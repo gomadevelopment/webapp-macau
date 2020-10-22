@@ -1,0 +1,94 @@
+/* 
+    Web App Macau CSS
+*/
+
+/* Body */
+body,
+.navigation,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Gilroy', sans-serif !important;
+}
+
+h1 {
+    font-size: 37px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 21px;
+}
+
+.red-skin a:hover,
+.red-skin .active {
+    color: #ff224b !important;
+}
+
+/* Header */
+
+.navigation {
+    font-size: 16px;
+}
+
+.nav-menu.nav-menu-social>li.login_click.light a {
+    color: #ff224b !important;
+}
+
+.nav-brand,
+.nav-brand:focus,
+.nav-brand:hover,
+.nav-menu>li>a {
+    color: #131b31;
+    letter-spacing: -0.22px;
+}
+
+.nav-menu>.active>a,
+.nav-menu>.focus>a,
+.nav-menu>li:hover>a {
+    color: #ff224b !important;
+}
+
+.nav-brand {
+    padding: 15px 15px;
+    font-size: 32px;
+}
+
+.nav-brand p {
+    display: inline-block;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    text-align: left;
+    margin: 0;
+}
+
+.nav-brand p.logo_esc {
+    color: #131b31;
+    letter-spacing: -0.59px;
+}
+
+.nav-brand p.logo_ola {
+    color: #ff2850;
+    letter-spacing: normal;
+}
+
+.submenu-indicator {
+    margin-top: 4px;
+}
+
+.nav-menu.nav-menu-social>li.login_click a {
+    font-size: 18px;
+}
+
+/* Homepage Hero */
+
+.banner-search .btn.search-btn {
+    color: #ffffff !important;
+}
