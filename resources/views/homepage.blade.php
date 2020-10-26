@@ -570,5 +570,18 @@
 @stop
 
 @section('scripts')
-
+    @if (session('login_error'))
+        <script type="text/javascript">
+            $(function() {
+                $('#login').modal('show');
+            });
+        </script>
+    @endif
+    @if (session('signup_error'))
+        <script type="text/javascript">
+            $(function() {
+                $('#signup').modal('show');
+            });
+        </script>
+    @endif
 @stop

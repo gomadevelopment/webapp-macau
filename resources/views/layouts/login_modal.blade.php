@@ -6,22 +6,27 @@
             <div class="modal-body">
                 <h4 class="modal-header-title">Log In</h4>
                 <div class="login-form">
-                    <form>
+                    @if (session('login_error'))
+                        <div class="alert alert-danger">
+                            {{ session('login_error') }}
+                        </div>
+                    @endif
+                    <form method="post" action="/login">
                     
                         <div class="form-group">
-                            <label>User Name</label>
-                            <input type="text" class="form-control" placeholder="Username">
+                            <label>E-mail</label>
+                            <input name="email" type="text" class="form-control" placeholder="E-mail">
                         </div>
                         
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="*******">
+                            <input name="password" type="password" class="form-control" placeholder="*******">
                         </div>
                         
                         <div class="form-group">
                             <button type="submit" class="btn btn-md full-width pop-login">Login</button>
                         </div>
-                    
+                        @csrf
                     </form>
                 </div>
                 

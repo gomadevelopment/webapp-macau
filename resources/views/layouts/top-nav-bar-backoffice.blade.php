@@ -101,11 +101,8 @@
                 </ul>
                 
                 <ul class="nav-menu nav-menu-social align-to-right">
-                    <li class="login_click light">
-                        <a href="#" data-toggle="modal" data-target="#login">Sign in</a>
-                    </li>
                     <li class="login_click theme-bg">
-                        <a href="#" data-toggle="modal" data-target="#signup">Sign up</a>
+                        <a href="/logout">Log Out</a>
                     </li>
                 </ul>
             </div>

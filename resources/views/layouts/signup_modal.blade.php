@@ -6,29 +6,33 @@
             <div class="modal-body">
                 <h4 class="modal-header-title">Sign Up</h4>
                 <div class="login-form">
-                    <form>
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form method="post" action="/signup">
                     
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Full Name">
+                            <input name="fullname" type="text" class="form-control" placeholder="Full Name">
                         </div>
                         
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input name="email" type="email" class="form-control" placeholder="Email">
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="*******">
+                            <input name="password" type="password" class="form-control" placeholder="Password">
                         </div>
 
+                        <div class="form-group">
+                            <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password">
+                        </div>
                         
                         <div class="form-group">
                             <button type="submit" class="btn btn-md full-width pop-login">Sign Up</button>
                         </div>
-                    
+                        @csrf
                     </form>
                 </div>
                 <div class="text-center">

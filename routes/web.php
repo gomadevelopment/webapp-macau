@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
+
+Route::group(['middlewareGroups' => 'web'], function () {
+
+    Route::get('/', function () {
+        return view('homepage');
+    });
+
+    Route::post('/signup', 'UsersController@signUp');
+
+    Route::post('/login', 'Auth\AuthController@loginPost');
+
+    Route::group(['middleware' => ['auth']], function () {
+
+        Route::get('/logout', 'Auth\AuthController@logout');
+        Route::get('/forbidden', 'Auth\AuthController@forbidden');
+
+    });
 });
