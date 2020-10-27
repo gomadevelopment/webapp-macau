@@ -21,32 +21,29 @@ class AuthController extends Controller
         $this->request = $request;
     }
 
-    public function login()
-    {
-        return view('login');
-    }   
-
     public function loginPost()
     {
-        $inputs = $this->request->only('email', 'password');
+        $inputs = $this->request->only('username', 'password');
+
         $validator = \Validator::make($inputs, [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
-        ], ['email.required' => 'Por favor insira o seu e-mail.', 
-            'password.required' => 'Por favor insira a sua password.']);
+        ], ['username.required' => 'Por favor, insira o seu nome de utilizador.', 
+            'password.required' => 'Por favor, insira a sua password.']);
 
         if ($validator->fails()) {
-            // session()->flash('');
+            request()->session()->flash('error', 'Por favor, verifique os erros no formulário.');
             return redirect('/')
                     ->with('login_error', 'Login Failed!')
                     ->withErrors($validator)
                     ->withInput();
         }
 
-        if (!$user = auth()->attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
+        if (!$user = auth()->attempt(['username' => $inputs['username'], 'password' => $inputs['password']])) {
+            request()->session()->flash('error', 'Nome de Utilizador ou password inválidos.');
             return redirect('/')
                     ->with('login_error', 'Login Failed!')
-                    ->withErrors(['login_incorrect' => 'Nome de Utilizador ou Password inválidos.'])
+                    ->withErrors(['login_incorrect' => 'Nome de Utilizador ou password inválidos.'])
                     ->withInput();
         }
 

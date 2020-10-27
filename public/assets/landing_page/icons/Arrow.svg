@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.6348073,6.4 L9.03168934,2.73137085 C8.41800831,2.10653198 8.41800831,1.09346802 9.03168934,0.46862915 C9.64537037,-0.156209717 10.6403439,-0.156209717 11.2540249,0.46862915 L17.5397392,6.86862915 C18.1534203,7.49346802 18.1534203,8.50653198 17.5397392,9.13137085 L11.2540249,15.5313708 C10.6403439,16.1562097 9.64537037,16.1562097 9.03168934,15.5313708 C8.41800831,14.906532 8.41800831,13.893468 9.03168934,13.2686292 L12.6348073,9.6 L1.56911729,9.6 C0.70251774,9.6 0,8.8836556 0,8 C0,7.1163444 0.70251774,6.4 1.56911729,6.4 L12.6348073,6.4 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4">
+            <g id="Rounded_Button_Active">
+                <g id="Group-8">
+                    <g id="Icon/Arrow-Right">
+                        <g>
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

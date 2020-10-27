@@ -89,8 +89,8 @@
 .red-skin .pagination>.active>span:hover,
 .red-skin .pagination>li>a:focus,
 .red-skin .pagination>li>a:hover {
-    background-color: #da0b4e;
-    background: #da0b4e;
+    background-color: #ff2850;
+    background: #ff2850;
 }
 
 .red-skin a.link:hover,
@@ -151,7 +151,7 @@ a:focus,
 .red-skin .btn.pop-login,
 .red-skin .single-widgets.widget_tags ul li a:hover,
 .red-skin .single-widgets.widget_tags ul li a:focus {
-    border-color: #da0b4e;
+    border-color: #ff2850;
 }
 
 .red-skin li.login-attri.theme-log a {

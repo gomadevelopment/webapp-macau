@@ -7,8 +7,7 @@
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
                 <a class="nav-brand" href="/">
-                    {{-- <img src="{{asset('/assets/img/logo.png')}}" class="logo" alt="" /> --}}
-                    <p class="logo_esc">esc</p><p class="logo_ola">olá</p>
+                     <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Positivo.svg')}}" class="logo" alt="" />
                 </a>
                 <div class="nav-toggle"></div>
             </div>

@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fullname', 'email', 'password',
+        'username', 'email', 'password', 'role'
     ];
 
     /**
@@ -27,16 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'password',
     ];
 
     /**
@@ -45,7 +36,7 @@ class User extends Authenticatable
      * @var array
      */
     public static $rulesForAdd = array(
-        'fullname' => 'required',
+        'username' => 'required|min:6|unique:users',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed'
     );
@@ -53,7 +44,7 @@ class User extends Authenticatable
     public static function rulesForEdit($id = 0, $merge = [])
     {
         return array_merge([
-            'fullname' => 'required',
+            'username' => ['required', Rule::unique('users')->ignore($id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
             'password' => 'required|min:6|confirmed'
         ], $merge);
@@ -65,11 +56,13 @@ class User extends Authenticatable
      * @var array
      */
     public static $messages = array(
-        'name.required' => 'O nome é de preenchimento obrigatório.',
-        'email.required' => 'O email é de preenchimento obrigatório.',
-        'email.unique' => 'O email escolhido já existe nos nossos registos.',
+        'username.required' => 'O nome é de preenchimento obrigatório.',
+        'username.min' => 'O nome tem de ter no mínimo 6 caracteres.',
+        'username.unique' => 'O nome de utilizador introduzido já existe.',
+        'email.required' => 'O e-mail é de preenchimento obrigatório.',
+        'email.unique' => 'O e-mail introduzido já existe.',
         'password.required' => 'A password é de preenchimento obrigatório.',
-        'password.min' => 'A password tem de no minímo 6 caracteres.',
+        'password.min' => 'A password tem de ter no mínimo 6 caracteres.',
         'password.confirmed' => 'As passwords inseridas não são iguais.',
     );
 }

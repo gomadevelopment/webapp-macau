@@ -5,567 +5,103 @@
 @stop
 
 @section('content')
-
-<!-- ============================ Hero Banner  Start================================== -->
-<div class="image-cover hero_banner hero-inner-2 shadow rlt" style="background:url(https://via.placeholder.com/1920x650) no-repeat;" data-overlay="7">
-    <div class="elix_img_box">
-        <img src="assets/img/preet-o.png" class="img-fluid" alt="" />
-    </div>
+<!-- ============================ Hero ================================== -->
+<div class="image-cover hero_banner hero-inner-2 shadow rlt" data-overlay="7">
     <div class="container">
-        
-        <div class="hero-caption small_wd mb-5">
-            <h1 class="big-header-capt cl_2 mb-0">Learn on your schedule</h1>
-            <p>Study any topic, anytime. Explore thousands of courses for the lowest price ever!</p>
-        </div>
-        <!-- Type -->
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                <div class="banner-search shadow_high">
-                    <div class="search_hero_wrapping">
-                        <div class="row">
-                        
-                            <div class="col-lg-5 col-md-5 col-sm-12 br-right">
-                                <div class="form-group">
-                                    <div class="input-with-icon">
-                                        <input type="text" class="form-control" placeholder="Keyword" />
-                                        <img src="assets/img/search.svg" class="search-icon" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-5 col-md-4 col-sm-12 small-pad">
-                                <div class="form-group">
-                                    <div class="input-with-icon">
-                                        <select id="c-category" class="form-control">
-                                            <option value="">&nbsp;</option>
-                                            <option value="1">Web Designing</option>
-                                            <option value="2">Business</option>
-                                            <option value="3">Accounting</option>
-                                            <option value="3">Development</option>
-                                            <option value="3">Art & Culture</option>
-                                        </select>
-                                        <img src="assets/img/pin.svg" class="search-icon" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-2 col-md-3 col-sm-12 pl-0">
-                                <div class="form-group none">
-                                    <a href="#" class="btn search-btn full-width">Search</a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
+
+                <div class="hero-caption small_wd mb-5">
+                    <h1 class="big-header-capt cl_2 mb-0">Aprendizagem de </h1>
+                    <h1 class="big-header-capt-pink cl_2 mb-0">Português&nbsp;</h1> 
+                    <h1 class="big-header-capt cl_2 mb-0">fácil e prática.</h1>
+                    <p style="margin-left: 0;">Plataforma moderna criada especificamente para professores e alunos.
+                        Aprenda Português de forma moderna, prática e fácil.</p>
+
+                    <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
+                        Inscrever &nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow.svg')}}" type="image/svg+xml"></object>
+                    </button>
                 </div>
-            </div>
-        </div>
+                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/Scene1.svg')}}" alt="">
+                {{-- <object class="scene1_svg" data="{{asset('/assets/landing_page/illustrations/Scene1.svg')}}" type="image/svg+xml"></object> --}}
+        
     </div>
 </div>
-<!-- ============================ Hero Banner End ================================== -->
 
-<!-- ============================ Trips Facts Start ================================== -->
-<section class="p-0 trips_top">
+<!-- ============================ About Section ================================== -->
+<section class="about_section p-0">
     <div class="container">
-        <div class="trips_wrap">
-            <div class="row m-0">
-            
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="trips">
-                        <div class="trips_icons">
-                            <i class="ti-video-camera"></i>
-                        </div>
-                        <div class="trips_detail">
-                            <h4>100,000 online courses</h4>
-                            <p>Nor again is there anyone who loves or pursues or desires</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="trips">
-                        <div class="trips_icons">
-                            <i class="ti-medall"></i>
-                        </div>
-                        <div class="trips_detail">
-                            <h4>Expert instruction</h4>
-                            <p>Nam libero tempore, cum soluta and nobis est eligendi optio</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="trips none">
-                        <div class="trips_icons">
-                            <i class="ti-infinite"></i>
-                        </div>
-                        <div class="trips_detail">
-                            <h4>Lifetime access</h4>
-                            <p>These cases are perfectly simple and easy to distinguish</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+        <h1 class="title">Sobre</h1>
+        <h1 class="sub_title">A Lingua Portuguesa simplificada, com ajuda de Instrutores Profissionais.</h1>
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in sem justo. Etiam ut ante ac sem malesuada sodales. Phasellus iaculis porttitor dui blandit egestas. Nulla eget lacinia nibh. Mauris rhoncus dolor tortor, a tristique purus ultricies at. Nunc at mi diam. Nunc nunc metus, lacinia et nisl ac, fringilla elementum ex. Fusce ut odio vel dolor rutrum suscipit et at ante. Aliquam in sem diam. Phasellus ut nunc eget nisl facilisis convallis ullamcorper nec mauris. Maecenas nec nibh orci. Ut eros sem, commodo sit amet risus a, efficitur dignissim purus. Nullam eu cursus dolor, vel ultricies elit. Duis eu mollis nunc. Etiam nec facilisis dui, eget egestas enim. Pellentesque pretium varius massa, nec mattis diam pellentesque quis.</p>
+        <div class="signup_button">
+            <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
+                Inscrever-me &nbsp;&nbsp;&nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" type="image/svg+xml"></object>
+            </button>
         </div>
+            
     </div>
 </section>
-<!-- ============================ Trips Facts Start ================================== -->
 
-<!-- ============================ Featured Courcses Start ================================== -->
-<section>
+<!-- ============================ How it works Section ================================== -->
+<section class="how_it_works_section">
     <div class="container">
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-12 col-md-12 mb-3">
-                <div class="sec-heading2">
-                    <div class="sec-left">
-                        <h3>Featured Courses</h3>
-                    </div>
-                    <div class="sec-right">
-                        <ul class="nav nav-tabs side-cates">
-                            <li class="nav-item">
-                            <a class="nav-link active" href="javascript:void(0);">Design</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0);">Development</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0);">Business</a>
-                            </li>
-                            <li class="nav-item" href="javascript:void(0);">
-                            <a class="nav-link" href="javascript:void(0);">Accounting</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+
+        <h1 class="title">Como funciona</h1>
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 p-0">
-
-                <div class="arrow_slide three_slide arrow_middle">
-
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$520</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">Tableau For Beginners: Get CA Certified, Grow Your Career</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>8682 Views</li>
-                                    <li><i class="ti-time mr-2"></i>6h 40min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.7 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Robert Wilson</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>54 lectures</div>
-                            </div>
-                        </div>	
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$349</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">The Complete Business Plan Course (Includes 50 Templates)</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>9882 Views</li>
-                                    <li><i class="ti-time mr-2"></i>6h 30min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.7 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Shruti Hasan</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>26 lectures</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$545</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">An Entire MBA In 1 Course:Award Winning Business School Prof</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>5893 Views</li>
-                                    <li><i class="ti-time mr-2"></i>5h 15min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.7 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Adam Viknoi</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>52 lectures</div>
-                            </div>
-                        </div>	
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$420</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">The Complete Financial Analyst Course 2020</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>8582 Views</li>
-                                    <li><i class="ti-time mr-2"></i>4h 59min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.6 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Shilpa Shekh</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>43 lectures</div>
-                            </div>
-                        </div>	
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$429</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">PMP Exam Prep Seminar - PMBOK Guide 6</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>9857 Views</li>
-                                    <li><i class="ti-time mr-2"></i>7h 45min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.9 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Shaurya Preet</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>32 lectures</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$249</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">Tableau 2020 A-Z:Hands-On Tableau Training For Data Science!</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>6852 Views</li>
-                                    <li><i class="ti-time mr-2"></i>2h 30min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.8 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Preeti Bhartiya</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>48 lectures</div>
-                            </div>
-                        </div>	
-                    </div>
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="education_block_grid style_2">
-                            <div class="education_block_thumb n-shadow">
-                                <a href="course-detail.html"><img src="https://via.placeholder.com/700x500" class="img-fluid" alt=""></a>
-                                <div class="cources_price">$329</div>
-                            </div>
-                            
-                            <div class="education_block_body">
-                                <h4 class="bl-title"><a href="course-detail.html">The Complete Financial Analyst Training & Investing Course</a></h4>
-                            </div>
-                            
-                            <div class="cources_info_style3">
-                                <ul>
-                                    <li><i class="ti-eye mr-2"></i>8852 Views</li>
-                                    <li><i class="ti-time mr-2"></i>3h 20min</li>
-                                    <li><i class="ti-star text-warning mr-2"></i>4.9 Reviews</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="education_block_footer">
-                                <div class="education_block_author">
-                                    <div class="path-img"><a href="instructor-detail.html"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt=""></a></div>
-                                    <h5><a href="instructor-detail.html">Jasvinder Bhartiya</a></h5>
-                                </div>
-                                <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>42 lectures</div>
-                            </div>
-                            
-                        </div>	
-                    </div>
-                
-                </div>
+            <div class="col-xs-12 col-sm-12 col-md-7">
+                <img class="scene2_svg" src="{{asset('/assets/landing_page/illustrations/Scene2.svg')}}" alt="">
+                {{-- <object class="scene2_svg" data="{{asset('/assets/landing_page/illustrations/Scene2.svg')}}" type="image/svg+xml"></object> --}}
             </div>
-
-        </div>
-        
-    </div>
-</section>
-<!-- ============================ Featured Courcses End ================================== -->
-
-<!-- ============================ Featured Category Start ================================== -->
-<section class="bg-light">
-    <div class="container">
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-12 col-md-12 mb-3">
-                <div class="sec-heading2">
-                    <div class="sec-left">
-                        <h3>Got & Popular Categories</h3>
-                    </div>
-                    <div class="sec-right">
-                        <a href="javascript:void(0);" class="btn-br-more">Browse More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 p-0">
-
-                <div class="arrow_slide three_slide-dots arrow_middle">
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="edu_cat">
-                            <div class="pic">
-                                <a class="pic-main" href="#" style="background-image:url(https://via.placeholder.com/700x500);"></a>
-                            </div>
-                            <div class="edu_data">
-                                <h4 class="title"><a href="#">Finance & Accounting</a></h4>
-                                <ul class="meta">
-                                    <li class="video"><i class="ti-video-clapper"></i>23 Videos</li>
-                                    <li class="lessions"><i class="ti-book"></i>54 Lessions</li>
-                                </ul>
-                            </div>
-                        </div>	
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="edu_cat">
-                            <div class="pic">
-                                <a class="pic-main" href="#" style="background-image:url(https://via.placeholder.com/700x500);"></a>
-                            </div>
-                            <div class="edu_data">
-                                <h4 class="title"><a href="#">Gym & Lifestyle</a></h4>
-                                <ul class="meta">
-                                    <li class="video"><i class="ti-video-clapper"></i>23 Videos</li>
-                                    <li class="lessions"><i class="ti-book"></i>54 Lessions</li>
-                                </ul>
-                            </div>
-                        </div>		
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="edu_cat">
-                            <div class="pic">
-                                <a class="pic-main" href="#" style="background-image:url(https://via.placeholder.com/700x500);"></a>
-                            </div>
-                            <div class="edu_data">
-                                <h4 class="title"><a href="#">Health & Fitness</a></h4>
-                                <ul class="meta">
-                                    <li class="video"><i class="ti-video-clapper"></i>23 Videos</li>
-                                    <li class="lessions"><i class="ti-book"></i>54 Lessions</li>
-                                </ul>
-                            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5">
+                <div class="hero-caption small_wd mb-5">
+                    <h1 class="big-header-capt cl_2 mb-0">Reading for hours? Way better than that.</h1>
+                    <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
+                        <div style="width: 30px; text-align: center;">
+                            <img src="{{asset('/assets/landing_page/icons/Desktop.svg')}}" alt="">
                         </div>
+                        <p>Easily access to all the content you need from our WebApp.</p>
                     </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="edu_cat">
-                            <div class="pic">
-                                <a class="pic-main" href="#" style="background-image:url(https://via.placeholder.com/700x500);"></a>
-                            </div>
-                            <div class="edu_data">
-                                <h4 class="title"><a href="#">Software & Development</a></h4>
-                                <ul class="meta">
-                                    <li class="video"><i class="ti-video-clapper"></i>23 Videos</li>
-                                    <li class="lessions"><i class="ti-book"></i>54 Lessions</li>
-                                </ul>
-                            </div>
-                        </div>		
-                    </div>
-                    
-                    <!-- Single Slide -->
-                    <div class="singles_items">
-                        <div class="edu_cat">
-                            <div class="pic">
-                                <a class="pic-main" href="#" style="background-image:url(https://via.placeholder.com/700x500);"></a>
-                            </div>
-                            <div class="edu_data">
-                                <h4 class="title"><a href="#">Business Development</a></h4>
-                                <ul class="meta">
-                                    <li class="video"><i class="ti-video-clapper"></i>23 Videos</li>
-                                    <li class="lessions"><i class="ti-book"></i>54 Lessions</li>
-                                </ul>
-                            </div>
+                    <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
+                        <div style="width: 40px; text-align: center;">
+                            <img src="{{asset('/assets/landing_page/icons/Comment.svg')}}" alt="">
                         </div>
+                        <p>Make contact with other Students and Teachers all around the World so you don't fall into error by mispelling.</p>
                     </div>
-                
-                </div>
-            </div>
-
-        </div>
-        
-    </div>
-</section>
-<!-- ============================ Featured Category End ================================== -->
-
-<!-- ========================== Articles Section =============================== -->
-<section>
-    <div class="container">
-    
-        <div class="row justify-content-center">
-            <div class="col-lg-12 col-md-12">
-                <div class="sec-heading-flex">
-                    <h2 class="pl-2">Recent Articles</h2>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-                    
-            <!-- Single Article -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="articles_grid_style">
-                    <div class="articles_grid_thumb">
-                        <a href="blog-detail.html"><img src="https://via.placeholder.com/700x400" class="img-fluid" alt="" /></a>
-                    </div>
-                    
-                    <div class="articles_grid_caption">
-                        <h4>The National Minimum wage is an important part</h4>
-                        <div class="articles_grid_author">
-                            <div class="articles_grid_author_img"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt="" /></div>
-                            <h4>Adam Willsone</h4>
+                    <div style="display: inline-flex; align-items: center; margin-bottom: 30px;">
+                        <div style="width: 40px; text-align: center;">
+                            <img src="{{asset('/assets/landing_page/icons/Badge.svg')}}" alt="">
                         </div>
+                        <p>Get your Portuguese well learned to earn an Official Portuguese Certificate gaven by your Teacher.</p>
                     </div>
+
+                    <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup" style="display: block;">
+                        Inscrever &nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow.svg')}}" type="image/svg+xml"></object>
+                    </button>
                 </div>
             </div>
             
-            <!-- Single Article -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="articles_grid_style">
-                    <div class="articles_grid_thumb">
-                        <a href="blog-detail.html"><img src="https://via.placeholder.com/700x400" class="img-fluid" alt="" /></a>
-                    </div>
-                    
-                    <div class="articles_grid_caption">
-                        <h4>The National Minimum wage is an important part</h4>
-                        <div class="articles_grid_author">
-                            <div class="articles_grid_author_img"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt="" /></div>
-                            <h4>Rikki Sen</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Single Article -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="articles_grid_style">
-                    <div class="articles_grid_thumb">
-                        <a href="blog-detail.html"><img src="https://via.placeholder.com/700x400" class="img-fluid" alt="" /></a>
-                    </div>
-                    
-                    <div class="articles_grid_caption">
-                        <h4>The National Minimum wage is an important part</h4>
-                        <div class="articles_grid_author">
-                            <div class="articles_grid_author_img"><img src="https://via.placeholder.com/500x500" class="img-fluid" alt="" /></div>
-                            <h4>Daniel Wikjones</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         
-        </div>
     </div>
 </section>
-<!-- ========================== Articles Section =============================== -->
-            
-<!-- ============================== Start Newsletter ================================== -->
-<section class="bg-cover newsletter inverse-theme" style="background:url(https://via.placeholder.com/1920x650);" data-overlay="9">
+
+<!-- ============================ Contacts Section ================================== -->
+<section class="contacts_section about_section p-0">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-8 col-sm-12">
-                <div class="text-center">
-                    <h2>Join Thousand of Happy Students!</h2>
-                    <p>Subscribe our newsletter & get latest news and updation!</p>
-                    <form class="sup-form">
-                        <input type="email" class="form-control sigmup-me" placeholder="Your Email Address" required="required">
-                        <input type="submit" class="btn btn-theme" value="Get Started">
-                    </form>
-                </div>
-            </div>
+        <h1 class="title">Contactos</h1>
+        <p class="small_text">4967 Sardis Sta, Victoria 8007,  Macau.</p>
+        <p class="small_text">+1 246-345-0695</p>
+        <p class="small_text">info@escola.com</p>
+        <h1 class="sub_title">Junta-te a milhares de Utilizadores felizes!</h1>
+        <p class="small_text">Inscreve-te agora e começa a aprender uma das Linguas mais faladas por todo o Mundo!</p>
+        <p class="small_text">*Alunos de Nacionalidade Chinesa sujeitos a Pagamento.</p>
+        <div class="signup_button">
+            <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
+                Inscrever-me &nbsp;&nbsp;&nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" type="image/svg+xml"></object>
+            </button>
         </div>
+            
     </div>
 </section>
-<!-- ================================= End Newsletter =============================== -->
 
 @stop
 

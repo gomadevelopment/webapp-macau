@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}">
 
         {{-- Font --}}
-        <link rel="stylesheet" href="https://cdn.rawgit.com/mfd/09b70eb47474836f25a21660282ce0fd/raw/e06a670afcb2b861ed2ac4a1ef752d062ef6b46b/Gilroy.css">
+        <link rel="stylesheet" href="{{asset('/assets/css/fonts/Gilroy', config()->get('app.https')) }}">
 
         @yield('header')
 
@@ -63,6 +63,7 @@
         <script src="{{asset('/assets/js/slick.js', config()->get('app.https'))}}"></script>
         <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https'))}}"></script>
         <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https'))}}"></script>
+        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https'))}}"></script>
         <script src="{{asset('/assets/js/custom.js', config()->get('app.https'))}}"></script>
 
         <script src="{{asset('/assets/js/webapp-macau-custom.js', config()->get('app.https'))}}"></script>

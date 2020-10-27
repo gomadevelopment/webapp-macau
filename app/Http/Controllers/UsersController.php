@@ -12,11 +12,12 @@ class UsersController extends Controller
     public function signUp()
     {
         $inputs = request()->all();
-
+        // dd($inputs);
         $validator = \Validator::make($inputs, User::$rulesForAdd, User::$messages);
 
         if ($validator->fails()) {
-            request()->session()->flash('error', 'Por favor verifique os erros no formulário.');
+            // dd($validator);
+            request()->session()->flash('error', 'Por favor, verifique os erros no formulário.');
             return redirect()
                 ->back()
                 ->withErrors($validator)
@@ -25,16 +26,12 @@ class UsersController extends Controller
         }
 
         $new_user = User::create([
-            'fullname' => $inputs["fullname"],
+            'username' => $inputs["username"],
             'email' => $inputs["email"],
             'password' => bcrypt($inputs["password"]),
+            'role' => $inputs["professor_or_student"] == 'professor' ? 2 : 3
         ]);
 
         return redirect()->to('/');
-    }
-
-    public function signIn()
-    {
-        
     }
 }
