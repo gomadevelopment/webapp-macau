@@ -48,11 +48,11 @@
         <div class="container">
             <div class="row align-items-center">
                 
-                <div class="col-lg-8 col-md-8">
+                <div class="col-xs-6 col-sm-7 col-md-8 col-lg-8">
                     <p class="mb-0">© 2020 escolá. Desenhado e Desenvolvido por <a href="https://gomadevelopment.pt/" target="_blank">GOMA Development</a>.</p>
                 </div>
                 
-                <div class="col-lg-4 col-md-4 text-right">
+                <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 text-right">
                     <ul class="footer-bottom-social">
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/facebook.svg')}}" alt=""></a></li>
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/instagram.svg')}}" alt=""></a></li>

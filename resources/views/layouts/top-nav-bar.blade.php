@@ -16,9 +16,9 @@
                 <ul class="nav-menu">
 
                     <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/">Sobre</a></li>
-                    <li><a href="/">Como Funciona</a></li>
-                    <li><a href="/">Contactos</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#como_funciona">Como Funciona</a></li>
+                    <li><a href="#contactos">Contactos</a></li>
                     
                 </ul>
                 

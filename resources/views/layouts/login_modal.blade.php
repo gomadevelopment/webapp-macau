@@ -38,7 +38,7 @@
                         
                         <div class="form-group signup_button about_section">
                             <button type="submit" class="btn btn-theme btn-lg" data-target="#login">
-                                Prosseguir &nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" type="image/svg+xml"></object>
+                                Prosseguir &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>
                         

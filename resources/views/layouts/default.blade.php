@@ -9,15 +9,15 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}">
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom.css', config()->get('app.https')) }}">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}">
+        
 		
 		<!-- Custom Color Option -->
         <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}">
 
-        {{-- Font --}}
-        <link rel="stylesheet" href="{{asset('/assets/css/fonts/Gilroy', config()->get('app.https')) }}">
-
         @yield('header')
+
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}">
 
     </head>
 	
@@ -66,7 +66,7 @@
         <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https'))}}"></script>
         <script src="{{asset('/assets/js/custom.js', config()->get('app.https'))}}"></script>
 
-        <script src="{{asset('/assets/js/webapp-macau-custom.js', config()->get('app.https'))}}"></script>
+        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https'))}}"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
 		<!-- ============================================================== -->
