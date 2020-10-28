@@ -1,0 +1,363 @@
+/* Homepage */
+
+/* Hero */
+.hero_banner {
+    padding: 0;
+    height: unset;
+}
+
+.hero_banner .container {
+    display: flex;
+    padding-top: 100px;
+}
+
+.scene1_svg {
+    width: 160%;
+    max-width: 160%;
+    margin-left: -140px;
+    margin-right: -200px;
+}
+
+.hero-caption.small_wd {
+    /* position: absolute; */
+    max-width: 520px;
+    margin-top: 50px;
+    max-width: unset;
+}
+
+.hero-caption.small_wd .big-header-capt {
+    color: #131b31 !important;
+    font-family: "Gilroy - Bold";
+    font-size: 45px !important;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.72px;
+    line-height: 52px;
+    text-align: left;
+    display: inline-block;
+}
+
+.hero-caption.small_wd .big-header-capt-pink {
+    color: #ff2850 !important;
+    font-family: "Gilroy - Bold";
+    font-size: 45px !important;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    display: inline-block;
+}
+
+.hero-caption.small_wd p {
+    color: #647b9c;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: normal;
+    text-align: left;
+    margin: 33px 0 33px 15px;
+    width: 90%;
+}
+
+.btn.btn-theme.btn-lg {
+    height: 55px;
+    border-radius: 5px;
+    background-color: #ff2850;
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.3px;
+    line-height: normal;
+    text-align: left;
+}
+
+/* Section 1 - About */
+
+.about_section {
+    top: -98px;
+    background-color: #ff2850;
+}
+
+.about_section .container {
+    width: 794px;
+}
+
+.about_section .title {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 37px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.59px;
+    line-height: 40px;
+    text-align: center;
+    padding-top: 180px;
+}
+
+.about_section .sub_title {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 45px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.72px;
+    line-height: 52px;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.about_section .description {
+    color: #ffffff;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: center;
+}
+
+.about_section .btn.btn-theme.btn-lg {
+    background-color: #ffffff;
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.27px;
+    line-height: normal;
+    text-align: left;
+}
+
+.about_section .signup_button {
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 60px;
+}
+
+.about_section .btn.btn-theme.btn-lg:hover,
+.about_section .btn.btn-theme.btn-lg:focus {
+    background-color: #ffffff;
+    background: #ffffff;
+}
+
+/* Section 2 - How it works */
+
+.how_it_works_section {
+    top: -98px;
+    padding-bottom: 0;
+    background-color: #ffffff;
+}
+
+.how_it_works_section .title {
+    color: #131b31;
+    font-family: "Gilroy - Bold" !important;
+    font-size: 37px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.59px;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.how_it_works_section .hero-caption.small_wd .big-header-capt {
+    color: #000000 !important;
+    padding-bottom: 30px;
+}
+
+.desktop_icon_div {
+    margin-left: 3px;
+}
+
+.scene2_svg {
+    width: 100%;
+    max-width: 100%;
+    margin-left: -90px;
+}
+
+/* Section 3 - Contacts */
+.contacts_section {
+    top: 0 !important;
+}
+
+.contacts_section .container {
+    width: unset;
+}
+
+.contacts_section .title {
+    padding: 77px 0 40px 0 !important;
+}
+
+.contacts_section .sub_title {
+    margin-top: 74px;
+    margin-bottom: 30px;
+}
+
+.contacts_section .small_text {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 21px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.33px;
+    line-height: 25px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.contacts_section .signup_button {
+    margin-top: 0;
+}
+
+/* Login & Signup Modals */
+
+.modal-dialog {
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal-content {
+    background-color: #ff2850;
+    border: unset;
+    flex-flow: nowrap;
+}
+
+.modal-body {
+    width: 50%;
+    position: relative;
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+h4.modal-header-title,
+h1.modal-header-title {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 32px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.51px;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: 77px;
+}
+
+h1.modal-header-title {
+    font-size: 37px;
+    letter-spacing: -0.59px;
+    line-height: 40px;
+    margin-bottom: 94px;
+}
+
+.login-form input,
+.login-form input:focus,
+.login-form input:-webkit-autofill,
+.login-form input:focus:-webkit-autofill {
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #ffffff;
+    border-radius: 0;
+    padding: 10px 34px 0 44px;
+}
+
+.login-form input,
+.login-form input:focus,
+.login-form input::placeholder {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 23px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.37px;
+    line-height: 40px;
+
+    text-align: left;
+}
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #ff2850 inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+} */
+
+.login-form input:focus::placeholder {
+    color: transparent;
+}
+
+.login-form .eye-show,
+.login-form .eye-hide {
+    float: right;
+    margin-left: -25px;
+    margin-top: -35px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-form .eye-show {
+    display: none;
+}
+
+.login-form button {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30px;
+}
+
+
+.scene3_svg {
+    /* margin-left: 534px; */
+    width: 100%;
+    margin-top: 70px;
+    position: relative;
+}
+
+/* #signup [type="radio"]:checked,
+#signup [type="radio"]:not(:checked) {
+    position: unset;
+    margin: 0 10px;
+} */
+
+#signup .form-group.radio {
+    display: inline-flex;
+}
+
+#signup label.checkbox-custom-label {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    /* line-height: 40px; */
+    text-align: left;
+    margin-left: 8px;
+}
+
+.checkbox-custom:checked+.checkbox-custom-label:before {
+    border-radius: 8px;
+}
+
+[type="radio"]:checked+label:before,
+[type="radio"]:not(:checked)+label:before {
+    background: transparent;
+    border: 3px solid #fff;
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"]:not(:checked)+label:after {
+    background: #fff;
+}
+
+#signup h1.modal-header-title {
+    margin-bottom: 40px;
+}

@@ -32,17 +32,17 @@ class AuthController extends Controller
             'password.required' => 'Por favor, insira a sua password.']);
 
         if ($validator->fails()) {
-            request()->session()->flash('error', 'Por favor, verifique os erros no formulário.');
+            request()->session()->flash('login_error', 'Por favor, verifique os erros no formulário.');
             return redirect('/')
-                    ->with('login_error', 'Login Failed!')
+                    ->with('login_error', 'Por favor, verifique os erros no formulário.')
                     ->withErrors($validator)
                     ->withInput();
         }
 
         if (!$user = auth()->attempt(['username' => $inputs['username'], 'password' => $inputs['password']])) {
-            request()->session()->flash('error', 'Nome de Utilizador ou password inválidos.');
+            request()->session()->flash('login_error', 'Nome de Utilizador ou password inválidos.');
             return redirect('/')
-                    ->with('login_error', 'Login Failed!')
+                    ->with('login_error', 'Nome de Utilizador ou password inválidos.')
                     ->withErrors(['login_incorrect' => 'Nome de Utilizador ou password inválidos.'])
                     ->withInput();
         }

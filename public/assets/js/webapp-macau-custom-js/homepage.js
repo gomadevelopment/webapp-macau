@@ -1,14 +1,13 @@
 $(function() {
+    // Show or Hide password on login/signup modal
     $(document).on("click", ".eye-hide, .eye-show", function() {
-        console.log($(this).attr("class"));
-
         if ($(this).attr("class") == "eye-hide") {
             $(this).css("display", "none");
             $(this)
                 .next($(".eye-show"))
                 .css("display", "block");
             $(this)
-                .prev($("input"))
+                .prevAll("input")
                 .attr("type", "text");
         } else {
             $(this).css("display", "none");
@@ -16,12 +15,12 @@ $(function() {
                 .prev($(".eye-hide"))
                 .css("display", "block");
             $(this)
-                .prev()
-                .prev()
+                .prevAll("input")
                 .attr("type", "password");
         }
     });
 
+    // Signup and Login form input validations and form submit
     var signup_form_validate = $("#signup form").validate({
         rules: {
             username: {

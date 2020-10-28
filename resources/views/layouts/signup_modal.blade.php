@@ -7,9 +7,9 @@
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
                 <h1 class="modal-header-title">Vamos inscrever-te!</h1>
                 <div class="login-form">
-                    @if (session('error'))
+                    @if (session('signup_error'))
                         <div class="alert alert-danger">
-                            {{ session('error') }}
+                            {{ session('signup_error') }}
                         </div>
                     @endif
                     <form method="post" action="/signup">
@@ -69,16 +69,14 @@
 
                         <div class="form-group signup_button about_section">
                             <button type="submit" class="btn btn-theme btn-lg" data-target="#signup">
-                                Tudo Pronto!&nbsp; <object class="" data="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" type="image/svg+xml"></object>
+                                Tudo Pronto!&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>
                         @csrf
                     </form>
                 </div>
             </div>
-            {{-- <div class="modal-svg"> --}}
-                <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/Scene3.svg')}}" alt="">
-            {{-- </div> --}}
+            <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/Scene3.svg')}}" alt="">
         </div>
     </div>
 </div>

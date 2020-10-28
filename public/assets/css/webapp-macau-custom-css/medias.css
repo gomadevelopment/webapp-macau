@@ -1,0 +1,175 @@
+/* MEDIAS */
+
+@media (min-width: 1280px) {
+    .container.modal-dialog {
+        max-width: 1250px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .about_section {
+        top: -96px;
+    }
+
+    .container.modal-dialog {
+        max-width: 1180px;
+    }
+
+    .scene3_svg {
+        margin-right: -60px;
+    }
+}
+
+@media (max-width: 1199px) {
+
+    .nav-menu>li:first-child {
+        margin-left: 0;
+    }
+
+    .scene3_svg {
+        margin-right: -180px;
+    }
+
+    .container.modal-dialog {
+        max-width: 1145px;
+    }
+
+    .about_section {
+        top: -78px;
+    }
+
+    .about_section .title {
+        padding-top: 140px;
+    }
+
+    .scene1_svg {
+        margin-left: -100px;
+    }
+
+    .how_it_works_section .hero-caption.small_wd {
+        margin: 0 !important;
+    }
+
+    .scene2_svg {
+        width: 115%;
+        max-width: 115%;
+        margin-left: -80px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .nav-menu.nav-menu-social>li.login_click a {
+        padding: 10px 15px;
+    }
+
+    .scene3_svg {
+        margin-right: -300px;
+    }
+
+    .about_section {
+        top: 0;
+    }
+
+    .about_section .title {
+        padding-top: 77px;
+    }
+
+    .how_it_works_section {
+        top: 0;
+        padding-bottom: 80px;
+    }
+
+    .hero_banner .container {
+        padding-top: 25px;
+    }
+
+    .scene1_svg {
+        width: 210%;
+        max-width: 210%;
+        margin-left: -80px;
+    }
+
+    .about_section .container {
+        width: 100%;
+    }
+
+    .scene2_svg {
+        width: 120%;
+        max-width: 120%;
+        margin-top: 100px;
+    }
+}
+
+@media (max-width: 860px) {
+    .scene3_svg {
+        margin-right: -350px;
+    }
+}
+
+@media (max-width: 820px) {
+    .scene3_svg {
+        margin-right: -410px;
+    }
+}
+
+
+
+@media (max-width: 767px) {
+    .modal-body {
+        width: 100%;
+        position: absolute;
+        margin-left: 0;
+    }
+
+    #login .scene3_svg {
+        margin-top: 550px;
+    }
+
+    .scene3_svg {
+        margin-top: 640px;
+    }
+
+    .scene1_svg {
+        width: 160%;
+        max-width: 160%;
+        margin-left: -155px;
+    }
+
+    .scene2_svg {
+        margin-top: 0;
+        margin-left: -50px;
+        margin-bottom: 40px;
+    }
+
+    .how_it_works_section .title {
+        margin-bottom: 50px;
+    }
+
+    .hero_banner .container {
+        flex-wrap: wrap;
+    }
+
+    .desktop_icon_div {
+        margin-left: 3px;
+    }
+
+}
+
+@media (max-width: 425px) {
+    .hero_banner .container {
+        padding-top: 0;
+    }
+
+    .scene1_svg,
+    .scene2_svg {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .scene3_svg {
+        margin-top: 750px;
+    }
+
+}

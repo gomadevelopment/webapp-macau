@@ -1,0 +1,299 @@
+/* Body */
+
+/* FONTS */
+@font-face {
+    font-family: 'Gilroy - Black';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - BlackItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-BlackItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Bold';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - BoldItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-BoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - ExtraBold';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - ExtraBoldItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-ExtraBoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Heavy';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Heavy.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - HeavyItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-HeavyItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Light';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - LightItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-LightItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Medium';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - MediumItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-MediumItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Regular';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - RegularItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-RegularItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - SemiBold';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - SemiBoldItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-SemiBoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - Thin';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-Thin.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - ThinItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-ThinItalic.ttf');
+}
+
+@font-face {
+    font-family: 'Gilroy - UltraLightItalic';
+    src: url('/assets/css/fonts/Gilroy/Gilroy-UltraLightItalic.ttf');
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Gilroy - Regular';
+    text-transform: none;
+}
+
+h1 {
+    font-size: 37px;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+h3 {
+    font-size: 21px;
+}
+
+.red-skin a:hover,
+.red-skin .active {
+    color: #ff224b !important;
+}
+
+[data-overlay]:before {
+    background: #fff;
+}
+
+label.error,
+span.error-block-span {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    text-align: left;
+    margin-left: 8px;
+    margin-bottom: 0;
+}
+
+/* Header */
+
+.header.header-fixed {
+    position: sticky !important;
+}
+
+.navigation {
+    font-family: 'Poppins' !important;
+    font-size: 16px;
+}
+
+.nav-menu.nav-menu-social>li.login_click.light a {
+    color: #ff224b !important;
+}
+
+.nav-menu>li:first-child {
+    margin-left: 80px;
+}
+
+.nav-brand,
+.nav-brand:focus,
+.nav-brand:hover,
+.nav-menu>li>a {
+    color: #131b31;
+    letter-spacing: -0.22px;
+}
+
+.nav-menu>.active>a,
+.nav-menu>.focus>a,
+.nav-menu>li:hover>a {
+    color: #ff224b !important;
+}
+
+.nav-brand {
+    padding: 15px 15px;
+    font-size: 32px;
+    margin-right: 40px;
+}
+
+.nav-brand img {
+    max-width: unset;
+    top: 0;
+}
+
+.nav-brand p {
+    display: inline-block;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    text-align: left;
+    margin: 0;
+}
+
+.nav-brand p.logo_esc {
+    color: #131b31;
+    letter-spacing: -0.59px;
+}
+
+.nav-brand p.logo_ola {
+    color: #ff2850;
+    letter-spacing: normal;
+}
+
+.submenu-indicator {
+    margin-top: 4px;
+}
+
+.nav-menu.nav-menu-social>li.login_click a {
+    color: #ff2850;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: normal;
+    text-align: center;
+    padding: 21px 15px;
+}
+
+.nav-menu.nav-menu-social>li.login_click {
+    background-color: #ff2850;
+}
+
+.nav-menu.nav-menu-social>li.login_click.light {
+    border: 1px solid #ff2850 !important;
+}
+
+.nav-menu.nav-menu-social>li.login_click.light:hover,
+.nav-menu.nav-menu-social>li.login_click.light:focus {
+    background: #ff2850;
+    border-color: #ff2850 !important;
+}
+
+/* Footer */
+.dark-footer .footer-widget {
+    padding: 0;
+}
+
+.dark-footer p,
+.dark-footer a {
+    color: #858c9f;
+    font-family: Poppins;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: left;
+}
+
+.dark-footer p {
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.dark-footer a {
+    font-size: 16px;
+    margin-bottom: 9px;
+}
+
+.dark-footer .supported_label {
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.dark-footer h4 {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 22px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.35px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.dark-footer .footer-bottom p {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 14px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.dark-footer .footer-bottom a {
+    color: #ffffff;
+    transition: all ease 0.4s;
+    font-family: "Gilroy - Bold";
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: 40px;
+    text-align: left;
+}
