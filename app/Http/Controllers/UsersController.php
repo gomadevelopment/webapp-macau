@@ -12,17 +12,16 @@ class UsersController extends Controller
     public function signUp()
     {
         $inputs = request()->all();
-        // dd($inputs);
+
         $validator = \Validator::make($inputs, User::$rulesForAdd, User::$messages);
 
         if ($validator->fails()) {
-            // dd($validator);
-            request()->session()->flash('error', 'Por favor, verifique os erros no formulário.');
+            request()->session()->flash('signup_error', 'Por favor, verifique os erros no formulário.');
             return redirect()
                 ->back()
                 ->withErrors($validator)
                 ->withInput()
-                ->with('signup_error', 'SignUp Failed!');
+                ->with('signup_error', 'Por favor, verifique os erros no formulário.');
         }
 
         $new_user = User::create([

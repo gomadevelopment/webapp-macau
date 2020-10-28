@@ -7,9 +7,9 @@
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
                 <h1 class="modal-header-title">Vamos entrar!</h1>
                 <div class="login-form">
-                    @if (session('error'))
+                    @if (session('login_error'))
                         <div class="alert alert-danger">
-                            {{ session('error') }}
+                            {{ session('login_error') }}
                         </div>
                     @endif
                     <form method="post" action="/login">
