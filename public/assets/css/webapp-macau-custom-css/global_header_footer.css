@@ -581,25 +581,6 @@ span.error-block-span {
     z-index: 1001;
 }
 
-
-/* Message Image Container */
-
-.msg-box-content .msg-img {
-    float: left;
-    display: inline-block;
-    width: 55px;
-    height: 45px;
-    margin: 0px 0px 8px 0px;
-}
-
-
-/* Messsage Image */
-
-.msg-box-content .msg-img img {
-    width: 40px;
-    height: 40px;
-}
-
 .message-box .msg-box-content a {
     display: block;
     padding: 10px 10px 18px 10px;
