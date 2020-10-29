@@ -27,4 +27,30 @@ $(function() {
             );
         }
     });
+
+    // $(".user_avatar.dropdown a.messages").on("mouseenter", function(event) {
+    //     event.preventDefault();
+    //     $(this)
+    //         .parent()
+    //         .addClass("show");
+    //     $(this)
+    //         .next()
+    //         .css("transform", "translate3d(-5px, 82px, 0px)")
+    //         .css("left", "0px")
+    //         .css("will-change", "transform")
+    //         .addClass("show");
+    // });
+
+    // $(".user_avatar.dropdown a.messages").on("mouseleave", function(event) {
+    //     event.preventDefault();
+    //     $(this)
+    //         .parent()
+    //         .removeClass("show");
+    //     $(this)
+    //         .next()
+    //         .css("transform", "translate3d(-5px, 82px, 0px)")
+    //         .css("left", "0px")
+    //         .css("will-change", "transform")
+    //         .removeClass("show");
+    // });
 });

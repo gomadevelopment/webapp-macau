@@ -234,6 +234,36 @@ span.error-block-span {
     border-color: #ff2850 !important;
 }
 
+/* Backoffice nav-bar */
+
+.nav-menu .user_avatar a {
+    padding: 20px 12px;
+}
+
+.nav-menu .user_avatar a img {
+    max-width: 42px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.nav-menu .user_notifications a {
+    padding: 28px 12px;
+}
+
+.nav-menu .user_notifications .notifications-count {
+    background-color: #ff2850;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 500;
+    position: absolute;
+    top: 28px;
+    right: 8px;
+    padding: 1px 1px;
+    vertical-align: middle;
+    font-size: 0.60rem;
+    line-height: 1;
+}
+
 /* Footer */
 .dark-footer .footer-widget {
     padding: 0;
@@ -296,4 +326,341 @@ span.error-block-span {
     letter-spacing: -0.22px;
     line-height: 40px;
     text-align: left;
+}
+
+
+
+/* CSS TEST */
+
+.top-head {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    background: #FFFFFF;
+    width: 100%;
+    float: left;
+    height: 50px;
+}
+
+.top-head h1 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 50px;
+    margin-bottom: 0px;
+}
+
+.top-menu-right {
+    float: right;
+}
+
+.top-head .user-bar {
+    text-align: right;
+    float: right;
+}
+
+.top-head .user-bar a {
+    color: rgba(0, 0, 0, .7);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 49px;
+    position: relative;
+    padding: 0 7px;
+}
+
+.top-head .user-bar a:hover {
+    color: #02b875;
+}
+
+.top-head .user-bar a i {
+    margin-right: 6px;
+}
+
+.top-head .user-bar .ping {
+    background: #02b875;
+    border-radius: 50%;
+    height: 10px;
+    position: absolute;
+    right: 9px;
+    top: 13px;
+    width: 10px;
+    z-index: 1;
+}
+
+.top-head .user-bar img {
+    float: left;
+    height: 32px;
+    width: 32px;
+    margin-top: 9px;
+}
+
+
+/* DROPDOWN MENU */
+
+.dropbtn {
+    color: rgba(0, 0, 0, .7);
+    padding: 13px 7px;
+    font-size: 15px;
+    border: none;
+    margin-top: 0px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    float: left;
+    text-align: left;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    display: block;
+    padding: 10px 25px 10px 15px !important;
+    line-height: 1.42857 !important;
+}
+
+.dropdown-content a:hover {
+    color: #02b875;
+    text-decoration: none;
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #fff;
+    color: #02b875;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: 0px;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+}
+
+.dropdown-menu-arrow {
+    display: none;
+    bottom: 26px;
+    left: 24px;
+    position: absolute;
+    z-index: 1002;
+}
+
+.user_avatar .dropdown-menu-arrow {
+    left: 110px;
+}
+
+.dropdown-menu-arrow:before,
+.dropdown-menu-arrow:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 11px 12px;
+    border-style: solid;
+    border-color: transparent;
+    z-index: 1001;
+}
+
+.dropdown-menu-arrow:after {
+    bottom: -18px;
+    right: -8px;
+    border-bottom-color: #fff;
+}
+
+.dropdown-menu-arrow:before {
+    bottom: -16px;
+    right: -8px;
+    border-bottom-color: rgba(0, 0, 0, .15);
+}
+
+
+/* ========== Navigation Start ========== */
+
+.account-name {
+    font-weight: 600;
+}
+
+
+/* NOTIFICATION */
+
+.notification {
+    color: rgba(0, 0, 0, .7) !important;
+    font-size: 17px !important;
+}
+
+.notification:hover,
+.messages:hover {
+    color: #183247;
+}
+
+.notification-imp {
+    font-weight: 600;
+    color: #1d2129;
+}
+
+/* .messages {
+    color: rgba(0, 0, 0, .7) !important;
+    font-size: 17px !important;
+    margin-left: -5px !important;
+} */
+
+.nav-link {
+    font-weight: unset;
+}
+
+/* Message DropBox*/
+
+.message-box {
+    min-width: 250px !important;
+    background-color: #fff;
+    padding-bottom: 0px;
+    border-radius: 6px;
+    border: 2px solid #e2e2e2 !important;
+    position: absolute !important;
+    margin-top: 0 !important;
+    top: -10px !important;
+    z-index: 1001;
+    margin-left: -510%;
+}
+
+.user_avatar .message-box {
+    margin-left: -60%;
+    padding: 0;
+}
+
+
+/* Message Heading */
+
+.message-box .msg-title {
+    border-bottom: 2px solid #e2e2e2;
+    padding: 0px 15px 8px 15px;
+    color: #131b31;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: left;
+}
+
+.user_avatar .message-box .msg-title {
+    padding: 8px 15px 8px 15px;
+    border-bottom: unset;
+}
+
+.logout_icon {
+    border-radius: 0 !important;
+}
+
+/* Message Notification */
+
+.messages-noti {
+    font-weight: 600;
+}
+
+
+/* Message Content */
+
+.message-box .msg-box-content {
+    /* min-height: 380px; */
+    max-height: 380px;
+    overflow-y: scroll;
+    z-index: 1001;
+}
+
+
+/* Message Image Container */
+
+.msg-box-content .msg-img {
+    float: left;
+    display: inline-block;
+    width: 55px;
+    height: 45px;
+    margin: 0px 0px 8px 0px;
+}
+
+
+/* Messsage Image */
+
+.msg-box-content .msg-img img {
+    width: 40px;
+    height: 40px;
+}
+
+.message-box .msg-box-content a {
+    display: block;
+    padding: 10px 10px 18px 10px;
+    /* border-bottom: 2px solid #e2e2e2; */
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: 19px;
+    text-align: left;
+}
+
+.message-box .msg-box-content a:hover {
+    color: rgb(0, 0, 0, .7);
+    background-color: #fafafa;
+    text-decoration: none;
+}
+
+.message-box .msg-box-content .pd-l0 {
+    padding-left: 0px;
+}
+
+
+/* Message box scroller hides */
+
+.message-box .msg-box-content::-webkit-scrollbar,
+.message-box .msg-box-content::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.message-box .msg-box-content p {
+    font-size: 13px;
+    color: #1d2129;
+    font-weight: normal;
+    margin: 1px 0px 8px 0px;
+}
+
+.message-box .msg-box-content p.time {
+    position: relative;
+    display: inline-block;
+    margin-top: 14px;
+    margin-right: 0px;
+    opacity: 0.5;
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 10px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.16px;
+    line-height: 19px;
+    text-align: left;
+}
+
+.dropdown.show .dropdown-menu-arrow {
+    display: block;
+}
+
+/* Unread Notification */
+
+.message-box .msg-box-content>a:nth-child(2n+0) {
+    background-color: #fafafa;
 }

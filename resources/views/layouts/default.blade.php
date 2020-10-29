@@ -33,11 +33,7 @@
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <div id="main-wrapper">
-            @if(auth()->user())
-                @include('layouts.top-nav-bar-backoffice')
-            @else
-                @include('layouts.top-nav-bar')
-            @endif
+            @include('layouts.top-nav-bar')
 
             @yield('content')
             

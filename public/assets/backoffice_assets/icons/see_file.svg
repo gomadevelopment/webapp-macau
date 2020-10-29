@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="22px" viewBox="0 0 23 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3" transform="translate(1.000000, 0.000000)">
+            <path d="M16.7666016,0 C17.2562425,0 17.7288721,0.179619924 18.0949228,0.504820154 L21.3283212,3.37737875 C21.7555428,3.75692342 22,4.30109339 22,4.87255859 L22,20 C22,21.1045695 21.1045695,22 20,22 L6,22 C4.8954305,22 4,21.1045695 4,20 L3.99824133,12.746926 C4.4623932,12.9060418 4.96357943,13 5.5,13 C5.67020122,13 5.83685529,12.9905409 5.9999047,12.9725427 L6,16 L20,16 L20,8.05 L16,8.05004883 C15.4477153,8.05004883 15,7.60233358 15,7.05004883 L15,2 L6,2 L5.9999047,5.02745729 C5.83685529,5.00945909 5.67020122,5 5.5,5 C4.96357943,5 4.4623932,5.09395821 3.99824133,5.253074 L4,2 C4,0.8954305 4.8954305,0 6,0 L16.7666016,0 Z M20,18 L6,18 L6,20 L20,20 L20,18 Z M17,2.208 L17,6.05004883 L20,6.05 L20,4.87255859 L17,2.208 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <g id="eye" transform="translate(0.000000, 5.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0,4 C0,4 2,0 5.5,0 C9,0 11,4 11,4 C11,4 9,8 5.5,8 C2,8 0,4 0,4 Z" id="Path" stroke-width="1.7"></path>
+                <circle id="Oval" cx="5.5" cy="4" r="1.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
