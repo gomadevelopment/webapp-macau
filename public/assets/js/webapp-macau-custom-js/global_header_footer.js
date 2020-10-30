@@ -3,9 +3,11 @@ $(function() {
 
     // Scroll to section on nav-bar menu click
     $(".nav-menu a").on("click", function(event) {
-        $(".navigation-portrait .nav-menus-wrapper-close-button").trigger(
-            "click"
-        );
+        if (!$(this).hasClass("nav-link")) {
+            $(".navigation-portrait .nav-menus-wrapper-close-button").trigger(
+                "click"
+            );
+        }
 
         // Make sure this.hash has a value before overriding default behavior
         if (this.hash !== "") {
@@ -27,4 +29,30 @@ $(function() {
             );
         }
     });
+
+    // $(".user_avatar.dropdown a.messages").on("mouseenter", function(event) {
+    //     event.preventDefault();
+    //     $(this)
+    //         .parent()
+    //         .addClass("show");
+    //     $(this)
+    //         .next()
+    //         .css("transform", "translate3d(-5px, 82px, 0px)")
+    //         .css("left", "0px")
+    //         .css("will-change", "transform")
+    //         .addClass("show");
+    // });
+
+    // $(".user_avatar.dropdown a.messages").on("mouseleave", function(event) {
+    //     event.preventDefault();
+    //     $(this)
+    //         .parent()
+    //         .removeClass("show");
+    //     $(this)
+    //         .next()
+    //         .css("transform", "translate3d(-5px, 82px, 0px)")
+    //         .css("left", "0px")
+    //         .css("will-change", "transform")
+    //         .removeClass("show");
+    // });
 });

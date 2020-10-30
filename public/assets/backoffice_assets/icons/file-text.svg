@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="27px" viewBox="0 0 22 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>file-text</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="file-text" transform="translate(1.000000, 1.000000)" stroke="#FFFFFF" stroke-width="2">
+            <path d="M12.5,0 L2.5,0 C1.11928813,0 0,1.11928813 0,2.5 L0,22.5 C0,23.8807119 1.11928813,25 2.5,25 L17.5,25 C18.8807119,25 20,23.8807119 20,22.5 L20,7.5 L12.5,0 Z" id="Path"></path>
+            <polyline id="Path" points="12.5 0 12.5 7.5 20 7.5"></polyline>
+            <path d="M15,13.75 L5,13.75" id="Path"></path>
+            <path d="M15,18.75 L5,18.75" id="Path"></path>
+            <polyline id="Path" points="7.5 8.75 6.25 8.75 5 8.75"></polyline>
+        </g>
+    </g>
+</svg>

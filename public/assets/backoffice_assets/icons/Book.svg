@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="21px" viewBox="0 0 16 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icon/Book</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M4,1.9047619 C4,1.4050757 4.44771525,1 5,1 C5.55228475,1 6,1.4050757 6,1.9047619 L6,19.0952381 C6,19.5949243 5.55228475,20 5,20 C4.44771525,20 4,19.5949243 4,19.0952381 L4,1.9047619 Z M14,0 C15.1045695,0 16,0.8954305 16,2 L16.001809,3.98082404 L16.0019891,9 L16,9.019 L16,19 C16,20.1045695 15.1045695,21 14,21 L2,21 C0.8954305,21 0,20.1045695 0,19 L0,2 C0,0.8954305 0.8954305,0 2,0 L14,0 Z M14,2 L2,2 L2,19 L14,19 L14,10 L8.00198915,10 C7.06385264,10 6.64208667,8.82459947 7.36619702,8.22813967 L9.4641822,6.5 L7.36619702,4.77186033 C6.64208667,4.17540053 7.06385264,3 8.00198915,3 L14,3 L14,2 Z M14.0019891,5 L10.7888439,5 L11.6728155,5.72813967 C12.158426,6.12814381 12.158426,6.87185619 11.6728155,7.27186033 L10.7888439,8 L14.0019891,8 L14.0019891,5 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/Book">
+            <g>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
