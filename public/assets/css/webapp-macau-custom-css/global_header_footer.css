@@ -247,7 +247,7 @@ span.error-block-span {
 }
 
 .nav-menu .user_notifications a {
-    padding: 28px 12px;
+    padding: 28px 12px !important;
 }
 
 .nav-menu .user_notifications .notifications-count {
@@ -262,6 +262,23 @@ span.error-block-span {
     vertical-align: middle;
     font-size: 0.60rem;
     line-height: 1;
+}
+
+/* Backoffice mobile side-navbar */
+.navigation-portrait .nav-menu.nav-menu-social:nth-child(2) {
+    margin-top: 24px;
+}
+
+.navigation-portrait .nav-menu .user_avatar a {
+    padding: 20px 12px !important;
+}
+
+.navigation-portrait .nav-menu.nav-menu-social>li {
+    margin-left: 10px;
+}
+
+.navigation-portrait .nav-menu .user_avatar .message-box {
+    left: 60px !important;
 }
 
 /* Footer */
@@ -523,7 +540,6 @@ span.error-block-span {
 /* Message DropBox*/
 
 .message-box {
-    min-width: 250px !important;
     background-color: #fff;
     padding-bottom: 0px;
     border-radius: 6px;
@@ -533,11 +549,17 @@ span.error-block-span {
     top: -10px !important;
     z-index: 1001;
     margin-left: -510%;
+    width: 200px;
+}
+
+.message-box.notifications {
+    min-width: 250px !important;
 }
 
 .user_avatar .message-box {
-    margin-left: -60%;
+    margin-left: -30%;
     padding: 0;
+
 }
 
 

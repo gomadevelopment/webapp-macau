@@ -27,5 +27,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/logout', 'Auth\AuthController@logout');
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
 
+        Route::get('/artigos', 'ArticlesController@index');
+
     });
 });

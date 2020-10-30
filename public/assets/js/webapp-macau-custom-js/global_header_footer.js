@@ -3,9 +3,11 @@ $(function() {
 
     // Scroll to section on nav-bar menu click
     $(".nav-menu a").on("click", function(event) {
-        $(".navigation-portrait .nav-menus-wrapper-close-button").trigger(
-            "click"
-        );
+        if (!$(this).hasClass("nav-link")) {
+            $(".navigation-portrait .nav-menus-wrapper-close-button").trigger(
+                "click"
+            );
+        }
 
         // Make sure this.hash has a value before overriding default behavior
         if (this.hash !== "") {

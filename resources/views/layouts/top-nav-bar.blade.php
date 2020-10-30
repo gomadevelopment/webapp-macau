@@ -48,6 +48,10 @@
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box">
+                                <a class="msg-title" href="#">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon" alt="" />
+                                    Ver Perfil
+                                </a>
                                 <a class="msg-title" href="/logout">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon" alt="" />
                                     Terminar Sessão
@@ -61,7 +65,7 @@
                                 <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_pink.svg')}}" class="logo" alt="" />
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
-                            <div class="dropdown-menu message-box">
+                            <div class="dropdown-menu message-box notifications">
                                 <div class="msg-title">
                                     <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg')}}" class="logo" alt="" style="margin-right: 10px;" />
                                     Notificações (1)

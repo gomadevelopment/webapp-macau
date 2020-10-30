@@ -21,6 +21,21 @@
 }
 
 @media (max-width: 1199px) {
+    .shop_grid {
+        flex-wrap: wrap;
+    }
+
+    .shop_grid_caption {
+        margin: 10px;
+    }
+
+    .shop_grid_caption .article_buttons {
+        inline-size: -webkit-fill-available;
+    }
+
+    .header .container {
+        max-width: 980px;
+    }
 
     .nav-menu>li:first-child {
         margin-left: 0;
@@ -59,6 +74,15 @@
 }
 
 @media (max-width: 991px) {
+    .show-23 {
+        display: block !important;
+        position: relative;
+        float: right;
+    }
+
+    .hide-23 {
+        display: none !important;
+    }
 
     .nav-menu.nav-menu-social>li.login_click a {
         padding: 10px 15px;
@@ -114,8 +138,6 @@
     }
 }
 
-
-
 @media (max-width: 767px) {
     .modal-body {
         width: 100%;
@@ -154,7 +176,6 @@
     .desktop_icon_div {
         margin-left: 3px;
     }
-
 }
 
 @media (max-width: 425px) {
@@ -171,5 +192,16 @@
     .scene3_svg {
         margin-top: 750px;
     }
+}
 
+/* Articles sidebar */
+
+@media (max-width: 1023px) {
+    .show-23 {
+        display: none;
+    }
+
+    .hide-23 {
+        display: block;
+    }
 }
