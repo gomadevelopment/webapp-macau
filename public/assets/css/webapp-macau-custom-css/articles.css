@@ -401,6 +401,11 @@ a[class^="show_less_"] .triangle-up {
     background-color: #2583ed;
 }
 
+.shop_grid_caption .article_buttons a.share_button:focus {
+    border: 2px solid #2583ed;
+    background-color: #2583ed;
+}
+
 .shop_grid_caption .heart_icon,
 .shop_grid_caption .heart_filled_icon {
     float: right;
