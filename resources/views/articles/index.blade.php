@@ -149,8 +149,8 @@
                             <h4 class="side_title mt-3">Favoritos</h4>
                             <ul class="no-ul-list mb-3">
                                 <li>
-                                    <input id="show_favorites" class="checkbox-custom" name="show_favorites_mobile" type="checkbox">
-                                    <label for="show_favorites" class="checkbox-custom-label">Mostrar Favoritos</label>
+                                    <input id="show_favorites_mobile" class="checkbox-custom" name="show_favorites_mobile" type="checkbox">
+                                    <label for="show_favorites_mobile" class="checkbox-custom-label">Mostrar Favoritos</label>
                                 </li>
                             </ul>
                             
