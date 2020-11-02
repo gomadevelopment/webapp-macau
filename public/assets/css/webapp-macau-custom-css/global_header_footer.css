@@ -667,3 +667,7 @@ span.error-block-span {
 .message-box .msg-box-content>a:nth-child(2n+0) {
     background-color: #fafafa;
 }
+
+textarea.form-control {
+    height: auto;
+}

@@ -21,6 +21,11 @@ class AuthController extends Controller
         $this->request = $request;
     }
 
+    public function login()
+    {
+        return view('homepage');
+    }
+
     public function loginPost()
     {
         $inputs = $this->request->only('username', 'password');

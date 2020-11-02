@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 
-                <div class="breadcrumbs-wrap">
-                    <h1 class="breadcrumb-title">Artigos</h1>
+                <div class="wrap">
+                    <h1 class="title">Artigos</h1>
                 </div>
                 <div class="dropdown create_article">
                     <a href="#" class="btn btn-theme btn-custom dropdown-toggle">
@@ -303,7 +303,7 @@
                                     </a>
                                 </div>
                                 <div class="read_more">
-                                    <a href="#" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
+                                    <a href="/artigos/detalhe" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
                                 </div>
                                 
                             </div>
@@ -346,7 +346,7 @@
                                     </a>
                                 </div>
                                 <div class="read_more">
-                                    <a href="#" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
+                                    <a href="/artigos/detalhe" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
                                 </div>
                                 
                             </div>
@@ -389,7 +389,7 @@
                                     </a>
                                 </div>
                                 <div class="read_more">
-                                    <a href="#" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
+                                    <a href="/artigos/detalhe" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
                                 </div>
                                 
                             </div>
