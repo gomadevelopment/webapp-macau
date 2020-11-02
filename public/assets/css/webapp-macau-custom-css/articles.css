@@ -9,7 +9,7 @@
     padding: 40px 0 30px;
 }
 
-.page-title .breadcrumb-title {
+.page-title .title {
     color: #131b31;
     font-family: "Gilroy - Bold";
     font-size: 37px;
@@ -21,7 +21,7 @@
     margin-top: 5px;
 }
 
-.page-title .breadcrumbs-wrap {
+.page-title .wrap {
     display: inline-flex;
 }
 
@@ -411,6 +411,7 @@ a[class^="show_less_"] .triangle-up {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .shop_grid_caption .read_more {
@@ -426,4 +427,257 @@ a[class^="show_less_"] .triangle-up {
     letter-spacing: -0.3px;
     line-height: 40px;
     text-align: left;
+}
+
+/* Article details */
+
+.shop_grid.article_details_card.blog-page {
+    border: none;
+}
+
+.page-title .breadcrumb {
+    display: flex;
+    padding: 0;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: #131b31;
+    content: ">";
+    font-family: "Gilroy - Medium";
+    font-weight: 500;
+}
+
+.breadcrumb-item a {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.24px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.breadcrumb-item.active {
+    color: #131b31 !important;
+    font-family: "Gilroy - Bold";
+    font-size: 15px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    align-self: center;
+}
+
+.article_details_card {
+    padding: 30px;
+    display: block;
+}
+
+.article_details_card .card_content {
+    margin: 20px;
+    max-width: 80%;
+    margin: auto;
+}
+
+.article_details_card .card_content .article_title {
+    font-size: 46px;
+    letter-spacing: -0.73px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.article_details_card .card_content .article_author {
+    text-align: center;
+    margin: 10px;
+}
+
+.article_details_card .card_content .article_content {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 25px;
+    text-align: left;
+    padding-top: 20px;
+}
+
+.article_details_card .card_content .gray_tag_div {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.article_details_card .card_content .article_buttons {
+    float: unset;
+}
+
+.article_details_card .card_content .article_buttons a {
+    margin: 0;
+    font-size: 16px;
+    padding: 15px 35px;
+    padding-right: 45px;
+    float: right;
+}
+
+.article_details_card .card_content .article_buttons a.share_button img {
+    width: 25%;
+    margin-right: 10px;
+}
+
+.article_details_card .card_content hr {
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments .comments-title {
+    color: #131b31;
+    font-family: "Gilroy - Bold";
+    font-size: 25px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.4px;
+    line-height: 40px;
+    text-align: left;
+    margin: 0;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .article_comments_thumb {
+    width: auto;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .article_comments_thumb a img {
+    max-width: 42px;
+    border-radius: 50%;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-meta .comment-left-meta {
+    text-align: left;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details {
+    padding-left: 15px;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-meta .comment-left-meta .author-name {
+    color: #131b31;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-text {
+    margin: 0;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-text p {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 25px;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-info {
+    margin: 0;
+    text-align: left;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-info p.time-ago,
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-info a.reply {
+    opacity: 0.5;
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: 25px;
+    text-align: justify;
+    display: inline-block;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-info a.reply {
+    font-family: "Gilroy - Bold";
+    font-weight: 700;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article .comment-details .comment-info img {
+    float: unset;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments .comment-list ul li {
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments .comment-list ul li:last-child {
+    border-bottom: none;
+}
+
+.blog-page .article_detail_wrapss .comment-area .all-comments article {
+    margin: 0 0 10px;
+}
+
+.submit-form .form-control,
+.submit-page .form-control,
+.frm_submit_block .form-control,
+.submit-form .form-control::placeholder,
+.submit-page .form-control::placeholder,
+.frm_submit_block .form-control::placeholder {
+    opacity: 0.3;
+    color: #131b31;
+    font-family: "Gilroy - SemiBold";
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: normal;
+    text-align: left;
+}
+
+.submit-form .form-control,
+.submit-page .form-control,
+.frm_submit_block .form-control {
+    opacity: 1;
+    background: #fff;
+    border: 2px solid #e6ebf1;
+    border-radius: 5px;
+}
+
+.search-btn.comment_submit {
+    border-radius: 5px;
+    background-color: #ff2850;
+
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: left;
+    float: right;
+}
+
+.search-btn.comment_submit:hover,
+.search-btn.comment_submit:focus {
+    color: #fff !important;
 }

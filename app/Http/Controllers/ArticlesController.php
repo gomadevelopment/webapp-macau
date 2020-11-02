@@ -10,4 +10,9 @@ class ArticlesController extends Controller
     {
         return view('articles.index');
     }
+
+    public function details($id = null)
+    {
+        return view('articles.details');
+    }
 }
