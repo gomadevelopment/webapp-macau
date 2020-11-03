@@ -716,16 +716,21 @@ a[class^="show_less_"] .triangle-up {
 }
 
 .select2_with_search .select2-container--default .select2-search--inline .select2-search__field {
-    content: '+';
-    margin-left: 10px;
+    /* content: '+'; */
+    /* padding-left: 10px; */
     color: #131b31 !important;
     /* padding: 10px 8px; */
+    width: 100% !important;
+    cursor: pointer;
 }
 
 .select2_with_search .select2-container--default .select2-search--inline .select2-search__field::placeholder {
     content: '+';
-    font-size: 20px;
     color: black;
+}
+
+.select2_with_search .select2-container--default .select2-search--inline .select2-search__field.big::placeholder {
+    font-size: 20px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
@@ -739,6 +744,7 @@ a[class^="show_less_"] .triangle-up {
 .select2-container .select2-selection--multiple .select2-selection__rendered {
     display: flex;
     flex-flow: wrap;
+    cursor: pointer;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
@@ -761,6 +767,7 @@ a[class^="show_less_"] .triangle-up {
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-search.select2-search--inline {
     padding-top: 0px;
+    /* padding-left: 10px; */
 }
 
 .select2-search.select2-search--inline {
