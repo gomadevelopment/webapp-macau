@@ -18,7 +18,7 @@
                     <h1 class="title">Artigos</h1>
                 </div>
                 <div class="dropdown create_article">
-                    <a href="#" class="btn btn-theme btn-custom dropdown-toggle">
+                    <a href="/artigos/criar" class="btn btn-theme btn-custom dropdown-toggle">
                     <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
                     Criar Artigo</a>
                 </div>
@@ -292,7 +292,7 @@
                                     <p>Verbos</p>
                                 </div>
                                 <div class="article_buttons">
-                                    <a href="#" class="btn btn-theme edit_button">
+                                    <a href="/artigos/editar" class="btn btn-theme edit_button">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="">Editar
                                     </a>
                                     <a href="#" class="btn btn-theme remove_button">
@@ -335,7 +335,7 @@
                                     <p>Verbos</p>
                                 </div>
                                 <div class="article_buttons">
-                                    <a href="#" class="btn btn-theme edit_button">
+                                    <a href="/artigos/editar" class="btn btn-theme edit_button">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="">Editar
                                     </a>
                                     <a href="#" class="btn btn-theme remove_button">
@@ -378,7 +378,7 @@
                                     <p>Verbos</p>
                                 </div>
                                 <div class="article_buttons">
-                                    <a href="#" class="btn btn-theme edit_button">
+                                    <a href="/artigos/editar" class="btn btn-theme edit_button">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="">Editar
                                     </a>
                                     <a href="#" class="btn btn-theme remove_button">
