@@ -35,5 +35,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/artigos/editar', 'ArticlesController@save'); // Adicionar {id}
         Route::post('/artigos/editar', 'ArticlesController@savePost'); // Adicionar {id}
 
+        Route::get('/exercicios', 'ExercisesController@index');
+
     });
 });

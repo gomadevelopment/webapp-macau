@@ -1,0 +1,102 @@
+/* Shop grid - list contents */
+
+.shop_grid.exercises .shop_grid_caption {
+    margin: 5px 10px;
+    width: 100%;
+}
+
+/* .shop_grid.exercises .shop_grid_caption .heart_icon,
+.shop_grid.exercises .shop_grid_caption .heart_filled_icon {
+    position: absolute;
+    right: 0;
+} */
+
+.exercise_author,
+.exercise_level,
+.exercise_average_evaluation,
+.exercise_author strong,
+.exercise_level strong,
+.exercise_average_evaluation strong {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.exercise_author strong,
+.exercise_level strong,
+.exercise_average_evaluation strong {
+    font-family: "Gilroy - Bold";
+    font-weight: 700;
+}
+
+.exercise_author a.professor_link {
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.exercise_author {
+    margin: 0;
+}
+
+.exercise_level {
+    float: left;
+    margin-right: 20px;
+}
+
+.exercise_average_evaluation {
+    display: block;
+    margin-right: 20px;
+    float: left;
+}
+
+.shop_grid_caption .article_buttons.exercise_buttons {
+    float: right;
+    margin-top: -35px;
+}
+
+.shop_grid_caption .article_buttons.exercise_buttons a {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: left;
+    float: right;
+    padding: 15px 20px;
+}
+
+.shop_grid_caption .article_buttons.exercise_buttons a.clone_button {
+    border-radius: 4px;
+    border: 2px solid #131b31;
+    background-color: #131b31;
+}
+
+.shop_grid_caption .article_buttons.exercise_buttons a.remove_button {
+    background-color: #fff !important;
+    color: #ff2850;
+}
+
+.available_tooltip_text {
+    color: #131b31;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: 40px;
+    text-align: left;
+    margin-top: 15px;
+}

@@ -30,29 +30,18 @@ $(function() {
         }
     });
 
-    // $(".user_avatar.dropdown a.messages").on("mouseenter", function(event) {
-    //     event.preventDefault();
-    //     $(this)
-    //         .parent()
-    //         .addClass("show");
-    //     $(this)
-    //         .next()
-    //         .css("transform", "translate3d(-5px, 82px, 0px)")
-    //         .css("left", "0px")
-    //         .css("will-change", "transform")
-    //         .addClass("show");
-    // });
-
-    // $(".user_avatar.dropdown a.messages").on("mouseleave", function(event) {
-    //     event.preventDefault();
-    //     $(this)
-    //         .parent()
-    //         .removeClass("show");
-    //     $(this)
-    //         .next()
-    //         .css("transform", "translate3d(-5px, 82px, 0px)")
-    //         .css("left", "0px")
-    //         .css("will-change", "transform")
-    //         .removeClass("show");
-    // });
+    // Global Heart like
+    $(document).on("click", ".heart_icon, .heart_filled_icon", function() {
+        if ($(this).attr("class") == "heart_icon") {
+            $(this).hide();
+            $(this)
+                .next()
+                .show();
+        } else {
+            $(this).hide();
+            $(this)
+                .prev()
+                .show();
+        }
+    });
 });
