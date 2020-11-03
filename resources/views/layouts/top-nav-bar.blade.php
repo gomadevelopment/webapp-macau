@@ -16,14 +16,14 @@
                     @if(auth()->user())
                         {{-- Professor --}}
                         @if(auth()->user()->role == 1 || auth()->user()->role == 2)
-                            <li class="active"><a href="/exercicios">Exercícios</a></li>
+                            <li class=""><a href="/exercicios">Exercícios</a></li>
                             <li><a href="/questoes">Questões</a></li>
                             <li><a href="/sala_de_aula">Sala de Aula</a></li>
                             <li><a href="/artigos">Artigos</a></li>
                         
                         {{-- Student --}}
                         @else
-                            <li class="active"><a href="/exercicios">Exercícios</a></li>
+                            <li class=""><a href="/exercicios">Exercícios</a></li>
                             <li><a href="/questoes">Questões</a></li>
                             <li><a href="/sala_de_aula">Sala de Aula</a></li>
                             <li><a href="/artigos">Artigos</a></li>

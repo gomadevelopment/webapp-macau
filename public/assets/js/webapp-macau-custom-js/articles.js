@@ -87,18 +87,4 @@ $(function() {
         e.preventDefault();
         hideExtraTags();
     });
-
-    $(document).on("click", ".heart_icon, .heart_filled_icon", function() {
-        if ($(this).attr("class") == "heart_icon") {
-            $(this).hide();
-            $(this)
-                .next()
-                .show();
-        } else {
-            $(this).hide();
-            $(this)
-                .prev()
-                .show();
-        }
-    });
 });

@@ -33,6 +33,10 @@
         inline-size: -webkit-fill-available;
     }
 
+    .shop_grid_caption .exercise_buttons {
+        inline-size: unset;
+    }
+
     .header .container {
         max-width: 980px;
     }
