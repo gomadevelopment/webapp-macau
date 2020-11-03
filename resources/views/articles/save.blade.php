@@ -54,8 +54,8 @@
                                                 <div class="form-group">
                                                     <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                                                     <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
-                                                        <input type="text" class="form-control" placeholder="Pesquisar" style="border: none;">
-                                                        <hr class="m-0" style="border-top: 2px solid rgba(0, 0, 0, .1);">
+                                                        {{-- <input type="text" class="form-control" placeholder="Pesquisar" style="border: none;">
+                                                        <hr class="m-0" style="border-top: 2px solid rgba(0, 0, 0, .1);"> --}}
                                                         <select name="tags" id="tags" class="form-control" multiple  style="border: none;">
                                                             <option value=""></option>
                                                             <option value="1">Ciência</option>
@@ -102,7 +102,7 @@
                                                     <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
-                                                            <form class="dropzone needsclick" id="demo-upload" action="/upload">
+                                                            <form class="dropzone needsclick" id="form-dropzone" action="#">
                                                                 <div class="dz-message needsclick">
                                                                     <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
                                                                     <br>
@@ -166,7 +166,7 @@
         </g>
       </svg>
     </div>
-    
+</DIV>
 <!-- ============================ Find Courses with Sidebar End ================================== -->
 
 @stop
@@ -193,52 +193,62 @@
             language: 'pt'
         });
 
+        Dropzone.autoDiscover = false;
         $(function(){
             $('#categories').select2({
                 placeholder: "Escolher categoria..."
             });
 
             $('#tags').select2({
-                placeholder: "+"
+                placeholder: "Pesquisar"
             });
 
             $('li.select2-search.select2-search--inline').css('padding', '0px !important');
 
-            $(document).on('change', '#tags', function(){
-                $('input.select2-search__field')
-                    .prop('placeholder', '+')
-                    .css('color', 'black')
-                    .css('cursor', 'pointer');
-                console.log('CHANGE');
-                console.log($('li.select2-search.select2-search--inline').css('padding-top', '0px !important'));
-                $('li.select2-search.select2-search--inline').css('padding-top', '0px !important');
+            $('#tags').on('change', function(){
+                    console.log($(this).val());
+
+                if($(this).val() == null){
+                    console.log('EMPTY');
+                    $('input.select2-search__field')
+                        .prop('placeholder', 'Pesquisar')
+                        .removeClass('big');
+                }
+                else{
+                    $('input.select2-search__field')
+                        .prop('placeholder', '+')
+                        .addClass('big');
+                }
+                $('input.select2-search__field').css('padding-left', '10px !important');
+                
+                $('.select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-search.select2-search--inline')
+                    .css('padding-top', '0px !important')
+                    .css('padding-left', '10px !important');
             });
 
-            var dropzone = new Dropzone('#demo-upload', {
-            previewTemplate: document.querySelector('#preview-template').innerHTML,
-            parallelUploads: 2,
-            thumbnailHeight: 120,
-            thumbnailWidth: 120,
-            maxFilesize: 3,
-            filesizeBase: 1000,
-            thumbnail: function(file, dataUrl) {
-                if (file.previewElement) {
-                file.previewElement.classList.remove("dz-file-preview");
-                var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                for (var i = 0; i < images.length; i++) {
-                    var thumbnailElement = images[i];
-                    thumbnailElement.alt = file.name;
-                    thumbnailElement.src = dataUrl;
+            
+            var dropzone = new Dropzone('#form-dropzone', {
+                previewTemplate: document.querySelector('#preview-template').innerHTML,
+                addRemoveLinks: true,
+                parallelUploads: 2,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 3,
+                filesizeBase: 1000,
+                thumbnail: function(file, dataUrl) {
+                    if (file.previewElement) {
+                    file.previewElement.classList.remove("dz-file-preview");
+                    var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                    for (var i = 0; i < images.length; i++) {
+                        var thumbnailElement = images[i];
+                        thumbnailElement.alt = file.name;
+                        thumbnailElement.src = dataUrl;
+                    }
+                    setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
                 }
-                setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
-                }
-            }
 
             });
-
-
-            // Now fake the file upload, since GitHub does not handle file uploads
-            // and returns a 404
 
             var minSteps = 6,
                 maxSteps = 60,
@@ -246,35 +256,34 @@
                 bytesPerStep = 100000;
 
             dropzone.uploadFiles = function(files) {
-            var self = this;
+                var self = this;
 
-            for (var i = 0; i < files.length; i++) {
+                for (var i = 0; i < files.length; i++) {
 
-                var file = files[i];
-                totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+                    var file = files[i];
+                    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
 
-                for (var step = 0; step < totalSteps; step++) {
-                var duration = timeBetweenSteps * (step + 1);
-                setTimeout(function(file, totalSteps, step) {
-                    return function() {
-                    file.upload = {
-                        progress: 100 * (step + 1) / totalSteps,
-                        total: file.size,
-                        bytesSent: (step + 1) * file.size / totalSteps
-                    };
+                    for (var step = 0; step < totalSteps; step++) {
+                        var duration = timeBetweenSteps * (step + 1);
+                        setTimeout(function(file, totalSteps, step) {
+                            return function() {
+                                file.upload = {
+                                    progress: 100 * (step + 1) / totalSteps,
+                                    total: file.size,
+                                    bytesSent: (step + 1) * file.size / totalSteps
+                                };
 
-                    self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
-                    if (file.upload.progress == 100) {
-                        file.status = Dropzone.SUCCESS;
-                        self.emit("success", file, 'success', null);
-                        self.emit("complete", file);
-                        self.processQueue();
-                        //document.getElementsByClassName("dz-success-mark").style.opacity = "1";
+                                self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                                if (file.upload.progress == 100) {
+                                    file.status = Dropzone.SUCCESS;
+                                    self.emit("success", file, 'success', null);
+                                    self.emit("complete", file);
+                                    self.processQueue();
+                                }
+                            };
+                        }(file, totalSteps, step), duration);
                     }
-                    };
-                }(file, totalSteps, step), duration);
                 }
-            }
             }
         });
         
