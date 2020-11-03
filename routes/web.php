@@ -20,7 +20,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
     Route::post('/signup', 'UsersController@signUp');
 
-    Route::get('/login', 'Auth\AuthController@login');
+    Route::get('/login', 'Auth\AuthController@login')->name('login');
     Route::post('/login', 'Auth\AuthController@loginPost');
 
     Route::group(['middleware' => ['auth']], function () {
@@ -29,7 +29,11 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
 
         Route::get('/artigos', 'ArticlesController@index');
-        Route::get('/artigos/detalhe', 'ArticlesController@details');
+        Route::get('/artigos/detalhe', 'ArticlesController@details'); // Adicionar {id}
+        Route::get('/artigos/criar', 'ArticlesController@save');
+        Route::post('/artigos/criar', 'ArticlesController@savePost');
+        Route::get('/artigos/editar', 'ArticlesController@save'); // Adicionar {id}
+        Route::post('/artigos/editar', 'ArticlesController@savePost'); // Adicionar {id}
 
     });
 });

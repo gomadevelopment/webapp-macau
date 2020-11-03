@@ -15,4 +15,14 @@ class ArticlesController extends Controller
     {
         return view('articles.details');
     }
+
+    public function save($id = null)
+    {
+        return view('articles.save');
+    }
+
+    public function savePost($id = null)
+    {
+        return view('articles.save');
+    }
 }
