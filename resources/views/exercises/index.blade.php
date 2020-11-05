@@ -19,7 +19,7 @@
                     <h1 class="title">Exercícios</h1>
                 </div>
                 <div class="dropdown create_article">
-                    <a href="#" class="btn btn-theme btn-custom dropdown-toggle">
+                    <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
                     <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
                     Criar Exercício</a>
                 </div>

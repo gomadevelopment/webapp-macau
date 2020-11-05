@@ -10,4 +10,24 @@ class ExercisesController extends Controller
     {
         return view('exercises.index');
     }
+
+    public function save($id = null)
+    {
+        return view('exercises.save');
+    }
+
+    public function savePost($id = null)
+    {
+        return view('exercises.save');
+    }
+
+    public function saveQuestion($id = null)
+    {
+        return view('exercises.questions.save');
+    }
+
+    public function savePostQuestion($id = null)
+    {
+        return view('exercises.questions.save');
+    }
 }

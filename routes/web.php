@@ -36,6 +36,15 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::post('/artigos/editar', 'ArticlesController@savePost'); // Adicionar {id}
 
         Route::get('/exercicios', 'ExercisesController@index');
+        Route::get('/exercicios/criar', 'ExercisesController@save');
+        Route::post('/exercicios/criar', 'ExercisesController@savePost');
+        Route::get('/exercicios/editar', 'ExercisesController@save'); // Adicionar {id}
+        Route::post('/exercicios/editar', 'ExercisesController@savePost'); // Adicionar {id}
+
+        Route::get('/exercicios/questao/criar', 'ExercisesController@saveQuestion');
+        Route::get('/exercicios/questao/criar', 'ExercisesController@savePostQuestion');
+        Route::get('/exercicios/questao/editar', 'ExercisesController@saveQuestion'); // Adicionar {id}
+        Route::get('/exercicios/questao/editar', 'ExercisesController@savePostQuestion'); // Adicionar {id}
 
     });
 });

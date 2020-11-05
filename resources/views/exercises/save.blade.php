@@ -3,6 +3,7 @@
 @section('header')
 
 <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}">
 
 @stop
 
@@ -15,7 +16,7 @@
             <div class="col-lg-12 col-md-12">
                 
                 <div class="wrap">
-                    <h1 class="title">Artigo</h1>
+                    <h1 class="title">Criar Exercício</h1>
                 </div>
                 
             </div>
@@ -24,110 +25,55 @@
 </section>
 <!-- ============================ Page Title End ================================== -->	
 
-<!-- ============================ Create / Edit article ================================== -->
+<!-- ============================ Find Courses with Sidebar ================================== -->
 <section class="pt-0">
     <div class="container">
 
-        <!-- Row -->
-        <div class="row">
-        
-            
-            <div class="col-lg-12 col-md-12 col-sm-12 order-1 order-lg-2 order-md-1">
-                
-                <div class="row">
-            
-                    <!-- Single Product -->
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <form action="">
-                            <div class="shop_grid save_article_card">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <input type="text" class="form-control" placeholder="Título do artigo">
-                                                </div>
-                                            </div>
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
-                                                        {{-- <input type="text" class="form-control" placeholder="Pesquisar" style="border: none;">
-                                                        <hr class="m-0" style="border-top: 2px solid rgba(0, 0, 0, .1);"> --}}
-                                                        <select name="tags" id="tags" class="form-control" multiple  style="border: none;">
-                                                            <option value=""></option>
-                                                            <option value="1">Ciência</option>
-                                                            <option value="2">Tecnologia</option>
-                                                            <option value="3">Natureza</option>
-                                                            <option value="4">Sintáx</option>
-                                                            <option value="5">Geografia</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+            <div class="custom-tab customize-tab tabs_creative">
+                <ul class="nav nav-tabs p-2 b-0" id="create_exercise_tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="begin-tab" data-toggle="tab" href="#begin" role="tab" aria-controls="begin" aria-selected="true">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="false">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            Introdução</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="structure-tab" data-toggle="tab" href="#structure" role="tab" aria-controls="structure" aria-selected="false">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Layers.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Layers_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            Estrutura</a>
+                    </li>
+                </ul>
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Categoria <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 p-0">
-                                                        <select name="categories" id="categories" class="form-control">
-                                                            <option value=""></option>
-                                                            <option value="1">Gramática</option>
-                                                            <option value="2">Ciência</option>
-                                                            <option value="3">Desporto</option>
-                                                        </select>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <div class="row">
-                                            
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Descrição <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <textarea class="form-control" name="description" id="description" cols="30" rows="4" placeholder="Descrição do artigo"></textarea>
-                                                    
-                                                </div>
-                                            </div>
+                <div class="tab-content" id="create_exercise_tabs_content">
+                    {{-- BEGIN TAB --}}
+                    <div class="tab-pane fade show active" id="begin" role="tabpanel" aria-labelledby="begin-tab">
+                        
+                        @include('exercises.tab-contents.save_beginning')
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <form action=""></form>
-                                                    <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <div class="col-lg-9 col-md-9 col-sm-12 p-0">
-                                                        <div id="dropzone">
-                                                            <form class="dropzone needsclick" id="form-dropzone" action="#">
-                                                                <div class="dz-message needsclick">
-                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
-                                                                    <br>
-                                                                    Arraste e solte os seus ficheiros aqui 
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="" class="btn search-btn comment_submit">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
-                        </form>
                     </div>
-                    
+                    {{-- INTRO TAB --}}
+                    <div class="tab-pane fade" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+
+                        @include('exercises.tab-contents.save_intro')
+
+                    </div>
+                    {{-- STRUCTURE TAB --}}
+                    <div class="tab-pane fade" id="structure" role="tabpanel" aria-labelledby="structure-tab">
+
+                        @include('exercises.tab-contents.save_structure')
+
+                    </div>
                 </div>
-                
-                
             </div>
-        
-        </div>
-        <!-- Row -->
+            
         
     </div>
 </section>
@@ -176,41 +122,115 @@
 
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script>
 
     <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https'))}}"></script>
 
     <script>
-        function openNav() {
-            document.getElementById("filter-sidebar").style.width = "320px";
-        }
 
-        function closeNav() {
-            document.getElementById("filter-sidebar").style.width = "0";
-        }
+        CKEDITOR.replace( 'intro_text' , {
+            language: 'pt'
+        });
 
-        CKEDITOR.replace( 'description' , {
+        CKEDITOR.replace( 'statement' , {
+            language: 'pt'
+        });
+
+        CKEDITOR.replace( 'audio_visual_description' , {
+            language: 'pt'
+        });
+
+        CKEDITOR.replace( 'audio_transcription' , {
             language: 'pt'
         });
 
         Dropzone.autoDiscover = false;
-        $(function(){
+
+        $(function() {
+            // Change icon image on tab change
+            changeIconImage();
+            function changeIconImage(){
+                $('#create_exercise_tabs a.nav-link').each(function(index, element){
+                    if($(element).hasClass('active')){
+                        $(element).find('.white_icon').show();
+                        $(element).find('.black_icon').hide();
+                    }
+                    else{
+                        $(element).find('.white_icon').hide();
+                        $(element).find('.black_icon').show();
+                    }
+                });
+            }
+
+            $(document).on('click', '#create_exercise_tabs a.nav-link', function(){
+                changeIconImage();
+            });
+
+            $(document).on('click', '#time_for_fill, #allow_interruptions', function(){
+                if($(this).is(':checked')){
+                    if($(this).attr('id') == 'time_for_fill'){
+                        $('select#fill_time').attr('disabled', false);
+                    }
+                    else{
+                        $('select#interruption_time').attr('disabled', false);
+                    }
+                }
+                else{
+                    if($(this).attr('id') == 'time_for_fill'){
+                        $('select#fill_time').attr('disabled', true);
+                    }
+                    else{
+                        $('select#interruption_time').attr('disabled', true);
+                    }
+                }
+            });
+
+            changePageTitle('#create_exercise_tabs .nav-link.active');
+
+            function changePageTitle(selector){
+                if($(selector).hasClass('active') && $(selector).attr('id') != 'begin-tab'){
+                    $('.page-title .title').text('Exercício: "'+$('#exercise_name').val()+'"');
+                }
+                else{
+                    $('.page-title .title').text('Criar Exercício');
+                }
+            }
+
+            $(document).on('click', '#create_exercise_tabs .nav-link', function(){
+                changePageTitle(this);
+            });
+
+            $('#exercise_template').select2({
+                placeholder: "Escolher exercício"
+            });
+
             $('#categories').select2({
                 placeholder: "Escolher categoria"
+            });
+
+            $('#levels').select2({
+                placeholder: "Escolher Nível"
             });
 
             $('#tags').select2({
                 placeholder: "Pesquisar"
             });
 
+            $('#fill_time').select2({
+                placeholder: "Sel. Tempo"
+            });
+
+            $('#interruption_time').select2({
+                placeholder: "Sel. Tempo"
+            });
+
             $('li.select2-search.select2-search--inline').css('padding', '0px !important');
 
             $('#tags').on('change', function(){
-                    console.log($(this).val());
 
                 if($(this).val() == null){
-                    console.log('EMPTY');
                     $('input.select2-search__field')
                         .prop('placeholder', 'Pesquisar')
                         .removeClass('big');
@@ -227,7 +247,6 @@
                     .css('padding-left', '10px !important');
             });
 
-            
             var dropzone = new Dropzone('#form-dropzone', {
                 previewTemplate: document.querySelector('#preview-template').innerHTML,
                 addRemoveLinks: true,
@@ -287,7 +306,7 @@
                 }
             }
         });
-        
+
     </script>
 
 @stop
