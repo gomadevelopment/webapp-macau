@@ -41,9 +41,9 @@
     background-color: #ffffff;
 }
 
-.page-title .btn-custom.dropdown-toggle,
-.page-title .checkbox-custom-label,
-.page-title .radio-custom-label {
+.btn-custom.dropdown-toggle,
+.checkbox-custom-label,
+.radio-custom-label {
     color: #131b31 !important;
     font-family: "Gilroy - Medium";
     font-size: 16px;
@@ -52,6 +52,12 @@
     letter-spacing: -0.25px;
     line-height: normal;
     text-align: left;
+    display: flow-root;
+}
+
+.page-title .btn-custom.dropdown-toggle,
+.page-title .checkbox-custom-label,
+.page-title .radio-custom-label {
     margin: 0;
 }
 
@@ -702,6 +708,7 @@ a[class^="show_less_"] .triangle-up {
     text-align: left;
 }
 
+.form-group input.form-control,
 .shop_grid.save_article_card input {
     border-radius: 5px;
     border: 2px solid #e6ebf1;
@@ -728,7 +735,6 @@ a[class^="show_less_"] .triangle-up {
 
 .select2_with_search .select2-container--default .select2-search--inline .select2-search__field::placeholder {
     content: '+';
-    color: black;
 }
 
 .select2_with_search .select2-container--default .select2-search--inline .select2-search__field.big::placeholder {
@@ -777,6 +783,8 @@ a[class^="show_less_"] .triangle-up {
     border: none !important;
 }
 
+.form-group input.form-control,
+.form-group input.form-control::placeholder,
 .shop_grid.save_article_card input,
 .shop_grid.save_article_card input::placeholder,
 .select2-selection__rendered,
@@ -800,13 +808,14 @@ a[class^="show_less_"] .triangle-up {
     background-color: #ff2850;
 }
 
+.form-group input.form-control::placeholder,
 .shop_grid.save_article_card input::placeholder {
     opacity: 0.3;
 }
 
-.shop_grid.save_article_card #cke_description {
+.cke_reset {
     border-radius: 5px;
-    border: 2px solid #e6ebf1;
+    border: 1px solid #e6ebf1 !important;
 }
 
 .dropzone {

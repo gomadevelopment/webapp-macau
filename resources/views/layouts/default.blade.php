@@ -42,7 +42,7 @@
             @include('layouts.login_modal')
             @include('layouts.signup_modal')
 
-            <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+            {{-- <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a> --}}
 
 		</div>
 		<!-- ============================================================== -->
