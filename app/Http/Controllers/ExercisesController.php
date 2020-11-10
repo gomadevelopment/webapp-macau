@@ -30,4 +30,14 @@ class ExercisesController extends Controller
     {
         return view('exercises.questions.save');
     }
+
+    public function performExercise($id = null)
+    {
+        return view('exercises.fill_exercises.perform');
+    }
+
+    public function performPostExercise($id = null)
+    {
+        return view('exercises.fill_exercises.perform');
+    }
 }

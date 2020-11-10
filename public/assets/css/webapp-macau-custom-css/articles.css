@@ -30,9 +30,13 @@
     float: right;
 }
 
+.page-title .dropdown.show-23 {
+    float: unset;
+}
+
 .page-title .show_favorites {
     position: relative;
-    padding: 11px 25px;
+    padding: 15px 25px;
     float: right;
     margin-left: 10px;
     box-shadow: 0 3px 26px 13px rgba(0, 0, 0, 0.03);
@@ -74,6 +78,7 @@
     border-radius: 5px;
     border: 2px solid #e6ebf1;
     background-color: #ffffff;
+    padding: 15px 25px;
 }
 
 .page-title .dropdown-toggle::after {
@@ -113,7 +118,6 @@
 .page-title .dropdown.create_article a {
     background-color: #ff2850;
     color: #fff !important;
-    padding-top: 11px !important;
 }
 
 .page-title .dropdown.create_article a:hover,
@@ -314,7 +318,8 @@ a[class^="show_less_"] .triangle-up {
     margin-bottom: 20px;
 }
 
-.shop_grid_caption .gray_tag_div {
+.shop_grid_caption .gray_tag_div,
+.gray_tag_div {
     color: #ffffff;
     font-family: "Gilroy - SemiBold";
     font-size: 14px;
@@ -333,7 +338,8 @@ a[class^="show_less_"] .triangle-up {
     margin-bottom: 15px;
 }
 
-.shop_grid_caption .gray_tag_div p {
+.shop_grid_caption .gray_tag_div p,
+.gray_tag_div p {
     padding: 8px 20px 8px 10px;
     margin: 0;
 }
@@ -418,7 +424,7 @@ a[class^="show_less_"] .triangle-up {
 .shop_grid_caption .heart_filled_icon {
     float: right;
     margin-top: 10px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     cursor: pointer;
 }
 

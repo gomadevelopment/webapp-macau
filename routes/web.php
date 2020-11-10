@@ -46,5 +46,8 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/exercicios/questao/editar', 'ExercisesController@saveQuestion'); // Adicionar {id}
         Route::get('/exercicios/questao/editar', 'ExercisesController@savePostQuestion'); // Adicionar {id}
 
+        Route::get('/exercicios/realizar', 'ExercisesController@performExercise'); // Adicionar {id}
+        Route::post('/exercicios/realizar', 'ExercisesController@performPostExercise'); // Adicionar {id}
+
     });
 });
