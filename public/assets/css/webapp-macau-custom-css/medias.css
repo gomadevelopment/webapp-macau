@@ -209,3 +209,9 @@
         display: block;
     }
 }
+
+@media (min-width: 992px) {
+    .show-23 {
+        display: none;
+    }
+}

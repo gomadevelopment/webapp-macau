@@ -18,11 +18,13 @@
                 <div class="wrap">
                     <h1 class="title">Exercícios</h1>
                 </div>
-                <div class="dropdown create_article">
-                    <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
-                    Criar Exercício</a>
-                </div>
+                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    <div class="dropdown create_article">
+                        <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
+                        Criar Exercício</a>
+                    </div>
+                @endif
                 <div class="show_favorites">
                     <input id="show_my_favorites" class="checkbox-custom" name="show_my_favorites" type="checkbox">
                     <label for="show_my_favorites" class="checkbox-custom-label">Meus Favoritos</label>                    
@@ -332,32 +334,62 @@
                 
                 <div class="row">
             
-                    <!-- Single Product -->
+                    <!-- Single Product 11 -->
                     <div class="col-lg-12 col-md-12 col-sm-12">
                 
                         <div class="shop_grid exercises">
-                            <div class="shop_grid_caption">
+                            <div class="shop_grid_caption card-body">
                                 {{-- Like buttons heart/heart_filled --}}
                                 <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
                                 <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                                 <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-
-                                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                                    <p class="exercise_level" style="float: left; margin-right: 20px;"><strong>Nível:</strong> A1</p>
-                                    <p class="exercise_average_evaluation"><strong>Média de Avaliação:</strong> 62%</p>
-                                    <div class="article_buttons exercise_buttons">
-                                        <a href="#" class="btn btn-theme remove_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="">Remover
+                                <div class="d-flex float-left flex-column">
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                                    @else
+                                        <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
+                                    @endif
+                                    <p class="exercise_level" style="float: left; margin-right: 20px;">
+                                        <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
+                                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                            <strong>Média de Avaliação:</strong> 62%
+                                        @endif
+                                    </p>
+                                </div>
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="d-block float-right mt-3">
+                                        <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Visualizar
                                         </a>
-                                        <a href="#" class="btn btn-theme share_button clone_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="">Clonar
+                                        <a href="#" class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                            Remover
                                         </a>
-                                        <a href="#" class="btn btn-theme edit_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="">Visualizar
+                                        <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Clonar
                                         </a>
                                     </div>
+                                @else
+                                    <div class="d-block float-right mt-3">
+                                        <a href="/exercicios/realizar" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Iniciar Exercício
+                                        </a>
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Retomar
+                                        </a>
+                                        <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Notificar Professor
+                                        </a>
+                                    </div>
+                                @endif
+                                
 
-                                <hr style="margin-top: 4rem;">
+                                <hr style="margin-top: 6rem;">
 
                                 <h4 class="sg_rate_title">Resumo</h4>
 
@@ -375,43 +407,79 @@
                                     <p>Verbos</p>
                                 </div>
 
-                                <div class="read_more available_tooltip_text">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
-                                    Disponível só para os meus Alunos
-                                </div>
-                                
-                                
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="read_more available_tooltip_text">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
+                                        Disponível só para os meus Alunos
+                                    </div>
+                                @endif
+                                    
                             </div>
                         </div>
                         
                     </div>
 
-                    <!-- Single Product -->
+                    <!-- Single Product 22 -->
                     <div class="col-lg-12 col-md-12 col-sm-12">
                 
                         <div class="shop_grid exercises">
-                            <div class="shop_grid_caption">
+                            <div class="shop_grid_caption card-body">
                                 {{-- Like buttons heart/heart_filled --}}
                                 <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
                                 <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                                 <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-
-                                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                                    <p class="exercise_level" style="float: left; margin-right: 20px;"><strong>Nível:</strong> A1</p>
-                                    <p class="exercise_average_evaluation"><strong>Média de Avaliação:</strong> 62%</p>
-                                    <div class="article_buttons exercise_buttons">
-                                        <a href="#" class="btn btn-theme remove_button" hidden>
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="">Remover
+                                <div class="d-flex float-left flex-column">
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                                    @else
+                                        <p class="exercise_author">
+                                            <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;
+                                            <strong>Estado:</strong> <strong class="exercise_complete"> Realizado</strong>
+                                        </p>
+                                    @endif
+                                    <p class="exercise_level" style="float: left; margin-right: 20px;">
+                                        <strong>Nível:</strong> A1
+                                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                            <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
+                                        @else
+                                             <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:</strong> 100%
+                                        @endif
+                                    </p>
+                                </div>
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="d-block float-right mt-3">
+                                        <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Visualizar
                                         </a>
-                                        <a href="#" class="btn btn-theme share_button clone_button" hidden>
-                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="">Clonar
+                                        <a href="#" class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                            Remover
                                         </a>
-                                        <a href="#" class="btn btn-theme edit_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="">Visualizar
+                                        <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Clonar
                                         </a>
                                     </div>
+                                @else
+                                    <div class="d-block float-right mt-3">
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Iniciar Exercício
+                                        </a>
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Retomar
+                                        </a>
+                                        <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Notificar Professor
+                                        </a>
+                                    </div>
+                                @endif
+                                
 
-                                <hr style="margin-top: 4rem;">
+                                <hr style="margin-top: 6rem;">
 
                                 <h4 class="sg_rate_title">Resumo</h4>
 
@@ -429,43 +497,79 @@
                                     <p>Verbos</p>
                                 </div>
 
-                                <div class="read_more available_tooltip_text" hidden>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
-                                    Disponível só para os meus Alunos
-                                </div>
-                                
-                                
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="read_more available_tooltip_text">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
+                                        Disponível só para os meus Alunos
+                                    </div>
+                                @endif
+                                    
                             </div>
                         </div>
                         
                     </div>
 
-                    <!-- Single Product -->
+                    <!-- Single Product 33 -->
                     <div class="col-lg-12 col-md-12 col-sm-12">
                 
                         <div class="shop_grid exercises">
-                            <div class="shop_grid_caption">
+                            <div class="shop_grid_caption card-body">
                                 {{-- Like buttons heart/heart_filled --}}
                                 <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
                                 <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                                 <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-
-                                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                                    <p class="exercise_level" style="float: left; margin-right: 20px;"><strong>Nível:</strong> A1</p>
-                                    <p class="exercise_average_evaluation"><strong>Média de Avaliação:</strong> 62%</p>
-                                    <div class="article_buttons exercise_buttons">
-                                        <a href="#" class="btn btn-theme remove_button" hidden>
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="">Remover
+                                <div class="d-flex float-left flex-column">
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                                    @else
+                                        <p class="exercise_author">
+                                            <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;
+                                            <strong>Estado:</strong> <strong class="exercise_in_course"> Em curso</strong>
+                                        </p>
+                                    @endif
+                                    <p class="exercise_level" style="float: left; margin-right: 20px;">
+                                        <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
+                                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                            <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
+                                        @else
+                                             {{-- <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:</strong> 100% --}}
+                                        @endif
+                                    </p>
+                                </div>
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="d-block float-right mt-3">
+                                        <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Visualizar
                                         </a>
-                                        <a href="#" class="btn btn-theme share_button clone_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="">Clonar
+                                        <a href="#" hidden class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                            Remover
                                         </a>
-                                        <a href="#" class="btn btn-theme edit_button">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="">Visualizar
+                                        <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Clonar
                                         </a>
                                     </div>
+                                @else
+                                    <div class="d-block float-right mt-3">
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Iniciar Exercício
+                                        </a>
+                                        <a href="/exercicios/realizar" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Retomar
+                                        </a>
+                                        <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Notificar Professor
+                                        </a>
+                                    </div>
+                                @endif
+                                
 
-                                <hr style="margin-top: 4rem;">
+                                <hr style="margin-top: 6rem;">
 
                                 <h4 class="sg_rate_title">Resumo</h4>
 
@@ -483,12 +587,103 @@
                                     <p>Verbos</p>
                                 </div>
 
-                                <div class="read_more available_tooltip_text" hidden>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
-                                    Disponível só para os meus Alunos
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="read_more available_tooltip_text">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
+                                        Disponível só para os meus Alunos
+                                    </div>
+                                @endif
+                                    
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Single Product 44 -->
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                
+                        <div class="shop_grid exercises">
+                            <div class="shop_grid_caption card-body">
+                                {{-- Like buttons heart/heart_filled --}}
+                                <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
+                                <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
+                                <h4 class="sg_rate_title">Da Áustria para Macau</h4>
+                                <div class="d-flex float-left flex-column">
+                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                                    @else
+                                        <p class="exercise_author">
+                                            <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;
+                                            <strong>Estado:</strong> <strong class="exercise_awaiting"> A aguardar Avaliação</strong>
+                                        </p>
+                                    @endif
+                                    <p class="exercise_level" style="float: left; margin-right: 20px;">
+                                        <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
+                                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                            <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
+                                        @else
+                                             <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota Provisória:</strong> 90%
+                                        @endif
+                                    </p>
                                 </div>
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="d-block float-right mt-3">
+                                        <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Visualizar
+                                        </a>
+                                        <a href="#" hidden class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                            Remover
+                                        </a>
+                                        <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Clonar
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="d-block float-right mt-3">
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Iniciar Exercício
+                                        </a>
+                                        <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Retomar
+                                        </a>
+                                        <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Notificar Professor
+                                        </a>
+                                    </div>
+                                @endif
                                 
+
+                                <hr style="margin-top: 6rem;">
+
+                                <h4 class="sg_rate_title">Resumo</h4>
+
+                                <p class="article_description" style="margin-top: 15px;">
+                                    Vamos conhecer Astrid Pires, professora de Alemão em Lisboa. De onde é que ela é? Porque é que veio para Portugal? Quais as dificuldades que teve?
+                                </p>
                                 
+                                <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                                    <p>Gramática</p>
+                                </div>
+                                <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                                    <p>Experiência</p>
+                                </div>
+                                <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                                    <p>Verbos</p>
+                                </div>
+
+                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    <div class="read_more available_tooltip_text">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
+                                        Disponível só para os meus Alunos
+                                    </div>
+                                @endif
+                                    
                             </div>
                         </div>
                         

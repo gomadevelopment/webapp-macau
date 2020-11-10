@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="21px" viewBox="0 0 22 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icon/Home</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M15.7069779,4.29289322 L25.7051558,14.2928932 C26.3350058,14.9228581 25.8889203,16 24.9981778,16 L22.9985423,16 L22.9985423,24 C22.9985423,24.5522847 22.5509086,25 21.9987245,25 L8.00127552,25 C7.44909141,25 7.00145774,24.5522847 7.00145774,24 L7.00145774,16 L5.00182217,16 C4.11107966,16 3.66499417,14.9228581 4.29484424,14.2928932 L14.2930221,4.29289322 C14.6834752,3.90236893 15.3165248,3.90236893 15.7069779,4.29289322 Z M15,6.41421356 L7.41421356,14 L8,14 C8.55228475,14 9,14.4477153 9,15 L9,23 L14,22.999 L14,23 L16,23 L16,22.999 L21,23 L21,15 C21,14.4477153 21.4477153,14 22,14 L22.5857864,14 L15,6.41421356 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/Home" transform="translate(-4.000000, -4.000000)">
+            <g>
+                <rect id="Grid" x="0" y="0" width="30" height="30"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#131B31" fill-rule="nonzero" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
