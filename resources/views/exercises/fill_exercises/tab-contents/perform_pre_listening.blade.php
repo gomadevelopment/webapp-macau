@@ -16,7 +16,7 @@
                         <label class="label_title d-block" style="font-size: 30px;">
                             Pré-Escuta </label>
                     </div>
-                    <div class="exercise_time wrap float-right">
+                    {{-- <div class="exercise_time wrap float-right">
                         <p class="time_label exercise_author align-self-center">
                             <strong style="font-size: 22px;">Ir para:</strong>
                         </p>
@@ -26,7 +26,7 @@
                         <a href="#" class="pause_time" style="padding: 10px 25px !important;">
                             Ir
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
