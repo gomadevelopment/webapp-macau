@@ -15,7 +15,7 @@
                     <mask id="mask-2" fill="white">
                         <use xlink:href="#path-1"></use>
                     </mask>
-                    <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <use id="Mask" fill="#ff2850" xlink:href="#path-1"></use>
                 </g>
             </g>
             <g id="Icon/Equalizer" transform="translate(11.000000, 0.000000)">
@@ -23,7 +23,7 @@
                     <mask id="mask-4" fill="white">
                         <use xlink:href="#path-3"></use>
                     </mask>
-                    <use id="Mask" fill="#FFFFFF" xlink:href="#path-3"></use>
+                    <use id="Mask" fill="#ff2850" xlink:href="#path-3"></use>
                 </g>
             </g>
             <g id="Icon/Equalizer" transform="translate(22.000000, 0.000000)">
@@ -31,7 +31,7 @@
                     <mask id="mask-6" fill="white">
                         <use xlink:href="#path-5"></use>
                     </mask>
-                    <use id="Mask" fill="#FFFFFF" xlink:href="#path-5"></use>
+                    <use id="Mask" fill="#ff2850" xlink:href="#path-5"></use>
                 </g>
             </g>
         </g>

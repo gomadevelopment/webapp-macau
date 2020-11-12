@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="13px" viewBox="0 0 16 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icon/Check</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M14.4107443,0.910744349 C14.7361813,0.585307439 15.2638187,0.585307439 15.5892557,0.910744349 C15.9146926,1.23618126 15.9146926,1.76381874 15.5892557,2.08925565 L5.58925565,12.0892557 C5.26381874,12.4146926 4.73618126,12.4146926 4.41074435,12.0892557 L0.244077682,7.92258898 C-0.0813592274,7.59715207 -0.0813592274,7.06951459 0.244077682,6.74407768 C0.569514592,6.41864077 1.09715207,6.41864077 1.42258898,6.74407768 L5,10.3214887 L14.4107443,0.910744349 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/Check">
+            <g>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#131b31" fill-rule="nonzero" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,146 @@
+/* Classroom CSSS */
+
+.classroom .user_round_avatar,
+.classroom .colleagues_round_avatar {
+    max-width: 120px;
+    border-radius: 50%;
+    float: left;
+}
+
+.classroom .colleagues_round_avatar {
+    max-width: 50px;
+}
+
+.classroom .edit_profile,
+.classroom .colleagues_name {
+    display: block;
+    margin-top: -10px;
+
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 14px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.22px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.classroom .notifications_see_all,
+.classroom .colleagues_options {
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: normal;
+    text-align: left;
+}
+
+.classroom .colleagues_name {
+    font-size: 16px;
+    color: #131b31;
+    align-self: center;
+}
+
+.expand_accordion,
+.red-skin a.expand_accordion:hover,
+.red-skin a.expand_accordion:focus {
+    border-radius: 5px;
+    border: 2px solid #e6ebf1;
+    padding: 5px 15px;
+
+    color: #131b31 !important;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 40px;
+    text-align: right;
+}
+
+.expand_accordion img {
+    margin-left: 5px;
+}
+
+.expand_accordion.expanded,
+.red-skin a.expand_accordion.expanded:hover,
+.red-skin a.expand_accordion.expanded:focus {
+    border: 2px solid #ff2850;
+
+    color: #ff2850 !important;
+    font-family: "Gilroy - Bold";
+    font-weight: 700;
+}
+
+.red-skin a.shortcut_links,
+.red-skin a.shortcut_links:hover,
+.red-skin a.shortcut_links:focus {
+    display: flow-root;
+
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: normal;
+    text-align: left;
+}
+
+.shortcut_links img {
+    width: 8%;
+    margin-top: 3px;
+    float: right;
+}
+
+/* Dropdown menus */
+
+.dropdown.student_options_dropdown,
+.dropdown.student_dropdown {
+    margin-left: 0;
+}
+
+.dropdown.student_options_dropdown .message-box,
+.dropdown.student_dropdown .message-box {
+    background-color: #fff;
+    padding-bottom: 0px;
+    border-radius: 6px;
+    border: 2px solid #e2e2e2 !important;
+    position: absolute !important;
+    margin-top: 0 !important;
+    /* top: -10px !important; */
+    z-index: 1001;
+    margin-left: -140%;
+    width: max-content;
+    box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown.student_dropdown .message-box {
+    top: 19px !important;
+    margin-left: -290%;
+}
+
+.dropdown.student_options_dropdown .message-box .msg-title,
+.dropdown.student_dropdown .message-box .msg-title {
+    display: block;
+    border-bottom: none;
+    padding: 2px 15px 10px 15px;
+}
+
+.dropdown.student_options_dropdown .dropdown-menu-arrow,
+.dropdown.student_dropdown .dropdown-menu-arrow {
+    /* bottom: 1px; */
+    left: 35px;
+}
+
+.dropdown.student_dropdown .dropdown-menu-arrow {
+    left: 20px;
+}
+
+.dropdown.student_options_dropdown .dropdown-menu-arrow:before,
+.dropdown.student_dropdown .dropdown-menu-arrow:before {
+    /* border: 2px solid #e2e2e2 !important; */
+}
