@@ -214,7 +214,7 @@
                 {{-- <iframe width="100%" height="240px" style="background-color: black;"
                     src="http://techslides.com/demos/sample-videos/small.mp4">
                 </iframe> --}}
-                <video controls="true" autoplay="true" name="media" width="100%" height="240px" style="background-color: black;">
+                <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
                     <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
                 </video>
             </div>

@@ -29,7 +29,7 @@
                                     João Paulo
                                     <div class="d-flex flex-row">
                                         <p class="exercise_author align-self-center">
-                                            <a href="#" class="edit_profile">Editar</a>
+                                            <a href="/perfil/editar" class="edit_profile">Editar</a>
                                             @if(auth()->user()->role == 1 || auth()->user()->role == 2)
                                                 <a href="#" class="edit_profile">Definições do Sistema</a>
                                             @endif
@@ -192,7 +192,7 @@
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
                                     <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
@@ -216,7 +216,7 @@
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
                                     <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
@@ -240,7 +240,7 @@
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
                                     <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
@@ -264,7 +264,7 @@
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
                                     <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
@@ -288,7 +288,7 @@
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
                                     <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>

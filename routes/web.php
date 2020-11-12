@@ -51,5 +51,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         Route::get('/sala_de_aula', 'ClassroomController@index');
 
+        
+        Route::get('/perfil', 'UsersController@index_profile');
+        Route::get('/perfil/editar', 'UsersController@edit_profile'); // Adicionar {id}
+        Route::post('/perfil/editar', 'UsersController@editPost_profile'); // Adicionar {id}
+
     });
 });
