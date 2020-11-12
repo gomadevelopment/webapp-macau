@@ -756,7 +756,7 @@ a[class^="show_less_"] .triangle-up {
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
-    display: flex;
+    display: block;
     flex-flow: wrap;
     cursor: pointer;
 }
@@ -781,6 +781,7 @@ a[class^="show_less_"] .triangle-up {
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-search.select2-search--inline {
     padding-top: 0px;
+    margin: 18px 5px;
     /* padding-left: 10px; */
 }
 

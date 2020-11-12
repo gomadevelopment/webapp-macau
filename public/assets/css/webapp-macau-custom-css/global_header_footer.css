@@ -256,9 +256,9 @@ span.error-block-span {
     border-radius: 12px;
     font-weight: 500;
     position: absolute;
-    top: 28px;
-    right: 8px;
-    padding: 1px 1px;
+    top: 24px;
+    right: 4px;
+    padding: 2px 4px;
     vertical-align: middle;
     font-size: 0.60rem;
     line-height: 1;
@@ -642,7 +642,8 @@ span.error-block-span {
     margin: 1px 0px 8px 0px;
 }
 
-.message-box .msg-box-content p.time {
+.message-box .msg-box-content p.time,
+.notification_time_ago {
     position: relative;
     display: inline-block;
     margin-top: 14px;
