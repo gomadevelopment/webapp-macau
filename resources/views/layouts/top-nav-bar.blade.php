@@ -48,7 +48,7 @@
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box">
-                                <a class="msg-title" href="#">
+                                <a class="msg-title" href="/perfil">
                                     <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon" alt="" />
                                     Ver Perfil
                                 </a>

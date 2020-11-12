@@ -33,4 +33,19 @@ class UsersController extends Controller
 
         return redirect()->to('/');
     }
+
+    public function index_profile()
+    {
+        return view('users.index_profile');
+    }
+
+    public function edit_profile()
+    {
+        return view('users.edit_profile');
+    }
+
+    public function editPost_profile()
+    {
+        return view('users.edit_profile');
+    }
 }
