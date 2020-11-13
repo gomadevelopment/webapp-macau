@@ -7765,7 +7765,7 @@ span.mod-close {
     position: absolute;
     right: 15px;
     top: 15px;
-    background: #f4f5f7;
+    background: transparent;
     width: 35px;
     height: 35px;
     display: flex;

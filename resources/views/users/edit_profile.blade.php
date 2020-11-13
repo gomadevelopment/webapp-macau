@@ -193,28 +193,24 @@
                 expandCollapseAccordion($(this));
             });
 
-
-            // changeDotsIcons('.classes_student_dropdown a');
             function changeDotsIcons(selector){
-                if($(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').hide();
-                    $(selector).find('img.empty_dots').show();
-                    // hideAllDotIcons();
-                }
-                else if(!$(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').show();
-                    $(selector).find('img.empty_dots').hide();
+                if(!$(selector).parent().hasClass('show')){
+                    $(selector).find('img.filled_dots').addClass('d-block');
+                    $(selector).find('img.empty_dots').removeClass('d-block').hide();
                 }
             }
 
             $('.classes_student_dropdown a').on('click', function(){
-                // hideAllDotIcons();
+                $('.classes_student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
+                $('.classes_student_dropdown a').find('img.empty_dots').addClass('d-block');
                 changeDotsIcons(this);
             });
 
-            $('html, body').on('click', function(){
-                $('.classes_student_dropdown a').find('img.filled_dots').hide();
-                $('.classes_student_dropdown a').find('img.empty_dots').show();
+            $('html, body').on('click', function(e){
+                if (!$(e.target).hasClass('empty_dots') || $(e.target).hasClass('colleagues_options')) {
+                    $('.classes_student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
+                    $('.classes_student_dropdown a').find('img.empty_dots').addClass('d-block');
+                }
             });
 
         });

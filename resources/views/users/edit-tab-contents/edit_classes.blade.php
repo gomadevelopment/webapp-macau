@@ -43,7 +43,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -74,7 +74,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -105,7 +105,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -136,7 +136,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -167,7 +167,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -236,7 +236,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -267,7 +267,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -298,7 +298,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -329,7 +329,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -360,7 +360,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -437,7 +437,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -468,7 +468,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -499,7 +499,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -530,7 +530,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -561,7 +561,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -630,7 +630,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -661,7 +661,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -692,7 +692,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -723,7 +723,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>
@@ -754,7 +754,7 @@
                             <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
                                 <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                     <span class="ping"></span>
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                     <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                     <span class="dropdown-menu-arrow"></span>
                                 </a>

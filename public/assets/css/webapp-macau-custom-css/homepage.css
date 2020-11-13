@@ -279,16 +279,10 @@ h1.modal-header-title {
     text-align: left;
 }
 
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #ff2850 inset !important;
+input:-internal-autofill-selected {
+    color: #fff !important;
+    background-color: #ff2850;
 }
-
-input:-webkit-autofill {
-    -webkit-text-fill-color: #fff !important;
-} */
 
 .login-form input:focus::placeholder {
     color: transparent;
@@ -316,7 +310,7 @@ input:-webkit-autofill {
 
 .scene3_svg {
     /* margin-left: 534px; */
-    width: 100%;
+    width: 55%;
     margin-top: 70px;
     position: relative;
 }

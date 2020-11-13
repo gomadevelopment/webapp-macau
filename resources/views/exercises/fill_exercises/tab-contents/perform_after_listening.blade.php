@@ -41,7 +41,7 @@
 
             <div class="row mt-5 mb-5 text-center pr-5 pl-5">
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         1
                     </div>
                     <div class="quiz_level_label">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         2
                     </div>
                     <div class="quiz_level_label">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         3
                     </div>
                     <div class="quiz_level_label">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         4
                     </div>
                     <div class="quiz_level_label">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         5
                     </div>
                     <div class="quiz_level_label">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 col-md-2 col-lg-2">
-                    <div class="time_countdown d-inline-block" style="padding: 8px 20px !important; font-size: 30px; border-radius: 10px;">
+                    <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         6
                     </div>
                     <div class="quiz_level_label">
@@ -107,32 +107,32 @@
                                 <div id="rb-1" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -158,32 +158,32 @@
                                 <div id="rb-2" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -209,32 +209,32 @@
                                 <div id="rb-3" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -260,32 +260,32 @@
                                 <div id="rb-4" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -311,32 +311,32 @@
                                 <div id="rb-5" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -362,32 +362,32 @@
                                 <div id="rb-6" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -413,32 +413,32 @@
                                 <div id="rb-7" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -464,32 +464,32 @@
                                 <div id="rb-8" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -515,32 +515,32 @@
                                 <div id="rb-9" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -566,32 +566,32 @@
                                 <div id="rb-10" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -617,32 +617,32 @@
                                 <div id="rb-11" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -668,32 +668,32 @@
                                 <div id="rb-12" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -719,32 +719,32 @@
                                 <div id="rb-13" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -770,32 +770,32 @@
                                 <div id="rb-14" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                     </div>
                                     <div class="rb-tab" data-value="6">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">6</span>
+                                            <span class="rb-txt pt-1">6</span>
                                         </div>
                                     </div>
                                 </div>
@@ -827,7 +827,7 @@
                                 <div id="rb-15" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">1</span>
+                                            <span class="rb-txt pt-1">1</span>
                                         </div>
                                         <div class="quiz_level_label">
                                             Senti muita Ansiedade
@@ -835,7 +835,7 @@
                                     </div>
                                     <div class="rb-tab" data-value="2">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">2</span>
+                                            <span class="rb-txt pt-1">2</span>
                                         </div>
                                         <div class="quiz_level_label">
                                             Senti Ansiedade
@@ -843,7 +843,7 @@
                                     </div>
                                     <div class="rb-tab" data-value="3">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">3</span>
+                                            <span class="rb-txt pt-1">3</span>
                                         </div>
                                         <div class="quiz_level_label">
                                             Senti pouca Ansiedade
@@ -851,7 +851,7 @@
                                     </div>
                                     <div class="rb-tab" data-value="4">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">4</span>
+                                            <span class="rb-txt pt-1">4</span>
                                         </div>
                                         <div class="quiz_level_label">
                                             Não senti Ansiedade
@@ -859,7 +859,7 @@
                                     </div>
                                     <div class="rb-tab" data-value="5">
                                         <div class="rb-spot">
-                                            <span class="rb-txt">5</span>
+                                            <span class="rb-txt pt-1">5</span>
                                         </div>
                                         <div class="quiz_level_label">
                                             Não senti Ansiedade nenhuma

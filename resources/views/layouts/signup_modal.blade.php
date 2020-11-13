@@ -2,7 +2,9 @@
 <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
     <div class="container modal-dialog modal-dialog-centered login-pop-form" role="document">
         <div class="modal-content" id="sign-up">
-            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg')}}" alt="" class="w-100">
+            </span>
             <div class="modal-body">
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
                 <h1 class="modal-header-title">Vamos inscrever-te!</h1>
@@ -25,7 +27,7 @@
                     
                         <div class="form-group">
                             <input name="username" type="text" class="form-control" placeholder="Nome de Utilizador" required autocomplete="off" value="{{ old('username') }}"
-                            style="background: url({{asset('/assets/landing_page/icons/User.svg')}}) no-repeat scroll 7px 16px;">
+                            style="background: url({{asset('/assets/landing_page/icons/User.svg')}}) no-repeat scroll 7px 18px;">
                             @if ($errors->has('username'))
                                 <span class="error-block-span">
                                     {{ $errors->first('username') }}
@@ -35,7 +37,7 @@
                         
                         <div class="form-group">
                             <input name="email" type="email" class="form-control" placeholder="E-mail" required autocomplete="off" value="{{ old('email') }}"
-                            style="background: url({{asset('/assets/landing_page/icons/Mail.svg')}}) no-repeat scroll 7px 18px;">
+                            style="background: url({{asset('/assets/landing_page/icons/Mail.svg')}}) no-repeat scroll 7px 22px;">
                             @if ($errors->has('email'))
                                 <span class="error-block-span">
                                     {{ $errors->first('email') }}
@@ -45,7 +47,7 @@
                         
                         <div class="form-group">
                             <input id="password" name="password" type="password" class="form-control" placeholder="Palavra-Passe" autocomplete="off"
-                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 12px;">
+                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                             <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                             <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
                             @if ($errors->has('password'))
@@ -57,7 +59,7 @@
 
                         <div class="form-group">
                             <input name="password_confirmation" type="password" class="form-control" placeholder="Confirmar Palavra-Passe" autocomplete="off"
-                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 12px;">
+                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                             <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                             <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
                             @if ($errors->has('password'))
