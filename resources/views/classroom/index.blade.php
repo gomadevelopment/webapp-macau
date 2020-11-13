@@ -187,7 +187,7 @@
                                 <div class="dropdown ml-auto align-self-center student_dropdown">
                                     <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                         <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                         <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
@@ -211,7 +211,7 @@
                                 <div class="dropdown ml-auto align-self-center student_dropdown">
                                     <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                         <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                         <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
@@ -235,7 +235,7 @@
                                 <div class="dropdown ml-auto align-self-center student_dropdown">
                                     <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                         <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                         <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
@@ -259,7 +259,7 @@
                                 <div class="dropdown ml-auto align-self-center student_dropdown">
                                     <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                         <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                         <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
@@ -283,7 +283,7 @@
                                 <div class="dropdown ml-auto align-self-center student_dropdown">
                                     <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                                         <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
                                         <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
@@ -733,36 +733,24 @@
                 expandCollapseAccordion($(this));
             });
 
-            function hideAllDotIcons() {
-                $('.student_dropdown a').each(function(index, element){
-                    if(!$(element).parent().hasClass('show')){
-                        $(element).find('img.filled_dots').hide();
-                        $(element).find('img.empty_dots').show();
-                    }
-                });
-            }
-
-            // changeDotsIcons('.student_dropdown a');
             function changeDotsIcons(selector){
-                if($(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').hide();
-                    $(selector).find('img.empty_dots').show();
-                    // hideAllDotIcons();
-                }
-                else if(!$(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').show();
-                    $(selector).find('img.empty_dots').hide();
+                if(!$(selector).parent().hasClass('show')){
+                    $(selector).find('img.filled_dots').addClass('d-block');
+                    $(selector).find('img.empty_dots').removeClass('d-block').hide();
                 }
             }
 
             $('.student_dropdown a').on('click', function(){
-                // hideAllDotIcons();
+                $('.student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
+                $('.student_dropdown a').find('img.empty_dots').addClass('d-block');
                 changeDotsIcons(this);
             });
 
-            $('html, body').on('click', function(){
-                $('.student_dropdown a').find('img.filled_dots').hide();
-                $('.student_dropdown a').find('img.empty_dots').show();
+            $('html, body').on('click', function(e){
+                if (!$(e.target).hasClass('empty_dots') || $(e.target).hasClass('colleagues_options')) {
+                    $('.student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
+                    $('.student_dropdown a').find('img.empty_dots').addClass('d-block');
+                }
             });
 
             // Select All Classes or Just one

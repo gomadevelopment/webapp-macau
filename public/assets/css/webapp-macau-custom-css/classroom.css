@@ -91,7 +91,7 @@
 }
 
 .shortcut_links img {
-    width: 8%;
+    width: 6%;
     margin-top: 3px;
     float: right;
 }
@@ -132,11 +132,11 @@
 
 .dropdown.student_options_dropdown .dropdown-menu-arrow,
 .dropdown.student_dropdown .dropdown-menu-arrow {
-    /* bottom: 1px; */
     left: 35px;
 }
 
 .dropdown.student_dropdown .dropdown-menu-arrow {
+    bottom: -4px;
     left: 20px;
 }
 
@@ -144,8 +144,4 @@
     float: none;
     margin-left: 0;
     margin-right: 10px;
-}
-
-.dropdown.classes_student_dropdown .dropdown-menu-arrow {
-    bottom: 0px !important;
 }

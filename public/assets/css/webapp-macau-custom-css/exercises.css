@@ -52,20 +52,18 @@ strong.exercise_awaiting {
     line-height: 40px;
     text-align: left;
     padding: 10px;
+    border-radius: 5px;
 }
 
 strong.exercise_complete {
-    border-radius: 2px;
     background-color: #00b265;
 }
 
 strong.exercise_in_course {
-    border-radius: 2px;
     background-color: #ffb801;
 }
 
 strong.exercise_awaiting {
-    border-radius: 2px;
     background-color: #2583ed;
 }
 

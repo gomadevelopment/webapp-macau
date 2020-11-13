@@ -2,7 +2,9 @@
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
     <div class="container modal-dialog modal-dialog-centered login-pop-form" role="document">
         <div class="modal-content" id="registermodal">
-            <span class="mod-close" data-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg')}}" alt="" class="w-100">
+            </span>
             <div class="modal-body">
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
                 <h1 class="modal-header-title">Vamos entrar!</h1>
@@ -16,7 +18,7 @@
                     
                         <div class="form-group">
                             <input name="username" type="text" class="form-control" placeholder="Nome de Utilizador" autocomplete="off" value="{{ old('username') }}"
-                            style="background: url({{asset('/assets/landing_page/icons/User.svg')}}) no-repeat scroll 7px 12px;">
+                            style="background: url({{asset('/assets/landing_page/icons/User.svg')}}) no-repeat scroll 7px 18px;">
                             @if ($errors->has('username'))
                                 <span class="error-block-span">
                                     {{ $errors->first('username') }}
@@ -26,7 +28,7 @@
                         
                         <div class="form-group">
                             <input name="password" type="password" class="form-control" placeholder="Palavra-Passe" autocomplete="off"
-                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 12px;">
+                            style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                             <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                             <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
                             @if ($errors->has('password'))

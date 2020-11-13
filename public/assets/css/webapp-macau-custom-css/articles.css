@@ -59,6 +59,10 @@
     display: flow-root;
 }
 
+.page_sidebar .checkbox-custom-label {
+    margin: 8px 0;
+}
+
 .page-title .btn-custom.dropdown-toggle,
 .page-title .checkbox-custom-label,
 .page-title .radio-custom-label {
@@ -112,7 +116,8 @@
     float: right;
     margin-left: 10px;
     margin-right: 0;
-    /* background: #ff2850 url('/assets/backoffice_assets/icons/Check.svg') no-repeat 80% 50% */
+    margin-top: -1px;
+    margin-bottom: 1px;
 }
 
 .page-title .dropdown.create_article a {
@@ -127,7 +132,7 @@
 
 .page-title .dropdown.create_article a img {
     margin-right: 5px;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 
@@ -328,14 +333,12 @@ a[class^="show_less_"] .triangle-up {
     letter-spacing: -0.22px;
     line-height: normal;
     text-align: left;
-
     float: left;
     margin-right: 10px;
-    background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    height: auto;
-    margin-bottom: 15px;
+    height: 37px;
+    background-size: cover;
+    background-position: right;
+    border-radius: 5px;
 }
 
 .shop_grid_caption .gray_tag_div p,

@@ -4,7 +4,7 @@
 
             <div class="row mb-4" style="place-content: center;">
                 <div class="form-group">
-                    <video controls="true" autoplay="false" name="media" width="100%" height="100%" style="background-color: black;">
+                    <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                         <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
                     </video>
                 </div>

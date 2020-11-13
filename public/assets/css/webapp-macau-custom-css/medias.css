@@ -2,7 +2,7 @@
 
 @media (min-width: 1280px) {
     .container.modal-dialog {
-        max-width: 1250px;
+        max-width: 1050px;
     }
 }
 
@@ -12,7 +12,7 @@
     }
 
     .container.modal-dialog {
-        max-width: 1180px;
+        max-width: 980px;
     }
 
     .scene3_svg {
@@ -47,10 +47,11 @@
 
     .scene3_svg {
         margin-right: -180px;
+        width: 65%;
     }
 
     .container.modal-dialog {
-        max-width: 1145px;
+        max-width: 945px;
     }
 
     .about_section {
@@ -94,6 +95,11 @@
 
     .scene3_svg {
         margin-right: -300px;
+        width: 80%
+    }
+
+    .container.modal-dialog {
+        max-width: 845px;
     }
 
     .about_section {
@@ -133,12 +139,6 @@
 @media (max-width: 860px) {
     .scene3_svg {
         margin-right: -350px;
-    }
-}
-
-@media (max-width: 820px) {
-    .scene3_svg {
-        margin-right: -410px;
     }
 }
 

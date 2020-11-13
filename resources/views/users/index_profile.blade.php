@@ -25,7 +25,7 @@
                         <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
                         
                     </div>
-                        <h4 class="sg_rate_title align-self-center text-center mt-3">
+                        <h4 class="sg_rate_title align-self-center text-center mt-3 mb-3">
                             João Paulo Madeira
                             <p class="exercise_author align-self-center text-center">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Location.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 5px;">
@@ -49,7 +49,7 @@
                     @endif
                     
                 </div>
-                <div class="shop_grid_caption card-body m-0 mb-4">
+                <div class="shop_grid_caption card-body m-0 mb-4 pb-0">
                     <div class="d-flex flex-column">
                         <p class="exercise_author" style="line-height: 25px;">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mi non est
@@ -75,12 +75,12 @@
                                 </div>
                                 <div class="d-block text-left mt-3">
                                     {{-- LinkedIn logo --}}
-                                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px; background-color: #0766c1; border-color: #0766c1;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg')}}" alt="">
+                                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 44px; font-size: 21px; background-color: #0766c1; border-color: #0766c1;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg')}}" alt="" style="width: 110%;">
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
                                 <h4 class="sg_rate_title">A aguardar Validação</h4>
                                 <div class="d-block text-left mt-3">
                                     <p class="exercise_author" style="line-height: 25px; font-style: italic;">
@@ -107,7 +107,7 @@
                             <p class="exercise_author"><strong>Professor:</strong> <a href="#" class="professor_link">João Paulo</a></p>
                             <p class="exercise_author"><strong>Turma:</strong> A
                         </div>
-                        <div class="d-block float-right mt-3">
+                        <div class="d-block float-right mt-3 mb-4">
                             <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px; font-size: 21px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/contact.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Contactar
