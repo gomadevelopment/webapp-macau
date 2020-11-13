@@ -19,6 +19,13 @@
                 <div class="wrap">
                     <h1 class="title">O meu Perfil</h1>
                 </div>
+
+                <div class="exercise_time wrap float-right create_class_button" style="display: none;">
+                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        Criar Turma
+                    </a>
+                </div>
                 
             </div>
         </div>
@@ -125,6 +132,7 @@
         // });
 
         $(function() {
+
             // Change icon image on tab change
             changeIconImage();
             function changeIconImage(){
@@ -140,153 +148,73 @@
                 });
             }
 
-            $(document).on('click', '#edit_profile_tabs a.nav-link', function(){
-                changeIconImage();
-            });
-
-            // Change right side info_accordion icon
-            changeAccordionInfoIcon($('.info_accordion a'));
-            function changeAccordionInfoIcon(selector){
-                if($(selector).hasClass('collapsed')){
-                    $(selector).find('.show_info_button').show();
-                    $(selector).find('.hide_info_button').hide();
-                }
-                else{
-                    $(selector).find('.show_info_button').hide();
-                    $(selector).find('.hide_info_button').show();
-                }
-            }
-
-            $(document).on('click', '.info_accordion a', function(){
-                changeAccordionInfoIcon($(this));
-            });
-
-            $('#exercise_template').select2({
-                placeholder: "Escolher exercício"
-            });
-
-            $('#categories').select2({
-                placeholder: "Escolher categoria"
-            });
-
-            $('#levels').select2({
-                placeholder: "Escolher Nível"
-            });
-
-            $('#tags').select2({
-                placeholder: "Pesquisar"
-            });
-
-            $('#fill_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#interruption_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#verbs_select_1').select2();
-
-            $('#verbs_select_2').select2();
-
-            $('#select_school_name').select2();
-
-            // DRAG AND DROP
-            var $draggedItem;
-
-            $('.drag_and_drop_item').on('dragstart', dragging);
-            $('.drag_and_drop_item').on('dragend', draggingEnded);
-
-            $('.drag_and_drop_hole').on('dragenter', preventDefault);
-            $('.drag_and_drop_hole').on('dragover', preventDefault);
-            $('.drag_and_drop_hole').on('drop', dropItem);
-
-            function dragging(e) {
-                $(e.target).addClass('dragging');
-                $draggedItem = $(e.target);
-            }
-
-            function draggingEnded(e) {
-                $(e.target).removeClass('dragging');
-            }
-
-            function preventDefault(e) {
-                e.preventDefault();
-            }
-
-            function dropItem(e) {
-                var hole = $(e.target);
-                if (hole.hasClass('drag_and_drop_hole') && hole.children().length === 0) {
-                    $draggedItem.detach();
-                    $draggedItem.appendTo(hole);
-                    if(hole.hasClass('origin_hole')){
-                        $draggedItem.removeClass('item_dragged');
+            function changePageTitleOnTab(selector){
+                if($(selector).hasClass('active')){
+                    if($(selector).attr('id') == 'classes-tab'){
+                        $('.page-title .wrap .title').text('Turmas');
+                        $('.page-title .create_class_button').show();
+                    }
+                    else if($(selector).attr('id') == 'settings-tab'){  
+                        $('.page-title .wrap .title').text('Definições');
+                        $('.page-title .create_class_button').hide();
+                    }
+                    else if($(selector).attr('id') == 'notifications-tab'){  
+                        $('.page-title .wrap .title').text('Notificações');
+                        $('.page-title .create_class_button').hide();
                     }
                     else{
-                        $draggedItem.addClass('item_dragged');
+                        $('.page-title .wrap .title').text('O meu Perfil');
+                        $('.page-title .create_class_button').hide();
                     }
                 }
             }
 
-            //Global:
-            var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
-
-            //Switcher function:
-            $(".rb-tab").click(function(){
-                //Spot switcher:
-                $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
-                $(this).addClass("rb-tab-active");
+            $(document).on('click', '#edit_profile_tabs a.nav-link', function(){
+                changeIconImage();
+                changePageTitleOnTab(this);
             });
 
-            //Save data:
-            $(".trigger").click(function(){
-                //Empty array:
-                survey = [];
-                //Push data:
-                for (i=1; i<=$(".rb").length; i++) {
-                    var rb = "rb" + i;
-                    var rbValue = parseInt($("#rb-"+i).find(".rb-tab-active").attr("data-value"));
-                    //Bidimensional array push:
-                    survey.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
-                };
-                //Debug:
-                debug();
+            function expandCollapseAccordion(selector){
+                if(!$(selector).hasClass('expanded')){
+                    $(selector).addClass('expanded');
+                    $(selector).css('border', 'none');
+                    $(selector).find('img.expand_chevron').hide();
+                    $(selector).find('img.collapse_chevron').show();
+                }
+                else{
+                    $(selector).removeClass('expanded');
+                    $(selector).css('border', 'none');
+                    $(selector).find('img.expand_chevron').show();
+                    $(selector).find('img.collapse_chevron').hide();
+                }
+            }
+
+            $(document).on('click', '.expand_accordion', function(){
+                expandCollapseAccordion($(this));
             });
 
-            //Debug:
-            function debug(){
-                var debug = "";
-                for (i=0; i<survey.length; i++) {
-                    debug += "Nº " + survey[i][0] + " = " + survey[i][1] + "\n";
-                };
-                alert(debug);
-            };
 
-            $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
+            // changeDotsIcons('.classes_student_dropdown a');
+            function changeDotsIcons(selector){
+                if($(selector).parent().hasClass('show')){
+                    $(selector).find('img.filled_dots').hide();
+                    $(selector).find('img.empty_dots').show();
+                    // hideAllDotIcons();
+                }
+                else if(!$(selector).parent().hasClass('show')){
+                    $(selector).find('img.filled_dots').show();
+                    $(selector).find('img.empty_dots').hide();
+                }
+            }
 
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-                    $(element).removeClass('show');
-                    $(element).removeClass('active');
-                });
+            $('.classes_student_dropdown a').on('click', function(){
+                // hideAllDotIcons();
+                changeDotsIcons(this);
+            });
 
-                var this_id = $(this).attr('id');
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-
-                    if($(element).attr('aria-labelledby') == this_id){
-                        $(element).addClass('fade');
-                        $(element).addClass('show');
-                        $(element).addClass('active');
-
-                        if($(element).attr('id') == 'listening'){
-                            $('#perform_listening_tabs .nav-link:first').trigger('click');
-                        }
-
-                        if($(element).attr('id') == 'listening-shop'){
-                            $('#perform_listening_shop_tabs .nav-link:first').trigger('click');
-                        }
-                    }
-                });
+            $('html, body').on('click', function(){
+                $('.classes_student_dropdown a').find('img.filled_dots').hide();
+                $('.classes_student_dropdown a').find('img.empty_dots').show();
             });
 
         });

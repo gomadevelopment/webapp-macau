@@ -140,13 +140,12 @@
     left: 20px;
 }
 
-.dropdown.student_options_dropdown .dropdown-menu-arrow:before,
-.dropdown.student_dropdown .dropdown-menu-arrow:before {
-    /* border: 2px solid #e2e2e2 !important; */
-}
-
 #edit_profile_tabs_content .checkbox-custom+.checkbox-custom-label:before {
     float: none;
     margin-left: 0;
     margin-right: 10px;
+}
+
+.dropdown.classes_student_dropdown .dropdown-menu-arrow {
+    bottom: 0px !important;
 }
