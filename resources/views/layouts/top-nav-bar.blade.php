@@ -66,7 +66,7 @@
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box notifications">
-                                <div class="msg-title">
+                                <div class="msg-title mt-2 pb-3">
                                     <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg')}}" class="logo" alt="" style="margin-right: 10px;" />
                                     Notificações (1)
                                 </div>
