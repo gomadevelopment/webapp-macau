@@ -56,5 +56,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/perfil/editar', 'UsersController@edit_profile'); // Adicionar {id}
         Route::post('/perfil/editar', 'UsersController@editPost_profile'); // Adicionar {id}
 
+        Route::get('/chat', 'UsersController@chat');
+
     });
 });
