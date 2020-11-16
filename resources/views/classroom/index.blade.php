@@ -22,12 +22,12 @@
                         <div class="wrap mb-3">
                             <h1 class="title">O meu Perfil</h1>
                         </div>
-                        <div class="shop_grid_caption card-body m-0 p-4">
+                        <div class="shop_grid_caption user_info card-body m-0 p-4">
                             <div class="form-group d-flex flex-wrap justify-content-center m-0">
                                 <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
                                 <h4 class="sg_rate_title align-self-center m-0">
                                     João Paulo
-                                    <div class="d-flex flex-row">
+                                    <div class="d-flex flex-row user_options">
                                         <p class="exercise_author align-self-center">
                                             <a href="/perfil/editar" class="edit_profile">Editar</a>
                                             @if(auth()->user()->role == 1 || auth()->user()->role == 2)
@@ -95,12 +95,12 @@
                             <div class="wrap mb-3">
                                 <h1 class="title">Professor</h1>
                             </div>
-                            <div class="shop_grid_caption card-body m-0 p-4">
+                            <div class="shop_grid_caption user_info card-body m-0 p-4">
                                 <div class="form-group d-flex flex-wrap justify-content-center m-0">
                                     <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
                                     <h4 class="sg_rate_title align-self-center m-0">
                                         João Paulo
-                                        <div class="d-flex flex-row">
+                                        <div class="d-flex flex-row user_options">
                                             <p class="exercise_author align-self-center">
                                                 <a href="#" class="edit_profile" style="font-size: 16px;">
                                                     Chat
@@ -161,14 +161,14 @@
                                                 Desempenho da Turma
                                             </a>
                                             <hr class="mt-0 mb-2 ml-2 mr-2">
-                                            <a class="msg-title" href="#">
+                                            <a class="msg-title" href="/chat">
                                                 <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                 Iniciar Conversa
                                             </a>
                                         </div>
                                     @else
                                         <div class="dropdown-menu message-box">
-                                            <a class="msg-title" href="#">
+                                            <a class="msg-title" href="/chat">
                                                 <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                 Iniciar Conversa de Turma
                                             </a>
@@ -197,7 +197,7 @@
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/chat">
                                             <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Iniciar Conversa
                                         </a>
@@ -221,7 +221,7 @@
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/chat">
                                             <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Iniciar Conversa
                                         </a>
@@ -245,7 +245,7 @@
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/chat">
                                             <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Iniciar Conversa
                                         </a>
@@ -269,7 +269,7 @@
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/chat">
                                             <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Iniciar Conversa
                                         </a>
@@ -293,7 +293,7 @@
                                             Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="#">
+                                        <a class="msg-title" href="/chat">
                                             <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                             Iniciar Conversa
                                         </a>

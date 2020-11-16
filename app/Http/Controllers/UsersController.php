@@ -48,4 +48,9 @@ class UsersController extends Controller
     {
         return view('users.edit_profile');
     }
+
+    public function chat()
+    {
+        return view('users.chat');
+    }
 }
