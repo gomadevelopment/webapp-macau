@@ -30,8 +30,18 @@
     float: right;
 }
 
-.page-title .dropdown.show-23 {
-    float: unset;
+.dropdown.order_by a:hover {
+    color: #131b31 !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #ff2850 !important;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    background-color: #ff285047;
 }
 
 .page-title .show_favorites {
@@ -92,6 +102,7 @@
 .page-title .dropdown-menu {
     width: 100%;
     top: 14px !important;
+    box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.1);
 }
 
 .page-title .dropdown-menu-arrow {
