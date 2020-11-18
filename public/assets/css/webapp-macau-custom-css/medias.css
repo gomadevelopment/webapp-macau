@@ -63,8 +63,9 @@
     }
 
     .scene1_svg {
+        width: 66%;
         margin-left: -60px;
-        margin-right: -270px;
+        margin-right: -131px;
     }
 
     .how_it_works_section .hero-caption.small_wd {
@@ -128,7 +129,7 @@
     }
 
     .scene1_svg {
-        width: 77%;
+        width: 65%;
         max-width: 210%;
         margin-left: -80px;
     }

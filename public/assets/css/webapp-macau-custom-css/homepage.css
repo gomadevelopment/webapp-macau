@@ -12,17 +12,17 @@
 }
 
 .scene1_svg {
-    width: 100%;
+    width: auto;
     max-width: 160%;
     margin-left: -90px;
-    margin-right: -200px;
+    margin-right: -120px;
     margin-bottom: 50px;
 }
 
 .hero-caption.small_wd {
     /* position: absolute; */
     max-width: 520px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     max-width: unset;
 }
 
