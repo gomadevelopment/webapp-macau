@@ -12,6 +12,7 @@
     <div class="container">
 
                 <div class="hero-caption small_wd mb-5">
+                    <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Positivo.svg')}}" alt="">
                     <h1 class="big-header-capt cl_2 mb-0">Aprendizagem de </h1>
                     <h1 class="big-header-capt-pink cl_2 mb-0">Português&nbsp;</h1> 
                     <h1 class="big-header-capt cl_2 mb-0">fácil e prática.</h1>
@@ -22,7 +23,7 @@
                         Inscrever &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow.svg')}}" alt="">
                     </button>
                 </div>
-                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/Scene1.svg')}}" alt="">
+                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/Hero_Image.svg')}}" alt="">
     </div>
 </div>
 
@@ -48,7 +49,7 @@
         <h1 class="title">Como funciona</h1>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-7">
-                <img class="scene2_svg" src="{{asset('/assets/landing_page/illustrations/Scene2.svg')}}" alt="">
+                <img class="scene2_svg" src="{{asset('/assets/landing_page/illustrations/HowitWorks.svg')}}" alt="">
             </div>
             <div class="col-xs-12 col-sm-12 col-md-5">
                 <div class="hero-caption small_wd mb-5">

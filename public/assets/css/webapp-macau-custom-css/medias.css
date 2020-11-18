@@ -63,7 +63,8 @@
     }
 
     .scene1_svg {
-        margin-left: -100px;
+        margin-left: -60px;
+        margin-right: -250px;
     }
 
     .how_it_works_section .hero-caption.small_wd {
@@ -87,6 +88,14 @@
 
     .hide-23 {
         display: none !important;
+    }
+
+    .page-title.articles .show_favorites {
+        display: none;
+    }
+
+    .page-title.articles .order_by {
+        display: none;
     }
 
     .nav-menu.nav-menu-social>li.login_click a {
@@ -120,7 +129,7 @@
     }
 
     .scene1_svg {
-        width: 210%;
+        width: 85%;
         max-width: 210%;
         margin-left: -80px;
     }
@@ -143,6 +152,12 @@
 }
 
 @media (max-width: 767px) {
+
+    .quiz_question_div .question,
+    .quiz_question_div .question strong {
+        text-align: center;
+    }
+
     .modal-body {
         width: 100%;
         position: absolute;
@@ -151,10 +166,12 @@
 
     #login .scene3_svg {
         margin-top: 550px;
+        margin-left: 50px;
     }
 
     .scene3_svg {
-        margin-top: 640px;
+        margin-top: 760px;
+        margin-left: 50px;
     }
 
     .scene1_svg {
@@ -179,6 +196,12 @@
 
     .desktop_icon_div {
         margin-left: 3px;
+    }
+}
+
+@media (max-width: 575px) {
+    .anxiety_levels .rb-tab {
+        width: 100%;
     }
 }
 

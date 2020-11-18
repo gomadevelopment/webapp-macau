@@ -3,7 +3,7 @@
         <div class="card-body">
 
             <div class="row mb-4" style="place-content: center;">
-                <div class="form-group">
+                <div class="form-group m-2">
                     <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                         <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
                     </video>
@@ -16,17 +16,6 @@
                         <label class="label_title d-block" style="font-size: 30px;">
                             Pré-Escuta </label>
                     </div>
-                    {{-- <div class="exercise_time wrap float-right">
-                        <p class="time_label exercise_author align-self-center">
-                            <strong style="font-size: 22px;">Ir para:</strong>
-                        </p>
-                        <div class="time_countdown time_countdown_white ml-2 mr-2" style="padding: 8px 15px !important;">
-                            00:24:38
-                        </div>
-                        <a href="#" class="pause_time" style="padding: 10px 25px !important;">
-                            Ir
-                        </a>
-                    </div> --}}
                 </div>
             </div>
 
@@ -51,7 +40,7 @@
 
             <div class="row mb-4">
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
+                    <div class="form-group" style="text-align: -webkit-center;">
                         <div class="drag_and_drop_image text-center">
                             <img src="{{asset('/assets/backoffice_assets/images/drag_image_1.png')}}" alt="">
                         </div>
@@ -62,7 +51,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
+                    <div class="form-group" style="text-align: -webkit-center;">
                         <div class="drag_and_drop_image text-center">
                             <img src="{{asset('/assets/backoffice_assets/images/drag_image_2.png')}}" alt="">
                         </div>
@@ -73,7 +62,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
+                    <div class="form-group" style="text-align: -webkit-center;">
                         <div class="drag_and_drop_image text-center">
                             <img src="{{asset('/assets/backoffice_assets/images/drag_image_3.png')}}" alt="">
                         </div>

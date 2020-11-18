@@ -8,7 +8,7 @@
                         <label class="label_title d-block" style="font-size: 30px;">
                             Pós-Escuta </label>
                     </div>
-                    <div class="exercise_time wrap float-right align-items-center">
+                    <div class="exercise_time wrap see_in_english float-right align-items-center">
                         <p class="time_label exercise_author align-self-center">
                             <strong style="font-size: 22px;">See in English</strong>
                         </p>
@@ -40,7 +40,7 @@
             <hr class="mt-4 mb-4">
 
             <div class="row mt-5 mb-5 text-center pr-5 pl-5">
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         1
                     </div>
@@ -48,7 +48,7 @@
                         Concordo plenamente
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         2
                     </div>
@@ -56,7 +56,7 @@
                         Concordo
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         3
                     </div>
@@ -64,7 +64,7 @@
                         Concordo em parte
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         4
                     </div>
@@ -72,7 +72,7 @@
                         Discordo em parte
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         5
                     </div>
@@ -80,7 +80,7 @@
                         Discordo
                     </div>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3">
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         6
                     </div>
@@ -822,7 +822,50 @@
                             </p>
                         </div>
 
-                        <div class="row mt-4">
+                        <div class="row mt-4 text-center justify-content-center pr-5 pl-5 rb anxiety_levels" id="rb-15">
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab rb-tab-active" data-value="1">
+                                <div class="rb-spot">
+                                    <span class="rb-txt pt-1">1</span>
+                                </div>
+                                <div class="quiz_level_label">
+                                    Senti muita Ansiedade
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab" data-value="2">
+                                <div class="rb-spot">
+                                    <span class="rb-txt pt-1">2</span>
+                                </div>
+                                <div class="quiz_level_label">
+                                    Senti Ansiedade
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab" data-value="3">
+                                <div class="rb-spot">
+                                    <span class="rb-txt pt-1">3</span>
+                                </div>
+                                <div class="quiz_level_label">
+                                    Senti pouca Ansiedade
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab" data-value="4">
+                                <div class="rb-spot">
+                                    <span class="rb-txt pt-1">4</span>
+                                </div>
+                                <div class="quiz_level_label">
+                                    Não senti Ansiedade
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab" data-value="5">
+                                <div class="rb-spot">
+                                    <span class="rb-txt pt-1">5</span>
+                                </div>
+                                <div class="quiz_level_label">
+                                    Não senti Ansiedade nenhuma
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <div class="row mt-4">
                             <div class="col-sm-12 col-md-12 col-lg-12 align-self-center">
                                 <div id="rb-15" class="rb">
                                     <div class="rb-tab rb-tab-active" data-value="1">
@@ -867,7 +910,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

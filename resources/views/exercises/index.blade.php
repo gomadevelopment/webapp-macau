@@ -29,7 +29,7 @@
                     <input id="show_my_favorites" class="checkbox-custom" name="show_my_favorites" type="checkbox">
                     <label for="show_my_favorites" class="checkbox-custom-label">Meus Favoritos</label>                    
                 </div>
-                <div class="dropdown">
+                <div class="dropdown order_by">
                     <a class="btn btn-custom dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg')}}" alt="" style="margin-left: 10px;">
                     </a>
@@ -64,6 +64,23 @@
                     </div>
                     <div class="show-hide-sidebar">
                         <div class="sidebar-widgets page_sidebar">
+
+                            <div class="page-title p-0">
+                                <div class="dropdown order_by d-block float-none mr-auto ml-auto mb-3" style="width: fit-content;">
+                                    <a class="btn btn-custom dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg')}}" alt="" style="margin-left: 10px;">
+                                    </a>
+                                    <span class="dropdown-menu-arrow"></span>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Data (Ascendente)</a>
+                                    <a class="dropdown-item" href="#">Data (Descendente)</a>
+                                    </div>
+                                </div>
+                                <div class="show_favorites float-none mr-auto ml-auto mb-3" style="width: fit-content;">
+                                    <input id="show_my_favorites_mobile" class="checkbox-custom" name="show_my_favorites_mobile" type="checkbox">
+                                    <label for="show_my_favorites_mobile" class="checkbox-custom-label">Meus Favoritos</label>                    
+                                </div>
+                            </div>
 
                             <h4 class="side_title">Nível</h4>
                             <ul class="no-ul-list mb-3 levels">

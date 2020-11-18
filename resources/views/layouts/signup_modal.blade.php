@@ -78,7 +78,7 @@
                     </form>
                 </div>
             </div>
-            <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/Scene3.svg')}}" alt="">
+            <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/SignIn&SignUp.svg')}}" alt="">
         </div>
     </div>
 </div>

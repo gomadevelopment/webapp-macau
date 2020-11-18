@@ -335,7 +335,7 @@ button.hide_video {
 .drag_and_drop_hole,
 .drag_and_drop_item {
     border-radius: 6px;
-    border: 1px solid #e6ebf1;
+    border: 2px solid #e6ebf1;
     background-color: #ffffff;
 
     color: #131b31;
@@ -350,7 +350,7 @@ button.hide_video {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    min-height: 250px;
     position: relative;
 }
 
@@ -440,8 +440,7 @@ button.hide_video {
 }
 
 .quiz_level_label {
-    margin-top: 20px;
-
+    margin-top: 15px;
     color: #131b31;
     font-family: "Gilroy - Bold";
     font-size: 18px;
