@@ -64,7 +64,7 @@
 
     .scene1_svg {
         margin-left: -60px;
-        margin-right: -250px;
+        margin-right: -270px;
     }
 
     .how_it_works_section .hero-caption.small_wd {
@@ -72,9 +72,8 @@
     }
 
     .scene2_svg {
-        width: 115%;
+        width: 100%;
         max-width: 115%;
-        margin-left: -80px;
         margin-top: 20px;
     }
 }
@@ -129,7 +128,7 @@
     }
 
     .scene1_svg {
-        width: 85%;
+        width: 77%;
         max-width: 210%;
         margin-left: -80px;
     }
@@ -139,7 +138,7 @@
     }
 
     .scene2_svg {
-        width: 120%;
+        width: 100%;
         max-width: 120%;
         margin-top: 100px;
     }
@@ -175,14 +174,15 @@
     }
 
     .scene1_svg {
-        width: 160%;
+        width: 100%;
         max-width: 160%;
-        margin-left: -155px;
+        margin-left: 0;
     }
 
     .scene2_svg {
+        width: 80%;
         margin-top: 0;
-        margin-left: -50px;
+        margin-left: 50px;
         margin-bottom: 40px;
     }
 

@@ -4853,7 +4853,6 @@ li.login-attri .account-drop a {
 /*---------- Home 3 ------------*/
 .hero-inner-2:after {
     content: "";
-    background: url(../img/inner-2.png) center center/cover no-repeat local;
     width: 100%;
     height: 100%;
     position: absolute;
