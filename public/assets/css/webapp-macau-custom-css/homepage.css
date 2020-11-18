@@ -12,10 +12,11 @@
 }
 
 .scene1_svg {
-    width: 120%;
+    width: 100%;
     max-width: 160%;
     margin-left: -90px;
     margin-right: -200px;
+    margin-bottom: 50px;
 }
 
 .hero-caption.small_wd {
@@ -58,7 +59,7 @@
     line-height: normal;
     text-align: left;
     margin: 33px 0 33px 15px;
-    width: 90%;
+    width: 85%;
 }
 
 .btn.btn-theme.btn-lg {
@@ -95,7 +96,7 @@
     letter-spacing: -0.59px;
     line-height: 40px;
     text-align: center;
-    padding-top: 180px;
+    padding-top: 150px;
 }
 
 .about_section .sub_title {
@@ -175,9 +176,8 @@
 }
 
 .scene2_svg {
-    width: 100%;
+    width: 90%;
     max-width: 100%;
-    margin-left: -90px;
 }
 
 /* Section 3 - Contacts */
