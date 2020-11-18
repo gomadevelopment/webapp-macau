@@ -13,7 +13,7 @@
 
                 <div class="hero-caption small_wd mb-5">
                     <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Positivo.svg')}}" alt="">
-                    <h1 class="big-header-capt cl_2 mb-0">Aprendizagem de </h1>
+                    <h1 class="big-header-capt cl_2 mb-0">Aprendizagem de&nbsp;</h1>
                     <h1 class="big-header-capt-pink cl_2 mb-0">Português&nbsp;</h1> 
                     <h1 class="big-header-capt cl_2 mb-0">fácil e prática.</h1>
                     <p style="margin-left: 0;">Plataforma moderna criada especificamente para professores e alunos.
