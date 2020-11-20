@@ -85,6 +85,7 @@
 {{-- CLONES --}}
 
 <div class="add_fill_clone" hidden>
+    <div class="col-12 mb-3"><hr></div>
     <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
         <textarea class="form-control" name="fill_textarea" id="fill_textarea" cols="30" rows="4" placeholder=""></textarea>
         <div class="d-flex float-left flex-column mt-4">

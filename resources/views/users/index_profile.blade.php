@@ -22,7 +22,7 @@
                 </div>
                 <div class="shop_grid_caption card-body m-0 p-4">
                     <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                        <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
+                        <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar">
                         
                     </div>
                         <h4 class="sg_rate_title align-self-center text-center mt-3 mb-3">
@@ -263,11 +263,11 @@
                     <div class="shop_grid_caption card-body m-0 mb-4">
 
                         <div class="d-block mt-3 mb-3">
-                            <a href="/exercicios" class="btn btn-theme remove_button" style="float: none; padding: 12px 20px;">
+                            <a href="/exercicios" class="btn btn-theme remove_button m-2" style="float: none; padding: 12px 20px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Ver todos os Exercícios
                             </a>
-                            <a href="/sala_de_aula" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                            <a href="/sala_de_aula" class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Sala de Aula
                             </a>

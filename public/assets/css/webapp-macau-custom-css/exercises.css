@@ -97,9 +97,10 @@ a.clone_button {
     font-style: normal;
     letter-spacing: -0.25px;
     line-height: normal;
-    text-align: left;
+    text-align: center;
     float: right;
     padding: 15px 20px;
+    white-space: normal;
 }
 
 a.clone_button,
@@ -315,8 +316,8 @@ button.hide_video {
 }
 
 #corr_exp_tabs_content .select2.select2-container.select2-container--default {
-    width: 432px !important;
-    margin-left: 15px;
+    width: 186px !important;
+    margin: .25rem !important;
 }
 
 .fill_split .fill_split_info_text {

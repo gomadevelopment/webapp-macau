@@ -701,8 +701,10 @@ a[class^="show_less_"] .triangle-up {
     font-style: normal;
     letter-spacing: -0.25px;
     line-height: normal;
-    text-align: left;
+    text-align: center;
     float: right;
+
+    white-space: normal;
 }
 
 .search-btn.comment_submit:hover,

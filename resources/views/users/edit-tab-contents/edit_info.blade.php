@@ -127,12 +127,12 @@
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-12">
-                            <div class="d-block text-right mt-3 mb-3">
-                                <a href="/perfil" class="btn btn-theme remove_button" style="float: none; padding: 12px 20px;">
+                            <div class="d-block text-right mt-2">
+                                <a href="/perfil" class="btn btn-theme remove_button m-2" style="float: none; padding: 12px 20px;">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                     Ver o meu Perfil
                                 </a>
-                                <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                <a href="#" class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
                                     Gravar
                                     <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px; margin-bottom: 2px;">
                                 </a>
@@ -147,12 +147,12 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-2">
-                    <div class="d-block text-center mt-3 mb-3">
-                        <a href="/exercicios" class="btn btn-theme remove_button" style="float: none; padding: 12px 20px;">
+                    <div class="d-block text-center mb-3">
+                        <a href="/exercicios" class="btn btn-theme remove_button m-3" style="float: none; padding: 12px 20px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                             Ver Exercícios
                         </a>
-                        <a href="/sala_de_aula" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                        <a href="/sala_de_aula" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                             Sala de Aula
                         </a>

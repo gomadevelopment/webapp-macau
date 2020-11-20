@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-5 mb-5">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 mb-5">
         <div class="card-body mb-3">
             <div class="form-group">
                 <label class="label_title">Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="form-group">
                         <label class="label_title">Categoria</label>
                         <select name="categories" id="categories" class="form-control">
@@ -43,7 +43,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="form-group">
                         <label class="label_title">Nível</label>
                         <select name="levels" id="levels" class="form-control">

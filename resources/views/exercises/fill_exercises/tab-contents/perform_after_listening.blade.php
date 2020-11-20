@@ -932,11 +932,11 @@
             </div>
 
             <div class="d-block text-center mt-5 mb-5">
-                <a href="#" class="btn btn-theme remove_button mr-4" style="float: none; padding: 15px 25px; margin-left: 15px;">
+                <a href="#" class="btn btn-theme remove_button m-2" style="float: none; padding: 15px 25px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Voltar
                 </a>
-                <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                <a href="#" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/Check.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Concluir
                 </a>

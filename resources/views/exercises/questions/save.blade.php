@@ -68,10 +68,10 @@
                 <div class="card-body">
                     {{-- Templates --}}
                     <div class="form-group">
-                        <label class="label_title mb-3" style="font-size: 30px;">
+                        <label class="label_title mb-2" style="font-size: 30px;">
                             Templates</label>
                         <div class="row">
-                            <div class="col-sm-3 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
                                 <select name="question_template" id="question_template" class="form-control">
                                     <option value=""></option>
                                     <option value="1">Template A</option>
@@ -79,23 +79,23 @@
                                     <option value="3">Template C</option>
                                 </select>
                             </div>
-                            <div class="col-sm-3 col-md-3 col-lg-3">
+                            <div class="col-sm-12 col-md-6 col-lg-8 mt-2 mb-2">
                                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 16px 15px;">
                                     Ver todos os Templates</a>
                             </div>
                         </div>
                     </div>
 
-                    <hr class="mt-5 mb-5">
+                    <hr class="mt-4 mb-5">
                     {{-- Criar Novo --}}
                     <div class="form-group">
-                        <label class="label_title mb-3" style="font-size: 30px;">
+                        <label class="label_title mb-2" style="font-size: 30px;">
                             Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                        <div class="row mb-3">
-                            <div class="col-sm-3 col-md-6 col-lg-6">
+                        <div class="row mb-1">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
                                 <input name="question_name" id="question_name" type="text" class="form-control" placeholder="Título da questão">
                             </div>
-                            <div class="col-sm-3 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
                                 <select name="question_type" id="question_type" class="form-control">
                                     <option value=""></option>
                                     <option value="1">Associar Medias</option>
@@ -103,7 +103,7 @@
                                     <option value="3">Preenchimento</option>
                                 </select>
                             </div>
-                            <div class="col-sm-3 col-md-2 col-lg-2"></div>
+                            <div class="col-xs-0 col-sm-0 col-md-0 col-lg-2"></div>
                         </div>
 
                         <div class="row">
@@ -113,9 +113,13 @@
                         </div>
                     </div>
 
-                    <hr class="mt-5 mb-5">
+                    <hr class="mt-5 mb-4">
 
                     {{-- QUESTION HERE --}}
+
+                    <div class="choose_question_type">
+                        <p class="exercise_level float-none m-0"><strong>Escolha o tipo de questão!</strong></p>
+                    </div>
 
                     @include('exercises.questions.types.associate_media')
 
@@ -123,7 +127,8 @@
 
                     @include('exercises.questions.types.fill_split')
 
-                    <hr class="mt-5 mb-5">
+                    <hr class="mt-4 mb-5">
+
                     {{-- Correção --}}
                     <div class="form-group">
                         <label class="label_title mb-3" style="font-size: 30px;">
@@ -180,8 +185,8 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-5">
-                        <button type="" class="btn search-btn comment_submit mr-5" style="float: none;">
+                    <div class="text-center mt-4">
+                        <button type="" class="btn search-btn comment_submit m-3" style="float: none;">
                             Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
                         <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
                         <label for="save_as_template" class="checkbox-custom-label d-inline-block">Gravar como Template</label>
@@ -282,13 +287,13 @@
                 if($(this).hasClass('show_video')){
                     $(this).hide();
                     $('button.hide_video').show();
-                    $('.videoWrapper video').trigger('play');
+                    // $('.videoWrapper video').trigger('play');
                     $('.videoWrapper').show().addClass('stuck');
                 }
                 else{
                     $(this).hide();
                     $('button.show_video').show();
-                    $('.videoWrapper video').trigger('pause');
+                    // $('.videoWrapper video').trigger('pause');
                     $('.videoWrapper').hide().removeClass('stuck');
                 }
 
@@ -355,7 +360,14 @@
             // Button remove clone/row
             $(document).on('click', '.remove_button.remove_row', function(e){
                 e.preventDefault();
-                $(this).parent().remove();
+                if($(this).hasClass('associate_media_remove') || $(this).hasClass('corr_expressions_remove')){
+                    $(this).parent().prev().prev().remove();
+                    $(this).parent().prev().remove();
+                    $(this).parent().remove();
+                }
+                else{
+                    $(this).parent().remove();
+                }
             });
 
             /*Floating js Start*/
@@ -405,7 +417,7 @@
             }
 
             $(document).on('change', '#question_type', function(){
-                console.log('CHANGED', $(this).val());
+                $('.choose_question_type').hide();
                 if($(this).val() == 1){
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.associate_media'));
