@@ -153,6 +153,11 @@
 
 @media (max-width: 767px) {
 
+    .shop_grid_caption.user_info .form-group {
+        display: grid !important;
+        justify-items: center;
+    }
+
     .quiz_question_div .question,
     .quiz_question_div .question strong {
         text-align: center;

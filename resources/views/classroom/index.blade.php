@@ -486,7 +486,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <a href="/exercicios" class="btn search-btn comment_submit" style="font-size: 21px; float: none;">
+                                    <a href="/exercicios" class="btn search-btn comment_submit" style="font-size: 21px; float: none; white-space: nowrap;">
                                         Ir para Exercícios
                                         <img src="{{asset('/assets/backoffice_assets/icons/Arrow.svg')}}" alt="" style="margin-left: 10px; width: 10%;">
                                     </a>

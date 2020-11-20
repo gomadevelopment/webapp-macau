@@ -15,16 +15,18 @@
         <div class="tab-pane fade show active" id="corr" role="tabpanel" aria-labelledby="corr-tab">
 
             <div class="form-group">
-                <div class="row mb-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 mb-3 d-flex">
-                        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control" placeholder="Descrição da Expressão">
+                <div class="row mb-3 align-items-center">
+                    <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
+                        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
                         <select name="corr_exp_select" id="corr_exp_select_0" class="form-control corr_exp_select select2" style="margin-left: 15px;">
                             <option value=""></option>
                             <option value="1">Opção 1</option>
                             <option value="2">Opção 2</option>
                             <option value="3">Opção 3</option>
                         </select>
-                        <a href="#" class="btn btn-theme remove_button remove_row" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                        <a href="#" class="btn btn-theme remove_button remove_row corr_expressions_remove m-1" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
@@ -45,16 +47,18 @@
         <div class="tab-pane fade" id="expressions" role="tabpanel" aria-labelledby="expressions-tab">
             
             <div class="form-group">
-                <div class="row mb-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12 mb-3 d-flex">
-                        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control" placeholder="Descrição da Expressão">
+                <div class="row mb-3 align-items-center">
+                    <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
+                        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
                         <select name="corr_exp_select" id="corr_exp_select_1" class="form-control corr_exp_select select2" style="margin-left: 15px;">
                             <option value=""></option>
                             <option value="1">Opção 1</option>
                             <option value="2">Opção 2</option>
                             <option value="3">Opção 3</option>
                         </select>
-                        <a href="#" class="btn btn-theme remove_button remove_row" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                        <a href="#" class="btn btn-theme remove_button remove_row corr_expressions_remove m-1" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
@@ -93,15 +97,18 @@
 {{-- CLONES --}}
 
 <div class="add_corr_expr_clone" hidden>
-    <div class="col-sm-12 col-md-12 col-lg-12 mb-3 d-flex">
-        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control" placeholder="Descrição da Expressão">
-        <select name="corr_exp_select" id="corr_exp_select" class="form-control corr_exp_select" style="margin-left: 15px;">
+    <div class="col-12 mb-3"><hr></div>
+    <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
+        <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
+        <select name="corr_exp_select" id="corr_exp_select" class="form-control corr_exp_select select2" style="margin-left: 15px;">
             <option value=""></option>
             <option value="1">Opção 1</option>
             <option value="2">Opção 2</option>
             <option value="3">Opção 3</option>
         </select>
-        <a href="#" class="btn btn-theme remove_button remove_row" style="float: none; padding: 16px 20px; margin-left: 15px;">
+        <a href="#" class="btn btn-theme remove_button remove_row corr_expressions_remove m-1" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Remover
         </a>
