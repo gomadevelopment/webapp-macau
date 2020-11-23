@@ -10,6 +10,14 @@
 
 @section('content')
 
+<div class="alert alert-success successMsg" style="display:none;" role="alert">
+
+</div>
+
+<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+</div>
+
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
     <div class="container">
@@ -45,7 +53,7 @@
                             <img src="{{asset('/assets/backoffice_assets/icons/info_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Informação</a>
                     </li>
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                     <li class="nav-item">
                         <a class="nav-link" id="classes-tab" data-toggle="tab" href="#classes" role="tab" aria-controls="classes-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Classes_white.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
@@ -75,7 +83,7 @@
 
                     </div>
                     {{-- professor - CLASSES TAB --}}
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                         <div class="tab-pane fade" id="classes" role="tabpanel" aria-labelledby="classes-tab">
 
                             @include('users.edit-tab-contents.edit_classes')
@@ -99,6 +107,9 @@
         
     </div>
 </section>
+
+<input type="text" name="" id="hidden_user_id" value="{{ $user->id }}" hidden>
+
 <!-- ============================ Find Courses with Sidebar End ================================== -->
 
 @stop
@@ -115,23 +126,52 @@
 
     <script>
 
-        // CKEDITOR.replace( 'intro_text' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'statement' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_visual_description' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_transcription' , {
-        //     language: 'pt'
-        // });
+        $('#select_university').select2();
 
         $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                }
+            });
+
+            // Replace user_avatar_image
+            $(document).on('click', '#replace_user_avatar', function(e){
+                e.preventDefault();
+                $('#avatar_url').click();
+            });
+
+            $(document).on('change', '#avatar_url', function(e){
+                e.preventDefault();
+
+                var user_id = $('#hidden_user_id').val();
+                var new_user_avatar = $(this)[0].files[0];
+                
+                var formData = new FormData();
+                formData.append('user_id', user_id);
+                formData.append('new_user_avatar', new_user_avatar);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/replace_user_avatar",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response && response.status == "success") {
+                            var new_avatar_url = '/webapp-macau-storage/' + user_id + '/avatar/' + response.avatar_url;
+                            $('.user_round_avatar').attr('src', new_avatar_url);
+                        }
+                        else {
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 2000);
+                        }
+                    }
+                });
+            })
 
             // Change icon image on tab change
             changeIconImage();

@@ -15,7 +15,7 @@
                 <ul class="nav-menu">
                     @if(auth()->user())
                         {{-- Professor --}}
-                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                             <li class=""><a href="/exercicios">Exercícios</a></li>
                             <li><a href="/questoes">Questões</a></li>
                             <li><a href="/sala_de_aula">Sala de Aula</a></li>
@@ -44,11 +44,11 @@
                             <a href="#" class="nav-link messages" data-toggle="dropdown">
                                 <span class="ping"></span>
                                 <img src="https://via.placeholder.com/500x500" class="img-fluid avater" alt="">
-                                Olá, {{ auth()->user()->role == 1 || auth()->user()->role == 2 ? 'Professor' : 'Aluno'}}!
+                                Olá, {{ auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2 ? 'Professor' : 'Aluno'}}!
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box">
-                                <a class="msg-title" href="/perfil">
+                                <a class="msg-title" href="/perfil/{{auth()->user()->id}}">
                                     <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon" alt="" />
                                     Ver Perfil
                                 </a>

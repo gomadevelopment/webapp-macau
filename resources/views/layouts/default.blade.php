@@ -39,8 +39,12 @@
             
             @include('layouts.footer')
 
-            @include('layouts.login_modal')
-            @include('layouts.signup_modal')
+            @if (!auth()->user())
+
+                @include('layouts.login_modal')
+                @include('layouts.signup_modal')
+                
+            @endif
 
             {{-- <a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a> --}}
 

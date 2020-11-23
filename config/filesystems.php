@@ -64,6 +64,13 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        
+        'webapp-macau-storage' => [
+            'driver' => 'local',
+            'root' => public_path('/webapp-macau-storage'),
+            'url' => env('APP_URL').'/public/webapp-macau-storage',
+            'visibility' => 'public',
+        ],
 
     ],
 
