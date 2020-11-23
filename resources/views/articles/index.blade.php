@@ -121,12 +121,12 @@
                                     <input id="show_my_articles_mobile" class="checkbox-custom" name="show_my_articles_mobile" type="checkbox">
                                     <label for="show_my_articles_mobile" class="checkbox-custom-label">As minhas Publicações</label>
                                 </li>
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <li>
                                         <input id="show_my_students_articles_mobile" class="checkbox-custom" name="show_my_students_articles_mobile" type="checkbox">
                                         <label for="show_my_students_articles_mobile" class="checkbox-custom-label">Dos meus Alunos</label>
                                     </li>
-                                @elseif(auth()->user()->role == 3)
+                                @elseif(auth()->user()->user_role_id == 3)
                                         <li>
                                         <input id="show_my_professor_articles_mobile" class="checkbox-custom" name="show_my_professor_articles_mobile" type="checkbox">
                                         <label for="show_my_professor_articles_mobile" class="checkbox-custom-label">Do meu Professor</label>
@@ -227,12 +227,12 @@
                             <input id="show_my_articles" class="checkbox-custom" name="show_my_articles" type="checkbox">
                             <label for="show_my_articles" class="checkbox-custom-label">As minhas Publicações</label>
                         </li>
-                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                             <li>
                                 <input id="show_my_students_articles" class="checkbox-custom" name="show_my_students_articles" type="checkbox">
                                 <label for="show_my_students_articles" class="checkbox-custom-label">Dos meus Alunos</label>
                             </li>
-                        @elseif(auth()->user()->role == 3)
+                        @elseif(auth()->user()->user_role_id == 3)
                                 <li>
                                 <input id="show_my_professor_articles" class="checkbox-custom" name="show_my_professor_articles" type="checkbox">
                                 <label for="show_my_professor_articles" class="checkbox-custom-label">Do meu Professor</label>

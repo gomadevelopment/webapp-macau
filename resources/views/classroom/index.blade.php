@@ -30,7 +30,7 @@
                                     <div class="d-flex flex-row user_options">
                                         <p class="exercise_author align-self-center">
                                             <a href="/perfil/editar" class="edit_profile">Editar</a>
-                                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                                 <a href="#" class="edit_profile">Definições do Sistema</a>
                                             @endif
                                         </p>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group m-0">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <div class="">
                                         <p class="exercise_level float-none m-0" style="font-size: 16px;line-height: 19px;">
                                             O Aluno <strong>Luis Silva</strong> aguarda a avaliação do Exercício “De Áustria para Portugal”. 
@@ -88,7 +88,7 @@
                     </div>
 
                     {{-- My professor --}}
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
 
                     @else
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
@@ -120,7 +120,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                         <div class="row mb-3">
                             <div class="col-sm-5 col-md-5 col-lg-5 align-self-center align-items-center">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <h1 class="title">Alunos</h1>
                                 @else
                                     <h1 class="title">Colegas</h1>
@@ -128,8 +128,8 @@
                                 
                             </div>
                             <div class="col-sm-7 col-md-7 col-lg-7 align-self-center align-items-center
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2) d-inline-flex @endif">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) d-inline-flex @endif">
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <div class="form-group mb-0 mr-2 w-100">
                                         <div class="select2_with_search" style="border-radius: 5px;">
                                             <select name="student_select" id="student_select" class="form-control" style="border: none;">
@@ -149,7 +149,7 @@
                                         Opções
                                         <span class="dropdown-menu-arrow"></span>
                                     </a>
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <div class="dropdown-menu message-box">
                                             <a class="msg-title" href="#">
                                                 <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
@@ -194,7 +194,7 @@
                                     <div class="dropdown-menu message-box">
                                         <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
+                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
                                         <a class="msg-title" href="/chat">
@@ -218,7 +218,7 @@
                                     <div class="dropdown-menu message-box">
                                         <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
+                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
                                         <a class="msg-title" href="/chat">
@@ -242,7 +242,7 @@
                                     <div class="dropdown-menu message-box">
                                         <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
+                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
                                         <a class="msg-title" href="/chat">
@@ -266,7 +266,7 @@
                                     <div class="dropdown-menu message-box">
                                         <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
+                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
                                         <a class="msg-title" href="/chat">
@@ -290,7 +290,7 @@
                                     <div class="dropdown-menu message-box">
                                         <a class="msg-title" href="/perfil">
                                             <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->role == 1 || auth()->user()->role == 2) do Aluno @endif
+                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
                                         </a>
                                         <hr class="mt-0 mb-2 ml-2 mr-2">
                                         <a class="msg-title" href="/chat">
@@ -306,7 +306,7 @@
                             <div class="form-group">
                                 <div class="text-center">
                                     <a href="#" class="notifications_see_all">
-                                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                             Ver todos os Alunos
                                         @else
                                             Mostrar todos os Colegas
@@ -319,7 +319,7 @@
                     </div>
 
                     {{-- Professor Shortcuts --}}
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                             <div class="wrap mb-3">
                                 <h1 class="title">Atalhos</h1>
@@ -372,7 +372,7 @@
                         <div class="wrap mb-3">
                             <h1 class="title">Exercícios</h1>
                         </div>
-                        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                             {{-- Class filter for professor --}}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -500,7 +500,7 @@
                     </div>
 
                     {{-- student -  My performance --}}
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
 
                     @else
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">

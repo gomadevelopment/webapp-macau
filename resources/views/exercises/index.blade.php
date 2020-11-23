@@ -18,7 +18,7 @@
                 <div class="wrap">
                     <h1 class="title">Exercícios</h1>
                 </div>
-                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                     <div class="dropdown create_article">
                         <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
                         <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
@@ -360,19 +360,19 @@
                             <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                             <div class="d-flex float-left flex-column">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                                 @else
                                     <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
                                 @endif
                                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                                     <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <strong>Média de Avaliação:</strong> 62%
                                     @endif
                                 </p>
                             </div>
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="d-block float-right mt-3">
                                     <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -423,7 +423,7 @@
                                 <p>Verbos</p>
                             </div>
 
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="read_more available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
@@ -443,7 +443,7 @@
                             <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                             <div class="d-flex float-left flex-column">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                                 @else
                                     <p class="exercise_author">
@@ -453,14 +453,14 @@
                                 @endif
                                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                                     <strong>Nível:</strong> A1
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
                                     @else
                                             <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:</strong> 100%
                                     @endif
                                 </p>
                             </div>
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="d-block float-right mt-3">
                                     <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -511,7 +511,7 @@
                                 <p>Verbos</p>
                             </div>
 
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="read_more available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
@@ -531,7 +531,7 @@
                             <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                             <div class="d-flex float-left flex-column">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                                 @else
                                     <p class="exercise_author">
@@ -541,14 +541,14 @@
                                 @endif
                                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                                     <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
                                     @else
                                             {{-- <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota:</strong> 100% --}}
                                     @endif
                                 </p>
                             </div>
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="d-block float-right mt-3">
                                     <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -599,7 +599,7 @@
                                 <p>Verbos</p>
                             </div>
 
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="read_more available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
@@ -619,7 +619,7 @@
                             <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
                             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                             <div class="d-flex float-left flex-column">
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                                 @else
                                     <p class="exercise_author">
@@ -629,14 +629,14 @@
                                 @endif
                                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                                     <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <strong>&nbsp;&nbsp;&nbsp;Média de Avaliação:</strong> 62%
                                     @else
                                             <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nota Provisória:</strong> 90%
                                     @endif
                                 </p>
                             </div>
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="d-block float-right mt-3">
                                     <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -687,7 +687,7 @@
                                 <p>Verbos</p>
                             </div>
 
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <div class="read_more available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos

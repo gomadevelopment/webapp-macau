@@ -52,9 +52,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/sala_de_aula', 'ClassroomController@index');
 
         
-        Route::get('/perfil', 'UsersController@index_profile');
-        Route::get('/perfil/editar', 'UsersController@edit_profile'); // Adicionar {id}
-        Route::post('/perfil/editar', 'UsersController@editPost_profile'); // Adicionar {id}
+        Route::get('/perfil/{id}', 'UsersController@index_profile');
+        Route::get('/perfil/editar/{id}', 'UsersController@edit_profile'); // Adicionar {id}
+        Route::post('/perfil/editar/{id}', 'UsersController@editPost_profile'); // Adicionar {id}
+        Route::post('/replace_user_avatar', 'UsersController@replaceUserAvatar');
 
         Route::get('/chat', 'UsersController@chat');
 

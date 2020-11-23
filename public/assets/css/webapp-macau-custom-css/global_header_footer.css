@@ -141,6 +141,19 @@ span.error-block-span {
     margin-bottom: 0;
 }
 
+span.error-block-span.pink {
+    color: #ff2850 !important;
+    margin: 0;
+}
+
+.alert-success {
+    border: 2px solid;
+}
+
+.alert-danger {
+    border: 2px solid;
+}
+
 /* Header */
 
 .header.header-fixed {

@@ -22,27 +22,34 @@
                 </div>
                 <div class="shop_grid_caption card-body m-0 p-4">
                     <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                        <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar">
+                        <img src="{{ $user->avatar_url ? '/webapp-macau-storage/'.$user->id.'/avatar/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}"
+                        alt="" class="user_round_avatar">
                         
                     </div>
-                        <h4 class="sg_rate_title align-self-center text-center mt-3 mb-3">
-                            João Paulo Madeira
+                    <h4 class="sg_rate_title align-self-center text-center mt-3 mb-3">
+                        {{ $user->username }}
+                        @if ($user->university)
                             <p class="exercise_author align-self-center text-center">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Location.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 5px;">
-                                Ilha da Taipa, Macau
+                                {{ $user->university->name }}
                             </p>
-                            <a href="/perfil/editar" class="btn search-btn comment_submit mt-4" style="float: none; padding: 12px 20px; font-size: 21px;">
+                        @else
+                        <br>
+                        @endif
+                        @if ($user->id == auth()->user()->id)
+                            <a href="/perfil/editar/{{ auth()->user()->id }}" class="btn search-btn comment_submit mt-4" style="float: none; padding: 12px 20px; font-size: 21px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Editar
                             </a>
-                        </h4>
+                        @endif
+                    </h4>
                 </div>
             </div>
 
             {{-- About me / Professional path --}}
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <div class="wrap mb-3">
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                         <h1 class="title">Percurso Profissional</h1>
                     @else
                         <h1 class="title">Sobre mim</h1>
@@ -50,19 +57,17 @@
                     
                 </div>
                 <div class="shop_grid_caption card-body m-0 mb-4 pb-0">
+                    @if($user->resume)
                     <div class="d-flex flex-column">
                         <p class="exercise_author" style="line-height: 25px;">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mi non est
-                            consectetur pellentesque at et lorem. Class aptent taciti sociosqu ad litora torquent
-                            per conubia nostra, per inceptos himenaeos. Nunc commodo fermentum tincidunt.
-                            Sed mollis, lectus non egestas posuere, tellus purus aliquam enim, ac hendrerit est
-                            augue nec nulla. Nulla nec orci non magna finibus pharetra. 
+                            {{ $user->resume }}
                         </p>
                     </div>
 
                     <hr>
+                    @endif
 
-                    @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
 
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
@@ -73,12 +78,15 @@
                                         Contactar
                                     </a>
                                 </div>
-                                <div class="d-block text-left mt-3">
-                                    {{-- LinkedIn logo --}}
-                                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 44px; font-size: 21px; background-color: #0766c1; border-color: #0766c1;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg')}}" alt="" style="width: 110%;">
-                                    </a>
-                                </div>
+                                @if ($user->linkedin_url)
+                                    <div class="d-block text-left mt-3">
+                                        {{-- LinkedIn logo --}}
+                                        <a href="{{ $user->linkedin_url }}" target="_blank" 
+                                        class="btn search-btn comment_submit" style="float: none; padding: 12px 44px; font-size: 21px; background-color: #0766c1; border-color: #0766c1;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg')}}" alt="" style="width: 110%;">
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
                                 <h4 class="sg_rate_title">A aguardar Validação</h4>
@@ -100,9 +108,12 @@
                     @else
 
                         <h4 class="sg_rate_title">Mais informação</h4>
+                        @if ($user->university)
                         <div class="d-flex flex-column">
-                            <p class="exercise_author"><strong>Instituição:</strong> St. Joseph University Macau </p>
+                            <p class="exercise_author"><strong>Instituição:</strong> {{ $user->university->name }} </p>
                         </div>
+                        @endif
+                        
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_author"><strong>Professor:</strong> <a href="#" class="professor_link">João Paulo</a></p>
                             <p class="exercise_author"><strong>Turma:</strong> A
@@ -120,7 +131,7 @@
             </div>
         </div>
 
-        @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
 
             {{-- professor - promoted exercises --}}
             <div class="row mb-5">
@@ -131,14 +142,14 @@
                     <div class="shop_grid_caption card-body m-0 mb-4">
                         <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                         <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                             @else
                                 <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
                             @endif
                             <p class="exercise_level" style="float: left; margin-right: 20px;">
                                 <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <strong>Média de Avaliação:</strong> 62%
                                 @endif
                             </p>
@@ -175,14 +186,14 @@
                     <div class="shop_grid_caption card-body m-0 mb-4">
                         <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                         <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                             @else
                                 <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
                             @endif
                             <p class="exercise_level" style="float: left; margin-right: 20px;">
                                 <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <strong>Média de Avaliação:</strong> 62%
                                 @endif
                             </p>
@@ -219,14 +230,14 @@
                     <div class="shop_grid_caption card-body m-0 mb-4">
                         <h4 class="sg_rate_title">Da Áustria para Macau</h4>
                         <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
                             @else
                                 <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
                             @endif
                             <p class="exercise_level" style="float: left; margin-right: 20px;">
                                 <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->role == 1 || auth()->user()->role == 2)
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <strong>Média de Avaliação:</strong> 62%
                                 @endif
                             </p>
