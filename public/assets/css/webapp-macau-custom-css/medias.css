@@ -154,6 +154,10 @@
 
 @media (max-width: 767px) {
 
+    .drag_and_drop_image img {
+        width: auto;
+    }
+
     .shop_grid_caption.user_info .form-group {
         display: grid !important;
         justify-items: center;
