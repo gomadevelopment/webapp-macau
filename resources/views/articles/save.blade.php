@@ -27,26 +27,41 @@
 <!-- ============================ Create / Edit article ================================== -->
 <section class="pt-0">
     <div class="container">
+        <div class="alert alert-success successMsg" style="display:none;" role="alert">
 
-        <!-- Row -->
+        </div>
+
+        <div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+        </div>
         <div class="row">
-        
             
             <div class="col-lg-12 col-md-12 col-sm-12 order-1 order-lg-2 order-md-1">
                 
                 <div class="row">
             
-                    <!-- Single Product -->
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <form action="">
+                        <form method="POST" id="save_article_form" novalidate="true" action="{{ $article->id ? '/artigos/editar/' . $article->id : '/artigos/criar' }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="article_id_hidden" id="article_id_hidden" value="{{ $article->id ? $article->id : null }}">
                             <div class="shop_grid save_article_card">
                                 <div class="row">
+                                    {{-- <div class="col-12">
+                                        @if (session('save_article_error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('save_article_error') }}
+                                            </div>
+                                        @endif
+                                    </div> --}}
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <input type="text" class="form-control" placeholder="Título do artigo">
+                                                    <input type="text" name="title" class="form-control" placeholder="Título do artigo"
+                                                    value="{{ old('title', $article->title) }}">
+                                                    <span class="error-block-span pink title_error" hidden>
+                                                    </span>
                                                 </div>
                                             </div>
 
@@ -54,15 +69,21 @@
                                                 <div class="form-group">
                                                     <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                                                     <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
-                                                        {{-- <input type="text" class="form-control" placeholder="Pesquisar" style="border: none;">
-                                                        <hr class="m-0" style="border-top: 2px solid rgba(0, 0, 0, .1);"> --}}
-                                                        <select name="tags" id="tags" class="form-control" multiple  style="border: none;">
-                                                            <option value=""></option>
-                                                            <option value="1">Ciência</option>
-                                                            <option value="2">Tecnologia</option>
-                                                            <option value="3">Natureza</option>
-                                                            <option value="4">Sintáx</option>
-                                                            <option value="5">Geografia</option>
+                                                        <select name="tags[]" id="tags" class="form-control" multiple  style="border: none;">
+                                                            @foreach ($tags as $tag)
+                                                                <?php 
+                                                                    $selected = '';
+                                                                    if (!empty($article->article_tags)) {
+                                                                        foreach ($article->article_tags as $article_tag) {
+                                                                            if ($article_tag->id == $tag->id) {
+                                                                                $selected = 'selected';
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ?>                                                        
+                                                                <option value="{{ $tag->id }}" <?php echo $selected;?>>{{ $tag->name }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -72,14 +93,33 @@
                                                 <div class="form-group">
                                                     <label>Categoria <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 p-0">
-                                                        <select name="categories" id="categories" class="form-control">
-                                                            <option value=""></option>
-                                                            <option value="1">Gramática</option>
-                                                            <option value="2">Ciência</option>
-                                                            <option value="3">Desporto</option>
+                                                        <select name="category" id="category" class="form-control">
+                                                            @foreach ($article_categories as $category)
+                                                                <option value="{{ $category->id }}" {{ $article->id && $article->article_category_id == $category->id ? 'selected' : '' }}
+                                                                    >{{ $category->name }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Foto de Capa <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12 p-0">
+                                                        <div id="dropzone">
+                                                            <div class="dropzone needsclick" id="form-dropzone-poster">
+                                                                <div class="dz-message needsclick">
+                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
+                                                                    <br>
+                                                                    Arraste e solte a foto de capa do artigo aqui
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="error-block-span pink poster_files_error" hidden>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             
@@ -91,24 +131,24 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Descrição <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <textarea class="form-control" name="description" id="description" cols="30" rows="4" placeholder="Descrição do artigo"></textarea>
-                                                    
+                                                    <textarea class="form-control" name="text" id="text" cols="30" rows="4" placeholder="Descrição do artigo">{{ old('text', $article->text) }}</textarea>
+                                                    <span class="error-block-span pink text_error" hidden>
+                                                    </span>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <form action=""></form>
                                                     <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
-                                                            <form class="dropzone needsclick" id="form-dropzone" action="#">
+                                                            <div class="dropzone needsclick" id="form-dropzone-media">
                                                                 <div class="dz-message needsclick">
                                                                     <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
                                                                     <br>
                                                                     Arraste e solte os seus ficheiros aqui 
                                                                 </div>
-                                                            </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,20 +157,31 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="" class="btn search-btn comment_submit">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
+                            
+                            <button type="button" class="btn search-btn comment_submit save_article_form_button">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
                         </form>
                     </div>
                     
                 </div>
                 
-                
             </div>
         
         </div>
-        <!-- Row -->
         
     </div>
 </section>
+
+<div hidden>
+    @if($article->id)
+        <img src="{{ '/webapp-macau-storage/articles/'.$article->id.'/poster/'.$article->poster->media_url }}"
+            alt="" id="existing_article_poster"/>
+        <input type="file" name="qq" id="qq" value="">
+        @foreach ($article->medias() as $media)
+            <img src="{{ '/webapp-macau-storage/articles/'.$article->id.'/medias/'.$article->media->media_url }}"
+                alt="" class="existing_article_medias"/>
+        @endforeach
+    @endif
+</div>
 
 <DIV id="preview-template" style="display: none;">
     <DIV class="dz-preview dz-file-preview">
@@ -190,13 +241,13 @@
             document.getElementById("filter-sidebar").style.width = "0";
         }
 
-        CKEDITOR.replace( 'description' , {
+        CKEDITOR.replace( 'text' , {
             language: 'pt'
         });
 
         Dropzone.autoDiscover = false;
         $(function(){
-            $('#categories').select2({
+            $('#category').select2({
                 placeholder: "Escolher categoria"
             });
 
@@ -207,10 +258,8 @@
             $('li.select2-search.select2-search--inline').css('padding', '0px !important');
 
             $('#tags').on('change', function(){
-                    console.log($(this).val());
 
                 if($(this).val() == null){
-                    console.log('EMPTY');
                     $('input.select2-search__field')
                         .prop('placeholder', 'Pesquisar')
                         .removeClass('big');
@@ -227,8 +276,69 @@
                     .css('padding-left', '10px !important');
             });
 
+            var article_id = $('#article_id_hidden').val();
+            var dropzone_poster_counter = 0;
+            var dropzone_medias_counter = 0;
+
+            var dropzone_poster = new Dropzone('#form-dropzone-poster', {
+                url: '/dropzone_poster',
+                previewTemplate: document.querySelector('#preview-template').innerHTML,
+                addRemoveLinks: true,
+                parallelUploads: 2,
+                uploadMultiple: false,
+                maxFiles: 1,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 3,
+                filesizeBase: 1000,
+                init: function(e) {
+                    
+                    this.on("maxfilesexceeded", function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                    });
+                    if(dropzone_poster_counter == 0){
+                        var thisDropzone = this;
+                        if(article_id){
+                            $.get('/artigos/get_article_poster/' + article_id, function(data) {
+                                if(data != 'no_poster'){
+                                    JSON.stringify(data);
+                                    $.each(data, function(key,value){
+                                        var mockFile = { name: value.name, size: value.size };
+
+                                        thisDropzone.emit("addedfile", mockFile);
+
+                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path);
+
+                                        // Make sure that there is no progress bar, etc...
+                                        thisDropzone.emit("complete", mockFile);
+
+                                    });
+                                }
+                                
+                            });
+                        }
+                        
+                    }
+                    dropzone_poster_counter = 1;
+                },
+                thumbnail: function(file, dataUrl) {
+                    if (file.previewElement) {
+                    file.previewElement.classList.remove("dz-file-preview");
+                    var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                    for (var i = 0; i < images.length; i++) {
+                        var thumbnailElement = images[i];
+                        thumbnailElement.alt = file.name;
+                        thumbnailElement.src = dataUrl;
+                    }
+                    setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
+                }
+
+            });
             
-            var dropzone = new Dropzone('#form-dropzone', {
+            var dropzone_media = new Dropzone('#form-dropzone-media', {
+                url: '/dropzone_media',
                 previewTemplate: document.querySelector('#preview-template').innerHTML,
                 addRemoveLinks: true,
                 parallelUploads: 2,
@@ -236,6 +346,33 @@
                 thumbnailWidth: 120,
                 maxFilesize: 3,
                 filesizeBase: 1000,
+                init: function(e) {
+                    if(dropzone_medias_counter == 0){
+                        var thisDropzone = this;
+                        if(article_id){
+                            $.get('/artigos/get_article_medias/' + article_id, function(data) {
+                                if(data != 'no_medias'){
+                                    JSON.stringify(data);
+                                    $.each(data, function(key,value){
+                                        var mockFile = { name: value.name, size: value.size };
+
+                                        thisDropzone.emit("addedfile", mockFile);
+
+                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path);
+
+                                        // Make sure that there is no progress bar, etc...
+                                        thisDropzone.emit("complete", mockFile);
+
+                                    });
+                                }
+                                
+
+                            });
+                        }
+                            
+                    }
+                    dropzone_medias_counter = 1;
+                },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
                     file.previewElement.classList.remove("dz-file-preview");
@@ -251,12 +388,50 @@
 
             });
 
+            var poster_files = [];
+            var media_files = [];
+
             var minSteps = 6,
                 maxSteps = 60,
                 timeBetweenSteps = 100,
                 bytesPerStep = 100000;
 
-            dropzone.uploadFiles = function(files) {
+            dropzone_poster.uploadFiles = function(files) {
+                var self = this;
+                if($('#form-dropzone-poster .dz-preview.dz-complete.dz-image-preview')){
+                    $('#form-dropzone-poster .dz-preview.dz-complete.dz-image-preview').remove();
+                }
+                for (var i = 0; i < files.length; i++) {
+
+                    var file = files[i];
+                    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+                    for (var step = 0; step < totalSteps; step++) {
+                        var duration = timeBetweenSteps * (step + 1);
+                        setTimeout(function(file, totalSteps, step) {
+                            return function() {
+                                file.upload = {
+                                    progress: 100 * (step + 1) / totalSteps,
+                                    total: file.size,
+                                    bytesSent: (step + 1) * file.size / totalSteps
+                                };
+
+                                self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                                if (file.upload.progress == 100) {
+                                    file.status = Dropzone.SUCCESS;
+                                    self.emit("success", file, 'success', null);
+                                    self.emit("complete", file);
+                                    self.processQueue();
+                                }
+                            };
+                        }(file, totalSteps, step), duration);
+                        // console.log(file);
+                    }
+                }
+                poster_files = files;
+            }
+
+            dropzone_media.uploadFiles = function(files) {
                 var self = this;
 
                 for (var i = 0; i < files.length; i++) {
@@ -284,8 +459,100 @@
                             };
                         }(file, totalSteps, step), duration);
                     }
+                    media_files.push(file);
+
+                }
+                // media_files = files;
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                }
+            });
+
+            function updateAllMessageForms()
+            {
+                for (instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].updateElement();
                 }
             }
+
+            $(document).on('click', '.save_article_form_button', function(){
+                updateAllMessageForms();
+                var article_id = $('#article_id_hidden').val();
+                var url = article_id ? '/artigos/editar/' + article_id : '/artigos/criar';
+
+                var formData = new FormData($("#save_article_form")[0]);
+
+                if(poster_files[0]){
+                    formData.append('poster_files', poster_files[0]);
+                }
+                else if(!poster_files[0] && $('#form-dropzone-poster .dz-preview.dz-complete.dz-image-preview')){
+                    var existing_poster = $('#form-dropzone-poster .dz-preview .dz-details .dz-filename span').text();
+                    formData.append('poster_files', existing_poster);
+                }
+                // if(media_files != []){
+                //     media_files.forEach(element => {
+                //         formData.append('media_files[]', element);
+                //     });
+                // }
+
+                if(media_files == []){
+                    $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                        formData.append('media_files[]', $(element).text());
+                    });
+                }
+                else{
+                    media_files.forEach(element2 => {
+                        
+                        $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                            if(element2.name != $(element).text()){
+                                formData.append('media_files[]', $(element).text());
+                                // console.log(element2.name, $(element).text());
+                            }
+                            else{
+                                formData.append('media_files[]', element2);
+                                console.log(element2.name, $(element).text());
+                            }
+                            
+                        });
+                    });
+                }
+                
+                
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                            window.location = response.url;
+                        }
+                        else if(response.status == 'error'){
+
+                            Object.keys(response.errors).forEach(function (key) {
+                                if(key == 'title'){
+                                    $('.title_error').text(response.errors[key]);
+                                    $('.title_error').removeAttr('hidden');
+                                }
+                                if(key == 'text'){
+                                    $('.text_error').text(response.errors[key]);
+                                    $('.text_error').removeAttr('hidden');
+                                }
+                                if(key == 'poster_files'){
+                                    $('.poster_files_error').text(response.errors[key]);
+                                    $('.poster_files_error').removeAttr('hidden');
+                                }
+                                // document.write('key: ' + key + ', value: ' + sArray[key] + '<br>');
+                            });
+                        }
+                    }
+                });
+            });
+            
         });
         
     </script>

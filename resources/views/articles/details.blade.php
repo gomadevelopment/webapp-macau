@@ -19,7 +19,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/artigos">Artigos</a></li>
                             <li class="breadcrumb-item"><a href="#">Personalidades</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sobre Astrid Pires</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $article->title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -46,65 +46,38 @@
                 
                         <div class="shop_grid article_details_card blog-page">
                             <div class="shop_grid_thumb img card_img">
-                                <img src="{{asset('/assets/backoffice_assets/images/woman_thumbnail_big.png')}}" class="img-fluid" alt="" />
+                                <img src="{{ $article->poster ? '/webapp-macau-storage/articles/'.$article->id.'/poster/'.$article->poster->media_url : 'https://via.placeholder.com/500x500' }}"
+                                 class="img-fluid" alt="" />
                             </div>
                             <div class="shop_grid_caption card_content article_detail_wrapss">
                                 <div class="container">
-                                    <h1 class="sg_rate_title article_title">A história de Astrid Pires</h1>
-                                    <p class="article_author"><strong>Por:</strong> João Monteiro | 5 min. de leitura</p>
+                                    <h1 class="sg_rate_title article_title">{{ $article->title }}</h1>
+                                    <p class="article_author"><strong>Por:</strong> {{ $article->user->username }}</p>
 
                                     <div class="article_content">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                        Sed ac mi non est consectetur pellentesque at et lorem. 
-                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-                                        Nunc commodo fermentum tincidunt. 
-                                        Sed mollis, lectus non egestas posuere, tellus purus aliquam enim, ac hendrerit est augue nec nulla. 
-                                        Nulla nec orci non magna finibus pharetra. 
-                                        Sed tellus sapien, ultrices eget erat at, pellentesque efficitur ipsum. 
-                                        Cras euismod lectus in ipsum lacinia, eget facilisis dolor commodo. 
-                                        Pellentesque lacus urna, tincidunt ut ex non, bibendum venenatis orci. 
-                                        Phasellus vel semper dui. Integer porttitor est eu magna posuere imperdiet.
-                                        <br>
-                                        Nunc eros arcu, commodo blandit neque eu, pulvinar malesuada augue. 
-                                        Proin luctus eu libero iaculis fermentum. 
-                                        Integer dui mauris, venenatis nec dapibus bibendum, placerat sed lorem. 
-                                        Etiam vel placerat nibh. In a suscipit tortor, sed pretium tortor. 
-                                        Sed facilisis, tortor sed dignissim bibendum, dui tellus aliquet lectus, eu elementum nisi est et ligula. 
-                                        Nunc at sollicitudin libero.
-                                        
+                                        {!! $article->text !!}
                                     </div>
-                                    <div style="margin-top: 30px;">
-                                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                                            <p>Gramática</p>
+                                    @if ($article->medias())
+                                        <div class="article_content text-center">
+                                            {{-- {{ var_dump($article->medias) }} --}}
+                                            @foreach ($article->medias as $media)
+                                                <img src="{{ '/webapp-macau-storage/articles/'.$article->id.'/medias/'.$media->media_url }}" alt=""
+                                                width="300px" height="auto">
+                                            @endforeach
                                         </div>
-                                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                                            <p>Experiência</p>
-                                        </div>
-                                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                                            <p>Verbos</p>
-                                        </div>
-                                        <div class="article_buttons">
+                                    @endif
+                                    
+                                        @foreach ($article->article_tags as $tag)
+                                            <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                                                <p>{{ $tag->name }}</p>
+                                            </div>
+                                        @endforeach
+                                    <div class="article_buttons">
                                             <a href="#" class="btn btn-theme share_button">
                                                 <img src="{{asset('/assets/backoffice_assets/icons/share.svg')}}" alt="">Partilhar
                                             </a>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    {{-- <div class="comments">
-                                        <h4 class="comments_label">Comentários</h4>
-
-                                        <div class="unique_comment">
-                                            <div class="user_comment">
-                                                <a href="#" class="comments_label user_avatar">
-                                                    <img src="https://via.placeholder.com/500x500" class="img-fluid avatar" alt="">
-                                                    Luis Antunes
-                                                </a>
-                                            </div>
-                                            <div class="content_comment">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mi non est consectetur pellentesque at et lorem.</p>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+                                    {{-- <hr>
                                     <div class="comment-area">
                                         <div class="all-comments">
                                             <h3 class="comments-title">Comentários</h3>
@@ -160,7 +133,6 @@
                                                             </div>
                                                         </article>
                                                     </li>
-                                                    {{-- Duplicar aqui --}}
                                                 </ul>
                                             </div>
                                         </div>
@@ -175,7 +147,6 @@
                                                         </div>
                                                         <div class="col-lg-12 col-md-12 col-sm-12">
                                                             <div class="form-group">
-                                                                {{-- type="submit" --}}
                                                                 <button type="" class="btn search-btn comment_submit">Submeter Comentário</button>
                                                             </div>
                                                         </div>
@@ -183,7 +154,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

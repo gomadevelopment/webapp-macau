@@ -29,11 +29,16 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
 
         Route::get('/artigos', 'ArticlesController@index');
-        Route::get('/artigos/detalhe', 'ArticlesController@details'); // Adicionar {id}
+        Route::get('/artigos/detalhe/{id}', 'ArticlesController@details');
         Route::get('/artigos/criar', 'ArticlesController@save');
         Route::post('/artigos/criar', 'ArticlesController@savePost');
-        Route::get('/artigos/editar', 'ArticlesController@save'); // Adicionar {id}
-        Route::post('/artigos/editar', 'ArticlesController@savePost'); // Adicionar {id}
+        Route::get('/artigos/editar/{id}', 'ArticlesController@save');
+        Route::post('/artigos/editar/{id}', 'ArticlesController@savePost');
+        Route::post('/artigos/apagar/{id}', 'ArticlesController@delete');
+        Route::post('/artigos/artigo_favorito', 'ArticlesController@toggleFavorite');
+
+        Route::get('/artigos/get_article_poster/{id}', 'ArticlesController@getArticlePoster');
+        Route::get('/artigos/get_article_medias/{id}', 'ArticlesController@getArticleMedias');
 
         Route::get('/exercicios', 'ExercisesController@index');
         Route::get('/exercicios/criar', 'ExercisesController@save');
@@ -51,6 +56,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         Route::get('/sala_de_aula', 'ClassroomController@index');
 
+        
         
         Route::get('/perfil/{id}', 'UsersController@index_profile');
         Route::get('/perfil/editar/{id}', 'UsersController@edit_profile'); // Adicionar {id}

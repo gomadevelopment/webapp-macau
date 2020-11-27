@@ -22,7 +22,7 @@
                 </div>
                 <div class="shop_grid_caption card-body m-0 p-4">
                     <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                        <img src="{{ $user->avatar_url ? '/webapp-macau-storage/'.$user->id.'/avatar/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}"
+                        <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}"
                         alt="" class="user_round_avatar">
                         
                     </div>

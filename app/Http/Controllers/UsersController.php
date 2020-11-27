@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 use App\User,
     App\University;
@@ -51,19 +52,30 @@ class UsersController extends Controller
 
         return view('users.edit_profile', compact('user', 'universities'));
     }
+    public function updateTest()
+    {
+        $users = User::get();
+        foreach($users as $user){
+            $user->password = bcrypt('123456');
+            $user->save();
+        }
+    }
 
     public function editPost_profile($id)
     {
         $inputs = request()->all();
 
-        $password_rule = [];
+        $more_rules = [];
         if(isset($inputs['password'])){
-            $password_rule = ['password' => 'required|min:6|confirmed'];
+            $more_rules['password'] = 'required|min:6|confirmed';
+        }
+        if(isset($inputs['second_email'])){
+            $more_rules['second_email'] = ['required', 'email', Rule::unique('users')->ignore($id)];
         }
         
         $user = User::find($id);
 
-        $validator = \Validator::make($inputs, User::rulesForEdit(auth()->user()->id, $password_rule), User::$messages);
+        $validator = \Validator::make($inputs, User::rulesForEdit(auth()->user()->id, $more_rules), User::$messages);
 
         if ($validator->fails()) {
             request()->session()->flash('edit_profile_error', 'Por favor, verifique os erros no formulário.');

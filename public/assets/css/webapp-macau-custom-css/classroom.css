@@ -2,12 +2,15 @@
 
 .classroom .user_round_avatar,
 .classroom .colleagues_round_avatar {
-    min-width: 120px;
     max-width: 120px;
-    min-height: 120px;
     max-height: 120px;
     border-radius: 50%;
     float: left;
+}
+
+.classroom .user_round_avatar {
+    min-width: 120px;
+    min-height: 120px;
 }
 
 .classroom .colleagues_round_avatar {
