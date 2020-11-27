@@ -154,6 +154,22 @@ span.error-block-span.pink {
     border: 2px solid;
 }
 
+.pagination>li>a:hover,
+.pagination>li>a:hover,
+.pagination>li>span:hover {
+    background-color: #ff2850;
+    color: #fff !important;
+}
+
+.pagination li:last-child a,
+.pagination li:last-child a:hover,
+.pagination>li:last-child>span:hover {
+    background: #35434e;
+    border: 1px solid #35434e;
+    border-radius: 50% !important;
+    color: #fff;
+}
+
 /* Header */
 
 .header.header-fixed {

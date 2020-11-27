@@ -50,7 +50,7 @@ class User extends Authenticatable
         return array_merge([
             'username' => ['required', Rule::unique('users')->ignore($id)],
             'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
-            'second_email' => ['required', 'email', Rule::unique('users')->ignore($id)],
+            // 'second_email' => ['required', 'email', Rule::unique('users')->ignore($id)],
         ], $merge);
     }
 
@@ -87,6 +87,26 @@ class User extends Authenticatable
         return $this->belongsTo('App\University', 'university_id');
     }
 
+    /**
+     * Articles
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Article', 'user_id');
+    }
+
+    /**
+     * Article Favorites pivot
+     */
+    public function article_favorite() {
+        return $this->belongsToMany(
+            'App\Article', 
+            'article_favorites', 
+            'user_id', 
+            'article_id'
+        );
+    }
+
     public function saveEditProfile($inputs)
     {
         $this->username = $inputs['username'];
@@ -94,7 +114,9 @@ class User extends Authenticatable
         $this->last_name = $inputs['last_name'];
         $this->email = $inputs['email'];
         $this->second_email = $inputs['second_email'];
-        $this->password = bcrypt($inputs['password']);
+        if(isset($inputs['password'])){
+            $this->password = bcrypt($inputs['password']);
+        }
         $this->linkedin_url = isset($inputs['linkedin_url']) ? $inputs['linkedin_url'] : null;
         $this->university_id = $inputs['select_university'] == 0 ? null : $inputs['select_university'];
         $this->student_number = isset($inputs['student_number']) ? $inputs['student_number'] : null;
@@ -111,12 +133,12 @@ class User extends Authenticatable
         $upload_date = date('Y-m-d_H:i:s_');
         $paths = [];
 
-        Storage::disk('webapp-macau-storage')->deleteDirectory($this->id.'/avatar');
+        Storage::disk('webapp-macau-storage')->deleteDirectory('avatars/'.$this->id);
 
         $fileName = $upload_date . $inputs['avatar_url']->getClientOriginalName();
 
-        $paths = $inputs['avatar_url']->storeAs('/'
-            . $this->id.'/avatar', $fileName, 'webapp-macau-storage');
+        $paths = $inputs['avatar_url']->storeAs('/avatars/'
+            . $this->id, $fileName, 'webapp-macau-storage');
 
         $this->avatar_url = $fileName;
         $this->save();

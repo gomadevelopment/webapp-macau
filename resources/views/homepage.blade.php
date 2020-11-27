@@ -93,7 +93,6 @@
         <p class="small_text">info@escola.com</p>
         <h1 class="sub_title">Junta-te a milhares de Utilizadores felizes!</h1>
         <p class="small_text">Inscreve-te agora e começa a aprender uma das Linguas mais faladas por todo o Mundo!</p>
-        <p class="small_text">*Alunos de Nacionalidade Chinesa sujeitos a Pagamento.</p>
         <div class="signup_button">
             <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
                 Inscrever-me &nbsp;&nbsp;&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">

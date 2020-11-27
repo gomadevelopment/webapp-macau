@@ -39,6 +39,10 @@ $(function() {
 
     // Global Heart like
     $(document).on("click", ".heart_icon, .heart_filled_icon", function() {
+        var article_id = $(this).attr("data-article-id");
+        if (article_id) {
+            return false;
+        }
         if ($(this).attr("class") == "heart_icon") {
             $(this).hide();
             $(this)
