@@ -90,7 +90,7 @@
 .about_section .title {
     color: #ffffff;
     font-family: "Gilroy - Bold";
-    font-size: 37px;
+    font-size: 45px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: -0.59px;
@@ -102,7 +102,7 @@
 .about_section .sub_title {
     color: #ffffff;
     font-family: "Gilroy - Bold";
-    font-size: 45px;
+    font-size: 37px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: -0.72px;
@@ -211,7 +211,7 @@
 }
 
 .contacts_section .signup_button {
-    margin-top: 0;
+    /* margin-top: 0; */
 }
 
 /* Login & Signup Modals */

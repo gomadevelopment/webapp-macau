@@ -125,18 +125,18 @@
     </div>
 
     {{-- EXERCISE INFO TOGGLE --}}
-    <div class="card-body accordion custom_accordion info_accordion p-2" id="accordion">
+    <div class="card-body accordion custom_accordion info_accordion" id="accordion">
         <a class="pause_time collapsed" data-toggle="collapse" href="#collapseOne">
             <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" class="show_info_button">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross_white.svg')}}" alt="" class="hide_info_button">
         </a>
         <div id="collapseOne" class="collapse" data-parent="#accordion" style="margin-left: -5px; margin-right: -5px;">
             <div class="info_help mt-3">
-                <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg')}}" alt="" class="mb-1" style="width: 70%">
+                <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg')}}" alt="" class="mb-1" style="width: 90%">
                 Ajuda
             </div>
             <div class="info_statement mt-2">
-                <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg')}}" alt="" class="mb-1" style="width: 40%">
+                <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg')}}" alt="" class="mb-1" style="width: 44%">
                 Enunciado
             </div>
         </div>

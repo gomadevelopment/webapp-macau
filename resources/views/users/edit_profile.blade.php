@@ -159,7 +159,7 @@
                     contentType: false,
                     success: function(response) {
                         if (response && response.status == "success") {
-                            var new_avatar_url = '/webapp-macau-storage/' + user_id + '/avatar/' + response.avatar_url;
+                            var new_avatar_url = '/webapp-macau-storage/' + user_id + '/avatars/' + response.avatar_url;
                             $('.user_round_avatar').attr('src', new_avatar_url);
                         }
                         else {

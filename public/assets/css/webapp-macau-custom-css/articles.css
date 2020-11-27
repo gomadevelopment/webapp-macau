@@ -291,7 +291,7 @@ a[class^="show_less_"] .triangle-up {
 .shop_grid_thumb img {
     max-width: 40%;
     width: 100%;
-    max-height: 100%;
+    max-height: 350px;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -300,6 +300,7 @@ a[class^="show_less_"] .triangle-up {
 .shop_grid_caption {
     margin-left: 20px;
     width: 100%;
+    position: relative;
 }
 
 .shop_grid_caption .sg_rate_title {
@@ -311,6 +312,7 @@ a[class^="show_less_"] .triangle-up {
     letter-spacing: -0.41px;
     line-height: 40px;
     text-align: left;
+    overflow-wrap: break-word;
 }
 
 .shop_grid_caption .article_author,
@@ -468,6 +470,9 @@ a[class^="show_less_"] .triangle-up {
 
 .shop_grid_caption .read_more {
     float: right;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
 }
 
 .shop_grid_caption .read_more a {
@@ -754,12 +759,14 @@ a[class^="show_less_"] .triangle-up {
 }
 
 .form-group input.form-control,
+.form-group textarea.form-control,
 .shop_grid.save_article_card input {
     border-radius: 5px;
     border: 2px solid #e6ebf1;
 }
 
 .form-group input.form-control:focus,
+.form-group textarea.form-control:focus,
 .shop_grid.save_article_card input:not(.select2-search__field):focus {
     border: 2px solid #ff2850 !important;
 }

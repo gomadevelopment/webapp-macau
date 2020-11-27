@@ -128,7 +128,7 @@ a.remove_button:hover {
     letter-spacing: -0.25px;
     line-height: 40px;
     text-align: left;
-    margin-top: 15px;
+    float: right;
 }
 
 /* Create Exercise */
@@ -355,7 +355,9 @@ button.hide_video {
     position: relative;
 }
 
-
+.drag_and_drop_image {
+    max-height: 250px;
+}
 
 .drag_and_drop_image img,
 .drag_and_drop_hole,
@@ -367,6 +369,10 @@ button.hide_video {
 .drag_and_drop_item {
     min-height: 75px;
     height: auto;
+}
+
+.drag_and_drop_item {
+    padding-right: 20px !important;
 }
 
 .drag_and_drop_item:after {
@@ -413,14 +419,17 @@ button.hide_video {
     z-index: 999;
     right: 0;
     top: 40vh;
+    box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 8%);
+    padding: 14px 10px !important;
+    text-align-last: center;
 }
 
 .custom_accordion.info_accordion a {
-    padding: 4px 7px !important;
+    padding: 7px 10px !important;
 }
 
 .custom_accordion.info_accordion a.collapsed {
-    padding: 4px !important;
+    padding: 7px !important;
 }
 
 .custom_accordion.info_accordion .info_help,
@@ -432,7 +441,7 @@ button.hide_video {
 
     color: #131b31;
     font-family: "Gilroy - Medium";
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 500;
     font-style: normal;
     letter-spacing: -0.16px;

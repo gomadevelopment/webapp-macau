@@ -424,7 +424,7 @@
                             </div>
 
                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <div class="read_more available_tooltip_text">
+                                <div class="available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
                                 </div>
@@ -512,7 +512,7 @@
                             </div>
 
                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <div class="read_more available_tooltip_text">
+                                <div class="available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
                                 </div>
@@ -600,7 +600,7 @@
                             </div>
 
                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <div class="read_more available_tooltip_text">
+                                <div class="available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
                                 </div>
@@ -688,7 +688,7 @@
                             </div>
 
                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <div class="read_more available_tooltip_text">
+                                <div class="available_tooltip_text">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-bottom: 5px; margin-right: 5px;"> 
                                     Disponível só para os meus Alunos
                                 </div>
