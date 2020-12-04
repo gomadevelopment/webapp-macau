@@ -119,9 +119,21 @@ class ChatController extends Controller
 
         try{
 
+            if($chat->is_group){
+                $other_user = null;
+            }
+            else{
+                if(auth()->user()->id == $chat->user_2->id){
+                    $other_user = $chat->user_1;
+                }
+                else{
+                    $other_user = $chat->user_2;
+                }
+            }
+
             $view = view()->make("users.chat-partials.chat-body", [
                 'chat' => $chat,
-                'other_user' => $chat->is_group ? null : auth()->user()->id == $chat->user_2->id ? $chat->user_1 : $chat->user_2
+                'other_user' => $other_user
             ]);
             $html = $view->render();
             
@@ -151,11 +163,23 @@ class ChatController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao filtrar os utilizadores. Por favor, tente de novo!'], 200);
         }
 
+        if($chat->is_group){
+            $other_user = null;
+        }
+        else{
+            if(auth()->user()->id == $chat->user_2->id){
+                $other_user = $chat->user_1;
+            }
+            else{
+                $other_user = $chat->user_2;
+            }
+        }
+
         $view = view()->make("users.chat-partials.chat-users", [
             'chat' => $chat,
             'users_with_chats' => $users_with_chats,
             'group_chats' => $group_chats,
-            'other_user' => $chat->is_group ? null : auth()->user()->id == $chat->user_2->id ? $chat->user_1 : $chat->user_2
+            'other_user' => $other_user
         ]);
         $html = $view->render();
 
