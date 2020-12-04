@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\User,
-    App\University;
+    App\University,
+    App\UserBlocked;
 
 use DB;
 
@@ -141,5 +142,22 @@ class UsersController extends Controller
         DB::commit();
         
         return response()->json(['status' => 'success', 'avatar_url' => $avatar_url]);
+    }
+
+    public function blockUser($user_id)
+    {
+        $user_to_block = User::find($user_id);
+
+        if(auth()->user()->blockedUser($user_to_block->id)){
+            auth()->user()->blockedUser($user_to_block->id)->delete();
+        }
+        else{
+            UserBlocked::create([
+                'user_id' => auth()->user()->id,
+                'user_blocked_id' => $user_to_block->id
+            ]);
+        }
+
+        return redirect()->to('/chat/' . $user_id);
     }
 }

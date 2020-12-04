@@ -96,6 +96,120 @@ class User extends Authenticatable
     }
 
     /**
+     * Chat User 1
+     */
+    public function chat_user_1()
+    {
+        return $this->hasMany('App\Chat', 'user_1_id');
+    }
+
+    /**
+     * Chat User 2
+     */
+    public function chat_user_2()
+    {
+        return $this->hasMany('App\Chat', 'user_2_id');
+    }
+
+    /**
+     * Chat User 2
+     */
+    public function chat_users()
+    {
+        return $this->hasMany('App\ChatUser', 'user_id');
+    }
+
+    /**
+     * Returns all users that present user has a chat created with
+     */
+    public static function usersWithChat($search_username = null)
+    {
+        $users_with_chat_ids = [];
+        foreach (auth()->user()->chat_users as $chat_user) {
+            if(!$chat_user->chat->is_group){
+                if($chat_user->chat->user_1_id == auth()->user()->id){
+                    $users_with_chat_ids[] = $chat_user->chat->user_2_id;
+                }
+                else{
+                    $users_with_chat_ids[] = $chat_user->chat->user_1_id;
+                }
+            }
+        }
+        
+        if($search_username){
+            return self::whereIn('id', $users_with_chat_ids)->where('username', 'LIKE', '%' . $search_username . '%')->get();
+        }
+        else{
+            return self::find($users_with_chat_ids);
+        }
+    }
+
+    /**
+     * Returns all users that present user has NOT a chat created with
+     */
+    public static function usersWithOutChat()
+    {
+        $users_with_chat_ids = [];
+        foreach (auth()->user()->chat_users as $chat_user) {
+            if(!$chat_user->chat->is_group){
+                if($chat_user->chat->user_1_id == auth()->user()->id){
+                    $users_with_chat_ids[] = $chat_user->chat->user_2_id;
+                }
+                else{
+                    $users_with_chat_ids[] = $chat_user->chat->user_1_id;
+                }
+            }
+        }
+
+        return self::whereNotIn('id', $users_with_chat_ids)->get();
+    }
+
+    /**
+     * User Block
+     */
+    public function user_block()
+    {
+        return $this->hasMany('App\UserBlocked', 'user_id');
+    }
+
+    /**
+     * User Blocked
+     */
+    public function user_blocked()
+    {
+        return $this->hasMany('App\UserBlocked', 'user_blocked_id');
+    }
+
+    /**
+     * User is Blocked?
+     */
+    public function blockedUser($user_blocked_id)
+    {
+        $userBlocked = UserBlocked::where('user_id', $this->id)->where('user_blocked_id', $user_blocked_id)->first();
+        if($userBlocked){
+            return $userBlocked;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Either user is blocked
+     */
+    public function eitherUserBlocked($user_blocked_id)
+    {
+        $userBlocked1 = UserBlocked::where('user_id', $this->id)->where('user_blocked_id', $user_blocked_id)->first();
+        $userBlocked2 = UserBlocked::where('user_blocked_id', $this->id)->where('user_id', $user_blocked_id)->first();
+        if($userBlocked1 || $userBlocked2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
      * Article Favorites pivot
      */
     public function article_favorite() {

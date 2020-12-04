@@ -21,7 +21,7 @@
                 </div>
                 
                 <div class="exercise_time wrap float-right create_class_button">
-                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
+                    <a href="#" data-toggle="modal" data-target="#chat_new_message_modal" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Nova Mensagem
                     </a>
@@ -34,6 +34,21 @@
 <!-- ============================ Page Title End ================================== -->	
 
 <!-- ============================ Find Courses with Sidebar ================================== -->
+<?php $other_user = null; ?>
+<?php $users_are_blocked = false; ?>
+
+@if(!$chat->is_group)
+    @if (auth()->user()->id == $chat->user_2->id)
+        <?php $other_user = $chat->user_1; ?>
+    @else
+        <?php $other_user = $chat->user_2; ?>
+    @endif
+
+    @if($other_user->eitherUserBlocked(auth()->user()->id) || auth()->user()->eitherUserBlocked($other_user->id))
+        <?php $users_are_blocked = true; ?>
+    @endif
+@endif
+
 <section class="pt-0 classroom">
     <div class="container h-100">
         <div class="row justify-content-center h-100">
@@ -41,195 +56,160 @@
                 <div class="card mb-sm-3 mb-md-0 contacts_card">
                     <div class="card-header">
                         <div class="input-group">
-                            <input type="text" placeholder="Pesquisar..." name="" class="form-control search">
+                            <input type="text" placeholder="Pesquisar..." id="filter_chat_users" name="filter_chat_users" class="form-control search">
                             <div class="input-group-prepend">
                                 <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
                             </div>
                         </div>
                     </div>
+
+                    {{-- Users partial --}}
                     <div class="card-body contacts_body">
-                        <ui class="contacts">
-                        <li class="chat_active">
-                            <div class="d-flex bd-highlight align-items-center">
-                                <div class="img_cont">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                                    <span class="online_icon"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span class="colleagues_name">Miguel Rodrigues</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight align-items-center">
-                                <div class="img_cont">
-                                    <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span class="colleagues_name">Luis Marques</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight align-items-center">
-                                <div class="img_cont">
-                                    <img src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg" class="rounded-circle user_img">
-                                    <span class="online_icon"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span class="colleagues_name">Luísa Nunes</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight align-items-center">
-                                <div class="img_cont">
-                                    <img src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg" class="rounded-circle user_img">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span class="colleagues_name">Rui Carapinha</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex bd-highlight align-items-center">
-                                <div class="img_cont">
-                                    <img src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg" class="rounded-circle user_img">
-                                    <span class="online_icon offline"></span>
-                                </div>
-                                <div class="user_info">
-                                    <span class="colleagues_name">Maria Ribeiro</span>
-                                </div>
-                            </div>
-                        </li>
-                        </ui>
+                        @include('users.chat-partials.chat-users', [
+                            'users_with_chats' => $users_with_chats,
+                            'group_chats' => $group_chats])
                     </div>
+                    
                 </div>
             </div>
             <div class="col-md-8 col-xl-9 chat">
+                <div class="alert alert-success successMsg" style="display:none;" role="alert">
+
+                </div>
+
+                <div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+                </div>
                 <div class="card">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight align-items-center">
                             <div class="img_cont">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                                <span class="online_icon"></span>
+                                @if (!$chat->is_group)
+                                    <img src="{{ $other_user->avatar_url ? '/webapp-macau-storage/avatars/'.$other_user->id.'/'.$other_user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                    class="rounded-circle user_img">
+                                @else
+                                    @foreach ($chat->users as $user)
+                                        @if($loop->index == 3)
+                                            @break
+                                        @endif
+                                        <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                        class="rounded-circle user_img {{ $loop->first ? 'group_white_border_first' : 'group_white_border' }} index_{{ $loop->index }}"
+                                        >
+                                    @endforeach
+                                    @if($chat->users->count() > 3)
+                                        <div class="chat_more_users_circle rounded-circle">
+                                            <span>
+                                                +{{ $chat->users->count() - 3 }}
+                                            </span>
+                                        </div>
+                                    @endif
+                                @endif
+                                
+                                {{-- <span class="online_icon"></span> --}}
                             </div>
-                            <div class="user_info">
-                                <span class="colleagues_name current_chat_user">Miguel Rodrigues</span>
-                                <p class="notification_time_ago m-0">Activo neste momento</p>
-                            </div>
-                            <div class="video_cam">
-                                <span><i class="fas fa-video"></i></span>
-                                <span><i class="fas fa-phone"></i></span>
+                            <div class="user_info {{ $chat->is_group ? 'users_group' : '' }} {{ $chat->is_group && $chat->users->count() > 3 ? 'more_than_3' : '' }}">
+                                @if (!$chat->is_group)
+                                    <span class="colleagues_name {{ $users_are_blocked ? 'current_chat_user' : '' }}">{{ $other_user->username }}</span>
+                                @else
+                                    <span class="colleagues_name current_chat_user">
+                                        @foreach ($chat->users as $user)
+                                            @if($loop->index == 3)
+                                                ...
+                                                @break
+                                            @endif
+                                            @if($user->first_name && $user->last_name)
+                                                {{ substr($user->first_name, 0, 1) . '. ' . substr($user->last_name, 0, 1) . '.' }}{{ $loop->index < 2 || !$loop->last ? ',' : '' }}
+                                            @else
+                                                {{ $user->username }} {{ $loop->index < 2 || !$loop->last ? ',' : '' }}
+                                            @endif
+                                            
+                                        @endforeach
+                                    </span>
+                                    <p class="notification_time_ago m-0">Chat constituído por {{ $chat->users->count() }} utilizadores.</p>
+                                @endif
+                                @if ($users_are_blocked)
+                                    <p class="notification_time_ago m-0">Utilizador bloqueado</p>
+                                @endif
                             </div>
                         </div>
-                        <span id="action_menu_btn">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                            <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                        </span>
-                        <div class="action_menu">
-                            <ul>
-                                <li><i class="fas fa-user-circle"></i> View profile</li>
-                                <li><i class="fas fa-users"></i> Add to close friends</li>
-                                <li><i class="fas fa-plus"></i> Add to group</li>
-                                <li><i class="fas fa-ban"></i> Block</li>
-                            </ul>
-                        </div>
+
+                        @if (!$chat->is_group)
+                            <span class="action_menu_btn">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
+                                <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                            </span>
+                            <div class="action_menu">
+                                <ul>
+                                    <li>
+                                        <a href="/perfil/{{ $other_user->id }}">
+                                            <i class="fas fa-user-circle"></i>  Ver Perfil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/block_user/{{ $other_user->id }}">
+                                            <i class="fas fa-ban"></i>
+                                        @if($users_are_blocked)
+                                            Desbloquear
+                                        @else
+                                            Bloquear
+                                        @endif
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
+
                     </div>
-                    <div class="card-body msg_card_body">
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Hi, how are you samim?
-                                Hi, how are you samim?
-                                Hi, how are you samim?
-                                Hi, how are you samim?
-                                <span class="msg_time notification_time_ago">8:40 AM, Today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-1">
-                            <div class="msg_cotainer_send">
-                                Hi Khalid i am good tnx how about you?
-                            </div>
-                            <div class="img_cont_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send border-not-first-message">
-                                Hi Khalid i am good tnx how about you?
-                                <span class="msg_time_send notification_time_ago">8:55 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am good too, thank you for your chat template
-                                <span class="msg_time notification_time_ago">9:00 AM, Today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                You are welcome
-                                <span class="msg_time_send notification_time_ago">9:05 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am looking for your next templates
-                                <span class="msg_time notification_time_ago">9:07 AM, Today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                Ok, thank you have a good day
-                                <span class="msg_time_send notification_time_ago">9:10 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Bye, see you
-                                <span class="msg_time notification_time_ago">9:12 AM, Today</span>
-                            </div>
-                        </div>
+
+                    {{-- Chat body partial --}}
+                    <div class="card-body msg_card_body pt-4">
+                        @include('users.chat-partials.chat-body', ['chat' => $chat, 'other_user' => $other_user])
                     </div>
+
                     <div class="card-footer">
-                        <div class="input-group">
-                            <div class="input-group-append">
-                                <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                        <form id="chat_message_form" class="" method="POST" autocomplete="off">
+                            @csrf
+                            <div class="input-group">
+                                {{-- <div class="input-group-append">
+                                    <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                                </div> --}}
+                                <input type="hidden" name="chat_id" id="hidden_chat_id" value="{{ $chat->id }}">
+                                {{-- <input type="hidden" name="user_1_id" id="hidden_user_1_id" value="{{ isset($chat->user_1_id) ? $chat->user_1_id : null }}">
+                                <input type="hidden" name="user_2_id" id="hidden_user_2_id" value="{{ isset($chat->user_2_id) ? $chat->user_2_id : null }}"> --}}
+                                <input type="hidden" name="user_sender_id" id="hidden_user_sender_id" value="{{ auth()->user()->id }}">
+                                <input name="message" id="chat_input_message" class="form-control type_msg" placeholder="Escreve a tua mensagem…" 
+                                {{ $users_are_blocked ? 'disabled' : '' }}/>
+                                <div class="input-group-append">
+                                    <span class="input-group-text {{ $users_are_blocked ? '' : 'send_btn' }}"><i class="fas fa-location-arrow"></i></span>
+                                </div>
                             </div>
-                            <input name="" class="form-control type_msg" placeholder="Escreve a tua mensagem…" />
-                            <div class="input-group-append">
-                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="new_message_clone" hidden>
+        <div class="d-flex justify-content-end mb-4">
+            <div class="msg_cotainer_send">
+                {{-- New Message HERE --}}
+                <span class="msg_time_send notification_time_ago">
+                    Agora mesmo
+                </span>
+            </div>
+            <div class="img_cont_msg">
+                <img src="{{ auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                class="rounded-circle user_img_msg">
+            </div>
+        </div>
+    </div>
+
 </section>
+
+{{-- New Message partial --}}
+@include('users.chat-partials.new-chat-modal', ['users_without_chats' => $users_without_chats])
+
 <!-- ============================ Find Courses with Sidebar End ================================== -->
 
 @stop
@@ -239,126 +219,54 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script>
-
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https'))}}"></script>
 
     <script>
 
         $(function() {
 
-            $('#action_menu_btn').click(function(){
-                $('.action_menu').toggle();
+            var chat_id = $('#hidden_chat_id').val();
+
+            $('body').addClass('chat_body');
+
+            // Force chat to scroll down
+            function scrollMessageBodyDown(){
+                var msgCardBody = $('.msg_card_body');
+                $(msgCardBody).scrollTop($(msgCardBody)[0].scrollHeight);
+            }
+            scrollMessageBodyDown();
+
+            $('#select_users_for_new_chat').select2({
+                placeholder: 'Pesquisar',
+                templateResult: formatState,
+                templateSelection: formatState
             });
 
-            // Change icon image on tab change
-            changeIconImage();
-            function changeIconImage(){
-                $('#classroom_exercises_tabs a.nav-link').each(function(index, element){
-                    if($(element).hasClass('active')){
-                        $(element).find('.white_icon').show();
-                        $(element).find('.black_icon').hide();
+            function formatState (opt) {
+                if (!opt.id) {
+                    return opt.text;
+                } 
+                var optimage = $(opt.element).attr('data-image'); 
+                if(!optimage){
+                    return opt.text;
+                }
+                else {                    
+                    var $opt = $(
+                    '<span><img class="rounded-circle user_img mr-2" src="' + optimage + '" /> ' + opt.text + '</span>'
+                    );
+                    return $opt;
+                }
+            };
+
+            $(document).on('click', '.action_menu_btn',function(){
+                $(this).next('.action_menu').toggle();
+                if($(this).hasClass('user_action_menu_btn')){
+                    if($(this).next('.action_menu').hasClass('d-block')){
+                        $(this).next('.action_menu').removeClass('d-block');
                     }
                     else{
-                        $(element).find('.white_icon').hide();
-                        $(element).find('.black_icon').show();
+                        $(this).next('.action_menu').addClass('d-block');
                     }
-                });
-            }
-
-            $(document).on('click', '#classroom_exercises_tabs a.nav-link', function(){
-                changeIconImage();
-            });
-
-            // Change right side info_accordion icon
-            changeAccordionInfoIcon($('.info_accordion a'));
-            function changeAccordionInfoIcon(selector){
-                if($(selector).hasClass('collapsed')){
-                    $(selector).find('.show_info_button').show();
-                    $(selector).find('.hide_info_button').hide();
                 }
-                else{
-                    $(selector).find('.show_info_button').hide();
-                    $(selector).find('.hide_info_button').show();
-                }
-            }
-
-            $(document).on('click', '.info_accordion a', function(){
-                changeAccordionInfoIcon($(this));
-            });
-
-            $('#exercise_template').select2({
-                placeholder: "Escolher exercício"
-            });
-
-            $('#categories').select2({
-                placeholder: "Escolher categoria"
-            });
-
-            $('#levels').select2({
-                placeholder: "Escolher Nível"
-            });
-
-            $('#class_select').select2();
-            $('#student_select').select2();
-
-            $('#fill_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#interruption_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#verbs_select_1').select2();
-
-            $('#verbs_select_2').select2();
-
-            $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-                    $(element).removeClass('show');
-                    $(element).removeClass('active');
-                });
-
-                var this_id = $(this).attr('id');
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-
-                    if($(element).attr('aria-labelledby') == this_id){
-                        $(element).addClass('fade');
-                        $(element).addClass('show');
-                        $(element).addClass('active');
-
-                        if($(element).attr('id') == 'listening'){
-                            $('#perform_listening_tabs .nav-link:first').trigger('click');
-                        }
-
-                        if($(element).attr('id') == 'listening-shop'){
-                            $('#perform_listening_shop_tabs .nav-link:first').trigger('click');
-                        }
-                    }
-                });
-            });
-
-            function expandCollapseAccordion(selector){
-                if(!$(selector).hasClass('expanded')){
-                    $(selector).addClass('expanded');
-                    $(selector).find('span').text('Ocultar');
-                    $(selector).find('img.expand_chevron').hide();
-                    $(selector).find('img.collapse_chevron').show();
-                }
-                else{
-                    $(selector).removeClass('expanded');
-                    $(selector).find('span').text('Expandir');
-                    $(selector).find('img.expand_chevron').show();
-                    $(selector).find('img.collapse_chevron').hide();
-                }
-            }
-
-            $(document).on('click', '.expand_accordion', function(){
-                expandCollapseAccordion($(this));
             });
 
             function changeDotsIcons(selector){
@@ -368,36 +276,221 @@
                 }
             }
 
-            $('#action_menu_btn').on('click', function(){
-                $('#action_menu_btn').find('img.filled_dots').removeClass('d-block').hide();
-                $('#action_menu_btn').find('img.empty_dots').addClass('d-block');
+            $('.action_menu_btn').on('click', function(){
+                $('.action_menu_btn').find('img.filled_dots').removeClass('d-block').hide();
+                $('.action_menu_btn').find('img.empty_dots').addClass('d-block');
                 changeDotsIcons(this);
             });
 
             $('html, body').on('click', function(e){
                 if (!$(e.target).hasClass('empty_dots') || $(e.target).hasClass('colleagues_options')) {
-                    $('#action_menu_btn').find('img.filled_dots').removeClass('d-block').hide();
-                    $('#action_menu_btn').find('img.empty_dots').addClass('d-block');
+                    $('.action_menu_btn').find('img.filled_dots').removeClass('d-block').hide();
+                    $('.action_menu_btn').find('img.empty_dots').addClass('d-block');
+                    $('.action_menu').hide();
+                }
+                if(!$(e.target).hasClass('user_img_msg')){
+                    $('.action_menu.user_action_menu.d-block').each(function(index, element){
+                        $(element).removeClass('d-block');
+                    });
+                }
+                // console.log($(e.target).attr('class'));
+                // $('.action_menu.user_action_menu.d-block').each(function(index, element){
+                //     $(element).removeClass('d-block');
+                // });
+            });
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('input[name="_token"]').attr("value")
                 }
             });
 
-            // Select All Classes or Just one
-            changeClass('#class_select');
-            function changeClass(selector){
-                // All Classes
-                if($(selector).val() == 1){
-                    $('p.all_classes').show();
-                    $('p.one_class').hide();
-                }
-                // Single Class
-                else{
-                    $('p.all_classes').hide();
-                    $('p.one_class').show();
+            function sendMessage(){
+                var message = $('#chat_input_message').val();
+
+                if(message){
+                    var form_array = $("#chat_message_form").serialize();
+                    pasteNewMessage(message);
+                    $('#chat_input_message').val('');
+                    $.ajax({
+                        type: "POST",
+                        url: '/chat/message',
+                        data: form_array,
+                        success: function(response) {
+                            if(response && response.status == 'success'){
+
+                                // $(".successMsg").text(response.message);
+                                // $(".successMsg").fadeIn();
+                                // setTimeout(() => {
+                                //     $(".successMsg").fadeOut();
+                                // }, 5000);
+                                
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
                 }
             }
-            $(document).on('change', '#class_select', function(){
-                changeClass($(this));
-            })
+
+            function getMessages(){
+                $.ajax({
+                    type: "GET",
+                    url: '/chat/messages/' + chat_id,
+                    success: function(response) {
+                        if(response && response.status == 'success'){
+                            $(".msg_card_body").html(response.html);
+                            // scrollMessageBodyDown();
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            }
+
+            function pasteNewMessage(new_message){
+                var last_message = $('.msg_card_body').children().last();
+                var html = $('.new_message_clone').children().clone();
+
+                // Previous message - same user
+                if(last_message.hasClass('justify-content-end')){
+                    last_message.removeClass('mb-4').addClass('mb-1');
+                    last_message.find('.msg_time_send').remove();
+                    last_message.find('.img_cont_msg').empty();
+
+                    html.find('.msg_cotainer_send').addClass('border-not-first-message');
+                    html.find('.msg_cotainer_send .msg_time_send').before(new_message);
+                }
+                // First message ever (Ainda não falou com AdrianoStudent. Comece já a escrever!) - removal
+                else if(last_message.hasClass('justify-content-center')){
+                    html.find('.msg_cotainer_send .msg_time_send').before(new_message);
+                    $(last_message).after(html);
+                    last_message.remove();
+                    return false;
+                }
+                // Previous message - other user
+                else{
+                    html.find('.msg_cotainer_send .msg_time_send').before(new_message);
+                }
+
+                $(last_message).after(html);
+                scrollMessageBodyDown();
+            }
+
+            $(document).on('click', 'span.send_btn', function(e){
+                sendMessage();
+            });
+
+            $('#chat_input_message').keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    $('span.send_btn').click();
+                    return false;  
+                }
+            });
+
+            // New Message - individual AND group
+            $(document).on('click', '.write_new_message_to', function(e){
+                e.preventDefault();
+                var user_ids_for_new_chat = $('#select_users_for_new_chat').val();
+
+                // Individual Chat
+                if(user_ids_for_new_chat.length == 1){
+                    window.location = '/chat/' + user_ids_for_new_chat[0];
+                }
+                // Group Chat
+                else if(user_ids_for_new_chat.length > 1){
+                    $.ajax({
+                        type: 'GET',
+                        url: '/chat_de_grupo',
+                        data: {group_chat_user_ids: user_ids_for_new_chat},
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                window.location = '/chat_de_grupo/' + response.chat_id;
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Filter Chat Users
+            $(document).on('click', '.search_btn', function(e){
+                var search_username = $('#filter_chat_users').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/chat_search_users',
+                    data: {search_username: search_username, chat_id: chat_id},
+                    success: function(response) {
+                        if(response && response.status == 'success'){
+                            $(".contacts_body").html(response.html);
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+
+            $('#filter_chat_users').keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    $('.search_btn').click();
+                    return false;  
+                }
+            });
+
+            $('#filter_chat_users').keyup(function (e) {
+                var search_username = $('#filter_chat_users').val();
+                if(search_username.length == 0 || search_username.length > 2){
+                    $.ajax({
+                        type: 'GET',
+                        url: '/chat_search_users',
+                        data: {search_username: search_username, chat_id: chat_id},
+                        success: function(response) {
+                            if(response && response.status == 'success'){
+                                $(".contacts_body").html(response.html);
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+                
+            });
+
+
+            // Update message every 10 seconds
+            setInterval(() => {
+                getMessages();
+            }, 15000);
 
         });
 

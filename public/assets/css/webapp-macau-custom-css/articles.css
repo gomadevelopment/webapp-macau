@@ -765,6 +765,10 @@ a[class^="show_less_"] .triangle-up {
     border: 2px solid #e6ebf1;
 }
 
+.select2-container--open .select2-dropdown--below {
+    border: 2px solid #ff2850;
+}
+
 .form-group input.form-control:focus,
 .form-group textarea.form-control:focus,
 .shop_grid.save_article_card input:not(.select2-search__field):focus {
@@ -779,6 +783,10 @@ a[class^="show_less_"] .triangle-up {
 .select2.select2-container.select2-container--default:focus {
     border-radius: 5px;
     border: 2px solid #ff2850;
+}
+
+.select2_with_search:focus {
+    border: 2px solid #ff2850 !important;
 }
 
 .select2_with_search .select2.select2-container.select2-container--default,

@@ -28,6 +28,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/logout', 'Auth\AuthController@logout');
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
 
+        // Articles
         Route::get('/artigos', 'ArticlesController@index');
         Route::get('/artigos/detalhe/{id}', 'ArticlesController@details');
         Route::get('/artigos/criar', 'ArticlesController@save');
@@ -40,6 +41,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/artigos/get_article_poster/{id}', 'ArticlesController@getArticlePoster');
         Route::get('/artigos/get_article_medias/{id}', 'ArticlesController@getArticleMedias');
 
+        // Exercises
         Route::get('/exercicios', 'ExercisesController@index');
         Route::get('/exercicios/criar', 'ExercisesController@save');
         Route::post('/exercicios/criar', 'ExercisesController@savePost');
@@ -54,16 +56,23 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/exercicios/realizar', 'ExercisesController@performExercise'); // Adicionar {id}
         Route::post('/exercicios/realizar', 'ExercisesController@performPostExercise'); // Adicionar {id}
 
+        // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');
-
         
-        
+        // Users Profile
         Route::get('/perfil/{id}', 'UsersController@index_profile');
         Route::get('/perfil/editar/{id}', 'UsersController@edit_profile'); // Adicionar {id}
         Route::post('/perfil/editar/{id}', 'UsersController@editPost_profile'); // Adicionar {id}
         Route::post('/replace_user_avatar', 'UsersController@replaceUserAvatar');
 
-        Route::get('/chat', 'UsersController@chat');
+        // Chat
+        Route::get('/chat/{id}', 'ChatController@getChat');
+        Route::get('/chat_de_grupo', 'ChatController@getGroupChat');
+        Route::get('/chat_de_grupo/{id}', 'ChatController@redirectToGroupChat');
+        Route::post('/chat/message', 'ChatController@postChatMessage');
+        Route::get('/chat/messages/{id}', 'ChatController@getChatMessages'); // id = chat_id
+        Route::get('/chat_search_users', 'ChatController@searchUsers');
+        Route::get('/block_user/{id}', 'UsersController@blockUser'); // id = chat_id
 
     });
 });
