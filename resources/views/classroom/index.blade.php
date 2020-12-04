@@ -168,7 +168,7 @@
                                         </div>
                                     @else
                                         <div class="dropdown-menu message-box">
-                                            <a class="msg-title" href="/chat">
+                                        <a class="msg-title class_group_chat" href="#" data-users-array-ids="@foreach($colleagues as $colleague){{ !$loop->last ? $colleague->id . ',' : $colleague->id . '' }}@endforeach">
                                                 <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                 Iniciar Conversa de Turma
                                             </a>
@@ -181,125 +181,31 @@
                         
                         <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0">
 
-                            <div class="form-group d-flex flex-wrap mb-4">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-                                <h4 class="colleagues_name m-0">Miguel Rodrigues</h4>
-                                <div class="dropdown ml-auto align-self-center student_dropdown">
-                                    <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="/perfil">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
+                            @foreach ($colleagues as $colleague)
+                                <div class="form-group d-flex flex-wrap mb-4">
+                                    <img src="{{ $colleague->avatar_url ? '/webapp-macau-storage/avatars/'.$colleague->id.'/'.$colleague->avatar_url : 'https://via.placeholder.com/500x500'}}" alt="" class="colleagues_round_avatar mr-3">
+                                    <h4 class="colleagues_name m-0">{{ $colleague->username }}</h4>
+                                    <div class="dropdown ml-auto align-self-center student_dropdown">
+                                        <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="ping"></span>
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                                            <span class="dropdown-menu-arrow"></span>
                                         </a>
-                                        <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="/chat">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Iniciar Conversa
-                                        </a>
+                                        <div class="dropdown-menu message-box">
+                                            <a class="msg-title" href="/perfil/{{ $colleague->id }}">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
+                                            </a>
+                                            <hr class="mt-0 mb-2 ml-2 mr-2">
+                                            <a class="msg-title" href="/chat/{{ $colleague->id }}">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                Iniciar Conversa
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group d-flex flex-wrap mb-4">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-                                <h4 class="colleagues_name m-0">Luis Marques</h4>
-                                <div class="dropdown ml-auto align-self-center student_dropdown">
-                                    <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="/perfil">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
-                                        </a>
-                                        <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="/chat">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Iniciar Conversa
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex flex-wrap mb-4">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-                                <h4 class="colleagues_name m-0">Luísa Nunes</h4>
-                                <div class="dropdown ml-auto align-self-center student_dropdown">
-                                    <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="/perfil">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
-                                        </a>
-                                        <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="/chat">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Iniciar Conversa
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex flex-wrap mb-4">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-                                <h4 class="colleagues_name m-0">Rui Carapinha</h4>
-                                <div class="dropdown ml-auto align-self-center student_dropdown">
-                                    <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="/perfil">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
-                                        </a>
-                                        <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="/chat">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Iniciar Conversa
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group d-flex flex-wrap mb-4">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-                                <h4 class="colleagues_name m-0">Maria Ribeiro</h4>
-                                <div class="dropdown ml-auto align-self-center student_dropdown">
-                                    <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="ping"></span>
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    <div class="dropdown-menu message-box">
-                                        <a class="msg-title" href="/perfil">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
-                                        </a>
-                                        <hr class="mt-0 mb-2 ml-2 mr-2">
-                                        <a class="msg-title" href="/chat">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                            Iniciar Conversa
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
 
                             <hr>
 
@@ -536,23 +442,32 @@
 
     <script>
 
-        // CKEDITOR.replace( 'intro_text' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'statement' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_visual_description' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_transcription' , {
-        //     language: 'pt'
-        // });
-
         $(function() {
+
+            // GROUP CHAT
+            $(document).on('click', '.class_group_chat', function(e){
+                e.preventDefault();
+                var group_chat_user_ids = $(this).attr('data-users-array-ids').split(',');
+                console.log(group_chat_user_ids);
+                $.ajax({
+                    type: 'GET',
+                    url: '/chat_de_grupo',
+                    data: {group_chat_user_ids: group_chat_user_ids},
+                    success: function(response){
+                        if(response && response.status == 'success'){
+                            window.location = '/chat_de_grupo/' + response.chat_id;
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+
             // Change icon image on tab change
             changeIconImage();
             function changeIconImage(){
