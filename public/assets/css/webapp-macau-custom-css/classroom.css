@@ -2,19 +2,15 @@
 
 .classroom .user_round_avatar,
 .classroom .colleagues_round_avatar {
-    max-width: 120px;
-    max-height: 120px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     float: left;
 }
 
-.classroom .user_round_avatar {
-    min-width: 120px;
-    min-height: 120px;
-}
-
 .classroom .colleagues_round_avatar {
-    max-width: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .classroom .edit_profile,
@@ -296,19 +292,20 @@ html {
 }
 
 .user_img {
-    max-width: 50px;
+    width: 50px;
     height: 50px;
+    background-color: white;
 }
 
 .user_img.group_white_border_first {
-    max-width: 52px;
+    width: 52px;
     height: 52px;
     border: 3px solid white;
 }
 
 .user_img.group_white_border,
 .chat_more_users_circle {
-    max-width: 52px;
+    width: 52px;
     height: 52px;
     border: 3px solid white;
     position: absolute;
@@ -552,6 +549,7 @@ html {
     padding: 5px 10px;
     border-radius: 6px;
     position: relative;
+    width: max-content;
     z-index: 5;
     top: -35px;
     /* right: 20px; */

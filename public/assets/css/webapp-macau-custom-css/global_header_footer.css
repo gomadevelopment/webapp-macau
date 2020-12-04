@@ -270,7 +270,8 @@ span.error-block-span.pink {
 }
 
 .nav-menu .user_avatar a img {
-    max-width: 42px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     margin-right: 10px;
 }
