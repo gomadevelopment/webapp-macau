@@ -6,6 +6,7 @@
     height: 120px;
     border-radius: 50%;
     float: left;
+    background-color: white;
 }
 
 .classroom .colleagues_round_avatar {
@@ -322,6 +323,7 @@ html {
 .user_img_msg {
     height: 40px;
     width: 40px;
+    background-color: white;
 }
 
 .chat_more_users_circle {
