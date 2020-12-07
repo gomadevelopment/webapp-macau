@@ -476,9 +476,6 @@
                                     $(".errorMsg").fadeOut();
                                 }, 2000);
                             }
-                        },
-                        fail: function (data) {
-                            alert(data.fail);
                         }
                     });
                 }, 50);

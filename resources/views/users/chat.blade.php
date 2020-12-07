@@ -236,7 +236,7 @@
             scrollMessageBodyDown();
 
             $('#select_users_for_new_chat').select2({
-                placeholder: 'Pesquisar',
+                placeholder: 'Pesquisar...',
                 templateResult: formatState,
                 templateSelection: formatState
             });

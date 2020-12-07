@@ -13,8 +13,15 @@
 <!-- ============================ Find Courses with Sidebar ================================== -->
 <section class="page-title classroom">
     <div class="container">
-        
+        <div class="alert alert-success successMsg" style="display:none;" role="alert">
+
+        </div>
+
+        <div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+        </div>
         <div class="row">
+            
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="row">
                     {{-- My Profile --}}
@@ -26,10 +33,10 @@
                             <div class="form-group d-flex flex-wrap justify-content-center m-0">
                                 <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
                                 <h4 class="sg_rate_title align-self-center m-0">
-                                    João Paulo
+                                    {{ auth()->user()->username }}
                                     <div class="d-flex flex-row user_options">
                                         <p class="exercise_author align-self-center">
-                                            <a href="/perfil/editar" class="edit_profile">Editar</a>
+                                            <a href="/perfil/editar/{{ auth()->user()->id }}" class="edit_profile">Editar</a>
                                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                                 <a href="#" class="edit_profile">Definições do Sistema</a>
                                             @endif
@@ -132,95 +139,65 @@
                                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                     <div class="form-group mb-0 mr-2 w-100">
                                         <div class="select2_with_search" style="border-radius: 5px;">
-                                            <select name="student_select" id="student_select" class="form-control" style="border: none;">
-                                                <option value="1">Todos</option>
-                                                <option value="2">Turma A</option>
-                                                <option value="3">Turma B</option>
-                                                <option value="4">Turma C</option>
-                                                <option value="5">Turma D</option>
+                                            <select name="students_class_select" id="students_class_select" class="form-control" style="border: none;">
+                                                <option value="0">Todos</option>
+                                                @foreach (auth()->user()->classes as $class)
+                                                    <option value="{{ $class->id }}">Turma {{ $class->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 @endif
                                 
-                                <div class="dropdown student_options_dropdown">
-                                    <a href="#" class="colleagues_options float-right messages" data-toggle="dropdown">
-                                        <span class="ping"></span>
-                                        Opções
-                                        <span class="dropdown-menu-arrow"></span>
-                                    </a>
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                        <div class="dropdown-menu message-box">
-                                            <a class="msg-title" href="#">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
-                                                Encontrar Alunos
-                                            </a>
-                                            <hr class="mt-0 mb-2 ml-2 mr-2">
-                                            <a class="msg-title" href="#">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                Desempenho da Turma
-                                            </a>
-                                            <hr class="mt-0 mb-2 ml-2 mr-2">
-                                            <a class="msg-title" href="/chat">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                Iniciar Conversa
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div class="dropdown-menu message-box">
-                                        <a class="msg-title class_group_chat" href="#" data-users-array-ids="@foreach($colleagues as $colleague){{ !$loop->last ? $colleague->id . ',' : $colleague->id . '' }}@endforeach">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                Iniciar Conversa de Turma
-                                            </a>
-                                        </div>
-                                    @endif
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0">
-
-                            @foreach ($colleagues as $colleague)
-                                <div class="form-group d-flex flex-wrap mb-4">
-                                    <img src="{{ $colleague->avatar_url ? '/webapp-macau-storage/avatars/'.$colleague->id.'/'.$colleague->avatar_url : 'https://via.placeholder.com/500x500'}}" alt="" class="colleagues_round_avatar mr-3">
-                                    <h4 class="colleagues_name m-0">{{ $colleague->username }}</h4>
-                                    <div class="dropdown ml-auto align-self-center student_dropdown">
-                                        <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
+                                @if (
+                                (auth()->user()->user_role_id == 3 
+                                && auth()->user()->student_class_user 
+                                && auth()->user()->getStudentColleagues(auth()->user()->student_class_user->student_class->id)->count()) 
+                                || 
+                                (auth()->user()->user_role_id != 3 
+                                && auth()->user()->getProfessorStudents())
+                                )
+                                    <div class="dropdown student_options_dropdown">
+                                        <a href="#" class="colleagues_options float-right messages" data-toggle="dropdown">
                                             <span class="ping"></span>
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                                            Opções
                                             <span class="dropdown-menu-arrow"></span>
                                         </a>
-                                        <div class="dropdown-menu message-box">
-                                            <a class="msg-title" href="/perfil/{{ $colleague->id }}">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
-                                            </a>
-                                            <hr class="mt-0 mb-2 ml-2 mr-2">
-                                            <a class="msg-title" href="/chat/{{ $colleague->id }}">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                Iniciar Conversa
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                            <hr>
-
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <a href="#" class="notifications_see_all">
                                         @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                            Ver todos os Alunos
+                                            <div class="dropdown-menu message-box">
+                                                <a class="msg-title" href="#">
+                                                    <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
+                                                    Encontrar Alunos
+                                                </a>
+                                                <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                <a class="msg-title" href="#">
+                                                    <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                    Desempenho da Turma
+                                                </a>
+                                                <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                <a class="msg-title professor_class_group_chat" href="#">
+                                                    <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                    Iniciar Conversa
+                                                </a>
+                                            </div>
                                         @else
-                                            Mostrar todos os Colegas
+                                        @if (auth()->user()->student_class_user)
+                                            <div class="dropdown-menu message-box">
+                                                <a class="msg-title student_class_group_chat" href="#" data-student-class-id="{{ auth()->user()->student_class_user->student_class_id }}">
+                                                    <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                    Iniciar Conversa de Turma
+                                                </a>
+                                            </div>
                                         @endif
-                                    </a>
-                                </div>
+                                            
+                                        @endif
+                                        
+                                    </div>
+                                @endif
                             </div>
-                            
+                        </div>
+                        <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0 students_colleagues">
+                            @include('classroom.classroom-partials.students-colleagues-partial')
                         </div>
                     </div>
 
@@ -284,12 +261,11 @@
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <div class="select2_with_search" style="border-radius: 5px;">
-                                            <select name="class_select" id="class_select" class="form-control" style="border: none;">
-                                                <option value="1">Todas as Turmas</option>
-                                                <option value="2">Turma A</option>
-                                                <option value="3">Turma B</option>
-                                                <option value="4">Turma C</option>
-                                                <option value="5">Turma D</option>
+                                            <select name="exercises_class_select" id="exercises_class_select" class="form-control" style="border: none;">
+                                                <option value="0">Todas as Turmas</option>
+                                                @foreach (auth()->user()->classes as $class)
+                                                    <option value="{{ $class->id }}">Turma {{ $class->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -445,14 +421,20 @@
         $(function() {
 
             // GROUP CHAT
-            $(document).on('click', '.class_group_chat', function(e){
+            $(document).on('click', '.student_class_group_chat, .professor_class_group_chat', function(e){
                 e.preventDefault();
-                var group_chat_user_ids = $(this).attr('data-users-array-ids').split(',');
-                console.log(group_chat_user_ids);
+                var class_id = null;
+                if($(this).hasClass('professor_class_group_chat')){
+                    class_id = $('#students_class_select').val();
+                }
+                else if($(this).hasClass('student_class_group_chat')){
+                    class_id = $(this).attr('data-student-class-id');
+                }
+                // var group_chat_user_ids = $(this).attr('data-users-array-ids').split(',');
                 $.ajax({
                     type: 'GET',
                     url: '/chat_de_grupo',
-                    data: {group_chat_user_ids: group_chat_user_ids},
+                    data: {class_id: class_id},
                     success: function(response){
                         if(response && response.status == 'success'){
                             window.location = '/chat_de_grupo/' + response.chat_id;
@@ -516,137 +498,8 @@
                 placeholder: "Escolher Nível"
             });
 
-            $('#class_select').select2();
-            $('#student_select').select2();
-
-            $('#fill_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#interruption_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#verbs_select_1').select2();
-
-            $('#verbs_select_2').select2();
-
-            // DRAG AND DROP
-            var $draggedItem;
-
-            $('.drag_and_drop_item').on('dragstart', dragging);
-            $('.drag_and_drop_item').on('dragend', draggingEnded);
-
-            $('.drag_and_drop_hole').on('dragenter', preventDefault);
-            $('.drag_and_drop_hole').on('dragover', preventDefault);
-            $('.drag_and_drop_hole').on('drop', dropItem);
-
-            function dragging(e) {
-                $(e.target).addClass('dragging');
-                $draggedItem = $(e.target);
-            }
-
-            function draggingEnded(e) {
-                $(e.target).removeClass('dragging');
-            }
-
-            function preventDefault(e) {
-                e.preventDefault();
-            }
-
-            function dropItem(e) {
-                var hole = $(e.target);
-                if (hole.hasClass('drag_and_drop_hole') && hole.children().length === 0) {
-                    $draggedItem.detach();
-                    $draggedItem.appendTo(hole);
-                    if(hole.hasClass('origin_hole')){
-                        $draggedItem.removeClass('item_dragged');
-                    }
-                    else{
-                        $draggedItem.addClass('item_dragged');
-                    }
-                }
-            }
-
-            //Global:
-            var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
-
-            //Switcher function:
-            $(".rb-tab").click(function(){
-                //Spot switcher:
-                $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
-                $(this).addClass("rb-tab-active");
-            });
-
-            //Save data:
-            $(".trigger").click(function(){
-                //Empty array:
-                survey = [];
-                //Push data:
-                for (i=1; i<=$(".rb").length; i++) {
-                    var rb = "rb" + i;
-                    var rbValue = parseInt($("#rb-"+i).find(".rb-tab-active").attr("data-value"));
-                    //Bidimensional array push:
-                    survey.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
-                };
-                //Debug:
-                debug();
-            });
-
-            //Debug:
-            function debug(){
-                var debug = "";
-                for (i=0; i<survey.length; i++) {
-                    debug += "Nº " + survey[i][0] + " = " + survey[i][1] + "\n";
-                };
-                alert(debug);
-            };
-
-            $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-                    $(element).removeClass('show');
-                    $(element).removeClass('active');
-                });
-
-                var this_id = $(this).attr('id');
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-
-                    if($(element).attr('aria-labelledby') == this_id){
-                        $(element).addClass('fade');
-                        $(element).addClass('show');
-                        $(element).addClass('active');
-
-                        if($(element).attr('id') == 'listening'){
-                            $('#perform_listening_tabs .nav-link:first').trigger('click');
-                        }
-
-                        if($(element).attr('id') == 'listening-shop'){
-                            $('#perform_listening_shop_tabs .nav-link:first').trigger('click');
-                        }
-                    }
-                });
-            });
-
-            function expandCollapseAccordion(selector){
-                if(!$(selector).hasClass('expanded')){
-                    $(selector).addClass('expanded');
-                    $(selector).find('span').text('Ocultar');
-                    $(selector).find('img.expand_chevron').hide();
-                    $(selector).find('img.collapse_chevron').show();
-                }
-                else{
-                    $(selector).removeClass('expanded');
-                    $(selector).find('span').text('Expandir');
-                    $(selector).find('img.expand_chevron').show();
-                    $(selector).find('img.collapse_chevron').hide();
-                }
-            }
-
-            $(document).on('click', '.expand_accordion', function(){
-                expandCollapseAccordion($(this));
-            });
+            $('#exercises_class_select').select2();
+            $('#students_class_select').select2();
 
             function changeDotsIcons(selector){
                 if(!$(selector).parent().hasClass('show')){
@@ -669,7 +522,7 @@
             });
 
             // Select All Classes or Just one
-            changeClass('#class_select');
+            changeClass('#exercises_class_select');
             function changeClass(selector){
                 // All Classes
                 if($(selector).val() == 1){
@@ -682,9 +535,40 @@
                     $('p.one_class').show();
                 }
             }
-            $(document).on('change', '#class_select', function(){
+
+            $(document).on('change', '#exercises_class_select', function(){
                 changeClass($(this));
-            })
+            });
+
+            // Choose class to display students (left side "Alunos")
+            $(document).on('change', '#students_class_select', function(e){
+                // e.preventDefault();
+                console.log($(this).val());
+                var class_id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/students_class_select/' + class_id,
+                    success: function(response){
+                        if(response && response.status == 'success'){
+                            $('.students_colleagues').html(response.html);
+                            // $(".successMsg").text(response.message);
+                            // $(".successMsg").fadeIn();
+                            // setTimeout(() => {
+                            //     $(".successMsg").fadeOut();
+                            // }, 5000);
+                        }
+                        else{
+                            // $('.class_name_error').text(response.message);
+                            // $('.class_name_error').removeAttr('hidden');
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
 
         });
 

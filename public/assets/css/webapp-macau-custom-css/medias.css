@@ -176,6 +176,12 @@
         margin-left: 0;
     }
 
+    #chat_new_message_modal .modal-body,
+    #new_create_class_modal .modal-body,
+    #new_insert_student_modal .modal-body {
+        position: relative;
+    }
+
     #login .scene3_svg {
         margin-top: 550px;
         margin-left: 50px;

@@ -96,6 +96,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Article Favorites pivot
+     */
+    public function article_favorite() {
+        return $this->belongsToMany(
+            'App\Article', 
+            'article_favorites', 
+            'user_id', 
+            'article_id'
+        );
+    }
+
+    /**
      * Chat User 1
      */
     public function chat_user_1()
@@ -117,6 +129,22 @@ class User extends Authenticatable
     public function chat_users()
     {
         return $this->hasMany('App\ChatUser', 'user_id');
+    }
+
+    /**
+     * Classes
+     */
+    public function classes()
+    {
+        return $this->hasMany('App\StudentClass', 'teacher_id');
+    }
+
+    /**
+     * Student Class
+     */
+    public function student_class_user()
+    {
+        return $this->hasOne('App\StudentClassUser', 'user_id');
     }
 
     /**
@@ -165,6 +193,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns all users that present user has NOT a chat created with
+     */
+    public static function usersWithOutClass()
+    {
+        $all_users_with_class_ids = StudentClassUser::get()->pluck('user_id')->toArray();
+        array_unique($all_users_with_class_ids);
+
+        return self::whereNotIn('id', $all_users_with_class_ids)->where('user_role_id', 3)->get();
+    }
+
+    /**
      * User Block
      */
     public function user_block()
@@ -210,15 +249,35 @@ class User extends Authenticatable
     }
 
     /**
-     * Article Favorites pivot
+     * Get Student Colleagues
      */
-    public function article_favorite() {
-        return $this->belongsToMany(
-            'App\Article', 
-            'article_favorites', 
-            'user_id', 
-            'article_id'
-        );
+    public function getStudentColleagues($class_id)
+    {
+        $students_ids = [];
+        $students_ids = StudentClass::find($class_id)->students->pluck('id')->toArray();
+        if(($key = array_search(auth()->user()->id, $students_ids)) !== false) {
+            unset($students_ids[$key]);
+        }
+
+        return User::whereIn('id', $students_ids)->get();
+    }
+
+    /**
+     * Get Professor Students by class
+     */
+    public function getProfessorStudents($class_id = null)
+    {
+        $students_ids = [];
+        if(!$class_id){
+            foreach($this->classes as $class){
+                $students_ids = array_merge($students_ids, $class->students->pluck('id')->toArray());
+            }
+        }
+        else{
+            $students_ids = StudentClass::find($class_id)->students->pluck('id')->toArray();
+        }
+
+        return User::whereIn('id', $students_ids)->get();
     }
 
     public function saveEditProfile($inputs)
