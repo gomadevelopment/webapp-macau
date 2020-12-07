@@ -58,6 +58,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');
+        Route::get('/students_class_select/{id}', 'ClassroomController@studentsClassSelect');
         
         // Users Profile
         Route::get('/perfil/{id}', 'UsersController@index_profile');
@@ -73,6 +74,11 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/chat/messages/{id}', 'ChatController@getChatMessages'); // id = chat_id
         Route::get('/chat_search_users', 'ChatController@searchUsers');
         Route::get('/block_user/{id}', 'UsersController@blockUser'); // id = chat_id
+
+        // Classes
+        Route::post('/create_class', 'ClassesController@createClass');
+        Route::get('/insert_students_in_class', 'ClassesController@insertStudentsInClass');
+        Route::get('/remove_student_from_class/{id}', 'ClassesController@removeStudentFromClass'); // id = student_id
 
     });
 });

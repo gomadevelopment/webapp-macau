@@ -8,7 +8,8 @@ use App\Chat,
     App\ChatMessage,
     App\ChatUser,
     App\UserBlocked,
-    App\User;
+    App\User,
+    App\StudentClass;
 
 use DB;
 
@@ -28,7 +29,6 @@ class ChatController extends Controller
             }
 
         } catch (\Exception $e) {
-            // dd($e);
             return redirect()
                 ->back()
                 ->withInput()
@@ -45,8 +45,40 @@ class ChatController extends Controller
 
     public function getGroupChat()
     {
-        $data = request()->only('group_chat_user_ids');
-        $chatExists = Chat::groupChatExists($data['group_chat_user_ids']);
+        $data = request()->only('group_chat_user_ids', 'class_id');
+        
+        if(isset($data['class_id'])){
+            // Professor/Student - specific class
+            if($data['class_id'] != 0){
+                $class = StudentClass::find($data['class_id']);
+                if(!$class){
+                    return response()->json(['status' => 'error', 'message' => 'A turma seleccionada não foi encontrada. Por favor, tente de novo.'], 200);
+                }
+                $group_chat_user_ids[] = $class->teacher->id;
+                $group_chat_user_ids = array_merge($group_chat_user_ids, $class->students->pluck('id')->toArray());
+                if(($key = array_search(auth()->user()->id, $group_chat_user_ids)) !== false) {
+                    unset($group_chat_user_ids[$key]);
+                }
+            }
+            // Professor/Student - all student classes
+            else{
+                if(auth()->user()->user_role_id == 3){
+
+                }
+                else{
+                    $group_chat_user_ids = auth()->user()->getProfessorStudents()->pluck('id')->toArray();
+                }
+            }
+        }
+        else{
+            $group_chat_user_ids = isset($data['group_chat_user_ids']) ? $data['group_chat_user_ids'] : $data['class_id'];
+        }
+
+        if(empty($group_chat_user_ids)){
+            return response()->json(['status' => 'error', 'message' => 'A turma seleccionada ainda não tem alunos. Adicione alunos à turma antes de criar o chat de grupo.'], 200);
+        }
+
+        $chatExists = Chat::groupChatExists($group_chat_user_ids);
 
         try {
 
@@ -54,11 +86,10 @@ class ChatController extends Controller
                 $chat = $chatExists;
             }
             else{
-                $chat = Chat::createNewGroupChat($data['group_chat_user_ids']);
+                $chat = Chat::createNewGroupChat($group_chat_user_ids);
             }
 
         } catch (\Exception $e) {
-            // dd($e);
             return response()->json([
                     'status' => 'error',
                     'message' => 'Ocorreu um erro ao carregar o chat de grupo. Por favor, tente de novo!'
@@ -93,7 +124,6 @@ class ChatController extends Controller
             Chat::saveMessage($data);
 
         }catch (\Exception $e) {
-            // dd($e);
             DB::rollback();
             return response()->json([
                     'status' => 'error',
@@ -138,7 +168,6 @@ class ChatController extends Controller
             $html = $view->render();
             
         }catch (\Exception $e) {
-            // dd($e);
             request()->session()->flash('error', 'Ocorreu um erro ao atualizar as mensagens deste chat. Por favor, tente de novo!');
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao atualizar as mensagens deste chat. Por favor, tente de novo!'], 200);    
         }

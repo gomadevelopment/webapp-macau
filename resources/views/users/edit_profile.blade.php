@@ -10,14 +10,6 @@
 
 @section('content')
 
-<div class="alert alert-success successMsg" style="display:none;" role="alert">
-
-</div>
-
-<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
-
-</div>
-
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
     <div class="container">
@@ -29,7 +21,7 @@
                 </div>
 
                 <div class="exercise_time wrap float-right create_class_button" style="display: none;">
-                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
+                    <a href="#" data-toggle="modal" data-target="#new_create_class_modal"  class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Criar Turma
                     </a>
@@ -85,7 +77,8 @@
                     {{-- professor - CLASSES TAB --}}
                     @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                         <div class="tab-pane fade" id="classes" role="tabpanel" aria-labelledby="classes-tab">
-
+                            
+                            
                             @include('users.edit-tab-contents.edit_classes')
 
                         </div>
@@ -108,6 +101,18 @@
     </div>
 </section>
 
+{{-- MODALS --}}
+
+{{-- New Class Modal include --}}
+@include('users.edit-tab-contents.classes.new-class-modal')
+{{-- Insert Student in class Modal include --}}
+
+{{-- TO DO REFRESH NOT WORKING --}}
+<div class="modal fade" id="new_insert_student_modal" tabindex="-1" role="dialog" aria-labelledby="insert_student_modal" aria-hidden="true">
+    @include('users.edit-tab-contents.classes.insert-student-modal', ['students_without_class' => $students_without_class])
+</div>
+
+
 <input type="text" name="" id="hidden_user_id" value="{{ $user->id }}" hidden>
 
 <!-- ============================ Find Courses with Sidebar End ================================== -->
@@ -126,14 +131,49 @@
 
     <script>
 
-        $('#select_university').select2();
-
         $(function() {
+
+            $('body').addClass('chat_body');
+
+            $('#select_university').select2();
+
+            function updateSelectStudentsModal(){
+                $('#select_students_to_class').select2({
+                    placeholder: 'Pesquisar...',
+                    templateResult: formatState,
+                    templateSelection: formatState
+                });
+            }
+
+            $('#select_students_to_class').select2({
+                placeholder: 'Pesquisar...',
+                templateResult: formatState,
+                templateSelection: formatState
+            });
+
+            function formatState (opt) {
+                if (!opt.id) {
+                    return opt.text;
+                } 
+                var optimage = $(opt.element).attr('data-image'); 
+                if(!optimage){
+                    return opt.text;
+                }
+                else {                    
+                    var $opt = $(
+                    '<span><img class="rounded-circle user_img mr-2" src="' + optimage + '" /> ' + opt.text + '</span>'
+                    );
+                    return $opt;
+                }
+            };
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 }
             });
+
+            
 
             // Replace user_avatar_image
             $(document).on('click', '#replace_user_avatar', function(e){
@@ -250,6 +290,162 @@
                 if (!$(e.target).hasClass('empty_dots') || $(e.target).hasClass('colleagues_options')) {
                     $('.classes_student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
                     $('.classes_student_dropdown a').find('img.empty_dots').addClass('d-block');
+                }
+            });
+
+            // Create new class
+            $(document).on('click', '.create_new_class_button', function(e){
+                e.preventDefault();
+                var class_name = $('#class_name').val();
+                var user_id = $('#hidden_user_id').val();
+
+                // No class name filled
+                if(class_name.length == 0){
+                    $('.class_name_error').text('Preencha o nome da turma antes de submeter.');
+                    $('.class_name_error').removeAttr('hidden');
+                }
+                else{
+                    $.ajax({
+                        type: 'POST',
+                        url: '/create_class',
+                        data: {class_name: class_name},
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                $('#classes').html(response.html);
+                                $('#new_create_class_modal .mod-close').click();
+                                $(".successMsg").text(response.message);
+                                $(".successMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".successMsg").fadeOut();
+                                }, 5000);
+                            }
+                            else{
+                                $('.class_name_error').text(response.message);
+                                $('.class_name_error').removeAttr('hidden');
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+            });
+
+            var class_to_add_student_id = null;
+            $(document).on('click', '.insert_student_button_on_class_body', function(e){
+                e.preventDefault();
+                class_to_add_student_id = $(this).attr('data-class-id');
+            });
+
+            // Insert Students in class
+            $(document).on('click', '.insert_student_button', function(e){
+                e.preventDefault();
+                var class_id = class_to_add_student_id;
+                var student_ids_for_class = $('#select_students_to_class').val();
+
+                // Invalid class
+                if(!class_id){
+                    $('.select_students_to_class_error').text('Turma inválida. Por favor, atualize a página e tente de novo.');
+                    $('.select_students_to_class_error').removeAttr('hidden');
+                }
+
+                // No students selected
+                if(!student_ids_for_class){
+                    $('.select_students_to_class_error').text('Insira pelo menos um (1) aluno.');
+                    $('.select_students_to_class_error').removeAttr('hidden');
+                }
+                else{
+                    $.ajax({
+                        type: 'GET',
+                        url: '/insert_students_in_class',
+                        data: {class_id: class_id, student_ids_for_class: student_ids_for_class},
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                $('.unique_class_body.class_' + class_id).html(response.html);
+                                $('#new_insert_student_modal .mod-close').click();
+                                $('#new_insert_student_modal').html(response.html2);
+                                updateSelectStudentsModal();
+                                $('a[href="#collapse_class_' + class_id + '"]').click();
+                                $(".successMsg").text(response.message);
+                                $(".successMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".successMsg").fadeOut();
+                                }, 5000);
+                            }
+                            else{
+                                // $('.class_name_error').text(response.message);
+                                // $('.class_name_error').removeAttr('hidden');
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+            })
+
+            // Remove Student from class
+            $(document).on('click', '.remove_student_button', function(e){
+                e.preventDefault();
+                var student_id = $(this).attr('data-student-id');
+                var class_id = $(this).attr('data-class-id');
+
+                // Invalid class
+                if(!class_id){
+                    $(".errorMsg").text('Turma inválida. Por favor, atualize a página e tente de novo.');
+                    $(".errorMsg").fadeIn();
+                    setTimeout(() => {
+                        $(".errorMsg").fadeOut();
+                    }, 5000);
+                }
+                else{
+                    $.ajax({
+                        type: 'GET',
+                        url: '/remove_student_from_class/' + student_id,
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                $('.unique_class_body.class_' + class_id).html(response.html);
+                                $('#new_insert_student_modal').html(response.html2);
+                                updateSelectStudentsModal();
+                                $('a[href="#collapse_class_' + class_id + '"]').click();
+                                $(".successMsg").text(response.message);
+                                $(".successMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".successMsg").fadeOut();
+                                }, 5000);
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+                    
+
+            });
+
+            $('#class_name').keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    $('.create_new_class_button').click();
+                    return false;  
+                }
+            });
+            $('#select_students_to_class').keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    $('.insert_student_button').click();
+                    return false;  
                 }
             });
 

@@ -50,16 +50,10 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $universities = University::get();
+        $classes = auth()->user()->classes;
+        $students_without_class = User::usersWithOutClass();
 
-        return view('users.edit_profile', compact('user', 'universities'));
-    }
-    public function updateTest()
-    {
-        $users = User::get();
-        foreach($users as $user){
-            $user->password = bcrypt('123456');
-            $user->save();
-        }
+        return view('users.edit_profile', compact('user', 'universities', 'classes', 'students_without_class'));
     }
 
     public function editPost_profile($id)
@@ -109,13 +103,10 @@ class UsersController extends Controller
         request()->session()->flash('success', 'Utilizador atualizado com sucesso!');
 
         $universities = University::get();
+        $classes = auth()->user()->classes;
+        $students_without_class = User::usersWithOutClass();
 
-        return view('users.edit_profile', compact('user', 'universities'));
-    }
-
-    public function chat()
-    {
-        return view('users.chat');
+        return view('users.edit_profile', compact('user', 'universities', 'classes', 'students_without_class'));
     }
 
     public function replaceUserAvatar()
