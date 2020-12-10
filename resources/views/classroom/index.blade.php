@@ -95,9 +95,7 @@
                     </div>
 
                     {{-- My professor --}}
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-
-                    @else
+                    @if (auth()->user()->student_class_user)
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                             <div class="wrap mb-3">
                                 <h1 class="title">Professor</h1>
@@ -106,10 +104,10 @@
                                 <div class="form-group d-flex flex-wrap justify-content-center m-0">
                                     <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
                                     <h4 class="sg_rate_title align-self-center m-0">
-                                        João Paulo
+                                        {{ auth()->user()->student_class_user->student_class->teacher->username }}
                                         <div class="d-flex flex-row user_options">
                                             <p class="exercise_author align-self-center">
-                                                <a href="#" class="edit_profile" style="font-size: 16px;">
+                                                <a href="/chat/{{ auth()->user()->student_class_user->student_class->teacher->id }}" class="edit_profile" style="font-size: 16px;">
                                                     Chat
                                                 </a>
                                                 <a href="#" class="edit_profile" style="font-size: 16px;">
@@ -124,82 +122,85 @@
                     @endif
 
                     {{-- Colleagues / Students --}}
-                    <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
-                        <div class="row mb-3">
-                            <div class="col-sm-5 col-md-5 col-lg-5 align-self-center align-items-center">
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <h1 class="title">Alunos</h1>
-                                @else
-                                    <h1 class="title">Colegas</h1>
-                                @endif
-                                
-                            </div>
-                            <div class="col-sm-7 col-md-7 col-lg-7 align-self-center align-items-center
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) d-inline-flex @endif">
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <div class="form-group mb-0 mr-2 w-100">
-                                        <div class="select2_with_search" style="border-radius: 5px;">
-                                            <select name="students_class_select" id="students_class_select" class="form-control" style="border: none;">
-                                                <option value="0">Todos</option>
-                                                @foreach (auth()->user()->classes as $class)
-                                                    <option value="{{ $class->id }}">Turma {{ $class->name }}</option>
-                                                @endforeach
-                                            </select>
+                    @if ((auth()->user()->user_role_id == 3 && auth()->user()->student_class_user) || 
+                    (auth()->user()->user_role_id != 3 && auth()->user()->classes->count()))
+                        <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
+                            <div class="row mb-3">
+                                <div class="col-sm-5 col-md-5 col-lg-5 align-self-center align-items-center">
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                        <h1 class="title">Alunos</h1>
+                                    @else
+                                        <h1 class="title">Colegas</h1>
+                                    @endif
+                                    
+                                </div>
+                                <div class="col-sm-7 col-md-7 col-lg-7 align-self-center align-items-center
+                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) d-inline-flex @endif">
+                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                        <div class="form-group mb-0 mr-2 w-100">
+                                            <div class="select2_with_search" style="border-radius: 5px;">
+                                                <select name="students_class_select" id="students_class_select" class="form-control" style="border: none;">
+                                                    <option value="0">Todos</option>
+                                                    @foreach (auth()->user()->classes as $class)
+                                                        <option value="{{ $class->id }}">Turma {{ $class->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
-                                
-                                @if (
-                                (auth()->user()->user_role_id == 3 
-                                && auth()->user()->student_class_user 
-                                && auth()->user()->getStudentColleagues(auth()->user()->student_class_user->student_class->id)->count()) 
-                                || 
-                                (auth()->user()->user_role_id != 3 
-                                && auth()->user()->getProfessorStudents())
-                                )
-                                    <div class="dropdown student_options_dropdown">
-                                        <a href="#" class="colleagues_options float-right messages" data-toggle="dropdown">
-                                            <span class="ping"></span>
-                                            Opções
-                                            <span class="dropdown-menu-arrow"></span>
-                                        </a>
-                                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                            <div class="dropdown-menu message-box">
-                                                <a class="msg-title" href="#">
-                                                    <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
-                                                    Encontrar Alunos
-                                                </a>
-                                                <hr class="mt-0 mb-2 ml-2 mr-2">
-                                                <a class="msg-title" href="#">
-                                                    <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                    Desempenho da Turma
-                                                </a>
-                                                <hr class="mt-0 mb-2 ml-2 mr-2">
-                                                <a class="msg-title professor_class_group_chat" href="#">
-                                                    <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                    Iniciar Conversa
-                                                </a>
-                                            </div>
-                                        @else
-                                        @if (auth()->user()->student_class_user)
-                                            <div class="dropdown-menu message-box">
-                                                <a class="msg-title student_class_group_chat" href="#" data-student-class-id="{{ auth()->user()->student_class_user->student_class_id }}">
-                                                    <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                                    Iniciar Conversa de Turma
-                                                </a>
-                                            </div>
-                                        @endif
+                                    @endif
+                                    
+                                    @if (
+                                    (auth()->user()->user_role_id == 3 
+                                    && auth()->user()->student_class_user 
+                                    && auth()->user()->getStudentColleagues(auth()->user()->student_class_user->student_class->id)->count()) 
+                                    || 
+                                    (auth()->user()->user_role_id != 3 
+                                    && auth()->user()->getProfessorStudents())
+                                    )
+                                        <div class="dropdown student_options_dropdown">
+                                            <a href="#" class="colleagues_options float-right messages" data-toggle="dropdown">
+                                                <span class="ping"></span>
+                                                Opções
+                                                <span class="dropdown-menu-arrow"></span>
+                                            </a>
+                                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                                <div class="dropdown-menu message-box">
+                                                    <a class="msg-title" href="#">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
+                                                        Encontrar Alunos
+                                                    </a>
+                                                    <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                    <a class="msg-title" href="#">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                        Desempenho da Turma
+                                                    </a>
+                                                    <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                    <a class="msg-title professor_class_group_chat" href="#">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                        Iniciar Conversa
+                                                    </a>
+                                                </div>
+                                            @else
+                                            @if (auth()->user()->student_class_user)
+                                                <div class="dropdown-menu message-box">
+                                                    <a class="msg-title student_class_group_chat" href="#" data-student-class-id="{{ auth()->user()->student_class_user->student_class_id }}">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                                        Iniciar Conversa de Turma
+                                                    </a>
+                                                </div>
+                                            @endif
+                                                
+                                            @endif
                                             
-                                        @endif
-                                        
-                                    </div>
-                                @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0 students_colleagues">
+                                @include('classroom.classroom-partials.students-colleagues-partial')
                             </div>
                         </div>
-                        <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0 students_colleagues">
-                            @include('classroom.classroom-partials.students-colleagues-partial')
-                        </div>
-                    </div>
+                    @endif
 
                     {{-- Professor Shortcuts --}}
                     @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)

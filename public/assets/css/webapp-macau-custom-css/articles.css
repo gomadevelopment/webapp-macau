@@ -336,6 +336,13 @@ a[class^="show_less_"] .triangle-up {
     line-height: normal;
 }
 
+.shop_grid_caption .article_author a.professor_link {
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    font-size: 15px;
+    font-weight: 700;
+}
+
 .shop_grid_caption .article_description {
     overflow: hidden;
     text-overflow: ellipsis;

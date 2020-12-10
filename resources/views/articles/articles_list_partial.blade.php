@@ -37,7 +37,12 @@
                         <img class="heart_filled_icon" data-article-id="{{ $article->id }}"
                             src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: {{ $article->is_article_favorite ? 'block;' : 'none;' }}">
                         <h4 class="sg_rate_title">{{ $article->title }}</h4>
-                        <p class="article_author"><strong>Por:</strong> {{ $article->user->username }}</p>
+                        <p class="article_author"><strong>Por:</strong>
+                            <a href="/perfil/{{ $article->user->id }}" class="professor_link">
+                                {{ $article->user->username }}
+                                <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 2px; width: 5%;">
+                            </a>
+                        </p>
                         <div class="article_description">{!! $article->text !!}</div>
                         @foreach ($article->article_tags as $tag)
                             <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">

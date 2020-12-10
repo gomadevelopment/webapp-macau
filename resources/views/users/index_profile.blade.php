@@ -49,7 +49,7 @@
             {{-- About me / Professional path --}}
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <div class="wrap mb-3">
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if($user->user_role_id == 1 || $user->user_role_id == 2)
                         <h1 class="title">Percurso Profissional</h1>
                     @else
                         <h1 class="title">Sobre mim</h1>
@@ -67,13 +67,13 @@
                     <hr>
                     @endif
 
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if($user->user_role_id == 1 || $user->user_role_id == 2)
 
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
                                 <h4 class="sg_rate_title">Mais informação</h4>
                                 <div class="d-block text-left mt-3">
-                                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
+                                    <a href="/chat/{{ $user->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/contact.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Contactar
                                     </a>
@@ -113,11 +113,17 @@
                             <p class="exercise_author"><strong>Instituição:</strong> {{ $user->university->name }} </p>
                         </div>
                         @endif
-                        
+                        @if($user->student_class_user)
                         <div class="d-flex float-left flex-column">
-                            <p class="exercise_author"><strong>Professor:</strong> <a href="#" class="professor_link">João Paulo</a></p>
-                            <p class="exercise_author"><strong>Turma:</strong> A
+                            <p class="exercise_author"><strong>Professor:</strong> 
+                                <a href="/perfil/{{ $user->student_class_user->student_class->teacher->id }}" class="professor_link">
+                                    {{ $user->student_class_user->student_class->teacher->username }}
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 3px;">
+                                </a>
+                            </p>
+                            <p class="exercise_author"><strong>Turma:</strong> {{ $user->student_class_user->student_class->name }}
                         </div>
+                        @endif
                         <div class="d-block float-right mt-3 mb-4">
                             <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px; font-size: 21px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/contact.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
