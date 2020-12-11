@@ -29,6 +29,34 @@ class ArticlesController extends Controller
         if(!empty($inputs)){
             // dd($inputs);
             try {
+                // Delete article
+                if(isset($inputs['article_to_delete_id']) && $inputs['article_to_delete_id']){
+                    $id = $inputs['article_to_delete_id'];
+                    $article = Article::find($id);
+
+                    if (!$article) {
+                        return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!'], 200);
+                    }
+
+                    DB::beginTransaction();
+                    try{
+                        foreach(ArticleTag::where('article_id', $article->id)->get() as $article_tag){
+                            $article_tag->delete();
+                        }
+                        foreach(ArticleFavorite::where('article_id', $article->id)->get() as $article_fav){
+                            $article_fav->delete();
+                        }
+                        $article->poster()->delete();
+                        $article->medias()->delete();
+                        $article->delete();
+                    }catch (\Exception $e) {
+                        // dd($e);
+                        DB::rollback();
+                        return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!'], 200);
+                    }
+                    DB::commit();
+                }
+
                 $articles = Article::applyFilters($inputs);
 
                 foreach($articles as $article){
@@ -54,6 +82,7 @@ class ArticlesController extends Controller
 
             return response()->json([
                 'status' => 'success',
+                'message' => isset($inputs['article_to_delete_id']) && $inputs['article_to_delete_id'] ? 'Artigo removido com sucesso!' : null,
                 'html' => $html
             ]);
         }
@@ -106,10 +135,10 @@ class ArticlesController extends Controller
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar o artigo. Por favor, tente de novo!');
 
             return response()->json([
-                    'status' => 'error',
-                    'errors' => $validator->errors(),
-                    'message' => 'Ocorreu um erro ao criar/editar o artigo. Por favor, verifique os erros no formulário.'
-                ]);
+                'status' => 'error',
+                'errors' => $validator->errors(),
+                'message' => 'Ocorreu um erro ao criar/editar o artigo. Por favor, verifique os erros no formulário.'
+            ]);
         }
 
         DB::beginTransaction();
@@ -124,54 +153,18 @@ class ArticlesController extends Controller
             request()->session()->flash('save_article_error', 'Por favor, verifique os erros no formulário.');
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar o artigo. Por favor, tente de novo!');
             return response()->json([
-                    'status' => 'error',
-                    'message' => 'Ocorreu um erro ao criar/editar o artigo. Por favor, verifique os erros no formulário.'
-                ]);
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao criar/editar o artigo. Por favor, verifique os erros no formulário.'
+            ]);
         }
         DB::commit();
 
         request()->session()->flash('success', 'Artigo criado/atualizado com sucesso!');
 
         return response()->json([
-                'status' => 'success',
-                'url' => '/artigos'
-            ]);
-
-        // return view('articles.save', compact('article', 'article_categories', 'tags'));
-    }
-
-    public function delete($id)
-    {
-        $article = Article::find($id);
-
-        if (!$article) {
-            request()->session()->flash('error', 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!');
-            return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!'], 200);
-        }
-
-        DB::beginTransaction();
-        try{
-            foreach(ArticleTag::where('article_id', $article->id)->get() as $article_tag){
-                $article_tag->delete();
-            }
-            foreach(ArticleFavorite::where('article_id', $article->id)->get() as $article_fav){
-                $article_fav->delete();
-            }
-            // $article->article_tags()->delete();
-            // $article->article_favorite()->delete();
-            $article->poster()->delete();
-            $article->medias()->delete();
-            $article->delete();
-        }catch (\Exception $e) {
-            dd($e);
-            DB::rollback();
-            request()->session()->flash('error', 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!');
-            return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar este artigo. Por favor, tente de novo!'], 200);
-        }
-        DB::commit();
-
-        request()->session()->flash('success', 'Artigo removido com sucesso!');
-        return response()->json(['status' => 'success', 'message' => 'Artigo removido com sucesso!'], 200);
+            'status' => 'success',
+            'url' => '/artigos'
+        ]);
     }
 
     public function toggleFavorite()
@@ -233,7 +226,5 @@ class ArticlesController extends Controller
         }
 
         return $array;
-
-        // dd($article);
     }
 }

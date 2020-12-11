@@ -7,7 +7,8 @@ use Illuminate\Validation\Rule;
 
 use App\User,
     App\University,
-    App\UserBlocked;
+    App\UserBlocked,
+    App\Exercise;
 
 use DB;
 
@@ -41,9 +42,42 @@ class UsersController extends Controller
 
     public function index_profile($id)
     {
-        $user = User::find($id);
+        $inputs = request()->all();
 
-        return view('users.index_profile', compact('user'));
+        $user = User::find($id);
+        // dd($user, $inputs);
+        if(!empty($inputs)){
+            // dd($inputs);
+            try {
+                $skip = $inputs['page'] * 4;
+
+                $promoted_exercises = Exercise::where('user_id', $user->id)->skip($skip)->paginate(4);
+
+                $view = view()->make("users.promoted_exercises_partial", [
+                    'promoted_exercises' => $promoted_exercises,
+                    'inputs' => $inputs
+                ]);
+                $html = $view->render();
+            } catch (\Exception $e) {
+                // dd($e);
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Ocorreu um erro ao mudar de página! Por favor, atualize a página e tente de novo.'
+                ]);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'html' => $html,
+                // 'changed_paged' => $inputs['page'] != 1 ? true : false
+            ]);
+        }
+
+        $promoted_exercises = Exercise::where('user_id', $user->id)->paginate(4);
+
+        $inputs['page'] = 1;
+
+        return view('users.index_profile', compact('user', 'promoted_exercises', 'inputs'));
     }
 
     public function edit_profile($id)

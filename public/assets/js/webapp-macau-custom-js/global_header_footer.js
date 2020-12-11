@@ -1,6 +1,6 @@
 $(function() {
     // Success + alert flash info fade
-    setTimeout(fade_out, 5000);
+    setTimeout(fade_out, 10000);
 
     function fade_out() {
         $(".global-alert").fadeOut();

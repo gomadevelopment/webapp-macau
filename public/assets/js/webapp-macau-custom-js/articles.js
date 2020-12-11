@@ -48,10 +48,10 @@ $(function() {
         $(".show_more_tags").show();
         $(".show_less_tags").hide();
         $("div.filter_tags")
-            .find("a")
-            .not(":nth-child(1)")
+            .find("label")
             .not(":nth-child(2)")
-            .not(":nth-child(3)")
+            .not(":nth-child(4)")
+            .not(":nth-child(6)")
             .hide();
     }
 
@@ -59,7 +59,7 @@ $(function() {
         $(".show_more_tags").hide();
         $(".show_less_tags").show();
         $("div.filter_tags")
-            .find("a")
+            .find("label")
             .show();
     }
 

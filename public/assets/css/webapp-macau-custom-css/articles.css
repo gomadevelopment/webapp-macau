@@ -68,6 +68,7 @@
     line-height: normal;
     text-align: left;
     display: flow-root;
+    word-break: break-all;
 }
 
 .page_sidebar .checkbox-custom-label {
@@ -184,6 +185,10 @@
     background: #ff2850 url("/assets/backoffice_assets/icons/Check.svg") no-repeat 60% 50% !important;
     box-shadow: unset !important;
     border: none !important;
+}
+
+.checkbox-custom:checked:disabled+.checkbox-custom-label:before {
+    background: #ff285080 url("/assets/backoffice_assets/icons/Check.svg") no-repeat 60% 50% !important;
 }
 
 .page_sidebar .filter_tags {
@@ -887,6 +892,18 @@ a[class^="show_less_"] .triangle-up {
     background-color: #ff2850;
 }
 
+.select2.select2-container.select2-container--default.select2-container--disabled .select2-selection__rendered,
+.select2.select2-container.select2-container--default.select2-container--disabled .select2-search__field {
+    background-color: #e9ecef;
+    opacity: 1;
+    cursor: default;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection__choice__remove {
+    display: block !important;
+    visibility: hidden !important;
+}
+
 .form-group input.form-control::placeholder,
 .shop_grid.save_article_card input::placeholder {
     opacity: 0.3;
@@ -907,6 +924,13 @@ a[class^="show_less_"] .triangle-up {
     margin-right: auto;
     padding: 0;
     min-height: unset;
+}
+
+.dropzone.disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: #e9ecef !important;
+    opacity: 1;
 }
 
 .dz-message {

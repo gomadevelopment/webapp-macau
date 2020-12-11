@@ -35,7 +35,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::post('/artigos/criar', 'ArticlesController@savePost');
         Route::get('/artigos/editar/{id}', 'ArticlesController@save');
         Route::post('/artigos/editar/{id}', 'ArticlesController@savePost');
-        Route::post('/artigos/apagar/{id}', 'ArticlesController@delete');
+        // Route::post('/artigos/apagar/{id}', 'ArticlesController@delete');
         Route::post('/artigos/artigo_favorito', 'ArticlesController@toggleFavorite');
 
         Route::get('/artigos/get_article_poster/{id}', 'ArticlesController@getArticlePoster');
@@ -43,11 +43,20 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         // Exercises
         Route::get('/exercicios', 'ExercisesController@index');
+        Route::get('/exercicios/detalhe/{id}', 'ExercisesController@details');
         Route::get('/exercicios/criar', 'ExercisesController@save');
         Route::post('/exercicios/criar', 'ExercisesController@savePost');
-        Route::get('/exercicios/editar', 'ExercisesController@save'); // Adicionar {id}
-        Route::post('/exercicios/editar', 'ExercisesController@savePost'); // Adicionar {id}
+        Route::get('/exercicios/editar/{id}', 'ExercisesController@save');
+        Route::post('/exercicios/editar/{id}', 'ExercisesController@savePost');
+        // Route::post('/exercicios/apagar/{id}', 'ExercisesController@delete');
+        Route::post('/exercicios/exercicio_favorito', 'ExercisesController@toggleFavorite');
+        Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
 
+        Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
+        
+
+
+        // Exercises - Questions
         Route::get('/exercicios/questao/criar', 'ExercisesController@saveQuestion');
         Route::get('/exercicios/questao/criar', 'ExercisesController@savePostQuestion');
         Route::get('/exercicios/questao/editar', 'ExercisesController@saveQuestion'); // Adicionar {id}
@@ -62,9 +71,11 @@ Route::group(['middlewareGroups' => 'web'], function () {
         
         // Users Profile
         Route::get('/perfil/{id}', 'UsersController@index_profile');
+        // Route::get('/perfil/{id}/update_promoted_exercises', 'UsersController@index_profile');
         Route::get('/perfil/editar/{id}', 'UsersController@edit_profile'); // Adicionar {id}
         Route::post('/perfil/editar/{id}', 'UsersController@editPost_profile'); // Adicionar {id}
         Route::post('/replace_user_avatar', 'UsersController@replaceUserAvatar');
+        // Route::get('/update_promoted_exercises/{id}', 'UsersController@index_profile');
 
         // Chat
         Route::get('/chat/{id}', 'ChatController@getChat');

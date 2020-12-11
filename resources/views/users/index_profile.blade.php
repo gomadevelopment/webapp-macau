@@ -10,7 +10,14 @@
 
 @section('content')
 
-<!-- ============================ Find Courses with Sidebar ================================== -->
+<div class="alert alert-success successMsg" style="display:none;" role="alert">
+
+</div>
+
+<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+</div>
+
 <section class="page-title classroom">
     <div class="container">
         
@@ -137,162 +144,21 @@
             </div>
         </div>
 
-        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+        @if($user->user_role_id == 1 || $user->user_role_id == 2)
 
             {{-- professor - promoted exercises --}}
-            <div class="row mb-5">
-                <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
-                    <div class="wrap mb-3">
-                        <h1 class="title">Exercícios promovidos pelo Utilizador</h1>
-                    </div>
-                    <div class="shop_grid_caption card-body m-0 mb-4">
-                        <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-                        <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                            @else
-                                <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
-                            @endif
-                            <p class="exercise_level" style="float: left; margin-right: 20px;">
-                                <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <strong>Média de Avaliação:</strong> 62%
-                                @endif
-                            </p>
-                        </div>
-
-                        <div class="d-block float-right mt-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Visualizar
-                            </a>
-                        </div>
+            <form id="promoted_exercises_filters_form" class="" method="GET" autocomplete="off">
+                @csrf
+                <div class="row mb-5">
+                    <div class="col-sm-12 col-md-12 col-lg-12 mb-5 update_promoted_exercises">
                         
+                        @include('users.promoted_exercises_partial')
 
-                        <hr style="margin-top: 6rem;">
-
-                        <h4 class="sg_rate_title">Resumo</h4>
-
-                        <p class="article_description" style="margin-top: 15px;">
-                            Vamos conhecer Astrid Pires, professora de Alemão em Lisboa. De onde é que ela é? Porque é que veio para Portugal? Quais as dificuldades que teve?
-                        </p>
-                        
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Gramática</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Experiência</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Verbos</p>
-                        </div>
-                            
-                    </div>
-
-                    <div class="shop_grid_caption card-body m-0 mb-4">
-                        <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-                        <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                            @else
-                                <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
-                            @endif
-                            <p class="exercise_level" style="float: left; margin-right: 20px;">
-                                <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <strong>Média de Avaliação:</strong> 62%
-                                @endif
-                            </p>
-                        </div>
-
-                        <div class="d-block float-right mt-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Visualizar
-                            </a>
-                        </div>
-                        
-
-                        <hr style="margin-top: 6rem;">
-
-                        <h4 class="sg_rate_title">Resumo</h4>
-
-                        <p class="article_description" style="margin-top: 15px;">
-                            Vamos conhecer Astrid Pires, professora de Alemão em Lisboa. De onde é que ela é? Porque é que veio para Portugal? Quais as dificuldades que teve?
-                        </p>
-                        
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Gramática</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Experiência</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Verbos</p>
-                        </div>
-                            
-                    </div>
-
-                    <div class="shop_grid_caption card-body m-0 mb-4">
-                        <h4 class="sg_rate_title">Da Áustria para Macau</h4>
-                        <div class="d-flex float-left flex-column">
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
-                            @else
-                                <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
-                            @endif
-                            <p class="exercise_level" style="float: left; margin-right: 20px;">
-                                <strong>Nível:</strong> A1 &nbsp;&nbsp;&nbsp;
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <strong>Média de Avaliação:</strong> 62%
-                                @endif
-                            </p>
-                        </div>
-
-                        <div class="d-block float-right mt-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Visualizar
-                            </a>
-                        </div>
-                        
-
-                        <hr style="margin-top: 6rem;">
-
-                        <h4 class="sg_rate_title">Resumo</h4>
-
-                        <p class="article_description" style="margin-top: 15px;">
-                            Vamos conhecer Astrid Pires, professora de Alemão em Lisboa. De onde é que ela é? Porque é que veio para Portugal? Quais as dificuldades que teve?
-                        </p>
-                        
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Gramática</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Experiência</p>
-                        </div>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
-                            <p>Verbos</p>
-                        </div>
-                            
-                    </div>
-
-                    <div class="shop_grid_caption card-body m-0 mb-4">
-
-                        <div class="d-block mt-3 mb-3">
-                            <a href="/exercicios" class="btn btn-theme remove_button m-2" style="float: none; padding: 12px 20px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Ver todos os Exercícios
-                            </a>
-                            <a href="/sala_de_aula" class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Sala de Aula
-                            </a>
-                        </div>
-                            
                     </div>
                 </div>
-            </div>
+                <input type="number" name="page" id="page_number" value="1" hidden>
+                <input type="number" name="previous_page" id="previous_page_number" value="1" hidden>
+            </form>
 
         @else
 
@@ -313,7 +179,9 @@
     </div>
 
 </section>
-<!-- ============================ Find Courses with Sidebar End ================================== -->
+
+<input type="text" name="hidden_user_id" id="hidden_user_id" value="{{ $user->id }}" hidden>
+
 
 @stop
 
@@ -346,6 +214,12 @@
         // });
 
         $(function() {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('input[name="_token"]').attr("value")
+                }
+            });
+
             // Change icon image on tab change
             changeIconImage();
             function changeIconImage(){
@@ -503,7 +377,59 @@
             }
             $(document).on('change', '#class_select', function(){
                 changeClass($(this));
-            })
+            });
+
+            // Update promoted exercises pagination
+            $(document).on('click', '.pagination li a', function(e){
+
+                // Pagination
+                if($(this).parent().hasClass('page-item')){
+                    e.preventDefault();
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_page_number').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_page_number').attr('value', $('#page_number').attr('value'));
+                    }
+                    
+                    $('#page_number').attr('value', $(this).attr('data-page'));
+                    
+                    $('.pagination li').each(function(index, element){
+                        $(element).removeClass('active');
+                    });
+                    $(this).parent().addClass('active');
+                    $("html, body").animate({ scrollTop: 0 }, 500);
+                }
+
+                var form_array;
+                setTimeout(function () {
+                    form_array = $("#promoted_exercises_filters_form").serialize();
+                    console.log($('#hidden_user_id').val(), form_array);
+                    $.ajax({
+                        url: "/perfil/" + $('#hidden_user_id').val(),
+                        type: "GET",
+                        dataType: "JSON",
+                        data: form_array,
+                        success: function (response) {
+                            if(response && response.status == 'success'){
+                                $(".update_promoted_exercises").html(response.html);
+                                // if ($('ul.pagination').length && response.changed_page){
+                                //     if($('a[data-page="1"]').length){
+                                //         $('a[data-page="1"]').click();
+                                //     }
+                                // }
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 2000);
+                            }
+                        }
+                    });
+                }, 50);
+            });
 
         });
 

@@ -520,7 +520,6 @@
                     });
                 }
                 
-                
                 $.ajax({
                     url: url,
                     type: "POST",
