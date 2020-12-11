@@ -8,14 +8,6 @@
 
 @section('content')
 
-<div class="alert alert-success successMsg" style="display:none;" role="alert">
-
-</div>
-
-<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
-
-</div>
-
 <form id="articles_filters_form" class="" method="GET" autocomplete="off">
     @csrf
 
@@ -283,10 +275,13 @@
                     
                 </div>
 
+                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2"><span></span><span></span></div>
                 <div class="col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2 order-md-1 update_articles_list">
+
                     @include('articles.articles_list_partial')
+                    
                 </div>
-            
+                <input type="text" name="article_to_delete_id" id="article_to_delete_id" hidden disabled>
             </div>
             <!-- Row -->
             
@@ -346,39 +341,24 @@
                 });
             });
 
-            // Delete article AJAX
-            $(document).on('click', '.remove_article', function(){
-                var article_id = $(this).attr('data-article-id');
-                var result = window.confirm(
-                    "Tem a certeza que deseja apagar permanentemente este artigo?"
-                );
-                if (result == true) {
-                    var url = '/artigos/apagar/' + $(this).attr('data-article-id');
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        success: function(response) {
-                            if (response && response.status == "success") {
-                                window.location.reload();
-                            } else {
-                                $(".errorMsg").text(response.message);
-                                $(".errorMsg").fadeIn();
-                                setTimeout(() => {
-                                    $(".errorMsg").fadeOut();
-                                }, 2000);
-                            }
-                        }
-                    });
+            // Filters + Delete article
+            $(document).on('click', 'label.checkbox-custom-label, .filter_tags label.cancel, .dropdown.order_by a.dropdown-item, .pagination li a, .remove_article', function(e){
+
+                var changed_page = false;
+
+                $(".update_articles_list").hide();
+                $('.preloader.ajax').show();
+
+                // Delete Article
+                if($(this).hasClass('remove_article')){
+                    $('#article_to_delete_id').attr('value', $(this).attr('data-article-id'));
+                    $('#article_to_delete_id').attr('disabled', false);
                 }
-
-                return false;
-            });
-
-            $(document).on('click', 'label.checkbox-custom-label, .filter_tags label.cancel, .dropdown.order_by a.dropdown-item, .pagination li a', function(e){
 
                 // Pagination
                 if($(this).parent().hasClass('page-item')){
                     e.preventDefault();
+                    changed_page = true;
                     $('#page_number').attr('value', $(this).attr('data-page'));
                     
                     $('.pagination li').each(function(index, element){
@@ -468,13 +448,35 @@
                         success: function (response) {
                             if(response && response.status == 'success'){
                                 $(".update_articles_list").html(response.html);
+                                $(".update_articles_list").show();
+                                $('.preloader.ajax').hide();
+                                // Reset article to delete
+                                $('#article_to_delete_id').attr('value', null);
+                                $('#article_to_delete_id').attr('disabled', true);
+                                if(response.message){
+                                    $(".successMsg").text(response.message);
+                                    $(".successMsg").fadeIn();
+                                    setTimeout(() => {
+                                        $(".successMsg").fadeOut();
+                                    }, 2000);
+                                }
+                                if(!changed_page){
+                                    if($('.pagination').length && $('a[data-page="1"]').length){
+                                        $('a[data-page="1"]').click();
+                                    }
+                                }
                             }
                             else{
+                                $(".update_articles_list").show();
+                                $('.preloader.ajax').hide();
+                                // Reset article to delete
+                                $('#article_to_delete_id').attr('value', null);
+                                $('#article_to_delete_id').attr('disabled', true);
                                 $(".errorMsg").text(response.message);
                                 $(".errorMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".errorMsg").fadeOut();
-                                }, 2000);
+                                }, 5000);
                             }
                         }
                     });

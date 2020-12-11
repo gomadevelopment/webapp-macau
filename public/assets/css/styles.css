@@ -48,7 +48,7 @@
 /*------------------------------------
 	Preloader
 ------------------------------------*/
-.preloader {
+#preloader .preloader {
     background-color: #ffffff;
     background-image: url("../img/loader.svg");
     background-position: center center;

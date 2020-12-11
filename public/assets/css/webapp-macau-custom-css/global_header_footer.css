@@ -170,6 +170,19 @@ span.error-block-span.pink {
     color: #fff;
 }
 
+.preloader.ajax {
+    background-color: transparent;
+    position: relative;
+    height: unset;
+    z-index: 99;
+    background-image: url("../../img/loader.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+}
+
 /* Header */
 
 .header.header-fixed {

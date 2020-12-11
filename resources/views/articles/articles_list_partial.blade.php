@@ -8,6 +8,13 @@
         {{session('error')}}
     </div>
 @endif
+<div class="alert alert-success successMsg" style="display:none;" role="alert">
+
+</div>
+
+<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+
+</div>
 
     <div class="row">
         @if ($articles->isEmpty())

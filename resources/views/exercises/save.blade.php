@@ -52,26 +52,31 @@
                     </li>
                 </ul>
 
-                <div class="tab-content" id="create_exercise_tabs_content">
-                    {{-- BEGIN TAB --}}
-                    <div class="tab-pane fade show active" id="begin" role="tabpanel" aria-labelledby="begin-tab">
-                        
-                        @include('exercises.tab-contents.save_beginning')
+                <form method="POST" id="save_exercise_form" novalidate="true" action="{{ $exercise->id ? '/exercicios/editar/' . $exercise->id : '/exercicios/criar' }}" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id ? $exercise->id : null }}">
+                    <div class="tab-content" id="create_exercise_tabs_content">
+                        {{-- BEGIN TAB --}}
+                        <div class="tab-pane fade show active" id="begin" role="tabpanel" aria-labelledby="begin-tab">
+                            
+                            @include('exercises.tab-contents.save_beginning')
 
+                        </div>
+                        {{-- INTRO TAB --}}
+                        <div class="tab-pane fade" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+
+                            @include('exercises.tab-contents.save_intro')
+
+                        </div>
+                        {{-- STRUCTURE TAB --}}
+                        <div class="tab-pane fade" id="structure" role="tabpanel" aria-labelledby="structure-tab">
+
+                            @include('exercises.tab-contents.save_structure')
+
+                        </div>
                     </div>
-                    {{-- INTRO TAB --}}
-                    <div class="tab-pane fade" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                </form>
 
-                        @include('exercises.tab-contents.save_intro')
-
-                    </div>
-                    {{-- STRUCTURE TAB --}}
-                    <div class="tab-pane fade" id="structure" role="tabpanel" aria-labelledby="structure-tab">
-
-                        @include('exercises.tab-contents.save_structure')
-
-                    </div>
-                </div>
             </div>
             
         
@@ -130,7 +135,7 @@
 
     <script>
 
-        CKEDITOR.replace( 'intro_text' , {
+        CKEDITOR.replace( 'introduction' , {
             language: 'pt'
         });
 
@@ -138,17 +143,20 @@
             language: 'pt'
         });
 
-        CKEDITOR.replace( 'audio_visual_description' , {
+        CKEDITOR.replace( 'audiovisual_desc' , {
             language: 'pt'
         });
 
-        CKEDITOR.replace( 'audio_transcription' , {
+        CKEDITOR.replace( 'audio_transcript' , {
             language: 'pt'
         });
 
         Dropzone.autoDiscover = false;
 
         $(function() {
+
+            var exercise_id = $('#exercise_id_hidden').val();
+
             // Change icon image on tab change
             changeIconImage();
             function changeIconImage(){
@@ -168,18 +176,25 @@
                 changeIconImage();
             });
 
-            $(document).on('click', '#time_for_fill, #allow_interruptions', function(){
+            if($('#has_time:checked').length == 0){
+                $('#time').attr('disabled', true);
+            }
+            if($('#has_interruption:checked').length == 0){
+                $('#interruption_time').attr('disabled', true);
+            }
+
+            $(document).on('click', '#has_time, #has_interruption', function(){
                 if($(this).is(':checked')){
-                    if($(this).attr('id') == 'time_for_fill'){
-                        $('select#fill_time').attr('disabled', false);
+                    if($(this).attr('id') == 'has_time'){
+                        $('select#time').attr('disabled', false);
                     }
                     else{
                         $('select#interruption_time').attr('disabled', false);
                     }
                 }
                 else{
-                    if($(this).attr('id') == 'time_for_fill'){
-                        $('select#fill_time').attr('disabled', true);
+                    if($(this).attr('id') == 'has_time'){
+                        $('select#time').attr('disabled', true);
                     }
                     else{
                         $('select#interruption_time').attr('disabled', true);
@@ -191,7 +206,7 @@
 
             function changePageTitle(selector){
                 if($(selector).hasClass('active') && $(selector).attr('id') != 'begin-tab'){
-                    $('.page-title .title').text('Exercício: "'+$('#exercise_name').val()+'"');
+                    $('.page-title .title').text('Exercício: "'+$('#title').val()+'"');
                 }
                 else{
                     $('.page-title .title').text('Criar Exercício');
@@ -203,14 +218,14 @@
             });
 
             $('#exercise_template').select2({
-                placeholder: "Escolher exercício"
+                placeholder: "Escolher exercício..."
             });
 
-            $('#categories').select2({
+            $('#category').select2({
                 placeholder: "Escolher categoria"
             });
 
-            $('#levels').select2({
+            $('#level').select2({
                 placeholder: "Escolher Nível"
             });
 
@@ -218,7 +233,7 @@
                 placeholder: "Pesquisar"
             });
 
-            $('#fill_time').select2({
+            $('#time').select2({
                 placeholder: "Sel. Tempo"
             });
 
@@ -247,7 +262,10 @@
                     .css('padding-left', '10px !important');
             });
 
-            var dropzone = new Dropzone('#form-dropzone', {
+            var dropzone_medias_counter = 0;
+
+            var dropzone_media = new Dropzone('#form-dropzone-media', {
+                url: '/dropzone_media',
                 previewTemplate: document.querySelector('#preview-template').innerHTML,
                 addRemoveLinks: true,
                 parallelUploads: 2,
@@ -255,6 +273,33 @@
                 thumbnailWidth: 120,
                 maxFilesize: 3,
                 filesizeBase: 1000,
+                init: function(e) {
+                    if(dropzone_medias_counter == 0){
+                        var thisDropzone = this;
+                        if(exercise_id){
+                            $.get('/exercicios/get_exercise_medias/' + exercise_id, function(data) {
+                                if(data != 'no_medias'){
+                                    JSON.stringify(data);
+                                    $.each(data, function(key,value){
+                                        var mockFile = { name: value.name, size: value.size };
+
+                                        thisDropzone.emit("addedfile", mockFile);
+
+                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path);
+
+                                        // Make sure that there is no progress bar, etc...
+                                        thisDropzone.emit("complete", mockFile);
+
+                                    });
+                                }
+                                
+
+                            });
+                        }
+                            
+                    }
+                    dropzone_medias_counter = 1;
+                },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
                     file.previewElement.classList.remove("dz-file-preview");
@@ -270,12 +315,14 @@
 
             });
 
+            var media_files = [];
+
             var minSteps = 6,
                 maxSteps = 60,
                 timeBetweenSteps = 100,
                 bytesPerStep = 100000;
 
-            dropzone.uploadFiles = function(files) {
+            dropzone_media.uploadFiles = function(files) {
                 var self = this;
 
                 for (var i = 0; i < files.length; i++) {
@@ -303,8 +350,130 @@
                             };
                         }(file, totalSteps, step), duration);
                     }
+                    media_files.push(file);
+
+                }
+                // media_files = files;
+            }
+
+            // Go to Intro tab button (Gravar button on beggining tab_content)
+            $(document).on('click', '.go_to_intro_tab', function(e){
+                e.preventDefault();
+                $('a#intro-tab').click();
+            });
+
+            // Save Exercise FORM
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                }
+            });
+
+            function updateAllMessageForms()
+            {
+                for (instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
                 }
             }
+
+            // Save POST AJAX
+            $(document).on('click', '.save_exercise_form_button', function(){
+                updateAllMessageForms();
+                var redirect = false;
+                if($(this).hasClass('beginning_save')){
+                    redirect = false;
+                }
+                else{
+                    redirect = true;
+                }
+
+                var exercise_id = $('#exercise_id_hidden').val();
+                var url = exercise_id ? '/exercicios/editar/' + exercise_id : '/exercicios/criar';
+
+                var formData = new FormData($("#save_exercise_form")[0]);
+
+                if(media_files == []){
+                    $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                        formData.append('media_files[]', $(element).text());
+                    });
+                }
+                else{
+                    media_files.forEach(element2 => {
+                        
+                        $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                            if(element2.name != $(element).text()){
+                                formData.append('media_files[]', $(element).text());
+                                // console.log(element2.name, $(element).text());
+                            }
+                            else{
+                                formData.append('media_files[]', element2);
+                                console.log(element2.name, $(element).text());
+                            }
+                            
+                        });
+                    });
+                }
+                
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                            if(redirect){
+                                window.location = response.url;
+                            }
+                            else{
+                                $('#exercise_id_hidden').attr('value', response.ex_id);
+                            }
+                        }
+                        else if(response.status == 'error'){
+
+                            Object.keys(response.errors).forEach(function (key) {
+                                if(key == 'title'){
+                                    $('.title_error').text(response.errors[key]);
+                                    $('.title_error').removeAttr('hidden');
+                                    $('a#begin-tab').click();
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Clone exercise template
+            $(document).on('change', '#exercise_template', function(e){
+                e.preventDefault();
+                var exercise_id = $(this).val();
+                if(exercise_id != 0){
+                    $.ajax({
+                        type: 'POST',
+                        url: '/exercicios/clonar/' + exercise_id,
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                window.location = '/exercicios/editar/' + response.clone_exercise_id;
+                                // setTimeout(function () {
+                                //     $(".successMsg").text(response.message);
+                                //     $(".successMsg").fadeIn();
+                                //     setTimeout(() => {
+                                //         $(".successMsg").fadeOut();
+                                //     }, 5000);
+                                // }, 1000);
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 2000);
+                            }
+                        }
+                    });
+                }
+            });
+
         });
 
     </script>
