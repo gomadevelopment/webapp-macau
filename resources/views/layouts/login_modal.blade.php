@@ -37,6 +37,11 @@
                                 </span>
                             @endif
                         </div>
+                        <div class="form-group m-0">
+                            <a href="#" class="recover_password_link" data-toggle="modal" data-target="#recover_password">
+                                Esqueceu-se da palavra-passe? Recupere aqui!
+                            </a>
+                        </div>
                         
                         <div class="form-group signup_button about_section">
                             <button type="submit" class="btn btn-theme btn-lg" data-target="#login">

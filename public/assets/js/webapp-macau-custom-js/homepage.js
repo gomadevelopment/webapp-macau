@@ -79,6 +79,44 @@ $(function() {
         }
     });
 
+    var recover_password_form_validate = $("#recover_password form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            email: {
+                required: "Insira o seu e-mail de registo.",
+                email: "Insira um e-mail válido."
+            }
+        }
+    });
+
+    var new_password_form_validate = $("#new_password form").validate({
+        rules: {
+            password: {
+                required: true,
+                minlength: 6
+            },
+            password_confirmation: {
+                required: true,
+                equalTo: "#password"
+            }
+        },
+        messages: {
+            password: {
+                required: "Insira uma password.",
+                minlength: "Password com mínimo de 6 caracteres."
+            },
+            password_confirmation: {
+                required: "Confirme a sua password.",
+                equalTo: "As palavras-passe não coincidem."
+            }
+        }
+    });
+
     $("#signup form").on("submit", function(event) {
         if (signup_form_validate.errorList.length == 0) {
             $(this).submit();
@@ -87,6 +125,12 @@ $(function() {
 
     $("#login form").on("submit", function(event) {
         if (login_form_validate.errorList.length == 0) {
+            $(this).submit();
+        }
+    });
+
+    $("#recover_password form").on("submit", function(event) {
+        if (recover_password_form_validate.errorList.length == 0) {
             $(this).submit();
         }
     });

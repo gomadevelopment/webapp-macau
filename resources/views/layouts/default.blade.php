@@ -43,6 +43,7 @@
 
                 @include('layouts.login_modal')
                 @include('layouts.signup_modal')
+                @include('layouts.recover_password_modal')
                 
             @endif
 

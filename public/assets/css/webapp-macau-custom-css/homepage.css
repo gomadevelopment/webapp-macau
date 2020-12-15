@@ -254,6 +254,22 @@ h1.modal-header-title {
     margin-bottom: 94px;
 }
 
+a.recover_password_link {
+    color: #ffffff;
+    font-family: "Gilroy - Bold";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.51px;
+    text-align: left;
+}
+
+a.recover_password_link:hover,
+a.recover_password_link:focus {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
 .login-form input,
 .login-form input:focus,
 .login-form input:-webkit-autofill,
