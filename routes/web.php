@@ -23,6 +23,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
     Route::get('/login', 'Auth\AuthController@login')->name('login');
     Route::post('/login', 'Auth\AuthController@loginPost');
 
+    Route::get('/recuperar_password', 'Auth\ForgotPasswordController@forgotPassword');
+    Route::get('/redefinir_password/{token}', 'Auth\ForgotPasswordController@resetPasswordGet')->name('password.reset');
+    Route::post('/redefinir_password', 'Auth\ForgotPasswordController@resetPasswordPost');
+
     Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/logout', 'Auth\AuthController@logout');

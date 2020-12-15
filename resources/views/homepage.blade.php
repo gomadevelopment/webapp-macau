@@ -8,6 +8,16 @@
 
 @section('content')
 <!-- ============================ Hero ================================== -->
+@if (session('success'))
+    <div class="global-alert alert alert-success" role="alert">
+        {{session('success')}}
+    </div>
+@endif
+@if (session('error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('error')}}
+    </div>
+@endif
 <div class="image-cover hero_banner hero-inner-2 shadow rlt" data-overlay="7">
     <div class="container">
 
@@ -119,6 +129,13 @@
         <script type="text/javascript">
             $(function() {
                 $('#signup').modal('show');
+            });
+        </script>
+    @endif
+    @if (session('recover_password_error'))
+        <script type="text/javascript">
+            $(function() {
+                $('#recover_password').modal('show');
             });
         </script>
     @endif
