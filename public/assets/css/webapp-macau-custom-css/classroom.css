@@ -29,7 +29,43 @@
     text-align: left;
 }
 
-.classroom .notifications_see_all,
+.classroom .colleagues_name.no_notifications {
+    font-family: "Gilroy - Medium";
+}
+
+.classroom .card-body.classroom_notifications_body .form-group {
+    max-height: 600px;
+}
+
+.classroom a.classroom_notification {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    text-align: left;
+    line-height: 19px;
+}
+
+.classroom a.classroom_notification:hover {
+    color: #ff224b !important;
+}
+
+.classroom a.classroom_notification.unread {
+    font-family: "Gilroy - Bold";
+}
+
+.classroom .students_colleagues .students_or_colleagues {
+    width: 100%;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+.classroom .notifications_see_more,
+.classroom .notifications_see_less,
+.classroom .students_colleagues_see_all,
+.classroom .students_colleagues_see_less,
 .classroom .colleagues_options {
     color: #ff2850;
     font-family: "Gilroy - Bold";
@@ -45,6 +81,13 @@
     font-size: 16px;
     color: #131b31;
     align-self: center;
+}
+
+.classroom .scrollable_div {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 600px;
+    padding: 5px;
 }
 
 .expand_accordion,
@@ -78,6 +121,22 @@
     font-weight: 700;
 }
 
+.expand_accordion:not(.expanded) .expand_chevron {
+    display: inline-block;
+}
+
+.expand_accordion:not(.expanded) .collapse_chevron {
+    display: none;
+}
+
+.expand_accordion.expanded .expand_chevron {
+    display: none;
+}
+
+.expand_accordion.expanded .collapse_chevron {
+    display: inline-block;
+}
+
 .red-skin a.shortcut_links,
 .red-skin a.shortcut_links:hover,
 .red-skin a.shortcut_links:focus {
@@ -104,6 +163,14 @@
 .dropdown.student_options_dropdown,
 .dropdown.student_dropdown {
     margin-left: 0;
+}
+
+.dropdown.student_options_dropdown .dropdown-menu {
+    transform: translate3d(0px, 22px, 0px) !important;
+}
+
+.dropdown.student_dropdown .dropdown-menu {
+    transform: translate3d(-67px, 8px, 0px) !important;
 }
 
 .dropdown.classes_student_dropdown a {
@@ -636,12 +703,12 @@ html {
 /* More medias */
 
 @media (max-width: 1199px) {
-    .shop_grid_caption.card-body.user_info .user_round_avatar {
+    /* .shop_grid_caption.card-body.user_info .user_round_avatar {
         margin: 0 !important;
-    }
+    } */
 
     .shop_grid_caption.card-body.user_info h4 {
-        margin-top: 20px !important;
+        text-align: center;
     }
 
     .shop_grid_caption.card-body.user_info .user_options {
@@ -650,4 +717,22 @@ html {
     }
 
 
+}
+
+@media (max-width: 991px) {
+    .shop_grid_caption.card-body.user_info h4 {
+        text-align: left;
+    }
+
+    .shop_grid_caption.card-body.user_info .user_options {
+        text-align-last: left;
+        place-content: unset;
+    }
+}
+
+@media (max-width: 767px) {
+    .shop_grid_caption.card-body.user_info .user_options {
+        justify-content: center;
+        text-align-last: center;
+    }
 }

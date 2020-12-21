@@ -17,7 +17,7 @@
                     <form id="form_new_messages_to" action="">
                         @csrf
                         <div class="form-group">
-                            <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
+                            <div class="select2_with_search">
                                 <select name="select_users_for_new_chat_ids[]" id="select_users_for_new_chat" class="form-control" multiple style="border: none;">
                                     @foreach ($users_without_chats as $user)                                             
                                         <option value="{{ $user->id }}" data-image="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}">

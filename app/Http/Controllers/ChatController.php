@@ -17,7 +17,16 @@ class ChatController extends Controller
 {
     public function getChat($user_id)
     {
+        $this->viewShareNotifications();
         $chatExists = Chat::chatExists(auth()->user()->id, $user_id);
+
+        if($user_id == auth()->user()->id){
+            session()->flash('error', 'Não é possível criar um chat consigo próprio!');
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('chat_error', 'Não é possível criar um chat consigo próprio!');
+        }
 
         try {
 
@@ -29,6 +38,7 @@ class ChatController extends Controller
             }
 
         } catch (\Exception $e) {
+            session()->flash('error', 'Ocorreu um erro ao carregar o chat com o desejado utilizador. Por favor, tente de novo!');
             return redirect()
                 ->back()
                 ->withInput()
@@ -104,6 +114,7 @@ class ChatController extends Controller
 
     public function redirectToGroupChat($id)
     {
+        $this->viewShareNotifications();
         $chat = Chat::find($id);
 
         $users_with_chats = User::usersWithChat();
@@ -216,5 +227,12 @@ class ChatController extends Controller
             'status' => 'success',
             'html' => $html
         ]);
+    }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
     }
 }

@@ -94,6 +94,32 @@ class Chat extends Model
             'is_admin' => 0
         ]);
 
+        Notification::create([
+            'title' => 'Novo Chat Individual',
+            'text' => 'Você criou um novo chat individual com, "'.$new_chat->user_2->username.'".',
+            'url' => '/chat/' . $new_chat->user_2->id,
+            'param1_text' => 'chat_with_user_id',
+            'param1' => $new_chat->user_2->id,
+            'param2_text' => '',
+            'param2' => '',
+            'type_id' => 3,
+            'user_id' => $new_chat->user_1->id,
+            'active' => 1
+        ]);
+
+        Notification::create([
+            'title' => 'Novo Chat Individual',
+            'text' => 'O utilizador "'.$new_chat->user_1->username.'" criou um chat indiviual consigo.',
+            'url' => '/chat/' . $new_chat->user_1->id,
+            'param1_text' => 'chat_with_user_id',
+            'param1' => $new_chat->user_1->id,
+            'param2_text' => '',
+            'param2' => '',
+            'type_id' => 3,
+            'user_id' => $new_chat->user_2->id,
+            'active' => 1
+        ]);
+
         return $new_chat;
     }
 
@@ -143,12 +169,38 @@ class Chat extends Model
             'chat_id' => $new_chat->id,
             'is_admin' => 1
         ]);
+
+        Notification::create([
+            'title' => 'Novo Chat de Grupo',
+            'text' => 'Você criou um novo chat de grupo.',
+            'url' => '/chat_de_grupo/' . $new_chat->id,
+            'param1_text' => 'group_chat_id',
+            'param1' => $new_chat->id,
+            'param2_text' => '',
+            'param2' => '',
+            'type_id' => 3,
+            'user_id' => $new_chat->user_1->id,
+            'active' => 1
+        ]);
         
         foreach($array_user_ids as $user_id){
             ChatUser::create([
                 'user_id' => $user_id,
                 'chat_id' => $new_chat->id,
                 'is_admin' => 0
+            ]);
+
+            Notification::create([
+                'title' => 'Novo Chat de Grupo',
+                'text' => 'O utilizador "'.$new_chat->user_1->username.'" criou um novo chat de grupo onde você foi incluído.',
+                'url' => '/chat_de_grupo/' . $new_chat->id,
+                'param1_text' => 'group_chat_id',
+                'param1' => $new_chat->id,
+                'param2_text' => '',
+                'param2' => '',
+                'type_id' => 3,
+                'user_id' => $user_id,
+                'active' => 1
             ]);
         }
 
@@ -188,5 +240,41 @@ class Chat extends Model
             'message' => $data['message'],
             'order' => 0
         ]);
+
+        $chat = self::find($data['chat_id']);
+
+        if($chat->is_group){
+            foreach($chat->users as $user){
+                if($user->id == auth()->user()->id){
+                    continue;
+                }
+                Notification::create([
+                    'title' => 'Nova Mensagem em Chat de Grupo',
+                    'text' => 'O utilizador "'.User::find($data['user_sender_id'])->username.'" enviou uma nova mensagem no chat de grupo.',
+                    'url' => '/chat_de_grupo/' . $chat->id,
+                    'param1_text' => 'group_chat_id',
+                    'param1' => $chat->id,
+                    'param2_text' => '',
+                    'param2' => '',
+                    'type_id' => 3,
+                    'user_id' => $user->id,
+                    'active' => 1
+                ]);
+            }
+        }
+        else{
+            Notification::create([
+                'title' => 'Nova Mensagem em Chat Individual',
+                'text' => 'O utilizador "'.User::find($data['user_sender_id'])->username.'" enviou-lhe uma nova mensagem no chat.',
+                'url' => '/chat/' . $chat->user_1_id == $data['user_sender_id'] ? $chat->user_2_id : $chat->user_1_id,
+                'param1_text' => 'chat_with_user_id',
+                'param1' => $chat->user_1_id == $data['user_sender_id'] ? $chat->user_2_id : $chat->user_1_id,
+                'param2_text' => '',
+                'param2' => '',
+                'type_id' => 3,
+                'user_id' => $chat->user_1_id == $data['user_sender_id'] ? $chat->user_2_id : $chat->user_1_id,
+                'active' => 1
+            ]);
+        }
     }
 }

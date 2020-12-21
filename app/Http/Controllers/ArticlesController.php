@@ -19,8 +19,14 @@ use DB;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('topNavBarOption', 'articles');
+    }
+
     public function index()
     {
+        $this->viewShareNotifications();
         $inputs = request()->all();
 
         $article_categories = ArticleCategory::get();
@@ -105,6 +111,7 @@ class ArticlesController extends Controller
 
     public function details($id)
     {
+        $this->viewShareNotifications();
         $article = Article::find($id);
 
         return view('articles.details', compact('article'));
@@ -112,6 +119,7 @@ class ArticlesController extends Controller
 
     public function save($id = null)
     {
+        $this->viewShareNotifications();
         $article = $id ? Article::find($id) : new Article;
 
         $article_categories = ArticleCategory::get();
@@ -122,6 +130,7 @@ class ArticlesController extends Controller
 
     public function savePost($id = null)
     {
+        $this->viewShareNotifications();
         $inputs = request()->all();
         // dd($inputs);
         $article = $id ? Article::find($id) : new Article;
@@ -147,7 +156,7 @@ class ArticlesController extends Controller
             $article->saveArticle($inputs);
 
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             DB::rollback();
 
             request()->session()->flash('save_article_error', 'Por favor, verifique os erros no formulário.');
@@ -226,5 +235,12 @@ class ArticlesController extends Controller
         }
 
         return $array;
+    }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
     }
 }

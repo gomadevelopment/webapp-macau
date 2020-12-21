@@ -42,6 +42,7 @@ class UsersController extends Controller
 
     public function index_profile($id)
     {
+        $this->viewShareNotifications();
         $inputs = request()->all();
 
         $user = User::find($id);
@@ -82,6 +83,7 @@ class UsersController extends Controller
 
     public function edit_profile($id)
     {
+        $this->viewShareNotifications();
         $user = User::find($id);
         $universities = University::get();
         $classes = auth()->user()->classes;
@@ -92,6 +94,7 @@ class UsersController extends Controller
 
     public function editPost_profile($id)
     {
+        $this->viewShareNotifications();
         $inputs = request()->all();
 
         $more_rules = [];
@@ -99,7 +102,7 @@ class UsersController extends Controller
             $more_rules['password'] = 'required|min:6|confirmed';
         }
         if(isset($inputs['second_email'])){
-            $more_rules['second_email'] = ['required', 'email', Rule::unique('users')->ignore($id)];
+            $more_rules['second_email'] = ['required', 'email'];
         }
         
         $user = User::find($id);
@@ -108,7 +111,7 @@ class UsersController extends Controller
 
         if ($validator->fails()) {
             request()->session()->flash('edit_profile_error', 'Por favor, verifique os erros no formulário.');
-            request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
+            // request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
             return redirect()
                 ->back()
                 ->withErrors($validator)
@@ -126,7 +129,7 @@ class UsersController extends Controller
             DB::rollback();
 
             request()->session()->flash('edit_profile_error', 'Por favor, verifique os erros no formulário.');
-            request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
+            // request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
             return redirect()
                 ->back()
                 ->withInput()
@@ -184,5 +187,12 @@ class UsersController extends Controller
         }
 
         return redirect()->to('/chat/' . $user_id);
+    }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
     }
 }

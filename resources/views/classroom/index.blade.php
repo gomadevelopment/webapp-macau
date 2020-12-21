@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             
-            <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="row">
                     {{-- My Profile --}}
                     <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
@@ -31,8 +31,8 @@
                         </div>
                         <div class="shop_grid_caption user_info card-body m-0 p-4">
                             <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
-                                <h4 class="sg_rate_title align-self-center m-0">
+                                <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar m-2">
+                                <h4 class="sg_rate_title align-self-center m-2">
                                     {{ auth()->user()->username }}
                                     <div class="d-flex flex-row user_options">
                                         <p class="exercise_author align-self-center">
@@ -52,45 +52,10 @@
                         <div class="wrap mb-3">
                             <h1 class="title">Notificações</h1>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group m-0">
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                                    <div class="">
-                                        <p class="exercise_level float-none m-0" style="font-size: 16px;line-height: 19px;">
-                                            O Aluno <strong>Luis Silva</strong> aguarda a avaliação do Exercício “De Áustria para Portugal”. 
-                                        </p>
-                                        <p class="notification_time_ago text-right d-block mt-0">Há 24 minutos</p>
-                                    </div>
-                                    <hr>
-                                    <div class="">
-                                        <p class="exercise_level float-none m-0" style="font-size: 16px;line-height: 19px;">
-                                            O Aluno <strong>Luis Silva</strong> aguarda a avaliação do Exercício “De Áustria para Portugal”. 
-                                        </p>
-                                        <p class="notification_time_ago text-right d-block mt-0">Há 2 horas e 8 minutos</p>
-                                    </div>
-                                @else
-                                    <div class="">
-                                        <p class="exercise_level float-none m-0" style="font-size: 16px;line-height: 19px;">
-                                            Tem um novo <strong>Exercício</strong> avaliado.
-                                        </p>
-                                        <p class="notification_time_ago text-right d-block mt-0">Há 24 minutos</p>
-                                    </div>
-                                    <hr>
-                                    <div class="">
-                                        <p class="exercise_level float-none m-0" style="font-size: 16px;line-height: 19px;">
-                                            Tem um novo <strong>Exercício</strong> sugerido.
-                                        </p>
-                                        <p class="notification_time_ago text-right d-block mt-0">Há 37 minutos</p>
-                                    </div>
-                                @endif
-                                
-                                <hr>
-                                <div class="text-center">
-                                    <a href="#" class="notifications_see_all">
-                                        Ver Tudo
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="card-body classroom_notifications_body p-1" id="classroom_notifications_body">
+
+                            @include('classroom.classroom-partials.notifications-partial')
+
                         </div>
                     </div>
 
@@ -102,8 +67,8 @@
                             </div>
                             <div class="shop_grid_caption user_info card-body m-0 p-4">
                                 <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                                    <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar mr-3">
-                                    <h4 class="sg_rate_title align-self-center m-0">
+                                    <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar m-2">
+                                    <h4 class="sg_rate_title align-self-center m-2">
                                         {{ auth()->user()->student_class_user->student_class->teacher->username }}
                                         <div class="d-flex flex-row user_options">
                                             <p class="exercise_author align-self-center">
@@ -138,7 +103,7 @@
                                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) d-inline-flex @endif">
                                     @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                         <div class="form-group mb-0 mr-2 w-100">
-                                            <div class="select2_with_search" style="border-radius: 5px;">
+                                            <div class="select2_with_search">
                                                 <select name="students_class_select" id="students_class_select" class="form-control" style="border: none;">
                                                     <option value="0">Todos</option>
                                                     @foreach (auth()->user()->classes as $class)
@@ -196,7 +161,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="shop_grid_caption card-body m-0 pt-4 pr-4 pl-4 pb-0 students_colleagues">
+                            <div class="shop_grid_caption card-body m-0 pt-4 pr-2 pl-2 pb-0 students_colleagues">
                                 @include('classroom.classroom-partials.students-colleagues-partial')
                             </div>
                         </div>
@@ -249,7 +214,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="col-sm-12 col-md-12 col-lg-8">
                 <div class="row">
                     {{-- Exercises --}}
                     <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
@@ -261,7 +226,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
-                                        <div class="select2_with_search" style="border-radius: 5px;">
+                                        <div class="select2_with_search">
                                             <select name="exercises_class_select" id="exercises_class_select" class="form-control" style="border: none;">
                                                 <option value="0">Todas as Turmas</option>
                                                 @foreach (auth()->user()->classes as $class)
@@ -412,6 +377,7 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script>
 
@@ -420,6 +386,22 @@
     <script>
 
         $(function() {
+
+            // Expand/Collapse Exercises Accordions
+            $(document).on('click', 'a.expand_accordion', function(){
+                if($(this).hasClass('expanded')){
+                    $(this).removeClass('expanded');
+                    $(this).find('span').text('Expandir');
+                    // $(this).find('expand_chevron').show();
+                    // $(this).find('collapse_chevron').hide();
+                }
+                else{
+                    $(this).addClass('expanded');
+                    $(this).find('span').text('Ocultar');
+                    // $(this).find('expand_chevron').hide();
+                    // $(this).find('collapse_chevron').show();
+                }
+            });
 
             // GROUP CHAT
             $(document).on('click', '.student_class_group_chat, .professor_class_group_chat', function(e){
@@ -544,6 +526,7 @@
             // Choose class to display students (left side "Alunos")
             $(document).on('change', '#students_class_select', function(e){
                 // e.preventDefault();
+                
                 console.log($(this).val());
                 var class_id = $(this).val();
                 $.ajax({
@@ -552,6 +535,7 @@
                     success: function(response){
                         if(response && response.status == 'success'){
                             $('.students_colleagues').html(response.html);
+                            $('.students_colleagues_see_less').click();
                             // $(".successMsg").text(response.message);
                             // $(".successMsg").fadeIn();
                             // setTimeout(() => {
@@ -561,6 +545,7 @@
                         else{
                             // $('.class_name_error').text(response.message);
                             // $('.class_name_error').removeAttr('hidden');
+                            $('.students_colleagues_see_less').click();
                             $(".errorMsg").text(response.message);
                             $(".errorMsg").fadeIn();
                             setTimeout(() => {
@@ -569,6 +554,143 @@
                         }
                     }
                 });
+            });
+
+            // NOTIFICATIONS
+
+            // Mark shown notifications as read (active = 0)
+            // var notifications_ids = JSON.parse('<?php echo json_encode(auth()->user()->unread_notifications->pluck("id")->toArray()); ?>');
+            // $.ajax({
+            //     type: 'GET',
+            //     url: '/notifications_mark_as_read',
+            //     data: {notifications_ids:notifications_ids},
+            //     success: function(response){
+            //     }
+            // });
+
+            // Update Unread + Read Notifications on scroll down bottom on notification div
+            function updateNotificationsOnScroll(e, show_less = null) {
+                // e.preventDefault();
+                if(show_less){
+                    if(show_less == 'yes'){
+                        show_less = true;
+                    }
+                    else if(show_less == 'no'){
+                        show_less = false;
+                    }
+                    var current_unread_limit = $('#unread_notifications_count').val();
+                    var current_read_limit = $('#read_notifications_count').val();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/update_classroom_notifications',
+                        data: {current_unread_limit:current_unread_limit, current_read_limit:current_read_limit, show_less: show_less},
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                $('#classroom_notifications_body').html(response.html);
+                                $('#classroom_notifications_body').find('time.timeago').timeago();
+                                $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
+                                if(show_less){
+                                    $("#classroom_notifications_body .to_scroll").removeClass("scrollable_div");
+                                    $('.notifications_see_less').hide();
+                                    $('.notifications_see_more').show();
+                                }
+                                else{
+                                    $("#classroom_notifications_body .to_scroll").addClass("scrollable_div");
+                                    $('.notifications_see_less').show();
+                                    $('.notifications_see_more').hide();
+                                }
+                                
+                                if(response.no_more_notifications){
+                                    $('#no_more_notifications').attr('checked', true);
+                                }
+                                else{
+                                    $('#no_more_notifications').attr('checked', false);
+                                }
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                        }
+                    });
+                }
+                else{
+                    var elem = $(e.currentTarget);
+                    if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight() && !$('#no_more_notifications').is(':checked')) {
+                        
+                        var current_unread_limit = $('#unread_notifications_count').val();
+                        var current_read_limit = $('#read_notifications_count').val();
+                        $.ajax({
+                            type: 'GET',
+                            url: '/update_classroom_notifications',
+                            data: {current_unread_limit:current_unread_limit, current_read_limit:current_read_limit, show_less: false},
+                            success: function(response){
+                                if(response && response.status == 'success'){
+                                    $('#classroom_notifications_body').html(response.html);
+                                    $('#classroom_notifications_body').find('time.timeago').timeago();
+                                    $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
+                                    $("#classroom_notifications_body .to_scroll").addClass("scrollable_div");
+                                    // console.log($("#classroom_notifications_body .to_scroll")[0].scrollHeight - 100);
+                                    // $("#classroom_notifications_body .to_scroll").animate({ scrollTop: $("#classroom_notifications_body .to_scroll")[0].scrollHeight - 100}, 1000);
+                                    // $("#classroom_notifications_body .to_scroll").scrollTop($("#classroom_notifications_body .to_scroll")[0].scrollHeight + 20);
+                                    $('.notifications_see_more').hide();
+                                    if(response.no_more_notifications){
+                                        $('#no_more_notifications').attr('checked', true);
+                                    }
+                                    else{
+                                        $('#no_more_notifications').attr('checked', false);
+                                    }
+                                }
+                                else{
+                                    $(".errorMsg").text(response.message);
+                                    $(".errorMsg").fadeIn();
+                                    setTimeout(() => {
+                                        $(".errorMsg").fadeOut();
+                                    }, 5000);
+                                }
+                            }
+                        });
+                    }
+                }
+                
+                // return false;
+            }
+
+            $('#classroom_notifications_body>div').off('scroll', updateNotificationsOnScroll);
+            $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
+
+            hideExtraNotifications();
+
+            // Notifications
+            function hideExtraNotifications() {
+                $(".notifications_see_more").show();
+                $(".notifications_see_less").hide();
+                $("#classroom_notifications_body .to_scroll").removeClass(
+                    "scrollable_div"
+                );
+            }
+
+            function showExtraNotifications() {
+                $(".notifications_see_more").hide();
+                $(".notifications_see_less").show();
+                $("#classroom_notifications_body .to_scroll").addClass(
+                    "scrollable_div"
+                );
+                // $(".classroom_notifications_body");
+            }
+
+            $(document).on("click", ".notifications_see_more", function(e){
+                updateNotificationsOnScroll(e, 'no');
+                e.preventDefault();
+                showExtraNotifications();
+            });
+            $(document).on("click", ".notifications_see_less", function(e) {
+                updateNotificationsOnScroll(e, 'yes');
+                e.preventDefault();
+                hideExtraNotifications();
             });
 
         });

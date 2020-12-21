@@ -44,11 +44,11 @@
 
             <div class="d-block text-center mt-3 mb-3">
                 <a href="#" class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin: 0 5px 2px 0;">
                     Iniciar Exercício
                 </a>
                 <a href="#" class="btn btn-theme remove_button m-2" style="float: none; padding: 14px 20px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-right: 5px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 5px 2px 0;">
                     Ver Enunciado
                 </a>
             </div>

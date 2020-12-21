@@ -47,7 +47,7 @@
                         <p class="article_author"><strong>Por:</strong>
                             <a href="/perfil/{{ $article->user->id }}" class="professor_link">
                                 {{ $article->user->username }}
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 2px; width: 5%;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 0 2px 3px;">
                             </a>
                         </p>
                         <div class="article_description">{!! $article->text !!}</div>
@@ -71,7 +71,7 @@
                             </a>
                         </div>
                         <div class="read_more">
-                            <a href="/artigos/detalhe/{{ $article->id }}" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin-left: 5px; margin-top: -2px; margin-right: 10px;"></a>
+                            <a href="/artigos/detalhe/{{ $article->id }}" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin: -2px 10px 3px 5px;"></a>
                         </div>
                         
                     </div>
