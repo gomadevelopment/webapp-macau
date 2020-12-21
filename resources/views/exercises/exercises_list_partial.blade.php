@@ -37,7 +37,7 @@
                             <strong>Professor:</strong> 
                             <a href="/perfil/{{ $exercise->user->id }}" class="professor_link">
                                 {{ $exercise->user->username }} 
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 3px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 0 2px 3px;">
                             </a> 
                         </p>
                         <p class="exercise_level" style="float: left; margin-right: 20px;">
@@ -126,7 +126,7 @@
             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
             <div class="d-flex float-left flex-column">
                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt=""></a> </p>
                 @else
                     <p class="exercise_author"><strong>Autor:</strong> Professor João Paulo</p>
                 @endif
@@ -207,7 +207,7 @@
             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
             <div class="d-flex float-left flex-column">
                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt=""></a> </p>
                 @else
                     <p class="exercise_author">
                         <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;
@@ -293,7 +293,7 @@
             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
             <div class="d-flex float-left flex-column">
                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt=""></a> </p>
                 @else
                     <p class="exercise_author">
                         <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;
@@ -378,7 +378,7 @@
             <h4 class="sg_rate_title">Da Áustria para Macau</h4>
             <div class="d-flex float-left flex-column">
                 @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt=""></a> </p>
+                    <p class="exercise_author"><strong>Autor:</strong> <a href="#" class="professor_link">Professor João Paulo <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt=""></a> </p>
                 @else
                     <p class="exercise_author">
                         <strong>Autor:</strong> Professor João Paulo &nbsp;&nbsp;&nbsp;

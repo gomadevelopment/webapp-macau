@@ -14,9 +14,7 @@
 
 Route::group(['middlewareGroups' => 'web'], function () {
 
-    Route::get('/', function () {
-        return view('homepage');
-    });
+    Route::get('/', 'Controller@homepage');
 
     Route::post('/signup', 'UsersController@signUp');
 
@@ -94,6 +92,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::post('/create_class', 'ClassesController@createClass');
         Route::get('/insert_students_in_class', 'ClassesController@insertStudentsInClass');
         Route::get('/remove_student_from_class/{id}', 'ClassesController@removeStudentFromClass'); // id = student_id
+
+        // Notifications
+        Route::get('/notifications_mark_as_read', 'NotificationsController@markNotificationsAsRead');
+        Route::get('/update_classroom_notifications', 'NotificationsController@updateNotifications');
 
     });
 });

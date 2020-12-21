@@ -68,7 +68,7 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
-                                                    <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
+                                                    <div class="select2_with_search">
                                                         <select name="tags[]" id="tags" class="form-control" multiple  style="border: none;">
                                                             @foreach ($tags as $tag)
                                                                 <?php 
@@ -248,7 +248,8 @@
         Dropzone.autoDiscover = false;
         $(function(){
             $('#category').select2({
-                placeholder: "Escolher categoria"
+                placeholder: "Escolher categoria",
+                dropdownAutoWidth : false
             });
 
             $('#tags').select2({

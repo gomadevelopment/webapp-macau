@@ -49,17 +49,17 @@
                         </a>
                         <div class="dropdown-menu message-box">
                             <a class="msg-title" href="/perfil/{{ $student->id }}">
-                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon ml-1 mr-1 mb-1" alt="" />
                                 Ver Perfil do Aluno
                             </a>
                             <hr class="mt-0 mb-2 ml-2 mr-2">
                             <a class="msg-title" href="/chat/{{ $student->id }}">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-1" alt="" />
                                 Iniciar Conversa
                             </a>
                             <hr class="mt-0 mb-2 ml-2 mr-2">
                             <a class="msg-title remove_student_button" href="#" data-student-id="{{ $student->id }}" data-class-id="{{ $class->id }}">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Cross_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/Cross_black.svg')}}" class="logo logout_icon ml-1 mr-2" alt="" />
                                 Remover Aluno da Turma
                             </a>
                         </div>

@@ -18,6 +18,17 @@
 
 </div>
 
+@if (session('success'))
+    <div class="global-alert alert alert-success" role="alert">
+        {{session('success')}}
+    </div>
+@endif
+@if (session('error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('error')}}
+    </div>
+@endif
+
 <section class="page-title classroom">
     <div class="container">
         
@@ -125,7 +136,7 @@
                             <p class="exercise_author"><strong>Professor:</strong> 
                                 <a href="/perfil/{{ $user->student_class_user->student_class->teacher->id }}" class="professor_link">
                                     {{ $user->student_class_user->student_class->teacher->username }}
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 3px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 3px 2px 3px;">
                                 </a>
                             </p>
                             <p class="exercise_author"><strong>Turma:</strong> {{ $user->student_class_user->student_class->name }}

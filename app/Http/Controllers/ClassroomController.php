@@ -11,9 +11,14 @@ use App\User,
 
 class ClassroomController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('topNavBarOption', 'classroom');
+    }
+
     public function index()
     {
-        
+        $this->viewShareNotifications();
         // User is student
         if(auth()->user()->user_role_id == 3){
             
@@ -30,7 +35,11 @@ class ClassroomController extends Controller
             $students_colleagues = auth()->user()->getProfessorStudents();
         }
 
-        return view('classroom.index', compact('students_colleagues'));
+        $unread_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_notifications = auth()->user()->getReadNotifications(5-$unread_notifications->count())->get();
+        // dd($unread_notifications, $read_notifications);
+
+        return view('classroom.index', compact('students_colleagues', 'unread_notifications', 'read_notifications'));
     }
 
     public function studentsClassSelect($class_id)
@@ -58,4 +67,12 @@ class ClassroomController extends Controller
             'html' => $html,
         ]);
     }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
+    }
+
 }

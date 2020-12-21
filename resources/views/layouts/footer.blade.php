@@ -6,7 +6,7 @@
                 
                 <div class="col-lg-6 col-md-6">
                     <div class="footer-widget">
-                        <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Negativo.svg')}}" class="logo" alt="" />
+                        <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Negativo.svg')}}" class="logo" alt="" style="width: 26%;" />
                         <div class="footer-add">
                             <p class="supported_label">Supported by Higher Education Fund of Macao SAR Government</p>
                             <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg')}}" alt="">

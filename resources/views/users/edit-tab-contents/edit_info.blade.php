@@ -228,7 +228,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="d-block text-right mt-2">
                                     <a href="/perfil/{{ $user->id }}" class="btn btn-theme remove_button m-2" style="float: none; padding: 12px 20px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Ver o meu Perfil
                                     </a>
                                     <button class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">

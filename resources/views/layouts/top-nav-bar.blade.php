@@ -16,17 +16,30 @@
                     @if(auth()->user())
                         {{-- Professor --}}
                         @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
-                            <li class=""><a href="/exercicios">Exercícios</a></li>
-                            <li><a href="/questoes">Questões</a></li>
-                            <li><a href="/sala_de_aula">Sala de Aula</a></li>
-                            <li><a href="/artigos">Artigos</a></li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'exercises' ? 'active' : ''; ?>">
+                                <a href="/exercicios">Exercícios</a>
+                            </li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'questions' ? 'active' : ''; ?>">
+                                <a href="/questoes">Questões</a>
+                            </li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'classroom' ? 'active' : ''; ?>">
+                                <a href="/sala_de_aula">Sala de Aula</a>
+                            </li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'articles' ? 'active' : ''; ?>">
+                                <a href="/artigos">Artigos</a>
+                            </li>
                         
                         {{-- Student --}}
                         @else
-                            <li class=""><a href="/exercicios">Exercícios</a></li>
-                            <li><a href="/questoes">Questões</a></li>
-                            <li><a href="/sala_de_aula">Sala de Aula</a></li>
-                            <li><a href="/artigos">Artigos</a></li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'exercises' ? 'active' : ''; ?>">
+                                <a href="/exercicios">Exercícios</a>
+                            </li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'classroom' ? 'active' : ''; ?>">
+                                <a href="/sala_de_aula">Sala de Aula</a>
+                            </li>
+                            <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'articles' ? 'active' : ''; ?>">
+                                <a href="/artigos">Artigos</a>
+                            </li>
                         @endif
                     {{-- No user logged in --}}
                     @else
@@ -50,11 +63,11 @@
                             </a>
                             <div class="dropdown-menu message-box">
                                 <a class="msg-title" href="/perfil/{{auth()->user()->id}}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon" alt="" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mb-1 " alt="" />
                                     Ver Perfil
                                 </a>
                                 <a class="msg-title" href="/logout">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon" alt="" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon mr-2" alt="" style="margin-left: 3px;" />
                                     Terminar Sessão
                                 </a>
                             </div>
@@ -68,20 +81,19 @@
                             </a>
                             <div class="dropdown-menu message-box notifications">
                                 <div class="msg-title mt-2 pb-3">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg')}}" class="logo" alt="" style="margin-right: 10px;" />
-                                    Notificações (1)
+                                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg')}}" class="logo" alt="" style="margin-right: 10px;margin-bottom: 3px;" />
+                                    <div class="d-inline-block">
+                                        Notificações ({{ $unread_user_notifications->count() }})
+                                    </div>
                                 </div>
 
-                                <div class="msg-box-content">
-                                    <!-- Message Block -->
-                                    <a href="#">
-                                        O Aluno Luis Silva aguarda a avaliação do Exercício “De Áustria para Portugal”.
-                                        <p class="time float-right">Há 24 minutos</p>
-                                    </a>
+                                <div id="user_notifications_partial">
+                                    @include('layouts.notifications-partial')
                                 </div>
+
                             </div>
                             <div class="notifications-count">
-                                1
+                                {{ $unread_user_notifications->count() }}
                             </div>
                         </li>
                     @else

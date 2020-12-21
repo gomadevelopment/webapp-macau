@@ -26,7 +26,7 @@
                         <strong>Professor:</strong> 
                         <a href="/perfil/{{ $exercise->user->id }}" class="professor_link">
                             {{ $exercise->user->username }} 
-                            <img src="{{asset('/assets/backoffice_assets/icons/Eye_pink.svg')}}" alt="" style="margin-bottom: 3px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 0 2px 3px;">
                         </a> 
                     </p>
                 @endif

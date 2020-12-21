@@ -17,7 +17,7 @@
                     <form id="form_new_messages_to" action="">
                         @csrf
                         <div class="form-group">
-                            <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
+                            <div class="select2_with_search">
                                 <select name="select_students_to_class_ids[]" id="select_students_to_class" class="form-control" multiple style="border: none;">
                                     @foreach ($students_without_class as $user)                                             
                                         <option value="{{ $user->id }}" data-image="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}">

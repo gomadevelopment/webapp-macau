@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label class="label_title">Tags</label>
-                <div class="select2_with_search" style="border-radius: 5px; border: 2px solid #e6ebf1;">
+                <div class="select2_with_search">
                     <select name="tags[]" id="tags" class="form-control" multiple  style="border: none;" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
                         @foreach ($tags as $tag)
                             <?php 

@@ -19,8 +19,14 @@ use DB;
 
 class ExercisesController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('topNavBarOption', 'exercises');
+    }
+
     public function index()
     {
+        $this->viewShareNotifications();
         $inputs = request()->all();
 
         $exercises_categories = ExerciseCategory::get();
@@ -114,6 +120,7 @@ class ExercisesController extends Controller
 
     public function details($id)
     {
+        $this->viewShareNotifications();
         $exercise = Exercise::find($id);
 
         if(!$exercise){
@@ -135,6 +142,7 @@ class ExercisesController extends Controller
 
     public function save($id = null)
     {
+        $this->viewShareNotifications();
         $exercise = $id ? Exercise::find($id) : new Exercise;
 
         $exercises_categories = ExerciseCategory::get();
@@ -274,21 +282,32 @@ class ExercisesController extends Controller
 
     public function saveQuestion($id = null)
     {
+        $this->viewShareNotifications();
         return view('exercises.questions.save');
     }
 
     public function savePostQuestion($id = null)
     {
+        $this->viewShareNotifications();
         return view('exercises.questions.save');
     }
 
     public function performExercise($id = null)
     {
+        $this->viewShareNotifications();
         return view('exercises.fill_exercises.perform');
     }
 
     public function performPostExercise($id = null)
     {
+        $this->viewShareNotifications();
         return view('exercises.fill_exercises.perform');
+    }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
     }
 }

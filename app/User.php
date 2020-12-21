@@ -140,6 +140,32 @@ class User extends Authenticatable
     }
 
     /**
+     * Unread Notifications
+     */
+    public function unread_notifications()
+    {
+        return $this->hasMany('App\Notification', 'user_id')->where('active', 1)->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Read Notifications
+     */
+    public function read_notifications()
+    {
+        return $this->hasMany('App\Notification', 'user_id')->where('active', 0)->orderBy('created_at', 'DESC');
+    }
+
+    public function getUnreadNotifications($limit = 10)
+    {
+        return $this->unread_notifications()->take($limit);
+    }
+
+    public function getReadNotifications($limit = 10)
+    {
+        return $this->read_notifications()->take($limit);
+    }
+
+    /**
      * Student Class
      */
     public function student_class_user()

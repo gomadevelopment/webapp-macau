@@ -19,7 +19,7 @@
                 <a  href="#collapseOne_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                     <span>Expandir</span>
                     <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
                 </a>
             </div>
 
@@ -83,7 +83,7 @@
                 <a  href="#collapseTwo_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                     <span>Expandir</span>
                     <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
                 </a>
             </div>
 
@@ -147,7 +147,7 @@
                 <a  href="#collapseThree_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                     <span>Expandir</span>
                     <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
                 </a>
             </div>
 
@@ -211,7 +211,7 @@
                 <a  href="#collapseFour_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                     <span>Expandir</span>
                     <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
                 </a>
             </div>
 
@@ -275,7 +275,7 @@
                 <a  href="#collapseFive_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                     <span>Expandir</span>
                     <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
                 </a>
             </div>
 

@@ -327,6 +327,10 @@ span.error-block-span.pink {
     left: 60px !important;
 }
 
+.navigation-portrait .message-box .msg-box-content {
+    max-height: 40vh !important;
+}
+
 /* Footer */
 .dark-footer .footer-widget {
     padding: 0;
@@ -345,7 +349,7 @@ span.error-block-span.pink {
 
 .dark-footer p {
     font-size: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
 }
 
 .dark-footer a {
@@ -644,12 +648,13 @@ span.error-block-span.pink {
 
 .message-box .msg-box-content {
     /* min-height: 380px; */
-    max-height: 380px;
+    max-height: 60vh;
     overflow-y: scroll;
     z-index: 1001;
 }
 
-.message-box .msg-box-content a {
+.message-box .msg-box-content a,
+.message-box .msg-box-content p {
     display: block;
     padding: 10px 10px 18px 10px;
     /* border-bottom: 2px solid #e2e2e2; */
@@ -661,13 +666,29 @@ span.error-block-span.pink {
     letter-spacing: -0.22px;
     line-height: 19px;
     text-align: left;
+    padding: 20px 12px 0px 12px !important;
 }
 
-.message-box .msg-box-content a:hover {
+.message-box .msg-box-content a.unread {
+    font-family: "Gilroy - Bold";
+}
+
+.message-box .msg-box-content p:not(.time) {
+    margin: 0 !important;
+    padding: 10px !important;
+    font-family: "Gilroy - Bold";
+}
+
+.message-box .msg-box-content p.time {
+    padding: 0 12px 5px 12px !important;
+    margin: 0;
+}
+
+/* .message-box .msg-box-content a:hover {
     color: rgb(0, 0, 0, .7);
     background-color: #fafafa;
     text-decoration: none;
-}
+} */
 
 .message-box .msg-box-content .pd-l0 {
     padding-left: 0px;
@@ -681,12 +702,12 @@ span.error-block-span.pink {
     display: none;
 }
 
-.message-box .msg-box-content p {
+/* .message-box .msg-box-content p {
     font-size: 13px;
     color: #1d2129;
     font-weight: normal;
     margin: 1px 0px 8px 0px;
-}
+} */
 
 .message-box .msg-box-content p.time,
 .notification_time_ago {
@@ -707,12 +728,6 @@ span.error-block-span.pink {
 
 .dropdown.show .dropdown-menu-arrow {
     display: block;
-}
-
-/* Unread Notification */
-
-.message-box .msg-box-content>a:nth-child(2n+0) {
-    background-color: #fafafa;
 }
 
 textarea.form-control {

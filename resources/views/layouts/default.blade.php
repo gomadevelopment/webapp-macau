@@ -67,10 +67,82 @@
         <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https'))}}"></script>
         <script src="{{asset('/assets/js/custom.js', config()->get('app.https'))}}"></script>
 
+        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https'))}}"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https'))}}"></script>
+
         <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https'))}}"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
-		<!-- ============================================================== -->
+        <!-- ============================================================== -->
+        
+        @if (auth()->user())
+            <script>
+                $(function(){
+                    $("time.timeago").timeago();
+
+                    // Mark shown notifications as read (active = 0) - when bell_icon notifications dropdown is opened
+                    // var notifications_ids = JSON.parse('<?php echo json_encode($unread_user_notifications->pluck("id")->toArray()); ?>');
+                    // $(document).on('click', '.user_notifications.dropdown a', function(){
+                    //     $.ajax({
+                    //         type: 'GET',
+                    //         url: '/notifications_mark_as_read',
+                    //         data: {notifications_ids:notifications_ids},
+                    //         success: function(response){
+                    //         }
+                    //     });
+                    // });
+
+                    // Update User Notifications on top-nav-bar dropdown notifications box
+                    function updateNotificationsOnScroll(e, show_less = null) {
+                        var elem = $(e.currentTarget);
+                        if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight() && !$('#no_more_user_notifications').is(':checked')) {
+                            console.log('ENTROU');
+                            var current_unread_limit = $('#unread_user_notifications_count').val();
+                            var current_read_limit = $('#read_user_notifications_count').val();
+                            $.ajax({
+                                type: 'GET',
+                                url: '/update_classroom_notifications',
+                                data: {current_unread_limit:current_unread_limit, current_read_limit:current_read_limit, show_less: false, nav_bar_notifications: true},
+                                success: function(response){
+                                    if(response && response.status == 'success'){
+                                        $('#user_notifications_partial').html(response.html);
+                                        $('#user_notifications_partial').find('time.timeago').timeago();
+                                        $('#user_notifications_partial>div').on('scroll', updateNotificationsOnScroll);
+                                        $('.notifications-count').text($('#unread_user_notifications_count').val());
+                                        $('.message-box.notifications>div.msg-title>div').text('Notificações ('+ $('#unread_user_notifications_count').val() +')');
+                                        if(response.no_more_notifications){
+                                            $('#no_more_user_notifications').attr('checked', true);
+                                        }
+                                        else{
+                                            $('#no_more_user_notifications').attr('checked', false);
+                                        }
+                                    }
+                                    else{
+                                        $(".errorMsg").text(response.message);
+                                        $(".errorMsg").fadeIn();
+                                        setTimeout(() => {
+                                            $(".errorMsg").fadeOut();
+                                        }, 5000);
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    $('.user_notifications .msg-box-content').off('scroll', updateNotificationsOnScroll);
+                    $('.user_notifications .msg-box-content').on('scroll', updateNotificationsOnScroll);
+
+                    // Fix select2 option containers
+                    $(document).on('click', '.select2', function(){
+                        var select2_below_width = $('.select2-dropdown.select2-dropdown--below').outerWidth();
+                        var select2_above_width = $('.select2-dropdown.select2-dropdown--above').outerWidth();
+                        $('.select2-dropdown.select2-dropdown--below').css('left', '1px');
+                        $('.select2-dropdown.select2-dropdown--above').css('left', '1px');
+                    });
+
+                });
+            </script>
+        @endif
 
         @yield('scripts')
 

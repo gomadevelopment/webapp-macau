@@ -16,7 +16,15 @@
             <div class="col-lg-12 col-md-12">
                 
                 <div class="wrap">
-                    <h1 class="title">Criar Exercício</h1>
+                    @if (isset($details_page) && $details_page)
+                        <h1 class="title details_page_title">
+                            Detalhes do exercício: "{{ $exercise->title }}"
+                        </h1>
+                    @elseif(isset($exercise->id))
+                        <h1 class="title edit_title">Editar exercício</h1>
+                    @else
+                        <h1 class="title">Criar exercício</h1>
+                    @endif
                 </div>
                 
             </div>
@@ -206,10 +214,20 @@
 
             function changePageTitle(selector){
                 if($(selector).hasClass('active') && $(selector).attr('id') != 'begin-tab'){
-                    $('.page-title .title').text('Exercício: "'+$('#title').val()+'"');
+                    if($('.page-title .title:not(.details_page_title)').hasClass('edit_title')){
+                        $('.page-title .title:not(.details_page_title)').text('Editar exercício: "'+$('#title').val()+'"');
+                    }
+                    else{
+                        $('.page-title .title:not(.details_page_title)').text('Exercício: "'+$('#title').val()+'"');
+                    }
                 }
                 else{
-                    $('.page-title .title').text('Criar Exercício');
+                    if($('.page-title .title:not(.details_page_title)').hasClass('edit_title')){
+                        $('.page-title .title:not(.details_page_title)').text('Editar exercício');
+                    }
+                    else{
+                        $('.page-title .title:not(.details_page_title)').text('Criar exercício');
+                    }
                 }
             }
 
