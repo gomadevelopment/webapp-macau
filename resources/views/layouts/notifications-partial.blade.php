@@ -2,6 +2,7 @@
     <input hidden type="number" id="unread_user_notifications_count" value="{{ $unread_user_notifications->count() }}">
     <input hidden type="number" id="read_user_notifications_count" value="{{ $read_user_notifications->count() }}">
     <input hidden type="checkbox" id="no_more_user_notifications">
+    <input hidden type="text" id="unread_user_notifications_ids" value="<?php echo json_encode($unread_user_notifications->pluck("id")->toArray()); ?>">
     <!-- Message Block -->
     @if ($unread_user_notifications->count())
         @foreach ($unread_user_notifications as $notification)

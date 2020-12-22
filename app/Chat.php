@@ -266,7 +266,7 @@ class Chat extends Model
             Notification::create([
                 'title' => 'Nova Mensagem em Chat Individual',
                 'text' => 'O utilizador "'.User::find($data['user_sender_id'])->username.'" enviou-lhe uma nova mensagem no chat.',
-                'url' => '/chat/' . $chat->user_1_id == $data['user_sender_id'] ? $chat->user_2_id : $chat->user_1_id,
+                'url' => $chat->user_1_id == $data['user_sender_id'] ? '/chat/' . $chat->user_2_id : '/chat/' . $chat->user_1_id,
                 'param1_text' => 'chat_with_user_id',
                 'param1' => $chat->user_1_id == $data['user_sender_id'] ? $chat->user_2_id : $chat->user_1_id,
                 'param2_text' => '',

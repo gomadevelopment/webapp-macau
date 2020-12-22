@@ -319,6 +319,10 @@ span.error-block-span.pink {
     padding: 20px 12px !important;
 }
 
+.navigation-portrait .nav-menu .user_avatar a.msg-title {
+    padding: 8px 15px !important;
+}
+
 .navigation-portrait .nav-menu.nav-menu-social>li {
     margin-left: 10px;
 }
@@ -648,7 +652,7 @@ span.error-block-span.pink {
 
 .message-box .msg-box-content {
     /* min-height: 380px; */
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-y: scroll;
     z-index: 1001;
 }

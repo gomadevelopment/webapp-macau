@@ -25,21 +25,14 @@ class NotificationsController extends Controller
     {
         $data = request()->only('current_unread_limit', 'current_read_limit', 'show_less', 'nav_bar_notifications');
         $no_more_notifications = false;
-        // dd($data);
+        
             if($data['show_less'] == 'true' && !isset($data['nav_bar_notifications'])){
                 $unread_notifications = auth()->user()->getUnreadNotifications(5)->get();
-                $read_notifications = auth()->user()->getReadNotifications(5)->get();
+                $read_notifications = auth()->user()->getReadNotifications(5-$unread_notifications->count())->get();
             }
             else{
-                $unread_limit = $data['current_unread_limit'] == 0 ? 0 : $data['current_unread_limit'] + 5;
+                $unread_limit = $data['current_unread_limit'] == 0 ? 0 : 5;
                 $unread_notifications = auth()->user()->getUnreadNotifications($unread_limit)->get();
-
-                // if($unread_notifications->count() == auth()->user()->unread_notifications->count()){
-                //     $read_limit = $data['current_read_limit'] + 5;
-                // }
-                // else{
-                //     $read_limit = 0;
-                // }
 
                 $read_limit = $data['current_read_limit'] + 5;
                 $read_notifications = auth()->user()->getReadNotifications($read_limit)->get();

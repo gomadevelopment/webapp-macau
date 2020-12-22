@@ -36,7 +36,7 @@ class ClassroomController extends Controller
         }
 
         $unread_notifications = auth()->user()->getUnreadNotifications(5)->get();
-        $read_notifications = auth()->user()->getReadNotifications(5-$unread_notifications->count())->get();
+        $read_notifications = auth()->user()->getReadNotifications(10)->get();
         // dd($unread_notifications, $read_notifications);
 
         return view('classroom.index', compact('students_colleagues', 'unread_notifications', 'read_notifications'));

@@ -83,6 +83,10 @@
 }
 
 @media (max-width: 991px) {
+    .classes_accordion {
+        margin: auto;
+    }
+
     .show-23 {
         display: block !important;
         position: relative;
@@ -155,6 +159,11 @@
 }
 
 @media (max-width: 767px) {
+
+    .classes_accordion {
+        margin-left: auto !important;
+        margin-right: unset;
+    }
 
     .drag_and_drop_image img {
         width: auto;

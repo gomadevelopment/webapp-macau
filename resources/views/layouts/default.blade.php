@@ -81,16 +81,19 @@
                     $("time.timeago").timeago();
 
                     // Mark shown notifications as read (active = 0) - when bell_icon notifications dropdown is opened
-                    // var notifications_ids = JSON.parse('<?php echo json_encode($unread_user_notifications->pluck("id")->toArray()); ?>');
-                    // $(document).on('click', '.user_notifications.dropdown a', function(){
-                    //     $.ajax({
-                    //         type: 'GET',
-                    //         url: '/notifications_mark_as_read',
-                    //         data: {notifications_ids:notifications_ids},
-                    //         success: function(response){
-                    //         }
-                    //     });
-                    // });
+                    function markUserNotsAsRead() {
+                        var notifications_ids = JSON.parse($('#unread_user_notifications_ids').val());
+                        console.log(notifications_ids);
+                        $.ajax({
+                            type: 'GET',
+                            url: '/notifications_mark_as_read',
+                            data: {notifications_ids:notifications_ids},
+                            success: function(response){
+                            }
+                        });
+                    }
+
+                    $(document).on('click', '.user_notifications.dropdown a', markUserNotsAsRead);
 
                     // Update User Notifications on top-nav-bar dropdown notifications box
                     function updateNotificationsOnScroll(e, show_less = null) {
@@ -105,6 +108,7 @@
                                 data: {current_unread_limit:current_unread_limit, current_read_limit:current_read_limit, show_less: false, nav_bar_notifications: true},
                                 success: function(response){
                                     if(response && response.status == 'success'){
+                                        
                                         $('#user_notifications_partial').html(response.html);
                                         $('#user_notifications_partial').find('time.timeago').timeago();
                                         $('#user_notifications_partial>div').on('scroll', updateNotificationsOnScroll);
@@ -116,6 +120,9 @@
                                         else{
                                             $('#no_more_user_notifications').attr('checked', false);
                                         }
+                                        var notifications_ids = JSON.parse($('#unread_user_notifications_ids').val());
+                                        console.log(notifications_ids);
+                                        markUserNotsAsRead();
                                     }
                                     else{
                                         $(".errorMsg").text(response.message);

@@ -1,12 +1,12 @@
 <div class="shop_grid_caption card-body m-0 mb-4 pt-2 pb-2">
                 
     <div class="form-group d-flex flex-wrap justify-content-center m-0">
-        <h4 class="sg_rate_title align-self-center m-0" style="font-size: 21px;">
-            <img src="{{asset('/assets/backoffice_assets/icons/Classes.svg')}}" class="mr-2" alt="">
+        <img src="{{asset('/assets/backoffice_assets/icons/Classes.svg')}}" class="ml-2 mr-2" alt="" style="margin-bottom: 4px;">
+        <h4 class="sg_rate_title align-self-center text-center m-0" style="font-size: 21px;">
             Turma {{ $class->name }} @if(auth()->user()->university) > {{ auth()->user()->university->name }} @endif
         </h4>
         <br>
-        <a  href="#collapse_class_{{ $class->id }}" class="ml-auto b-0 align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
+        <a  href="#collapse_class_{{ $class->id }}" class="ml-auto b-0 align-self-center classes_accordion expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
             <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
             <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
         </a>
@@ -18,13 +18,13 @@
 
     <div id="collapse_class_{{ $class->id }}" class="collapse" data-parent="#accordion">
 
-        <div class="exercise_time wrap mt-4 mb-5 text-left">
-            <a href="#" data-toggle="modal" data-target="#new_insert_student_modal" class="btn search-btn comment_submit insert_student_button_on_class_body" style="float: none; padding: 12px 20px;" data-class-id="{{ $class->id }}">
+        <div class="exercise_time wrap mt-3 mb-4 text-left">
+            <a href="#" data-toggle="modal" data-target="#new_insert_student_modal" class="btn search-btn float-none comment_submit insert_student_button_on_class_body m-2" style="padding: 12px 20px;" data-class-id="{{ $class->id }}">
                 <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                 Inserir Aluno
             </a>
 
-            <a href="#" class="btn btn-theme remove_button ml-3" style="float: none; padding: 13px 20px;">
+            <a href="#" class="btn btn-theme float-none remove_button m-2" style="padding: 13px 20px;">
                 <img src="{{asset('/assets/backoffice_assets/icons/performance_icon_pink.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                 Ver Desempenho
             </a>

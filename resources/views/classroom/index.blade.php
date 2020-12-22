@@ -52,10 +52,23 @@
                         <div class="wrap mb-3">
                             <h1 class="title">Notificações</h1>
                         </div>
-                        <div class="card-body classroom_notifications_body p-1" id="classroom_notifications_body">
-
-                            @include('classroom.classroom-partials.notifications-partial')
-
+                        <div class="card-body p-1">
+                            <div style="padding: 5px;" class="to_scroll classroom_notifications_body" id="classroom_notifications_body">
+                                @include('classroom.classroom-partials.notifications-partial')
+                            </div>
+                            @if($unread_notifications->count() || $read_notifications->count())
+                                <hr class="sep">
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <a href="#" class="notifications_see_more">
+                                            Ver Mais
+                                        </a>
+                                        <a href="#" class="notifications_see_less">
+                                            Ver Menos
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -559,18 +572,22 @@
             // NOTIFICATIONS
 
             // Mark shown notifications as read (active = 0)
-            // var notifications_ids = JSON.parse('<?php echo json_encode(auth()->user()->unread_notifications->pluck("id")->toArray()); ?>');
-            // $.ajax({
-            //     type: 'GET',
-            //     url: '/notifications_mark_as_read',
-            //     data: {notifications_ids:notifications_ids},
-            //     success: function(response){
-            //     }
-            // });
+            markNotsAsRead();
+            function markNotsAsRead() {
+                var notifications_ids = JSON.parse($('#unread_notifications_ids').val());
+                $.ajax({
+                    type: 'GET',
+                    url: '/notifications_mark_as_read',
+                    data: {notifications_ids:notifications_ids},
+                    success: function(response){
+                    }
+                });
+            }
 
             // Update Unread + Read Notifications on scroll down bottom on notification div
             function updateNotificationsOnScroll(e, show_less = null) {
                 // e.preventDefault();
+                console.log('updateNotificationsOnScroll');
                 if(show_less){
                     if(show_less == 'yes'){
                         show_less = true;
@@ -588,14 +605,14 @@
                             if(response && response.status == 'success'){
                                 $('#classroom_notifications_body').html(response.html);
                                 $('#classroom_notifications_body').find('time.timeago').timeago();
-                                $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
+                                $('#classroom_notifications_body').on('scroll', updateNotificationsOnScroll);
                                 if(show_less){
-                                    $("#classroom_notifications_body .to_scroll").removeClass("scrollable_div");
+                                    $("#classroom_notifications_body.to_scroll").removeClass("scrollable_div");
                                     $('.notifications_see_less').hide();
                                     $('.notifications_see_more').show();
                                 }
                                 else{
-                                    $("#classroom_notifications_body .to_scroll").addClass("scrollable_div");
+                                    $("#classroom_notifications_body.to_scroll").addClass("scrollable_div");
                                     $('.notifications_see_less').show();
                                     $('.notifications_see_more').hide();
                                 }
@@ -606,6 +623,7 @@
                                 else{
                                     $('#no_more_notifications').attr('checked', false);
                                 }
+                                markNotsAsRead();
                             }
                             else{
                                 $(".errorMsg").text(response.message);
@@ -631,8 +649,8 @@
                                 if(response && response.status == 'success'){
                                     $('#classroom_notifications_body').html(response.html);
                                     $('#classroom_notifications_body').find('time.timeago').timeago();
-                                    $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
-                                    $("#classroom_notifications_body .to_scroll").addClass("scrollable_div");
+                                    $('#classroom_notifications_body').on('scroll', updateNotificationsOnScroll);
+                                    $("#classroom_notifications_body.to_scroll").addClass("scrollable_div");
                                     // console.log($("#classroom_notifications_body .to_scroll")[0].scrollHeight - 100);
                                     // $("#classroom_notifications_body .to_scroll").animate({ scrollTop: $("#classroom_notifications_body .to_scroll")[0].scrollHeight - 100}, 1000);
                                     // $("#classroom_notifications_body .to_scroll").scrollTop($("#classroom_notifications_body .to_scroll")[0].scrollHeight + 20);
@@ -643,6 +661,7 @@
                                     else{
                                         $('#no_more_notifications').attr('checked', false);
                                     }
+                                    markNotsAsRead();
                                 }
                                 else{
                                     $(".errorMsg").text(response.message);
@@ -659,8 +678,8 @@
                 // return false;
             }
 
-            $('#classroom_notifications_body>div').off('scroll', updateNotificationsOnScroll);
-            $('#classroom_notifications_body>div').on('scroll', updateNotificationsOnScroll);
+            $('#classroom_notifications_body').off('scroll', updateNotificationsOnScroll);
+            $('#classroom_notifications_body').on('scroll', updateNotificationsOnScroll);
 
             hideExtraNotifications();
 
@@ -668,17 +687,53 @@
             function hideExtraNotifications() {
                 $(".notifications_see_more").show();
                 $(".notifications_see_less").hide();
-                $("#classroom_notifications_body .to_scroll").removeClass(
+                $("#classroom_notifications_body.to_scroll").removeClass(
                     "scrollable_div"
                 );
+                $("#classroom_notifications_body.to_scroll .students_or_colleagues .form-group")
+                    .find('div')
+                    .not(':nth-child(1)')
+                    .not(':nth-child(2)')
+                    .not(':nth-child(3)')
+                    .not(':nth-child(4)')
+                    .not(':nth-child(5)')
+                    .not(':nth-child(6)')
+                    .not(':nth-child(7)')
+                    .not(':nth-child(8)')
+                    .not(':nth-child(9)')
+                    .not(':nth-child(10)')
+                    .not(':nth-child(11)')
+                    .not(':nth-child(12)')
+                    .addClass('d-none');
+                $("#classroom_notifications_body.to_scroll .students_or_colleagues .form-group")
+                    .find('hr:not(.sep)')
+                    .not(':nth-child(1)')
+                    .not(':nth-child(2)')
+                    .not(':nth-child(3)')
+                    .not(':nth-child(4)')
+                    .not(':nth-child(5)')
+                    .not(':nth-child(6)')
+                    .not(':nth-child(7)')
+                    .not(':nth-child(8)')
+                    .not(':nth-child(9)')
+                    .not(':nth-child(10)')
+                    .not(':nth-child(11)')
+                    .not(':nth-child(12)')
+                    .addClass('d-none');
             }
 
             function showExtraNotifications() {
                 $(".notifications_see_more").hide();
                 $(".notifications_see_less").show();
-                $("#classroom_notifications_body .to_scroll").addClass(
+                $("#classroom_notifications_body.to_scroll").addClass(
                     "scrollable_div"
                 );
+                $("#classroom_notifications_body.to_scroll .students_or_colleagues .form-group")
+                    .find('div')
+                    .removeClass('d-none');
+                $("#classroom_notifications_body.to_scroll .students_or_colleagues .form-group")
+                    .find('hr:not(.sep)')
+                    .removeClass('d-none');
                 // $(".classroom_notifications_body");
             }
 
