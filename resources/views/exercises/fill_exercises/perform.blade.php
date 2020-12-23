@@ -23,11 +23,14 @@
                     <p class="time_label exercise_author align-self-center">
                         <strong style="font-size: 22px;">Tempo:</strong>
                     </p>
-                    <div class="time_countdown ml-2 mr-2" style="padding: 10px 15px !important;">
-                        00:41:38
+                    <div id="counterDisplay" class="time_countdown ml-2 mr-2" style="padding: 10px 15px !important;">
                     </div>
-                    <a href="#" class="pause_time" style="padding: 10px 15px !important;">
+                    <input type="number" id="minutesInput" value="20" hidden/>
+                    <a href="#" id="pauseButton" class="pause_time" style="padding: 10px 15px !important;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Pause_circle.svg')}}" alt="">
+                    </a>
+                    <a href="#" id="startButton" class="pause_time" style="padding: 10px 15px !important;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg')}}" alt="">
                     </a>
                 </div>
                 
@@ -51,31 +54,31 @@
                             Introdução</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pre-listening-tab" data-toggle="tab" href="#pre-listening" role="tab" aria-controls="pre-listening-tab" aria-selected="false">
+                        <a class="nav-link disabled" id="pre-listening-tab" data-toggle="tab" href="#pre-listening" role="tab" aria-controls="pre-listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pré-Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="listening-tab" data-toggle="tab" href="#listening" role="tab" aria-controls="listening-tab" aria-selected="false">
+                        <a class="nav-link disabled" id="listening-tab" data-toggle="tab" href="#listening" role="tab" aria-controls="listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             À Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="listening-shop-tab" data-toggle="tab" href="#listening-shop" role="tab" aria-controls="listening-shop-tab" aria-selected="false">
+                        <a class="nav-link disabled" id="listening-shop-tab" data-toggle="tab" href="#listening-shop" role="tab" aria-controls="listening-shop-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home2.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home2_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Oficina da Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="after-listening-tab" data-toggle="tab" href="#after-listening" role="tab" aria-controls="after-listening-tab" aria-selected="false">
+                        <a class="nav-link disabled" id="after-listening-tab" data-toggle="tab" href="#after-listening" role="tab" aria-controls="after-listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/After_listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/After_listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pós-Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="false">
+                        <a class="nav-link disabled" id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Classificação</a>
@@ -175,6 +178,38 @@
         // });
 
         $(function() {
+
+            // Start Exercise
+            $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
+                console.log($(this).attr('href'), this.hash);
+                if($(this).hasClass('start_exercise')){
+                    $(this).hide();
+                    $('.nav-link.disabled').removeClass('disabled');
+                    $('#startButton').click();
+                }
+
+                $($(this).attr('href') + "-tab").click();
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    e.preventDefault();
+
+                    var hash = this.hash + '-tab';
+                    var offset_disc = $(".header").height() + 10;
+
+                    if ($(window).width() < 992) {
+                        offset_disc = 0;
+                    }
+
+                    $("html, body").animate(
+                        {
+                            scrollTop: $(hash).offset().top - offset_disc
+                        },
+                        800
+                    );
+                }
+            });
+
             // Change icon image on tab change
             changeIconImage();
             function changeIconImage(){

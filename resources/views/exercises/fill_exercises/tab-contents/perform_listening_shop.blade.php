@@ -3,7 +3,7 @@
         <div class="card-body">
 
             <div class="row mb-4" style="place-content: center;">
-                <div class="form-group">
+                <div class="form-group m-2">
                     <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                         <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
                     </video>
@@ -76,15 +76,17 @@
                         <div class="row mt-5">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="words_to_split" id=""
-                                    value="Já estou a viver aqu ihá20anos masPortanto,veio pequenina.NãoVeio,veioObrigada.">
+                                    <textarea name="words_to_split" class="form-control" id="" cols="30" rows="2">Já estou a viver aqu ihá20anos masPortanto,veio pequenina.NãoVeio,veioObrigada.</textarea>
+                                    {{-- <input class="form-control" type="text" name="words_to_split" id=""
+                                    value="Já estou a viver aqu ihá20anos masPortanto,veio pequenina.NãoVeio,veioObrigada."> --}}
                                 </div>
                             </div>
 
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="words_to_split" id=""
-                                    value="SoudaÁustria,crescinaÁustria,estudeinaÁustria,comeceiatrabalharnaÁustria.E,depois,sim,umdiaconheciumportuguêsemViena.">
+                                    <textarea name="words_to_split" class="form-control" id="" cols="30" rows="2">SoudaÁustria,crescinaÁustria,estudeinaÁustria,comeceiatrabalharnaÁustria.E,depois,sim,umdiaconheciumportuguêsemViena.</textarea>
+                                    {{-- <input class="form-control" type="text" name="words_to_split" id=""
+                                    value="SoudaÁustria,crescinaÁustria,estudeinaÁustria,comeceiatrabalharnaÁustria.E,depois,sim,umdiaconheciumportuguêsemViena."> --}}
                                 </div>
                             </div>
                         </div>
@@ -105,8 +107,12 @@
                             </div>
                         </div>
 
-                        <div class="d-block text-center mt-5 mb-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                        <div class="d-block text-center mt-4 mb-4">
+                            <a href="#listening" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Voltar
+                            </a>
+                            <a href="#ex2-shop" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Seguinte
                             </a>
@@ -158,11 +164,11 @@
                         <div class="row mt-3">
 
                             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                                <div class="form-group">
-                                    <label class="label_title mb-0 d-block">
-                                        <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4">
+                                <div class="form-group d-inline-flex">
+                                    <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
+                                    <label class="label_title m-0 d-block align-self-center">
                                         - E 
-                                        <div class="drag_and_drop_hole fill_hole word_hole ml-2 mr-2 border-0">
+                                        <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
                                             <select name="verbs_select_1" id="verbs_select_1" class="form-control">
                                                 <option value="1">ser</option>
                                                 <option value="2">foi</option>
@@ -175,10 +181,10 @@
                             </div>
 
                             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                                <div class="form-group">
-                                    <label class="label_title mb-0 d-block">
-                                        <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4">
-                                        <div class="drag_and_drop_hole fill_hole word_hole ml-2 mr-2 border-0">
+                                <div class="form-group d-inline-flex">
+                                    <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
+                                    <label class="label_title m-0 d-block align-self-center">
+                                        <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
                                             <select name="verbs_select_2" id="verbs_select_2" class="form-control">
                                                 <option value="1">Vem</option>
                                                 <option value="2">Foi</option>
@@ -208,8 +214,12 @@
                             </div>
                         </div>
 
-                        <div class="d-block text-center mt-5 mb-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                        <div class="d-block text-center mt-4 mb-4">
+                            <a href="#ex1-shop" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Voltar
+                            </a>
+                            <a href="#after-listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Continuar
                             </a>

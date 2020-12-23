@@ -42,8 +42,8 @@
                 </div>
             </div>
 
-            <div class="d-block text-center mt-3 mb-3">
-                <a href="#" class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
+            <div class="d-block text-center mt-4 mb-4">
+                <a href="#pre-listening" class="btn search-btn comment_submit start_exercise m-2" style="float: none; padding: 12px 20px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin: 0 5px 2px 0;">
                     Iniciar Exercício
                 </a>

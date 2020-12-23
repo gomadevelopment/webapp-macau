@@ -133,6 +133,10 @@ a.remove_button:hover {
 
 /* Create Exercise */
 
+.tab-content>.tab-pane {
+    padding: 0 !important;
+}
+
 .customize-tab.tabs_creative ul {
     box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.03);
     border-radius: 10px;
@@ -141,8 +145,13 @@ a.remove_button:hover {
     place-content: center;
 }
 
+.customize-tab.tabs_creative .nav-link.disabled {
+    pointer-events: none;
+}
+
 .customize-tab.tabs_creative .nav-link,
 .customize-tab.tabs_creative .nav-link.active,
+.customize-tab.tabs_creative .nav-link.disabled,
 .time_countdown,
 .time_countdown_white,
 .pause_time {
@@ -163,7 +172,8 @@ a.remove_button:hover {
 }
 
 .customize-tab.tabs_creative .nav-link,
-.customize-tab.tabs_creative .nav-link.active {
+.customize-tab.tabs_creative .nav-link.active,
+.customize-tab.tabs_creative .nav-link.disabled {
     line-height: unset;
 }
 

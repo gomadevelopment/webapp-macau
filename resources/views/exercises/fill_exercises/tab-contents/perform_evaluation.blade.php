@@ -23,12 +23,12 @@
                 </div>
             </div>
 
-            <div class="d-block text-center mt-5 mb-5">
-                <a href="#" class="btn btn-theme remove_button m-2" style="float: none; padding: 15px 25px;">
+            <div class="d-block text-center mt-4 mb-4">
+                <a href="/exercicios" class="btn btn-theme remove_button m-2" style="float: none; padding: 15px 25px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Ver Exercícios
                 </a>
-                <a href="#" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
+                <a href="/sala_de_aula" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Sala de Aula
                 </a>

@@ -3,7 +3,7 @@
         <div class="card-body">
 
             <div class="row mb-4" style="place-content: center;">
-                <div class="form-group">
+                <div class="form-group m-2">
                     <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                         <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
                     </video>
@@ -189,8 +189,12 @@
                             </div>
                         </div>
 
-                        <div class="d-block text-center mt-5 mb-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                        <div class="d-block text-center mt-4 mb-4">
+                            <a href="#pre-listening" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Voltar
+                            </a>
+                            <a href="#ex2" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Seguinte
                             </a>
@@ -240,7 +244,7 @@
                         <hr class="mt-4 mb-4">
 
                         {{-- Palavras --}}
-                        <div class="row mt-5">
+                        <div class="row mt-4">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <label class="label_title d-block" style="font-size: 30px;">
@@ -314,12 +318,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                                <div class="form-group">
-                                    <label class="label_title mb-0 d-block">
-                                        <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4">
+                            <div class="col-sm-12 col-md-12 col-lg-12 mb-1">
+                                <div class="form-group d-inline-flex">
+                                    <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
+                                    <label class="label_title m-0 d-block align-self-center">
                                         Astrid esteve em Portugal em 
-                                        <div class="drag_and_drop_hole fill_hole word_hole ml-2 mr-2">
+                                        <div class="drag_and_drop_hole fill_hole word_hole m-2">
                                             
                                         </div>
                                         .
@@ -327,16 +331,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                                <div class="form-group">
-                                    <label class="label_title mb-0 d-block">
-                                        <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4">
+                            <div class="col-sm-12 col-md-12 col-lg-12 mb-1">
+                                <div class="form-group d-inline-flex">
+                                    <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
+                                    <label class="label_title m-0 d-block align-self-center">
                                         Ela fala 
-                                        <div class="drag_and_drop_hole fill_hole word_hole ml-2 mr-2">
+                                        <div class="drag_and_drop_hole fill_hole word_hole m-2">
                                             
                                         </div>
                                         e não foi fácil fazer uma Pós-Graduação em
-                                        <div class="drag_and_drop_hole fill_hole word_hole ml-2 mr-2">
+                                        <div class="drag_and_drop_hole fill_hole word_hole m2">
                                             
                                         </div>
                                         .
@@ -362,8 +366,12 @@
                             </div>
                         </div>
 
-                        <div class="d-block text-center mt-5 mb-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                        <div class="d-block text-center mt-4 mb-4">
+                            <a href="#ex1" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Voltar
+                            </a>
+                            <a href="#listening-shop" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Continuar
                             </a>
