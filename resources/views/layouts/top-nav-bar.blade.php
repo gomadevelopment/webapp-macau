@@ -2,7 +2,8 @@
 <!-- Top header  -->
 <!-- ============================================================== -->
 <!-- Start Navigation -->
-<div class="header header-light">
+
+<div class="header header-light {{ Request::path('') === '/' ? 'homepage' : '' }} {{ auth()->user() ? 'logged_in' : '' }}">
     <div class="container">
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
@@ -44,9 +45,9 @@
                     {{-- No user logged in --}}
                     @else
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#como_funciona">Como Funciona</a></li>
-                        <li><a href="#contactos">Contactos</a></li>
+                        <li><a href="#sobre">{{ isset($pt_lang) && $pt_lang ? 'Sobre' : 'About' }}</a></li>
+                        <li><a href="#como_funciona">{{ isset($pt_lang) && $pt_lang ? 'Como Funciona' : 'How it Works' }}</a></li>
+                        <li><a href="#contactos">{{ isset($pt_lang) && $pt_lang ? 'Contactos' : 'Contacts' }}</a></li>
                     @endif
                     
                 </ul>
@@ -98,10 +99,21 @@
                         </li>
                     @else
                         <li class="login_click light">
-                            <a href="#" data-toggle="modal" data-target="#login">Entrar</a>
+                            <a href="#" data-toggle="modal" data-target="#login">{{ isset($pt_lang) && $pt_lang ? 'Entrar' : 'Sign In' }}</a>
                         </li>
                         <li class="login_click theme-bg">
-                            <a href="#" data-toggle="modal" data-target="#signup">Inscrever</a>
+                            <a href="#" data-toggle="modal" data-target="#signup">{{ isset($pt_lang) && $pt_lang ? 'Inscrever' : 'Sign Up' }}</a>
+                        </li>
+                    @endif
+                    @if(Request::path() === '/' || stristr(Request::path(), 'redefinir_password') !== false)
+                        <li class="language_button ml-3 {{ isset($pt_lang) && $pt_lang ? 'active' : '' }}">
+                            <a href="/locale/pt">PT</a>
+                        </li>
+                        <li class="language_slash">
+                            <a href="#">|</a>
+                        </li>
+                        <li class="language_button {{ isset($en_lang) && $en_lang ? 'active' : '' }}">
+                            <a href="/locale/en">EN</a>
                         </li>
                     @endif
                 </ul>

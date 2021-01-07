@@ -20,6 +20,8 @@ $(function() {
         }
     });
 
+    var homepage_lang = $("#homepage_lang").val();
+
     // Signup and Login form input validations and form submit
     var signup_form_validate = $("#signup form").validate({
         rules: {
@@ -42,20 +44,44 @@ $(function() {
         },
         messages: {
             username: {
-                required: "Insira o seu nome de utilizador.",
-                minlength: "Nome com mínimo de 6 caracteres."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira o seu nome de utilizador."
+                        : "Insert your username.",
+                minlength:
+                    homepage_lang == "pt_lang"
+                        ? "Nome com mínimo de 6 caracteres."
+                        : "Username has a minimum of 6 characters required."
             },
             email: {
-                required: "Insira o seu e-mail.",
-                email: "Insira um e-mail válido."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira o seu e-mail."
+                        : "Insert your e-mail.",
+                email:
+                    homepage_lang == "pt_lang"
+                        ? "Insira um e-mail válido."
+                        : "Insert a valid e-mail"
             },
             password: {
-                required: "Insira uma password.",
-                minlength: "Password com mínimo de 6 caracteres."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira uma password."
+                        : "Insert a password.",
+                minlength:
+                    homepage_lang == "pt_lang"
+                        ? "Password com mínimo de 6 caracteres."
+                        : "Password has a minimum of 6 characters required."
             },
             password_confirmation: {
-                required: "Confirme a sua password.",
-                equalTo: "As palavras-passe não coincidem."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Confirme a sua password."
+                        : "Confirm your password.",
+                equalTo:
+                    homepage_lang == "pt_lang"
+                        ? "As palavras-passe não coincidem."
+                        : "The passwords don't match."
             }
         }
     });
@@ -71,10 +97,16 @@ $(function() {
         },
         messages: {
             username: {
-                required: "Insira o seu nome de utilizador."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira o seu nome de utilizador."
+                        : "Insert your username."
             },
             password: {
-                required: "Insira a sua password."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira a sua password."
+                        : "Insert your password."
             }
         }
     });
@@ -88,8 +120,14 @@ $(function() {
         },
         messages: {
             email: {
-                required: "Insira o seu e-mail de registo.",
-                email: "Insira um e-mail válido."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira o seu e-mail de registo."
+                        : "Insert your register e-mail.",
+                email:
+                    homepage_lang == "pt_lang"
+                        ? "Insira um e-mail válido."
+                        : "Insert a valid e-mail."
             }
         }
     });
@@ -107,12 +145,24 @@ $(function() {
         },
         messages: {
             password: {
-                required: "Insira uma password.",
-                minlength: "Password com mínimo de 6 caracteres."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Insira uma password."
+                        : "Insert a password.",
+                minlength:
+                    homepage_lang == "pt_lang"
+                        ? "Password com mínimo de 6 caracteres."
+                        : "Password has a minimum of 6 characters required."
             },
             password_confirmation: {
-                required: "Confirme a sua password.",
-                equalTo: "As palavras-passe não coincidem."
+                required:
+                    homepage_lang == "pt_lang"
+                        ? "Confirme a sua password."
+                        : "Confirm your password.",
+                equalTo:
+                    homepage_lang == "pt_lang"
+                        ? "As palavras-passe não coincidem."
+                        : "The passwords don't match."
             }
         }
     });
@@ -131,6 +181,12 @@ $(function() {
 
     $("#recover_password form").on("submit", function(event) {
         if (recover_password_form_validate.errorList.length == 0) {
+            $(this).submit();
+        }
+    });
+
+    $("#new_password form").on("submit", function(event) {
+        if (new_password_form_validate.errorList.length == 0) {
             $(this).submit();
         }
     });

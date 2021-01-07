@@ -181,7 +181,7 @@
 
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
-                console.log($(this).attr('href'), this.hash);
+                // console.log($(this).attr('href'), this.hash);
                 if($(this).hasClass('start_exercise')){
                     $(this).hide();
                     $('.nav-link.disabled').removeClass('disabled');

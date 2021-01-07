@@ -33,6 +33,15 @@
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <div id="main-wrapper">
+
+            @if(Session::get('locale') == 'pt' || !Session::has('locale'))
+                <?php $pt_lang = true; ?>
+                <input hidden type="text" id="homepage_lang" value="pt_lang">
+            @elseif(Session::get('locale') == 'en')
+                <?php $en_lang = true; ?>
+                <input hidden type="text" id="homepage_lang" value="en_lang">
+            @endif
+
             @include('layouts.top-nav-bar')
 
             @yield('content')
@@ -83,7 +92,7 @@
                     // Mark shown notifications as read (active = 0) - when bell_icon notifications dropdown is opened
                     function markUserNotsAsRead() {
                         var notifications_ids = JSON.parse($('#unread_user_notifications_ids').val());
-                        console.log(notifications_ids);
+                        // console.log(notifications_ids);
                         $.ajax({
                             type: 'GET',
                             url: '/notifications_mark_as_read',
@@ -99,7 +108,7 @@
                     function updateNotificationsOnScroll(e, show_less = null) {
                         var elem = $(e.currentTarget);
                         if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight() && !$('#no_more_user_notifications').is(':checked')) {
-                            console.log('ENTROU');
+                            // console.log('ENTROU');
                             var current_unread_limit = $('#unread_user_notifications_count').val();
                             var current_read_limit = $('#read_user_notifications_count').val();
                             $.ajax({
@@ -121,7 +130,7 @@
                                             $('#no_more_user_notifications').attr('checked', false);
                                         }
                                         var notifications_ids = JSON.parse($('#unread_user_notifications_ids').val());
-                                        console.log(notifications_ids);
+                                        // console.log(notifications_ids);
                                         markUserNotsAsRead();
                                     }
                                     else{

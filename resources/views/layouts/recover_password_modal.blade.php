@@ -7,7 +7,7 @@
             </span>
             <div class="modal-body">
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
-                <h1 class="modal-header-title">Recuperar Palavra-Passe!</h1>
+                <h1 class="modal-header-title">{{ isset($pt_lang) && $pt_lang ? 'Recuperar Palavra-Passe!' : 'Recover Password!' }}</h1>
                 <div class="login-form">
                     @if (session('recover_password_error'))
                         <div class="alert alert-danger">
@@ -28,7 +28,7 @@
                         
                         <div class="form-group signup_button about_section">
                             <button type="submit" class="btn btn-theme btn-lg">
-                                Recuperar &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                                {{ isset($pt_lang) && $pt_lang ? 'Recuperar' : 'Recover' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>
                         

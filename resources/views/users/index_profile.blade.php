@@ -415,7 +415,7 @@
                 var form_array;
                 setTimeout(function () {
                     form_array = $("#promoted_exercises_filters_form").serialize();
-                    console.log($('#hidden_user_id').val(), form_array);
+                    // console.log($('#hidden_user_id').val(), form_array);
                     $.ajax({
                         url: "/perfil/" + $('#hidden_user_id').val(),
                         type: "GET",

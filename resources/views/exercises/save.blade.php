@@ -425,7 +425,7 @@
                             }
                             else{
                                 formData.append('media_files[]', element2);
-                                console.log(element2.name, $(element).text());
+                                // console.log(element2.name, $(element).text());
                             }
                             
                         });

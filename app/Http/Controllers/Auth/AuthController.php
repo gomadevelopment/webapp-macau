@@ -45,10 +45,13 @@ class AuthController extends Controller
         }
 
         if (!$user = auth()->attempt(['username' => $inputs['username'], 'password' => $inputs['password']])) {
-            request()->session()->flash('login_error', 'Nome de Utilizador ou password inválidos.');
+            $login_error = \Session::get('locale') == 'pt' || !\Session::has('locale') 
+                                ? 'Nome de Utilizador ou password inválidos.' 
+                                : 'Username or password is invalid.';
+            request()->session()->flash('login_error', $login_error);
             return redirect('/')
-                    ->with('login_error', 'Nome de Utilizador ou password inválidos.')
-                    ->withErrors(['login_incorrect' => 'Nome de Utilizador ou password inválidos.'])
+                    ->with('login_error', $login_error)
+                    ->withErrors(['login_incorrect' => $login_error])
                     ->withInput();
         }
 

@@ -7,7 +7,7 @@
             </span>
             <div class="modal-body">
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
-                <h1 class="modal-header-title">Vamos inscrever-te!</h1>
+                <h1 class="modal-header-title">{{ isset($pt_lang) && $pt_lang ? 'Vamos Inscrever-te!' : 'Lets Sign You Up!' }}</h1>
                 <div class="login-form">
                     @if (session('signup_error'))
                         <div class="alert alert-danger">
@@ -18,15 +18,19 @@
                         
                         <div class="form-group radio">
                             <input id="professor" class="checkbox-custom" name="professor_or_student" value="professor" type="radio">
-							<label for="professor" class="checkbox-custom-label">Sou um Professor</label>
+							<label for="professor" class="checkbox-custom-label">
+                                {{ isset($pt_lang) && $pt_lang ? 'Sou um Professor' : "I am a Teacher" }}
+                            </label>
                         </div>
                         <div class="form-group radio">
                             <input id="student" class="checkbox-custom" name="professor_or_student" value="student" type="radio" checked>
-							<label for="student" class="checkbox-custom-label">Sou um Aluno</label>
+							<label for="student" class="checkbox-custom-label">
+                                {{ isset($pt_lang) && $pt_lang ? 'Sou um Aluno' : "I am a Student" }}
+                            </label>
                         </div>
                     
                         <div class="form-group">
-                            <input name="username" type="text" class="form-control" placeholder="Nome de Utilizador" required autocomplete="off" value="{{ old('username') }}"
+                            <input name="username" type="text" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Nome de Utilizador' : 'Username' }}" required autocomplete="off" value="{{ old('username') }}"
                             style="background: url({{asset('/assets/landing_page/icons/User.svg')}}) no-repeat scroll 7px 18px;">
                             @if ($errors->has('username'))
                                 <span class="error-block-span">
@@ -46,7 +50,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <input id="password" name="password" type="password" class="form-control" placeholder="Palavra-Passe" autocomplete="off"
+                            <input id="password" name="password" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Palavra-Passe' : 'Password' }}" autocomplete="off"
                             style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                             <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                             <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
@@ -58,7 +62,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input name="password_confirmation" type="password" class="form-control" placeholder="Confirmar Palavra-Passe" autocomplete="off"
+                            <input name="password_confirmation" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Confirmar Palavra-Passe' : 'Confirm Password' }}" autocomplete="off"
                             style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                             <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                             <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
@@ -71,7 +75,7 @@
 
                         <div class="form-group signup_button about_section">
                             <button type="submit" class="btn btn-theme btn-lg" data-target="#signup">
-                                Tudo Pronto!&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                                {{ isset($pt_lang) && $pt_lang ? 'Tudo Pronto!' : 'All Set!' }}&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>
                         @csrf

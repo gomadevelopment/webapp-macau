@@ -20,7 +20,17 @@ class Controller extends BaseController
         if(auth()->user()){
             $this->viewShareNotifications();
         }
+        
         return view('homepage');
+    }
+
+    public function setLocale($locale = 'pt')
+    {
+        if (!in_array($locale, ['pt', 'en'])){
+            $locale = 'pt';
+        }
+        \Session::put('locale', $locale);
+        return redirect()->to('/');
     }
 
     public function viewShareNotifications()

@@ -540,7 +540,7 @@
             $(document).on('change', '#students_class_select', function(e){
                 // e.preventDefault();
                 
-                console.log($(this).val());
+                // console.log($(this).val());
                 var class_id = $(this).val();
                 $.ajax({
                     type: 'GET',
@@ -587,7 +587,7 @@
             // Update Unread + Read Notifications on scroll down bottom on notification div
             function updateNotificationsOnScroll(e, show_less = null) {
                 // e.preventDefault();
-                console.log('updateNotificationsOnScroll');
+                // console.log('updateNotificationsOnScroll');
                 if(show_less){
                     if(show_less == 'yes'){
                         show_less = true;

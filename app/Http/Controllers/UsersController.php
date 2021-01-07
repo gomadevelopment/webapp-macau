@@ -22,12 +22,15 @@ class UsersController extends Controller
         $validator = \Validator::make($inputs, User::$rulesForAdd, User::$messages);
 
         if ($validator->fails()) {
-            request()->session()->flash('signup_error', 'Por favor, verifique os erros no formulário.');
+            $signup_error = \Session::get('locale') == 'pt' || !\Session::has('locale') 
+                                ? 'Por favor, verifique os erros no formulário.' 
+                                : 'Please, check the errors in the form.';
+            request()->session()->flash('signup_error', $signup_error);
             return redirect()
                 ->back()
                 ->withErrors($validator)
                 ->withInput()
-                ->with('signup_error', 'Por favor, verifique os erros no formulário.');
+                ->with('signup_error', $signup_error);
         }
 
         $new_user = User::create([

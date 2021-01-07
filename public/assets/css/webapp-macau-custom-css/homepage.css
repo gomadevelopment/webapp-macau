@@ -4,6 +4,8 @@
 .hero_banner {
     padding: 0;
     height: unset;
+    top: 98px;
+    margin-top: -98px;
 }
 
 .hero_banner .container {
@@ -79,7 +81,7 @@
 /* Section 1 - About */
 
 .about_section {
-    top: -98px;
+    /* top: -98px; */
     background-color: #ff2850;
 }
 
@@ -149,7 +151,7 @@
 /* Section 2 - How it works */
 
 .how_it_works_section {
-    top: -98px;
+    /* top: -98px; */
     padding-bottom: 0;
     background-color: #ffffff;
 }
@@ -157,7 +159,7 @@
 .how_it_works_section .title {
     color: #131b31;
     font-family: "Gilroy - Bold" !important;
-    font-size: 37px;
+    font-size: 45px;
     font-weight: 700;
     font-style: normal;
     letter-spacing: -0.59px;

@@ -15,6 +15,7 @@
 Route::group(['middlewareGroups' => 'web'], function () {
 
     Route::get('/', 'Controller@homepage');
+    Route::get('/locale/{locale}', 'Controller@setLocale');
 
     Route::post('/signup', 'UsersController@signUp');
 

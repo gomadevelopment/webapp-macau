@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Mask</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M18.2230159,-1.11031748 C19.6957752,-1.11031748 20.8896825,0.0835898532 20.8896825,1.55634919 L20.8896825,26.8896825 C20.8896825,27.5969265 20.6087309,28.2752036 20.1086339,28.7753006 L17.4419673,31.4419673 C16.4005692,32.4833654 14.7121292,32.4833654 13.6707311,31.4419673 L11.0040644,28.7753006 C10.5039674,28.2752036 10.2230159,27.5969265 10.2230159,26.8896825 L10.2230159,1.55634919 C10.2230159,0.0835898532 11.4169232,-1.11031748 12.8896825,-1.11031748 L18.2230159,-1.11031748 Z M18.2230159,7.46068252 L12.8890159,7.46068252 L12.8896825,26.8896825 L15.5563492,29.5563492 L18.2230159,26.8896825 L18.2230159,7.46068252 Z M18.2230159,1.55634919 L12.8896825,1.55634919 L12.8890159,4.79468252 L18.2230159,4.79468252 L18.2230159,1.55634919 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="#1-PT" transform="translate(-857.000000, -2156.000000)">
+            <g id="Group-45" transform="translate(855.000000, 2150.000000)">
+                <g id="Icon/Pencil" transform="translate(0.000000, 5.000000)">
+                    <g>
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" transform="translate(15.556349, 15.556349) rotate(45.000000) translate(-15.556349, -15.556349) " xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

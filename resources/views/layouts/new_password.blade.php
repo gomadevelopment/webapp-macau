@@ -20,7 +20,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-8" style="background-color: #ff2850; border-radius: 5px;">
                     <div class="hero-caption small_wd text-center">
                         <h1 class="big-header-capt cl_2 p-0 mt-4 mb-4" style="color: white !important; font-size: 36px !important;">
-                            Recuperar Palavra-Passe
+                            {{ isset($pt_lang) && $pt_lang ? 'Recuperar Palavra-Passe' : 'Recover Password' }}
                         </h1>
                     </div>
                     <input type="email" name="email" id="email" hidden value="{{ isset($email) && $email ? $email : '' }}">
@@ -35,7 +35,7 @@
                         @endif
                     </div> --}}
                     <div class="form-group">
-                        <input id="password" name="password" type="password" class="form-control" placeholder="Nova Palavra-Passe" autocomplete="off"
+                        <input id="password" name="password" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Nova Palavra-Passe' : 'New Password' }}" autocomplete="off"
                         style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                         <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                         <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input name="password_confirmation" type="password" class="form-control" placeholder="Confirmar nova Palavra-Passe" autocomplete="off"
+                        <input name="password_confirmation" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Confirmar Nova Palavra-Passe' : 'Confirm New Password' }}" autocomplete="off"
                         style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
                         <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
                         <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="form-group signup_button about_section">
-                        <button type="submit" class="btn btn-theme btn-lg" data-target="#signup">
-                            Confirmar&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                        <button type="submit" class="btn btn-theme btn-lg">
+                            {{ isset($pt_lang) && $pt_lang ? 'Confirmar' : 'Confirm' }}&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                         </button>
                     </div>
                 </div>

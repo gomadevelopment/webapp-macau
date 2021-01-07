@@ -9,9 +9,9 @@
 }
 
 @media (max-width: 1280px) {
-    .about_section {
+    /* .about_section {
         top: -96px;
-    }
+    } */
 
     .container.modal-dialog {
         max-width: 980px;
@@ -40,7 +40,11 @@
         inline-size: unset;
     }
 
-    .header .container {
+    .header.homepage .container {
+        max-width: 1000px;
+    }
+
+    .header:not(.homepage) .container {
         max-width: 980px;
     }
 
@@ -57,9 +61,9 @@
         max-width: 945px;
     }
 
-    .about_section {
+    /* .about_section {
         top: -78px;
-    }
+    } */
 
     .about_section .title {
         padding-top: 140px;
@@ -69,6 +73,10 @@
         width: 66%;
         margin-left: -60px;
         margin-right: -131px;
+    }
+
+    .how_it_works_section {
+        padding-bottom: 60px;
     }
 
     .how_it_works_section .hero-caption.small_wd {
@@ -83,6 +91,12 @@
 }
 
 @media (max-width: 991px) {
+
+    .hero_banner {
+        top: 0;
+        margin-top: 0;
+    }
+
     .classes_accordion {
         margin: auto;
     }
@@ -126,10 +140,9 @@
         padding-top: 77px;
     }
 
-    .how_it_works_section {
-        top: 0;
-        padding-bottom: 80px;
-    }
+    /* .how_it_works_section {
+        padding-bottom: 60px;
+    } */
 
     .hero_banner .container {
         padding-top: 25px;
@@ -159,6 +172,10 @@
 }
 
 @media (max-width: 767px) {
+
+    .nav-menu.nav-menu-social>li.login_click {
+        top: 20px;
+    }
 
     .classes_accordion {
         margin-left: auto !important;
