@@ -174,4 +174,16 @@
     </div>
 </div>
 
-<button type="" class="btn search-btn comment_submit">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
+{{-- <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
+<label for="save_as_template" class="checkbox-custom-label d-inline-block">Publicar Exame? (Ativo/Desativo)</label>
+<button type="" class="btn search-btn comment_submit">
+    Gravar 
+    <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;">
+</button> --}}
+
+<div class="text-right mt-4">
+    <input id="publish_exam" class="checkbox-custom" name="publish_exam" type="checkbox">
+    <label for="publish_exam" class="checkbox-custom-label publish_exam-label d-inline-block mb-3">Publicar Exame? (Ativo/Desativo)</label>
+    <button type="" class="btn search-btn comment_submit ml-3 mb-3" style="float: none;">
+        Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
+</div>

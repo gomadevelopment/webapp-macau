@@ -222,8 +222,7 @@ span.error-block-span.pink {
     margin-right: 0;
 }
 
-.header:not(.homepage) .nav-brand,
-.header.logged_in .nav-brand {
+.header:not(.homepage).logged_in .nav-brand {
     padding: 15px 15px;
     font-size: 32px;
     margin-right: 40px;
@@ -346,7 +345,7 @@ span.error-block-span.pink {
 }
 
 .nav-menu .user_notifications a {
-    padding: 28px 12px !important;
+    padding: 28px 8px !important;
 }
 
 .nav-menu .user_notifications .notifications-count {
@@ -369,7 +368,7 @@ span.error-block-span.pink {
 }
 
 .navigation-portrait .nav-menu .user_avatar a {
-    padding: 20px 12px !important;
+    padding: 20px 8px !important;
 }
 
 .navigation-portrait .nav-menu .user_avatar a.msg-title {

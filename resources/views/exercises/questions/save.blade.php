@@ -69,20 +69,20 @@
                     {{-- Templates --}}
                     <div class="form-group">
                         <label class="label_title mb-2" style="font-size: 30px;">
-                            Templates</label>
+                            Meus Modelos</label>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
                                 <select name="question_template" id="question_template" class="form-control">
                                     <option value=""></option>
-                                    <option value="1">Template A</option>
-                                    <option value="2">Template B</option>
-                                    <option value="3">Template C</option>
+                                    <option value="1">Modelo A</option>
+                                    <option value="2">Modelo B</option>
+                                    <option value="3">Modelo C</option>
                                 </select>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-8 mt-2 mb-2">
+                            {{-- <div class="col-sm-12 col-md-6 col-lg-8 mt-2 mb-2">
                                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 16px 15px;">
-                                    Ver todos os Templates</a>
-                            </div>
+                                    Ver todos os Modelos</a>
+                            </div> --}}
                         </div>
                     </div>
 
@@ -188,8 +188,8 @@
                     <div class="text-center mt-4">
                         <button type="" class="btn search-btn comment_submit m-3" style="float: none;">
                             Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
-                        <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
-                        <label for="save_as_template" class="checkbox-custom-label d-inline-block">Gravar como Template</label>
+                        {{-- <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
+                        <label for="save_as_template" class="checkbox-custom-label d-inline-block">Gravar como Template</label> --}}
                     </div>
 
                 </div>
@@ -258,7 +258,7 @@
             });
 
             $('#question_template').select2({
-                placeholder: "Escolher Template"
+                placeholder: "Escolher Modelo"
             });
 
             $('#question_type').select2({

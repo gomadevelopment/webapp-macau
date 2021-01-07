@@ -30,7 +30,7 @@ class Controller extends BaseController
             $locale = 'pt';
         }
         \Session::put('locale', $locale);
-        return redirect()->to('/');
+        return redirect()->back();
     }
 
     public function viewShareNotifications()

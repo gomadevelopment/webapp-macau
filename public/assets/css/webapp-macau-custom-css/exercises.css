@@ -231,6 +231,10 @@ a.remove_button:hover {
     margin-right: 0;
 }
 
+.tab-content .checkbox-custom+.checkbox-custom-label.publish_exam-label:before {
+    margin-top: -2px;
+}
+
 .nav-tabs .nav-item {
     margin-bottom: unset !important;
 }

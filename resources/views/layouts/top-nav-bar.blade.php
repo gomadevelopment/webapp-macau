@@ -21,7 +21,7 @@
                                 <a href="/exercicios">Exercícios</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'questions' ? 'active' : ''; ?>">
-                                <a href="/questoes">Questões</a>
+                                <a href="#">Questões</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'classroom' ? 'active' : ''; ?>">
                                 <a href="/sala_de_aula">Sala de Aula</a>
