@@ -19,7 +19,7 @@
                     <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
                         <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center small_inline_selects2">
                         <select name="corr_exp_select" id="corr_exp_select_0" class="form-control corr_exp_select select2" style="margin-left: 15px;">
                             <option value=""></option>
                             <option value="1">Opção 1</option>
@@ -51,7 +51,7 @@
                     <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
                         <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center small_inline_selects2">
                         <select name="corr_exp_select" id="corr_exp_select_1" class="form-control corr_exp_select select2" style="margin-left: 15px;">
                             <option value=""></option>
                             <option value="1">Opção 1</option>
@@ -101,7 +101,7 @@
     <div class="col-sm-12 col-md-8 col-lg-8 mb-3">
         <input name="corr_expr_description" id="corr_expr_description" type="text" class="form-control m-1" placeholder="Descrição da Expressão">
     </div>
-    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center">
+    <div class="col-sm-12 col-md-4 col-lg-4 mb-3 text-center small_inline_selects2">
         <select name="corr_exp_select" id="corr_exp_select" class="form-control corr_exp_select select2" style="margin-left: 15px;">
             <option value=""></option>
             <option value="1">Opção 1</option>

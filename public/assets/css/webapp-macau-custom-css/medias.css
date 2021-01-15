@@ -92,6 +92,23 @@
 
 @media (max-width: 991px) {
 
+    /* Exercises Col + Button wraps */
+
+    .col-wrap {
+        flex-flow: wrap;
+    }
+
+    .button-wrap,
+    .small_inline_selects2 .select2.select2-container.select2-container--default {
+        margin-left: auto !important;
+        margin-top: 10px !important;
+    }
+
+    .button-wrap-2,
+    .button-wrap-3 {
+        margin-top: 10px !important;
+    }
+
     .hero_banner {
         top: 0;
         margin-top: 0;
