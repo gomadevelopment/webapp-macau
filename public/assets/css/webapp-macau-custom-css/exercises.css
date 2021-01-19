@@ -677,6 +677,11 @@ input:checked+.slider:before {
     margin: 0 10px 2px 10px;
 }
 
+.associate_media_preview [class^="associate_media_thumbnail_remove_"] {
+    pointer-events: all;
+    margin: 0 10px 2px 10px;
+}
+
 .cke_button_icon.cke_button__\<\%.\%\>_icon {
     background-image: url('/assets/backoffice_assets/icons/tag_64.png');
     background-size: 16px;

@@ -12,7 +12,6 @@
                 <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Associar Media
             </a>
-            <input type="file" name="f_q_associate_media_file_input_0" id="f_q_associate_media_file_input_0" hidden disabled>
             <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover

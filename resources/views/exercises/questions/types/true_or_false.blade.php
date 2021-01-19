@@ -12,7 +12,6 @@
                 <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Associar Media
             </a>
-            <input type="file" name="true_or_false_associate_media_file_input_0" id="true_or_false_associate_media_file_input_0" hidden disabled>
             <a href="#" class="btn btn-theme remove_button remove_row button-wrap-3" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
@@ -43,7 +42,6 @@
             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Associar Media
         </a>
-        <input type="file" name="true_or_false_associate_media_file_input_0" id="true_or_false_associate_media_file_input_0" hidden disabled>
         <a href="#" class="btn btn-theme remove_button remove_row button-wrap-3" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Remover

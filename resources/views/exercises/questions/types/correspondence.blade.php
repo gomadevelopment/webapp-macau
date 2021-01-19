@@ -30,7 +30,6 @@
                             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Associar Media
                         </a>
-                        <input type="file" name="corr_image_file_input_0" id="corr_image_file_input_0" hidden disabled>
                         <a href="#" class="btn btn-theme remove_button button-wrap-2 remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
@@ -67,7 +66,6 @@
                             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Associar Media
                         </a>
-                        <input type="file" name="corr_audio_file_input_0" id="corr_audio_file_input_0" hidden disabled>
                         <a href="#" class="btn btn-theme remove_button button-wrap-2 remove_row associate_media_remove" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
@@ -119,9 +117,9 @@
                             <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
                         </label>
                     </div>
-                    <div class="col col-wrap d-flex mb-3">
+                    <div class="row_to_remove col col-wrap d-flex mb-3">
                         <input name="corr_category_answer_0_question_0" id="corr_category_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
-                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_multiple_choice_answer" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
@@ -160,7 +158,6 @@
             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Associar Media
         </a>
-        <input type="file" name="corr_image_file_input_0" id="corr_image_file_input_0" hidden disabled>
         <a href="#" class="btn btn-theme remove_button button-wrap-2 remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Remover
@@ -176,7 +173,6 @@
             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Associar Media
         </a>
-        <input type="file" name="corr_audio_file_input_0" id="corr_audio_file_input_0" hidden disabled>
         <a href="#" class="btn btn-theme remove_button button-wrap-2 remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Remover
@@ -209,7 +205,7 @@
                 <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
             </label>
         </div>
-        <div class="col col-wrap d-flex mb-3">
+        <div class="row_to_remove col col-wrap d-flex mb-3">
             <input name="corr_category_answer_0_question_0" id="corr_category_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_multiple_choice_answer" style="float: none; padding: 16px 20px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
@@ -226,8 +222,8 @@
 </div>
 
 <div class="add_correspondence_categories_answer_clone" hidden>
-    <div class="col-12"></div>
-    <div class="col col-wrap d-flex mb-3">
+    <div class="col-12 empty_col"></div>
+    <div class="row_to_remove col col-wrap d-flex mb-3">
         <input name="corr_category_answer_0_question_0" id="corr_category_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
         <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_multiple_choice_answer" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">

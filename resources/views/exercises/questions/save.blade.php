@@ -108,7 +108,7 @@
                                     <option value="8">Correção de Afirmações</option>
                                     <option value="9">Conteúdo gerado automaticamente</option>
                                     <option value="10">Ordenação</option>
-                                    {{-- <option value="11">Vogais</option> --}}
+                                    <option value="11">Vogais</option>
                                 </select>
                             </div>
                             <div class="col-xs-0 col-sm-0 col-md-0 col-lg-2"></div>
@@ -155,6 +155,8 @@
                     @include('exercises.questions.types.automatic_content')
 
                     @include('exercises.questions.types.assortment')
+
+                    @include('exercises.questions.types.vowels')
 
                     <hr class="mt-4 mb-5">
 
@@ -463,14 +465,17 @@
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.assortment'));
                 }
-                
-                
+                else if($(this).val() == 11){
+                    hideAllQuestionTypes();
+                    showSpecificQuestionType($('.to_choose.vowels'));
+                }
             });
+
+            // $('#question_type').val(11).trigger("change");
 
             // Button remove clone/row
             $(document).on('click', '.remove_button.remove_row', function(e){
                 e.preventDefault();
-                console.log($(this).attr('class'));
                 var row_to_remove = $(this).closest('.row_to_remove');
 
                 // Remove simple row
@@ -574,12 +579,15 @@
             $(document).on('click', "[id^='corr_image_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#corr_image_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="corr_image_file_input_'+id_index+'" id="corr_image_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+                
                 $('#corr_image_file_input_' + id_index).click();
-                // console.log(id_index);
+                
                 $('#corr_image_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
-                    
                     var files = e.target.files,
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
@@ -591,7 +599,6 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target, f);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -602,17 +609,16 @@
                             $('#corr_image_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#corr_image_button_' + id_index).show();
-                                $('#corr_image_file_input_' + id_index).attr('disabled', true);
+                                $('#corr_image_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
                         fileReader.readAsDataURL(f);
                     }
-                    // return false;
                 });
-                // return false;
             });
 
             // Clone new Correspondence Audio/Video
@@ -640,9 +646,13 @@
             $(document).on('click', "[id^='corr_audio_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#corr_audio_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="corr_audio_file_input_'+id_index+'" id="corr_audio_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+
                 $('#corr_audio_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $('#corr_audio_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
                     
@@ -657,7 +667,6 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target, f);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview no-preview button-wrap\">" +
                                 // "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -668,17 +677,16 @@
                             $('#corr_audio_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#corr_audio_button_' + id_index).show();
-                                $('#corr_audio_file_input_' + id_index).attr('disabled', true);
+                                $('#corr_audio_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
                         fileReader.readAsDataURL(f);
                     }
-                    // return false;
                 });
-                // return false;
             });
 
             // Clone new Correspondence Category QUESTION + ANSWER
@@ -762,22 +770,23 @@
             $(document).on('click', "[id^='true_or_false_associate_media_file_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#true_or_false_associate_media_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="true_or_false_associate_media_file_input_'+id_index+'" id="true_or_false_associate_media_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+
                 $('#true_or_false_associate_media_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $('#true_or_false_associate_media_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
                     
                     var files = e.target.files,
                         filesLength = files.length;
-                    // console.log(id_index + '---');
-                    // console.log(files.length + 'files.length');
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target, f);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -788,9 +797,10 @@
                             $('#true_or_false_associate_media_file_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#true_or_false_associate_media_file_button_' + id_index).show();
-                                $('#true_or_false_associate_media_file_input_' + id_index).attr('disabled', true);
+                                $('#true_or_false_associate_media_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
@@ -809,20 +819,18 @@
 
                 var html = $('.add_multiple_choice_clone').children();
 
-                var question_number = parseInt(html.find("[id^='m_c_associate_media_button_']")[0].id.match(/\d+/)[0]) + 1;
+                var question_number = parseInt(html.find("[id^='multiple_choice_question_']")[0].id.match(/\d+/)[0]) + 1;
 
                 html.find('.question_number>span').text('Pergunta ' + (question_number + 1));
 
-                var new_question_id = parseInt(html.find("[id^='multiple_choice_question_']")[0].id.match(/\d+/)[0]) + 1;
-                html.find("[name^='multiple_choice_question_']").attr('name', 'multiple_choice_question_'+new_question_id);
-                html.find("[id^='multiple_choice_question_']").attr('id', 'multiple_choice_question_'+new_question_id);
+                html.find("[name^='multiple_choice_question_']").attr('name', 'multiple_choice_question_'+question_number);
+                html.find("[id^='multiple_choice_question_']").attr('id', 'multiple_choice_question_'+question_number);
                 
-                var new_m_c_associate_media_button_id = parseInt(html.find("[id^='m_c_associate_media_button_']")[0].id.match(/\d+/)[0]) + 1;
-                html.find("[id^='m_c_associate_media_button_']").attr('id', 'm_c_associate_media_button_'+new_m_c_associate_media_button_id);
+                html.find("[id^='m_c_associate_media_button_']").attr('id', 'm_c_associate_media_button_'+question_number);
 
-                var new_m_c_associate_media_file_input_id = parseInt(html.find("[id^='m_c_associate_media_file_input_']")[0].id.match(/\d+/)[0]) + 1;
-                html.find("[name^='m_c_associate_media_file_input_']").attr('name', 'm_c_associate_media_file_input_'+new_m_c_associate_media_file_input_id);
-                html.find("[id^='m_c_associate_media_file_input_']").attr('id', 'm_c_associate_media_file_input_'+new_m_c_associate_media_file_input_id);
+                // var new_m_c_associate_media_file_input_id = parseInt(html.find("[id^='m_c_associate_media_file_input_']")[0].id.match(/\d+/)[0]) + 1;
+                // html.find("[name^='m_c_associate_media_file_input_']").attr('name', 'm_c_associate_media_file_input_'+new_m_c_associate_media_file_input_id);
+                // html.find("[id^='m_c_associate_media_file_input_']").attr('id', 'm_c_associate_media_file_input_'+new_m_c_associate_media_file_input_id);
 
                 // Change answers names and ids
                 var answer_number = parseInt(html.find("[id^='multiple_choice_correct_answer_']")[0].id.match(/\d+/)[0]);
@@ -867,22 +875,23 @@
             $(document).on('click', "[id^='m_c_associate_media_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#m_c_associate_media_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="m_c_associate_media_file_input_'+id_index+'" id="m_c_associate_media_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+
                 $('#m_c_associate_media_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $('#m_c_associate_media_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
                     
                     var files = e.target.files,
                         filesLength = files.length;
-                    console.log(id_index + '---');
-                    console.log(files.length + 'files.length');
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -893,9 +902,10 @@
                             $('#m_c_associate_media_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#m_c_associate_media_button_' + id_index).show();
-                                $('#m_c_associate_media_file_input_' + id_index).attr('disabled', true);
+                                $('#m_c_associate_media_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
@@ -938,22 +948,23 @@
             $(document).on('click', "[id^='fill_associate_media_file_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#fill_associate_media_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="fill_associate_media_file_input_'+id_index+'" id="fill_associate_media_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
                 $('#fill_associate_media_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $('#fill_associate_media_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
                     
                     var files = e.target.files,
                         filesLength = files.length;
-                    console.log(id_index + '---');
-                    console.log(files.length + 'files.length');
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -964,9 +975,10 @@
                             $('#fill_associate_media_file_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#fill_associate_media_file_button_' + id_index).show();
-                                $('#fill_associate_media_file_input_' + id_index).attr('disabled', true);
+                                $('#fill_associate_media_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
@@ -1005,25 +1017,22 @@
             $(document).on('click', "[id^='f_q_associate_media_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#f_q_associate_media_file_input_' + id_index).attr('disabled', false);
-                $('#f_q_associate_media_file_input_' + id_index).val(null);
+
+                var html = '<input type="file" name="f_q_associate_media_file_input_'+id_index+'" id="f_q_associate_media_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+
                 $('#f_q_associate_media_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $(document).on("change", '#f_q_associate_media_file_input_' + id_index, function(e) {
-                    console.log('CHANGE');
                     var id_index = this.id.match(/\d+/)[0];
                     var files = e.target.files,
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
-                        if(i > 0){
-                            break;
-                        }
-                        // console.log(i);
                         var f = files[i];
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -1034,19 +1043,15 @@
                             $('#f_q_associate_media_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#f_q_associate_media_button_' + id_index).show();
-                                // console.log($('#f_q_associate_media_file_input_' + id_index).val());
-                                $('#f_q_associate_media_file_input_' + id_index).val(null);
-                                // console.log($('#f_q_associate_media_file_input_' + id_index).val());
-
-                                $('#f_q_associate_media_file_input_' + id_index).attr('disabled', true);
+                                $('#f_q_associate_media_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
                         fileReader.readAsDataURL(f);
                     }
-                    return false;
                 });
             });
 
@@ -1193,7 +1198,6 @@
                 // Change solutions names and ids
                 var sentence_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
                 var solution_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
-                assort_words_solution_0_question_0
                 html.find("[name^='assort_words_solution_']").attr('name', 'assort_words_solution_'+solution_number+'_question_'+sentence_number);
                 html.find("[id^='assort_words_solution_']").attr('id', 'assort_words_solution_'+solution_number+'_question_'+sentence_number);
 
@@ -1229,22 +1233,23 @@
             $(document).on('click', "[id^='assort_image_media_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
-                $('#assort_image_media_file_input_' + id_index).attr('disabled', false);
+
+                var html = '<input type="file" name="assort_image_media_file_input_'+id_index+'" id="assort_image_media_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
                 $('#assort_image_media_file_input_' + id_index).click();
-                // console.log(id_index);
+
                 $('#assort_image_media_file_input_' + id_index).on("change", function(e) {
                     var id_index = this.id.match(/\d+/)[0];
                     
                     var files = e.target.files,
                         filesLength = files.length;
-                    console.log(id_index + '---');
-                    console.log(files.length + 'files.length');
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            // console.log(e.target);
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
@@ -1255,9 +1260,10 @@
                             $('#assort_image_media_button_' + id_index).hide();
 
                             $(".associate_media_thumbnail_remove").click(function(e){
+                                e.stopImmediatePropagation();
                                 e.preventDefault();
                                 $('#assort_image_media_button_' + id_index).show();
-                                $('#assort_image_media_file_input_' + id_index).attr('disabled', true);
+                                $('#assort_image_media_file_input_' + id_index).remove();
                                 $(this).parent(".associate_media_preview").remove();
                             });
                         });
@@ -1265,6 +1271,107 @@
                     }
                 });
             });
+
+
+            // VOWELS // 10
+
+            $('#possible_vowels').select2({
+                tags: true
+            });
+
+            // Clone new Vowels
+            $(document).on('click', '.button_add_vowels', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent().parent();
+
+                var html = $('.add_vowels_clone').children();
+
+                var new_index = parseInt(html.find("[id^='vowels_word_']")[0].id.match(/\d+/)[0]) + 1;
+
+                html.find('.question_number>span').text('Palavra ' + (new_index + 1));
+
+                html.find("[name^='vowels_word_']").attr('name', 'vowels_word_'+new_index);
+                html.find("[id^='vowels_word_']").attr('id', 'vowels_word_'+new_index);
+
+                html.find("[id^='selects_row_word_']").attr('id', 'selects_row_word_'+new_index);
+                
+                html = html.clone();
+
+                $(paste_before).before(html);
+                
+            });
+
+            $(document).on('keyup', '[id^="vowels_word_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var word = $(this).val();
+                var regex_match = word.match(/<%[a-zA-Z ]+%>/gm);
+                if(regex_match){
+
+                    regex_match.forEach(function (value, index) {
+
+                        if($('#select_word_' + word_id + '_vowel_' + index).length){
+                            return;
+                        }
+
+                        var new_vowel_select = '<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 mb-1 d-flex">';
+                        new_vowel_select += '<p class="exercise_level align-self-center m-0">'+(index + 1)+'ª&nbsp;&nbsp;</p>';
+                        new_vowel_select += '<select name="select_word_' + word_id + '_vowel_' + index+'" id="select_word_' + word_id + '_vowel_' + index+'" class="form-control select_vowels_class"></select>';
+                        new_vowel_select += '</div>';
+
+                        $('#selects_row_word_'+word_id).append(new_vowel_select);
+                        
+                        updateVowelSelects(index, word_id);
+
+                        $('#select_word_' + word_id + '_vowel_' + index).select2({
+                            placeholder: 'Seleccionar vogal...'
+                        });
+                        
+                    });
+                    
+                }
+                // Delete selects "a mais"
+                $('[id^="select_word_'+word_id+'"]').each(function(index, element){
+                    var check_vowel_id = parseInt(element.id.match(/\d+/g)[1]);
+                    if(!regex_match){
+                        $('#select_word_' + word_id + '_vowel_0').parent().remove();
+                        $('#select_word_' + word_id + '_vowel_0').remove();
+                        return;
+                    }
+                    if(check_vowel_id >= regex_match.length){
+                        $(element).parent().remove();
+                        $(element).remove();
+                    }
+                });
+                
+            });
+
+            $(document).on('change', '#possible_vowels', function(e){
+                updateVowelSelects();
+            });
+
+            // Update all vowel selects
+            function updateVowelSelects(index = null, word_id = null) {
+                var possible_vowels_selected = $('#possible_vowels').find(':selected');
+                if(!index && !word_id){
+                    $('[id^="select_word_"]').empty();
+                }
+                else{
+                    $('#select_word_' + word_id + '_vowel_' + index).empty();
+                }
+                possible_vowels_selected.each(function(possible_vowels_index, possible_vowels_element){
+                    var new_option = new Option(possible_vowels_element.text, possible_vowels_element.value);
+                    if(!index && !word_id){
+                        $('[id^="select_word_"]').each(function(select_vowel_index, select_vowel_element){
+                            $(select_vowel_element)
+                                .append('<option value="'+new_option.value+'">'+new_option.text+'</option>');
+                        });
+                    }
+                    else{
+                        $('#select_word_' + word_id + '_vowel_' + index).append(new_option);
+                    }
+                });
+            }
         });
 
     </script>

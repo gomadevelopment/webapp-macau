@@ -27,9 +27,9 @@
                             *Construa frases de forma ordenada/correta.
                         </p>
                     </div>
-                    <div class="col col-wrap d-flex mb-3">
+                    <div class="row_to_remove col col-wrap d-flex mb-3">
                         <input name="assort_sentence_question_0" id="assort_sentence_question_0" type="text" class="form-control" placeholder="Frase...">
-                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
@@ -64,7 +64,7 @@
                 </div>
                 {{-- SOLUTIONS --}}
                 <div class="row mt-1 mb-3 align-items-center">
-                    <div class="col col-wrap d-flex mb-3">
+                    <div class="row_to_remove col col-wrap d-flex mb-3">
                         <input name="assort_words_solution_0_question_0" id="assort_words_solution_0_question_0" type="text" class="form-control" placeholder="Resposta...">
                         <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
@@ -104,13 +104,12 @@
                             *Insira imagens com descrição de forma ordenada/correta.
                         </p>
                     </div>
-                    <div class="col col-wrap d-flex mb-3">
+                    <div class="row_to_remove col col-wrap d-flex mb-3">
                         <input name="assort_image_input_0" id="assort_image_input_0" type="text" class="form-control" placeholder="Descrição do Media">
                         <a href="#" id="assort_image_media_button_0" class="btn search-btn comment_submit button-wrap" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Associar Media
                         </a>
-                        <input type="file" name="assort_image_media_file_input_0" id="assort_image_media_file_input_0" hidden disabled>
                         <a href="#" class="btn btn-theme remove_button remove_row button-wrap-2" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
@@ -135,10 +134,10 @@
 {{-- CLONES --}}
 
 <div class="add_assort_sentences_clone" hidden>
-    <div class="col-12 mb-3"></div>
-    <div class="col col-wrap d-flex mb-3">
+    <div class="col-12 mb-3 empty_col"></div>
+    <div class="row_to_remove col col-wrap d-flex mb-3">
         <input name="assort_sentence_question_0" id="assort_sentence_question_0" type="text" class="form-control" placeholder="Frase...">
-        <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
+        <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
             Remover
         </a>
@@ -146,7 +145,7 @@
 </div>
 
 <div class="add_assort_words_clone" hidden>
-    <div class="mb-3"><hr></div>
+    <div class="mt-4 mb-3 hr_row"><hr></div>
     {{-- QUESTIONS --}}
     <div class="row">
         <div class="col-12">
@@ -161,7 +160,7 @@
     </div>
     {{-- SOLUTIONS --}}
     <div class="row mt-1 mb-3 align-items-center">
-        <div class="col col-wrap d-flex mb-3">
+        <div class="row_to_remove col col-wrap d-flex mb-3">
             <input name="assort_words_solution_0_question_0" id="assort_words_solution_0_question_0" type="text" class="form-control" placeholder="Resposta...">
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
@@ -178,8 +177,8 @@
 </div>
 
 <div class="add_assort_words_solution_clone" hidden>
-    <div class="col-12"></div>
-    <div class="col col-wrap d-flex mb-3">
+    <div class="col-12 empty_col"></div>
+    <div class="row_to_remove col col-wrap d-flex mb-3">
         <input name="assort_words_solution_0_question_0" id="assort_words_solution_0_question_0" type="text" class="form-control" placeholder="Resposta...">
         <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
@@ -190,8 +189,8 @@
 
 
 <div class="add_assort_images_clone" hidden>
-    <div class="col-12 mb-3"></div>
-    <div class="col col-wrap d-flex mb-3">
+    <div class="col-12 mb-3 empty_col"></div>
+    <div class="row_to_remove col col-wrap d-flex mb-3">
         <input name="assort_image_input_0" id="assort_image_input_0" type="text" class="form-control" placeholder="Descrição do Media">
         <a href="#" id="assort_image_media_button_0" class="btn search-btn comment_submit button-wrap" style="float: none; padding: 16px 20px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
