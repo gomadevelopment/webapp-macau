@@ -1276,7 +1276,8 @@
             // VOWELS // 10
 
             $('#possible_vowels').select2({
-                tags: true
+                tags: true,
+                // placeholder: 'Seleccione as vogais...'
             });
 
             // Clone new Vowels

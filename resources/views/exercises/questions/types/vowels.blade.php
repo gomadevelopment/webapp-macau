@@ -26,7 +26,7 @@
             </label>
         </div>
         <div class="col col-wrap d-flex mb-3">
-            <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra..." value="Tr<%a%>b<%a%>lh<%a%>r">
+            <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra...">
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
@@ -60,7 +60,7 @@
                 </label>
             </div>
             <div class="col col-wrap d-flex mb-3">
-                <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra..." value="Tr<%a%>b<%a%>lh<%a%>r">
+                <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra...">
                 <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                     <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Remover
