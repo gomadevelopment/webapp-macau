@@ -237,16 +237,19 @@ a.remove_button:hover {
     margin-right: 0;
 }
 
-.create_question .checkbox-custom+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before {
+.create_question .checkbox-custom+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before,
+.create_question .checkbox-custom+.checkbox-custom-label[class*="multiple_choice_intruder_intruder_answer_"]:before {
     margin: 16px 20px 16px 0;
 }
 
-.checkbox-custom+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before {
+.checkbox-custom+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before,
+.checkbox-custom+.checkbox-custom-label[class*="multiple_choice_intruder_intruder_answer_"]:before {
     width: 25px;
     height: 25px;
 }
 
-.checkbox-custom:checked+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before {
+.checkbox-custom:checked+.checkbox-custom-label[class*="multiple_choice_correct_answer_"]:before,
+.checkbox-custom:checked+.checkbox-custom-label[class*="multiple_choice_intruder_intruder_answer_"]:before {
     background-size: 75% !important;
 }
 
@@ -366,7 +369,7 @@ button.hide_video {
     margin-left: 10px !important;
 }
 
-.fill_split .fill_split_info_text {
+#fill_options_tabs_content .fill_split_info_text {
     opacity: 0.5;
     color: #131b31;
     font-family: "Gilroy - Medium";
@@ -693,4 +696,19 @@ input:checked+.slider:before {
 
 .associate_media_preview.no-preview .associate_media_thumbnail_title {
     width: 120px;
+}
+
+.possible_words_change_font .select2-container--default .select2-results>.select2-results__options,
+.possible_words_change_font .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+    font-family: sans-serif !important;
+    letter-spacing: 0.78px;
+}
+
+div[id^="cke_fill_text_word_"] {
+    width: -webkit-fill-available !important;
+}
+
+[id^="selects_row_text_words_"] .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice:first-child {
+    background-color: #28a745 !important;
+    border: 1px solid #28a745 !important;
 }

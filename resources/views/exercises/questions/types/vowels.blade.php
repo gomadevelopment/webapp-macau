@@ -7,7 +7,7 @@
                 *Escolha as possíveis vogais a serem apresentadas para cada palavra.
             </p>
         </div>
-        <div class="col-12 mb-2">
+        <div class="col-12 mb-2 possible_words_change_font">
             <select name="possible_vowels" id="possible_vowels" class="form-control" aria-placeholder="Possíveis Vogais" multiple>
                 <option value="1">/a/</option>
                 <option value="2">/ɐ/</option>
@@ -23,6 +23,9 @@
         <div class="col-12">
             <label class="label_title question_number">
                 <span>Palavra 1</span>
+                <a href="#" id="vow_word_perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                    <% %>
+                </a>
             </label>
         </div>
         <div class="col col-wrap d-flex mb-3">
@@ -57,6 +60,9 @@
             <div class="col-12">
                 <label class="label_title question_number">
                     <span>Palavra 1</span>
+                    <a href="#" id="vow_word_perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                        <% %>
+                    </a>
                 </label>
             </div>
             <div class="col col-wrap d-flex mb-3">

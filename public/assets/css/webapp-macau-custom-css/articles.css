@@ -896,8 +896,8 @@ a[class^="show_less_"] .triangle-up {
     border: none !important;
 }
 
-.form-group input.form-control,
-.form-group input.form-control::placeholder,
+.form-group .form-control,
+.form-group .form-control::placeholder,
 .shop_grid.save_article_card input,
 .shop_grid.save_article_card input::placeholder,
 .select2-selection__rendered,
@@ -943,7 +943,7 @@ a[class^="show_less_"] .triangle-up {
     visibility: hidden !important;
 }
 
-.form-group input.form-control::placeholder,
+.form-group .form-control::placeholder,
 .shop_grid.save_article_card input::placeholder {
     opacity: 0.3;
 }

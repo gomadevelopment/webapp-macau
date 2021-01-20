@@ -98,7 +98,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
                                 <select name="question_type" id="question_type" class="form-control">
                                     <option value=""></option>
-                                    {{-- <option value="1">Associar Medias</option> --}}
+                                    <option value="1">Informação</option>
                                     <option value="2">Correspondência</option>
                                     <option value="3">Preenchimento</option>
                                     <option value="4">Verdadeiro ou Falso</option>
@@ -134,7 +134,7 @@
                         <p class="exercise_level float-none m-0"><strong>Escolha o tipo de questão!</strong></p>
                     </div>
 
-                    {{-- @include('exercises.questions.types.associate_media') --}}
+                    @include('exercises.questions.types.information')
 
                     @include('exercises.questions.types.correspondence')
 
@@ -286,6 +286,10 @@
 
             // CKEDITOR
 
+            CKEDITOR.replace('info_text', {
+                language: 'pt'
+            });
+
             CKEDITOR.plugins.add( 'perc_delimiter', {
                 init: function( editor ) {
                     editor.addCommand( 'insertPercDelimiter', {
@@ -304,16 +308,8 @@
 
             CKEDITOR.config.extraPlugins = 'perc_delimiter';
 
-            CKEDITOR.replace( 'fill_textarea_0' , {
-                height: 125,
-                toolbar: 'Custom',
-                toolbarStartupExpanded : false,
-                toolbarCanCollapse  : false,
-                toolbar_Custom: [
-                    { name: 'test', items: ['perc_delimiter', '<% %>'] }
-                ],
-                language: 'pt',
-            });
+            // applyCKEditor('fill_textarea_0');
+            // applyCKEditor('fill_text_word_0');
 
             function applyCKEditor(textarea) {
                 CKEDITOR.replace( textarea , {
@@ -375,26 +371,6 @@
 
             $('button.hide_video').click();
 
-            // Buttons add clones
-
-            $(document).on('click', '.button_add_corr_exp', function(e){
-                e.preventDefault();
-                var paste_before = $(this).parent().parent().prev();
-
-                var html = $('.add_corr_expr_clone').children().clone();
-
-                html.find('select#corr_exp_select')
-                    .attr('id','corr_exp_select_' + count)
-                    .select2({
-                        placeholder: "Escolher opção"
-                    });
-
-                count++;
-
-                $(paste_before).append(html);
-                
-            });
-
             /*Floating js Start*/
             var windows = jQuery(window);
             var iframeWrap = jQuery(this).parent();
@@ -411,7 +387,8 @@
             });
             /*Floating js End*/
 
-            // Change question type on select change
+            // CHANGE QUESTION TYPE //
+
             hideAllQuestionTypes();
 
             function hideAllQuestionTypes(){
@@ -422,12 +399,15 @@
                 $(selector).show();
             }
 
-            // CHANGE QUESTION TYPE
             $(document).on('change', '#question_type', function(){
                 $('.choose_question_type').hide();
+
+                $('#correction_required').attr('checked', false);
+                $('#correction_required').removeAttr('onclick');
+
                 if($(this).val() == 1){
                     hideAllQuestionTypes();
-                    showSpecificQuestionType($('.to_choose.associate_media'));
+                    showSpecificQuestionType($('.to_choose.information'));
                 }
                 else if($(this).val() == 2){
                     hideAllQuestionTypes();
@@ -447,6 +427,8 @@
                 }
                 else if($(this).val() == 6){
                     hideAllQuestionTypes();
+                    $('#correction_required').prop('checked', true);
+                    $('#correction_required').attr('onclick', 'return false;');
                     showSpecificQuestionType($('.to_choose.free_question'));
                 }
                 else if($(this).val() == 7){
@@ -482,6 +464,9 @@
                 if(!$(this).hasClass('remove_entire_question') && !$(this).hasClass('remove_fill_option')){
                     if(row_to_remove.prev('.empty_col').length){
                         row_to_remove.prev('.empty_col').remove();
+                    }
+                    if(row_to_remove.prev('.hr_row').length){
+                        row_to_remove.prev('.hr_row').remove();
                     }
                     row_to_remove.remove();
                 }
@@ -914,10 +899,62 @@
                 });
             });
 
+            // Clone new Multiple Choice INTRUDER + ANSWER
+            $(document).on('click', '.button_add_multiple_choice_intruder', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent().parent();
+
+                var html = $('.add_multiple_choice_intruder_clone').children();
+
+                var question_number = parseInt(html.find("[id^='multiple_choice_intruder_question_']")[0].id.match(/\d+/)[0]) + 1;
+
+                html.find('.question_number>span').text('Grupo de Palavras ' + (question_number + 1));
+
+                html.find("[id^='multiple_choice_intruder_question_']").attr('id', 'multiple_choice_intruder_question_'+question_number);
+                
+                // Change answers names and ids
+                var answer_number = parseInt(html.find("[id^='multiple_choice_intruder_intruder_answer_']")[0].id.match(/\d+/)[0]);
+                html.find("[name^='multiple_choice_intruder_intruder_answer_']").attr('name', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[id^='multiple_choice_intruder_intruder_answer_']").attr('id', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[for^='multiple_choice_intruder_intruder_answer_']").attr('for', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[name^='multiple_choice_intruder_input_answer_']").attr('name', 'multiple_choice_intruder_input_answer_'+answer_number+'_question_'+question_number);
+                html.find("[id^='multiple_choice_intruder_input_answer_']").attr('id', 'multiple_choice_intruder_input_answer_'+answer_number+'_question_'+question_number);
+
+                // Update add more questions - question number and answer number
+                html.find('.add_intruders_question_').attr('id', 'add_intruders_question_'+question_number+'_answer_1');
+
+                html = html.clone();
+
+                $(paste_before).before(html);
+            });
+            // Clone new Multiple Choice ANSWER ONLY
+            $(document).on('click', '.button_add_multiple_choice_intruder_answer', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent();
+
+                var html = $('.add_multiple_choice_intruder_answer_clone').children();
+
+                // Change answers names and ids
+                var question_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
+                var answer_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
+
+                html.find("[name^='multiple_choice_intruder_intruder_answer_']").attr('name', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[id^='multiple_choice_intruder_intruder_answer_']").attr('id', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[for^='multiple_choice_intruder_intruder_answer_']").attr('for', 'multiple_choice_intruder_intruder_answer_'+answer_number+'_question_'+question_number);
+                html.find("[name^='multiple_choice_intruder_input_answer_']").attr('name', 'multiple_choice_intruder_input_answer_'+answer_number+'_question_'+question_number);
+                html.find("[id^='multiple_choice_intruder_input_answer_']").attr('id', 'multiple_choice_intruder_input_answer_'+answer_number+'_question_'+question_number);
+
+                // Update add more questions - question number and answer number
+                $(this).attr('id', 'add_intruders_question_'+question_number+'_answer_'+(answer_number + 1));
+
+                html = html.clone();
+
+                $(paste_before).before(html);
+            });
 
             // FILL OPTIONS // 4
 
-            // Clone new Fill options
+            // Clone new Fill options SHUFFLE
             $(document).on('click', '.button_add_fill', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent().parent().prev();
@@ -927,6 +964,8 @@
                 var new_index = parseInt(html.find("[id^='fill_textarea_']")[0].id.match(/\d+/)[0]) + 1;
 
                 html.find('.question_number>span').text('Questão ' + (new_index + 1));
+
+                html.find("[id^='fill_perc_delimiter_']").attr('id', 'fill_perc_delimiter_'+new_index);
 
                 html.find("[name^='fill_textarea_']").attr('name', 'fill_textarea_'+new_index);
                 html.find("[id^='fill_textarea_']").attr('id', 'fill_textarea_'+new_index);
@@ -941,10 +980,10 @@
 
                 $(paste_before).append(html);
 
-                applyCKEditor('fill_textarea_' + new_index);
+                // applyCKEditor('fill_textarea_' + new_index);
                 
             });
-            // Fill options Media upload and preview script
+            // Fill options SHUFFLE Media upload and preview script
             $(document).on('click', "[id^='fill_associate_media_file_button_']", function(e){
                 e.preventDefault();
                 var id_index = this.id.match(/\d+/)[0];
@@ -986,7 +1025,109 @@
                     }
                 });
             });
+            // <% %> button
+            $(document).on('click', '[id^="fill_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#fill_textarea_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
+            });
 
+            // Clone new Fill Options TEXT WORDS
+            $(document).on('click', '.button_add_fill_text_words', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent().parent();
+
+                var html = $('.add_fill_text_words_clone').children();
+
+                var new_index = parseInt(html.find("[id^='fill_text_word_']")[0].id.match(/\d+/)[0]) + 1;
+
+                html.find('.question_number>span').text('Frase ' + (new_index + 1));
+
+                html.find("[id^='perc_delimiter_']").attr('id', 'perc_delimiter_'+new_index);
+
+                html.find("[name^='fill_text_word_']").attr('name', 'fill_text_word_'+new_index);
+                html.find("[id^='fill_text_word_']").attr('id', 'fill_text_word_'+new_index);
+
+                html.find("[id^='selects_row_text_words_']").attr('id', 'selects_row_text_words_'+new_index);
+
+                html = html.clone();
+
+                $(paste_before).before(html);
+
+                // applyCKEditor('fill_text_word_' + new_index);
+                
+            });
+            // Generate multiple selects on KEYUP
+            $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var word = $(this).val();
+                var regex_match = word.match(/<%\s*%>/gm);
+                if(regex_match){
+
+                    regex_match.forEach(function (value, index) {
+
+                        if($('#select_text_word_' + word_id + '_option_' + index).length){
+                            return;
+                        }
+
+                        var new_vowel_select = '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-1 d-flex">';
+                        new_vowel_select += '<p class="exercise_level align-self-center m-0">'+(index + 1)+'ª&nbsp;&nbsp;</p>';
+                        new_vowel_select += '<select name="select_text_word_' + word_id + '_option_' + index+'" id="select_text_word_' + word_id + '_option_' + index+'" class="form-control select_vowels_class" multiple></select>';
+                        new_vowel_select += '</div>';
+
+                        $('#selects_row_text_words_'+word_id).append(new_vowel_select);
+                        
+                        updateVowelSelects(index, word_id);
+
+                        $('#select_text_word_' + word_id + '_option_' + index).select2({
+                            tags: true,
+                            "language": {
+                                "noResults": function(){
+                                    return "Não foram encontradas opções.";
+                                }
+                            }
+                        });
+                        
+                    });
+                    
+                }
+                else if(!regex_match){
+                    $('#selects_row_text_words_'+word_id).empty();
+                }
+                // Delete selects "a mais"
+                $('[id^="select_text_word_'+word_id+'"]').each(function(index, element){
+                    var check_vowel_id = parseInt(element.id.match(/\d+/g)[1]);
+                    if(!regex_match){
+                        $('#select_text_word_' + word_id + '_option_0').parent().remove();
+                        $('#select_text_word_' + word_id + '_option_0').remove();
+                        return;
+                    }
+                    if(check_vowel_id >= regex_match.length){
+                        $(element).parent().remove();
+                        $(element).remove();
+                    }
+                });
+                
+            });
+            // <% %> button
+            $(document).on('click', '[id^="fill_text_word_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#fill_text_word_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
+            });
 
             // FREE QUESTION // 5
 
@@ -1279,7 +1420,6 @@
                 tags: true,
                 // placeholder: 'Seleccione as vogais...'
             });
-
             // Clone new Vowels
             $(document).on('click', '.button_add_vowels', function(e){
                 e.preventDefault();
@@ -1291,6 +1431,8 @@
 
                 html.find('.question_number>span').text('Palavra ' + (new_index + 1));
 
+                html.find("[id^='vow_word_perc_delimiter_']").attr('id', 'vow_word_perc_delimiter_'+new_index);
+
                 html.find("[name^='vowels_word_']").attr('name', 'vowels_word_'+new_index);
                 html.find("[id^='vowels_word_']").attr('id', 'vowels_word_'+new_index);
 
@@ -1301,7 +1443,7 @@
                 $(paste_before).before(html);
                 
             });
-
+            // Generate multiple selects on KEYUP
             $(document).on('keyup', '[id^="vowels_word_"]', function(e){
                 e.preventDefault();
                 var word_id = parseInt(this.id.match(/\d+/)[0]);
@@ -1331,6 +1473,9 @@
                     });
                     
                 }
+                else if(!regex_match){
+                    $('#selects_row_word_'+word_id).empty();
+                }
                 // Delete selects "a mais"
                 $('[id^="select_word_'+word_id+'"]').each(function(index, element){
                     var check_vowel_id = parseInt(element.id.match(/\d+/g)[1]);
@@ -1346,12 +1491,22 @@
                 });
                 
             });
-
+            // <% %> button
+            $(document).on('click', '[id^="vow_word_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#vowels_word_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
+            });
+            // Update all Vowel Selects
             $(document).on('change', '#possible_vowels', function(e){
                 updateVowelSelects();
             });
-
-            // Update all vowel selects
             function updateVowelSelects(index = null, word_id = null) {
                 var possible_vowels_selected = $('#possible_vowels').find(':selected');
                 if(!index && !word_id){

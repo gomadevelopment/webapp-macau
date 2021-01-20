@@ -7,6 +7,7 @@
             <select name="true_or_false_select_0" id="true_or_false_select_0" class="form-control corr_exp_select select2" style="margin-left: 15px;">
                 <option value="true">Verdadeiro</option>
                 <option value="false">Falso</option>
+                <option value="not_said">Não dito</option>
             </select>
             <a href="#" id="true_or_false_associate_media_file_button_0" class="btn search-btn button-wrap-2 comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
@@ -37,6 +38,7 @@
         <select name="true_or_false_select_0" id="true_or_false_select_0" class="form-control corr_exp_select select2" style="margin-left: 15px;">
             <option value="true">Verdadeiro</option>
             <option value="false">Falso</option>
+            <option value="not_said">Não dito</option>
         </select>
         <a href="#" id="true_or_false_associate_media_file_button_0" class="btn search-btn button-wrap-2 comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
             <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
