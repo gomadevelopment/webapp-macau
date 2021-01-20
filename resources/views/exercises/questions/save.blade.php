@@ -1088,11 +1088,13 @@
 
                         $('#select_text_word_' + word_id + '_option_' + index).select2({
                             tags: true,
+                            placeholder: "Escreva as opções...",
                             "language": {
                                 "noResults": function(){
                                     return "Não foram encontradas opções.";
                                 }
-                            }
+                            },
+                            multiple: true
                         });
                         
                     });
@@ -1418,7 +1420,8 @@
 
             $('#possible_vowels').select2({
                 tags: true,
-                // placeholder: 'Seleccione as vogais...'
+                placeholder: 'Escreva as vogais...',
+                multiple: true
             });
             // Clone new Vowels
             $(document).on('click', '.button_add_vowels', function(e){

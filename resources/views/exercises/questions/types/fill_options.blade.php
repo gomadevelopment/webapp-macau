@@ -17,7 +17,7 @@
                     <div class="col-12">
                         <label class="label_title question_number m-0">
                             <span>Questão 1</span>
-                            <a href="#" id="fill_perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                            <a href="#" id="fill_perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
                                 <% %>
                             </a>
                         </label>
@@ -62,7 +62,7 @@
                     <div class="col-12">
                          <label class="label_title question_number m-0">
                             <span>Frase 1</span>
-                            <a href="#" id="fill_text_word_perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                            <a href="#" id="fill_text_word_perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
                                 <% %>
                             </a>
                         </label>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 {{-- Answers ROW --}}
-                <div class="row mb-3 pl-3 align-items-center" id="selects_row_text_words_0">
+                <div class="row mb-3 pl-3 align-items-center select2_with_search" id="selects_row_text_words_0">
                 </div>
 
                 <div class="row mb-3">
@@ -107,7 +107,7 @@
     <div class="col-12">
         <label class="label_title question_number m-0">
             <span>Questão 1</span>
-            <a href="#" id="fill_perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+            <a href="#" id="fill_perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
                 <% %>
             </a>
         </label>
@@ -141,7 +141,7 @@
             <div class="col-12">
                     <label class="label_title question_number m-0">
                     <span>Frase 1</span>
-                    <a href="#" id="perc_delimiter_0" class="btn search-btn button-wrap comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                    <a href="#" id="perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
                         <% %>
                     </a>
                 </label>
