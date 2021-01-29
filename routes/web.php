@@ -56,14 +56,14 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
 
         Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
-        
-
 
         // Exercises - Questions
-        Route::get('/exercicios/questao/criar', 'ExercisesController@saveQuestion');
-        Route::get('/exercicios/questao/criar', 'ExercisesController@savePostQuestion');
-        Route::get('/exercicios/questao/editar', 'ExercisesController@saveQuestion'); // Adicionar {id}
-        Route::get('/exercicios/questao/editar', 'ExercisesController@savePostQuestion'); // Adicionar {id}
+        Route::get('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@saveQuestion');
+        Route::post('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@savePostQuestion');
+        Route::get('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@saveQuestion');
+        Route::post('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@savePostQuestion');
+        Route::get('/exercicios/{exercise_id}/questao/modelo/{question_id}/criar', 'QuestionsController@loadSaveQuestionModel');
+        Route::get('/exercicios/editar/{exercise_id}/apagar/{question_id}', 'QuestionsController@deleteQuestion');
 
         Route::get('/exercicios/realizar', 'ExercisesController@performExercise'); // Adicionar {id}
         Route::post('/exercicios/realizar', 'ExercisesController@performPostExercise'); // Adicionar {id}

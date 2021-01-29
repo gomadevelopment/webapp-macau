@@ -113,6 +113,14 @@ class Exercise extends Model
         }
     }
 
+    /**
+     * Questions
+     */
+    public function questions()
+    {
+        return $this->hasMany('App\Question');
+    }
+
     public function saveExercise($inputs)
     {
         $this->user_id = auth()->user()->id;

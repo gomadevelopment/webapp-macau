@@ -14,17 +14,34 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 d-flex align-items-center">
-                <a href="javascript:history.back()" class="btn search-btn comment_submit mr-5" style="float: none; padding: 10px 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt=""></a>
+                <form method="GET" action="/exercicios/editar/{{ $exercise->id }}" class="">
+                    <button type="submit" class="btn search-btn comment_submit mr-5" style="float: none; padding: 10px 15px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
+                    </button>
+                    <input type="hidden" name="land_on_structure_tab" id="land_on_structure_tab" value="true">
+                </form>
                 <div class="wrap d-inline-block">
-                    <h1 class="title mb-0">Pré-Escuta / Visionamento</h1>
-                    <p class="sub_title m-0">Do Exercício: “De Áustria para Portugal”</p>
+                    <input type="hidden" name="exercise_question_section" id="exercise_question_section" value="{{ isset($exercise_question_section) ? $exercise_question_section : '' }}">
+                    <h1 class="title mb-0">{{ isset($exercise_question_section) ? $exercise_question_section : '' }}</h1>
+                    <p class="sub_title m-0">Do Exercício: “{{ $exercise->title }}”</p>
                 </div>
                 
             </div>
         </div>
     </div>
 </section>
+<input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
+<input type="hidden" name="question_id_hidden" id="question_id_hidden" value="{{ isset($question) && $question->id ? $question->id : null }}">
+<input type="hidden" name="question_section_hidden" id="question_section_hidden" value="{{ isset($question) && $question->id ? $question->section : null }}">
+<input type="hidden" name="question_type_id_hidden" id="question_type_id_hidden" value="{{ isset($question) && $question->id ? $question->question_type->id : null }}">
+<input type="hidden" name="question_type_name_hidden" id="question_type_name_hidden" value="{{ isset($question) && $question->id ? $question->question_type->name : null }}">
+<input type="hidden" name="question_subtype_id_hidden" id="question_subtype_id_hidden" value="{{ isset($question) && $question->id ? $question->question_subtype->id : null }}">
+<input type="hidden" name="question_subtype_name_hidden" id="question_subtype_name_hidden" value="{{ isset($question) && $question->id ? $question->question_subtype->name : null }}">
+<input type="hidden" name="question_avaliation_score_hidden" id="question_avaliation_score_hidden" value="{{ isset($question) && $question->id ? $question->avaliation_score : null }}">
+<input type="hidden" name="model_question_id_hidden" id="model_question_id_hidden" value="{{ $model_question_id }}">
+
+
+
 <!-- ============================ Page Title End ================================== -->	
 
 <!-- ============================ Find Courses with Sidebar ================================== -->
@@ -32,36 +49,49 @@
     <div class="container">
 
         {{-- CREATED CARDS --}}
-        <div class="row mb-5">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label class="label_title mb-4 d-block">
-                            Fronteira da Palavra</label>
-                        <div class="d-flex float-left flex-column">
-                            <p class="exercise_level m-0"><strong>Tipo:</strong> Preenchimento</p>
-                            <p class="exercise_level m-0"><strong>Referência:</strong> Texto para ajudar a identificar a Questão</p>
-                            <p class="exercise_level m-0"><strong>Autor:</strong> Professor João Paulo</p>
-                        </div>
-                        <div class="d-block float-right mt-3">
-                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Editar
-                            </a>
-                            <a href="#" class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
-                                Remover
-                            </a>
-                            <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                Clonar
-                            </a>
+        {{-- @if($exercise->questions->count())
+
+            @foreach ($exercise->questions as $created_question)
+                @if(isset($question) && $created_question->id == $question->id)
+                    @continue
+                @endif
+                @if ($created_question->section == $exercise_question_section)
+                    <div class="row mb-5">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="label_title mb-4 d-block">
+                                        {{ $created_question->title }}
+                                    </label>
+                                    <div class="d-flex float-left flex-column">
+                                        <p class="exercise_level m-0"><strong>Tipo:</strong> {{ $created_question->question_type->name }}</p>
+                                        <p class="exercise_level m-0"><strong>Referência:</strong> {{ $created_question->reference }}</p>
+                                    </div>
+                                    <div class="d-block float-right mt-3">
+                                        <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $created_question->id }}" class="" style="display: contents;">
+                                            <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                Editar
+                                            </button>
+                                            <input type="hidden" name="exercise_question_section" id="exercise_question_section" value="{{ isset($exercise_question_section) ? $exercise_question_section : '' }}">
+                                        </form>
+                                        <a href="#" class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                            Remover
+                                        </a>
+                                        <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Clonar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
+                @endif
+            @endforeach
+                
+        @endif --}}
         {{-- CREATE NEW CARD --}}
         <div class="row mb-5">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -71,12 +101,15 @@
                         <label class="label_title mb-2" style="font-size: 30px;">
                             Os meus Modelos</label>
                         <div class="row">
-                            <div class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
-                                <select name="question_template" id="question_template" class="form-control">
+                            <div class="col-sm-12 col-md-8 col-lg-6 mt-2 mb-2">
+                                <select name="question_model" id="question_model" class="form-control">
                                     <option value=""></option>
-                                    <option value="1">Modelo A</option>
+                                    @foreach ($my_question_models as $question_model)
+                                        <option value="{{$question_model->id}}">{{$question_model->reference}}</option>
+                                    @endforeach
+                                    {{-- <option value="1">Modelo A</option>
                                     <option value="2">Modelo B</option>
-                                    <option value="3">Modelo C</option>
+                                    <option value="3">Modelo C</option> --}}
                                 </select>
                             </div>
                             {{-- <div class="col-sm-12 col-md-6 col-lg-8 mt-2 mb-2">
@@ -93,35 +126,39 @@
                             Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                         <div class="row mb-1">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
-                                <input name="question_name" id="question_name" type="text" class="form-control" placeholder="Título da questão">
+                                <input name="question_name" id="question_name" type="text" class="form-control" placeholder="Título da questão"
+                                value="{{ isset($question) ? $question->title : '' }}">
+                                <span class="error-block-span pink question_title_error" hidden>
+                                </span>
                             </div>
+                            
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
                                 <select name="question_type" id="question_type" class="form-control">
                                     <option value=""></option>
-                                    <option value="1">Informação</option>
-                                    <option value="2">Correspondência</option>
-                                    <option value="3">Preenchimento</option>
-                                    <option value="4">Verdadeiro ou Falso</option>
-                                    <option value="5">Escolha Múltipla</option>
-                                    <option value="6">Questões Livres</option>
-                                    <option value="7">Diferenças</option>
-                                    <option value="8">Correção de Afirmações</option>
-                                    <option value="9">Conteúdo gerado automaticamente</option>
-                                    <option value="10">Ordenação</option>
-                                    <option value="11">Vogais</option>
+                                    @foreach ($question_types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
                                 </select>
+                                <span class="error-block-span pink question_type_error" hidden>
+                                </span>
                             </div>
                             <div class="col-xs-0 col-sm-0 col-md-0 col-lg-2"></div>
                         </div>
 
                         <div class="row mb-2">
                              <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input name="exercise_reference" id="exercise_reference" type="text" class="form-control" placeholder="Referência da questão">
+                                <input name="question_reference" id="question_reference" type="text" class="form-control" placeholder="Referência da questão"
+                                value="{{ isset($question) ? $question->reference : '' }}">
+                                <span class="error-block-span pink question_reference_error" hidden>
+                                </span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input name="exercise_description" id="exercise_description" type="text" class="form-control" placeholder="Descrição da questão a mostrar ao aluno">
+                                <input name="question_description" id="question_description" type="text" class="form-control" placeholder="Descrição da questão a mostrar ao aluno"
+                                value="{{ isset($question) ? $question->description : '' }}">
+                                <span class="error-block-span pink question_description_error" hidden>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -166,15 +203,15 @@
                             Correção <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox">
+                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction == 1 ? 'checked' : 'LOL' }}>
                                 <label for="correction_required" class="checkbox-custom-label d-inline-block">Requer correção do Professor</label>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input name="question_reference" id="question_reference" type="text" class="form-control" placeholder="Referência sobre o tipo de questão">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <hr class="mt-5 mb-5">
@@ -190,7 +227,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <select name="question_score" id="question_score" class="form-control">
-                                    <option value=""></option>
+                                    {{-- <option value=""></option> --}}
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -217,7 +254,7 @@
                     </div>
 
                     <div class="text-center mt-4">
-                        <button type="" class="btn search-btn comment_submit m-3" style="float: none;">
+                        <button type="button" id="submit_enabled_form" class="btn search-btn comment_submit m-3" style="float: none;">
                             Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>
                         {{-- <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
                         <label for="save_as_template" class="checkbox-custom-label d-inline-block">Gravar como Template</label> --}}
@@ -226,13 +263,16 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <a href="#" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
-                    Criar Questão
-                </a>
+                <form method="GET" action="{{ isset($exercise->id) ? '/exercicios/' . $exercise->id . '/questao/criar' : '#' }}" class="add_question_form">
+                    <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                        Criar Questão
+                    </button>
+                    <input type="hidden" name="exercise_question_section" id="exercise_question_section" value="{{ isset($exercise_question_section) ? $exercise_question_section : '' }}">
+                </form>
             </div>
         </div>
 
@@ -324,8 +364,8 @@
                 });
             }
 
-            $('#question_template').select2({
-                placeholder: "Escolher Modelo"
+            $('#question_model').select2({
+                placeholder: "Escolher Modelo..."
             });
 
             $('#question_type').select2({
@@ -339,8 +379,6 @@
             $('#corr_exp_select_0, #corr_exp_select_1, #corr_exp_select_2').select2({
                 placeholder: "Escolher opção"
             });
-
-            $('#true_or_false_select_0').select2();
 
             $('#fill_time').select2({
                 placeholder: "Sel. Tempo"
@@ -393,61 +431,94 @@
 
             function hideAllQuestionTypes(){
                 $('.to_choose').hide();
+                $('form.question-form').removeClass('form-enabled').addClass('form-disabled');
             }
 
             function showSpecificQuestionType(selector){
+                hideAllQuestionTypes();
+                // Form in tabs - Form with Type and Subtype
+                if($(selector).hasClass('tabs_creative')){
+                    var tab_active = $(selector).find('.nav-link.active').attr('aria-controls');
+                    // console.log(tab_active);
+                    $('form.question-form#form-' + tab_active).removeClass('form-disabled').addClass('form-enabled');
+                }
+                // Form outside tabs - Form with Type only
+                else{
+                    var question_type = $(selector).attr('class').split(' ')[2];
+                    $('form.question-form#form-' + question_type).removeClass('form-disabled').addClass('form-enabled');
+                }
+
                 $(selector).show();
             }
 
+            $(document).on('click', '.nav-link', function(e){
+                var tabs_creative = $(this).closest('.tabs_creative'); // Example: "Correspondence (Correspondência)"
+                if(tabs_creative.hasClass('to_choose')){
+                    var question_type = tabs_creative.attr('class').split(' ')[4];
+                    showSpecificQuestionType($('.to_choose.' + question_type));
+                }
+            });
+
             $(document).on('change', '#question_type', function(){
                 $('.choose_question_type').hide();
-
-                $('#correction_required').attr('checked', false);
-                $('#correction_required').removeAttr('onclick');
+                $('.question_type_error').attr('hidden', 'hidden');
+                // $('#correction_required').attr('checked', false);
+                // $('#correction_required').removeAttr('onclick');
 
                 if($(this).val() == 1){
+                    // Information
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.information'));
                 }
                 else if($(this).val() == 2){
+                    // Correspondence
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.correspondence'));
                 }
                 else if($(this).val() == 3){
+                    // Fill Options
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.fill_options'));
                 }
                 else if($(this).val() == 4){
+                    // True or False
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.true_or_false'));
                 }
                 else if($(this).val() == 5){
+                    // Multiple Choice
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.multiple_choice'));
                 }
                 else if($(this).val() == 6){
+                    // Free Question
                     hideAllQuestionTypes();
-                    $('#correction_required').prop('checked', true);
-                    $('#correction_required').attr('onclick', 'return false;');
+                    // $('#correction_required').prop('checked', true);
+                    // $('#correction_required').attr('onclick', 'return false;');
                     showSpecificQuestionType($('.to_choose.free_question'));
                 }
                 else if($(this).val() == 7){
+                    // Differences
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.differences'));
                 }
                 else if($(this).val() == 8){
+                    // Correction of Statement
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.correction_of_statement'));
                 }
                 else if($(this).val() == 9){
+                    // Automatic Content - Break Words
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.automatic_content'));
                 }
                 else if($(this).val() == 10){
+                    // Assortment
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.assortment'));
                 }
                 else if($(this).val() == 11){
+                    //Vowels
                     hideAllQuestionTypes();
                     showSpecificQuestionType($('.to_choose.vowels'));
                 }
@@ -537,6 +608,17 @@
                 TEMPLATE TYPES
             */
 
+            // Remove existent files
+            $(document).on('click', ".associate_media_thumbnail_remove", function(e){
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                // var id_index = this.id.match(/\d+/)[0];
+                $(this).parent(".associate_media_preview").prev().remove();
+                $(this).parent(".associate_media_preview").prev().show();
+                $(this).parent(".associate_media_preview").remove();
+            });
+
+
             // CORRESPONDENCE // 1
             
             // Clone new Correspondence Image
@@ -587,24 +669,27 @@
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
                                 "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
-                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "<img class=\"associate_media_thumbnail_remove\" id=\"corr_image_file_remove_"+id_index+"\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
                             ).insertAfter("#corr_image_file_input_" + id_index);
 
                             $('#corr_image_button_' + id_index).hide();
-
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#corr_image_button_' + id_index).show();
-                                $('#corr_image_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
                         });
                         fileReader.readAsDataURL(f);
                     }
                 });
             });
+            // Remove existent file
+            // $(document).on('click', '[id^="corr_image_file_remove_"]', function(e){
+            //     e.preventDefault();
+            //     var id_index = this.id.match(/\d+/)[0];
+            //     e.stopImmediatePropagation();
+            //     e.preventDefault();
+            //     $('#corr_image_button_' + id_index).show();
+            //     $('#corr_image_file_input_' + id_index).remove();
+            //     $(this).parent(".associate_media_preview").remove();
+            // });
+            
 
             // Clone new Correspondence Audio/Video
             $(document).on('click', '.button_add_corr_audio', function(e){
@@ -647,6 +732,7 @@
                         var f = files[i];
                         if(!f.type.match('video.*')){
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio ou video.');
+                            $('#corr_audio_file_input_'+id_index).remove();
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -660,14 +746,6 @@
                             ).insertAfter("#corr_audio_file_input_" + id_index);
 
                             $('#corr_audio_button_' + id_index).hide();
-
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#corr_audio_button_' + id_index).show();
-                                $('#corr_audio_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
                         });
                         fileReader.readAsDataURL(f);
                     }
@@ -704,15 +782,20 @@
             $(document).on('click', '.button_add_category_answer', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent();
-
+                // add_corr_category_question_0_answer_1
                 var html = $('.add_correspondence_categories_answer_clone').children();
 
                 // Change answers names and ids
                 var question_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
                 var answer_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
 
-                html.find("[name^='multiple_choice_correct_answer_']").attr('name', 'multiple_choice_correct_answer_'+answer_number+'_question_'+question_number);
-                html.find("[id^='multiple_choice_correct_answer_']").attr('id', 'multiple_choice_correct_answer_'+answer_number+'_question_'+question_number);
+                if(answer_number >= 10){
+                    alert('Não pode adicionar mais de 10 respostas por pergunta.');
+                    return false;
+                }
+
+                html.find("[name^='corr_category_answer_']").attr('name', 'corr_category_answer_'+answer_number+'_question_'+question_number);
+                html.find("[id^='corr_category_answer_']").attr('id', 'corr_category_answer_'+answer_number+'_question_'+question_number);
 
                 // Update add more questions - question number and answer number
                 $(this).attr('id', 'add_corr_category_question_'+question_number+'_answer_'+(answer_number + 1));
@@ -724,7 +807,7 @@
 
 
             // TRUE OR FALSE //  2
-
+            
             // Clone new True or Falses
             $(document).on('click', '.button_add_true_or_false', function(e){
                 e.preventDefault();
@@ -737,8 +820,10 @@
                 html.find("[name^='true_or_false_input_']").attr('name', 'true_or_false_input_'+new_index)
                 html.find("[id^='true_or_false_input_']").attr('id', 'true_or_false_input_'+new_index)
 
-                html.find("[name^='true_or_false_select_']").attr('name', 'true_or_false_select_'+new_index);
-                html.find("[id^='true_or_false_select_']").attr('id', 'true_or_false_select_'+new_index);
+                html.find("[name^='true_or_false_select_']")
+                    .attr('name', 'true_or_false_select_'+new_index)
+                    .attr('id', 'true_or_false_select_'+new_index);
+                // html.find("[id^='true_or_false_select_']").attr('id', 'true_or_false_select_'+new_index);
 
                 html.find("[id^='true_or_false_associate_media_file_button_']").attr('id', 'true_or_false_associate_media_file_button_'+new_index);
 
@@ -781,19 +866,20 @@
 
                             $('#true_or_false_associate_media_file_button_' + id_index).hide();
 
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#true_or_false_associate_media_file_button_' + id_index).show();
-                                $('#true_or_false_associate_media_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#true_or_false_associate_media_file_button_' + id_index).show();
+                            //     $('#true_or_false_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
                         });
                         fileReader.readAsDataURL(f);
                     }
                 });
             });
-
+            // Apply select2 on load EDIT - true_or_false
+            
 
             // MULTIPLE CHOICE // 3
 
@@ -886,13 +972,13 @@
 
                             $('#m_c_associate_media_button_' + id_index).hide();
 
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#m_c_associate_media_button_' + id_index).show();
-                                $('#m_c_associate_media_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#m_c_associate_media_button_' + id_index).show();
+                            //     $('#m_c_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
                         });
                         fileReader.readAsDataURL(f);
                     }
@@ -921,7 +1007,7 @@
                 html.find("[id^='multiple_choice_intruder_input_answer_']").attr('id', 'multiple_choice_intruder_input_answer_'+answer_number+'_question_'+question_number);
 
                 // Update add more questions - question number and answer number
-                html.find('.add_intruders_question_').attr('id', 'add_intruders_question_'+question_number+'_answer_1');
+                html.find('.button_add_multiple_choice_intruder_answer').attr('id', 'add_intruders_question_'+question_number+'_answer_1');
 
                 html = html.clone();
 
@@ -1013,13 +1099,13 @@
 
                             $('#fill_associate_media_file_button_' + id_index).hide();
 
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#fill_associate_media_file_button_' + id_index).show();
-                                $('#fill_associate_media_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
                         });
                         fileReader.readAsDataURL(f);
                     }
@@ -1049,7 +1135,7 @@
 
                 html.find('.question_number>span').text('Frase ' + (new_index + 1));
 
-                html.find("[id^='perc_delimiter_']").attr('id', 'perc_delimiter_'+new_index);
+                html.find("[id^='text_word_perc_delimiter_']").attr('id', 'text_word_perc_delimiter_'+new_index);
 
                 html.find("[name^='fill_text_word_']").attr('name', 'fill_text_word_'+new_index);
                 html.find("[id^='fill_text_word_']").attr('id', 'fill_text_word_'+new_index);
@@ -1063,6 +1149,18 @@
                 // applyCKEditor('fill_text_word_' + new_index);
                 
             });
+            // Apply select2 on load EDIT - text_words
+            $('[id^="select_text_word_"]').select2({
+                tags: true,
+                placeholder: "Escreva as opções...",
+                "language": {
+                    "noResults": function(){
+                        return "Não foram encontradas opções.";
+                    }
+                },
+                multiple: true
+            });
+
             // Generate multiple selects on KEYUP
             $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
                 e.preventDefault();
@@ -1079,7 +1177,7 @@
 
                         var new_vowel_select = '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-1 d-flex">';
                         new_vowel_select += '<p class="exercise_level align-self-center m-0">'+(index + 1)+'ª&nbsp;&nbsp;</p>';
-                        new_vowel_select += '<select name="select_text_word_' + word_id + '_option_' + index+'" id="select_text_word_' + word_id + '_option_' + index+'" class="form-control select_vowels_class" multiple></select>';
+                        new_vowel_select += '<select name="select_text_word_' + word_id + '_option_' + index+'[]" id="select_text_word_' + word_id + '_option_' + index+'" class="form-control select_vowels_class" multiple></select>';
                         new_vowel_select += '</div>';
 
                         $('#selects_row_text_words_'+word_id).append(new_vowel_select);
@@ -1119,7 +1217,7 @@
                 
             });
             // <% %> button
-            $(document).on('click', '[id^="fill_text_word_perc_delimiter_"]', function(e){
+            $(document).on('click', '[id^="text_word_perc_delimiter_"]', function(e){
                 e.preventDefault();
                 var word_id = parseInt(this.id.match(/\d+/)[0]);
                 var $txt = $("#fill_text_word_" + word_id);
@@ -1185,13 +1283,13 @@
 
                             $('#f_q_associate_media_button_' + id_index).hide();
 
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#f_q_associate_media_button_' + id_index).show();
-                                $('#f_q_associate_media_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#f_q_associate_media_button_' + id_index).show();
+                            //     $('#f_q_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
                         });
                         fileReader.readAsDataURL(f);
                     }
@@ -1285,24 +1383,51 @@
 
             // ASSORTMENT // 9
 
-            // Clone new Assort Sentences
+            // Clone new Assort Sentences - SENTENCE + SOLUTION
             $(document).on('click', '.button_add_assort_sentence', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent().parent().prev();
 
                 var html = $('.add_assort_sentences_clone').children();
 
-                var new_index = parseInt(html.find("[id^='assort_sentence_question_']")[0].id.match(/\d+/)[0]) + 1;
+                var sentence_number = parseInt(html.find("[id^='assort_sentences_question_']")[0].id.match(/\d+/)[0]) + 1;
 
-                // html.find('.sentence_number>span').text('Frase ' + (new_index + 1));
+                html.find('.sentence_number>span').text('Conjunto de Frases ' + (sentence_number + 1));
 
-                html.find("[name^='assort_sentence_question_']").attr('name', 'assort_sentence_question_'+new_index);
-                html.find("[id^='assort_sentence_question_']").attr('id', 'assort_sentence_question_'+new_index);
+                html.find("[name^='assort_sentences_question_']").attr('name', 'assort_sentences_question_'+sentence_number);
+                html.find("[id^='assort_sentences_question_']").attr('id', 'assort_sentences_question_'+sentence_number);
+
+                var sub_sentence_number = parseInt(html.find("[id^='assort_sentences_sentence_']")[0].id.match(/\d+/)[0]);
+
+                html.find("[name^='assort_sentences_sentence_']").attr('name', 'assort_sentences_sentence_'+sub_sentence_number+'_question_'+sentence_number);
+                html.find("[id^='assort_sentences_sentence_']").attr('id', 'assort_sentences_sentence_'+sub_sentence_number+'_question_'+sentence_number);
+
+                html.find('.button_add_assort_sentences_solution').attr('id', 'add_assort_sentences_question_'+sentence_number+'_solution_1');
 
                 html = html.clone();
 
-                $(paste_before).append(html);
+                $(paste_before).after(html);
                 
+            });
+            // Clone new Assort Sentences - SOLUTION ONLY
+            $(document).on('click', '.button_add_assort_sentences_solution', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent();
+
+                var html = $('.add_assort_sentences_sentence_clone').children();
+
+                // Change solutions names and ids
+                var sentence_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
+                var solution_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
+                html.find("[name^='assort_sentences_sentence_']").attr('name', 'assort_sentences_sentence_'+solution_number+'_question_'+sentence_number);
+                html.find("[id^='assort_sentences_sentence_']").attr('id', 'assort_sentences_sentence_'+solution_number+'_question_'+sentence_number);
+
+                // Update add more questions - question number and answer number
+                $(this).attr('id', 'add_assort_sentences_question_'+sentence_number+'_solution_'+(solution_number + 1));
+
+                html = html.clone();
+
+                $(paste_before).before(html);
             });
 
             // Clone new Assort Words - SENTENCE + SOLUTION
@@ -1353,11 +1478,11 @@
             });
 
             // Clone new Assort Images
-            $(document).on('click', '.button_add_assort_images', function(e){
+            $(document).on('click', '.button_add_assort_assort_images', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent().parent().prev();
 
-                var html = $('.add_assort_images_clone').children();
+                var html = $('.add_assort_assort_images_clone').children();
 
                 var new_index = parseInt(html.find("[id^='assort_image_input_']")[0].id.match(/\d+/)[0]) + 1;
 
@@ -1402,13 +1527,13 @@
 
                             $('#assort_image_media_button_' + id_index).hide();
 
-                            $(".associate_media_thumbnail_remove").click(function(e){
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
-                                $('#assort_image_media_button_' + id_index).show();
-                                $('#assort_image_media_file_input_' + id_index).remove();
-                                $(this).parent(".associate_media_preview").remove();
-                            });
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#assort_image_media_button_' + id_index).show();
+                            //     $('#assort_image_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
                         });
                         fileReader.readAsDataURL(f);
                     }
@@ -1422,6 +1547,9 @@
                 tags: true,
                 placeholder: 'Escreva as vogais...',
                 multiple: true
+            });
+            $('[id^=select_word_]').select2({
+                placeholder: 'Seleccionar vogal...'
             });
             // Clone new Vowels
             $(document).on('click', '.button_add_vowels', function(e){
@@ -1531,6 +1659,193 @@
                     }
                 });
             }
+            
+            // 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                }
+            });
+
+            function updateAllMessageForms()
+            {
+                for (instance in CKEDITOR.instances) {
+                    CKEDITOR.instances[instance].updateElement();
+                }
+            }
+            //
+
+
+            // SUBMIT ENABLED FORM
+            
+            var question_id = $('#question_id_hidden').val();
+            console.log($('#model_question_id_hidden').val());
+
+            $(document).on('click', '#submit_enabled_form', function(e){
+                updateAllMessageForms();
+
+                var exercise_id = $('#exercise_id_hidden').val();
+                var url = question_id ? '/exercicios/'+exercise_id+'/questao/editar/'+question_id : '/exercicios/'+exercise_id+'/questao/criar';
+
+                if($('#model_question_id_hidden').val() == "true"){
+                    url = '/exercicios/'+exercise_id+'/questao/criar';
+                }
+
+                var form_id = $('form.question-form.form-enabled').attr('id');
+                var formData = new FormData($('form.question-form.form-enabled')[0]);
+                var question_subtype;
+
+                if(typeof form_id == 'undefined'){
+                    $('.question_type_error').text('Escolha um tipo de questão e preencha os seus campos.');
+                    $('.question_type_error').removeAttr('hidden');
+                    return false;
+                }
+
+                if (form_id.split('-').length > 2) {
+                    question_subtype = form_id.split('-')[2];
+                }
+                else{
+                    question_subtype = 'same_type_and_subtype';
+                }
+                
+                switch (question_subtype) {
+                    case "images":
+                        question_subtype_id = "2";
+                        break;
+                    case "audio":
+                        question_subtype_id = "3";
+                        break;
+                    case "categories":
+                        question_subtype_id = "4";
+                        break;
+                    case "shuffle":
+                        question_subtype_id = "5";
+                        break;
+                    case "text_words":
+                        question_subtype_id = "6";
+                        break;
+                    case "questions":
+                        question_subtype_id = "8";
+                        break;
+                    case "intruder":
+                        question_subtype_id = "9";
+                        break;
+                    case "sentences":
+                        question_subtype_id = "14";
+                        break;
+                    case "words":
+                        question_subtype_id = "15";
+                        break;
+                    case "assort_images":
+                        question_subtype_id = "16";
+                        break;
+                    case "same_type_and_subtype":
+                        question_subtype_id = 'same_type_and_subtype';
+                        break;
+                    default:
+                        question_subtype_id = 'same_type_and_subtype';
+                        break;
+                }
+
+                // FormData append outside form inputs
+                formData.append($('#question_name')[0].name, $('#question_name')[0].value);
+                formData.append($('#question_type')[0].name, $('#question_type')[0].value);
+                formData.append('question_subtype', question_subtype_id);
+                formData.append($('#question_reference')[0].name, $('#question_reference')[0].value);
+                formData.append($('#question_description')[0].name, $('#question_description')[0].value);
+                formData.append($('#correction_required')[0].name, $('#correction_required')[0].value);
+                formData.append($('#question_score')[0].name, $('#question_score')[0].value);
+                if(question_id){
+                    formData.append('exercise_question_section', $('#question_section_hidden').val());
+                }
+                else{
+                    formData.append('exercise_question_section', $('#exercise_question_section')[0].value);
+                }
+
+                if($('#model_question_id_hidden').val() == "true"){
+                    formData.set('exercise_question_section', $('#exercise_question_section')[0].value);
+                    formData.append('question_model_id', question_id);
+                }
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                            window.location = response.url + '?land_on_structure_tab=true';
+                        }
+                        else if(response.status == 'error'){
+                            // question_title_error
+                            // question_type_error
+                            // question_reference_error
+                            // question_description_error
+                            Object.keys(response.errors).forEach(function (key) {
+                                if(key == 'question_name'){
+                                    $('.question_title_error').text(response.errors[key]);
+                                    $('.question_title_error').removeAttr('hidden');
+                                }
+                                if(key == 'question_reference'){
+                                    $('.question_reference_error').text(response.errors[key]);
+                                    $('.question_reference_error').removeAttr('hidden');
+                                }
+                                if(key == 'question_description'){
+                                    $('.question_description_error').text(response.errors[key]);
+                                    $('.question_description_error').removeAttr('hidden');
+                                }
+                                if(key == 'question_type'){
+                                    $('.question_type_error').text(response.errors[key]);
+                                    $('.question_type_error').removeAttr('hidden');
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+
+            // QUESTIONS
+            updateQuestionOnEdit(question_id);
+            function updateQuestionOnEdit(question_id) {
+                console.log(question_id);
+                if(question_id){
+                    var question_type_id = $('#question_type_id_hidden').val();
+                    var question_type_name = $('#question_type_name_hidden').val();
+                    var question_subtype_id = $('#question_subtype_id_hidden').val();
+                    var question_subtype_name = $('#question_subtype_name_hidden').val();
+                    $('#question_type').val(question_type_id).trigger('change');
+                    $('#question_score').val($('#question_avaliation_score_hidden').val()).trigger('change');
+                    console.log(question_type_id);
+                    if(question_subtype_id == 7){
+                        $('[id^="true_or_false_select_"]').select2();
+                    }
+                    else{
+                        $('#true_or_false_select_0').select2();
+                    }
+                }
+            }
+
+            // Models
+            $(document).on('change', '#question_model', function(){
+                var exercise_id = $('#exercise_id_hidden').val();
+                var model_question_id = $(this).val();
+                var exercise_question_section = $('#exercise_question_section').val();
+                console.log(model_question_id);
+                $.ajax({
+                    url: '/exercicios/'+exercise_id+'/questao/criar',
+                    type: "GET",
+                    data: {model_question_id : model_question_id, exercise_question_section : exercise_question_section},
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                            window.location = response.url;
+                        }
+                        else if(response.status == 'error'){
+                        }
+                    }
+                });
+            });
         });
 
     </script>

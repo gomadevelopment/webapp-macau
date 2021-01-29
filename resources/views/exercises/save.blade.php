@@ -41,7 +41,7 @@
             <div class="custom-tab customize-tab tabs_creative">
                 <ul class="nav nav-tabs p-2 b-0" id="create_exercise_tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="begin-tab" data-toggle="tab" href="#begin" role="tab" aria-controls="begin" aria-selected="true">
+                        <a class="nav-link {{ $land_on_structure_tab ? '' : 'active' }}" id="begin-tab" data-toggle="tab" href="#begin" role="tab" aria-controls="begin" aria-selected="{{ $land_on_structure_tab ? 'false' : 'true' }}">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Início</a>
@@ -53,7 +53,7 @@
                             Introdução</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="structure-tab" data-toggle="tab" href="#structure" role="tab" aria-controls="structure" aria-selected="false">
+                        <a class="nav-link {{ $land_on_structure_tab ? 'active' : '' }} {{ isset($exercise->id) ? '' : 'disabled' }}" id="structure-tab" data-toggle="tab" href="#structure" role="tab" aria-controls="structure" aria-selected="{{ $land_on_structure_tab ? 'true' : 'false' }}">
                             <img src="{{asset('/assets/backoffice_assets/icons/Layers.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Layers_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Estrutura</a>
@@ -65,7 +65,7 @@
                     <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id ? $exercise->id : null }}">
                     <div class="tab-content" id="create_exercise_tabs_content">
                         {{-- BEGIN TAB --}}
-                        <div class="tab-pane fade show active" id="begin" role="tabpanel" aria-labelledby="begin-tab">
+                        <div class="tab-pane fade {{ $land_on_structure_tab ? '' : 'show active' }}" id="begin" role="tabpanel" aria-labelledby="begin-tab">
                             
                             @include('exercises.tab-contents.save_beginning')
 
@@ -77,7 +77,7 @@
 
                         </div>
                         {{-- STRUCTURE TAB --}}
-                        <div class="tab-pane fade" id="structure" role="tabpanel" aria-labelledby="structure-tab">
+                        <div class="tab-pane fade {{ $land_on_structure_tab ? 'show active' : '' }}" id="structure" role="tabpanel" aria-labelledby="structure-tab">
 
                             @include('exercises.tab-contents.save_structure')
 
@@ -440,12 +440,15 @@
                     contentType: false,
                     success: function (response) {
                         if(response && response.status == 'success'){
-                            if(redirect){
-                                window.location = response.url;
-                            }
-                            else{
-                                $('#exercise_id_hidden').attr('value', response.ex_id);
-                            }
+                            // if(redirect){
+                            //     window.location = response.url;
+                            // }
+                            // else{
+                            //     $('#exercise_id_hidden').attr('value', response.ex_id);
+                            // }
+                            $('#exercise_id_hidden').attr('value', response.ex_id);
+                            $('#structure-tab').removeClass('disabled');
+                            $('.add_question_form').attr('action', '/exercicios/' + response.ex_id + '/questao/criar');
                         }
                         else if(response.status == 'error'){
 
@@ -490,6 +493,36 @@
                         }
                     });
                 }
+            });
+
+            // Delete question
+            $(document).on('click', '.delete_question_button', function(e){
+                e.preventDefault();
+                var exercise_id = $('#exercise_id_hidden').val();
+                var question_id = $(this).attr('data-id');
+                $.ajax({
+                    type: 'GET',
+                    url: '/exercicios/editar/'+exercise_id+'/apagar/'+question_id,
+                    success: function(response){
+                        if(response && response.status == 'success'){
+                            // window.location = '/exercicios/editar/' + response.clone_exercise_id;
+                            console.log(response.html);
+                            $("#structure").html(response.html);
+                            $(".successMsg").text(response.message);
+                            $(".successMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".successMsg").fadeOut();
+                            }, 5000);
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 2000);
+                        }
+                    }
+                });
             });
 
         });

@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(ExerciseCategoriesSeed::class);
         // $this->call(ExerciseLevelsSeed::class);
 
-        $this->call(NotificationTypesSeed::class);
+        // $this->call(NotificationTypesSeed::class);
+
+        $this->call(QuestionTypesSeed::class);
+        $this->call(QuestionSubTypesSeed::class);
     }
 }
