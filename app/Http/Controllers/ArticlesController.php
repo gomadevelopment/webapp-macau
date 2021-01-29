@@ -156,7 +156,7 @@ class ArticlesController extends Controller
             $article->saveArticle($inputs);
 
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             DB::rollback();
 
             request()->session()->flash('save_article_error', 'Por favor, verifique os erros no formulário.');

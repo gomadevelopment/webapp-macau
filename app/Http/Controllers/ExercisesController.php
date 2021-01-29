@@ -150,7 +150,10 @@ class ExercisesController extends Controller
         $tags = Tag::get();
         $clonable_exercises = Exercise::where('can_clone', 1)->get();
 
-        return view('exercises.save', compact('exercise', 'exercises_categories', 'exercises_levels', 'tags', 'clonable_exercises'));
+        $inputs = request()->only('land_on_structure_tab');
+        $land_on_structure_tab = isset($inputs['land_on_structure_tab']) && $inputs['land_on_structure_tab'] == "true" ? true : false;
+
+        return view('exercises.save', compact('exercise', 'exercises_categories', 'exercises_levels', 'tags', 'clonable_exercises', 'land_on_structure_tab'));
     }
 
     public function savePost($id = null)
