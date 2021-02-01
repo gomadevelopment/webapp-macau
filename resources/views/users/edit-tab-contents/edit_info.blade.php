@@ -22,8 +22,9 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                                    <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
-                                    alt="" class="user_round_avatar">
+                                    {{-- <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                    alt="" class="user_round_avatar"> --}}
+                                <div style="background-size: 100%; background-image: url('{{$user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}')" class="user_round_avatar"></div>
                                 </div>
                                 <h4 class="sg_rate_title align-self-center text-center mt-3">
                                     Imagem de Perfil

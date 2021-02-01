@@ -66,7 +66,7 @@
                             <div class="row mb-3 align-items-center pl-3 answers_row">
                                 <div class="col-12">
                                     <label class="label_title m-0" style="font-size: 18px;">
-                                        <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
+                                        <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
                                     </label>
                                     <p class="exercise_level m-0 float-none" style="font-size: 16px;">
                                         *A resposta certa deverá ser selecionada antes de gravar.
@@ -127,7 +127,7 @@
                         <div class="row mb-3 align-items-center pl-3 answers_row">
                             <div class="col-12">
                                 <label class="label_title m-0" style="font-size: 18px;">
-                                    <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
+                                    <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
                                 </label>
                                 <p class="exercise_level m-0 float-none" style="font-size: 16px;">
                                     *A resposta certa deverá ser selecionada antes de gravar.
@@ -320,7 +320,7 @@
                 <div class="row mb-3 align-items-center pl-3 answers_row">
                     <div class="col-12">
                         <label class="label_title m-0" style="font-size: 18px;">
-                            <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
+                            <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
                         </label>
                         <p class="exercise_level m-0 float-none" style="font-size: 16px;">
                             *A resposta certa deverá ser selecionada antes de gravar.
@@ -369,7 +369,7 @@
         <div class="row mb-3 align-items-center pl-3 answers_row">
             <div class="col-12">
                 <label class="label_title m-0" style="font-size: 18px;">
-                    <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;">
+                    <span>Respostas</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
                 </label>
                 <p class="exercise_level m-0 float-none" style="font-size: 16px;">
                     *A resposta certa deverá ser selecionada antes de gravar.

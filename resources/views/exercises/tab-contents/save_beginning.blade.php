@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-6 col-lg-4 mb-5" {{ isset($details_page) && $details_page ? 'hidden' : '' }}>
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Criar a partir de outro Exercício <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Criar a partir de outro Exercício <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                 <select name="exercise_template" id="exercise_template" class="form-control" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
                     <option value="0">Escolher exercício...</option>
                     @foreach ($clonable_exercises as $clonable_exercise)
@@ -15,7 +15,7 @@
     <div class="col-xs-12 col-sm-12 {{ isset($details_page) && $details_page ? 'col-md-12 col-lg-8' : 'col-md-6 col-lg-5' }} mb-5">
         <div class="card-body mb-3">
             <div class="form-group">
-                <label class="label_title">Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                 <input name="title" id="title" type="text" class="form-control" placeholder="Título do exercício"
                 value="{{ old('title', $exercise->title) }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
                 <span class="error-block-span pink title_error" hidden>

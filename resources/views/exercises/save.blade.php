@@ -398,10 +398,7 @@
             $(document).on('click', '.save_exercise_form_button', function(){
                 updateAllMessageForms();
                 var redirect = false;
-                if($(this).hasClass('beginning_save')){
-                    redirect = false;
-                }
-                else{
+                if($(this).hasClass('intro_save')){
                     redirect = true;
                 }
 
@@ -421,11 +418,9 @@
                         $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
                             if(element2.name != $(element).text()){
                                 formData.append('media_files[]', $(element).text());
-                                // console.log(element2.name, $(element).text());
                             }
                             else{
                                 formData.append('media_files[]', element2);
-                                // console.log(element2.name, $(element).text());
                             }
                             
                         });
@@ -440,15 +435,12 @@
                     contentType: false,
                     success: function (response) {
                         if(response && response.status == 'success'){
-                            // if(redirect){
-                            //     window.location = response.url;
-                            // }
-                            // else{
-                            //     $('#exercise_id_hidden').attr('value', response.ex_id);
-                            // }
                             $('#exercise_id_hidden').attr('value', response.ex_id);
-                            $('#structure-tab').removeClass('disabled');
-                            $('.add_question_form').attr('action', '/exercicios/' + response.ex_id + '/questao/criar');
+                            // $('#structure-tab').removeClass('disabled');
+                            // $('.add_question_form').attr('action', '/exercicios/' + response.ex_id + '/questao/criar');
+                            if(redirect){
+                                window.location = response.url + '?land_on_structure_tab=true';
+                            }
                         }
                         else if(response.status == 'error'){
 
@@ -475,13 +467,6 @@
                         success: function(response){
                             if(response && response.status == 'success'){
                                 window.location = '/exercicios/editar/' + response.clone_exercise_id;
-                                // setTimeout(function () {
-                                //     $(".successMsg").text(response.message);
-                                //     $(".successMsg").fadeIn();
-                                //     setTimeout(() => {
-                                //         $(".successMsg").fadeOut();
-                                //     }, 5000);
-                                // }, 1000);
                             }
                             else{
                                 $(".errorMsg").text(response.message);
@@ -505,8 +490,6 @@
                     url: '/exercicios/editar/'+exercise_id+'/apagar/'+question_id,
                     success: function(response){
                         if(response && response.status == 'success'){
-                            // window.location = '/exercicios/editar/' + response.clone_exercise_id;
-                            console.log(response.html);
                             $("#structure").html(response.html);
                             $(".successMsg").text(response.message);
                             $(".successMsg").fadeIn();

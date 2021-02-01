@@ -123,7 +123,10 @@
                     {{-- Criar Novo --}}
                     <div class="form-group">
                         <label class="label_title mb-2" style="font-size: 30px;">
-                            Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                            Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip"
+                            data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                            {{-- <span class="info_tooltip_text">Tooltip text</span> --}}
+                        </label>
                         <div class="row mb-1">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
                                 <input name="question_name" id="question_name" type="text" class="form-control" placeholder="Título da questão"
@@ -200,7 +203,7 @@
                     {{-- Correção --}}
                     <div class="form-group">
                         <label class="label_title mb-3" style="font-size: 30px;">
-                            Correção <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                            Correção <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction == 1 ? 'checked' : 'LOL' }}>
@@ -222,7 +225,7 @@
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="label_title" style="font-size: 16px;">
-                                    Pontuação <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                    Pontuação <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                 
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -439,7 +442,6 @@
                 // Form in tabs - Form with Type and Subtype
                 if($(selector).hasClass('tabs_creative')){
                     var tab_active = $(selector).find('.nav-link.active').attr('aria-controls');
-                    // console.log(tab_active);
                     $('form.question-form#form-' + tab_active).removeClass('form-disabled').addClass('form-enabled');
                 }
                 // Form outside tabs - Form with Type only
@@ -462,8 +464,6 @@
             $(document).on('change', '#question_type', function(){
                 $('.choose_question_type').hide();
                 $('.question_type_error').attr('hidden', 'hidden');
-                // $('#correction_required').attr('checked', false);
-                // $('#correction_required').removeAttr('onclick');
 
                 if($(this).val() == 1){
                     // Information
@@ -493,8 +493,6 @@
                 else if($(this).val() == 6){
                     // Free Question
                     hideAllQuestionTypes();
-                    // $('#correction_required').prop('checked', true);
-                    // $('#correction_required').attr('onclick', 'return false;');
                     showSpecificQuestionType($('.to_choose.free_question'));
                 }
                 else if($(this).val() == 7){
@@ -523,8 +521,6 @@
                     showSpecificQuestionType($('.to_choose.vowels'));
                 }
             });
-
-            // $('#question_type').val(11).trigger("change");
 
             // Button remove clone/row
             $(document).on('click', '.remove_button.remove_row', function(e){
@@ -579,29 +575,6 @@
                     $(this).parent().prev().remove();
                     $(this).parent().remove();
                 }
-
-                // if($(this).hasClass('associate_media_remove') || $(this).hasClass('corr_expressions_remove')){
-                //     $(this).parent().prev().prev().remove();
-                //     $(this).parent().prev().remove();
-                //     $(this).parent().remove();
-                // }
-                // else if($(this).hasClass('remove_multiple_choice_answer')){
-                //     // $(this).parent().prev().prev().remove();
-                //     $(this).parent().prev().remove();
-                //     $(this).parent().remove();
-                // }
-                // else if($(this).hasClass('remove_entire_question')){
-                //     $(this).parent().parent().next().remove();
-                //     $(this).parent().parent().remove();
-                // }
-                // else{
-                //     $(this).parent().remove();
-                // }
-
-                // if(exercise_type_classes.hasClass('automatic_content')){
-                //     $(this).parent().prev().remove();
-                //     $(this).parent().remove();
-                // }
             });
 
             /*
@@ -679,17 +652,6 @@
                     }
                 });
             });
-            // Remove existent file
-            // $(document).on('click', '[id^="corr_image_file_remove_"]', function(e){
-            //     e.preventDefault();
-            //     var id_index = this.id.match(/\d+/)[0];
-            //     e.stopImmediatePropagation();
-            //     e.preventDefault();
-            //     $('#corr_image_button_' + id_index).show();
-            //     $('#corr_image_file_input_' + id_index).remove();
-            //     $(this).parent(".associate_media_preview").remove();
-            // });
-            
 
             // Clone new Correspondence Audio/Video
             $(document).on('click', '.button_add_corr_audio', function(e){
@@ -1679,7 +1641,6 @@
             // SUBMIT ENABLED FORM
             
             var question_id = $('#question_id_hidden').val();
-            console.log($('#model_question_id_hidden').val());
 
             $(document).on('click', '#submit_enabled_form', function(e){
                 updateAllMessageForms();
@@ -1809,7 +1770,6 @@
             // QUESTIONS
             updateQuestionOnEdit(question_id);
             function updateQuestionOnEdit(question_id) {
-                console.log(question_id);
                 if(question_id){
                     var question_type_id = $('#question_type_id_hidden').val();
                     var question_type_name = $('#question_type_name_hidden').val();
@@ -1817,7 +1777,6 @@
                     var question_subtype_name = $('#question_subtype_name_hidden').val();
                     $('#question_type').val(question_type_id).trigger('change');
                     $('#question_score').val($('#question_avaliation_score_hidden').val()).trigger('change');
-                    console.log(question_type_id);
                     if(question_subtype_id == 7){
                         $('[id^="true_or_false_select_"]').select2();
                     }
@@ -1832,7 +1791,6 @@
                 var exercise_id = $('#exercise_id_hidden').val();
                 var model_question_id = $(this).val();
                 var exercise_question_section = $('#exercise_question_section').val();
-                console.log(model_question_id);
                 $.ajax({
                     url: '/exercicios/'+exercise_id+'/questao/criar',
                     type: "GET",

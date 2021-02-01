@@ -77,7 +77,15 @@ class UsersController extends Controller
             ]);
         }
 
-        $promoted_exercises = Exercise::where('user_id', $user->id)->paginate(4);
+        if($user->id == auth()->user()->id){
+            $promoted_exercises = Exercise::orderBy('created_at', 'desc')->where('user_id', $user->id)->paginate(4);
+        }
+        else{
+            $promoted_exercises = Exercise::orderBy('created_at', 'desc')
+                                            ->where('user_id', $user->id)
+                                            ->where('published', 1)
+                                            ->paginate(4);
+        }
 
         $inputs['page'] = 1;
 

@@ -24,6 +24,7 @@ class CreateExercisesTable extends Migration {
 			$table->tinyInteger('can_clone')->default('0');
 			$table->tinyInteger('only_my_students')->default('0');
 			$table->tinyInteger('only_after_correction')->default('0');
+			$table->tinyInteger('published')->default('0');
 			$table->timestamps();
 		});
 	}

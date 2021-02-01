@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <input type="text" name="title" class="form-control" placeholder="Título do artigo"
                                                     value="{{ old('title', $article->title) }}">
                                                     <span class="error-block-span pink title_error" hidden>
@@ -67,7 +67,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <div class="select2_with_search">
                                                         <select name="tags[]" id="tags" class="form-control" multiple  style="border: none;">
                                                             @foreach ($tags as $tag)
@@ -91,7 +91,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Categoria <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Categoria <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 p-0">
                                                         <select name="category" id="category" class="form-control">
                                                             @foreach ($article_categories as $category)
@@ -106,7 +106,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Foto de Capa <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Foto de Capa <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-poster">
@@ -130,7 +130,7 @@
                                             
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Descrição <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Descrição <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <textarea class="form-control" name="text" id="text" cols="30" rows="4" placeholder="Descrição do artigo">{{ old('text', $article->text) }}</textarea>
                                                     <span class="error-block-span pink text_error" hidden>
                                                     </span>
@@ -139,7 +139,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+                                                    <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-media">

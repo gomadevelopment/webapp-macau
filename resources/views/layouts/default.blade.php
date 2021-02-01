@@ -89,6 +89,8 @@
                 $(function(){
                     $("time.timeago").timeago();
 
+                    $('[data-toggle="tooltip"]').tooltip();
+
                     // Mark shown notifications as read (active = 0) - when bell_icon notifications dropdown is opened
                     function markUserNotsAsRead() {
                         var notifications_ids = JSON.parse($('#unread_user_notifications_ids').val());
