@@ -31,7 +31,9 @@
                         </div>
                         <div class="shop_grid_caption user_info card-body m-0 p-4">
                             <div class="form-group d-flex flex-wrap justify-content-center m-0">
-                                <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar m-2">
+                                {{-- <img src="https://via.placeholder.com/500x500" alt="" class="user_round_avatar m-2"> --}}
+                                <div style="background-size: 100%; background-image: url('{{auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}}')" class="user_round_avatar">
+                                </div>
                                 <h4 class="sg_rate_title align-self-center m-2">
                                     {{ auth()->user()->username }}
                                     <div class="d-flex flex-row user_options">
