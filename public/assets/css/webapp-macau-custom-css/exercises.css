@@ -88,6 +88,15 @@ strong.exercise_awaiting {
     float: left;
 }
 
+.not_published_exercise {
+    float: right;
+    display: block;
+    color: red;
+    margin-bottom: 0;
+    margin-right: 40px;
+    font-family: "Gilroy - Bold";
+}
+
 .shop_grid_caption .article_buttons.exercise_buttons {
     float: right;
     margin-top: -35px;
@@ -228,6 +237,10 @@ a.remove_button:hover {
     line-height: 30px;
     text-align: left;
     margin-top: 5px;
+}
+
+.tab-content .checkbox-custom-label {
+    display: flow-root;
 }
 
 .tab-content .checkbox-custom+.checkbox-custom-label:before,

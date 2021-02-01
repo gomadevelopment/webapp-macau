@@ -352,6 +352,16 @@ span.error-block-span.pink {
     height: 42px;
 }
 
+.nav-menu .user_avatar a .top_nav_bar_avatar {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 42px;
+    height: 42px;
+    background-size: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
 .nav-menu .user_notifications a {
     padding: 28px 8px !important;
 }
@@ -805,4 +815,71 @@ textarea.form-control {
     letter-spacing: -0.25px;
     line-height: normal;
     text-align: left;
+}
+
+/* 
+    ToolTips
+*/
+
+.tooltip-inner {
+    background-color: #131b31;
+    color: #ffffff;
+    font-family: "Gilroy - Medium";
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.19px;
+    line-height: 14px;
+    text-align: left;
+    padding: 15px;
+    /* bottom: 3px; */
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top],
+.tooltip.bs-tooltip-top {
+    top: -5px !important;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.tooltip.bs-tooltip-top .arrow::before {
+    border-top-color: #131b31;
+    margin-left: -7px;
+    border-width: 8px 10px 0px 10px;
+    /* bottom: 3px; */
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow,
+.tooltip.bs-tooltip-top .arrow {
+    border-top-color: #131b31;
+    /* bottom: 3px; */
+}
+
+/* .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+} */
+
+/* Tooltip text */
+.info_tooltip+.info_tooltip_text {
+    visibility: hidden;
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    /* Use half of the width (120/2 = 60), to center the tooltip */
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.info_tooltip:hover+.info_tooltip_text {
+    visibility: visible;
 }

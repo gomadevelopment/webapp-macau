@@ -60,6 +60,16 @@ class ExercisesController extends Controller
                             $exercise_fav->delete();
                         }
                         $exercise->medias()->delete();
+                        foreach($exercise->questions as $question){
+                            foreach($question->question_items as $question_item){
+                                if($question_item->question_item_media){
+                                    $question_item->question_item_media->delete();
+                                }
+                                $question_item->delete();
+                            }
+                            Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$question->id);
+                            $question->delete();
+                        }
                         $exercise->delete();
                     }catch (\Exception $e) {
                         // dd($e);
@@ -102,7 +112,14 @@ class ExercisesController extends Controller
             ]);
         }
 
-        $exercises = Exercise::orderBy('created_at', 'asc')->paginate(4);
+        $exercises = Exercise::orderBy('created_at', 'desc')
+                                ->where(function ($query) {
+                                    $query->where('published', 1);
+                                })->orWhere(function ($query) {
+                                    $query->where('published', 0)
+                                        ->where('user_id', auth()->user()->id);
+                                })
+                                ->paginate(4);
 
         foreach($exercises as $exercise){
             $exercise['is_exercise_favorite'] = $exercise->is_exercise_favorite();
@@ -136,8 +153,9 @@ class ExercisesController extends Controller
         $clonable_exercises = Exercise::where('can_clone', 1)->get();
 
         $details_page = true;
+        $land_on_structure_tab = false;
 
-        return view('exercises.save', compact('exercise', 'exercises_categories', 'exercises_levels', 'tags', 'clonable_exercises', 'details_page'));
+        return view('exercises.save', compact('exercise', 'exercises_categories', 'exercises_levels', 'tags', 'clonable_exercises', 'details_page', 'land_on_structure_tab'));
     }
 
     public function save($id = null)
@@ -159,8 +177,17 @@ class ExercisesController extends Controller
     public function savePost($id = null)
     {
         $inputs = request()->all();
-        // dd($inputs, $id);
+
         $exercise = $id ? Exercise::find($id) : new Exercise;
+
+        if(isset($inputs['from_structure_tab'])){
+            $exercise->published = isset($inputs['publish_exam']) ? 1 : 0;
+            $exercise->save();
+
+            request()->session()->flash('success', 'Exercício criado/atualizado com sucesso!');
+
+            return redirect()->to('/exercicios');
+        }
 
         $rules = $id ? Exercise::rulesForEdit() : Exercise::$rulesForAdd;
 
@@ -199,7 +226,7 @@ class ExercisesController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'url' => '/exercicios',
+            'url' => '/exercicios/editar/' . $exercise->id,
             'ex_id' => $exercise->id
         ]);
     }
@@ -231,7 +258,7 @@ class ExercisesController extends Controller
             $exercise_clone = $exercise->replicate();
             $exercise_clone->user_id = auth()->user()->id;
             $exercise_clone->push();
-            foreach($exercise->exercise_tags as $tag){
+            foreach ($exercise->exercise_tags as $tag){
                 $exercise_clone->exercise_tags()->attach($tag);
             }
             foreach ($exercise->medias as $media) {
@@ -242,6 +269,23 @@ class ExercisesController extends Controller
                 $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
                 $toPath = public_path('webapp-macau-storage/exercises/'.$exercise_clone->id.'/medias');
                 File::copyDirectory($fromPath, $toPath);
+            }
+            foreach ($exercise->questions as $question) {
+                $question_clone = $question->replicate();
+                $exercise_clone->questions()->save($question_clone);
+                if($question->question_items->count()){
+                    foreach ($question->question_items as $question_item) {
+                        $question_item_clone = $question_item->replicate();
+                        $question_clone->question_items()->save($question_item_clone);
+                        if($question_item->question_item_media->count()){
+                            $question_item_media_clone = $question_item->question_item_media->replicate();
+                            $question_item_clone->question_item_media()->save($question_item_media_clone);
+                            $fromPath = public_path('webapp-macau-storage/questions/'.$question->id.'/question_item/' . $question_item->id);
+                            $toPath = public_path('webapp-macau-storage/questions/'.$question_clone->id.'/question_item/' . $question_item_clone->id);
+                            File::copyDirectory($fromPath, $toPath);
+                        }
+                    }
+                }
             }
 
         } catch (\Exception $e) {

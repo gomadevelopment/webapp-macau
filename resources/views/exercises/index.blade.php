@@ -233,7 +233,7 @@
                         <ul class="no-ul-list mb-3 levels">
                             <li>
                                 <input id="all_levels" class="checkbox-custom" name="all_levels" type="checkbox" {{ isset($inputs['all_levels']) ? 'checked' : ''}}>
-                                <label for="all_levels" class="checkbox-custom-label all_levels">Todos</label>
+                                <label for="all_levels" class="checkbox-custom-label lev all_levels">Todos</label>
                             </li>
                             @foreach ($exercises_levels as $level)
                                 <li>
@@ -266,7 +266,7 @@
                         <ul class="no-ul-list mb-3 categories">
                             <li>
                                 <input id="all_categories" class="checkbox-custom" name="all_categories" type="checkbox" {{ isset($inputs['all_categories']) ? 'checked' : ''}}>
-                                <label for="all_categories" class="checkbox-custom-label all_categories">Todas</label>
+                                <label for="all_categories" class="checkbox-custom-label cat all_categories">Todas</label>
                             </li>
                             @foreach ($exercises_categories as $category)
                                 <li>
@@ -301,7 +301,7 @@
                         <ul class="no-ul-list mb-3 professors">
                             <li>
                                 <input id="show_all_professors" class="checkbox-custom" name="show_all_professors" type="checkbox" checked>
-                                <label for="show_all_professors" class="checkbox-custom-label show_all_professors">Todos</label>
+                                <label for="show_all_professors" class="checkbox-custom-label prof show_all_professors">Todos</label>
                             </li>
                             @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
                                 <li>
@@ -487,40 +487,45 @@
                 }
 
                 // Levels
-                if($(this).hasClass('all_levels')){
-                    $('label.checkbox-custom-label[class*="level_"]').each(function(index, element){
-                        if(!$(element).hasClass('all_levels')){
-                            $(element).prev('input').attr('checked', false);
-                        }
-                    });
-                }
-                else if(!$(this).hasClass('all_levels') && $(this).hasClass('lev')){
-                    $('label.checkbox-custom-label.all_levels').prev('input').attr('checked', false);
-                }
-
-                setTimeout(function () {
-                    if($('label.checkbox-custom-label[class*="level_"]').prev('input:checked').length == 0){
-                        $('label.checkbox-custom-label.all_levels').prev('input').attr('checked', true);
+                if($(this).hasClass('lev')){
+                    if($(this).hasClass('all_levels')){
+                        $('label.checkbox-custom-label[class*="level_"]').each(function(index, element){
+                            if(!$(element).hasClass('all_levels')){
+                                $(element).prev('input').attr('checked', false);
+                            }
+                        });
                     }
-                }, 50);
+                    else if(!$(this).hasClass('all_levels') && $(this).hasClass('lev')){
+                        $('label.checkbox-custom-label.all_levels').prev('input').attr('checked', false);
+                    }
+
+                    setTimeout(function () {
+                        if($('label.checkbox-custom-label[class*="level_"]').prev('input:checked').length == 0){
+                            $('label.checkbox-custom-label.all_levels').prev('input').click();
+                        }
+                    }, 50);
+                }
+                
                 
                 // Categories
-                if($(this).hasClass('all_categories')){
-                    $('label.checkbox-custom-label[class*="category_"]').each(function(index, element){
-                        if(!$(element).hasClass('all_categories')){
-                            $(element).prev('input').attr('checked', false);
-                        }
-                    });
-                }
-                else if(!$(this).hasClass('all_categories') && $(this).hasClass('cat')){
-                    $('label.checkbox-custom-label.all_categories').prev('input').attr('checked', false);
-                }
-
-                setTimeout(function () {
-                    if($('label.checkbox-custom-label[class*="category_"]').prev('input:checked').length == 0){
-                        $('label.checkbox-custom-label.all_categories').prev('input').attr('checked', true);
+                if($(this).hasClass('cat')){
+                    if($(this).hasClass('all_categories')){
+                        $('label.checkbox-custom-label[class*="category_"]').each(function(index, element){
+                            if(!$(element).hasClass('all_categories')){
+                                $(element).prev('input').attr('checked', false);
+                            }
+                        });
                     }
-                }, 50);
+                    else if(!$(this).hasClass('all_categories') && $(this).hasClass('cat')){
+                        $('label.checkbox-custom-label.all_categories').prev('input').attr('checked', false);
+                    }
+
+                    setTimeout(function () {
+                        if($('label.checkbox-custom-label[class*="category_"]').prev('input:checked').length == 0){
+                            $('label.checkbox-custom-label.all_categories').prev('input').click();
+                        }
+                    }, 50);
+                }
 
                 // Tags
                 if($(this).hasClass('cancel')){
@@ -533,29 +538,39 @@
                 }
 
                 // Professors
-                if($(this).hasClass('show_all_professors')){
-                    $('label.checkbox-custom-label[class*="professor_"]').each(function(index, element){
-                        if(!$(element).hasClass('show_all_professors')){
-                            $(element).prev('input').attr('checked', false);
-                        }
-                    });
-                }
-                else if(!$(this).hasClass('show_all_professors') && $(this).hasClass('prof')){
-                    $('label.checkbox-custom-label.show_all_professors').prev('input').attr('checked', false);
-                }
-
-                setTimeout(function () {
-                    if($('label.checkbox-custom-label[class*="professor_"]').prev('input:checked').length == 0){
-                        $('label.checkbox-custom-label.show_all_professors').prev('input').attr('checked', true);
+                if($(this).hasClass('prof')){
+                    if($(this).hasClass('show_all_professors')){
+                        $('label.checkbox-custom-label[class*="professor_"]').each(function(index, element){
+                            if(!$(element).hasClass('show_all_professors')){
+                                $(element).prev('input').attr('checked', false);
+                            }
+                        });
                     }
-                }, 50);
+                    else if(!$(this).hasClass('show_all_professors') && $(this).hasClass('prof')){
+                        $('label.checkbox-custom-label.show_all_professors').prev('input').attr('checked', false);
+                    }
+
+                    setTimeout(function () {
+                        if($('label.checkbox-custom-label[class*="professor_"]').prev('input:checked').length == 0){
+                            $('label.checkbox-custom-label.show_all_professors').prev('input').click();
+                        }
+                    }, 50);
+                }
+                
+                
 
                 // Visibility
                 if($(this).hasClass('show_vis_all')){
                     $('label.checkbox-custom-label.show_vis_my_students').prev('input').attr('checked', false);
                 }
                 else if($(this).hasClass('show_vis_my_students')){
-                    $('label.checkbox-custom-label.show_vis_all').prev('input').attr('checked', false);
+                    if(typeof $('label.checkbox-custom-label.show_vis_all').prev('input').attr('checked') == "undefined"
+                        && typeof $('label.checkbox-custom-label.show_vis_my_students').prev('input').attr('checked') == "undefined"){
+                            $('label.checkbox-custom-label.show_vis_all').prev('input').click();
+                        }
+                    else{
+                        $('label.checkbox-custom-label.show_vis_all').prev('input').attr('checked', false);
+                    }
                 }
 
                 var form_array;

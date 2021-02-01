@@ -32,7 +32,7 @@
         @foreach ($articles as $article)
             <div class="col-lg-12 col-md-12 col-sm-12">
         
-                <div class="shop_grid">
+                <div class="shop_grid" style="min-height: 300px;">
                     <div class="shop_grid_thumb img">
                         <img src="{{ $article->poster ? '/webapp-macau-storage/articles/'.$article->id.'/poster/'.$article->poster->media_url : 'https://via.placeholder.com/500x500'}}"
                          class="img-fluid" alt="" />
@@ -71,7 +71,7 @@
                             </a>
                         </div>
                         <div class="read_more">
-                            <a href="/artigos/detalhe/{{ $article->id }}" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin: -2px 10px 3px 5px;"></a>
+                            <a href="/artigos/detalhe/{{ $article->id }}" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin: -1px 10px 3px 5px;"></a>
                         </div>
                         
                     </div>

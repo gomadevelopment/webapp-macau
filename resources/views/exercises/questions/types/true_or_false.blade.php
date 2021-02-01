@@ -4,7 +4,7 @@
         @csrf
 
         <label class="label_title mb-3" style="font-size: 30px;">
-            Afirmações <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+            Afirmações <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
         <div class="row mb-3 align-items-center">
             @if (isset($question->id) && $question->question_subtype_id == 7)
                 @foreach ($question->question_items as $question_item)

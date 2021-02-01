@@ -160,7 +160,7 @@ class Exercise extends Model
         Notification::create([
             'title' => 'Novo Exercício',
             'text' => 'Você criou um novo exercício, "'.$this->title.'".',
-            'url' => '/exercícios/editar/' . $this->id,
+            'url' => '/exercicios/editar/' . $this->id,
             'param1_text' => 'exercise_id',
             'param1' => $this->id,
             'param2_text' => '',
@@ -226,9 +226,18 @@ class Exercise extends Model
             $query = self::orderBy('created_at', 'desc');
         }
         else{
-            $query = self::orderBy('created_at', 'asc');
+            $query = self::orderBy('created_at', 'desc');
         }
-
+        // dump($filters['show_professors']);
+        // $query = $query->where('published', 0)->where('user_id', auth()->user()->id)->orWhere('published', 1);
+        // dump($filters['show_professors']);
+        // $query = $query
+        //         ->where(function ($query) {
+        //             $query->where('published', 1);
+        //         })->orWhere(function ($query) {
+        //             $query->where('published', 0)
+        //                 ->where('user_id', auth()->user()->id);
+        //         });
         // My Favorites filter
         if(isset($filters['my_favorites'])){
             $query = $query->whereHas('exercise_favorite', function($q) {
@@ -248,7 +257,23 @@ class Exercise extends Model
         
         // Professor filters
         if(!isset($filters['show_all_professors']) && isset($filters['show_professors']) && !empty($filters['show_professors'])){
-            $query = $query->whereIn('user_id', $filters['show_professors']);
+            $query = $query->whereIn('user_id', $filters['show_professors'])
+                                ->where('published', 1);
+
+            if(in_array(auth()->user()->id, $filters['show_professors'])){
+                $query = $query->orWhere(function ($query) {
+                                $query->where('published', 0)
+                                    ->where('user_id', auth()->user()->id);
+                        });
+            }
+        }
+        else{
+            $query = $query->where(function ($query) {
+                        $query->where('published', 1);
+                    })->orWhere(function ($query) {
+                        $query->where('published', 0)
+                            ->where('user_id', auth()->user()->id);
+                    });
         }
 
         // Tags filters
@@ -262,6 +287,22 @@ class Exercise extends Model
         if(!isset($filters['show_vis_all']) && isset($filters['show_vis_my_students'])){
             $query = $query->where('only_my_students', 1);
         }
+        // dd($query->paginate(4));
+        // $query = $query->where('published', 0)->where('user_id', auth()->user()->id)->orWhere('published', 1);
+        // $query = $query
+        //         ->where(function ($query) {
+        //             $query->where('published', 1);
+        //         })->orWhere(function ($query) {
+        //             $query->where('published', 0)
+        //                 ->where('user_id', auth()->user()->id);
+        //         });
+                        // ->where('published', 1)
+                        // ->orWhere(function ($q){
+                        //     $q->where('published', 0);
+                        //         // ->where(function ($q2){
+                        //         //     $q2->orWhere('user_id', auth()->user()->id);
+                        //         // });
+                        // })->where('user_id', auth()->user()->id);
 
         $skip = $filters['page'] * 4;
 

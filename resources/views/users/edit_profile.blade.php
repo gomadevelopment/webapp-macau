@@ -199,8 +199,10 @@
                     contentType: false,
                     success: function(response) {
                         if (response && response.status == "success") {
-                            var new_avatar_url = '/webapp-macau-storage/' + user_id + '/avatars/' + response.avatar_url;
-                            $('.user_round_avatar').attr('src', new_avatar_url);
+                            var new_avatar_url = '/webapp-macau-storage/avatars/' + user_id + '/' + response.avatar_url;
+                            // $('.user_round_avatar').attr('src', new_avatar_url);
+                            $('.user_round_avatar').css('background-image', "url("+new_avatar_url+")");
+                            $('.top_nav_bar_avatar').css('background-image', "url("+new_avatar_url+")");
                         }
                         else {
                             $(".errorMsg").text(response.message);

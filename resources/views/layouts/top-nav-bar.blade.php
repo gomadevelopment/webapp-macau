@@ -57,8 +57,11 @@
                         <li class="user_avatar dropdown">
                             <a href="#" class="nav-link messages" data-toggle="dropdown">
                                 <span class="ping"></span>
-                                <img src="{{ auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}}" 
-                                class="img-fluid avater" alt="">
+                                {{-- <img src="{{ auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                class="img-fluid avater" alt=""> --}}
+                                <div style="backgroud-size: 100%; background-image: url({{ auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}})"
+                                    class="top_nav_bar_avatar">
+                                </div>
                                 Olá, {{ auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2 ? 'Professor' : 'Aluno'}}!
                                 <span class="dropdown-menu-arrow"></span>
                             </a>

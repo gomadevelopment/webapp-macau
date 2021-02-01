@@ -4,7 +4,7 @@
         @csrf
 
         <label class="label_title mb-3" style="font-size: 30px;">
-            Diferenças <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+            Diferenças <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
         @if (isset($question->id) && $question->question_subtype_id == 11)
             @foreach ($question->question_items as $question_item)
                 @if (!$loop->first)

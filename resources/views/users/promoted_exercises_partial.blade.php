@@ -14,6 +14,7 @@
 @else
     @foreach ($promoted_exercises as $exercise)
         <div class="shop_grid_caption card-body m-0 mb-4">
+            <p class="exercise_level not_published_exercise mr-0">{{ $exercise->published ? '' : 'Exercício não publicado.' }}</p>
             <h4 class="sg_rate_title">{{ $exercise->title }}</h4>
             <div class="d-flex float-left flex-column">
                 @if (auth()->user()->id == $exercise->user->id)

@@ -1,6 +1,6 @@
 <div class="form-group to_choose associate_media">
     <label class="label_title mb-3" style="font-size: 30px;">
-        Associar Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" alt="" style="margin-left: 5px;"></label>
+        Associar Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
     <div class="row mb-3 align-items-center">
         <div class="col col-wrap d-flex mb-3">
             <input name="media_descriptions[]" id="media_description_0" type="text" class="form-control" placeholder="Descrição do Media">
