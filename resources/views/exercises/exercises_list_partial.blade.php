@@ -77,11 +77,11 @@
                         </div>
                     @else
                         <div class="d-block float-right mt-3">
-                            <a href="/exercicios/realizar" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                            <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Iniciar Exercício
                             </a>
-                            <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
+                            <a href="/exercicios/realizar/{{ $exercise->id }}" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Retomar
                             </a>

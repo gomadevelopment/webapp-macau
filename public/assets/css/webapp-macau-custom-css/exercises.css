@@ -153,7 +153,7 @@ a.remove_button:hover {
 }
 
 .customize-tab.tabs_creative ul {
-    box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.03);
+    box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 0.15);
     border-radius: 10px;
     background-color: #ffffff;
     width: fit-content;
@@ -414,7 +414,15 @@ button.hide_video {
     align-items: center;
     justify-content: center;
     min-height: 250px;
+    max-height: 250px;
     position: relative;
+}
+
+.drag_and_drop_image video {
+    object-fit: fill;
+    width: -webkit-fill-available;
+    border-radius: 6px;
+    height: 250px;
 }
 
 .drag_and_drop_item {
@@ -439,6 +447,9 @@ button.hide_video {
 
 .drag_and_drop_item {
     padding-right: 20px !important;
+    z-index: 11;
+    cursor: all-scroll;
+    min-height: 71px;
 }
 
 .drag_and_drop_item:after {
@@ -446,6 +457,28 @@ button.hide_video {
     position: absolute;
     top: -2px;
     right: 5px;
+}
+
+/* drag_and_drop_item p-2 draggable dragaware draggable_clone */
+/* drag_and_drop_item p-2 draggable dragaware draggable_clone */
+/* 255 40 80 */
+
+.draggable_clone {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #e6ebf1;
+    z-index: 12;
+}
+
+.drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item {
+    border-radius: 5px;
+    border: 2px solid #ff2850;
+    background-color: #ff2850;
+    color: #ffffff;
+}
+
+.drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item.draggable_clone {
+    background-color: rgba(255, 40, 80, 0.8);
+    z-index: 12;
 }
 
 .word_item,

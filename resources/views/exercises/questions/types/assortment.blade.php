@@ -3,8 +3,8 @@
         <li class="nav-item">
             <a class="nav-link {{ (isset($question->id) && $question->question_subtype_id == 14) 
                         || !isset($question->id)
-                        || $question->question_subtype_id != 15
-                        || $question->question_subtype_id != 16 ? 'active' : '' }}" 
+                        || ($question->question_subtype_id != 15
+                        && $question->question_subtype_id != 16) ? 'active' : '' }}" 
                 id="assort-sentences-tab" data-toggle="tab" href="#assort-sentences" role="tab" aria-controls="assort-sentences" 
                 aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 14) || !isset($question->id) ? 'true' : 'false' }}">
                 Frases
@@ -30,8 +30,8 @@
 
         <div class="tab-pane fade {{ (isset($question->id) && $question->question_subtype_id == 14) 
                             || !isset($question->id)
-                            || $question->question_subtype_id != 15
-                            || $question->question_subtype_id != 16 ? 'show active' : '' }}" id="assort-sentences" role="tabpanel" aria-labelledby="assort-sentences-tab">
+                            || ($question->question_subtype_id != 15
+                            && $question->question_subtype_id != 16) ? 'show active' : '' }}" id="assort-sentences" role="tabpanel" aria-labelledby="assort-sentences-tab">
 
             <div class="form-group">
 

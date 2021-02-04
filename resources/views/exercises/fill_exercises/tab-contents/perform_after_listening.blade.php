@@ -91,7 +91,6 @@
             </div>
 
             <div class="row mb-4">
-                {{-- Question 1 --}}
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
                     <div class="form-group quiz_question_div rb-box p-3">
@@ -142,7 +141,6 @@
                     </div>
                 </div>
 
-                {{-- Question 2 --}}
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
                     <div class="form-group quiz_question_div rb-box p-3">
@@ -193,7 +191,6 @@
                     </div>
                 </div>
 
-                {{-- Question 3 --}}
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
                     <div class="form-group quiz_question_div rb-box p-3">

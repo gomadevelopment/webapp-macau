@@ -8,11 +8,31 @@
                         <label class="label_title mb-4 d-block">
                             Informação</label>
                         <div class="d-flex float-left flex-column">
-                            <p class="exercise_level m-0"><strong>Programa:</strong> Sociedade Civil</p>
-                            <p class="exercise_level m-0"><strong>Canal:</strong> RTP</p>
-                            <p class="exercise_level m-0"><strong>Duração:</strong> 1 hora e 42 minutos</p>
-                            <p class="exercise_level m-0"><strong>Tempo para conclusão:</strong> 2 horas</p>
-                            <p class="exercise_level m-0 mb-4"><strong>Pode interromper?</strong> Sim</p>
+                            <p class="exercise_level m-0">
+                                <strong>Programa:</strong> Sociedade Civil
+                            </p>
+                            <p class="exercise_level m-0">
+                                <strong>Canal:</strong> RTP
+                            </p>
+                            <p class="exercise_level m-0">
+                                <strong>Duração:</strong> 1 hora e 42 minutos
+                            </p>
+                            <p class="exercise_level m-0">
+                                <strong>Tempo para conclusão:</strong> 
+                                <span class="conclusion_time_convertion">
+                                    @if($exercise->has_time)
+                                        @if(intdiv($exercise->time, 60) != 0)
+                                            {{ intdiv($exercise->time, 60) > 1 ? intdiv($exercise->time, 60) . ' horas' : intdiv($exercise->time, 60) . ' hora' }} {{ ($exercise->time % 60) == 0 ? '' : ' e ' . ($exercise->time % 60) . ' minutos' }}
+                                        @endif
+                                    @else
+                                        (Sem tempo limite)
+                                    @endif
+                                    {{-- {{ $exercise->has_time ? intdiv($exercise->time, 60) != 0 ? intdiv($exercise->time, 60).'h:'. ($exercise->time % 60) : '(Sem tempo limite)' }} --}}
+                                </span>
+                            </p>
+                            <p class="exercise_level m-0 mb-4">
+                                <strong>Pode interromper?</strong> {{ $exercise->has_interruption ? 'Sim' : 'Não' }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -20,16 +40,19 @@
                     <div class="form-group">
                         <label class="label_title mb-4 d-block">
                             Resumo</label>
-                        <div class="d-flex float-left flex-column">
-                            <p class="exercise_level m-0 mb-4" style="line-height: 25px;">
-                                Vamos conhecer Astrid Pires, professora de Alemão em Lisboa.
-                                De onde é que ela é? Porque é que veio para Portugal? Quais
-                                as dificuldades que teve?
-                            </p>
+                        <div class="d-flex float-left flex-column shop_grid_caption ml-0">
+                            <div class="article_description m-0 mb-4" style="line-height: 25px;">
+                                {!! $exercise->introduction !!}
+                            </div>
                         </div>
                         <label class="label_title mb-4 d-block">
                             Tags</label>
-                        <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                        @foreach ($exercise->exercise_tags as $tag)
+                            <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
+                                <p>{{ $tag->name }}</p>
+                            </div>
+                        @endforeach
+                        {{-- <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
                             <p>Gramática</p>
                         </div>
                         <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
@@ -37,7 +60,7 @@
                         </div>
                         <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
                             <p>Verbos</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

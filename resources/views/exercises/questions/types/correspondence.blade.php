@@ -3,8 +3,8 @@
         <li class="nav-item">
             <a class="nav-link {{ (isset($question->id) && $question->question_subtype_id == 2) 
                         || !isset($question->id)
-                        || $question->question_subtype_id != 3
-                        || $question->question_subtype_id != 4 ? 'active' : '' }}" 
+                        || ($question->question_subtype_id != 3
+                        && $question->question_subtype_id != 4) ? 'active' : '' }}" 
                 id="correspondence-images-tab" data-toggle="tab" href="#correspondence-images" role="correspondence-images" aria-controls="correspondence-images" 
                 aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 2) || !isset($question->id) ? 'true' : 'false' }}">
                 Imagens
@@ -30,8 +30,8 @@
 
         <div class="tab-pane fade {{ (isset($question->id) && $question->question_subtype_id == 2) 
                             || !isset($question->id)
-                            || $question->question_subtype_id != 3
-                            || $question->question_subtype_id != 4 ? 'show active' : '' }}" 
+                            || ($question->question_subtype_id != 3
+                            && $question->question_subtype_id != 4) ? 'show active' : '' }}" 
             id="correspondence-images" role="tabpanel" aria-labelledby="correspondence-images-tab">
 
             <div class="form-group">

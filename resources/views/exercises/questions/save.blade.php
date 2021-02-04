@@ -692,7 +692,10 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i];
-                        if(!f.type.match('video.*')){
+                        console.log(f.type);
+                        if(f.type.match('video.*') || f.type.match('audio.*')){
+                        }
+                        else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio ou video.');
                             $('#corr_audio_file_input_'+id_index).remove();
                             return false;

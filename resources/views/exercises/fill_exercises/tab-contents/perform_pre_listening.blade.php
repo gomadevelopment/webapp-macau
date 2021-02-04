@@ -10,134 +10,195 @@
                 </div>
             </div>
 
-            <div class="row page-title p-0" style="margin-bottom: -15px;">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group wrap m-0">
-                        <label class="label_title d-block" style="font-size: 30px;">
-                            Pré-Escuta </label>
-                    </div>
-                </div>
-            </div>
+            <div class="custom-tab customize-tab tabs_creative">
+                <ul class="nav nav-tabs p-0 b-0 m-auto" id="perform_pre_listening_tabs" role="tablist">
+                    @foreach ($pre_listening_questions as $question)
+                        <li class="nav-item">
+                            <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="ex{{$question->id}}-tab" data-toggle="tab" href="#ex{{$question->id}}" role="tab" aria-controls="ex{{$question->id}}" aria-selected="{{ $loop->first ? 'true' : 'false' }}" style="padding: 8px 30px !important;">
+                                Exercício {{$loop->index + 1}}
+                            </a>
+                        </li>
+                    @endforeach
+                    {{-- <li class="nav-item">
+                        <a class="nav-link" id="ex1-tab" data-toggle="tab" href="#ex1" role="tab" aria-controls="ex1" aria-selected="false" style="padding: 8px 30px !important;">
+                            Exercício 1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="ex2-tab" data-toggle="tab" href="#ex2" role="tab" aria-controls="ex2" aria-selected="false" style="padding: 8px 30px !important;">
+                            Exercício 2
+                        </a>
+                    </li> --}}
+                </ul>
 
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label class="label_title mb-3 d-block">
-                            Observar as Imagens </label>
-                        <div class="d-flex float-left flex-column">
-                            <p class="exercise_author" style="margin-bottom: -10px;">
-                                Comece por associar cada Frase a uma Imagem.
-                            </p>
-                            <p class="exercise_author">
-                                <strong>Arraste a Frase para a Imagem correcta.</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <div class="tab-content" id="perform_pre_listening_tabs_content">
 
-            <hr class="mt-4 mb-4">
+                    @foreach ($pre_listening_questions as $question)
 
-            <div class="row mb-4">
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group" style="text-align: -webkit-center;">
-                        <div class="drag_and_drop_image text-center">
-                            <img src="{{asset('/assets/backoffice_assets/images/drag_image_1.png')}}" alt="">
-                        </div>
-                        <div class="drag_and_drop_hole mt-3">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group" style="text-align: -webkit-center;">
-                        <div class="drag_and_drop_image text-center">
-                            <img src="{{asset('/assets/backoffice_assets/images/drag_image_2.png')}}" alt="">
-                        </div>
-                        <div class="drag_and_drop_hole mt-3">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group" style="text-align: -webkit-center;">
-                        <div class="drag_and_drop_image text-center">
-                            <img src="{{asset('/assets/backoffice_assets/images/drag_image_3.png')}}" alt="">
-                        </div>
-                        <div class="drag_and_drop_hole mt-3">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label class="label_title d-block" style="font-size: 30px;">
-                        Frases </label>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
-                        <div class="drag_and_drop_hole origin_hole">
-                            <div class="drag_and_drop_item p-2" draggable="true">
-                                Conheci um Português em Viena. Ele agora é o meu Marido.
-                            </div>
-                        </div>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" data-subtype-id="{{ $question->question_subtype_id }}"
+                            id="ex{{$question->id}}" role="tabpanel" aria-labelledby="ex{{$question->id}}-tab">
                             
-                    </div>
-                </div>
-
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
-                        <div class="drag_and_drop_hole origin_hole">
-                            <div class="drag_and_drop_item p-2" draggable="true">
-                                Acho que o português e o Alemão são duas línguas difíceis.
+                            <div class="row page-title p-0" style="margin-bottom: -15px;">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group wrap m-0">
+                                        <label class="label_title d-block" style="font-size: 30px;">
+                                            {{ $question->section }} </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="form-group">
-                        <div class="drag_and_drop_hole origin_hole">
-                            <div class="drag_and_drop_item p-2" draggable="true">
-                                Sou da Áustria, cresci, estudei e trabalhei na Áustria.
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label class="label_title mb-3 d-block">
+                                            {{ $question->title }} </label>
+                                        <div class="d-flex float-left flex-column">
+                                            <p class="exercise_author" style="margin-bottom: -10px;">
+                                                {{ $question->description }}
+                                            </p>
+                                            {{-- <p class="exercise_author" style="margin-bottom: -10px;">
+                                                Assista agora ao <strong>Programa</strong>. Comece por <strong>arrastar</strong>
+                                            </p>
+                                            <p class="exercise_author">
+                                                <strong>a frase para os Campos correctos.</strong>
+                                            </p> --}}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <hr class="mt-4 mb-4">
+
+                            @switch($question->question_subtype_id)
+                                @case(1)
+                                    @include('exercises.fill_exercises.question-types.information', ['question' => $question])
+                                    @break
+                                @case(2)
+                                    @include('exercises.fill_exercises.question-types.correspondence.images', ['question' => $question])
+                                    @break
+                                @case(3)
+                                    @include('exercises.fill_exercises.question-types.correspondence.audios', ['question' => $question])
+                                    @break
+                                @case(4)
+                                    @include('exercises.fill_exercises.question-types.correspondence.categories', ['question' => $question])
+                                    @break
+                                @case(5)
+                                    @include('exercises.fill_exercises.question-types.fill_options.shuffle', ['question' => $question])
+                                    @break
+                                @case(6)
+                                    @include('exercises.fill_exercises.question-types.fill_options.words_text', ['question' => $question])
+                                    @break
+                                @case(7)
+                                    @include('exercises.fill_exercises.question-types.true_or_false', ['question' => $question])
+                                    @break
+                                @case(8)
+                                    @include('exercises.fill_exercises.question-types.multiple_choice.questions', ['question' => $question])
+                                    @break
+                                @case(9)
+                                    @include('exercises.fill_exercises.question-types.multiple_choice.intruder', ['question' => $question])
+                                    @break
+                                @case(10)
+                                    @include('exercises.fill_exercises.question-types.free_question', ['question' => $question])
+                                    @break
+                                @case(11)
+                                    @include('exercises.fill_exercises.question-types.differences', ['question' => $question])
+                                    @break
+                                @case(12)
+                                    @include('exercises.fill_exercises.question-types.statement_correction', ['question' => $question])
+                                    @break
+                                @case(13)
+                                    @include('exercises.fill_exercises.question-types.automatic_content', ['question' => $question])
+                                    @break
+                                @case(14)
+                                    @include('exercises.fill_exercises.question-types.assortment.sentences', ['question' => $question])
+                                    @break
+                                @case(15)
+                                    @include('exercises.fill_exercises.question-types.assortment.words', ['question' => $question])
+                                    @break
+                                @case(16)
+                                    @include('exercises.fill_exercises.question-types.assortment.images', ['question' => $question])
+                                    @break
+                                @case(17)
+                                    @include('exercises.fill_exercises.question-types.vowels', ['question' => $question])
+                                    @break
+                                @default
+                                    
+                            @endswitch
+
+                            <hr class="mt-4 mb-4">
+
+                            <div class="row mb-4">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label class="label_title d-block" style="font-size: 30px;">
+                                        Avaliação </label>
+                                        <div class="d-flex float-left flex-column">
+                                            <p class="exercise_author">
+                                            <strong>Pontuação:</strong> Esta questão vale <strong>{{ $question->avaliation_score }}</strong> pontos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-block text-center mt-4 mb-4">
+                                @if($loop->first)
+                                    <a href="#intro" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Voltar
+                                    </a>
+                                    @if($loop->last)
+                                        <a href="#listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Continuar
+                                        </a>
+                                    @else
+                                        <a href="#ex{{$pre_listening_questions[$loop->index+1]->id}}" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Seguinte
+                                        </a>
+                                    @endif
+                                @else
+                                    @if($loop->last)
+                                        <a href="#ex{{$pre_listening_questions[$loop->index-1]->id}}" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Voltar
+                                        </a>
+                                        <a href="#listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Continuar
+                                        </a>
+                                    @else
+                                        <a href="#ex{{$pre_listening_questions[$loop->index-1]->id}}" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Voltar
+                                        </a>
+                                        <a href="#ex{{$pre_listening_questions[$loop->index+1]->id}}" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            Seguinte
+                                        </a>
+                                    @endif
+                                @endif
+                                {{-- <a href="#intro" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    Voltar
+                                </a>
+                                <a href="#ex2" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    Seguinte
+                                </a>
+                                <a href="#listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    Continuar
+                                </a> --}}
+                            </div>
+
                         </div>
-                        
-                    </div>
+
+                    @endforeach
+
                 </div>
-            </div>
 
-            <hr class="mt-4 mb-4">
-
-            <div class="row mb-4">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label class="label_title d-block" style="font-size: 30px;">
-                        Avaliação </label>
-                        <div class="d-flex float-left flex-column">
-                            <p class="exercise_author">
-                                <strong>Pontuação:</strong> Esta questão vale <strong>20</strong> pontos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-block text-center mt-4 mb-4">
-                <a href="#intro" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                    Voltar
-                </a>
-                <a href="#listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                    Continuar
-                </a>
             </div>
 
         </div>

@@ -516,7 +516,7 @@ class Question extends Model
                     if(strpos($inputs['m_c_associate_media_file_input_'.$question_key], 'from_storage_') !== false){
                         if(isset($inputs['question_model_id'])){
                             $question_model = self::find($inputs['question_model_id']);
-                            $question_model_item = QuestionItem::find(explode('_', $inputs['m_c_associate_media_file_input_'.$index])[2]);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['m_c_associate_media_file_input_'.$question_key])[2]);
                             $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
                             $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
                             Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);

@@ -339,10 +339,26 @@ class ExercisesController extends Controller
         return view('exercises.questions.save');
     }
 
-    public function performExercise($id = null)
+    public function performExercise($exercise_id)
     {
         $this->viewShareNotifications();
-        return view('exercises.fill_exercises.perform');
+
+        $exercise = Exercise::find($exercise_id);
+
+        $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
+        $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
+        $listening_shop_questions = $exercise->questions()->where('section', 'Oficida da Escuta')->get();
+        $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
+        // dd($pre_listening_questions);
+
+        return view(
+            'exercises.fill_exercises.perform', 
+            compact(
+                'exercise', 
+                'pre_listening_questions', 
+                'listening_questions', 
+                'listening_shop_questions',
+                'after_listening_questions'));
     }
 
     public function performPostExercise($id = null)

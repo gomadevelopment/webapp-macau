@@ -16,7 +16,7 @@
             <div class="col-lg-12 col-md-12">
                 
                 <div class="wrap">
-                    <h1 class="title">Exercício: “De Áustria para Portugal”</h1>
+                    <h1 class="title">Exercício: “{{ $exercise->title }}”</h1>
                     
                 </div>
                 <div class="exercise_time wrap float-right">
@@ -95,25 +95,25 @@
                     {{-- PRE-LISTENING TAB --}}
                     <div class="tab-pane fade" id="pre-listening" role="tabpanel" aria-labelledby="pre-listening-tab">
 
-                        @include('exercises.fill_exercises.tab-contents.perform_pre_listening')
+                        @include('exercises.fill_exercises.tab-contents.perform_pre_listening', ['pre_listening_questions' => $pre_listening_questions])
 
                     </div>
                     {{-- LISTENING TAB --}}
                     <div class="tab-pane fade" id="listening" role="tabpanel" aria-labelledby="listening-tab">
 
-                        @include('exercises.fill_exercises.tab-contents.perform_listening')
+                        @include('exercises.fill_exercises.tab-contents.perform_listening', ['listening_questions' => $listening_questions])
 
                     </div>
                     {{-- LISTENING SHOP TAB --}}
                     <div class="tab-pane fade" id="listening-shop" role="tabpanel" aria-labelledby="listening-shop-tab">
 
-                        @include('exercises.fill_exercises.tab-contents.perform_listening_shop')
+                        @include('exercises.fill_exercises.tab-contents.perform_listening_shop', ['listening_shop_questions' => $listening_shop_questions])
 
                     </div>
                     {{-- AFTER LISTENING TAB --}}
                     <div class="tab-pane fade" id="after-listening" role="tabpanel" aria-labelledby="after-listening-tab">
 
-                        @include('exercises.fill_exercises.tab-contents.perform_after_listening')
+                        @include('exercises.fill_exercises.tab-contents.perform_after_listening', ['after_listening_questions' => $after_listening_questions])
 
                     </div>
                     {{-- EVALUATION TAB --}}
@@ -154,30 +154,46 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https'))}}"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https'))}}"></script> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script>
 
     <script>
 
-        // CKEDITOR.replace( 'intro_text' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'statement' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_visual_description' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_transcription' , {
-        //     language: 'pt'
-        // });
-
         $(function() {
+
+            // $('.drag_and_drop_item').draggable();
+
+            $('.drag_and_drop_item').draggable({
+                revert: true,
+                placeholder: false,
+                droptarget: '.drop',
+                drop: function(evt, droptarget) {
+                    if(!droptarget.children.length){
+                        $(this).appendTo(droptarget);
+                    }
+                    else{
+                        // droptarget.children.appendTo($(this).parent());
+                        // $(this).appendTo(droptarget);
+                        // console.log(droptarget);
+                        // console.log($.parseHTML(droptarget), $(this));
+                    }
+                }
+            });
+
+            $('#list').sortable({
+                autocreate: true,
+                update: function(evt) {
+                    $(this).sortable('serialize').forEach(element => {
+                        console.log(element.id);
+                    });
+                    // console.log(JSON.stringify($(this).sortable('serialize')));
+                }
+            });
 
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
@@ -274,42 +290,11 @@
 
             $('#verbs_select_2').select2();
 
-            // DRAG AND DROP
-            var $draggedItem;
+            $('[id^="word_select_question_item_"]').select2();
 
-            $('.drag_and_drop_item').on('dragstart', dragging);
-            $('.drag_and_drop_item').on('dragend', draggingEnded);
+            $('[id^="true_or_false_select_question_item_"]').select2();
 
-            $('.drag_and_drop_hole').on('dragenter', preventDefault);
-            $('.drag_and_drop_hole').on('dragover', preventDefault);
-            $('.drag_and_drop_hole').on('drop', dropItem);
-
-            function dragging(e) {
-                $(e.target).addClass('dragging');
-                $draggedItem = $(e.target);
-            }
-
-            function draggingEnded(e) {
-                $(e.target).removeClass('dragging');
-            }
-
-            function preventDefault(e) {
-                e.preventDefault();
-            }
-
-            function dropItem(e) {
-                var hole = $(e.target);
-                if (hole.hasClass('drag_and_drop_hole') && hole.children().length === 0) {
-                    $draggedItem.detach();
-                    $draggedItem.appendTo(hole);
-                    if(hole.hasClass('origin_hole')){
-                        $draggedItem.removeClass('item_dragged');
-                    }
-                    else{
-                        $draggedItem.addClass('item_dragged');
-                    }
-                }
-            }
+            $('[id^="m_c_questions_select_question_item_"]').select2();
 
             //Global:
             var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
@@ -347,14 +332,14 @@
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
 
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
+                $('#perform_exercise_tabs_content>.tab-pane').each(function(index, element){
                     $(element).removeClass('show');
                     $(element).removeClass('active');
                 });
 
                 var this_id = $(this).attr('id');
 
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
+                $('#perform_exercise_tabs_content>.tab-pane').each(function(index, element){
 
                     if($(element).attr('aria-labelledby') == this_id){
                         $(element).addClass('fade');
