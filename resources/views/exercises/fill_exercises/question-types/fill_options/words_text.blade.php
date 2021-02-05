@@ -1,5 +1,12 @@
 <div class="row mt-3">
 
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="form-group">
+            <label class="label_title d-block mb-1" style="font-size: 30px;">
+            Frases </label>
+        </div>
+    </div>
+
     <?php 
 
         function get_delimiters($str){
@@ -19,7 +26,6 @@
     ?>
 
     @foreach ($question->question_items as $item)
-    {{-- Eu sou a <% %>, o meu apelido é <% %> e tenho <% %> anos. <% %> --}}
         <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
             <div class="form-group d-inline-flex">
                 @if($item->question_item_media)
@@ -27,7 +33,7 @@
                         alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
                 @endif
                 <label class="label_title m-0 d-block align-self-center">
-
+                    - &nbsp;
                     @for ($i = 0; $i < $item->options_number; $i++)
                         {{ getStringWithSelects($item->text_1)[$i] }}
                         <?php $option = "options_".($i+1); ?>
@@ -47,63 +53,10 @@
                         
                     @endfor
 
-                    {{-- @foreach (getStringWithSelects($item) as $sub_string)
-                        {{ $sub_string }}
-                        <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
-                            <select name="verbs_select_1" id="verbs_select_1" class="form-control">
-                                <option value="1">ser</option>
-                                <option value="2">foi</option>
-                                <option value="3">é</option>
-                            </select>
-                        </div>
-                    @endforeach
-                    {!! getStringWithSelects($item) !!}
-                    - E 
-                    <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
-                        <select name="verbs_select_1" id="verbs_select_1" class="form-control">
-                            <option value="1">ser</option>
-                            <option value="2">foi</option>
-                            <option value="3">é</option>
-                        </select>
-                    </div>
-                    de onde? --}}
                 </label>
             </div>
     </div>
         
     @endforeach
-
-    {{-- <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-        <div class="form-group d-inline-flex">
-            <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
-            <label class="label_title m-0 d-block align-self-center">
-                - E 
-                <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
-                    <select name="verbs_select_1" id="verbs_select_1" class="form-control">
-                        <option value="1">ser</option>
-                        <option value="2">foi</option>
-                        <option value="3">é</option>
-                    </select>
-                </div>
-                de onde?
-            </label>
-        </div>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-        <div class="form-group d-inline-flex">
-            <img src="{{asset('/assets/backoffice_assets/images/pt_flag_image.png')}}" alt="" class="mr-4 mt-2 mb-2 align-self-center" style="height: fit-content;">
-            <label class="label_title m-0 d-block align-self-center">
-                <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
-                    <select name="verbs_select_2" id="verbs_select_2" class="form-control">
-                        <option value="1">Vem</option>
-                        <option value="2">Foi</option>
-                        <option value="3">É</option>
-                    </select>
-                </div>
-                de onde?
-            </label>
-        </div>
-    </div> --}}
 
 </div>

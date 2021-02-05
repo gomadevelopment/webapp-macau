@@ -2,7 +2,7 @@
 <div class="row mt-5">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group">
-            <label class="label_title d-block" style="font-size: 30px;">
+            <label class="label_title d-block mb-1" style="font-size: 30px;">
             Frases </label>
         </div>
     </div>
@@ -29,7 +29,7 @@
 
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group mb-0">
-            <label class="label_title d-block mb-4" style="font-size: 30px;">
+            <label class="label_title d-block mb-1" style="font-size: 30px;">
             Categorias </label>
         </div>
     </div>

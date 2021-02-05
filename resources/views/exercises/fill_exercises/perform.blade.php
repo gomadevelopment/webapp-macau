@@ -170,6 +170,7 @@
 
             $('.drag_and_drop_item').draggable({
                 revert: true,
+                scroll: true,
                 placeholder: false,
                 droptarget: '.drop',
                 drop: function(evt, droptarget) {
@@ -185,15 +186,42 @@
                 }
             });
 
-            $('#list').sortable({
-                autocreate: true,
+            $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]').sortable({
+                autocreate: false,
+                group: false,
+                scroll: true,
                 update: function(evt) {
                     $(this).sortable('serialize').forEach(element => {
-                        console.log(element.id);
+                        // console.log(element.id);
                     });
                     // console.log(JSON.stringify($(this).sortable('serialize')));
                 }
             });
+
+            $('[id^="assortment_words_table_question_item_"]').sortable({
+                autocreate: false,
+                group: false,
+                scroll: true,
+                update: function(evt) {
+                    var word_preview = '';
+                    $(this).find('li span').each(function(index, element){
+                        word_preview += $(element).text() + ' ';
+                    });
+                    $(this).prev('.word_preview').text(word_preview);
+                }
+            });
+
+            // $('[id^="assortment_images_table_question_"]').sortable({
+            //     autocreate: false,
+            //     group: false,
+            //     scroll: true,
+            //     update: function(evt) {
+            //         $(this).sortable('serialize').forEach(element => {
+            //             // console.log(element.id);
+            //         });
+            //         // console.log(JSON.stringify($(this).sortable('serialize')));
+            //     }
+            // });
 
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
@@ -296,6 +324,8 @@
 
             $('[id^="m_c_questions_select_question_item_"]').select2();
 
+            $('[id^="m_c_intruder_select_question_item_"]').select2();
+            
             //Global:
             var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
 
@@ -345,6 +375,10 @@
                         $(element).addClass('fade');
                         $(element).addClass('show');
                         $(element).addClass('active');
+
+                        if($(element).attr('id') == 'pre-listening'){
+                            $('#perform_pre_listening_tabs .nav-link:first').trigger('click');
+                        }
 
                         if($(element).attr('id') == 'listening'){
                             $('#perform_listening_tabs .nav-link:first').trigger('click');

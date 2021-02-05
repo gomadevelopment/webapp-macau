@@ -158,7 +158,7 @@
     </div>
 </div>
 
-<h1 class="structure_title">Pós-Escuta / Formulário de Participação</h1>
+<h1 class="structure_title">Pós-Escuta</h1>
 {{-- CREATED CARDS --}}
 @foreach ($exercise->questions as $question)
     @if($question->section == "Pós-Escuta")

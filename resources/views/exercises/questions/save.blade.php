@@ -151,7 +151,7 @@
                         <div class="row mb-2">
                              <div class="col-sm-12 col-md-12 col-lg-12">
                                 <input name="question_reference" id="question_reference" type="text" class="form-control" placeholder="Referência da questão"
-                                value="{{ isset($question) ? $question->reference : '' }}">
+                                value="{{ isset($question) && $model_question_id == "false" ? $question->reference : '' }}">
                                 <span class="error-block-span pink question_reference_error" hidden>
                                 </span>
                             </div>
@@ -392,7 +392,7 @@
             });
 
             // Button show/hide video
-            // $('.videoWrapper video').trigger('play');
+            $('.videoWrapper video').trigger('pause');
             
             $(document).on('click', 'button.show_video, button.hide_video', function(){
                 if($(this).hasClass('show_video')){

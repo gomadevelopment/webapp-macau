@@ -152,8 +152,8 @@ a.remove_button:hover {
     padding: 0 !important;
 }
 
-.customize-tab.tabs_creative ul {
-    box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 0.15);
+.customize-tab.tabs_creative ul:not(.select2-selection__rendered):not(.assortment_tables) {
+    box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 0.08);
     border-radius: 10px;
     background-color: #ffffff;
     width: fit-content;
@@ -757,4 +757,53 @@ div[id^="cke_fill_text_word_"] {
 [id^="selects_row_text_words_"] .select2-container--default .select2-selection--multiple .select2-selection__rendered li.select2-selection__choice:first-child {
     background-color: #28a745 !important;
     border: 1px solid #28a745 !important;
+}
+
+.assortment_tables {
+    float: left;
+    /* border-collapse: separate;
+    border-spacing: 0 10px; */
+    width: 100%;
+    text-align: left;
+}
+
+.sortable_clone {
+    width: 97.5%;
+}
+
+.sortable_placeholder {
+    border: none !important;
+}
+
+.assortment_tables li:not(.dragging) {
+    padding: 12px 15px;
+    cursor: all-scroll;
+    display: flex !important;
+}
+
+.assortment_tables img {
+    margin-right: 15px;
+}
+
+.assortment_tables span {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.37px;
+    line-height: 30px;
+    text-align: left;
+    border-radius: 5px;
+    border: 2px solid #e6ebf1;
+    padding: 12px 15px;
+    width: 100%;
+}
+
+.assortment_tables img.assort_image {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 75px;
+    max-height: 75px;
+    border-radius: 5px;
 }

@@ -347,7 +347,7 @@ class ExercisesController extends Controller
 
         $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
         $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
-        $listening_shop_questions = $exercise->questions()->where('section', 'Oficida da Escuta')->get();
+        $listening_shop_questions = $exercise->questions()->where('section', 'Oficina da Escuta')->get();
         $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
         // dd($pre_listening_questions);
 

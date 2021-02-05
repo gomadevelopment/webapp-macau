@@ -18,7 +18,7 @@ class Question extends Model
 
     public static $rulesForAdd = array(
         'question_name' => 'required',
-        'question_reference' => 'required',
+        // 'question_reference' => 'required',
         'question_description' => 'required',
         'question_type' => 'required'
     );
@@ -27,7 +27,7 @@ class Question extends Model
     {
         return array_merge([
             'question_name' => 'required',
-            'question_reference' => 'required',
+            // 'question_reference' => 'required',
             'question_description' => 'required',
             'question_type' => 'required'
         ], $merge);
@@ -35,7 +35,7 @@ class Question extends Model
 
     public static $messages = array(
         'question_name.required' => 'O título da questão é de preenchimento obrigatório.',
-        'question_reference.required' => 'A referência da questão é de preenchimento obrigatório.',
+        // 'question_reference.required' => 'A referência da questão é de preenchimento obrigatório.',
         'question_description.required' => 'A descrição da questão a apresentar ao aluno é de preenchimento obrigatório.',
         'question_type.required' => 'Escolha um tipo de questão e preencha os seus campos.',
     );

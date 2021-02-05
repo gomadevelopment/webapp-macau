@@ -11,7 +11,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="form-group" style="text-align: -webkit-center;">
 
-                <div class="mt-3">
+                <div class="">
 
                     <textarea class="form-control" name="" id="" cols="30" rows="5">{{ $item->text_1 }}</textarea>
 
