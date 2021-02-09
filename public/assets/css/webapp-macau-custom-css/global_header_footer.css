@@ -360,6 +360,7 @@ span.error-block-span.pink {
     background-size: 100%;
     vertical-align: middle;
     display: inline-block;
+    background-repeat: no-repeat;
 }
 
 .nav-menu .user_notifications a {
