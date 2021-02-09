@@ -15,7 +15,8 @@
                                 <source src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" type="{{ $exercise->medias->media_type }}">
                             </video>
                         @elseif ($exercise->medias && strpos($exercise->medias->media_type, 'image') !== false)
-                            <img src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" alt="">
+                            <img src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" alt=""
+                            style="height: -webkit-fill-available;">
                         @endif
                         {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                             <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">

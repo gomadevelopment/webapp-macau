@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(NotificationTypesSeed::class);
 
-        $this->call(QuestionTypesSeed::class);
-        $this->call(QuestionSubTypesSeed::class);
+        // $this->call(QuestionTypesSeed::class);
+        // $this->call(QuestionSubTypesSeed::class);
+        
+        $this->call(InquiriesSeeds::class);
     }
 }

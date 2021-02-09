@@ -389,7 +389,7 @@
             });
 
             //Save data:
-            $(".trigger").click(function(){
+            $("#finish_exercise_button").click(function(){
                 //Empty array:
                 survey = [];
                 //Push data:
@@ -399,8 +399,9 @@
                     //Bidimensional array push:
                     survey.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
                 };
+                console.log(survey);
                 //Debug:
-                debug();
+                // debug();
             });
 
             //Debug:
@@ -409,7 +410,7 @@
                 for (i=0; i<survey.length; i++) {
                     debug += "Nº " + survey[i][0] + " = " + survey[i][1] + "\n";
                 };
-                alert(debug);
+                // alert(debug);
             };
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){

@@ -13,7 +13,8 @@ use App\Exercise,
     App\ExerciseMedia,
     App\ExerciseTag,
     App\Tag,
-    App\User;
+    App\User,
+    App\Inquiry;
 
 use DB;
 
@@ -359,6 +360,8 @@ class ExercisesController extends Controller
         $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
         $listening_shop_questions = $exercise->questions()->where('section', 'Oficina da Escuta')->get();
         $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
+
+        $inquiries = Inquiry::orderBy('order', 'asc')->get();
         // dd($pre_listening_questions);
 
         return view(
@@ -368,7 +371,8 @@ class ExercisesController extends Controller
                 'pre_listening_questions', 
                 'listening_questions', 
                 'listening_shop_questions',
-                'after_listening_questions'));
+                'after_listening_questions',
+                'inquiries'));
     }
 
     public function performPostExercise($id = null)
