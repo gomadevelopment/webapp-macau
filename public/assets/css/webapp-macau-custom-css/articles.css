@@ -69,7 +69,7 @@
     text-align: left;
     display: flex;
     align-items: center;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .page_sidebar .checkbox-custom-label {

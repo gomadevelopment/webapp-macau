@@ -308,22 +308,32 @@ class ExercisesController extends Controller
         $exercise = Exercise::find($exercise_id);
         $count = 0;
         $array = [];
-        if(!$exercise->medias()){
+        // dd($exercise, $exercise->medias()->count());
+        if(!$exercise->medias()->count()){
             return 'no_medias';
         }
-        foreach ($exercise->medias()->get() as $media) {
-            // dd($media);
-            $path = 'webapp-macau-storage/exercises/'.$exercise_id.'/medias/'.$media->media_url;
-            $media_file = new \Illuminate\Http\File($path);
-            $array['media_'.$count] = 
-            [
+        // foreach ($exercise->medias()->get() as $media) {
+        //     // dd($media);
+        //     $path = 'webapp-macau-storage/exercises/'.$exercise_id.'/medias/'.$media->media_url;
+        //     $media_file = new \Illuminate\Http\File($path);
+        //     $array['media_'.$count] = 
+        //     [
+        //         'name' => $media_file->getFilename(),
+        //         'size' => $media_file->getSize(),
+        //         'path' => '/'.$media_file->getPathname()
+        //     ];
+        //     $count++;
+        // }
+
+        $path = 'webapp-macau-storage/exercises/'.$exercise_id.'/medias/'.$exercise->medias->media_url;
+        $media_file = new \Illuminate\Http\File($path);
+        $array = [
+            'poster' => [
                 'name' => $media_file->getFilename(),
                 'size' => $media_file->getSize(),
                 'path' => '/'.$media_file->getPathname()
-            ];
-            $count++;
-        }
-
+            ]
+        ];
         return $array;
     }
 

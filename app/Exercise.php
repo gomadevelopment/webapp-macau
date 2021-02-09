@@ -97,7 +97,7 @@ class Exercise extends Model
      */
     public function medias()
     {
-        return $this->hasMany('App\ExerciseMedia');
+        return $this->hasOne('App\ExerciseMedia');
     }
 
     /**
@@ -156,6 +156,10 @@ class Exercise extends Model
         if(isset($inputs['media_files'])){
             self::updatePosterAndMedias($this->id, $inputs['media_files']);
         }
+        else{
+            Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$this->id.'/medias');
+            self::find($this->id)->medias()->delete();
+        }
 
         Notification::create([
             'title' => 'Novo Exercício',
@@ -171,49 +175,68 @@ class Exercise extends Model
         ]);
     }
 
-    public function updatePosterAndMedias($exercise_id, $medias = [])
+    public function updatePosterAndMedias($exercise_id, $media)
     {
         // dd(is_string($poster), $medias);
 
-        if(!empty($medias)){
-            // Upload medias
-            $skip_medias = [];
-            foreach(self::find($exercise_id)->medias()->get() as $existing_media){
-                // dd(self::find($article_id)->medias()->get(), $medias);
-                foreach($medias as $media){
-                    if(is_string($media) && $media == $existing_media->media_url){
-                        $skip_medias[] = $media;
-                    }
-                    else{
-                        $existing_media->delete();
-                        Storage::disk('webapp-macau-storage')->delete('exercises/'.$exercise_id.'/medias/'.$existing_media->media_url);
-                    }
-                }
-            }
-            // dd('stop', $skip_medias);
-            // self::find($exercise_id)->medias()->delete();
+        if(!is_string($media)){
+            self::find($exercise_id)->medias()->delete();
+            $upload_date = date('Y-m-d_H:i:s_');
+            $paths = [];
+
+            Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$exercise_id.'/medias');
+
+            $fileName = $upload_date . $media->getClientOriginalName();
+
+            $paths = $media->storeAs('/exercises/'
+                . $exercise_id . '/medias', $fileName, 'webapp-macau-storage');
+
+            ExerciseMedia::create([
+                'exercise_id' => $exercise_id,
+                'media_url' => $fileName,
+                'media_type' => $media->getMimeType()
+            ]);
+        }
+
+        // if(!empty($medias)){
+        //     // Upload medias
+        //     $skip_medias = [];
+        //     foreach(self::find($exercise_id)->medias()->get() as $existing_media){
+        //         // dd(self::find($article_id)->medias()->get(), $medias);
+        //         foreach($medias as $media){
+        //             if(is_string($media) && $media == $existing_media->media_url){
+        //                 $skip_medias[] = $media;
+        //             }
+        //             else{
+        //                 $existing_media->delete();
+        //                 Storage::disk('webapp-macau-storage')->delete('exercises/'.$exercise_id.'/medias/'.$existing_media->media_url);
+        //             }
+        //         }
+        //     }
+        //     // dd('stop', $skip_medias);
+        //     // self::find($exercise_id)->medias()->delete();
             
 
-            // Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$exercise_id.'/medias');
-            foreach ($medias as $media) {
+        //     // Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$exercise_id.'/medias');
+        //     foreach ($medias as $media) {
                 
-                if(!is_string($media)){
-                    $upload_date = date('Y-m-d_H:i:s_');
-                    $paths = [];
+        //         if(!is_string($media)){
+        //             $upload_date = date('Y-m-d_H:i:s_');
+        //             $paths = [];
 
-                    $fileName = $upload_date . $media->getClientOriginalName();
+        //             $fileName = $upload_date . $media->getClientOriginalName();
 
-                    $paths = $media->storeAs('/exercises/'
-                        . $exercise_id . '/medias', $fileName, 'webapp-macau-storage');
+        //             $paths = $media->storeAs('/exercises/'
+        //                 . $exercise_id . '/medias', $fileName, 'webapp-macau-storage');
 
-                    ExerciseMedia::create([
-                        'exercise_id' => $exercise_id,
-                        'media_url' => $fileName
-                    ]);
-                }
-            }
+        //             ExerciseMedia::create([
+        //                 'exercise_id' => $exercise_id,
+        //                 'media_url' => $fileName
+        //             ]);
+        //         }
+        //     }
 
-        }
+        // }
     }
 
     public static function applyFilters($filters = [])

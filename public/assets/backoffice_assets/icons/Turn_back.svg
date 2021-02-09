@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="17px" viewBox="0 0 19 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>rotate-ccw</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Widget---Exercício-em-Pausa" transform="translate(-746.000000, -1150.000000)" stroke="#FFFFFF">
+            <g id="rotate-ccw" transform="translate(747.000000, 1151.000000)">
+                <polyline id="Path" stroke-width="2" points="0 0.81 0 5.67 4.86 5.67"></polyline>
+                <path d="M2.0331,9.72 C3.11202518,12.7823808 6.08620975,14.7620859 9.3277293,14.5755209 C12.5692489,14.3889558 15.2966634,12.0810962 16.0171186,8.91515247 C16.7375737,5.74920871 15.2773878,2.48840154 12.4357958,0.917538665 C9.59420372,-0.653324208 6.05623414,-0.155551561 3.7584,2.1384 L0,5.67" id="Path" stroke-width="1.98"></path>
+            </g>
+        </g>
+    </g>
+</svg>

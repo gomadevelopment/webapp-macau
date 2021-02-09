@@ -156,8 +156,9 @@ $(function() {
     // Exercise Timer
     var totalSeconds;
     var timer;
+    var countDown;
     var timerStartedBool = false;
-    const minutesInput = 90;
+    const minutesInput = $("#minutesInput").val();
     const counterDiv = $("#counterDisplay");
 
     counterDiv.text(
@@ -181,7 +182,7 @@ $(function() {
     });
 
     $(document).on("click", "#pauseButton", function(e) {
-        e.preventDefault();
+        // e.preventDefault();
         pauseTimer();
     });
 
@@ -200,14 +201,23 @@ $(function() {
 
     function runTimer() {
         $("#startButton").hide();
-        $("#pauseButton").show();
+        if (!$("#startButton").hasClass("no_interruption_time")) {
+            $("#pauseButton").show();
+        }
+        clearInterval(countDown);
         timer = setInterval(tick, 1000);
     }
 
     function pauseTimer() {
         clearInterval(timer);
-        $("#startButton").show();
+        if ($(".nav-link#evaluation-tab").hasClass("finished")) {
+            return false;
+        }
+        if (!$("#startButton").hasClass("no_interruption_time")) {
+            $("#startButton").show();
+        }
         $("#pauseButton").hide();
+        countDown = setInterval(theFunction, 1000);
     }
 
     function tick() {
@@ -246,83 +256,42 @@ $(function() {
         return seconds < 10 ? "0" + seconds : seconds;
     }
 
-    //////////
+    // Pause Countdown
+    if ($("#pause_countdown").length) {
+        var rawAmount = $("#pause_countdown").val();
+        var split = rawAmount.split(":");
+        var minutes = split[0];
+        var seconds = split[1];
+        var totalAmount = parseInt(minutes, 10) * 60;
+        if (seconds) {
+            totalAmount += parseInt(seconds, 10);
+        }
+    }
 
-    // Defines identifiers for accessing HTML elements
-    // const minutesInput = document.getElementById("minutesInput"),
-    //     startButton = document.getElementById("startButton"),
-    //     pauseButton = document.getElementById("pauseButton"),
-    //     unpauseButton = document.getElementById("startButton"),
-    //     counterDiv = document.getElementById("counterDisplay");
+    // $("#pause_countdown").val(" ");
+    theFunction = function() {
+        totalAmount--;
 
-    // // Adds listeners and declares global variables
-    // startButton.addEventListener("click", start);
-    // pauseButton.addEventListener("click", pauseTimer);
-    // unpauseButton.addEventListener("click", runTimer);
-    // let totalSeconds; // global variable to count down total seconds
-    // let timer; // global variable for setInterval and clearInterval
+        if (totalAmount == 0) {
+            clearInterval(countDown);
+            $(".unpause_exercise_modal_button").click();
+            $("#pause_countdown").val("00:00");
+            $("#startButton").hide();
+            $("#pauseButton").hide();
+        }
+        var minutes = parseInt(totalAmount / 60);
+        var seconds = parseInt(totalAmount % 60);
 
-    // //Disables buttons that are not needed yet
-    // // pauseButton.hide();
-    // // hide(pauseButton);
-    // // hide(unpauseButton);
+        if (seconds < 10) seconds = "0" + seconds;
+        $("label.pause_counter_modal").text(minutes + ":" + seconds);
+        $("#pause_countdown").val(minutes + ":" + seconds);
+    };
 
-    // // Defines functions that get the minutes and seconds for display
-    // function getMinutes(totalSeconds) {
-    //     return Math.floor(totalSeconds / 60); // Gets quotient rounded down
-    // }
-
-    // function getSeconds(totalSeconds) {
-    //     let seconds = totalSeconds % 60; // Gets remainder after division
-    //     return seconds < 10 ? "0" + seconds : seconds; // Inserts "0" if needed
-    // }
-
-    // // Defines functions that manipulate the countdown
-    // function start(e) {
-    //     e.preventDefault();
-    //     totalSeconds = minutesInput.value * 60; // Sets initial value of totalSeconds based on user input
-    //     counterDiv.innerHTML =
-    //         getMinutes(totalSeconds) + ":" + getSeconds(totalSeconds); // Initializes display
-    //     hide(minutesInput);
-    //     hide(startButton); // Toggles buttons
-    //     runTimer();
-    // }
-
-    // function runTimer(e) {
-    //     e.preventDefault();
-    //     // Is the main timer function, calls `tick` every 1000 milliseconds
-    //     timer = setInterval(tick, 1000);
-    //     hide(unpauseButton);
-    //     show(pauseButton); // Toggles buttons
-    // }
-
-    // function tick() {
-    //     if (totalSeconds > 0) {
-    //         totalSeconds--; // Decreases total seconds by one
-    //         counterDiv.innerHTML =
-    //             getMinutes(totalSeconds) + ":" + getSeconds(totalSeconds); // Updates display
-    //     } else {
-    //         // The timer has reached zero. Let the user start again.
-    //         show(minutesInput);
-    //         show(startButton);
-    //         hide(pauseButton);
-    //         hide(unpauseButton);
-    //     }
-    // }
-
-    // function pauseTimer(e) {
-    //     e.preventDefault();
-    //     // Stops calling `tick` and toggles buttons
-    //     clearInterval(timer);
-    //     hide(pauseButton);
-    //     show(unpauseButton);
-    // }
-
-    // // Defines functions to hide and re-show HTML elements
-    // function hide(element) {
-    //     element.setAttribute("hidden", "");
-    // }
-    // function show(element) {
-    //     element.removeAttribute("hidden");
-    // }
+    $(document).on("click", ".unpause_exercise_modal_button", function(e) {
+        e.preventDefault();
+        $(this)
+            .closest(".modal")
+            .modal("hide");
+        $("#startButton").click();
+    });
 });

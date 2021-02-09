@@ -3,7 +3,7 @@
 <!-- ============================================================== -->
 <!-- Start Navigation -->
 
-<div class="header header-light {{ Request::path('') === '/' ? 'homepage' : '' }} {{ auth()->user() ? 'logged_in' : '' }}">
+<div class="header header-light {{ Request::path('') === '/' || Request::path('') === '/login' ? 'homepage' : '' }} {{ auth()->user() ? 'logged_in' : '' }}">
     <div class="container">
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">

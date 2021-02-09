@@ -17,19 +17,21 @@
                 
                 <div class="wrap">
                     <h1 class="title">Exercício: “{{ $exercise->title }}”</h1>
-                    
                 </div>
-                <div class="exercise_time wrap float-right">
+
+                <div class="exercise_time wrap float-right {{ !$exercise->has_time ? 'd-none' : '' }}">
                     <p class="time_label exercise_author align-self-center">
                         <strong style="font-size: 22px;">Tempo:</strong>
                     </p>
-                    <div id="counterDisplay" class="time_countdown ml-2 mr-2" style="padding: 10px 15px !important;">
+                    <div id="counterDisplay" class="time_countdown ml-2" style="padding: 10px 15px !important;">
                     </div>
-                    <input type="number" id="minutesInput" value="20" hidden/>
-                    <a href="#" id="pauseButton" class="pause_time" style="padding: 10px 15px !important;">
+                    <input type="number" id="minutesInput" value="{{ $exercise->time }}" hidden/>
+
+                    <a href="#" data-toggle="modal" data-target="#pause_modal" data-backdrop='static' data-keyboard='false'
+                        id="pauseButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Pause_circle.svg')}}" alt="">
                     </a>
-                    <a href="#" id="startButton" class="pause_time" style="padding: 10px 15px !important;">
+                    <a href="#" id="startButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg')}}" alt="">
                     </a>
                 </div>
@@ -54,31 +56,31 @@
                             Introdução</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="pre-listening-tab" data-toggle="tab" href="#pre-listening" role="tab" aria-controls="pre-listening-tab" aria-selected="false">
+                        <a class="nav-link" id="pre-listening-tab" data-toggle="tab" href="#pre-listening" role="tab" aria-controls="pre-listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pré-Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="listening-tab" data-toggle="tab" href="#listening" role="tab" aria-controls="listening-tab" aria-selected="false">
+                        <a class="nav-link" id="listening-tab" data-toggle="tab" href="#listening" role="tab" aria-controls="listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             À Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="listening-shop-tab" data-toggle="tab" href="#listening-shop" role="tab" aria-controls="listening-shop-tab" aria-selected="false">
+                        <a class="nav-link" id="listening-shop-tab" data-toggle="tab" href="#listening-shop" role="tab" aria-controls="listening-shop-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home2.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Home2_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Oficina da Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="after-listening-tab" data-toggle="tab" href="#after-listening" role="tab" aria-controls="after-listening-tab" aria-selected="false">
+                        <a class="nav-link" id="after-listening-tab" data-toggle="tab" href="#after-listening" role="tab" aria-controls="after-listening-tab" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/After_listen.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/After_listen_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pós-Escuta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="false">
+                        <a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="false">
                             <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Classificação</a>
@@ -146,6 +148,38 @@
     </div>
 </section>
 <!-- ============================ Find Courses with Sidebar End ================================== -->
+
+{{-- PAUSE MODAL --}}
+<!-- Log In Modal -->
+<div class="modal fade" id="pause_modal" tabindex="-1" role="dialog" aria-labelledby="pausemodal" aria-hidden="true">
+    <div class="container modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="pausemodal">
+            <div class="modal-body card-body">
+                <label class="label_title d-block text-center mt-3" style="font-size: 37px;">
+                    Exercício em Pausa
+                </label>
+                <label class="label_title d-block mt-5 text-center">
+                    Colocou o exercício 
+                    “{{ $exercise->title }}” 
+                    em pausa.
+                </label>
+                <hr class="mb-5" style="margin-top: 2.5rem;">
+                <label class="label_title d-block text-center mt-5 pause_counter_modal" style="font-size: 54px;">
+                    {{-- 00:14:27 --}}
+                    {{ $exercise->interruption_time < 10 ? '0' . $exercise->interruption_time . ':00' : $exercise->interruption_time . ':00' }}
+                </label>
+                <input type="hidden" name="pause_countdown" id="pause_countdown" value="{{ $exercise->interruption_time < 10 ? '0' . $exercise->interruption_time . ':00' : $exercise->interruption_time . ':00' }}"/>
+                <div class="d-block text-center" style="margin: 2rem 0 !important;">
+                    <a href="#" class="btn search-btn comment_submit m-2 unpause_exercise_modal_button" style="float: none; padding: 15px 25px;">
+                        Retomar
+                        <img src="{{asset('/assets/backoffice_assets/icons/Turn_back.svg')}}" alt="" style="margin-left: 5px; margin-bottom: 2px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
 
 @stop
 
@@ -225,20 +259,35 @@
 
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
-                // console.log($(this).attr('href'), this.hash);
-                if($(this).hasClass('start_exercise')){
-                    $(this).hide();
-                    $('.nav-link.disabled').removeClass('disabled');
-                    $('#startButton').click();
+
+                if(this.hash == "#evaluation"){
+                    $('.nav-link').addClass('disabled');
+                    $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
+                    $('#evaluation-tab').show();
+                    $('#pauseButton').attr('data-toggle', '');
+                    $('#pauseButton').attr('data-target', '');
+                    $('#pauseButton').click();
+                    $('#pauseButton').hide();
+                    $('#startButton').hide();
+                    $('#accordion').hide();
                 }
 
-                $($(this).attr('href') + "-tab").click();
+                if($(this).hasClass('start_exercise')){
+                    $(this).hide();
+                    // $('.nav-link.disabled').removeClass('disabled');
+                    $('#evaluation-tab').hide();
+                    $('#startButton').click();
+                }
+                else{
+                    $($(this).attr('href') + "-tab").click();
+                }
 
                 // Make sure this.hash has a value before overriding default behavior
-                if (this.hash !== "") {
+                if (this.hash !== "" && !$(this).hasClass('start_exercise')) {
                     e.preventDefault();
 
-                    var hash = this.hash + '-tab';
+                    var hash = this.hash !== "#quiz-div" ? this.hash + '-tab' : this.hash;
+
                     var offset_disc = $(".header").height() + 10;
 
                     if ($(window).width() < 992) {
@@ -252,7 +301,10 @@
                         800
                     );
                 }
+
             });
+            $('.start_exercise').click();
+            $('.start_exercise').hide();
 
             // Change icon image on tab change
             changeIconImage();

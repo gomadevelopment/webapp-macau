@@ -93,7 +93,7 @@
 
 <DIV id="preview-template" style="display: none;">
     <DIV class="dz-preview dz-file-preview">
-        <DIV class="dz-image"><IMG data-dz-thumbnail=""></DIV>
+        <DIV class="dz-image"><IMG data-dz-thumbnail="" style="width: 120px; height: 120px;"></DIV>
         <DIV class="dz-details">
         <DIV class="dz-size"><SPAN data-dz-size=""></SPAN></DIV>
         <DIV class="dz-filename"><SPAN data-dz-name=""></SPAN></DIV>
@@ -280,6 +280,12 @@
                     .css('padding-left', '10px !important');
             });
 
+            var remove_file_button_clicked = false;
+
+            $(document).on('click', '.dz-remove', function(){
+                remove_file_button_clicked = true;
+            });
+
             var dropzone_medias_counter = 0;
 
             var dropzone_media = new Dropzone('#form-dropzone-media', {
@@ -287,14 +293,20 @@
                 previewTemplate: document.querySelector('#preview-template').innerHTML,
                 addRemoveLinks: true,
                 parallelUploads: 2,
+                uploadMultiple: false,
+                maxFiles: 1,
                 thumbnailHeight: 120,
                 thumbnailWidth: 120,
                 maxFilesize: 3,
                 filesizeBase: 1000,
                 init: function(e) {
+                    this.on("maxfilesexceeded", function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                    });
                     if(dropzone_medias_counter == 0){
                         var thisDropzone = this;
-                        if(exercise_id){
+                        if(exercise_id || !remove_file_button_clicked){
                             $.get('/exercicios/get_exercise_medias/' + exercise_id, function(data) {
                                 if(data != 'no_medias'){
                                     JSON.stringify(data);
@@ -326,6 +338,8 @@
                         var thumbnailElement = images[i];
                         thumbnailElement.alt = file.name;
                         thumbnailElement.src = dataUrl;
+                        thumbnailElement.width = "120px";
+                        thumbnailElement.height = "120px";
                     }
                     setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
                     }
@@ -342,7 +356,9 @@
 
             dropzone_media.uploadFiles = function(files) {
                 var self = this;
-
+                if($('#form-dropzone-media .dz-preview.dz-complete.dz-image-preview')){
+                    $('#form-dropzone-media .dz-preview.dz-complete.dz-image-preview').remove();
+                }
                 for (var i = 0; i < files.length; i++) {
 
                     var file = files[i];
@@ -368,10 +384,9 @@
                             };
                         }(file, totalSteps, step), duration);
                     }
-                    media_files.push(file);
-
+                    // media_files.push(file);
                 }
-                // media_files = files;
+                media_files = files;
             }
 
             // Go to Intro tab button (Gravar button on beggining tab_content)
@@ -407,24 +422,32 @@
 
                 var formData = new FormData($("#save_exercise_form")[0]);
 
-                if(media_files == []){
-                    $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
-                        formData.append('media_files[]', $(element).text());
-                    });
-                }
-                else{
-                    media_files.forEach(element2 => {
+                // if(media_files == []){
+                //     $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                //         formData.append('media_files[]', $(element).text());
+                //     });
+                // }
+                // else{
+                //     media_files.forEach(element2 => {
                         
-                        $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
-                            if(element2.name != $(element).text()){
-                                formData.append('media_files[]', $(element).text());
-                            }
-                            else{
-                                formData.append('media_files[]', element2);
-                            }
+                //         $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
+                //             if(element2.name != $(element).text()){
+                //                 formData.append('media_files[]', $(element).text());
+                //             }
+                //             else{
+                //                 formData.append('media_files[]', element2);
+                //             }
                             
-                        });
-                    });
+                //         });
+                //     });
+                // }
+
+                if(media_files[0]){
+                    formData.append('media_files', media_files[0]);
+                }
+                else if(!media_files[0] && $('#form-dropzone-media .dz-preview.dz-complete.dz-image-preview')){
+                    var existing_file = $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').text();
+                    formData.append('media_files', existing_file);
                 }
                 
                 $.ajax({

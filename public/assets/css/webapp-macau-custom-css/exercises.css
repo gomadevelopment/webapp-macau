@@ -437,6 +437,8 @@ button.hide_video {
 .drag_and_drop_hole,
 .drag_and_drop_item {
     width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    object-fit: contain;
 }
 
 .drag_and_drop_hole,
@@ -558,6 +560,7 @@ button.hide_video {
     letter-spacing: -0.29px;
     line-height: 22px;
     text-align: center;
+    cursor: pointer;
 }
 
 .quiz_question_div {
@@ -695,6 +698,14 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
+.anxiety_levels {
+    display: flow-root;
+}
+
+.anxiety_levels .rb-tab {
+    width: unset;
+}
+
 
 /* Upload Medias in Exercices */
 
@@ -806,4 +817,33 @@ div[id^="cke_fill_text_word_"] {
     min-height: 75px;
     max-height: 75px;
     border-radius: 5px;
+}
+
+/* 
+    PAUSE MODAL
+*/
+
+#pause_modal .modal-open .modal {
+    overflow-y: hidden;
+}
+
+#pause_modal .modal-dialog {
+    padding: 0;
+    overflow: hidden;
+    margin: 200px auto;
+}
+
+#pause_modal .modal-content {
+    flex-flow: nowrap;
+    width: 50%;
+    margin: auto;
+    box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+#pause_modal .modal-body {
+    width: 50%;
+    position: relative;
+    padding-right: 50px;
 }
