@@ -32,8 +32,9 @@
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
                 <div class="form-group">
                     <div class="drag_and_drop_hole origin_hole word_hole drop">
-                        <div class="drag_and_drop_item word_item p-2" >
+                        <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" >
                             {{ $word }}
+                            <input type="hidden" name="" value="{{ $word }}">
                         </div>
                     </div>
                 </div>
@@ -62,6 +63,7 @@
                         <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
                             alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
                     @endif
+
                     <label class="label_title m-0 d-block align-self-center">
 
                         @foreach (getStringInArray($item->text_1) as $sub_string)
@@ -69,6 +71,7 @@
                             {{ $sub_string }}
 
                             @if(!$loop->last)
+                                <input type="hidden" name="{{$question->id}}_fill_options_shuffle[{{ $item->id }}][]" class="fill_options_d_and_d" data-item-id="">
                                 <div class="drag_and_drop_hole fill_hole word_hole drop m-2">
 
                                 </div>

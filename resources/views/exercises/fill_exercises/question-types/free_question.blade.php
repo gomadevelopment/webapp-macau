@@ -12,7 +12,7 @@
 
                 <div class="mt-3">
 
-                    <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+                    <textarea class="form-control" name="{{$question->id}}_free_question[{{$item->id}}]" id="" cols="30" rows="5"></textarea>
 
                 </div>
             </div>

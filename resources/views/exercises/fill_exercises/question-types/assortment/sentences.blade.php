@@ -14,13 +14,17 @@
 
                 <?php shuffle($shuffled_array); ?>
 
+
                 <ul id="assortment_sentences_table_question_item_{{ $item->id }}" class="assortment_tables" cellspacing="0" cellpadding="2">
 
                     @foreach ($shuffled_array as $shuffled_option)
 
                         <li>
                             <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="">
-                            <span>{{ $shuffled_option }}</span>
+                            <span>
+                                {{ $shuffled_option }}
+                            </span>
+                            <input type="hidden" name="{{$question->id}}_assortment_sentences[{{ $item->id }}][]" value="{{$shuffled_option}}" class="assortment_d_and_d" data-item-id="">
                         </li>
 
                     @endforeach

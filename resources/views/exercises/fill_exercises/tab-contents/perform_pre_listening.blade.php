@@ -67,6 +67,8 @@
 
                                 <hr class="mt-4 mb-4">
 
+                                <input type="text" name="question_ids[]" value="{{ $question->id }}" hidden>
+
                                 @switch($question->question_subtype_id)
                                     @case(1)
                                         @include('exercises.fill_exercises.question-types.information', ['question' => $question])

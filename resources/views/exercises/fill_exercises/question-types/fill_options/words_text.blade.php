@@ -40,7 +40,7 @@
                         <?php $shuffled_select_options = explode('|', $item->$option); ?>
                         <?php shuffle($shuffled_select_options); ?>
                         <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
-                            <select name="word_select_question_item_{{$item->id}}_option_{{$i+1}}" id="word_select_question_item_{{$item->id}}_option_{{$i+1}}" class="form-control">
+                            <select name="{{$question->id}}_fill_options_words[{{$item->id}}][]" id="word_select_question_item_{{$item->id}}_option_{{$i+1}}" class="form-control">
                                 @foreach ($shuffled_select_options as $select_option)
                                     <option value="{{$select_option}}">{{$select_option}}</option>
                                 @endforeach

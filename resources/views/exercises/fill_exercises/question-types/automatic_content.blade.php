@@ -13,7 +13,7 @@
 
                 <div class="">
 
-                    <textarea class="form-control" name="" id="" cols="30" rows="5">{{ str_replace(" ","",$item->text_1) }}</textarea>
+                    <textarea class="form-control" name="{{$question->id}}_automatic_content[{{$item->id}}]" id="" cols="30" rows="5">{{ str_replace(" ","",$item->text_1) }}</textarea>
 
                 </div>
             </div>

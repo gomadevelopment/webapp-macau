@@ -27,11 +27,11 @@
         <div class="col-sm-12 col-md-6 col-lg-6">
             <div class="form-group" style="text-align: -webkit-center;">
 
-                <select name="m_c_intruder_select_question_item_{{$item->id}}" id="m_c_intruder_select_question_item_{{$item->id}}">
+                <select name="{{$question->id}}_multiple_choice_intruder[{{$item->id}}]" id="m_c_intruder_select_question_item_{{$item->id}}">
                     @for ($i = 0; $i < $item->options_number; $i++)
                         <?php $option = "options_".($i+1); ?>
 
-                        <option value="{{ $option }}">{{ $item->$option }}</option>
+                        <option value="{{ $i + 1 }}">{{ $item->$option }}</option>
 
                     @endfor
                 </select>

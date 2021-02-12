@@ -66,7 +66,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/exercicios/editar/{exercise_id}/apagar/{question_id}', 'QuestionsController@deleteQuestion');
 
         Route::get('/exercicios/realizar/{exercise_id}', 'ExercisesController@performExercise'); // Adicionar {id}
-        // Route::post('/exercicios/realizar', 'ExercisesController@performPostExercise'); // Adicionar {id}
+        Route::post('/exercicios/realizar/{exercise_id}', 'ExercisesController@performPostExercise'); // Adicionar {id}
 
         // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');

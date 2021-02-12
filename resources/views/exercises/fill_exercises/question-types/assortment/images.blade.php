@@ -23,6 +23,7 @@
 
                         @endif
                         <span class="d-flex align-items-center">{{ $item->text_1 }}</span>
+                        <input type="hidden" name="{{$question->id}}_assortment_images[]" value="{{ $item->id }}" class="assortment_d_and_d" data-item-id="">
                     </li>
 
                 @endforeach

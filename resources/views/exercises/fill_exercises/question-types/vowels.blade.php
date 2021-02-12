@@ -50,8 +50,9 @@
                     <div class="form-group">
                         <div class="drag_and_drop_hole origin_hole drop">
                             {{-- {!! getVowelsUnderlined($item->text_1) !!} --}}
-                            <div class="drag_and_drop_item p-2">
+                            <div class="drag_and_drop_item p-2 vowels_items">
                                 {!! getVowelsUnderlined($item->text_1, $i) !!}
+                                <input type="hidden" name="" value="{{ $item->id . ',' . $i }}">
                             </div>
                         </div>
                     </div>
@@ -110,6 +111,8 @@
         </div>
 
         @for ($i = 0; $i < getNumberOfVowels($question->question_items, $vowel); $i++)
+
+            <input type="hidden" name="{{$question->id}}_vowels[{{ $vowel }}][]" class="vowels_d_and_d" data-item-id="">
 
             <div class="col-sm-12 col-md-3 col-lg-3">
                 <div class="form-group">

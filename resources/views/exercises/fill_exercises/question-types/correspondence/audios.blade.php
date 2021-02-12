@@ -21,6 +21,7 @@
                         @endif
                     @endif
                 </div>
+                <input type="hidden" name="{{$question->id}}_correspondence_audios[{{ $item->question_item_media->id }}]" class="correspondence_d_and_d" data-item-id="">
                 <div class="drag_and_drop_hole drop mt-3">
 
                 </div>
@@ -45,8 +46,9 @@
 
                 <div class="drag_and_drop_hole origin_hole drop">
 
-                    <div class="drag_and_drop_item p-2">
+                    <div class="drag_and_drop_item p-2 correspondence_items">
                         {{ $item->text_1 }}
+                        <input type="hidden" name="" value="{{ $item->id }}">
                     </div>
 
                 </div>

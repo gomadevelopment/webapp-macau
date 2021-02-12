@@ -24,8 +24,9 @@
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <div class="drag_and_drop_hole origin_hole drop">
-                        <div class="drag_and_drop_item p-2">
+                        <div class="drag_and_drop_item p-2 correspondence_items">
                             {{ $shuffled_option }}
+                            <input type="hidden" name="" value="{{ $shuffled_option }}">
                         </div>
                     </div>
                         
@@ -59,7 +60,9 @@
             </div>
         </div>
 
-        @for ($i = 0; $i < $highest_options_number; $i++)
+        @for ($i = 0; $i < $item->options_number; $i++)
+        
+            <input type="hidden" name="{{$question->id}}_correspondence_categories[{{ $item->id }}][]" class="correspondence_d_and_d" data-item-id="">
 
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
