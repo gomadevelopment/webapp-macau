@@ -14,7 +14,7 @@ class Exercise extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'statement', 
+        'user_id', 'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'statement', 
         'audiovisual_desc', 'audio_transcript', 'has_time', 'time', 'has_interruption', 'interruption_time',
         'can_clone', 'only_my_students', 'only_after_correction'
     ];   
@@ -71,7 +71,7 @@ class Exercise extends Model
     /**
      * Exercise Tags pivot
      */
-    public function exercise_tags() { 
+    public function exercise_tags() {
         return $this->belongsToMany(
             'App\Tag', 
             'exercises_tags', 
@@ -121,6 +121,9 @@ class Exercise extends Model
         return $this->hasMany('App\Question');
     }
 
+    /**
+     * PROFESSOR
+     */
     public function saveExercise($inputs)
     {
         $this->user_id = auth()->user()->id;
@@ -251,16 +254,6 @@ class Exercise extends Model
         else{
             $query = self::orderBy('created_at', 'desc');
         }
-        // dump($filters['show_professors']);
-        // $query = $query->where('published', 0)->where('user_id', auth()->user()->id)->orWhere('published', 1);
-        // dump($filters['show_professors']);
-        // $query = $query
-        //         ->where(function ($query) {
-        //             $query->where('published', 1);
-        //         })->orWhere(function ($query) {
-        //             $query->where('published', 0)
-        //                 ->where('user_id', auth()->user()->id);
-        //         });
         // My Favorites filter
         if(isset($filters['my_favorites'])){
             $query = $query->whereHas('exercise_favorite', function($q) {
@@ -310,22 +303,6 @@ class Exercise extends Model
         if(!isset($filters['show_vis_all']) && isset($filters['show_vis_my_students'])){
             $query = $query->where('only_my_students', 1);
         }
-        // dd($query->paginate(4));
-        // $query = $query->where('published', 0)->where('user_id', auth()->user()->id)->orWhere('published', 1);
-        // $query = $query
-        //         ->where(function ($query) {
-        //             $query->where('published', 1);
-        //         })->orWhere(function ($query) {
-        //             $query->where('published', 0)
-        //                 ->where('user_id', auth()->user()->id);
-        //         });
-                        // ->where('published', 1)
-                        // ->orWhere(function ($q){
-                        //     $q->where('published', 0);
-                        //         // ->where(function ($q2){
-                        //         //     $q2->orWhere('user_id', auth()->user()->id);
-                        //         // });
-                        // })->where('user_id', auth()->user()->id);
 
         $skip = $filters['page'] * 4;
 

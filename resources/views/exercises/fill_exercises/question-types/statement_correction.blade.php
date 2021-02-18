@@ -11,7 +11,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="form-group" style="text-align: -webkit-center;">
 
-                <input class="form-control" type="text" name="" id="" value="{{ $item->text_1 }}">
+                <input class="form-control" type="text" name="{{$question->id}}_statement_correction[{{$item->id}}]" id="" value="{{ $item->text_1 }}">
 
             </div>
         </div>

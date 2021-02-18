@@ -519,6 +519,9 @@
                             setTimeout(() => {
                                 $(".successMsg").fadeOut();
                             }, 5000);
+                            if(!response.has_questions){
+                                $('#publish_exam').attr('disabled', true);
+                            }
                         }
                         else{
                             $(".errorMsg").text(response.message);

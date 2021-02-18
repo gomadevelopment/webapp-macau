@@ -9,6 +9,9 @@
 
 @section('content')
 
+<input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
+<input type="hidden" name="exame_id" id="exame_id" value="{{ $exame->id }}">
+
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
     <div class="container">
@@ -25,7 +28,7 @@
                     </p>
                     <div id="counterDisplay" class="time_countdown ml-2" style="padding: 10px 15px !important;">
                     </div>
-                    <input type="number" id="minutesInput" value="{{ $exercise->time }}" hidden/>
+                    <input type="text" id="minutesInput" value="{{ !$exercise->has_time ? '' : $time_left }}" hidden/>
 
                     <a href="#" data-toggle="modal" data-target="#pause_modal" data-backdrop='static' data-keyboard='false'
                         id="pauseButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
@@ -87,44 +90,61 @@
                     </li>
                 </ul>
 
-                <div class="tab-content" id="perform_exercise_tabs_content">
-                    {{-- INTRO TAB --}}
-                    <div class="tab-pane fade active show" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                <form method="POST" id="perform_exercise_form" action="" enctype="multipart/form-data">
+                    @csrf
 
-                        @include('exercises.fill_exercises.tab-contents.perform_intro')
+                    <div class="tab-content" id="perform_exercise_tabs_content">
 
+                        @if (session('success'))
+                            <div class="global-alert alert alert-success" role="alert">
+                                {{session('success')}}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="global-alert alert alert-danger" role="alert">
+                                {{session('error')}}
+                            </div>
+                        @endif
+                        {{-- INTRO TAB --}}
+                        <div class="tab-pane fade active show" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_intro')
+
+                        </div>
+                        {{-- PRE-LISTENING TAB --}}
+                        <div class="tab-pane fade" id="pre-listening" role="tabpanel" aria-labelledby="pre-listening-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_pre_listening', ['pre_listening_questions' => $pre_listening_questions])
+
+                        </div>
+                        {{-- LISTENING TAB --}}
+                        <div class="tab-pane fade" id="listening" role="tabpanel" aria-labelledby="listening-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_listening', ['listening_questions' => $listening_questions])
+
+                        </div>
+                        {{-- LISTENING SHOP TAB --}}
+                        <div class="tab-pane fade" id="listening-shop" role="tabpanel" aria-labelledby="listening-shop-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_listening_shop', ['listening_shop_questions' => $listening_shop_questions])
+
+                        </div>
+                        {{-- AFTER LISTENING TAB --}}
+                        <div class="tab-pane fade" id="after-listening" role="tabpanel" aria-labelledby="after-listening-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_after_listening', ['after_listening_questions' => $after_listening_questions])
+
+                        </div>
+                        {{-- EVALUATION TAB --}}
+                        <div class="tab-pane fade" id="evaluation" role="tabpanel" aria-labelledby="evaluation-tab">
+
+                            @include('exercises.fill_exercises.tab-contents.perform_evaluation')
+
+                        </div>
                     </div>
-                    {{-- PRE-LISTENING TAB --}}
-                    <div class="tab-pane fade" id="pre-listening" role="tabpanel" aria-labelledby="pre-listening-tab">
+                
+                </form>
 
-                        @include('exercises.fill_exercises.tab-contents.perform_pre_listening', ['pre_listening_questions' => $pre_listening_questions])
-
-                    </div>
-                    {{-- LISTENING TAB --}}
-                    <div class="tab-pane fade" id="listening" role="tabpanel" aria-labelledby="listening-tab">
-
-                        @include('exercises.fill_exercises.tab-contents.perform_listening', ['listening_questions' => $listening_questions])
-
-                    </div>
-                    {{-- LISTENING SHOP TAB --}}
-                    <div class="tab-pane fade" id="listening-shop" role="tabpanel" aria-labelledby="listening-shop-tab">
-
-                        @include('exercises.fill_exercises.tab-contents.perform_listening_shop', ['listening_shop_questions' => $listening_shop_questions])
-
-                    </div>
-                    {{-- AFTER LISTENING TAB --}}
-                    <div class="tab-pane fade" id="after-listening" role="tabpanel" aria-labelledby="after-listening-tab">
-
-                        @include('exercises.fill_exercises.tab-contents.perform_after_listening', ['after_listening_questions' => $after_listening_questions])
-
-                    </div>
-                    {{-- EVALUATION TAB --}}
-                    <div class="tab-pane fade" id="evaluation" role="tabpanel" aria-labelledby="evaluation-tab">
-
-                        @include('exercises.fill_exercises.tab-contents.perform_evaluation')
-
-                    </div>
-                </div>
             </div>
         
     </div>
@@ -200,6 +220,122 @@
 
         $(function() {
 
+            $(document).on('click', '#finish_exercise_button', function(e){
+                // Deactivate finish_exercise_button
+                $(this).attr('id', '');
+
+                var exercise_id = $('#exercise_id_hidden').val();
+                var exame_id = $('#exame_id').val();
+
+                var formData = new FormData($('form#perform_exercise_form')[0]);
+                formData.append('exame_id', exame_id);
+
+                // Inquiries
+                var inquiries = new Array();
+                $('.rb').each(function(index, element){
+                    var inquiry_id = $(element).attr('data-id');
+                    var data_value = $(element).find('.rb-tab-active').attr('data-value');
+                    inquiries[inquiry_id] = data_value;
+                });
+
+                for (var key in inquiries) {
+                    formData.append('inquiries['+key+']', inquiries[key]);
+                }
+
+                $.ajax({
+                    url: '/exercicios/realizar/' + exercise_id,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+
+                            if(response.teacher_correction){
+                                $('#score_label').text('Nota Provisória: ');
+                                $('#score_percentage').addClass('exercise_awaiting').text(response.score + '%');
+                            }
+                            else{
+                                $('#score_label').text('Nota: ');
+
+                                if(response.score < 33.3){
+                                    $('#score_percentage').addClass('low_score').text(response.score + '%');
+                                }
+                                else if(response.score >= 33.3 && response.score < 66.6){
+                                    $('#score_percentage').addClass('med_score').text(response.score + '%');
+                                }
+                                else{
+                                    $('#score_percentage').addClass('high_score').text(response.score + '%');
+                                }
+                            }
+                            $('#conclusion_date_label').text(response.conclusion_time);
+
+                        }
+                        else if(response.status == 'error'){
+                            $('#score_percentage').remove();
+                            $('#score_label').text('Ocorreu um erro ao submeter o seu exame. Por favor, contacte um professor.');
+                            $('#conclusion_date_label').text(response.conclusion_time);
+                        }
+
+                        $('#perform_exercise_tabs.nav-link').addClass('disabled');
+                        $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
+                        $('#evaluation-tab').show();
+                        $('#pauseButton').attr('data-toggle', '');
+                        $('#pauseButton').attr('data-target', '');
+                        $('#pauseButton').click();
+                        $('#pauseButton').hide();
+                        $('#startButton').hide();
+                        $('#accordion').hide();
+
+                        $('#evaluation-tab').click();
+
+                        var offset_disc = $(".header").height() + 10;
+
+                        if ($(window).width() < 992) {
+                            offset_disc = 0;
+                        }
+
+                        $("html, body").animate(
+                            {
+                                scrollTop: $('#evaluation').offset().top - offset_disc
+                            },
+                            800
+                        );
+                    }
+                });
+            });
+
+            // /exercicios/realizar/update_pause_timer/{exame_id}
+
+            $(document).on('click', '#pauseButton, #startButton', function(){
+                if($(this).attr('data-target') == ''){
+                    return false;
+                }
+                var exame_id = $('#exame_id').val();
+                var to_update = '';
+                var dt = new Date();
+                var date = dt.getUTCFullYear() + "-" + ((dt.getUTCMonth()+1) < 10 ? "0" + (dt.getUTCMonth()+1) : (dt.getUTCMonth()+1)) + "-" + (dt.getUTCDate() < 10 ? "0"+dt.getUTCDate() : dt.getUTCDate()) + " ";
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + (dt.getSeconds() < 10 ? '0' + dt.getSeconds() : dt.getSeconds());
+                var to_update_timestamp = date + time;
+                if($(this).attr('id') == 'pauseButton'){
+                    to_update = 'pause_start';
+                }
+                else if($(this).attr('id') == 'startButton'){
+                    to_update = 'pause_end';
+                }
+                $.ajax({
+                    url: '/exercicios/realizar/update_pause_timer/' + exame_id,
+                    type: "GET",
+                    data: {to_update:to_update, to_update_timestamp:to_update_timestamp},
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                        }
+                        else if(response.status == 'error'){
+                        }
+                    }
+                });
+            });
+
             // $('.drag_and_drop_item').draggable();
 
             $('.drag_and_drop_item').draggable({
@@ -210,6 +346,69 @@
                 drop: function(evt, droptarget) {
                     if(!droptarget.children.length){
                         $(this).appendTo(droptarget);
+                        var test = $(this);
+                        // Correspondence
+                        if($(this).hasClass('correspondence_items')){
+                            $('input.correspondence_d_and_d').each(function(index, element){
+                                // console.log($(element));
+                                // Images and Audios
+                                if($(element).next('.drag_and_drop_hole').length){
+                                    // console.log($(element).find('input').val(), $(element.attr('class')));
+                                    if($.trim($(element).next('.drag_and_drop_hole').html())==''){
+                                        $(element).val(null);
+                                    }
+                                    else{
+                                        $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
+                                    }
+                                }
+                                // Categories
+                                else{
+                                    $(element).next('div').each(function(index2, element2){
+                                        if($.trim($(element2).find('.drag_and_drop_hole').html())==''){
+                                            $(element).val(null);
+                                        }
+                                        else{
+                                            $(element).val($(element2).find('.drag_and_drop_hole').find('input').val());
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                        // Fill Options - Shuffle
+                        else if($(this).hasClass('fill_options_shuffle_items')){
+                            $('input.fill_options_d_and_d').each(function(index, element){
+                                if($.trim($(element).next('.drag_and_drop_hole').html())==''){
+                                    $(element).val(null);
+                                }
+                                else{
+                                    $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
+                                }
+                            });
+                        }
+                        // True or False
+                        else if($(this).hasClass('true_or_false_items')){
+                            $('input.true_or_false_d_and_d').each(function(index, element){
+                                if($.trim($(element).next('.drag_and_drop_hole').html())==''){
+                                    $(element).val(null);
+                                }
+                                else{
+                                    $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
+                                }
+                            });
+                        }
+                        // Correspondence
+                        else if($(this).hasClass('vowels_items')){
+                            $('input.vowels_d_and_d').each(function(index, element){
+                                $(element).next('div').each(function(index2, element2){
+                                    if($.trim($(element2).find('.drag_and_drop_hole').html())==''){
+                                        $(element).val(null);
+                                    }
+                                    else{
+                                        $(element).val($(element2).find('.drag_and_drop_hole').find('input').val());
+                                    }
+                                });
+                            });
+                        }
                     }
                     else{
                         // droptarget.children.appendTo($(this).parent());
@@ -225,10 +424,6 @@
                 group: false,
                 scroll: true,
                 update: function(evt) {
-                    $(this).sortable('serialize').forEach(element => {
-                        // console.log(element.id);
-                    });
-                    // console.log(JSON.stringify($(this).sortable('serialize')));
                 }
             });
 
@@ -245,32 +440,20 @@
                 }
             });
 
-            // $('[id^="assortment_images_table_question_"]').sortable({
-            //     autocreate: false,
-            //     group: false,
-            //     scroll: true,
-            //     update: function(evt) {
-            //         $(this).sortable('serialize').forEach(element => {
-            //             // console.log(element.id);
-            //         });
-            //         // console.log(JSON.stringify($(this).sortable('serialize')));
-            //     }
-            // });
-
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
 
-                if(this.hash == "#evaluation"){
-                    $('.nav-link').addClass('disabled');
-                    $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
-                    $('#evaluation-tab').show();
-                    $('#pauseButton').attr('data-toggle', '');
-                    $('#pauseButton').attr('data-target', '');
-                    $('#pauseButton').click();
-                    $('#pauseButton').hide();
-                    $('#startButton').hide();
-                    $('#accordion').hide();
-                }
+                // if(this.hash == "#evaluation"){
+                //     $('.nav-link').addClass('disabled');
+                //     $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
+                //     $('#evaluation-tab').show();
+                //     $('#pauseButton').attr('data-toggle', '');
+                //     $('#pauseButton').attr('data-target', '');
+                //     $('#pauseButton').click();
+                //     $('#pauseButton').hide();
+                //     $('#startButton').hide();
+                //     $('#accordion').hide();
+                // }
 
                 if($(this).hasClass('start_exercise')){
                     $(this).hide();
@@ -377,41 +560,11 @@
             $('[id^="m_c_questions_select_question_item_"]').select2();
 
             $('[id^="m_c_intruder_select_question_item_"]').select2();
-            
-            //Global:
-            var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
 
-            //Switcher function:
             $(".rb-tab").click(function(){
-                //Spot switcher:
                 $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
                 $(this).addClass("rb-tab-active");
             });
-
-            //Save data:
-            $("#finish_exercise_button").click(function(){
-                //Empty array:
-                survey = [];
-                //Push data:
-                for (i=1; i<=$(".rb").length; i++) {
-                    var rb = "rb" + i;
-                    var rbValue = parseInt($("#rb-"+i).find(".rb-tab-active").attr("data-value"));
-                    //Bidimensional array push:
-                    survey.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
-                };
-                console.log(survey);
-                //Debug:
-                // debug();
-            });
-
-            //Debug:
-            function debug(){
-                var debug = "";
-                for (i=0; i<survey.length; i++) {
-                    debug += "Nº " + survey[i][0] + " = " + survey[i][1] + "\n";
-                };
-                // alert(debug);
-            };
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
 

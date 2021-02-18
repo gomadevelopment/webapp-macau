@@ -158,16 +158,19 @@ $(function() {
     var timer;
     var countDown;
     var timerStartedBool = false;
-    const minutesInput = $("#minutesInput").val();
-    const counterDiv = $("#counterDisplay");
+    var minutesInput = $("#minutesInput").val();
+    if (typeof minutesInput == "undefined") {
+        var hours = "00";
+        var minutes = "00";
+        var seconds = "00";
+    } else {
+        var hours = minutesInput.split(":")[0];
+        var minutes = minutesInput.split(":")[1];
+        var seconds = minutesInput.split(":")[2];
+    }
+    var counterDiv = $("#counterDisplay");
 
-    counterDiv.text(
-        getHours(minutesInput * 60) +
-            ":" +
-            getMinutes(minutesInput * 60) +
-            ":" +
-            getSeconds(minutesInput * 60)
-    );
+    counterDiv.text(hours + ":" + minutes + ":" + seconds);
 
     $("#startButton").hide();
     $("#pauseButton").hide();
@@ -188,7 +191,8 @@ $(function() {
 
     function startTimer() {
         timerStartedBool = true;
-        totalSeconds = minutesInput * 60; // Sets initial value of totalSeconds based on user input
+        totalSeconds = +hours * 60 * 60 + +minutes * 60 + +seconds; // Sets initial value of totalSeconds based on user input
+        // totalSeconds = minutesInput * 60; // Sets initial value of totalSeconds based on user input
         counterDiv.text(
             getHours(totalSeconds) +
                 ":" +
@@ -234,6 +238,10 @@ $(function() {
             // The timer has reached zero. Let the user start again.
             $("#startButton").hide();
             $("#pauseButton").hide();
+            if ($("#minutesInput").val() != "") {
+                $("#finish_exercise_button").click();
+            }
+            return false;
         }
     }
 
@@ -260,11 +268,11 @@ $(function() {
     if ($("#pause_countdown").length) {
         var rawAmount = $("#pause_countdown").val();
         var split = rawAmount.split(":");
-        var minutes = split[0];
-        var seconds = split[1];
-        var totalAmount = parseInt(minutes, 10) * 60;
-        if (seconds) {
-            totalAmount += parseInt(seconds, 10);
+        var pause_minutes = split[0];
+        var pause_seconds = split[1];
+        var totalAmount = parseInt(pause_minutes, 10) * 60;
+        if (pause_seconds) {
+            totalAmount += parseInt(pause_seconds, 10);
         }
     }
 

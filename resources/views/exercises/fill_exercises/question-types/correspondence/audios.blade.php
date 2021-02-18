@@ -10,17 +10,18 @@
                     @else
                         @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
                             <audio controls>
-                                <source src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
                             </audio>
                         @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
                             <video controls>
-                                <source src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
                             </video>
                         @else
 
                         @endif
                     @endif
                 </div>
+                <input type="hidden" name="{{$question->id}}_correspondence_audios[{{ $item->question_item_media->id }}]" class="correspondence_d_and_d" data-item-id="">
                 <div class="drag_and_drop_hole drop mt-3">
 
                 </div>
@@ -45,8 +46,9 @@
 
                 <div class="drag_and_drop_hole origin_hole drop">
 
-                    <div class="drag_and_drop_item p-2">
+                    <div class="drag_and_drop_item p-2 correspondence_items">
                         {{ $item->text_1 }}
+                        <input type="hidden" name="" value="{{ $item->id }}">
                     </div>
 
                 </div>

@@ -214,7 +214,7 @@
     <form method="POST" action="/exercicios/editar/{{ $exercise->id }}">
         @csrf
         <input type="hidden" name="from_structure_tab" value="true">
-        <input id="publish_exam" class="checkbox-custom" name="publish_exam" type="checkbox" {{ $exercise->published == 1 ? 'checked' : '' }}>
+        <input id="publish_exam" class="checkbox-custom" name="publish_exam" type="checkbox" {{ $exercise->published == 1 ? 'checked' : '' }} {{ $exercise->questions()->count() ? '' : 'disabled' }}>
         <label for="publish_exam" class="checkbox-custom-label publish_exam-label d-inline-block mb-3">Publicar Exame? (Ativo/Desativo)</label>
         <button type="submit" class="btn search-btn comment_submit ml-3 mb-3" style="float: none;">
             Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;"></button>

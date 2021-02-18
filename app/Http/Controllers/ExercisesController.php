@@ -266,7 +266,7 @@ class ExercisesController extends Controller
                 $media_clone = $media->replicate();
                 $exercise_clone->medias()->save($media_clone);
             }
-            if($exercise->medias->count()){
+            if($exercise->medias){
                 $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
                 $toPath = public_path('webapp-macau-storage/exercises/'.$exercise_clone->id.'/medias');
                 File::copyDirectory($fromPath, $toPath);
@@ -274,7 +274,7 @@ class ExercisesController extends Controller
             foreach ($exercise->questions as $question) {
                 $question_clone = $question->replicate();
                 $exercise_clone->questions()->save($question_clone);
-                if($question->question_items->count()){
+                if($question->question_items){
                     foreach ($question->question_items as $question_item) {
                         $question_item_clone = $question_item->replicate();
                         $question_clone->question_items()->save($question_item_clone);
@@ -338,23 +338,13 @@ class ExercisesController extends Controller
         return $array;
     }
 
-    public function saveQuestion($id = null)
-    {
-        $this->viewShareNotifications();
-        return view('exercises.questions.save');
-    }
-
-    public function savePostQuestion($id = null)
-    {
-        $this->viewShareNotifications();
-        return view('exercises.questions.save');
-    }
-
     public function performExercise($exercise_id)
     {
         $this->viewShareNotifications();
 
         $exercise = Exercise::find($exercise_id);
+
+        $student_exame = $exercise->cloneStudentExame();
 
         $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
         $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
@@ -362,7 +352,6 @@ class ExercisesController extends Controller
         $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
 
         $inquiries = Inquiry::orderBy('order', 'asc')->get();
-        // dd($pre_listening_questions);
 
         return view(
             'exercises.fill_exercises.perform', 
@@ -375,10 +364,63 @@ class ExercisesController extends Controller
                 'inquiries'));
     }
 
-    public function performPostExercise($id = null)
+    public function performPostExercise($exercise_id)
     {
         $this->viewShareNotifications();
-        return view('exercises.fill_exercises.perform');
+
+        $inputs = request()->all();
+
+        $exercise = Exercise::find($exercise_id);
+        $student = auth()->user();
+
+        DB::beginTransaction();
+        try {
+            
+            $student_exercise_submition_info = $exercise->saveExerciseByStudent($inputs);
+
+            $score = $student_exercise_submition_info[0];
+            $teacher_correction = $student_exercise_submition_info[1];
+
+            // dd($score, $teacher_correction);
+
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollback();
+
+            // request()->session()->flash('save_exercise_error', 'Por favor, verifique os erros no formulário.');
+            // request()->session()->flash('error', 'Ocorreu um erro ao criar/editar o exercicio. Por favor, tente de novo!');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao criar/editar o exercicio. Por favor, verifique os erros no formulário.'
+            ]);
+        }
+        DB::commit();
+
+        return response()->json([
+            'status' => 'success',
+            'score' => $score,
+            'teacher_correction' => $teacher_correction,
+            'conclusion_time' => date('d/m/Y')
+        ]);
+
+        // $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
+        // $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
+        // $listening_shop_questions = $exercise->questions()->where('section', 'Oficina da Escuta')->get();
+        // $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
+
+        // $inquiries = Inquiry::orderBy('order', 'asc')->get();
+
+        // return view(
+        //     'exercises.fill_exercises.perform', 
+        //     compact(
+        //         'exercise', 
+        //         'pre_listening_questions', 
+        //         'listening_questions', 
+        //         'listening_shop_questions',
+        //         'after_listening_questions',
+        //         'inquiries'));
+
+        // return view('exercises.fill_exercises.perform');
     }
 
     public function viewShareNotifications()

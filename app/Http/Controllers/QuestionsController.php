@@ -156,8 +156,11 @@ class QuestionsController extends Controller
         ]);
         $html = $view->render();
 
+        $has_questions = $exercise->questions()->count() ? true : false;
+
         return response()->json([
             'status' => 'success',
+            'has_questions' => $has_questions,
             'message' => 'Questão removida com sucesso!',
             'html' => $html,
         ]);

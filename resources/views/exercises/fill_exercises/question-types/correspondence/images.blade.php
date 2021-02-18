@@ -5,11 +5,12 @@
             <div class="form-group" style="text-align: -webkit-center;">
                 <div class="drag_and_drop_image text-center">
                     @if($item->question_item_media)
-                        <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
-                    @else
+                        <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
+                        @else
 
                     @endif
-                    </div>
+                </div>
+                <input type="hidden" name="{{$question->id}}_correspondence_images[{{ $item->question_item_media->id }}]" class="correspondence_d_and_d" data-item-id="">
                 <div class="drag_and_drop_hole drop mt-3">
 
                 </div>
@@ -17,6 +18,7 @@
         </div>
 
     @endforeach
+
 </div>
 
 <div class="row">
@@ -34,8 +36,9 @@
 
                 <div class="drag_and_drop_hole origin_hole drop">
 
-                    <div class="drag_and_drop_item p-2">
+                    <div class="drag_and_drop_item p-2 correspondence_items">
                         {{ $item->text_1 }}
+                        <input type="hidden" name="" value="{{ $item->id }}">
                     </div>
 
                 </div>

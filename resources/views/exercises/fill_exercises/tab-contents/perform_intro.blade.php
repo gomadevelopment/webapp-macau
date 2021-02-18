@@ -9,10 +9,10 @@
                             Informação</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0">
-                                <strong>Título:</strong> {{ $exercise->title }}
+                                <strong>Título:</strong> {{ $exame->title }}
                             </p>
                             <p class="exercise_level m-0">
-                                <strong>Categoria:</strong> {{ $exercise->category->name }}
+                                <strong>Categoria:</strong> {{ $exame->category->name }}
                             </p>
                             {{-- <p class="exercise_level m-0">
                                 <strong>Duração:</strong> 1 hora e 42 minutos
@@ -20,11 +20,11 @@
                             <p class="exercise_level m-0">
                                 <strong>Tempo para conclusão:</strong> 
                                 <span class="conclusion_time_convertion">
-                                    @if($exercise->has_time)
-                                        @if(intdiv($exercise->time, 60) != 0)
-                                            {{ intdiv($exercise->time, 60) > 1 ? intdiv($exercise->time, 60) . ' horas' : intdiv($exercise->time, 60) . ' hora' }} {{ ($exercise->time % 60) == 0 ? '' : ' e ' . ($exercise->time % 60) . ' minutos' }}
+                                    @if($exame->has_time)
+                                        @if(intdiv($exame->time, 60) != 0)
+                                            {{ intdiv($exame->time, 60) > 1 ? intdiv($exame->time, 60) . ' horas' : intdiv($exame->time, 60) . ' hora' }} {{ ($exame->time % 60) == 0 ? '' : ' e ' . ($exame->time % 60) . ' minutos' }}
                                         @else
-                                            {{ $exercise->time . ' minutos' }}
+                                            {{ $exame->time . ' minutos' }}
                                         @endif
                                     @else
                                         (Sem tempo limite)
@@ -32,27 +32,27 @@
                                 </span>
                             </p>
                             <p class="exercise_level m-0 mb-4">
-                                <strong>Pode interromper?</strong> {{ $exercise->has_interruption ? 'Sim' : 'Não' }}
+                                <strong>Pode interromper?</strong> {{ $exame->has_interruption ? 'Sim' : 'Não' }}
                             </p>
                         </div>
                     </div>
                 </div>
-                @if($exercise->introduction || $exercise->exercise_tags)
+                @if($exame->introduction || $exame->exercise->exercise_tags)
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                            @if($exercise->introduction)
+                            @if($exame->introduction)
                                 <label class="label_title mb-3 d-block">
                                     Resumo</label>
                                 <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                     <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                        {!! $exercise->introduction !!}
+                                        {!! $exame->introduction !!}
                                     </div>
                                 </div>
                             @endif
-                            @if($exercise->exercise_tags->count())
+                            @if($exame->exercise->exercise_tags->count())
                                 <label class="label_title mb-3 d-block">
                                     Tags</label>
-                                @foreach ($exercise->exercise_tags as $tag)
+                                @foreach ($exame->exercise->exercise_tags as $tag)
                                     <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
                                         <p>{{ $tag->name }}</p>
                                     </div>
@@ -61,40 +61,40 @@
                         </div>
                     </div>
                 @endif
-                @if($exercise->statement)
+                @if($exame->statement)
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group">
                             <label class="label_title mb-3 d-block">
                                 Enunciado</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                 <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                    {!! $exercise->statement !!}
+                                    {!! $exame->statement !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
-                @if($exercise->audiovisual_desc)
+                @if($exame->audiovisual_desc)
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
                             <label class="label_title mb-3 d-block">
                                 Descrição Audiovisual</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                 <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                    {!! $exercise->audiovisual_desc !!}
+                                    {!! $exame->audiovisual_desc !!}
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endif
-                @if($exercise->audio_transcript)
+                @if($exame->audio_transcript)
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
                             <label class="label_title mb-3 d-block">
                                 Descrição Audiovisual</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                 <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                    {!! $exercise->statement !!}
+                                    {!! $exame->statement !!}
                                 </div>
                             </div>
                         </div>

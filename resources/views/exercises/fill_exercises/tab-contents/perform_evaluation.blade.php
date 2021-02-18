@@ -11,12 +11,13 @@
                                     
                     <div class="d-flex flex-column">
                         <p class="exercise_author text-center mt-3" style="font-size: 22px;">
-                            <strong style="font-size: 22px;">Data de Conclusão:</strong> 20/09/2020
+                            <strong style="font-size: 22px;">Data de Conclusão:&nbsp;</strong> <span id="conclusion_date_label"></span>
                         </p>
                         <p class="exercise_author text-center mt-3">
-                            <strong style="font-size: 30px;">Nota: </strong> 
-                            <strong class="exercise_complete" style="font-size: 27px; line-height: 67.2px; border-radius: 5px; padding: 10px 20px 8px 20px;">
-                                100%
+                            <strong id="score_label" style="font-size: 30px;"></strong>
+                            &nbsp;
+                            <strong id="score_percentage" class="" style="font-size: 27px; line-height: 67.2px; border-radius: 5px; padding: 10px 20px 8px 20px;">
+                                
                             </strong>
                         </p>
                     </div>

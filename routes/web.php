@@ -65,8 +65,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/exercicios/{exercise_id}/questao/modelo/{question_id}/criar', 'QuestionsController@loadSaveQuestionModel');
         Route::get('/exercicios/editar/{exercise_id}/apagar/{question_id}', 'QuestionsController@deleteQuestion');
 
-        Route::get('/exercicios/realizar/{exercise_id}', 'ExercisesController@performExercise'); // Adicionar {id}
-        // Route::post('/exercicios/realizar', 'ExercisesController@performPostExercise'); // Adicionar {id}
+        Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise'); // Adicionar {id}
+        Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise'); // Adicionar {id}
+
+        Route::get('/exercicios/realizar/update_pause_timer/{exame_id}', 'ExamesController@updatePauseTimers');
 
         // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');

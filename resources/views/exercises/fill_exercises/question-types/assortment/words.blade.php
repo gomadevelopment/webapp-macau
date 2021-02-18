@@ -29,6 +29,7 @@
                         <li>
                             <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="">
                             <span>{{ $shuffled_option }}</span>
+                            <input type="hidden" name="{{$question->id}}_assortment_words[{{ $item->id }}][]" value="{{$shuffled_option}}" class="assortment_d_and_d" data-item-id="">
                         </li>
 
                     @endforeach

@@ -48,7 +48,10 @@
 
 strong.exercise_complete,
 strong.exercise_in_course,
-strong.exercise_awaiting {
+strong.exercise_awaiting,
+strong.low_score,
+strong.med_score,
+strong.high_score {
     color: #ffffff;
     font-family: "Gilroy - Medium";
     font-size: 16px;
@@ -61,16 +64,22 @@ strong.exercise_awaiting {
     border-radius: 5px;
 }
 
-strong.exercise_complete {
+strong.exercise_complete,
+strong.high_score {
     background-color: #00b265;
 }
 
-strong.exercise_in_course {
+strong.exercise_in_course,
+strong.med_score {
     background-color: #ffb801;
 }
 
 strong.exercise_awaiting {
     background-color: #2583ed;
+}
+
+strong.low_score {
+    background-color: #ff2850;
 }
 
 .exercise_author {
@@ -269,6 +278,12 @@ a.remove_button:hover {
 
 .tab-content .checkbox-custom+.checkbox-custom-label.publish_exam-label:before {
     margin-top: -2px;
+}
+
+.tab-content .checkbox-custom:disabled+.checkbox-custom-label.publish_exam-label:before {
+    background-color: #e8e8e8 !important;
+    pointer-events: none;
+    cursor: not-allowed;
 }
 
 .nav-tabs .nav-item {
