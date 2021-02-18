@@ -206,7 +206,7 @@
                             Correção <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction == 1 ? 'checked' : 'LOL' }}>
+                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction == 1 ? 'checked' : '' }}>
                                 <label for="correction_required" class="checkbox-custom-label d-inline-block">Requer correção do Professor</label>
                             </div>
                         </div>

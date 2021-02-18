@@ -344,4 +344,38 @@ class User extends Authenticatable
 
         return $fileName;
     }
+
+    /**
+     * Student has exercise in progress
+     * returns an exame if the student has this exercise in progress
+     * returns 'no_exame_started' if the student hasn't started this exercise
+     * returns 'has_exame_finished' if the student has this exercise finished (none of the above)
+     */
+    public function hasExerciseInProgress($exercise_id)
+    {
+        $exercise = Exercise::find($exercise_id);
+        $exame = Exame::where('student_id', $this->id)->where('exercise_id', $exercise->id)->first();
+
+        if(!$exame){
+            return 'no_exame_started';
+        }
+
+        if($exame->is_finished){
+            return 'has_exame_finished';
+        }
+
+        $start_timestamp_unix = strtotime($exame->start_timestamp);
+        $exame_time_unix = $exame->time * 60;
+        $exame_datetime_limit = gmdate("Y-m-d H:i:s", $start_timestamp_unix + $exame_time_unix);
+        
+        // Has exame in progress
+        if(strtotime('now') < strtotime($exame_datetime_limit)){
+            return $exame;
+        }
+        // Has exame finished
+        else{
+            return 'has_exame_finished';
+        }
+        
+    }
 }

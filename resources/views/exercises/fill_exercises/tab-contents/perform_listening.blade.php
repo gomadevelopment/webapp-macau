@@ -6,16 +6,16 @@
 
                 <div class="row mb-4" style="place-content: center;">
                     <div class="form-group m-2">
-                        @if($exercise->medias && strpos($exercise->medias->media_type, 'audio') !== false)
+                        @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
                             <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
-                                <source src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" type="{{ $exercise->medias->media_type }}">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                                 </audio>
-                        @elseif ($exercise->medias && strpos($exercise->medias->media_type, 'video') !== false)
+                        @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
                             <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
-                                <source src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" type="{{ $exercise->medias->media_type }}">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                             </video>
-                        @elseif ($exercise->medias && strpos($exercise->medias->media_type, 'image') !== false)
-                            <img src="{{ '/webapp-macau-storage/exercises/' . $exercise->id . '/medias/' . $exercise->medias->media_url }}" alt=""
+                        @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
+                            <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" alt=""
                             style="height: -webkit-fill-available;">
                         @endif
                         {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">

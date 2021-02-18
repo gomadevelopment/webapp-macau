@@ -29,7 +29,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
             <div class="form-group d-inline-flex">
                 @if($item->question_item_media)
-                    <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
+                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
                         alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
                 @endif
                 <label class="label_title m-0 d-block align-self-center">

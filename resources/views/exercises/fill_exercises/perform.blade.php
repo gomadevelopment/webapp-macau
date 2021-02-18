@@ -10,6 +10,7 @@
 @section('content')
 
 <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
+<input type="hidden" name="exame_id" id="exame_id" value="{{ $exame->id }}">
 
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
@@ -27,7 +28,7 @@
                     </p>
                     <div id="counterDisplay" class="time_countdown ml-2" style="padding: 10px 15px !important;">
                     </div>
-                    <input type="number" id="minutesInput" value="{{ $exercise->time }}" hidden/>
+                    <input type="text" id="minutesInput" value="{{ !$exercise->has_time ? '' : $time_left }}" hidden/>
 
                     <a href="#" data-toggle="modal" data-target="#pause_modal" data-backdrop='static' data-keyboard='false'
                         id="pauseButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
@@ -93,6 +94,17 @@
                     @csrf
 
                     <div class="tab-content" id="perform_exercise_tabs_content">
+
+                        @if (session('success'))
+                            <div class="global-alert alert alert-success" role="alert">
+                                {{session('success')}}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="global-alert alert alert-danger" role="alert">
+                                {{session('error')}}
+                            </div>
+                        @endif
                         {{-- INTRO TAB --}}
                         <div class="tab-pane fade active show" id="intro" role="tabpanel" aria-labelledby="intro-tab">
 
@@ -209,21 +221,26 @@
         $(function() {
 
             $(document).on('click', '#finish_exercise_button', function(e){
+                // Deactivate finish_exercise_button
+                $(this).attr('id', '');
+
                 var exercise_id = $('#exercise_id_hidden').val();
+                var exame_id = $('#exame_id').val();
 
                 var formData = new FormData($('form#perform_exercise_form')[0]);
+                formData.append('exame_id', exame_id);
 
                 // Inquiries
-                var inquiries = [];
-                for (i=1; i<=$(".rb").length; i++) {
-                    var rb = "rb" + i;
-                    var rbValue = parseInt($("#rb-"+i).find(".rb-tab-active").attr("data-value"));
-                    inquiries.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
-                };
-
-                inquiries.forEach(element => {
-                    formData.append('inquiries[]', element);
+                var inquiries = new Array();
+                $('.rb').each(function(index, element){
+                    var inquiry_id = $(element).attr('data-id');
+                    var data_value = $(element).find('.rb-tab-active').attr('data-value');
+                    inquiries[inquiry_id] = data_value;
                 });
+
+                for (var key in inquiries) {
+                    formData.append('inquiries['+key+']', inquiries[key]);
+                }
 
                 $.ajax({
                     url: '/exercicios/realizar/' + exercise_id,
@@ -257,27 +274,10 @@
                         else if(response.status == 'error'){
                             $('#score_percentage').remove();
                             $('#score_label').text('Ocorreu um erro ao submeter o seu exame. Por favor, contacte um professor.');
-                            // Object.keys(response.errors).forEach(function (key) {
-                            //     if(key == 'question_name'){
-                            //         $('.question_title_error').text(response.errors[key]);
-                            //         $('.question_title_error').removeAttr('hidden');
-                            //     }
-                            //     if(key == 'question_reference'){
-                            //         $('.question_reference_error').text(response.errors[key]);
-                            //         $('.question_reference_error').removeAttr('hidden');
-                            //     }
-                            //     if(key == 'question_description'){
-                            //         $('.question_description_error').text(response.errors[key]);
-                            //         $('.question_description_error').removeAttr('hidden');
-                            //     }
-                            //     if(key == 'question_type'){
-                            //         $('.question_type_error').text(response.errors[key]);
-                            //         $('.question_type_error').removeAttr('hidden');
-                            //     }
-                            // });
+                            $('#conclusion_date_label').text(response.conclusion_time);
                         }
 
-                        $('.nav-link').addClass('disabled');
+                        $('#perform_exercise_tabs.nav-link').addClass('disabled');
                         $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
                         $('#evaluation-tab').show();
                         $('#pauseButton').attr('data-toggle', '');
@@ -301,6 +301,37 @@
                             },
                             800
                         );
+                    }
+                });
+            });
+
+            // /exercicios/realizar/update_pause_timer/{exame_id}
+
+            $(document).on('click', '#pauseButton, #startButton', function(){
+                if($(this).attr('data-target') == ''){
+                    return false;
+                }
+                var exame_id = $('#exame_id').val();
+                var to_update = '';
+                var dt = new Date();
+                var date = dt.getUTCFullYear() + "-" + ((dt.getUTCMonth()+1) < 10 ? "0" + (dt.getUTCMonth()+1) : (dt.getUTCMonth()+1)) + "-" + (dt.getUTCDate() < 10 ? "0"+dt.getUTCDate() : dt.getUTCDate()) + " ";
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + (dt.getSeconds() < 10 ? '0' + dt.getSeconds() : dt.getSeconds());
+                var to_update_timestamp = date + time;
+                if($(this).attr('id') == 'pauseButton'){
+                    to_update = 'pause_start';
+                }
+                else if($(this).attr('id') == 'startButton'){
+                    to_update = 'pause_end';
+                }
+                $.ajax({
+                    url: '/exercicios/realizar/update_pause_timer/' + exame_id,
+                    type: "GET",
+                    data: {to_update:to_update, to_update_timestamp:to_update_timestamp},
+                    success: function (response) {
+                        if(response && response.status == 'success'){
+                        }
+                        else if(response.status == 'error'){
+                        }
                     }
                 });
             });
@@ -529,41 +560,11 @@
             $('[id^="m_c_questions_select_question_item_"]').select2();
 
             $('[id^="m_c_intruder_select_question_item_"]').select2();
-            
-            //Global:
-            var survey = []; //Bidimensional array: [ [1,3], [2,4] ]
 
-            //Switcher function:
             $(".rb-tab").click(function(){
-                //Spot switcher:
                 $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
                 $(this).addClass("rb-tab-active");
             });
-
-            //Save data:
-            $("#finish_exercise_button").click(function(){
-                //Empty array:
-                survey = [];
-                //Push data:
-                for (i=1; i<=$(".rb").length; i++) {
-                    var rb = "rb" + i;
-                    var rbValue = parseInt($("#rb-"+i).find(".rb-tab-active").attr("data-value"));
-                    //Bidimensional array push:
-                    survey.push([i, rbValue]); //Bidimensional array: [ [1,3], [2,4] ]
-                };
-                // console.log(survey);
-                //Debug:
-                // debug();
-            });
-
-            //Debug:
-            function debug(){
-                var debug = "";
-                for (i=0; i<survey.length; i++) {
-                    debug += "Nº " + survey[i][0] + " = " + survey[i][1] + "\n";
-                };
-                // alert(debug);
-            };
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
 

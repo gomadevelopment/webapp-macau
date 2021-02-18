@@ -266,7 +266,7 @@ class ExercisesController extends Controller
                 $media_clone = $media->replicate();
                 $exercise_clone->medias()->save($media_clone);
             }
-            if($exercise->medias->count()){
+            if($exercise->medias){
                 $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
                 $toPath = public_path('webapp-macau-storage/exercises/'.$exercise_clone->id.'/medias');
                 File::copyDirectory($fromPath, $toPath);
@@ -274,7 +274,7 @@ class ExercisesController extends Controller
             foreach ($exercise->questions as $question) {
                 $question_clone = $question->replicate();
                 $exercise_clone->questions()->save($question_clone);
-                if($question->question_items->count()){
+                if($question->question_items){
                     foreach ($question->question_items as $question_item) {
                         $question_item_clone = $question_item->replicate();
                         $question_clone->question_items()->save($question_item_clone);
@@ -338,23 +338,13 @@ class ExercisesController extends Controller
         return $array;
     }
 
-    public function saveQuestion($id = null)
-    {
-        $this->viewShareNotifications();
-        return view('exercises.questions.save');
-    }
-
-    public function savePostQuestion($id = null)
-    {
-        $this->viewShareNotifications();
-        return view('exercises.questions.save');
-    }
-
     public function performExercise($exercise_id)
     {
         $this->viewShareNotifications();
 
         $exercise = Exercise::find($exercise_id);
+
+        $student_exame = $exercise->cloneStudentExame();
 
         $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
         $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();

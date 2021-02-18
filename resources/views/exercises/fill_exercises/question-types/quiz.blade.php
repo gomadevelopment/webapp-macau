@@ -93,7 +93,9 @@
             <div class="row mb-4">
 
                 @foreach($inquiries as $inquiry)
-
+                    @if ($inquiry->order == 999)
+                        @continue
+                    @endif
                     <div class="col-sm-12 col-md-12 col-lg-12">
 
                         <div class="form-group quiz_question_div rb-box p-3">
@@ -106,8 +108,8 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-5 col-lg-5 align-self-center">
-                                    <div id="rb-{{$loop->index + 1}}" class="rb">
-                                        <div class="rb-tab " data-value="1">
+                                    <div id="rb-{{$inquiry->id}}" class="rb" data-id="{{ $inquiry->id }}">
+                                        <div class="rb-tab rb-tab-active" data-value="1">
                                             <div class="rb-spot">
                                                 <span class="rb-txt pt-1">1</span>
                                             </div>
@@ -150,10 +152,11 @@
             <hr class="mt-4 mb-4">
 
             <div class="row mb-4">
+                
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                         <label class="label_title d-block" style="font-size: 30px;">
-                        Qual o nível de Ansiedade que teve ao fazer os Exercícios? </label>
+                        {{ $anxiety_inquiry->question }} </label>
                         <div class="d-flex flex-column">
                             <p class="exercise_author" style="margin-bottom: -10px;">
                                 Use uma escala de 1 a 5 para medir a <strong>'Temperatura'</strong> da sua <strong>Ansiedade</strong> em relação à
@@ -163,8 +166,8 @@
                             </p>
                         </div>
 
-                        <div class="row mt-4 text-center justify-content-center pr-5 pl-5 rb anxiety_levels" id="rb-15">
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab " data-value="1">
+                        <div class="row mt-4 text-center justify-content-center pr-5 pl-5 rb anxiety_levels" id="rb-15" data-id="15">
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab rb-tab-active" data-value="1">
                                 <div class="rb-spot">
                                     <span class="rb-txt pt-1">1</span>
                                 </div>

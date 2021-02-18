@@ -280,6 +280,12 @@ a.remove_button:hover {
     margin-top: -2px;
 }
 
+.tab-content .checkbox-custom:disabled+.checkbox-custom-label.publish_exam-label:before {
+    background-color: #e8e8e8 !important;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 .nav-tabs .nav-item {
     margin-bottom: unset !important;
 }

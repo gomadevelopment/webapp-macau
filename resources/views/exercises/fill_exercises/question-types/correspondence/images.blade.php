@@ -5,8 +5,8 @@
             <div class="form-group" style="text-align: -webkit-center;">
                 <div class="drag_and_drop_image text-center">
                     @if($item->question_item_media)
-                        <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
-                    @else
+                        <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
+                        @else
 
                     @endif
                 </div>

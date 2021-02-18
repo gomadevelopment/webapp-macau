@@ -81,5 +81,10 @@ class InquiriesSeeds extends Seeder
             'question' => 'Quando compreendo o significado de uma palavra, penso no que ouvi anteriormente, para perceber se estou correto.',
             'order' => '14'
         ]);
+        DB::table('inquiries')->insert([
+            'id' => '15',
+            'question' => 'Qual o nível de Ansiedade que teve ao fazer os Exercícios?',
+            'order' => '999'
+        ]);
     }
 }

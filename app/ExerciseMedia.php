@@ -10,5 +10,5 @@ class ExerciseMedia extends Model
 
     protected $fillable = [
         'exercise_id', 'media_url', 'media_type'
-    ];   
+    ];
 }
