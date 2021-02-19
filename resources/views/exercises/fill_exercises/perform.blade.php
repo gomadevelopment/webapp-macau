@@ -277,7 +277,7 @@
                             $('#conclusion_date_label').text(response.conclusion_time);
                         }
 
-                        $('#perform_exercise_tabs.nav-link').addClass('disabled');
+                        $('#perform_exercise_tabs .nav-link').addClass('disabled');
                         $('.nav-link#evaluation-tab').removeClass('disabled').addClass('finished');
                         $('#evaluation-tab').show();
                         $('#pauseButton').attr('data-toggle', '');

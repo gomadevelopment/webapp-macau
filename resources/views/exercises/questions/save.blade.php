@@ -206,7 +206,7 @@
                             Correção <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction == 1 ? 'checked' : '' }}>
+                                <input id="correction_required" class="checkbox-custom" name="correction_required" type="checkbox" {{ isset($question) && $question->teacher_correction ? 'checked' : '' }}>
                                 <label for="correction_required" class="checkbox-custom-label d-inline-block">Requer correção do Professor</label>
                             </div>
                         </div>
@@ -1718,7 +1718,9 @@
                 formData.append('question_subtype', question_subtype_id);
                 formData.append($('#question_reference')[0].name, $('#question_reference')[0].value);
                 formData.append($('#question_description')[0].name, $('#question_description')[0].value);
-                formData.append($('#correction_required')[0].name, $('#correction_required')[0].value);
+                if($('#correction_required').is(':checked')){
+                    formData.append($('#correction_required')[0].name, $('#correction_required')[0].value);
+                }
                 formData.append($('#question_score')[0].name, $('#question_score')[0].value);
                 if(question_id){
                     formData.append('exercise_question_section', $('#question_section_hidden').val());

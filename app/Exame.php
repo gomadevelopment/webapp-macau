@@ -82,9 +82,9 @@ class Exame extends Model
 
     public function calculateExameTimeLeft()
     {
-        $secondstart_timestamp_unix = strtotime($this->start_timestamp); // 2021-02-17 12:19:16
+        $start_timestamp_unix = strtotime($this->start_timestamp); // 2021-02-17 12:19:16
         $exame_time_unix = $this->time * 60;
-        $exame_datetime_limit = gmdate("Y-m-d H:i:s", $secondstart_timestamp_unix + $exame_time_unix);
+        $exame_datetime_limit = gmdate("Y-m-d H:i:s", $start_timestamp_unix + $exame_time_unix);
 
         $time_left_unix = strtotime($exame_datetime_limit) - strtotime('now');
 
@@ -92,17 +92,12 @@ class Exame extends Model
         $minutes = ($time_left_unix / 60 % 60) < 10 ? '0'.($time_left_unix / 60 % 60) : $time_left_unix / 60 % 60; 
         $seconds = ($time_left_unix % 60) < 10 ? '0'.($time_left_unix % 60) : $time_left_unix % 60;
 
-        // dd($hours, $minutes, $seconds);
-        
-        // $minutesinutes_left = (strtotime($exame_datetime_limit) - strtotime('now')) / 60;
-
         return $hours . ':' . $minutes . ':' . $seconds;
     }
 
     public static function cloneStudentExame($exercise)
     {
-        // dd(date('Y-m-d H:i:s'));
-        $secondstudent_exame = self::create([
+        $student_exame = self::create([
             'user_id' => $exercise->user_id,
             'student_id' => auth()->user()->id,
             'exercise_id' => $exercise->id,
@@ -128,19 +123,19 @@ class Exame extends Model
         ]);
 
         if($exercise->medias){
-            $secondstudent_exame_media = ExameMedia::create([
-                'exame_id' => $secondstudent_exame->id,
+            $student_exame_media = ExameMedia::create([
+                'exame_id' => $student_exame->id,
                 'media_url' => $exercise->medias->media_url,
                 'media_type' => $exercise->medias->media_type
             ]);
             $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
-            $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$secondstudent_exame->id.'/medias');
+            $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/medias');
             File::copyDirectory($fromPath, $toPath);
         }
 
         foreach ($exercise->questions as $exercise_question) {
             $exame_question = ExameQuestion::create([
-                'exame_id' => $secondstudent_exame->id,
+                'exame_id' => $student_exame->id,
                 'classification' => 0.00,
                 'title' => $exercise_question->title,
                 'section' => $exercise_question->section,
@@ -180,13 +175,13 @@ class Exame extends Model
                             'media_type' => $exercise_question_item->question_item_media->media_type
                         ]);
                         $fromPath = public_path('webapp-macau-storage/questions/'.$exercise_question->id.'/question_item/' . $exercise_question_item->id);
-                        $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$secondstudent_exame->id.'/questions/'.$exame_question->id.'/question_item/'.$exame_question_item->id);
+                        $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/questions/'.$exame_question->id.'/question_item/'.$exame_question_item->id);
                         File::copyDirectory($fromPath, $toPath);
                     }
                 }
             }
         }
-        return $secondstudent_exame;
+        return $student_exame;
     }
 
     /**
@@ -306,7 +301,7 @@ class Exame extends Model
         }
 
         $exercise_student_score = $questions->sum('classification');
-        // dd($exercise_sum_score_points, $exercise_student_score);
+
         $score_perc = $exercise_sum_score_points == 0 ? 0 : round(($exercise_student_score / $exercise_sum_score_points) * 100);
 
         $this->classification = $exercise_student_score;
@@ -340,12 +335,12 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
-            $secondsolution_array[$question_item->question_item_media->id] = $question_item->id;
+            $solution_array[$question_item->question_item_media->id] = $question_item->id;
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -373,12 +368,12 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
-            $secondsolution_array[$question_item->question_item_media->id] = $question_item->id;
+            $solution_array[$question_item->question_item_media->id] = $question_item->id;
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -412,15 +407,15 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             for($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
-                $secondsolution_array[$question_item->id][] = $question_item->$option;
+                $solution_array[$question_item->id][] = $question_item->$option;
             }
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
-        if($answer_array == $secondsolution_array){
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -454,16 +449,16 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
             preg_match_all($regex, $question_item->text_1, $minutesatches);
             foreach($minutesatches[1] as $word_match){
-                $secondsolution_array[$question_item->id][] = $word_match;
+                $solution_array[$question_item->id][] = $word_match;
             }
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
-        if($answer_array == $secondsolution_array){
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -496,15 +491,15 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             for($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
-                $secondsolution_array[$question_item->id][] = explode('|', $question_item->$option)[0];
+                $solution_array[$question_item->id][] = explode('|', $question_item->$option)[0];
             }
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
-        if($answer_array == $secondsolution_array){
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -514,41 +509,29 @@ class Exame extends Model
 
     public function trueOrFalseCorrection($question, $answer_array)
     {
+        // dd($answer_array);
         // Missing answers = WRONG = 0
-        foreach($answer_array as $answer_sub_array){
-            if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-                // dd('WRONG - SCORE 0', $answer_array);
-                return 0;
-            }
+        if (array_search(null, $answer_array) !== false){
+            // dd('WRONG - SCORE 0', $answer_array);
+            return 0;
         }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
-            foreach($answer_array as $label_key => $secondsub_array){
-                foreach($secondsub_array as $question_item_response_id){
-                    if($question_item->id == $question_item_response_id){
-                        $question_item->options_answered = $label_key;
-                    }
+            foreach($answer_array as $question_item_id => $question_answer){
+                if($question_item_id == $question_item->id){
+                    $question_item->options_answered = $question_answer;
                 }
             }
             $question_item->save();
         }
 
         // Solution
-        $secondsolution_array = [];
-        foreach($answer_array as $key => $secondsub_array){
-            $secondsolution_array[$key] = [];
-        }
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
-            $secondsolution_array[$question_item->options_correct][] = (string)$question_item->id;
+            $solution_array[$question_item->id] = $question_item->options_correct;
         }
-        foreach($answer_array as $key => &$secondsub_array){
-            sort($secondsub_array);
-        }
-        foreach($secondsolution_array as $key => &$secondsub_array){
-            sort($secondsub_array);
-        }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
-        if($answer_array == $secondsolution_array){
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -570,14 +553,14 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             $options_correct = explode(',', $question_item->options_correct);
             if(!in_array($answer_array[$question_item->id], $options_correct)){
                 return 0;
             }
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
 
         return $question->avaliation_score;
     }
@@ -596,14 +579,14 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             $options_correct = explode(',', $question_item->options_correct);
             if(!in_array($answer_array[$question_item->id], $options_correct)){
                 return 0;
             }
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
 
         return $question->avaliation_score;
     }
@@ -627,12 +610,12 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach($question->question_items as $question_item){
-            $secondsolution_array[$question_item->id] = $question_item->text_2;
+            $solution_array[$question_item->id] = $question_item->text_2;
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -654,13 +637,13 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach($question->question_items as $question_item){
-            $secondsolution_array[$question_item->id] = $question_item->text_2;
+            $solution_array[$question_item->id] = $question_item->text_2;
         }
-        // dd($answer_array, $secondsolution_array, $answer_array == $secondsolution_array, $question_item);
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -682,12 +665,12 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach($question->question_items as $question_item){
-            $secondsolution_array[$question_item->id] = $question_item->text_1;
+            $solution_array[$question_item->id] = $question_item->text_1;
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -719,15 +702,15 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             for($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
-                $secondsolution_array[$question_item->id][] = $question_item->$option;
+                $solution_array[$question_item->id][] = $question_item->$option;
             }
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -758,15 +741,15 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             for($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
-                $secondsolution_array[$question_item->id][] = $question_item->$option;
+                $solution_array[$question_item->id][] = $question_item->$option;
             }
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -790,13 +773,13 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
-                $secondsolution_array[] = $question_item->id;
+                $solution_array[] = $question_item->id;
         }
-        // dd($answer_array, $secondsolution_array, $question_item);
+        // dd($answer_array, $solution_array, $question_item);
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
@@ -814,10 +797,10 @@ class Exame extends Model
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             for ($i = 0; $i < $question_item->options_number; $i++){
-                $secondsearch_string = $question_item->id . ','.$i;
-                foreach($answer_array as $label_key => $secondsub_array){
-                    foreach($secondsub_array as $question_item_response_id){
-                        if($secondsearch_string == $question_item_response_id){
+                $search_string = $question_item->id . ','.$i;
+                foreach($answer_array as $label_key => $sub_array){
+                    foreach($sub_array as $question_item_response_id){
+                        if($search_string == $question_item_response_id){
                             if($i == ($question_item->options_number-1)) {
                                 $question_item->options_answered .= $label_key;
                             }
@@ -832,7 +815,7 @@ class Exame extends Model
         }
 
         // Solution
-        $secondsolution_array = [];
+        $solution_array = [];
         foreach ($question->question_items as $question_item) {
             for ($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
@@ -840,24 +823,24 @@ class Exame extends Model
             }
         }
         foreach(array_unique($unique_vowels) as $vowel){
-            $secondsolution_array[$vowel] = [];
+            $solution_array[$vowel] = [];
         }
 
         foreach ($question->question_items as $question_item) {
             for ($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
-                $secondsolution_array[$question_item->$option][] = $question_item->id . ',' . $i;
+                $solution_array[$question_item->$option][] = $question_item->id . ',' . $i;
             }
         }
 
-        foreach($answer_array as $key => &$secondsub_array){
-            sort($secondsub_array);
+        foreach($answer_array as $key => &$sub_array){
+            sort($sub_array);
         }
-        foreach($secondsolution_array as $key => &$secondsub_array){
-            sort($secondsub_array);
+        foreach($solution_array as $key => &$sub_array){
+            sort($sub_array);
         }
 
-        if($answer_array == $secondsolution_array){
+        if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
         else{
