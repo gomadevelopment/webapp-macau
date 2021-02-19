@@ -19,8 +19,9 @@
                         @if($item->question_item_media)
                             <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="" class="true_or_false_image">
                         @else
-
+                            <div class="true_or_false_image"></div>
                         @endif
+                        
                         <p class="d-flex align-items-center mb-0 mr-3">{{ $item->text_1 }}</p>
                         
                         <select class="form-control" name="{{$question->id}}_true_or_false[{{$item->id}}]" id="true_or_false_select_question_item_{{$item->id}}">

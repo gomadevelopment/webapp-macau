@@ -63,7 +63,7 @@
                     </p>
 
                     <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
-                        {{ isset($pt_lang) && $pt_lang ? 'Inscrever' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow.svg')}}" alt="">
+                        {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow.svg')}}" alt="" style="margin-bottom: 2px;">
                     </button>
                 </div>
                 <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/Hero_Image.svg')}}" alt="">
@@ -90,7 +90,7 @@
         </p>
         <div class="signup_button">
             <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
-                {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp;&nbsp;&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="" style="margin-bottom: 2px;">
             </button>
         </div>
             
@@ -191,7 +191,7 @@
                     </div>
                     
                     <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup" style="display: block;">
-                        {{ isset($pt_lang) && $pt_lang ? 'Inscrever' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow.svg')}}" alt="">
+                        {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow.svg')}}" alt="" style="margin-bottom: 2px;">
                     </button>
                 </div>
             </div>
@@ -224,7 +224,7 @@
         </p>
         <div class="signup_button">
             <button class="btn btn-theme btn-lg" data-toggle="modal" data-target="#signup">
-                {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp;&nbsp;&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                {{ isset($pt_lang) && $pt_lang ? 'Inscrever-me' : 'Sign Up' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="" style="margin-bottom: 2px;">
             </button>
         </div>
             

@@ -23,6 +23,11 @@
 }
 
 @media (max-width: 1199px) {
+
+    .hero-caption.small_wd p {
+        margin: 15px 0 20px 15px;
+    }
+
     .shop_grid {
         flex-wrap: wrap;
     }
@@ -93,6 +98,10 @@
 @media (max-width: 991px) {
 
     /* Exercises Col + Button wraps */
+
+    .header.homepage .nav-brand {
+        padding: 15px 15px;
+    }
 
     .col-wrap {
         flex-flow: wrap;

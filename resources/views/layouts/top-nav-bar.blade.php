@@ -27,7 +27,7 @@
                                 <a href="/sala_de_aula">Sala de Aula</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'articles' ? 'active' : ''; ?>">
-                                <a href="/artigos">Artigos</a>
+                                <a href="/artigos">Biblioteca</a>
                             </li>
                         
                         {{-- Student --}}
@@ -39,7 +39,7 @@
                                 <a href="/sala_de_aula">Sala de Aula</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'articles' ? 'active' : ''; ?>">
-                                <a href="/artigos">Artigos</a>
+                                <a href="/artigos">Biblioteca</a>
                             </li>
                         @endif
                     {{-- No user logged in --}}

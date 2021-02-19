@@ -240,7 +240,7 @@
             });
 
             $('#category').select2({
-                placeholder: "Escolher categoria"
+                placeholder: "Escolher tema"
             });
 
             $('#level').select2({

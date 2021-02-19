@@ -113,7 +113,7 @@
                                     </a>
                                 </ul>
                                 
-                                <h4 class="side_title">Categorias</h4>
+                                <h4 class="side_title">Temas</h4>
                                 <ul class="no-ul-list mb-3 categories">
                                     <li>
                                         <input id="cat_all_mobile" class="checkbox-custom" name="cat_all_mobile" type="checkbox" checked>
@@ -262,11 +262,11 @@
                             </a>
                         </ul>
                         
-                        <h4 class="side_title">Categorias</h4>
+                        <h4 class="side_title">Temas</h4>
                         <ul class="no-ul-list mb-3 categories">
                             <li>
                                 <input id="all_categories" class="checkbox-custom" name="all_categories" type="checkbox" {{ isset($inputs['all_categories']) ? 'checked' : ''}}>
-                                <label for="all_categories" class="checkbox-custom-label cat all_categories">Todas</label>
+                                <label for="all_categories" class="checkbox-custom-label cat all_categories">Todos</label>
                             </li>
                             @foreach ($exercises_categories as $category)
                                 <li>

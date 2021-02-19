@@ -91,7 +91,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Categoria <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Tema <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 p-0">
                                                         <select name="category" id="category" class="form-control">
                                                             @foreach ($article_categories as $category)

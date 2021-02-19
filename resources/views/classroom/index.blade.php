@@ -219,7 +219,7 @@
                                 <hr>
                                 <div class="form-group m-0">
                                     <a href="/artigos" class="shortcut_links">
-                                        Lista de Artigos
+                                        Biblioteca
                                         <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
                                     </a>
                                 </div>
@@ -489,7 +489,7 @@
             });
 
             $('#categories').select2({
-                placeholder: "Escolher categoria"
+                placeholder: "Escolher tema"
             });
 
             $('#levels').select2({

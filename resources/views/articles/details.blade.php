@@ -17,8 +17,8 @@
                 <div class="breadcrumbs-wrap">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/artigos">Artigos</a></li>
-                            <li class="breadcrumb-item"><a href="#">Personalidades</a></li>
+                            <li class="breadcrumb-item"><a href="/artigos">Biblioteca</a></li>
+                            {{-- <li class="breadcrumb-item"><a href="#">Personalidades</a></li> --}}
                             <li class="breadcrumb-item active" aria-current="page">{{ $article->title }}</li>
                         </ol>
                     </nav>

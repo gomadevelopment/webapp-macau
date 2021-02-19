@@ -17,7 +17,7 @@
                 <div class="col-lg-12 col-md-12">
                     
                     <div class="wrap">
-                        <h1 class="title">Artigos</h1>
+                        <h1 class="title">Biblioteca</h1>
                     </div>
                     <div class="dropdown create_article">
                         <a href="/artigos/criar" class="btn btn-theme btn-custom dropdown-toggle">
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 
-                                <h4 class="side_title">Categorias</h4>
+                                <h4 class="side_title">Temas</h4>
                                 <ul class="no-ul-list mb-3 categories">
                                     <li>
                                         <input id="cat_all_mobile" class="checkbox-custom" name="cat_all_mobile" type="checkbox" checked>
@@ -191,11 +191,11 @@
                 <div class="col-lg-3 col-md-12 col-sm-12 order-2 order-lg-1 order-md-2">							
                     <div class="page_sidebar hide-23">
                         
-                        <h4 class="side_title">Categorias</h4>
+                        <h4 class="side_title">Temas</h4>
                         <ul class="no-ul-list mb-3 categories">
                             <li>
                                 <input id="all_categories" class="checkbox-custom" name="all_categories" type="checkbox" {{ isset($inputs['all_categories']) ? 'checked' : ''}}>
-                                <label for="all_categories" class="checkbox-custom-label all_categories">Todas</label>
+                                <label for="all_categories" class="checkbox-custom-label all_categories">Todos</label>
                             </li>
                             @foreach ($article_categories as $category)
                                 <li>

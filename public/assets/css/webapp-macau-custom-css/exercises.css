@@ -807,10 +807,10 @@ div[id^="cke_fill_text_word_"] {
     display: flex !important;
 }
 
-.assortment_tables img,
+/* .assortment_tables img,
 .true_or_false_table img {
     margin-right: 15px;
-}
+} */
 
 .assortment_tables span,
 .true_or_false_table p {
@@ -829,12 +829,14 @@ div[id^="cke_fill_text_word_"] {
 }
 
 .assortment_tables img.assort_image,
-.true_or_false_table img.true_or_false_image {
+.true_or_false_table .true_or_false_image {
     min-width: 100px;
     max-width: 100px;
     min-height: 75px;
     max-height: 75px;
     border-radius: 5px;
+    margin-right: 15px;
+    border: 2px solid #e6ebf1;
 }
 
 .true_or_false_table {
@@ -849,6 +851,8 @@ div[id^="cke_fill_text_word_"] {
 }
 
 .true_or_false_table p {
+    min-height: 75px;
+    max-height: 75px;
     width: 230%;
 }
 

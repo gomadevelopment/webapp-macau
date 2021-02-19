@@ -16,7 +16,7 @@
                 @foreach ($question->question_items->shuffle() as $item)
 
                     <li>
-                        <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="" class="mr-3">
                         @if($item->question_item_media)
                             <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="" class="assort_image">
                         @else

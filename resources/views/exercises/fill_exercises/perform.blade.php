@@ -530,7 +530,7 @@
             });
 
             $('#categories').select2({
-                placeholder: "Escolher categoria"
+                placeholder: "Escolher tema"
             });
 
             $('#levels').select2({

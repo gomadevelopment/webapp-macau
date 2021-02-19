@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="form-group">
-                        <label class="label_title">Categoria</label>
+                        <label class="label_title">Tema</label>
                         <select name="category" id="category" class="form-control" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
                             @foreach ($exercises_categories as $category)
                                 <option value="{{ $category->id }}" {{ $exercise->id && $exercise->exercise_category_id == $category->id ? 'selected' : '' }}

@@ -224,7 +224,13 @@ span.error-block-span.pink {
     color: #ff224b !important;
 }
 
-.header.homepage .nav-brand {
+.header.homepage.logged_in .nav-brand {
+    padding: 15px 0;
+    font-size: 32px;
+    margin-right: 0;
+}
+
+.header.homepage:not(.logged_in) .nav-brand {
     padding: 15px 15px;
     font-size: 32px;
     margin-right: 0;

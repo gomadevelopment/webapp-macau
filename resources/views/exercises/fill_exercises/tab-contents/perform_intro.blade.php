@@ -12,7 +12,7 @@
                                 <strong>Título:</strong> {{ $exame->title }}
                             </p>
                             <p class="exercise_level m-0">
-                                <strong>Categoria:</strong> {{ $exame->category->name }}
+                                <strong>Tema:</strong> {{ $exame->category->name }}
                             </p>
                             {{-- <p class="exercise_level m-0">
                                 <strong>Duração:</strong> 1 hora e 42 minutos
