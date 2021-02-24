@@ -60,6 +60,12 @@
                     <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Sala de Aula
                 </a>
+                @if(!$exame_review)
+                    <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        Rever Exercício
+                    </a>
+                @endif
             </div>
 
         </div>

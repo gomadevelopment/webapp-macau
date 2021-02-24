@@ -501,6 +501,7 @@
                 }
 
             });
+
             $('.start_exercise').click();
             $('.start_exercise').hide();
 
@@ -581,8 +582,10 @@
             $('[id^="exame_review_m_c_intruder_select_question_item_"]').select2();
 
             $(".rb-tab").click(function(){
-                $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
-                $(this).addClass("rb-tab-active");
+                if($('#exame_review').val() == false){
+                    $(this).parent().find(".rb-tab").removeClass("rb-tab-active");
+                    $(this).addClass("rb-tab-active");
+                }
             });
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){

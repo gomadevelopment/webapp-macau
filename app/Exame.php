@@ -80,6 +80,14 @@ class Exame extends Model
         return $this->hasMany('App\ExameInquiry');
     }
 
+    /**
+     * Anxiety Inquiry
+     */
+    public function anxiety_inquiry()
+    {
+        return $this->hasOne('App\ExameInquiry')->where('inquirie_id', 15);
+    }
+
     public function calculateExameTimeLeft()
     {
         $start_timestamp_unix = strtotime($this->start_timestamp); // 2021-02-17 12:19:16
