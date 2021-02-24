@@ -99,7 +99,7 @@ class QuestionsController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            // dd($e);
+            dd($e);
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
 
             return response()->json([

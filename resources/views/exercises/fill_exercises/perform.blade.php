@@ -11,6 +11,7 @@
 
 <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
 <input type="hidden" name="exame_id" id="exame_id" value="{{ $exame->id }}">
+<input type="hidden" name="exame_review" id="exame_review" value="{{ $exame_review }}">
 
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
@@ -19,10 +20,16 @@
             <div class="col-lg-12 col-md-12">
                 
                 <div class="wrap">
-                    <h1 class="title">Exercício: “{{ $exercise->title }}”</h1>
+                    <h1 class="title">Exame: “{{ $exercise->title }}”</h1>
                 </div>
 
-                <div class="exercise_time wrap float-right {{ !$exercise->has_time ? 'd-none' : '' }}">
+                <div class="exercise_time wrap float-right {{ $exame_review ? '' : 'd-none' }}">
+                    <div id="" class="time_countdown ml-2" style="padding: 10px 15px !important;">
+                        Revisão
+                    </div>
+                </div>
+
+                <div class="exercise_time wrap float-right {{ !$exercise->has_time || $exame_review ? 'd-none' : '' }}">
                     <p class="time_label exercise_author align-self-center">
                         <strong style="font-size: 22px;">Tempo:</strong>
                     </p>
@@ -440,6 +447,14 @@
                 }
             });
 
+            if($('#exame_review').val() == true){
+                $('.drag_and_drop_item').draggable('destroy');
+                $('.drag_and_drop_item').css('cursor', 'default');
+
+                $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]').sortable('destroy');
+                $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
+            }
+
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
 
@@ -554,12 +569,16 @@
             $('#verbs_select_2').select2();
 
             $('[id^="word_select_question_item_"]').select2();
+            $('[id^="exame_review_word_select_question_item_"]').select2();
 
             $('[id^="true_or_false_select_question_item_"]').select2();
+            $('[id^="exame_review_true_or_false_select_question_item_"]').select2();
 
             $('[id^="m_c_questions_select_question_item_"]').select2();
+            $('[id^="exame_review_m_c_questions_select_question_item_"]').select2();
 
             $('[id^="m_c_intruder_select_question_item_"]').select2();
+            $('[id^="exame_review_m_c_intruder_select_question_item_"]').select2();
 
             $(".rb-tab").click(function(){
                 $(this).parent().find(".rb-tab").removeClass("rb-tab-active");

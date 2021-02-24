@@ -17,7 +17,7 @@ class Question extends Model
     ];
 
     public static $rulesForAdd = array(
-        'question_name' => 'required',
+        // 'question_name' => 'required',
         // 'question_reference' => 'required',
         'question_description' => 'required',
         'question_type' => 'required'
@@ -26,7 +26,7 @@ class Question extends Model
     public static function rulesForEdit($id = 0, $merge = [])
     {
         return array_merge([
-            'question_name' => 'required',
+            // 'question_name' => 'required',
             // 'question_reference' => 'required',
             'question_description' => 'required',
             'question_type' => 'required'
@@ -34,7 +34,7 @@ class Question extends Model
     }
 
     public static $messages = array(
-        'question_name.required' => 'O título da questão é de preenchimento obrigatório.',
+        // 'question_name.required' => 'O título da questão é de preenchimento obrigatório.',
         // 'question_reference.required' => 'A referência da questão é de preenchimento obrigatório.',
         'question_description.required' => 'A descrição da questão a apresentar ao aluno é de preenchimento obrigatório.',
         'question_type.required' => 'Escolha um tipo de questão e preencha os seus campos.',
@@ -122,7 +122,7 @@ class Question extends Model
         }
 
         $this->exercise_id = $exercise->id;
-        $this->title = $inputs['question_name'];
+        $this->title = null;
         $this->section = $inputs['exercise_question_section'];
         $this->question_type_id = $inputs['question_type'];
         $this->question_subtype_id = $inputs['question_subtype'];
@@ -811,9 +811,9 @@ class Question extends Model
 
         // dd($inputs, $input_indexes);
 
-        foreach($this->question_items as $question_item){
-            $question_item->delete();
-        }
+        // foreach($this->question_items as $question_item){
+        //     $question_item->delete();
+        // }
 
         foreach($input_indexes as $word_key => $vowels_array){
 
@@ -828,6 +828,7 @@ class Question extends Model
 
             $question_item->question_id = $this->id;
             $question_item->text_1 = $inputs['vowels_word_'.$word_key];
+            $question_item->text_2 = '';
             foreach($inputs['possible_vowels'] as $possible_vowel_index => $possible_vowel_value){
                 if($possible_vowel_index === array_key_last($inputs['possible_vowels'])){
                     $question_item->text_2 .= $possible_vowel_value;
@@ -836,6 +837,7 @@ class Question extends Model
                     $question_item->text_2 .= $possible_vowel_value . '|';
                 }
             }
+            // dd($inputs['possible_vowels'], $question_item->text_2);
             $question_item->save();
 
             $options_count = 1;
@@ -845,6 +847,39 @@ class Question extends Model
                 $question_item->options_number = $options_count;
                 $question_item->save();
                 $options_count++;
+            }
+
+            if(isset($inputs['vowels_media_file_input_'.$word_key])){
+                if(strpos($inputs['vowels_media_file_input_'.$word_key], 'from_storage_') !== false){
+                    if(isset($inputs['question_model_id'])){
+                        $question_model = self::find($inputs['question_model_id']);
+                        $question_model_item = QuestionItem::find(explode('_', $inputs['vowels_media_file_input_'.$word_key])[2]);
+                        $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                        $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                        Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                        $question_item_media = QuestionItemMedia::create([
+                            'question_item_id' => $question_item->id,
+                            'media_url' => $question_model_item->question_item_media->media_url,
+                            'media_type' => $question_model_item->question_item_media->media_type
+                        ]);
+                    }
+                    
+                    continue;
+                }
+                $file = $inputs['vowels_media_file_input_'.$word_key];
+                $upload_date = date('Y-m-d_H:i:s_');
+                $paths = [];
+
+                $fileName = $file->getClientOriginalName();
+
+                $paths = $file->storeAs('/questions/'
+                    . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                $question_item_media = QuestionItemMedia::create([
+                    'question_item_id' => $question_item->id,
+                    'media_url' => $file->getClientOriginalName(),
+                    'media_type' => $file->getMimeType()
+                ]);
             }
 
         }
@@ -989,6 +1024,8 @@ class Question extends Model
                 }
             }
             // dd($input_indexes, $inputs);
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
             foreach($input_indexes as $index => $array){
                 if(isset($inputs['m_c_associate_media_file_input_'.$index]) && strpos($inputs['m_c_associate_media_file_input_'.$index], 'from_storage_') !== false){
                     $existent_file_question_item_ids[] = explode('_', $inputs['m_c_associate_media_file_input_'.$index])[2];
@@ -1147,6 +1184,16 @@ class Question extends Model
                             
                         }
                     }
+                }
+            }
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index => $array){
+                if(isset($inputs['vowels_media_file_input_'.$index]) && strpos($inputs['vowels_media_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['vowels_media_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
                 }
             }
         }

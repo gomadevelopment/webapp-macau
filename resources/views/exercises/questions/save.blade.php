@@ -128,14 +128,14 @@
                             {{-- <span class="info_tooltip_text">Tooltip text</span> --}}
                         </label>
                         <div class="row mb-1">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
+                            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
                                 <input name="question_name" id="question_name" type="text" class="form-control" placeholder="Título da questão"
                                 value="{{ isset($question) ? $question->title : '' }}">
                                 <span class="error-block-span pink question_title_error" hidden>
                                 </span>
-                            </div>
+                            </div> --}}
                             
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 mb-2">
                                 <select name="question_type" id="question_type" class="form-control">
                                     <option value=""></option>
                                     @foreach ($question_types as $type)
@@ -1588,6 +1588,55 @@
                 });
                 
             });
+            // Vowels upload and preview script
+            $(document).on('click', "[id^='vowels_media_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="vowels_media_file_input_'+id_index+'" id="vowels_media_file_input_'+id_index+'" hidden>';
+
+                $(this).after(html);
+
+                $('#vowels_media_file_input_' + id_index).click();
+
+                $('#vowels_media_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#vowels_media_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
+                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#vowels_media_file_input_" + id_index);
+
+                            $('#vowels_media_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#vowels_media_button_' + id_index).show();
+                            //     $('#vowels_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            });
             // <% %> button
             $(document).on('click', '[id^="vow_word_perc_delimiter_"]', function(e){
                 e.preventDefault();
@@ -1713,7 +1762,7 @@
                 }
 
                 // FormData append outside form inputs
-                formData.append($('#question_name')[0].name, $('#question_name')[0].value);
+                formData.append('question_name', null);
                 formData.append($('#question_type')[0].name, $('#question_type')[0].value);
                 formData.append('question_subtype', question_subtype_id);
                 formData.append($('#question_reference')[0].name, $('#question_reference')[0].value);

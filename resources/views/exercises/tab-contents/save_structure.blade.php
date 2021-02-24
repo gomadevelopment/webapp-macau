@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="label_title mb-4 d-block">
-                            Pré-Escuta: {{ $question->title }}</label>
+                            Pré-Escuta</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0"><strong>Tipo:</strong> {{ $question->question_type->name }}</p>
                             <p class="exercise_level m-0"><strong>Referência:</strong> {{ $question->reference }}</p>
@@ -73,7 +73,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="label_title mb-4 d-block">
-                            À Escuta: {{ $question->title }}</label>
+                            À Escuta</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0"><strong>Tipo:</strong> {{ $question->question_type->name }}</p>
                             <p class="exercise_level m-0"><strong>Referência:</strong> {{ $question->reference }}</p>
@@ -120,7 +120,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="label_title mb-4 d-block">
-                            Oficina da Escuta: {{ $question->title }}</label>
+                            Oficina da Escuta</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0"><strong>Tipo:</strong> {{ $question->question_type->name }}</p>
                             <p class="exercise_level m-0"><strong>Referência:</strong> {{ $question->reference }}</p>
@@ -167,7 +167,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="label_title mb-4 d-block">
-                            Pós-Escuta: {{ $question->title }}</label>
+                            Pós-Escuta</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0"><strong>Tipo:</strong> {{ $question->question_type->name }}</p>
                             <p class="exercise_level m-0"><strong>Referência:</strong> {{ $question->reference }}</p>

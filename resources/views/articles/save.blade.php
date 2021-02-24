@@ -290,8 +290,8 @@
                 maxFiles: 1,
                 thumbnailHeight: 120,
                 thumbnailWidth: 120,
-                maxFilesize: 3,
-                filesizeBase: 1000,
+                // maxFilesize: 3,
+                // filesizeBase: 1000,
                 init: function(e) {
                     
                     this.on("maxfilesexceeded", function(file) {
@@ -345,8 +345,8 @@
                 parallelUploads: 2,
                 thumbnailHeight: 120,
                 thumbnailWidth: 120,
-                maxFilesize: 3,
-                filesizeBase: 1000,
+                // maxFilesize: 3,
+                // filesizeBase: 1000,
                 init: function(e) {
                     if(dropzone_medias_counter == 0){
                         var thisDropzone = this;

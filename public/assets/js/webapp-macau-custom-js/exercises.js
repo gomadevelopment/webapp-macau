@@ -238,7 +238,10 @@ $(function() {
             // The timer has reached zero. Let the user start again.
             $("#startButton").hide();
             $("#pauseButton").hide();
-            if ($("#minutesInput").val() != "") {
+            if (
+                $("#minutesInput").val() != "" &&
+                $("#exame_review").val() == "false"
+            ) {
                 $("#finish_exercise_button").click();
             }
             return false;

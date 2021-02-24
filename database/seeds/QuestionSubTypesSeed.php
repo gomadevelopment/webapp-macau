@@ -74,7 +74,7 @@ class QuestionSubTypesSeed extends Seeder
         DB::table('question_subtypes')->insert([
             'id' => '13',
             'question_type_id' => '9',
-            'name' => 'Conteúdo gerado automaticamente'
+            'name' => 'Fronteira da Palavra'
         ]);
         DB::table('question_subtypes')->insert([
             'id' => '14',
@@ -94,7 +94,7 @@ class QuestionSubTypesSeed extends Seeder
         DB::table('question_subtypes')->insert([
             'id' => '17',
             'question_type_id' => '11',
-            'name' => 'Vogais'
+            'name' => 'Pronúncia'
         ]);
     }
 }

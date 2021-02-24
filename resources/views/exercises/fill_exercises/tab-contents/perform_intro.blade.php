@@ -112,7 +112,7 @@
             </div> --}}
 
             <div class="d-block text-center mt-4 mb-4">
-                <a href="" class="btn search-btn comment_submit start_exercise m-2" style="float: none; padding: 12px 20px;">
+                <a href="" class="btn search-btn comment_submit {{ $exame_review ? '' : 'start_exercise' }} m-2 d-none" style="float: none; padding: 12px 20px;">
                     <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin: 0 5px 2px 0;">
                     Iniciar Exercício
                 </a>

@@ -233,10 +233,12 @@
                     <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Voltar
                 </a>
-                <a href="#evaluation" id="finish_exercise_button" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Check.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                    Concluir
-                </a>
+                @if(!$exame_review)
+                    <a href="#evaluation" id="{{ $exame_review ? '' : 'finish_exercise_button' }}" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Check.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        Concluir
+                    </a>
+                @endif
             </div>
 
         </div>

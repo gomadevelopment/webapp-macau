@@ -18,12 +18,13 @@
                         <span>Afirmação {{ $loop->index + 1 }}</span>
                         </label>
                     </div>
-                    <div class="col col-wrap d-flex mb-3">
-                        <input name="correction_of_statement_question_{{$loop->index}}" id="correction_of_statement_question_{{$loop->index}}" 
-                        value="{{$question_item->text_1}}"
-                        type="text" class="form-control" placeholder="Questão...">
-                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    <div class="col col-wrap d-flex mb-3 align-items-center">
+                        <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                            <textarea cols="30" rows="5" name="correction_of_statement_question_{{$loop->index}}" id="correction_of_statement_question_{{$loop->index}}" 
+                            class="form-control" placeholder="Afirmação...">{{$question_item->text_1}}</textarea>
+                        </div>
+                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px; height: fit-content;">
                             Remover
                         </a>
                     </div>
@@ -33,9 +34,10 @@
                         </label>
                     </div>
                     <div class="col-12">
-                        <input name="correction_of_statement_solution_{{$loop->index}}" id="correction_of_statement_solution_{{$loop->index}}" 
-                        value="{{$question_item->text_2}}"
-                        type="text" class="form-control" placeholder="Solução...">
+                        <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                            <textarea cols="30" rows="5" name="correction_of_statement_solution_{{$loop->index}}" id="correction_of_statement_solution_{{$loop->index}}" 
+                            class="form-control" placeholder="Solução...">{{$question_item->text_2}}</textarea>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -47,9 +49,11 @@
                         <span>Afirmação 1</span>
                     </label>
                 </div>
-                <div class="col col-wrap d-flex mb-3">
-                    <input name="correction_of_statement_question_0" id="correction_of_statement_question_0" type="text" class="form-control" placeholder="Questão...">
-                    <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                <div class="col col-wrap d-flex mb-3 align-items-center">
+                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                        <textarea cols="30" rows="5" name="correction_of_statement_question_0" id="correction_of_statement_question_0" class="form-control" placeholder="Afirmação..."></textarea>
+                    </div>
+                    <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
                     </a>
@@ -60,7 +64,9 @@
                     </label>
                 </div>
                 <div class="col-12">
-                    <input name="correction_of_statement_solution_0" id="correction_of_statement_solution_0" type="text" class="form-control" placeholder="Questão...">
+                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                        <textarea cols="30" rows="5" name="correction_of_statement_solution_0" id="correction_of_statement_solution_0" class="form-control" placeholder="Solução..."></textarea>
+                    </div>
                 </div>
             </div>
         @endif
@@ -91,8 +97,10 @@
                         <span>Afirmação {{ $loop->index + 1 }}</span>
                     </label>
                 </div>
-                <div class="col col-wrap d-flex mb-3">
-                    <input name="correction_of_statement_question_{{$loop->index}}" id="correction_of_statement_question_{{$loop->index}}" type="text" class="form-control" placeholder="Questão...">
+                <div class="col col-wrap d-flex mb-3 align-items-center">
+                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                        <textarea cols="30" rows="5" name="correction_of_statement_question_{{$loop->index}}" id="correction_of_statement_question_{{$loop->index}}" class="form-control" placeholder="Afirmação..."></textarea>
+                    </div>
                     <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
@@ -104,7 +112,9 @@
                     </label>
                 </div>
                 <div class="col-12">
-                    <input name="correction_of_statement_solution_{{$loop->index}}" id="correction_of_statement_solution_{{$loop->index}}" type="text" class="form-control" placeholder="Solução...">
+                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                        <textarea cols="30" rows="5" name="correction_of_statement_solution_{{$loop->index}}" id="correction_of_statement_solution_{{$loop->index}}" class="form-control" placeholder="Solução..."></textarea>
+                    </div>
                 </div>
             @endif
         @endforeach
@@ -115,8 +125,10 @@
                 <span>Afirmação 1</span>
             </label>
         </div>
-        <div class="col col-wrap d-flex mb-3">
-            <input name="correction_of_statement_question_0" id="correction_of_statement_question_0" type="text" class="form-control" placeholder="Questão...">
+        <div class="col col-wrap d-flex mb-3 align-items-center">
+            <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                <textarea cols="30" rows="5" name="correction_of_statement_question_0" id="correction_of_statement_question_0" class="form-control" placeholder="Afirmação..."></textarea>
+            </div>
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
@@ -128,7 +140,9 @@
             </label>
         </div>
         <div class="col-12">
-            <input name="correction_of_statement_solution_0" id="correction_of_statement_solution_0" type="text" class="form-control" placeholder="Solução...">
+            <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
+                <textarea cols="30" rows="5" name="correction_of_statement_solution_0" id="correction_of_statement_solution_0" class="form-control" placeholder="Solução..."></textarea>
+            </div>
         </div>
     @endif
 </div>

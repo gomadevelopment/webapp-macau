@@ -500,8 +500,15 @@ button.hide_video {
 
 .word_item,
 .word_hole {
-    min-height: 50px;
+    min-height: 54px;
     height: auto;
+}
+
+.word_item {
+    padding-right: 20px !important;
+    z-index: 11;
+    cursor: all-scroll;
+    min-height: 50px;
 }
 
 .fill_hole.word_hole {
@@ -771,10 +778,20 @@ input:checked+.slider:before {
 }
 
 .possible_words_change_font .select2-container--default .select2-results>.select2-results__options,
-.possible_words_change_font .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+.possible_words_change_font .select2-container--default .select2-selection--multiple .select2-selection__rendered li,
+#form-vowels .select2-container .select2-selection--single .select2-selection__rendered,
+.select2-results__option[id^="select2-select_word_"] {
     font-family: sans-serif !important;
     letter-spacing: 0.78px;
 }
+
+/* #form-vowels .select2-container .select2-selection--single .select2-selection__rendered {
+    font-family: monospace;
+}
+
+.select2-results__option[id^="select2-select_word_"] {
+    font-family: monospace;
+} */
 
 div[id^="cke_fill_text_word_"] {
     width: -webkit-fill-available !important;
@@ -883,4 +900,52 @@ div[id^="cke_fill_text_word_"] {
     width: 50%;
     position: relative;
     padding-right: 50px;
+}
+
+
+/* 
+    Exame Review by Student
+*/
+
+.checkbox-custom.correct_answer_checkbox_input,
+.checkbox-custom.wrong_answer_checkbox_input,
+.checkbox-custom-label.wrong_answer_checkbox_label,
+.checkbox-custom-label.correct_answer_checkbox_label {
+    font-family: "Gilroy - SemiBold";
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 25px;
+    text-align: left;
+    /* margin: 20px 0 0 0 !important; */
+    pointer-events: none;
+}
+
+.checkbox-custom.correct_answer_checkbox_input:checked+.checkbox-custom-label.correct_answer_checkbox_input:before,
+.checkbox-custom.wrong_answer_checkbox_input:checked+.checkbox-custom-label.wrong_answer_checkbox_input:before {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.checkbox-custom.correct_answer_checkbox_input:checked+.checkbox-custom-label.correct_answer_checkbox_label:before {
+    background: #00B265 url("/assets/backoffice_assets/icons/Check.svg") no-repeat 50% 50% !important;
+    pointer-events: none;
+    background-size: 60% !important;
+    margin-top: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.checkbox-custom.wrong_answer_checkbox_input:checked+.checkbox-custom-label.wrong_answer_checkbox_label:before {
+    background: #ff2850 url("/assets/backoffice_assets/icons/Cross_white.svg") no-repeat 50% 50% !important;
+    pointer-events: none;
+    background-size: 50% !important;
+    margin-top: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30px !important;
+    height: 30px !important;
 }

@@ -53,6 +53,22 @@
                             <input name="vowels_word_{{$loop->index}}" id="vowels_word_{{$loop->index}}" 
                             value="{{ $question_item->text_1 }}"
                             type="text" class="form-control" placeholder="Palavra...">
+                            <a href="#" id="vowels_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
+                                style="float: none; padding: 16px 20px; white-space: nowrap; display: {{$question_item->question_item_media ? 'none' : 'block'}};">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Associar Media
+                            </a>
+                            @if($question_item->question_item_media)
+                                <input type="text" name="vowels_media_file_input_{{$loop->index}}" id="vowels_media_file_input_{{$loop->index}}" hidden
+                                    value="from_storage_{{ $question_item->id }}">
+                                <a href="#" class="btn btn-theme remove_button associate_media_preview button-wrap">
+                                    <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url }}" 
+                                    title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
+                                    <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
+                                    <img class="associate_media_thumbnail_remove" id="" src="/assets/backoffice_assets/icons/Cross.svg">
+                                </a>
+                            @endif
+                            <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
                             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                 Remover
@@ -89,6 +105,10 @@
                 </div>
                 <div class="col col-wrap d-flex mb-3">
                     <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra...">
+                    <a href="#" id="vowels_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        Associar Media
+                    </a>
                     <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
@@ -132,6 +152,11 @@
                         </div>
                         <div class="col col-wrap d-flex mb-3">
                             <input name="vowels_word_{{$loop->index}}" id="vowels_word_{{$loop->index}}" type="text" class="form-control" placeholder="Palavra...">
+                            <a href="#" id="vowels_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
+                                style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Associar Media
+                            </a>
                             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                 Remover
@@ -156,6 +181,10 @@
                 </div>
                 <div class="col col-wrap d-flex mb-3">
                     <input name="vowels_word_0" id="vowels_word_0" type="text" class="form-control" placeholder="Palavra...">
+                    <a href="#" id="vowels_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        Associar Media
+                    </a>
                     <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover

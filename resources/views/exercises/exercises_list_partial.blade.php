@@ -87,6 +87,11 @@
                                 <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Retomar Exercício
                             </a>
+                            <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;"
+                                {{ auth()->user()->hasExerciseInProgress($exercise->id) == 'has_exame_finished' ? '' : 'hidden' }}>
+                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                Rever Exercício
+                            </a>
                             <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Notificar Professor

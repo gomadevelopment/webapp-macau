@@ -32,25 +32,25 @@ class ExamesController extends Controller
 
         $exercise = Exercise::find($exercise_id);
 
+        $exame_review = false;
+
         DB::beginTransaction();
         try {
             if(auth()->user()->hasExerciseInProgress($exercise->id) == 'no_exame_started'){
                 $exame = Exame::cloneStudentExame($exercise);
                 if($exame->has_time){
                     $time_left = gmdate("H:i:s", $exame->time * 60);
-                    // dd($time_left, $exame->time);
-                    // dd($time_left);
-                    // $time_left = $exame->time;
                 }
                 else{
                     $time_left = '00:00:00';
                 }
             }
             else if(auth()->user()->hasExerciseInProgress($exercise->id) == 'has_exame_finished'){
-                request()->session()->flash('error', 'Já terminou este exercício ou o mesmo já não está disponível! Escolha outro exercício!');
-                return redirect()->to('/exercicios');
-                // $exame = Exame::where('student_id', auth()->user()->id)->where('exercise_id', $exercise->id)->first();
-                // $time_left = 0;
+                $exame_review = true;
+                $exame = Exame::where('student_id', auth()->user()->id)->where('exercise_id', $exercise->id)->first();
+                $time_left = '00:00:00';
+                // request()->session()->flash('error', 'Já terminou este exercício ou o mesmo já não está disponível! Escolha outro exercício!');
+                // return redirect()->to('/exercicios');
             }
             else{
                 $exame = auth()->user()->hasExerciseInProgress($exercise->id);
@@ -86,6 +86,7 @@ class ExamesController extends Controller
                 'exercise',
                 'exame',
                 'time_left',
+                'exame_review',
                 'pre_listening_questions', 
                 'listening_questions', 
                 'listening_shop_questions',

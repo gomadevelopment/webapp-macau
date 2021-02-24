@@ -297,8 +297,8 @@
                 maxFiles: 1,
                 thumbnailHeight: 120,
                 thumbnailWidth: 120,
-                maxFilesize: 3,
-                filesizeBase: 1000,
+                // maxFilesize: 3,
+                // filesizeBase: 1000,
                 init: function(e) {
                     this.on("maxfilesexceeded", function(file) {
                         this.removeAllFiles();

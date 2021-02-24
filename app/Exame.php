@@ -318,10 +318,10 @@ class Exame extends Model
     public function correspondenceImagesCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
 
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -329,7 +329,7 @@ class Exame extends Model
                 $question_item->options_answered = $answer_array[$question_item->question_item_media->id];
             }
             else{
-                $question_item->options_answered = null;
+                $question_item->options_answered = '';
             }
             $question_item->save();
         }
@@ -351,10 +351,10 @@ class Exame extends Model
     public function correspondenceAudiosCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
 
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -362,7 +362,7 @@ class Exame extends Model
                 $question_item->options_answered = $answer_array[$question_item->question_item_media->id];
             }
             else{
-                $question_item->options_answered = null;
+                $question_item->options_answered = '';
             }
             $question_item->save();
         }
@@ -384,12 +384,12 @@ class Exame extends Model
     public function correspondenceCategoriesCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        foreach($answer_array as $answer_sub_array){
-            if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-                // dd('WRONG - SCORE 0', $answer_array);
-                return 0;
-            }
-        }
+        // foreach($answer_array as $answer_sub_array){
+        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
+        //         // dd('WRONG - SCORE 0', $answer_array);
+        //         return 0;
+        //     }
+        // }
 
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -426,12 +426,12 @@ class Exame extends Model
     public function fillOptionsShuffleCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        foreach($answer_array as $answer_sub_array){
-            if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-                // dd('WRONG - SCORE 0', $answer_array);
-                return 0;
-            }
-        }
+        // foreach($answer_array as $answer_sub_array){
+        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
+        //         // dd('WRONG - SCORE 0', $answer_array);
+        //         return 0;
+        //     }
+        // }
 
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -469,12 +469,12 @@ class Exame extends Model
     public function fillOptionsTextWordsCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        foreach($answer_array as $answer_sub_array){
-            if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-                // dd('WRONG - SCORE 0', $answer_array);
-                return 0;
-            }
-        }
+        // foreach($answer_array as $answer_sub_array){
+        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
+        //         // dd('WRONG - SCORE 0', $answer_array);
+        //         return 0;
+        //     }
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -511,10 +511,10 @@ class Exame extends Model
     {
         // dd($answer_array);
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             foreach($answer_array as $question_item_id => $question_answer){
@@ -542,10 +542,10 @@ class Exame extends Model
     public function multipleChoiceQuestionsCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -568,10 +568,10 @@ class Exame extends Model
     public function multipleChoiceIntruderCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -599,10 +599,10 @@ class Exame extends Model
     public function differencesCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -626,10 +626,10 @@ class Exame extends Model
     public function statementCorrectionCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -654,10 +654,10 @@ class Exame extends Model
     public function automaticContentCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -681,10 +681,10 @@ class Exame extends Model
     public function assortmentSentencesCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
 
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -721,10 +721,10 @@ class Exame extends Model
     public function assortmentWordsCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -760,22 +760,23 @@ class Exame extends Model
     public function assortmentImagesCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
+        // dd($answer_array);
         // Save Answers given
+        $count = 0;
         foreach ($question->question_items as $question_item) {
-            foreach($answer_array as $key => $question_item_response_id){
-                $question_item->options_answered = $question_item_response_id;
-            }
+            $question_item->options_answered = $answer_array[$count];
             $question_item->save();
+            $count++;
         }
 
         // Solution
         $solution_array = [];
         foreach ($question->question_items as $question_item) {
-                $solution_array[] = $question_item->id;
+            $solution_array[] = $question_item->id;
         }
         // dd($answer_array, $solution_array, $question_item);
 
@@ -790,10 +791,10 @@ class Exame extends Model
     public function vowelsCorrection($question, $answer_array)
     {
         // Missing answers = WRONG = 0
-        if (array_search(null, $answer_array) !== false){
-            // dd('WRONG - SCORE 0', $answer_array);
-            return 0;
-        }
+        // if (array_search(null, $answer_array) !== false){
+        //     // dd('WRONG - SCORE 0', $answer_array);
+        //     return 0;
+        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             for ($i = 0; $i < $question_item->options_number; $i++){

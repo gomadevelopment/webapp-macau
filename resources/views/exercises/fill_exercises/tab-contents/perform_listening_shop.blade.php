@@ -54,8 +54,8 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
-                                            <label class="label_title mb-3 d-block">
-                                                {{ $question->title }} </label>
+                                            {{-- <label class="label_title mb-3 d-block">
+                                                {{ $question->title }} </label> --}}
                                             <div class="d-flex float-left flex-column">
                                                 <p class="exercise_author" style="margin-bottom: -10px;">
                                                     {{ $question->description }}
