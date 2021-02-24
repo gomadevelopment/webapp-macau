@@ -135,7 +135,7 @@ class Question extends Model
 
         switch ($inputs['question_type']) {
             case 1:
-                $this->informationQuestionType($inputs);
+                $this->informationQuestionType($inputs, $bool_same_type_and_subtype);
                 break;
             case 2:
                 $this->correspondenceQuestionType($inputs, $bool_same_type_and_subtype);
