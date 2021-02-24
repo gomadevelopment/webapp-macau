@@ -949,3 +949,28 @@ div[id^="cke_fill_text_word_"] {
     width: 30px !important;
     height: 30px !important;
 }
+
+.exercise_question_description,
+.exercise_question_description * {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.29px;
+    line-height: 25px;
+    text-align: left;
+    word-break: break-word;
+}
+
+.exercise_question_description {
+    margin: 10px 0 -10px 0;
+}
+
+.exercise_question_description * {
+    margin: 0;
+}
+
+.exercise_question_description * a {
+    color: #ff2850;
+}

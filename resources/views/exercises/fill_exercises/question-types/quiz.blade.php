@@ -44,7 +44,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         1
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Concordo plenamente
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         2
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Concordo
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         3
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Concordo em parte
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         4
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Discordo em parte
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         5
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Discordo
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <div class="time_countdown d-inline-block" style="padding: 10px 20px 6px 20px !important; font-size: 30px; border-radius: 10px;">
                         6
                     </div>
-                    <div class="quiz_level_label">
+                    <div class="quiz_level_label" style="cursor: default; pointer-events: none;">
                         Discordo completamente
                     </div>
                 </div>
@@ -228,42 +228,42 @@
                         <div class="row mt-4 text-center justify-content-center pr-5 pl-5 rb anxiety_levels" id="rb-15" data-id="15">
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab
                              {{ ($exame_review && $exame->anxiety_inquiry->value == 1) || !$exame_review ? 'rb-tab-active' : '' }}" data-value="1">
-                                <div class="rb-spot" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="rb-spot" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     <span class="rb-txt pt-1">1</span>
                                 </div>
-                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     Senti muita Ansiedade
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab {{ $exame_review && $exame->anxiety_inquiry->value == 2 ? 'rb-tab-active' : '' }}" data-value="2">
-                                <div class="rb-spot" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="rb-spot" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     <span class="rb-txt pt-1">2</span>
                                 </div>
-                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     Senti Ansiedade
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab {{ $exame_review && $exame->anxiety_inquiry->value == 3 ? 'rb-tab-active' : '' }}" data-value="3">
-                                <div class="rb-spot" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="rb-spot" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     <span class="rb-txt pt-1">3</span>
                                 </div>
-                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     Senti pouca Ansiedade
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab {{ $exame_review && $exame->anxiety_inquiry->value == 4 ? 'rb-tab-active' : '' }}" data-value="4">
-                                <div class="rb-spot" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="rb-spot" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     <span class="rb-txt pt-1">4</span>
                                 </div>
-                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     Não senti Ansiedade
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2 mb-3 rb-tab {{ $exame_review && $exame->anxiety_inquiry->value == 5 ? 'rb-tab-active' : '' }}" data-value="5">
-                                <div class="rb-spot" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="rb-spot" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     <span class="rb-txt pt-1">5</span>
                                 </div>
-                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursos: default; pointer-events: none;' : '' }}">
+                                <div class="quiz_level_label" style="{{ $exame_review ? 'cursor: default; pointer-events: none;' : '' }}">
                                     Não senti Ansiedade nenhuma
                                 </div>
                             </div>

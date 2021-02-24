@@ -57,9 +57,9 @@
                                             {{-- <label class="label_title mb-3 d-block">
                                                 {{ $question->title }} </label> --}}
                                             <div class="d-flex float-left flex-column">
-                                                <p class="exercise_author" style="margin-bottom: -10px;">
-                                                    {{ $question->description }}
-                                                </p>
+                                                <div class="article_description" style="margin-bottom: -10px;">
+                                                    {!! $question->description !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

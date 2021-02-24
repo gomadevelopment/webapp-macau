@@ -345,31 +345,69 @@
 
             // $('.drag_and_drop_item').draggable();
 
-            $('.drag_and_drop_item').draggable({
-                revert: true,
-                scroll: true,
-                placeholder: false,
-                droptarget: '.drop',
-                drop: function(evt, droptarget) {
-                    if(!droptarget.children.length){
-                        $(this).appendTo(droptarget);
-                        var test = $(this);
-                        // Correspondence
-                        if($(this).hasClass('correspondence_items')){
-                            $('input.correspondence_d_and_d').each(function(index, element){
-                                // console.log($(element));
-                                // Images and Audios
-                                if($(element).next('.drag_and_drop_hole').length){
-                                    // console.log($(element).find('input').val(), $(element.attr('class')));
+            if($('#exame_review').val() == false){
+
+                $('.drag_and_drop_item').draggable({
+                    revert: true,
+                    scroll: true,
+                    placeholder: false,
+                    droptarget: '.drop',
+                    drop: function(evt, droptarget) {
+                        if(!droptarget.children.length){
+                            $(this).appendTo(droptarget);
+                            var test = $(this);
+                            // Correspondence
+                            if($(this).hasClass('correspondence_items')){
+                                $('input.correspondence_d_and_d').each(function(index, element){
+                                    // console.log($(element));
+                                    // Images and Audios
+                                    if($(element).next('.drag_and_drop_hole').length){
+                                        // console.log($(element).find('input').val(), $(element.attr('class')));
+                                        if($.trim($(element).next('.drag_and_drop_hole').html())==''){
+                                            $(element).val(null);
+                                        }
+                                        else{
+                                            $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
+                                        }
+                                    }
+                                    // Categories
+                                    else{
+                                        $(element).next('div').each(function(index2, element2){
+                                            if($.trim($(element2).find('.drag_and_drop_hole').html())==''){
+                                                $(element).val(null);
+                                            }
+                                            else{
+                                                $(element).val($(element2).find('.drag_and_drop_hole').find('input').val());
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            // Fill Options - Shuffle
+                            else if($(this).hasClass('fill_options_shuffle_items')){
+                                $('input.fill_options_d_and_d').each(function(index, element){
                                     if($.trim($(element).next('.drag_and_drop_hole').html())==''){
                                         $(element).val(null);
                                     }
                                     else{
                                         $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
                                     }
-                                }
-                                // Categories
-                                else{
+                                });
+                            }
+                            // True or False
+                            else if($(this).hasClass('true_or_false_items')){
+                                $('input.true_or_false_d_and_d').each(function(index, element){
+                                    if($.trim($(element).next('.drag_and_drop_hole').html())==''){
+                                        $(element).val(null);
+                                    }
+                                    else{
+                                        $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
+                                    }
+                                });
+                            }
+                            // Correspondence
+                            else if($(this).hasClass('vowels_items')){
+                                $('input.vowels_d_and_d').each(function(index, element){
                                     $(element).next('div').each(function(index2, element2){
                                         if($.trim($(element2).find('.drag_and_drop_hole').html())==''){
                                             $(element).val(null);
@@ -378,81 +416,44 @@
                                             $(element).val($(element2).find('.drag_and_drop_hole').find('input').val());
                                         }
                                     });
-                                }
-                            });
-                        }
-                        // Fill Options - Shuffle
-                        else if($(this).hasClass('fill_options_shuffle_items')){
-                            $('input.fill_options_d_and_d').each(function(index, element){
-                                if($.trim($(element).next('.drag_and_drop_hole').html())==''){
-                                    $(element).val(null);
-                                }
-                                else{
-                                    $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
-                                }
-                            });
-                        }
-                        // True or False
-                        else if($(this).hasClass('true_or_false_items')){
-                            $('input.true_or_false_d_and_d').each(function(index, element){
-                                if($.trim($(element).next('.drag_and_drop_hole').html())==''){
-                                    $(element).val(null);
-                                }
-                                else{
-                                    $(element).val($(element).next('.drag_and_drop_hole').find('input').val());
-                                }
-                            });
-                        }
-                        // Correspondence
-                        else if($(this).hasClass('vowels_items')){
-                            $('input.vowels_d_and_d').each(function(index, element){
-                                $(element).next('div').each(function(index2, element2){
-                                    if($.trim($(element2).find('.drag_and_drop_hole').html())==''){
-                                        $(element).val(null);
-                                    }
-                                    else{
-                                        $(element).val($(element2).find('.drag_and_drop_hole').find('input').val());
-                                    }
                                 });
-                            });
+                            }
+                        }
+                        else{
+                            // droptarget.children.appendTo($(this).parent());
+                            // $(this).appendTo(droptarget);
+                            // console.log(droptarget);
+                            // console.log($.parseHTML(droptarget), $(this));
                         }
                     }
-                    else{
-                        // droptarget.children.appendTo($(this).parent());
-                        // $(this).appendTo(droptarget);
-                        // console.log(droptarget);
-                        // console.log($.parseHTML(droptarget), $(this));
+                });
+
+                $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]').sortable({
+                    autocreate: false,
+                    group: false,
+                    scroll: true,
+                    update: function(evt) {
                     }
-                }
-            });
+                });
 
-            $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]').sortable({
-                autocreate: false,
-                group: false,
-                scroll: true,
-                update: function(evt) {
-                }
-            });
-
-            $('[id^="assortment_words_table_question_item_"]').sortable({
-                autocreate: false,
-                group: false,
-                scroll: true,
-                update: function(evt) {
-                    var word_preview = '';
-                    $(this).find('li span').each(function(index, element){
-                        word_preview += $(element).text() + ' ';
-                    });
-                    $(this).prev('.word_preview').text(word_preview);
-                }
-            });
-
-            if($('#exame_review').val() == true){
-                $('.drag_and_drop_item').draggable('destroy');
+                $('[id^="assortment_words_table_question_item_"]').sortable({
+                    autocreate: false,
+                    group: false,
+                    scroll: true,
+                    update: function(evt) {
+                        var word_preview = '';
+                        $(this).find('li span').each(function(index, element){
+                            word_preview += $(element).text() + ' ';
+                        });
+                        $(this).prev('.word_preview').text(word_preview);
+                    }
+                });
+                
+            }
+            else{
                 $('.drag_and_drop_item').css('cursor', 'default');
-
-                $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]').sortable('destroy');
                 $('[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
+                $('[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
             }
 
             // Start Exercise

@@ -55,6 +55,9 @@
     <?php
         if($exame_review){
             $answered_vowels = [];
+            foreach($vowels_solutions as $key => $value){
+                $answered_vowels[$key] = [];
+            }
             foreach ($unique_vowels as $vowel) {
                 foreach ($question->question_items as $item) {
                     $options_answered = explode('|', $item->options_answered);
@@ -68,13 +71,14 @@
             }
             foreach ($unique_vowels as $vowel) {
                 if(sizeof($answered_vowels[$vowel]) < sizeof($vowels_solutions[$vowel])){
-                    for($i = 0; $i < (sizeof($vowels_solutions[$vowel]) - sizeof($answered_vowels[$vowel])); $i++){
+                    $sizeof_diff = sizeof($vowels_solutions[$vowel]) - sizeof($answered_vowels[$vowel]);
+                    for($i = 0; $i < $sizeof_diff; $i++){
                         $answered_vowels[$vowel][] = null;
                     }
                 }
             }
         }
-        // dd($answered_vowels, array_merge($answered_vowels, $answered_vowels));
+        // dd($answered_vowels, $vowels_solutions);
     ?>
 
     <?php

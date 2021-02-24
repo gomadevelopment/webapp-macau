@@ -158,8 +158,9 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <input name="question_description" id="question_description" type="text" class="form-control" placeholder="Descrição da questão a mostrar ao aluno"
-                                value="{{ isset($question) ? $question->description : '' }}">
+                                {{-- <input name="question_description" id="question_description" type="text" class="form-control" placeholder="Enunciado da questão a mostrar ao aluno"
+                                value="{{ isset($question) ? $question->description : '' }}"> --}}
+                                <textarea class="form-control" name="question_description" id="question_description" cols="30" rows="5" placeholder="Enunciado da questão a mostrar ao aluno">{{ isset($question) ? $question->description : '' }}</textarea>
                                 <span class="error-block-span pink question_description_error" hidden>
                                 </span>
                             </div>
@@ -317,8 +318,9 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https'))}}"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https'))}}"></script> --}}
 
     <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https'))}}"></script>
 
@@ -330,43 +332,57 @@
 
             // CKEDITOR
 
-            CKEDITOR.replace('info_text', {
-                language: 'pt'
-            });
+            // CKEDITOR.replace('info_text', {
+            //     language: 'pt'
+            // });
 
-            CKEDITOR.plugins.add( 'perc_delimiter', {
-                init: function( editor ) {
-                    editor.addCommand( 'insertPercDelimiter', {
-                        exec: function( editor ) {
-                            var now = new Date();
-                            editor.insertHtml('<% %>');
-                        }
-                    });
-                    editor.ui.addButton( '<% %>', {
-                        label: 'Inserir <% %>',
-                        command: 'insertPercDelimiter',
-                        toolbar: 'insert'
-                    });
-                }
-            });
+            // CKEDITOR.replace('question_description', {
+            //     language: 'pt'
+            // });
 
-            CKEDITOR.config.extraPlugins = 'perc_delimiter';
+            // CKEDITOR.plugins.add( 'perc_delimiter', {
+            //     init: function( editor ) {
+            //         editor.addCommand( 'insertPercDelimiter', {
+            //             exec: function( editor ) {
+            //                 var now = new Date();
+            //                 editor.insertHtml('<% %>');
+            //             }
+            //         });
+            //         editor.ui.addButton( '<% %>', {
+            //             label: 'Inserir <% %>',
+            //             command: 'insertPercDelimiter',
+            //             toolbar: 'insert'
+            //         });
+            //     }
+            // });
+
+            // CKEDITOR.config.extraPlugins = 'perc_delimiter';
+
+            ClassicEditor
+                .create( document.querySelector( '#question_description' ) )
+                .then( newEditor => {
+                    question_description = newEditor;
+                } )
+                .catch( error => {
+                    console.error( error );
+                } 
+            );
 
             // applyCKEditor('fill_textarea_0');
             // applyCKEditor('fill_text_word_0');
 
-            function applyCKEditor(textarea) {
-                CKEDITOR.replace( textarea , {
-                    height: 125,
-                    toolbar: 'Custom',
-                    toolbarStartupExpanded : false,
-                    toolbarCanCollapse  : false,
-                    toolbar_Custom: [
-                        { name: 'test', items: ['perc_delimiter', '<% %>'] }
-                    ],
-                    language: 'pt',
-                });
-            }
+            // function applyCKEditor(textarea) {
+            //     CKEDITOR.replace( textarea , {
+            //         height: 125,
+            //         toolbar: 'Custom',
+            //         toolbarStartupExpanded : false,
+            //         toolbarCanCollapse  : false,
+            //         toolbar_Custom: [
+            //             { name: 'test', items: ['perc_delimiter', '<% %>'] }
+            //         ],
+            //         language: 'pt',
+            //     });
+            // }
 
             $('#question_model').select2({
                 placeholder: "Escolher Modelo..."
@@ -693,7 +709,7 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i];
-                        console.log(f.type);
+                        // console.log(f.type);
                         if(f.type.match('video.*') || f.type.match('audio.*')){
                         }
                         else{
@@ -1410,6 +1426,10 @@
                 html.find("[name^='assort_words_question_']").attr('name', 'assort_words_question_'+sentence_number);
                 html.find("[id^='assort_words_question_']").attr('id', 'assort_words_question_'+sentence_number);
 
+                html.find("[id^='assort_words_media_button_']").attr('id', 'assort_words_media_button_'+sentence_number);
+
+                html.find("[id^='assort_words_media_file_input_']").attr('id', 'assort_words_media_file_input_'+sentence_number);
+
                 // Change solutions names and ids
                 var solution_number = parseInt(html.find("[id^='assort_words_solution_']")[0].id.match(/\d+/)[0]);
                 html.find("[name^='assort_words_solution_']").attr('name', 'assort_words_solution_'+solution_number+'_question_'+sentence_number);
@@ -1421,6 +1441,55 @@
                 html = html.clone();
 
                 $(paste_before).after(html);
+            });
+            // Assort Words upload and preview script
+            $(document).on('click', "[id^='assort_words_media_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="assort_words_media_file_input_'+id_index+'" id="assort_words_media_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#assort_words_media_file_input_' + id_index).click();
+
+                $('#assort_words_media_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#assort_words_media_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview ml-auto\">" +
+                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#assort_words_media_file_input_" + id_index);
+
+                            $('#assort_words_media_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#assort_image_media_button_' + id_index).show();
+                            //     $('#assort_image_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
             });
             // Clone new Assort Words - SOLUTION ONLY
             $(document).on('click', '.button_add_assort_words_solution', function(e){
@@ -1481,6 +1550,13 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
+                        if(f.type.match('image.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de imagem.');
+                            $('#assort_image_media_file_input_'+id_index).remove();
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1682,12 +1758,12 @@
                 }
             });
 
-            function updateAllMessageForms()
-            {
-                for (instance in CKEDITOR.instances) {
-                    CKEDITOR.instances[instance].updateElement();
-                }
-            }
+            // function updateAllMessageForms()
+            // {
+            //     for (instance in CKEDITOR.instances) {
+            //         CKEDITOR.instances[instance].updateElement();
+            //     }
+            // }
             //
 
 
@@ -1696,7 +1772,7 @@
             var question_id = $('#question_id_hidden').val();
 
             $(document).on('click', '#submit_enabled_form', function(e){
-                updateAllMessageForms();
+                // updateAllMessageForms();
 
                 var exercise_id = $('#exercise_id_hidden').val();
                 var url = question_id ? '/exercicios/'+exercise_id+'/questao/editar/'+question_id : '/exercicios/'+exercise_id+'/questao/criar';
@@ -1766,7 +1842,7 @@
                 formData.append($('#question_type')[0].name, $('#question_type')[0].value);
                 formData.append('question_subtype', question_subtype_id);
                 formData.append($('#question_reference')[0].name, $('#question_reference')[0].value);
-                formData.append($('#question_description')[0].name, $('#question_description')[0].value);
+                formData.append('question_description', question_description.getData());
                 if($('#correction_required').is(':checked')){
                     formData.append($('#correction_required')[0].name, $('#correction_required')[0].value);
                 }

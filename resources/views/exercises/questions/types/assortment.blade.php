@@ -159,7 +159,23 @@
                                     <label class="label_title m-0 sentence_number">
                                         <span>Frase {{ $loop->index + 1 }}</span>
                                     </label>
-                                    <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                    <a href="#" id="assort_words_media_button_{{$loop->index}}" class="btn search-btn comment_submit ml-auto" 
+                                        style="float: none; padding: 16px 20px; white-space: nowrap; display: {{$question_item->question_item_media ? 'none' : 'block'}};">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Associar Media
+                                    </a>
+                                    @if($question_item->question_item_media)
+                                        <input type="text" name="assort_words_media_file_input_{{$loop->index}}" id="assort_words_media_file_input_{{$loop->index}}" hidden
+                                            value="from_storage_{{ $question_item->id }}">
+                                        <a href="#" class="btn btn-theme remove_button associate_media_preview ml-auto">
+                                            <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url }}" 
+                                            title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
+                                            <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
+                                            <img class="associate_media_thumbnail_remove" src="/assets/backoffice_assets/icons/Cross.svg">
+                                        </a>
+                                    @endif
+                                    <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
+                                    <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-2" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Remover
                                     </a>
@@ -205,7 +221,12 @@
                                 <label class="label_title m-0 sentence_number">
                                     <span>Frase 1</span>
                                 </label>
-                                <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                <input name="assort_words_input_0" id="assort_words_input_0" type="text" class="form-control" placeholder="Descrição do Media">
+                                <a href="#" id="assort_words_media_button_0" class="btn search-btn comment_submit ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    Associar Media
+                                </a>
+                                <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-2" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
                                 </a>
@@ -443,40 +464,91 @@
 
 <div class="add_assort_words_clone" hidden>
     <div class="mt-4 mb-3 hr_row"><hr></div>
-    {{-- QUESTIONS --}}
-    <div class="row_to_remove row">
-        <div class="col col-wrap d-flex m-0 align-items-center">
-            <label class="label_title m-0 sentence_number">
-                <span>Frase 1</span>
-            </label>
-            <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                Remover
-            </a>
+    @if (isset($question->id) && $question->question_subtype_id == 15)
+        @foreach ($question->question_items as $question_item)
+            @if ($loop->last)
+                {{-- QUESTIONS --}}
+                <div class="row_to_remove row">
+                    <div class="col col-wrap d-flex m-0 align-items-center">
+                        <label class="label_title m-0 sentence_number">
+                            <span>Frase 1</span>
+                        </label>
+                        {{-- AQUI --}}
+                        <a href="#" id="assort_words_media_button_{{$loop->index}}" class="btn search-btn comment_submit ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Associar Media
+                        </a>
+                        <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-2" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Remover
+                        </a>
+                    </div>
+                    <div class="col-12">
+                        <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                            *Construa a frase separada em palavras/excertos de forma ordenada/correta.
+                        </p>
+                    </div>
+                    <input name="assort_words_question_{{$loop->index}}" id="assort_words_question_{{$loop->index}}" type="text" class="form-control" placeholder="Frase..." hidden>
+                </div>
+                {{-- SOLUTIONS --}}
+                <div class="row mt-1 mb-3 align-items-center">
+                    <div class="row_to_remove col col-wrap d-flex mb-3">
+                        <input name="assort_words_solution_0_question_{{$loop->index}}" id="assort_words_solution_0_question_{{$loop->index}}" type="text" class="form-control" placeholder="Resposta...">
+                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Remover
+                        </a>
+                    </div>
+                    <div class="col-12">
+                        <a href="#" id="add_assort_words_question_{{$loop->index}}_solution_1" class="btn search-btn comment_submit button_add_assort_words_solution question_{{$loop->index}} solution_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                            Adicionar
+                        </a>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    @else
+        {{-- QUESTIONS --}}
+        <div class="row_to_remove row">
+            <div class="col col-wrap d-flex m-0 align-items-center">
+                <label class="label_title m-0 sentence_number">
+                    <span>Frase 1</span>
+                </label>
+                {{-- AQUI --}}
+                <a href="#" id="assort_words_media_button_0" class="btn search-btn comment_submit ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Associar Media
+                </a>
+                <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-2" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Remover
+                </a>
+            </div>
+            <div class="col-12">
+                <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                    *Construa a frase separada em palavras/excertos de forma ordenada/correta.
+                </p>
+            </div>
+            <input name="assort_words_question_0" id="assort_words_question_0" type="text" class="form-control" placeholder="Frase..." hidden>
         </div>
-        <div class="col-12">
-            <p class="exercise_level m-0 float-none" style="font-size: 16px;">
-                *Construa a frase separada em palavras/excertos de forma ordenada/correta.
-            </p>
+        {{-- SOLUTIONS --}}
+        <div class="row mt-1 mb-3 align-items-center">
+            <div class="row_to_remove col col-wrap d-flex mb-3">
+                <input name="assort_words_solution_0_question_0" id="assort_words_solution_0_question_0" type="text" class="form-control" placeholder="Resposta...">
+                <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Remover
+                </a>
+            </div>
+            <div class="col-12">
+                <a href="#" id="add_assort_words_question_0_solution_1" class="btn search-btn comment_submit button_add_assort_words_solution question_0 solution_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                    Adicionar
+                </a>
+            </div>
         </div>
-        <input name="assort_words_question_0" id="assort_words_question_0" type="text" class="form-control" placeholder="Frase..." hidden>
-    </div>
-    {{-- SOLUTIONS --}}
-    <div class="row mt-1 mb-3 align-items-center">
-        <div class="row_to_remove col col-wrap d-flex mb-3">
-            <input name="assort_words_solution_0_question_0" id="assort_words_solution_0_question_0" type="text" class="form-control" placeholder="Resposta...">
-            <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                Remover
-            </a>
-        </div>
-        <div class="col-12">
-            <a href="#" id="add_assort_words_question_0_solution_1" class="btn search-btn comment_submit button_add_assort_words_solution question_0 solution_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
-                Adicionar
-            </a>
-        </div>
-    </div>
+    @endif
 </div>
 
 <div class="add_assort_words_solution_clone" hidden>

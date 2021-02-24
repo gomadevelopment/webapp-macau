@@ -684,6 +684,7 @@ class Question extends Model
 
     public function assortmentQuestionType($inputs, $bool_same_type_and_subtype)
     {
+        // dd($inputs);
         $input_indexes = self::inputIndexes($inputs, $this->question_subtype_id, $bool_same_type_and_subtype);
 
         if($this->question_subtype_id == 14){
@@ -721,9 +722,9 @@ class Question extends Model
 
         else if($this->question_subtype_id == 15){
 
-            foreach($this->question_items as $question_item){
-                $question_item->delete();
-            }
+            // foreach($this->question_items as $question_item){
+            //     $question_item->delete();
+            // }
 
             foreach($input_indexes as $question_key => $words_array){
 
@@ -746,6 +747,39 @@ class Question extends Model
                     $question_item->options_number = $options_count;
                     $question_item->save();
                     $options_count++;
+                }
+
+                if(isset($inputs['assort_words_media_file_input_'.$question_key])){
+                    if(strpos($inputs['assort_words_media_file_input_'.$question_key], 'from_storage_') !== false){
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['assort_words_media_file_input_'.$question_key])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['assort_words_media_file_input_'.$question_key];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
                 }
 
             }
@@ -1150,6 +1184,17 @@ class Question extends Model
                             }
                         }
                     }
+                }
+            }
+            // dd($input_indexes, $inputs);
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index => $array){
+                if(isset($inputs['assort_words_media_file_input_'.$index]) && strpos($inputs['assort_words_media_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['assort_words_media_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
                 }
             }
         }

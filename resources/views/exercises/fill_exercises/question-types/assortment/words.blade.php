@@ -14,7 +14,7 @@
 
                 <?php shuffle($shuffled_array); ?>
 
-                <label class="label_title mt-3 mb-1 d-block word_preview" style="border-radius: 5px; border: 2px solid #e6ebf1; padding: 10px; width: fit-content;">
+                <label class="label_title mt-3 mb-1 d-block word_preview text-center ml-3 mr-3" style="border-radius: 5px; border: 2px solid #e6ebf1; padding: 10px; width: fit-content;">
                     @if(!$exame_review)
                         @foreach ($shuffled_array as $shuffled_option)
                             {{ $shuffled_option }}
@@ -26,6 +26,16 @@
                     @endif
 
                 </label>
+
+                @if(!$item->question_item_media)
+
+                @else
+                    @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                        <audio controls class="mt-2">
+                            <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                        </audio>
+                    @endif
+                @endif
 
                 <ul id="assortment_words_table_question_item_{{ $item->id }}" class="assortment_tables" cellspacing="0" cellpadding="2">
                     
@@ -90,7 +100,7 @@
                         Conjunto de Palavras/Excertos {{ $loop->index + 1 }}
                     </label>
 
-                    <label class="label_title mt-3 mb-1 d-block word_preview" style="border-radius: 5px; border: 2px solid #e6ebf1; padding: 10px; width: fit-content;">
+                    <label class="label_title mt-3 mb-1 d-block word_preview text-center ml-3 mr-3" style="border-radius: 5px; border: 2px solid #e6ebf1; padding: 10px; width: fit-content;">
                         
                         @for ($i = 0; $i < $item->options_number; $i++)
                             <?php $option = 'options_'.($i+1); ?>

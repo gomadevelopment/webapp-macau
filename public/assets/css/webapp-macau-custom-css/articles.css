@@ -966,6 +966,37 @@ a[class^="show_less_"] .triangle-up {
     border: 2px solid #e6ebf1 !important;
 }
 
+.ck.ck-reset.ck-editor.ck-rounded-corners {
+    border-radius: 5px;
+    border: 2px solid #e6ebf1 !important;
+}
+
+.ck.ck-toolbar {
+    border: none !important;
+}
+
+.ck.ck-editor__main {
+    border-top: 2px solid #e6ebf1 !important;
+}
+
+.ck.ck-editor__editable_inline {
+    border: none !important;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+    /* border-radius: 5px; */
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.ck.ck-content * {
+    color: #131b31 !important;
+}
+
+.ck.ck-content * a {
+    color: #ff2850 !important;
+}
+
 .cke.cke_focus {
     border: 2px solid #ff2850 !important;
 }
