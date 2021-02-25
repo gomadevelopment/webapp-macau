@@ -271,23 +271,25 @@ class ExercisesController extends Controller
             foreach ($exercise->exercise_tags as $tag){
                 $exercise_clone->exercise_tags()->attach($tag);
             }
-            foreach ($exercise->medias as $media) {
-                $media_clone = $media->replicate();
-                $exercise_clone->medias()->save($media_clone);
-            }
+            // foreach ($exercise->medias->get() as $media) {
+            //     $media_clone = $media->replicate();
+            //     $exercise_clone->medias()->save($media_clone);
+            // }
             if($exercise->medias){
+                $media_clone = $exercise->medias->replicate();
+                $exercise_clone->medias()->save($media_clone);
                 $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
                 $toPath = public_path('webapp-macau-storage/exercises/'.$exercise_clone->id.'/medias');
                 File::copyDirectory($fromPath, $toPath);
             }
-            foreach ($exercise->questions as $question) {
+            foreach ($exercise->questions()->get() as $question) {
                 $question_clone = $question->replicate();
                 $exercise_clone->questions()->save($question_clone);
                 if($question->question_items){
                     foreach ($question->question_items as $question_item) {
                         $question_item_clone = $question_item->replicate();
                         $question_clone->question_items()->save($question_item_clone);
-                        if($question_item->question_item_media->count()){
+                        if($question_item->question_item_media){
                             $question_item_media_clone = $question_item->question_item_media->replicate();
                             $question_item_clone->question_item_media()->save($question_item_media_clone);
                             $fromPath = public_path('webapp-macau-storage/questions/'.$question->id.'/question_item/' . $question_item->id);
@@ -305,7 +307,7 @@ class ExercisesController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao clonar este exercício. Por favor, tente de novo!'], 200);
         }
         DB::commit();
-        
+
         request()->session()->flash('success', 'O exercício "' . $exercise->title . '" foi clonado com sucesso!');
         return response()->json([
             'status' => 'success', 
