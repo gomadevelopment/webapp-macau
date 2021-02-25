@@ -486,7 +486,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
                     <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);">
-                        <textarea class="form-control" name="fill_options_writing_textarea_{{$loop->index}}" id="ffill_options_writing_textarea_{{$loop->index}}" cols="30" rows="3" placeholder=""></textarea>
+                        <textarea class="form-control" name="fill_options_writing_textarea_{{$loop->index}}" id="fill_options_writing_textarea_{{$loop->index}}" cols="30" rows="3" placeholder=""></textarea>
                     </div>
                     
                     <div class="d-block float-right mt-3">
