@@ -262,6 +262,7 @@ class ExercisesController extends Controller
     public function cloneExercise($exercise_id)
     {
         $exercise = Exercise::find($exercise_id);
+        DB::beginTransaction();
         try {
             
             $exercise_clone = $exercise->replicate();
@@ -299,9 +300,11 @@ class ExercisesController extends Controller
 
         } catch (\Exception $e) {
             // dd($e);
+            DB::rollback();
             request()->session()->flash('error', 'Ocorreu um erro ao clonar este exercício. Por favor, tente de novo!');
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao clonar este exercício. Por favor, tente de novo!'], 200);
         }
+        DB::commit();
         
         request()->session()->flash('success', 'O exercício "' . $exercise->title . '" foi clonado com sucesso!');
         return response()->json([
