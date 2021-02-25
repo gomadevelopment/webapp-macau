@@ -117,10 +117,12 @@
                     Iniciar Exercício
                 </a>
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group m-2">
-                        <label class="label_title d-block text-center">
-                        <u> Exercício em execução... </u> </label>
-                    </div>
+                    @if(!$exame_review)
+                        <div class="form-group m-2">
+                            <label class="label_title d-block text-center">
+                            <u> Exercício em execução... </u> </label>
+                        </div>
+                    @endif
                     <a href="#pre-listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Prosseguir

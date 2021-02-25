@@ -44,13 +44,13 @@
                             <select name="{{$question->id}}_fill_options_words[{{$item->id}}][]" id="word_select_question_item_{{$item->id}}_option_{{$i+1}}" class="form-control" {{ $exame_review ? 'disabled' : '' }}>
                                 @foreach ($shuffled_select_options as $select_option)
                                     <option value="{{$select_option}}" 
-                                    {{ $exame_review && $select_option == explode(', ', $item->options_answered)[$i] ? 'selected' : '' }}>
+                                    {{ $exame_review && $select_option == explode('|', $item->options_answered)[$i] ? 'selected' : '' }}>
                                         {{$select_option}}
                                     </option>
                                 @endforeach
                             </select>
                             @if($exame_review)
-                                @if(explode('|', $item->$option)[0] == explode(', ', $item->options_answered)[$i])
+                                @if(explode('|', $item->$option)[0] == explode('|', $item->options_answered)[$i])
                                     <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
                                     <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block"></label>
                                 @else

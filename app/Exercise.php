@@ -120,6 +120,14 @@ class Exercise extends Model
     {
         return $this->hasMany('App\Question');
     }
+    
+    /**
+     * Exames
+     */
+    public function exames()
+    {
+        return $this->hasMany('App\Exame');
+    }
 
     /**
      * PROFESSOR

@@ -123,7 +123,7 @@ class ExamesController extends Controller
             // dd($score, $teacher_correction);
 
         } catch (\Exception $e) {
-            dd($e);
+            // dd($e);
             DB::rollback();
 
             return response()->json([

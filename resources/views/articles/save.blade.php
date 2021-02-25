@@ -27,11 +27,11 @@
 <!-- ============================ Create / Edit article ================================== -->
 <section class="pt-0">
     <div class="container">
-        <div class="alert alert-success successMsg" style="display:none;" role="alert">
+        <div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
 
         </div>
 
-        <div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+        <div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
 
         </div>
         <div class="row">

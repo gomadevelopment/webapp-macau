@@ -10,11 +10,11 @@
 
 @section('content')
 
-<div class="alert alert-success successMsg" style="display:none;" role="alert">
+<div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
 
 </div>
 
-<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+<div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
 
 </div>
 
@@ -436,7 +436,7 @@
                                 $(".errorMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".errorMsg").fadeOut();
-                                }, 2000);
+                                }, 10000);
                             }
                         }
                     });

@@ -248,6 +248,11 @@ class Exame extends Model
                     $question->classification = $this->fillOptionsTextWordsCorrection($question, $inputs[$question->id . '_fill_options_words']);
                     $question->save();
                     break;
+                // Fill Options - Writing
+                case 18:
+                    $question->classification = $this->fillOptionsWritingCorrection($question, $inputs[$question->id . '_fill_options_writing']);
+                    $question->save();
+                    break;
                 // True or False
                 case 7:
                     $question->classification = $this->trueOrFalseCorrection($question, $inputs[$question->id . '_true_or_false']);
@@ -450,7 +455,7 @@ class Exame extends Model
                     $question_item->options_answered .= $response;
                 }
                 else{
-                    $question_item->options_answered .= $response . ', ';
+                    $question_item->options_answered .= $response . '|';
                 }
             }
             $question_item->save();
@@ -460,8 +465,8 @@ class Exame extends Model
         $solution_array = [];
         foreach ($question->question_items as $question_item) {
             $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
-            preg_match_all($regex, $question_item->text_1, $minutesatches);
-            foreach($minutesatches[1] as $word_match){
+            preg_match_all($regex, $question_item->text_1, $matches);
+            foreach($matches[1] as $word_match){
                 $solution_array[$question_item->id][] = $word_match;
             }
         }
@@ -492,7 +497,7 @@ class Exame extends Model
                     $question_item->options_answered .= $response;
                 }
                 else{
-                    $question_item->options_answered .= $response . ', ';
+                    $question_item->options_answered .= $response . '|';
                 }
             }
             $question_item->save();
@@ -504,6 +509,49 @@ class Exame extends Model
             for($i = 0; $i < $question_item->options_number; $i++){
                 $option = "options_".($i+1);
                 $solution_array[$question_item->id][] = explode('|', $question_item->$option)[0];
+            }
+        }
+        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
+        if($answer_array == $solution_array){
+            return $question->avaliation_score;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public function fillOptionsWritingCorrection($question, $answer_array)
+    {
+        // Missing answers = WRONG = 0
+        // foreach($answer_array as $answer_sub_array){
+        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
+        //         // dd('WRONG - SCORE 0', $answer_array);
+        //         return 0;
+        //     }
+        // }
+
+        // Save Answers given
+        foreach ($question->question_items as $question_item) {
+            $numItems = count($answer_array[$question_item->id]);
+            $i = 0;
+            foreach($answer_array[$question_item->id] as $response){
+                if(++$i === $numItems) {
+                    $question_item->options_answered .= $response;
+                }
+                else{
+                    $question_item->options_answered .= $response . '|';
+                }
+            }
+            $question_item->save();
+        }
+
+        // Solution
+        $solution_array = [];
+        foreach ($question->question_items as $question_item) {
+            $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
+            preg_match_all($regex, $question_item->text_1, $matches);
+            foreach($matches[1] as $word_match){
+                $solution_array[$question_item->id][] = $word_match;
             }
         }
         // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);

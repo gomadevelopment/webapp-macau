@@ -73,11 +73,11 @@ class Question extends Model
     }
 
     /**
-     * Question SubType
+     * Get Models by Question Reference
      */
     public static function my_models()
     {
-        $query = self::orderBy('created_at', 'asc');
+        $query = self::orderBy('created_at', 'asc')->where('reference', '!=', null);
 
         $query = $query->whereHas('exercise', function($q) {
             return $q->where('exercises.user_id', auth()->user()->id);
@@ -88,6 +88,7 @@ class Question extends Model
 
     public function switchQuestionType($exercise, $inputs)
     {
+        // dd($inputs);
         if($inputs['question_subtype'] == 'same_type_and_subtype'){
             switch ($inputs['question_type']) {
                 case 1:
@@ -409,6 +410,58 @@ class Question extends Model
                     $question_item->options_number = $options_count;
                     $question_item->save();
                     $options_count++;
+                }
+            }
+        }
+
+        if($this->question_subtype_id == 18){
+            // dd($input_indexes);
+            foreach ($input_indexes as $index) {
+
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$index])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$index]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['fill_options_writing_textarea_'.$index];
+                $question_item->save();
+
+                if(isset($inputs['fill_options_writing_associate_media_file_input_'.$index])){
+                    if(strpos($inputs['fill_options_writing_associate_media_file_input_'.$index], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['fill_options_writing_associate_media_file_input_'.$index])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['fill_options_writing_associate_media_file_input_'.$index];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
                 }
             }
         }
@@ -1017,6 +1070,26 @@ class Question extends Model
                     }
                 }
             }
+        }
+        // Writing
+        else if($question_subtype == 18){
+            foreach ($inputs as $key => $value) {
+                if (strpos($key, 'fill_options_writing_textarea_') === 0) {
+                    $input_indexes[] = explode('_', $key)[4];
+                }
+            }
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index){
+                if(isset($inputs['fill_options_writing_associate_media_file_input_'.$index]) && strpos($inputs['fill_options_writing_associate_media_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['fill_options_writing_associate_media_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
+                }
+            }
+            // dd($bool_same_type_and_subtype, $input_indexes, $existent_file_question_item_ids, $existent_question_item_ids);
+
         }
 
         // TRUE OR FALSE

@@ -88,6 +88,9 @@
                                     @case(6)
                                         @include('exercises.fill_exercises.question-types.fill_options.words_text', ['question' => $question])
                                         @break
+                                    @case(18)
+                                        @include('exercises.fill_exercises.question-types.fill_options.writing', ['question' => $question])
+                                        @break
                                     @case(7)
                                         @include('exercises.fill_exercises.question-types.true_or_false', ['question' => $question])
                                         @break

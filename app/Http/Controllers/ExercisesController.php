@@ -52,6 +52,14 @@ class ExercisesController extends Controller
                         return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar este exercício. Por favor, tente de novo!'], 200);
                     }
 
+                    if($exercise->exames->count()){
+                        return response()->json(
+                            ['status' => 'error', 
+                            'message' => 'Não é possível apagar este exercício pois já tem exames de alunos associados.
+                            Se pretende esconder o exercício dos alunos, cancele a publicação do mesmo.'], 
+                            200);
+                    }
+
                     DB::beginTransaction();
                     try{
                         foreach(ExerciseTag::where('exercise_id', $exercise->id)->get() as $exercise_tag){
@@ -336,91 +344,6 @@ class ExercisesController extends Controller
             ]
         ];
         return $array;
-    }
-
-    public function performExercise($exercise_id)
-    {
-        $this->viewShareNotifications();
-
-        $exercise = Exercise::find($exercise_id);
-
-        $student_exame = $exercise->cloneStudentExame();
-
-        $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
-        $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
-        $listening_shop_questions = $exercise->questions()->where('section', 'Oficina da Escuta')->get();
-        $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
-
-        $inquiries = Inquiry::orderBy('order', 'asc')->get();
-
-        return view(
-            'exercises.fill_exercises.perform', 
-            compact(
-                'exercise', 
-                'pre_listening_questions', 
-                'listening_questions', 
-                'listening_shop_questions',
-                'after_listening_questions',
-                'inquiries'));
-    }
-
-    public function performPostExercise($exercise_id)
-    {
-        $this->viewShareNotifications();
-
-        $inputs = request()->all();
-
-        $exercise = Exercise::find($exercise_id);
-        $student = auth()->user();
-
-        DB::beginTransaction();
-        try {
-            
-            $student_exercise_submition_info = $exercise->saveExerciseByStudent($inputs);
-
-            $score = $student_exercise_submition_info[0];
-            $teacher_correction = $student_exercise_submition_info[1];
-
-            // dd($score, $teacher_correction);
-
-        } catch (\Exception $e) {
-            dd($e);
-            DB::rollback();
-
-            // request()->session()->flash('save_exercise_error', 'Por favor, verifique os erros no formulário.');
-            // request()->session()->flash('error', 'Ocorreu um erro ao criar/editar o exercicio. Por favor, tente de novo!');
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Ocorreu um erro ao criar/editar o exercicio. Por favor, verifique os erros no formulário.'
-            ]);
-        }
-        DB::commit();
-
-        return response()->json([
-            'status' => 'success',
-            'score' => $score,
-            'teacher_correction' => $teacher_correction,
-            'conclusion_time' => date('d/m/Y')
-        ]);
-
-        // $pre_listening_questions = $exercise->questions()->where('section', 'Pré-Escuta')->get();
-        // $listening_questions = $exercise->questions()->where('section', 'À Escuta')->get();
-        // $listening_shop_questions = $exercise->questions()->where('section', 'Oficina da Escuta')->get();
-        // $after_listening_questions = $exercise->questions()->where('section', 'Pós-Escuta')->get();
-
-        // $inquiries = Inquiry::orderBy('order', 'asc')->get();
-
-        // return view(
-        //     'exercises.fill_exercises.perform', 
-        //     compact(
-        //         'exercise', 
-        //         'pre_listening_questions', 
-        //         'listening_questions', 
-        //         'listening_shop_questions',
-        //         'after_listening_questions',
-        //         'inquiries'));
-
-        // return view('exercises.fill_exercises.perform');
     }
 
     public function viewShareNotifications()

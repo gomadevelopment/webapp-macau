@@ -3,7 +3,8 @@
         <li class="nav-item">
             <a class="nav-link {{ (isset($question->id) && $question->question_subtype_id == 5) 
                             || !isset($question->id)
-                            || $question->question_subtype_id != 6 ? 'active' : '' }}" 
+                            || ($question->question_subtype_id != 6
+                            && $question->question_subtype_id != 18) ? 'active' : '' }}" 
                 id="fill_options-shuffle-tab" data-toggle="tab" href="#fill_options-shuffle" role="tab" aria-controls="fill_options-shuffle" 
                 aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 5) || !isset($question->id) ? 'true' : 'false' }}">
                 Mistura
@@ -11,10 +12,17 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ (isset($question->id) && $question->question_subtype_id == 6) ? 'active' : '' }}" 
-            id="fill_options-text_words-tab" data-toggle="tab" href="#fill_options-text_words" role="tab" aria-controls="fill_options-text_words" 
-            aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 6) ? 'true' : 'false' }}">
-            Palavras em texto
-        </a>
+                id="fill_options-text_words-tab" data-toggle="tab" href="#fill_options-text_words" role="tab" aria-controls="fill_options-text_words" 
+                aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 6) ? 'true' : 'false' }}">
+                Palavras em texto
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ (isset($question->id) && $question->question_subtype_id == 18) ? 'active' : '' }}" 
+                id="fill_options-writing-tab" data-toggle="tab" href="#fill_options-writing" role="tab" aria-controls="fill_options-writing" 
+                aria-selected="{{ (isset($question->id) && $question->question_subtype_id == 18) ? 'true' : 'false' }}">
+                Escrever
+            </a>
         </li>
     </ul>
 
@@ -22,7 +30,8 @@
 
         <div class="tab-pane fade {{ (isset($question->id) && $question->question_subtype_id == 5) 
                             || !isset($question->id)
-                            || $question->question_subtype_id != 6 ? 'show active' : '' }}" id="fill_options-shuffle" role="tabpanel" aria-labelledby="fill_options-shuffle-tab">
+                            || ($question->question_subtype_id != 6
+                            && $question->question_subtype_id != 18) ? 'show active' : '' }}" id="fill_options-shuffle" role="tabpanel" aria-labelledby="fill_options-shuffle-tab">
             
             <div class="form-group">
 
@@ -220,6 +229,107 @@
 
         </div>
 
+        <div class="tab-pane fade {{ (isset($question->id) && $question->question_subtype_id == 18) ? 'show active' : '' }}" id="fill_options-writing" role="tabpanel" aria-labelledby="fill_options-writing-tab">
+            
+            <div class="form-group">
+
+                <form id="form-fill_options-writing" class="question-form" action=""  enctype="multipart/form-data">
+                    @csrf
+                    @if (isset($question->id) && $question->question_subtype_id == 18)
+                        <div class="row mb-3">
+                            @foreach ($question->question_items as $question_item)
+                                @if(!$loop->first)
+                                    <div class="col-12 mb-3 hr_row"><hr></div>
+                                @endif
+                                <div class="col-12">
+                                    <label class="label_title question_number m-0">
+                                        <span>Frase {{ $loop->index + 1 }}</span>
+                                        <a href="#" id="fill_options_writing_perc_delimiter_{{$loop->index}}" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                                            <% %>
+                                        </a>
+                                    </label>
+                                    <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                                        *Insira dentro de <% %> os termos no local para preenchimento.
+                                    </p>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);">
+                                        <textarea class="form-control" name="fill_options_writing_textarea_{{$loop->index}}" id="fill_options_writing_textarea_{{$loop->index}}" cols="30" rows="3" placeholder="Frase...">{{ $question_item->text_1 }}</textarea>
+                                    </div>
+                                    
+                                    <div class="d-block float-right mt-3">
+                                        <a href="#" id="fill_options_writing_associate_media_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
+                                            style="float: none; padding: 16px 20px; margin-left: 15px; display: {{$question_item->question_item_media ? 'none' : 'inline-block'}};">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Associar Media
+                                        </a>
+                                        @if($question_item->question_item_media)
+                                            <input type="text" name="fill_options_writing_associate_media_file_input_{{$loop->index}}" id="fill_options_writing_associate_media_file_input_{{$loop->index}}" hidden
+                                                value="from_storage_{{ $question_item->id }}">
+                                            <a href="#" class="btn btn-theme remove_button associate_media_preview button-wrap">
+                                                <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url }}" 
+                                                title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
+                                                <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
+                                                <img class="associate_media_thumbnail_remove" id="corr_image_file_remove_{{$loop->index}}" src="/assets/backoffice_assets/icons/Cross.svg">
+                                            </a>
+                                        @endif
+                                        <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
+                                        <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Remover
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="label_title question_number m-0">
+                                    <span>Frase 1</span>
+                                    <a href="#" id="fill_options_writing_perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                                        <% %>
+                                    </a>
+                                </label>
+                                <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                                    *Insira dentro de <% %> os termos no local para preenchimento.
+                                </p>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                                <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);">
+                                    <textarea class="form-control" name="fill_options_writing_textarea_0" id="fill_options_writing_textarea_0" cols="30" rows="3" placeholder="Frase..."></textarea>
+                                </div>
+                                
+                                <div class="d-block float-right mt-3">
+                                    <a href="#" id="fill_options_writing_associate_media_file_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Associar Media
+                                    </a>
+                                    <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Remover
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    
+
+                    <div class="row mb-3">
+                        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                            <a href="#" class="btn search-btn comment_submit m-3 button_add_fill_options_writing" style="font-size: 21px; float: none;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                Adicionar Alínea
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -356,4 +466,70 @@
         @endif
         
     </div>
+</div>
+
+<div class="add_fill_options_writing_clone" hidden>
+    <div class="col-12 mb-3 hr_row"><hr></div>
+    @if (isset($question->id) && $question->question_subtype_id == 18)
+        @foreach ($question->question_items as $question_item)
+            @if($loop->last)
+                <div class="col-12">
+                    <label class="label_title question_number m-0">
+                        <span>Frase {{$loop->index + 1}}</span>
+                        <a href="#" id="fill_options_writing_perc_delimiter_{{$loop->index}}" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                            <% %>
+                        </a>
+                    </label>
+                    <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                        *Insira dentro de <% %> os termos no local para preenchimento.
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                    <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);">
+                        <textarea class="form-control" name="fill_options_writing_textarea_{{$loop->index}}" id="ffill_options_writing_textarea_{{$loop->index}}" cols="30" rows="3" placeholder=""></textarea>
+                    </div>
+                    
+                    <div class="d-block float-right mt-3">
+                        <a href="#" id="fill_options_writing_associate_media_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Associar Media
+                        </a>
+                        <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Remover
+                        </a>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    @else
+        <div class="col-12">
+            <label class="label_title question_number m-0">
+                <span>Frase 1</span>
+                <a href="#" id="fill_options_writing_perc_delimiter_0" class="btn search-btn ml-1 comment_submit" style="float: none;padding: 8px 10px; white-space: nowrap;">
+                    <% %>
+                </a>
+            </label>
+            <p class="exercise_level m-0 float-none" style="font-size: 16px;">
+                *Insira dentro de <% %> os termos no local para preenchimento.
+            </p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+            <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);">
+                <textarea class="form-control" name="fill_options_writing_textarea_0" id="fill_options_writing_textarea_0" cols="30" rows="3" placeholder=""></textarea>
+            </div>
+            
+            <div class="d-block float-right mt-3">
+                <a href="#" id="fill_options_writing_associate_media_file_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Associar Media
+                </a>
+                <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Remover
+                </a>
+            </div>
+        </div>
+    @endif
+    
 </div>

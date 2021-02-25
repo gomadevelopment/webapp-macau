@@ -73,11 +73,11 @@
                 </div>
             </div>
             <div class="col-md-8 col-xl-9 chat">
-                <div class="alert alert-success successMsg" style="display:none;" role="alert">
+                <div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
 
                 </div>
 
-                <div class="alert alert-danger errorMsg" style="display:none;" role="alert">
+                <div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
 
                 </div>
                 <div class="card">

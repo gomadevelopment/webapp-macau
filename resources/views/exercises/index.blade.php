@@ -8,13 +8,6 @@
 @stop
 
 @section('content')
-<div class="alert alert-success successMsg" style="display:none;" role="alert">
-
-</div>
-
-<div class="alert alert-danger errorMsg" style="display:none;" role="alert">
-
-</div>
 
 <form id="exercises_filters_form" class="" method="GET" autocomplete="off">
     @csrf
@@ -610,7 +603,7 @@
                                 $(".errorMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".errorMsg").fadeOut();
-                                }, 2000);
+                                }, 10000);
                             }
                         }
                     });
@@ -649,7 +642,7 @@
                                 $(".errorMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".errorMsg").fadeOut();
-                                }, 2000);
+                                }, 10000);
                             }
                         }
                     });

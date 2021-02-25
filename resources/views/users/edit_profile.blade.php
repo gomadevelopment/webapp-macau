@@ -319,7 +319,7 @@
                                 $(".successMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".successMsg").fadeOut();
-                                }, 5000);
+                                }, 10000);
                             }
                             else{
                                 $('.class_name_error').text(response.message);
@@ -374,7 +374,7 @@
                                 $(".successMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".successMsg").fadeOut();
-                                }, 5000);
+                                }, 10000);
                             }
                             else{
                                 // $('.class_name_error').text(response.message);
@@ -418,7 +418,7 @@
                                 $(".successMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".successMsg").fadeOut();
-                                }, 5000);
+                                }, 10000);
                             }
                             else{
                                 $(".errorMsg").text(response.message);

@@ -60,6 +60,8 @@
                     </li>
                 </ul>
 
+                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+
                 <form method="POST" id="save_exercise_form" novalidate="true" action="{{ $exercise->id ? '/exercicios/editar/' . $exercise->id : '/exercicios/criar' }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id ? $exercise->id : null }}">
@@ -411,6 +413,11 @@
 
             // Save POST AJAX
             $(document).on('click', '.save_exercise_form_button', function(){
+
+                $("#save_exercise_form").hide();
+                $('.preloader.ajax').show();
+                $('html, body').animate({scrollTop: '0px'}, 300);
+
                 updateAllMessageForms();
                 var redirect = false;
                 if($(this).hasClass('intro_save')){
@@ -421,26 +428,6 @@
                 var url = exercise_id ? '/exercicios/editar/' + exercise_id : '/exercicios/criar';
 
                 var formData = new FormData($("#save_exercise_form")[0]);
-
-                // if(media_files == []){
-                //     $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
-                //         formData.append('media_files[]', $(element).text());
-                //     });
-                // }
-                // else{
-                //     media_files.forEach(element2 => {
-                        
-                //         $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').each(function(index, element){
-                //             if(element2.name != $(element).text()){
-                //                 formData.append('media_files[]', $(element).text());
-                //             }
-                //             else{
-                //                 formData.append('media_files[]', element2);
-                //             }
-                            
-                //         });
-                //     });
-                // }
 
                 if(media_files[0]){
                     formData.append('media_files', media_files[0]);
@@ -464,8 +451,15 @@
                             if(redirect){
                                 window.location = response.url + '?land_on_structure_tab=true';
                             }
+                            else{
+                                $("#save_exercise_form").show();
+                                $('.preloader.ajax').hide();
+                            }
                         }
                         else if(response.status == 'error'){
+
+                            $("#save_exercise_form").show();
+                            $('.preloader.ajax').hide();
 
                             Object.keys(response.errors).forEach(function (key) {
                                 if(key == 'title'){
@@ -496,7 +490,7 @@
                                 $(".errorMsg").fadeIn();
                                 setTimeout(() => {
                                     $(".errorMsg").fadeOut();
-                                }, 2000);
+                                }, 10000);
                             }
                         }
                     });

@@ -57,7 +57,7 @@
                                             {{-- <label class="label_title mb-3 d-block">
                                                 {{ $question->title }} </label> --}}
                                             <div class="d-flex float-left flex-column">
-                                                <div class="article_description" style="margin-bottom: -10px;">
+                                                <div class="exercise_question_description">
                                                     {!! $question->description !!}
                                                 </div>
                                             </div>
@@ -87,6 +87,9 @@
                                         @break
                                     @case(6)
                                         @include('exercises.fill_exercises.question-types.fill_options.words_text', ['question' => $question])
+                                        @break
+                                    @case(18)
+                                        @include('exercises.fill_exercises.question-types.fill_options.writing', ['question' => $question])
                                         @break
                                     @case(7)
                                         @include('exercises.fill_exercises.question-types.true_or_false', ['question' => $question])

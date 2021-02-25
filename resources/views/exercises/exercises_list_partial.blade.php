@@ -9,6 +9,14 @@
     </div>
 @endif
 
+<div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
+
+</div>
+
+<div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
+
+</div>
+
 <div class="row">
     @if ($exercises->isEmpty())
         <div class="col-lg-12 col-md-12 col-sm-12">

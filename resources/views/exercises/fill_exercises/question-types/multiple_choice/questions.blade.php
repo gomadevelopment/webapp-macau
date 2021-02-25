@@ -30,7 +30,7 @@
 
                 </div>
                 @if($exame_review)
-                    @if(in_array($item->options_answered, explode(', ', $item->options_correct)))
+                    @if(in_array($item->options_answered, explode('|', $item->options_correct)))
                         {{-- CORRETO --}}
                         <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
                         <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block mb-0 mt-3"></label>
@@ -84,7 +84,7 @@
                             @for ($i = 0; $i < $item->options_number; $i++)
                                 <?php $option = "options_".($i+1); ?>
 
-                                <option value="{{ $i + 1 }}" {{ in_array(($i + 1), explode(', ', $item->options_correct)) ? 'selected' : '' }} >{{ $item->$option }}</option>
+                                <option value="{{ $i + 1 }}" {{ in_array(($i + 1), explode('|', $item->options_correct)) ? 'selected' : '' }} >{{ $item->$option }}</option>
 
                             @endfor
                         </select>

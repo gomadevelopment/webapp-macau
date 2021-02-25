@@ -1143,6 +1143,97 @@
                 multiple: true
             });
 
+            // Clone new Fill options WRITING
+            $(document).on('click', '.button_add_fill_options_writing', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent().parent().prev();
+
+                var html = $('.add_fill_options_writing_clone').children();
+
+                var new_index = parseInt(html.find("[id^='fill_options_writing_textarea_']")[0].id.match(/\d+/)[0]) + 1;
+
+                html.find('.question_number>span').text('Frase ' + (new_index + 1));
+
+                html.find("[id^='fill_options_writing_perc_delimiter_']").attr('id', 'fill_options_writing_perc_delimiter_'+new_index);
+
+                html.find("[name^='fill_options_writing_textarea_']").attr('name', 'fill_options_writing_textarea_'+new_index);
+                html.find("[id^='fill_options_writing_textarea_']").attr('id', 'fill_options_writing_textarea_'+new_index);
+
+                html.find("[name^='fill_options_writing_associate_media_file_button_']").attr('name', 'fill_options_writing_associate_media_file_button_'+new_index);
+                html.find("[id^='fill_options_writing_associate_media_file_button_']").attr('id', 'fill_options_writing_associate_media_file_button_'+new_index);
+
+                html.find("[name^='fill_options_writing_associate_media_file_input_']").attr('name', 'fill_options_writing_associate_media_file_input_'+new_index);
+                html.find("[id^='fill_options_writing_associate_media_file_input_']").attr('id', 'fill_options_writing_associate_media_file_input_'+new_index);
+
+                html = html.clone();
+
+                $(paste_before).append(html);
+
+                // applyCKEditor('fill_textarea_' + new_index);
+                
+            });
+            // Fill options WRITING Media upload and preview script
+            $(document).on('click', "[id^='fill_options_writing_associate_media_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="fill_options_writing_associate_media_file_input_'+id_index+'" id="fill_options_writing_associate_media_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#fill_options_writing_associate_media_file_input_' + id_index).click();
+
+                $('#fill_options_writing_associate_media_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#fill_options_writing_associate_media_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
+                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#fill_options_writing_associate_media_file_input_" + id_index);
+
+                            $('#fill_options_writing_associate_media_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            });
+            // <% %> button
+            $(document).on('click', '[id^="fill_options_writing_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#fill_options_writing_textarea_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
+            });
+
             // Generate multiple selects on KEYUP
             $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
                 e.preventDefault();
@@ -1828,6 +1919,10 @@
                         break;
                     case "assort_images":
                         question_subtype_id = "16";
+                        break;
+                    // New Fill Options - Writing
+                    case "writing":
+                        question_subtype_id = "18";
                         break;
                     case "same_type_and_subtype":
                         question_subtype_id = 'same_type_and_subtype';
