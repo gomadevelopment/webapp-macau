@@ -221,7 +221,6 @@
                                 <label class="label_title m-0 sentence_number">
                                     <span>Frase 1</span>
                                 </label>
-                                <input name="assort_words_input_0" id="assort_words_input_0" type="text" class="form-control" placeholder="Descrição do Media">
                                 <a href="#" id="assort_words_media_button_0" class="btn search-btn comment_submit ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Associar Media

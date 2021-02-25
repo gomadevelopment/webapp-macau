@@ -160,7 +160,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 {{-- <input name="question_description" id="question_description" type="text" class="form-control" placeholder="Enunciado da questão a mostrar ao aluno"
                                 value="{{ isset($question) ? $question->description : '' }}"> --}}
-                                <textarea class="form-control" name="question_description" id="question_description" cols="30" rows="5" placeholder="Enunciado da questão a mostrar ao aluno">{{ isset($question) ? $question->description : '' }}</textarea>
+                                <textarea class="form-control" name="question_description" id="question_description" cols="30" rows="5" placeholder="Enunciado da questão a mostrar ao aluno (Obrigatório)">{{ isset($question) ? $question->description : '' }}</textarea>
                                 <span class="error-block-span pink question_description_error" hidden>
                                 </span>
                             </div>

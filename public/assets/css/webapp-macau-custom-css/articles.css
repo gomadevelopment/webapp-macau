@@ -997,6 +997,18 @@ a[class^="show_less_"] .triangle-up {
     color: #ff2850 !important;
 }
 
+.ck-placeholder {
+    opacity: 0.4 !important;
+    color: #131b31 !important;
+    font-family: "Gilroy - Medium";
+    font-size: 16px;
+    font-weight: 500 !important;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+    text-align: left;
+}
+
 .cke.cke_focus {
     border: 2px solid #ff2850 !important;
 }
