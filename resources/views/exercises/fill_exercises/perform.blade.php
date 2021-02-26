@@ -511,68 +511,6 @@
                 $('[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
             }
 
-            // $(window).on('mousemove', function(e) {
-            //     console.log(e.pageY);
-            //     if(e.pageY < )
-            //     // if ( e.pageY < 200 ) {
-            //     //     $('header').fadeTo(0,1);
-            //     // }
-            // });
-            //  $(window).on('mousemove', function(e) {
-
-            //     e = e || window.event; var cursor = { y: 0 }; cursor.y = e.pageY; //Cursor YPos
-            //     var papaWindow = parent.window;
-            //     var $pxFromTop = $(papaWindow).scrollTop();
-            //     var $userScreenHeight = $(papaWindow).height();
-
-            //     if (cursor.y > (($userScreenHeight + $pxFromTop) / 1.25)) {
-
-            //             if ($pxFromTop < ($userScreenHeight * 3.2)) {
-
-            //                     papaWindow.scrollBy(0, ($userScreenHeight / 30));
-            //                 }
-            //             }
-            //     else if (cursor.y < (($userScreenHeight + $pxFromTop) * .75)) {
-
-            //             papaWindow.scrollBy(0, -($userScreenHeight / 30));
-
-            //             }
-
-            // }); //End mouseover()
-
-            // $(document).mousemove(function(e) {
-            //     $("html, body").scrollTop(function(i, v) {
-            //         var h = $(window).height();
-            //         var y = e.clientY - h / 2;
-            //         console.log(h, y, (v + y * 0.1));
-            //         return v + y * 0.1;
-            //     });
-            // });
-
-            // var $elems = $("html, body");
-            // var delta = 0;
-
-            // $(window).on("mousemove", function(e) {
-            //     var h = $(window).height();
-            //     var y = e.clientY - h / 2;
-            //     delta = y * 0.02;
-            // });
-
-            // $(window).on("blur mouseleave", function() {
-            //     delta = 0;
-            // });
-
-            // (function f() {
-            //     console.log(delta);
-                
-            //     if(delta && (delta > 7.5 || delta < -7.5) && $('.draggable_clone').length) {
-            //         $elems.scrollTop(function(i, v) {
-            //             return v + delta;
-            //         });
-            //     }
-            //     webkitRequestAnimationFrame(f);
-            // })();
-
             $(document).on("mousemove", function(event) {
                 // $("#log").text("pageX: " + ($(window).width() - event.pageX) + ", pageY: " + ($(window).height() -event.pageY));
                 // console.log((event.pageY - window.pageYOffset));
@@ -602,54 +540,6 @@
                     }
                 }
             });
-
-            // $("section").on('mousemove', function(e){
-            //     var sectionHeight = $(this).height();
-            //     var vertical = e.offsetY;
-
-            //     console.log(vertical );
-                
-            //     if(vertical > (sectionHeight - 50)) {      
-            //         $('body').css("cursor","pointer");
-            //     } else{
-            //         $('body').css("cursor","auto");
-            //     }
-            // }); 
-
-            // $(window).on("mousemove", function(event) {
-            //     var currentMousePos = { x: -1, y: -1 };
-            //     // Check mouse position - scroll if near bottom or top
-            //     currentMousePos.y = event.pageY;
-            //     // console.log(currentMousePos.y)
-
-            //     var sectionHeight = $(this).height();
-            //     var vertical = event.offsetY;
-
-            //     console.log(vertical );
-                
-            //     if(vertical > (sectionHeight - 50)) {      
-            //         $('body').css("cursor","pointer");
-            //     } else{
-            //         $('body').css("cursor","auto");
-            //     }
-            // });
-
-            // $("body").off("mousemove", function(event) {
-            // // Check mouse position - scroll if near bottom or top
-            // });
-
-            // $(window).on('mousemove', function(e) {
-            //     var y = e.pageY;
-            //     var h = $(window).height();
-            //     var n = h - y;  
-            //     if (n < 60) {
-            //         var t = parseFloat($(window).scrollTop());
-            //         console.log(t);
-            //         $('html,body').animate({scrollTop:t + 60 + 'px'},200);
-            //     } else {
-            //         // $('html,body').stop();
-            //     }
-            // });
 
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
