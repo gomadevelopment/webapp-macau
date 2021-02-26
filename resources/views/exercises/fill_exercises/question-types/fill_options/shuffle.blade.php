@@ -33,6 +33,7 @@
         @foreach (explode('|', $item->options_answered) as $answer)
             <?php $all_shuffled_options_answered[] = $answer; ?>
         @endforeach
+
     @endforeach
 
     @if($exame_review)
@@ -58,8 +59,10 @@
         @endfor
     @else
         @foreach ($question->question_items->shuffle() as $item)
+            <?php $shuffled_words = getInbetweenStrings($item->text_1); ?>
+            <?php shuffle($shuffled_words); ?>
 
-            @foreach (getInbetweenStrings($item->text_1) as $word)
+            @foreach ($shuffled_words as $word)
 
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
                     <div class="form-group">

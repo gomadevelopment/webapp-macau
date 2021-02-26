@@ -114,6 +114,35 @@
                                 {{session('error')}}
                             </div>
                         @endif
+
+                        <div class="row mb-3 under_tabs_video_card">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="card-body">
+
+                                    <div class="row" style="place-content: center;">
+                                        <div class="form-group m-2">
+                                            @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
+                                                <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
+                                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                    </audio>                                
+                                            @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
+                                                <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
+                                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                </video>
+                                            @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
+                                                <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" alt=""
+                                                style="height: -webkit-fill-available;">
+                                            @endif
+                                            {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
+                                                <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
+                                            </video> --}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- INTRO TAB --}}
                         <div class="tab-pane fade active show" id="intro" role="tabpanel" aria-labelledby="intro-tab">
 
@@ -209,6 +238,24 @@
     </div>
 </div>
 <!-- End Modal -->
+
+<button class="btn search-btn comment_submit show_video" style="display: none; float: none;">
+    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
+</button>
+<button class="btn search-btn comment_submit hide_video" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
+    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
+</button>
+
+@if($exercise->medias)
+    <div class="videoWrapper stuck">
+        <div>
+            <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
+                <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
+                    type="{{ $exercise->medias->media_type }}">
+            </video>
+        </div>
+    </div>
+@endif
 
 @stop
 
@@ -464,6 +511,146 @@
                 $('[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
             }
 
+            // $(window).on('mousemove', function(e) {
+            //     console.log(e.pageY);
+            //     if(e.pageY < )
+            //     // if ( e.pageY < 200 ) {
+            //     //     $('header').fadeTo(0,1);
+            //     // }
+            // });
+            //  $(window).on('mousemove', function(e) {
+
+            //     e = e || window.event; var cursor = { y: 0 }; cursor.y = e.pageY; //Cursor YPos
+            //     var papaWindow = parent.window;
+            //     var $pxFromTop = $(papaWindow).scrollTop();
+            //     var $userScreenHeight = $(papaWindow).height();
+
+            //     if (cursor.y > (($userScreenHeight + $pxFromTop) / 1.25)) {
+
+            //             if ($pxFromTop < ($userScreenHeight * 3.2)) {
+
+            //                     papaWindow.scrollBy(0, ($userScreenHeight / 30));
+            //                 }
+            //             }
+            //     else if (cursor.y < (($userScreenHeight + $pxFromTop) * .75)) {
+
+            //             papaWindow.scrollBy(0, -($userScreenHeight / 30));
+
+            //             }
+
+            // }); //End mouseover()
+
+            // $(document).mousemove(function(e) {
+            //     $("html, body").scrollTop(function(i, v) {
+            //         var h = $(window).height();
+            //         var y = e.clientY - h / 2;
+            //         console.log(h, y, (v + y * 0.1));
+            //         return v + y * 0.1;
+            //     });
+            // });
+
+            // var $elems = $("html, body");
+            // var delta = 0;
+
+            // $(window).on("mousemove", function(e) {
+            //     var h = $(window).height();
+            //     var y = e.clientY - h / 2;
+            //     delta = y * 0.02;
+            // });
+
+            // $(window).on("blur mouseleave", function() {
+            //     delta = 0;
+            // });
+
+            // (function f() {
+            //     console.log(delta);
+                
+            //     if(delta && (delta > 7.5 || delta < -7.5) && $('.draggable_clone').length) {
+            //         $elems.scrollTop(function(i, v) {
+            //             return v + delta;
+            //         });
+            //     }
+            //     webkitRequestAnimationFrame(f);
+            // })();
+
+            $(document).on("mousemove", function(event) {
+                // $("#log").text("pageX: " + ($(window).width() - event.pageX) + ", pageY: " + ($(window).height() -event.pageY));
+                // console.log((event.pageY - window.pageYOffset));
+
+                if(!$('.draggable_clone').length){
+                    $("html, body").stop();
+                }
+
+                if($('.draggable_clone').length){
+                    // $("html, body").stop();
+                    // SCROLL TOP
+                    if((event.pageY - window.pageYOffset) < 100){
+                        // console.log('SCROLL TOP', event.pageY, window.pageYOffset);
+                        // $("html, body").stop();
+                        $('html, body').animate({scrollTop:0}, 3000);
+                    }
+
+                    // SCROLL BOTTOM
+                    else if((event.pageY - window.pageYOffset) > ($(window).height() - 30)){
+                        // console.log('SCROLL BOTTOM');
+                        // $("html, body").stop();
+                        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 3000);
+                    }
+
+                    else {
+                        $("html, body").stop();
+                    }
+                }
+            });
+
+            // $("section").on('mousemove', function(e){
+            //     var sectionHeight = $(this).height();
+            //     var vertical = e.offsetY;
+
+            //     console.log(vertical );
+                
+            //     if(vertical > (sectionHeight - 50)) {      
+            //         $('body').css("cursor","pointer");
+            //     } else{
+            //         $('body').css("cursor","auto");
+            //     }
+            // }); 
+
+            // $(window).on("mousemove", function(event) {
+            //     var currentMousePos = { x: -1, y: -1 };
+            //     // Check mouse position - scroll if near bottom or top
+            //     currentMousePos.y = event.pageY;
+            //     // console.log(currentMousePos.y)
+
+            //     var sectionHeight = $(this).height();
+            //     var vertical = event.offsetY;
+
+            //     console.log(vertical );
+                
+            //     if(vertical > (sectionHeight - 50)) {      
+            //         $('body').css("cursor","pointer");
+            //     } else{
+            //         $('body').css("cursor","auto");
+            //     }
+            // });
+
+            // $("body").off("mousemove", function(event) {
+            // // Check mouse position - scroll if near bottom or top
+            // });
+
+            // $(window).on('mousemove', function(e) {
+            //     var y = e.pageY;
+            //     var h = $(window).height();
+            //     var n = h - y;  
+            //     if (n < 60) {
+            //         var t = parseFloat($(window).scrollTop());
+            //         console.log(t);
+            //         $('html,body').animate({scrollTop:t + 60 + 'px'},200);
+            //     } else {
+            //         // $('html,body').stop();
+            //     }
+            // });
+
             // Start Exercise
             $(document).on('click', '.start_exercise, .perform_exercise_nav_button', function(e){
 
@@ -597,7 +784,16 @@
                 }
             });
 
+            $('.under_tabs_video_card').hide();
+
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
+
+                if($(this).attr('id') == "intro-tab" || $(this).attr('id') == "evaluation-tab"){
+                    $('.under_tabs_video_card').hide();
+                }
+                else{
+                    $('.under_tabs_video_card').show();
+                }
 
                 $('#perform_exercise_tabs_content>.tab-pane').each(function(index, element){
                     $(element).removeClass('show');
@@ -627,6 +823,61 @@
                     }
                 });
             });
+
+            // Button show/hide video
+            $('.videoWrapper video').trigger('pause');
+            
+            $(document).on('click', 'button.show_video, button.hide_video', function(){
+                if($(this).hasClass('show_video')){
+                    $(this).hide();
+                    $('button.hide_video').show();
+                    // $('.videoWrapper video').trigger('play');
+                    $('.videoWrapper').show().addClass('stuck');
+                    $('.videoWrapper').show().addClass('stuck');
+                    if(!$('.videoWrapper').hasClass('was_opened')){
+                        $('.videoWrapper').addClass('was_opened');
+                    }
+                }
+                else{
+                    $(this).hide();
+                    $('button.show_video').show();
+                    $('.videoWrapper video').trigger('pause');
+                    $('.videoWrapper').hide().removeClass('stuck');
+                }
+
+            });
+
+            $('button.hide_video').click();
+
+            $('.videoWrapper video').on('play', function(){
+                $('.under_tabs_video_card video').trigger('pause');
+            });
+
+            $('.under_tabs_video_card video').on('play', function(){
+                $('.videoWrapper video').trigger('pause');
+            });
+
+            /*Floating js Start*/
+            var windows = jQuery(window);
+            var iframeWrap = jQuery(this).parent();
+            var iframe = jQuery(this);
+            var iframeHeight = iframe.outerHeight();
+            var iframeElement = iframe.get(0);
+
+            iframeWrap.height(iframeHeight);
+            iframe.addClass('stuck');
+
+            windows.on('scroll', function() {
+                // console.log($(this).scrollTop());
+                if($(this).scrollTop() >= 900){
+                    if(!$('.videoWrapper').hasClass('was_opened')){
+                        $('button.show_video').click();
+                    }
+                }
+                iframeWrap.height(iframeHeight);
+                iframe.addClass('stuck');
+            });
+            /*Floating js End*/
 
         });
 

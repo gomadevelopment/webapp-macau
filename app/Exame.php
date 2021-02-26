@@ -427,6 +427,14 @@ class Exame extends Model
                 $solution_array[$question_item->id][] = $question_item->$option;
             }
         }
+
+        foreach($answer_array as $key => &$sub_array){
+            sort($sub_array);
+        }
+        foreach($solution_array as $key => &$sub_array){
+            sort($sub_array);
+        }
+
         // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
         if($answer_array == $solution_array){
             return $question->avaliation_score;

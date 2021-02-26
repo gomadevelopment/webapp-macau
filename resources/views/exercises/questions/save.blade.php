@@ -288,18 +288,16 @@
             <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
         </button>
 
-
-        <div class="videoWrapper stuck">
-            <div>
-                {{-- <span class="close-videoWrapper" style="float: right; cursor: pointer;">x</span> --}}
-                {{-- <iframe width="100%" height="240px" style="background-color: black;"
-                    src="http://techslides.com/demos/sample-videos/small.mp4">
-                </iframe> --}}
-                <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
-                    <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
-                </video>
+        @if($exercise->medias)
+            <div class="videoWrapper stuck">
+                <div>
+                    <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
+                        <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
+                            type="{{ $exercise->medias->media_type }}">
+                    </video>
+                </div>
             </div>
-        </div>
+        @endif
 
     </div>
 </section>
