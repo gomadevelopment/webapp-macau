@@ -656,8 +656,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" id=\"corr_image_file_remove_"+id_index+"\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -720,8 +727,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
-                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview no-preview button-wrap\">" +
-                                // "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -839,8 +853,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -945,8 +966,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1072,8 +1100,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1200,8 +1235,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1347,8 +1389,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1561,8 +1610,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview ml-auto\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1651,8 +1707,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"
@@ -1783,8 +1846,15 @@
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
                             $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
-                                "<img src=\""+e.target.result+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
                                 "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
                                 "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
                                 "</a>"

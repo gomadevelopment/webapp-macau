@@ -974,3 +974,8 @@ div[id^="cke_fill_text_word_"] {
 .exercise_question_description * a {
     color: #ff2850;
 }
+
+.exercise_question_description.question_info_text_type,
+.exercise_question_description.question_info_text_type * {
+    font-style: revert !important;
+}

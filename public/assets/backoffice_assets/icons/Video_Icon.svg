@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="15px" viewBox="0 0 19 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>monitor-play</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="monitor-play" transform="translate(1.000000, 1.000000)" stroke="#FF2850">
+            <rect id="Rectangle" stroke-width="1.404" transform="translate(8.424000, 6.318000) rotate(180.000000) translate(-8.424000, -6.318000) " x="0" y="0" width="16.848" height="12.636" rx="1.404"></rect>
+            <polygon id="Path" points="11.232 6.318 7.02 3.51 7.02 9.126"></polygon>
+        </g>
+    </g>
+</svg>

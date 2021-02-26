@@ -97,6 +97,8 @@
                     </li>
                 </ul>
 
+                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+
                 <form method="POST" id="perform_exercise_form" action="" enctype="multipart/form-data">
                     @csrf
 
@@ -231,6 +233,10 @@
                 // Deactivate finish_exercise_button
                 $(this).attr('id', '');
 
+                $("#perform_exercise_form").hide();
+                $('.preloader.ajax').show();
+                $('html, body').animate({scrollTop: '0px'}, 300);
+
                 var exercise_id = $('#exercise_id_hidden').val();
                 var exame_id = $('#exame_id').val();
 
@@ -256,6 +262,8 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
+                        $("#perform_exercise_form").show();
+                        $('.preloader.ajax').hide();
                         if(response && response.status == 'success'){
 
                             if(response.teacher_correction){
@@ -296,18 +304,18 @@
 
                         $('#evaluation-tab').click();
 
-                        var offset_disc = $(".header").height() + 10;
+                        // var offset_disc = $(".header").height() + 10;
 
-                        if ($(window).width() < 992) {
-                            offset_disc = 0;
-                        }
+                        // if ($(window).width() < 992) {
+                        //     offset_disc = 0;
+                        // }
 
-                        $("html, body").animate(
-                            {
-                                scrollTop: $('#evaluation').offset().top - offset_disc
-                            },
-                            800
-                        );
+                        // $("html, body").animate(
+                        //     {
+                        //         scrollTop: $('#evaluation').offset().top - offset_disc
+                        //     },
+                        //     800
+                        // );
                     }
                 });
             });

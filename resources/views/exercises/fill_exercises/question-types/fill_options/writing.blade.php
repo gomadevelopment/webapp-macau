@@ -110,14 +110,11 @@
                             {{ getStringInArray2($item->text_1)[$i] }}
 
                             @if($i < (sizeof(getStringInArray2($item->text_1)) - 1))
-                                {{-- <div class="drag_and_drop_hole fill_hole word_hole drop mt-2 mb-2 ml-2"> --}}
-                                    @if(isset(explode('|', $item->options_answered)[$i]) && explode('|', $item->options_answered)[$i] != '')
-                                        {{-- <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" > --}}
-                                            {{-- {{ explode('|', $item->options_answered)[$i] }} --}}
-                                            <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex" style="width: auto; vertical-align: middle;">
-                                        {{-- </div> --}}
-                                    @endif
-                                {{-- </div> --}}
+
+                                @if(isset(explode('|', $item->options_answered)[$i]))
+                                    <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex" style="width: auto; vertical-align: middle;">
+                                @endif
+                                
                                 @if(getInbetweenStrings2($item->text_1)[$i] == explode('|', $item->options_answered)[$i])
                                     <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
                                     <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block"></label>

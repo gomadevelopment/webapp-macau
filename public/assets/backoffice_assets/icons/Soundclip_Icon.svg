@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="15px" viewBox="0 0 20 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>volume-2</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="volume-2" transform="translate(1.000000, 1.000000)" stroke="#FF2850" stroke-width="1.5">
+            <polygon id="Path" points="7.7805 0.1995 3.458 3.6575 0 3.6575 0 8.8445 3.458 8.8445 7.7805 12.3025"></polygon>
+            <path d="M14.757015,0.138985 C18.1318669,3.51485622 18.1318669,8.98714378 14.757015,12.363015 M11.70533,3.19067 C13.3927559,4.87860561 13.3927559,7.61474939 11.70533,9.302685" id="Shape"></path>
+        </g>
+    </g>
+</svg>

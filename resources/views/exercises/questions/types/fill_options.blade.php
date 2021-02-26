@@ -68,8 +68,15 @@
                                         @if($question_item->question_item_media)
                                             <input type="text" name="fill_associate_media_file_input_{{$loop->index}}" id="fill_associate_media_file_input_{{$loop->index}}" hidden
                                                 value="from_storage_{{ $question_item->id }}">
+                                            @if(explode('/', $question_item->question_item_media->media_type)[0] == 'audio')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg"; ?>
+                                            @elseif(explode('/', $question_item->question_item_media->media_type)[0] == 'video')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Video_Icon.svg"; ?>
+                                            @else
+                                                <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url; ?>
+                                            @endif
                                             <a href="#" class="btn btn-theme remove_button associate_media_preview button-wrap">
-                                                <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url }}" 
+                                                <img src="{{ $preview_image_src }}" 
                                                 title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
                                                 <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
                                                 <img class="associate_media_thumbnail_remove" id="corr_image_file_remove_{{$loop->index}}" src="/assets/backoffice_assets/icons/Cross.svg">
@@ -266,8 +273,15 @@
                                         @if($question_item->question_item_media)
                                             <input type="text" name="fill_options_writing_associate_media_file_input_{{$loop->index}}" id="fill_options_writing_associate_media_file_input_{{$loop->index}}" hidden
                                                 value="from_storage_{{ $question_item->id }}">
+                                            @if(explode('/', $question_item->question_item_media->media_type)[0] == 'audio')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg"; ?>
+                                            @elseif(explode('/', $question_item->question_item_media->media_type)[0] == 'video')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Video_Icon.svg"; ?>
+                                            @else
+                                                <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url; ?>
+                                            @endif
                                             <a href="#" class="btn btn-theme remove_button associate_media_preview button-wrap">
-                                                <img src="{{ '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url }}" 
+                                                <img src="{{ $preview_image_src }}" 
                                                 title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
                                                 <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
                                                 <img class="associate_media_thumbnail_remove" id="corr_image_file_remove_{{$loop->index}}" src="/assets/backoffice_assets/icons/Cross.svg">
