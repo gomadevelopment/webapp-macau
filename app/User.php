@@ -364,6 +364,10 @@ class User extends Authenticatable
             return 'has_exame_finished';
         }
 
+        if(!$exame->has_time){
+            return $exame;
+        }
+
         $start_timestamp_unix = strtotime($exame->start_timestamp);
         $exame_time_unix = $exame->time * 60;
         $exame_datetime_limit = gmdate("Y-m-d H:i:s", $start_timestamp_unix + $exame_time_unix);

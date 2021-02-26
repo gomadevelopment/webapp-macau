@@ -27,11 +27,11 @@
 
                     @if($item->question_item_media)
                         <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="" class="true_or_false_image">
-                    @else
-                        <div class="true_or_false_image"></div>
                     @endif
                     
-                    <p class="d-flex align-items-center mb-0 mr-3">{{ $item->text_1 }}</p>
+                    <p class="d-flex align-items-center mb-0 mr-3" style="{{ !$item->question_item_media ? 'width: 268% !important;' : '' }}">
+                        {{ $item->text_1 }}
+                    </p>
                     
                     <select class="form-control" name="{{$question->id}}_true_or_false[{{$item->id}}]" id="true_or_false_select_question_item_{{$item->id}}" {{ $exame_review ? 'disabled' : '' }}>
                         <option value="true" {{ $exame_review && $item->options_answered == "true" ? 'selected' : '' }}>Verdadeiro</option>
@@ -42,10 +42,10 @@
                     </select>
                     @if($exame_review)
                         @if($item->options_correct == $item->options_answered)
-                            <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
+                            <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked disabled>
                             <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block align-self-center"></label>
                         @else
-                            <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked>
+                            <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked disabled>
                             <label for="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label wrong_answer_checkbox_label d-inline-block align-self-center"></label>
                         @endif
                     @endif
@@ -80,11 +80,11 @@
 
                         @if($item->question_item_media)
                             <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="" class="true_or_false_image">
-                        @else
-                            <div class="true_or_false_image"></div>
                         @endif
                         
-                        <p class="d-flex align-items-center mb-0 mr-3">{{ $item->text_1 }}</p>
+                        <p class="d-flex align-items-center mb-0 mr-3" style="{{ !$item->question_item_media ? 'width: 268% !important;' : '' }}">
+                            {{ $item->text_1 }}
+                        </p>
                         
                         <select class="form-control" name="" id="exame_review_true_or_false_select_question_item_{{$item->id}}" disabled>
                             <option value="true" {{ $item->options_correct == "true" ? 'selected' : '' }}>Verdadeiro</option>

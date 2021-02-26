@@ -11,14 +11,14 @@
 
         function getInbetweenStrings($str){
             $matches = array();
-            $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
+            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
             preg_match_all($regex, $str, $matches);
             return $matches[1];
         }
 
         function getStringInArray($string){
             $matches = array();
-            $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
+            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
             $string_array = preg_split($regex, $string);
             return $string_array;
         }
@@ -105,6 +105,7 @@
                             {{ getStringInArray($item->text_1)[$i] }}
 
                             @if($i < (sizeof(getStringInArray($item->text_1)) - 1))
+                            <div class="d-inline-block">
                                 <div class="drag_and_drop_hole fill_hole word_hole drop mt-2 mb-2 ml-2">
                                     @if(isset(explode('|', $item->options_answered)[$i]) && explode('|', $item->options_answered)[$i] != '')
                                         <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" >
@@ -113,12 +114,13 @@
                                     @endif
                                 </div>
                                 @if(getInbetweenStrings($item->text_1)[$i] == explode('|', $item->options_answered)[$i])
-                                    <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
+                                    <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked disabled>
                                     <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block mr-2"></label>
                                 @else
-                                    <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked>
+                                    <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked disabled>
                                     <label for="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label wrong_answer_checkbox_label d-inline-block mr-2"></label>
                                 @endif
+                            </div>
                             @endif
 
                         @endfor

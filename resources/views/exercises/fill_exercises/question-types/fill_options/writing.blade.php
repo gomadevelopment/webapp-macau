@@ -11,14 +11,14 @@
 
         function getInbetweenStrings2($str){
             $matches = array();
-            $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
+            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
             preg_match_all($regex, $str, $matches);
             return $matches[1];
         }
 
         function getStringInArray2($string){
             $matches = array();
-            $regex = "/<%\s*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*)\s*%>/";
+            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
             $string_array = preg_split($regex, $string);
             return $string_array;
         }
@@ -90,10 +90,10 @@
 
     @foreach ($question->question_items as $item)
         
-        <div class="col-sm-12 col-md-12 col-lg-12 mb-1">
-            <div class="form-group d-inline-flex">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
                 @if($item->question_item_media)
-                    <audio controls controlslist="nodownload" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
+                    <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
                         <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
                     </audio>
                     {{-- <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
@@ -114,12 +114,12 @@
                                 @if(isset(explode('|', $item->options_answered)[$i]))
                                     <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex" style="width: auto; vertical-align: middle;">
                                 @endif
-                                
+
                                 @if(getInbetweenStrings2($item->text_1)[$i] == explode('|', $item->options_answered)[$i])
-                                    <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked>
+                                    <input id="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom correct_answer_checkbox_input" name="" type="checkbox" checked disabled>
                                     <label for="correct_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label correct_answer_checkbox_label d-inline-block"></label>
                                 @else
-                                    <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked>
+                                    <input id="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom wrong_answer_checkbox_input" name="" type="checkbox" checked disabled>
                                     <label for="wrong_answer_question_item_id_{{ $item->id }}" class="checkbox-custom-label wrong_answer_checkbox_label d-inline-block"></label>
                                 @endif
                             @endif
@@ -149,6 +149,12 @@
                 @endif
             </div>
         </div>
+
+        @if (!$loop->last)
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-2">
+                <hr>
+            </div>
+        @endif
         
     @endforeach
 
@@ -170,10 +176,10 @@
         
         @foreach ($question->question_items as $item)
         
-            <div class="col-sm-12 col-md-12 col-lg-12 mb-1">
-                <div class="form-group d-inline-flex">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
                     @if($item->question_item_media)
-                        <audio controls controlslist="nodownload" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
+                        <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
                             <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
                         </audio>
                         {{-- <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
@@ -200,6 +206,12 @@
                     </label>
                 </div>
             </div>
+
+            @if (!$loop->last)
+                <div class="col-sm-12 col-md-12 col-lg-12 mb-2">
+                    <hr>
+                </div>
+            @endif
             
         @endforeach
 
