@@ -408,7 +408,7 @@
                     placeholder: false,
                     droptarget: '.drop',
                     drop: function(evt, droptarget) {
-                        
+                        // console.log('Vou fazer DROPPP!!');
                         if(!droptarget.children.length){
                             $(this).appendTo(droptarget);
                             var test = $(this);
@@ -481,7 +481,9 @@
                             // console.log(droptarget);
                             // console.log($.parseHTML(droptarget), $(this));
                         }
+                        // console.log('Vou fazer STOOPPP');
                         $("html, body").stop();
+                        // $("html, body").trigger('mousemove');
                         // return false;
                     }
                 });
@@ -514,22 +516,41 @@
                 $('[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]').find('li').css('cursor', 'default');
             }
 
+            // $('html, body').click(function(){
+            //     console.log('CLICK');
+            //     if($('.draggable_clone').length){
+            //         if(!$('button.hide_video').is(":hidden") && !$('button.hide_video').hasClass('drag_hidden')){
+            //             $('button.hide_video').addClass('drag_hidden').click();
+            //         }
+            //     }
+            // });
+
             $(document).on("mousemove", function(event) {
-                // $("#log").text("pageX: " + ($(window).width() - event.pageX) + ", pageY: " + ($(window).height() -event.pageY));
-                // console.log((event.pageY - window.pageYOffset));
                 // $("html, body").stop();
+                // console.log($('.draggable_clone').length);
                 if(!$('.draggable_clone').length){
+                    // console.log('ACABOU O DRAGG!!');
                     $("html, body").stop();
                     // return false;
                 }
 
                 if($('.draggable_clone').length){
+                    // Close video on dragging
+                    if(!$('button.hide_video').is(":hidden") && !$('button.hide_video').hasClass('drag_hidden')){
+                        // $('button.hide_video').click().addClass('drag_hidden');
+                        $('button.hide_video').hide().addClass('drag_hidden');
+                        $('button.show_video').show();
+                        $('.videoWrapper video').trigger('pause');
+                        $('.videoWrapper').hide().removeClass('stuck');
+                        // return false;
+                    }
                     // $("html, body").stop();
                     // SCROLL TOP
                     if((event.pageY - window.pageYOffset) < 100){
-                        // console.log('SCROLL TOP', event.pageY, window.pageYOffset);
+                        // console.log('SCROLL TOP');
                         // $("html, body").stop();
                         $('html, body').animate({scrollTop:0}, 3000);
+                        // return false;
                     }
 
                     // SCROLL BOTTOM
@@ -537,9 +558,11 @@
                         // console.log('SCROLL BOTTOM');
                         // $("html, body").stop();
                         $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 3000);
+                        // return false;
                     }
 
                     else {
+                        // console.log('VOU parar no meio!!!');
                         $("html, body").stop();
                         // return false;
                     }
