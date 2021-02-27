@@ -408,6 +408,7 @@
                     placeholder: false,
                     droptarget: '.drop',
                     drop: function(evt, droptarget) {
+                        
                         if(!droptarget.children.length){
                             $(this).appendTo(droptarget);
                             var test = $(this);
@@ -480,6 +481,8 @@
                             // console.log(droptarget);
                             // console.log($.parseHTML(droptarget), $(this));
                         }
+                        $("html, body").stop();
+                        // return false;
                     }
                 });
 
@@ -514,9 +517,10 @@
             $(document).on("mousemove", function(event) {
                 // $("#log").text("pageX: " + ($(window).width() - event.pageX) + ", pageY: " + ($(window).height() -event.pageY));
                 // console.log((event.pageY - window.pageYOffset));
-
+                // $("html, body").stop();
                 if(!$('.draggable_clone').length){
                     $("html, body").stop();
+                    // return false;
                 }
 
                 if($('.draggable_clone').length){
@@ -537,6 +541,7 @@
 
                     else {
                         $("html, body").stop();
+                        // return false;
                     }
                 }
             });
