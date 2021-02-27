@@ -28,6 +28,7 @@
             <div class="form-group d-flex" style="text-align: -webkit-center;">
 
                 <select name="{{$question->id}}_multiple_choice_intruder[{{$item->id}}]" id="m_c_intruder_select_question_item_{{$item->id}}" {{ $exame_review ? 'disabled' : '' }}>
+                    <option></option>
                     @for ($i = 0; $i < $item->options_number; $i++)
                         <?php $option = "options_".($i+1); ?>
 
@@ -94,6 +95,7 @@
                 <div class="form-group" style="text-align: -webkit-center;">
 
                     <select name="" id="exame_review_m_c_intruder_select_question_item_{{$item->id}}" disabled>
+                        <option></option>
                         @for ($i = 0; $i < $item->options_number; $i++)
                             <?php $option = "options_".($i+1); ?>
 

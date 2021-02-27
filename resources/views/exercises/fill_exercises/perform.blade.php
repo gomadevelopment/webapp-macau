@@ -655,17 +655,33 @@
 
             $('#verbs_select_2').select2();
 
-            $('[id^="word_select_question_item_"]').select2();
-            $('[id^="exame_review_word_select_question_item_"]').select2();
+            $('[id^="word_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
+            $('[id^="exame_review_word_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
 
-            $('[id^="true_or_false_select_question_item_"]').select2();
-            $('[id^="exame_review_true_or_false_select_question_item_"]').select2();
+            $('[id^="true_or_false_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
+            $('[id^="exame_review_true_or_false_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
 
-            $('[id^="m_c_questions_select_question_item_"]').select2();
-            $('[id^="exame_review_m_c_questions_select_question_item_"]').select2();
+            $('[id^="m_c_questions_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
+            $('[id^="exame_review_m_c_questions_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
 
-            $('[id^="m_c_intruder_select_question_item_"]').select2();
-            $('[id^="exame_review_m_c_intruder_select_question_item_"]').select2();
+            $('[id^="m_c_intruder_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
+            $('[id^="exame_review_m_c_intruder_select_question_item_"]').select2({
+                placeholder: 'Escolher...'
+            });
 
             $(".rb-tab").click(function(){
                 if($('#exame_review').val() == false){

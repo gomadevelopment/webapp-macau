@@ -501,6 +501,7 @@ class Exame extends Model
             $numItems = count($answer_array[$question_item->id]);
             $i = 0;
             foreach($answer_array[$question_item->id] as $response){
+                $response = $response == null ? '' : $response;
                 if(++$i === $numItems) {
                     $question_item->options_answered .= $response;
                 }
@@ -580,10 +581,11 @@ class Exame extends Model
         //     return 0;
         // }
         // Save Answers given
+        // dd($answer_array);
         foreach ($question->question_items as $question_item) {
             foreach($answer_array as $question_item_id => $question_answer){
                 if($question_item_id == $question_item->id){
-                    $question_item->options_answered = $question_answer;
+                    $question_item->options_answered = $question_answer == null ? '' : $question_answer;
                 }
             }
             $question_item->save();
@@ -610,9 +612,10 @@ class Exame extends Model
         //     // dd('WRONG - SCORE 0', $answer_array);
         //     return 0;
         // }
+        // dd($answer_array);
         // Save Answers given
         foreach ($question->question_items as $question_item) {
-            $question_item->options_answered = $answer_array[$question_item->id];
+            $question_item->options_answered = $answer_array[$question_item->id] == null ? '' : $answer_array[$question_item->id];
             $question_item->save();
         }
 
@@ -638,7 +641,7 @@ class Exame extends Model
         // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
-            $question_item->options_answered = $answer_array[$question_item->id];
+            $question_item->options_answered = $answer_array[$question_item->id] == null ? '' : $answer_array[$question_item->id];
             $question_item->save();
         }
 

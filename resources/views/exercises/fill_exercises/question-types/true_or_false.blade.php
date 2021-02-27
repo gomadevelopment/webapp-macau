@@ -34,6 +34,7 @@
                     </p>
                     
                     <select class="form-control" name="{{$question->id}}_true_or_false[{{$item->id}}]" id="true_or_false_select_question_item_{{$item->id}}" {{ $exame_review ? 'disabled' : '' }}>
+                        <option></option>
                         <option value="true" {{ $exame_review && $item->options_answered == "true" ? 'selected' : '' }}>Verdadeiro</option>
                         <option value="false" {{ $exame_review && $item->options_answered == "false" ? 'selected' : '' }}>Falso</option>
                         @if($has_not_saids)
@@ -87,6 +88,7 @@
                         </p>
                         
                         <select class="form-control" name="" id="exame_review_true_or_false_select_question_item_{{$item->id}}" disabled>
+                            <option></option>
                             <option value="true" {{ $item->options_correct == "true" ? 'selected' : '' }}>Verdadeiro</option>
                             <option value="false" {{ $item->options_correct == "false" ? 'selected' : '' }}>Falso</option>
                             <option value="not_said" {{ $item->options_correct == "not_said" ? 'selected' : '' }}>Não dito</option>

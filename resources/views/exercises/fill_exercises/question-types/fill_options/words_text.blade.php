@@ -55,6 +55,7 @@
                         <?php shuffle($shuffled_select_options); ?>
                             <div class="drag_and_drop_hole fill_hole word_hole w-100 mt-2 mb-2 ml-2 {{ $exame_review ? '' : 'mr-2' }} border-0">
                                 <select name="{{$question->id}}_fill_options_words[{{$item->id}}][]" id="word_select_question_item_{{$item->id}}_option_{{$i+1}}" class="form-control" {{ $exame_review ? 'disabled' : '' }}>
+                                    <option></option>
                                     @foreach ($shuffled_select_options as $select_option)
                                         <option value="{{$select_option}}" 
                                         {{ $exame_review && $select_option == explode('|', $item->options_answered)[$i] ? 'selected' : '' }}>
@@ -130,6 +131,7 @@
                             <?php shuffle($shuffled_select_options); ?>
                             <div class="drag_and_drop_hole fill_hole word_hole m-2 border-0">
                                 <select name="" id="exame_review_word_select_question_item_{{$item->id}}_option_{{$i+1}}" class="form-control" disabled>
+                                    <option></option>
                                     @foreach ($shuffled_select_options as $select_option)
                                         <option value="{{$select_option}}" {{ explode('|', $item->$option)[0] == $select_option ? 'selected' : '' }}>{{$select_option}}</option>
                                     @endforeach
