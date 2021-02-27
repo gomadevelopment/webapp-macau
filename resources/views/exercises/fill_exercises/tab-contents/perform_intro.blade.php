@@ -75,26 +75,13 @@
                     </div>
                 @endif
                 @if($exame->audiovisual_desc)
-                    <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group">
                             <label class="label_title mb-3 d-block">
                                 Descrição Audiovisual</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                 <div class="article_description m-0 mb-4" style="line-height: 25px;">
                                     {!! $exame->audiovisual_desc !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                @if($exame->audio_transcript)
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label class="label_title mb-3 d-block">
-                                Transcrição Áudio</label>
-                            <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                    {!! $exame->audio_transcript !!}
                                 </div>
                             </div>
                         </div>

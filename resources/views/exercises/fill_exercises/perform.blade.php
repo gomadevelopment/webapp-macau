@@ -694,7 +694,7 @@
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
 
-                if($(this).attr('id') == "intro-tab" || $(this).attr('id') == "evaluation-tab"){
+                if($(this).attr('id') == "intro-tab" || $(this).attr('id') == "pre-listening-tab" || $(this).attr('id') == "evaluation-tab"){
                     $('.under_tabs_video_card').hide();
                 }
                 else{

@@ -513,10 +513,11 @@ button.hide_video {
 
 .fill_hole.word_hole {
     max-width: 200px;
-    min-width: 125px;
+    min-width: 150px;
     width: auto;
     display: inline-flex;
     vertical-align: middle;
+    margin: 5px 5px 5px 5px !important;
 }
 
 .item_dragged {
