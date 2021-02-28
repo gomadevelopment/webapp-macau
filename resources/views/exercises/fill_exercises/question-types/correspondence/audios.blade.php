@@ -2,7 +2,7 @@
 
     @foreach ($question->question_items as $item)
 
-        <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
             <div class="form-group" style="text-align: -webkit-center;">
 
                 <div class="drag_and_drop_image text-center">
@@ -79,7 +79,7 @@
 
     @foreach ($question->question_items->shuffle() as $item)
 
-        <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
             <div class="form-group">
 
                 @if($exame_review)

@@ -115,33 +115,35 @@
                             </div>
                         @endif
 
-                        <div class="row mb-3 under_tabs_video_card">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <div class="card-body">
+                        @if($exame->medias)
+                            <div class="row mb-3 under_tabs_video_card">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="card-body">
 
-                                    <div class="row" style="place-content: center;">
-                                        <div class="form-group m-2">
-                                            @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
-                                                <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
-                                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
-                                                    </audio>                                
-                                            @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
-                                                <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
-                                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
-                                                </video>
-                                            @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
-                                                <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" alt=""
-                                                style="height: -webkit-fill-available;">
-                                            @endif
-                                            {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
-                                                <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
-                                            </video> --}}
+                                        <div class="row" style="place-content: center;">
+                                            <div class="form-group m-2">
+                                                @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
+                                                    <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
+                                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                        </audio>                                
+                                                @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
+                                                    <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
+                                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                    </video>
+                                                @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
+                                                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" alt=""
+                                                    style="height: -webkit-fill-available;">
+                                                @endif
+                                                {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
+                                                    <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4')}}" type="video/mp4">
+                                                </video> --}}
+                                            </div>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         {{-- INTRO TAB --}}
                         <div class="tab-pane fade active show" id="intro" role="tabpanel" aria-labelledby="intro-tab">
@@ -239,15 +241,15 @@
 </div>
 <!-- End Modal -->
 
-<button class="btn search-btn comment_submit show_video" style="display: none; float: none;">
+<button class="btn search-btn comment_submit {{ !$exame_review ? 'show_video' : 'd-none' }}" style="display: none; float: none;">
     <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
 </button>
-<button class="btn search-btn comment_submit hide_video" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
+<button class="btn search-btn comment_submit {{ !$exame_review ? 'hide_video' : 'd-none' }}" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
     <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
 </button>
 
 @if($exercise->medias)
-    <div class="videoWrapper stuck">
+    <div class="{{ !$exame_review ? 'videoWrapper stuck' : 'd-none' }}">
         <div>
             <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
                 <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
@@ -719,14 +721,43 @@
             });
 
             $('.under_tabs_video_card').hide();
+            $('.videoWrapper').removeClass('stuck').hide();
+            $('.show_video').hide();
+            $('button.hide_video').hide();
 
             $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
 
                 if($(this).attr('id') == "intro-tab" || $(this).attr('id') == "pre-listening-tab" || $(this).attr('id') == "evaluation-tab"){
                     $('.under_tabs_video_card').hide();
+                    // Hide bottom video
+                    if($('button.show_video').is(":hidden")){
+                        $('button.hide_video').click();
+                        if(!$('.videoWrapper').hasClass('stuck') && $('.videoWrapper').hasClass('was_opened')){
+                            $('.videoWrapper').addClass('stuck');
+                        }
+                    }
+                    $('.videoWrapper').hide();
+                    $('.show_video').hide();
+                    $('.hide_video').hide();
                 }
                 else{
                     $('.under_tabs_video_card').show();
+                    $('.videoWrapper').show();
+                    $('.show_video').show();
+                    // $('.hide_video').hide();
+                    if($(this).attr('id') == "listening-tab" && $('#listening_questions_count').val()){
+                        $('.under_tabs_video_card').show();
+                    }
+                    else if($(this).attr('id') == "listening-shop-tab" && $('#listening_shop_questions_count').val()){
+                        $('.under_tabs_video_card').show();
+                    }
+                    else if($(this).attr('id') == "after-listening-tab" && $('#after_listening_questions_count').val()){
+                        s$('.under_tabs_video_card').show();
+                    }
+                }
+
+                if($('button.show_video').is(':visible') && !$('button.hide_video').is(':visible')){
+                    $('.videoWrapper').removeClass('stuck').hide();
                 }
 
                 $('#perform_exercise_tabs_content>.tab-pane').each(function(index, element){
@@ -765,8 +796,6 @@
                 if($(this).hasClass('show_video')){
                     $(this).hide();
                     $('button.hide_video').show();
-                    // $('.videoWrapper video').trigger('play');
-                    $('.videoWrapper').show().addClass('stuck');
                     $('.videoWrapper').show().addClass('stuck');
                     if(!$('.videoWrapper').hasClass('was_opened')){
                         $('.videoWrapper').addClass('was_opened');
@@ -779,9 +808,12 @@
                     $('.videoWrapper').hide().removeClass('stuck');
                 }
 
+                if($('button.show_video').is(':visible') && !$('button.hide_video').is(':visible')){
+                    $('.videoWrapper').removeClass('stuck').hide();
+                }
             });
 
-            $('button.hide_video').click();
+            // $('button.hide_video').click();
 
             $('.videoWrapper video').on('play', function(){
                 $('.under_tabs_video_card video').trigger('pause');
@@ -804,8 +836,12 @@
             windows.on('scroll', function() {
                 // console.log($(this).scrollTop());
                 if($(this).scrollTop() >= 900){
-                    if(!$('.videoWrapper').hasClass('was_opened')){
+                    if(!$('.videoWrapper').hasClass('was_opened') && !$('#pre-listening-tab').hasClass('active')){
                         $('button.show_video').click();
+
+                        if($('button.show_video').is(':visible') && !$('button.hide_video').is(':visible')){
+                            $('.videoWrapper').removeClass('stuck').hide();
+                        }
                     }
                 }
                 iframeWrap.height(iframeHeight);

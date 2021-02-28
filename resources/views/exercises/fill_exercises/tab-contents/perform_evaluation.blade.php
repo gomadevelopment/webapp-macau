@@ -68,15 +68,7 @@
                 @endif
             </div>
 
-        </div>
-    </div>
-</div>
-
-@if($exame->audio_transcript)
-    <div class="row mb-5">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="card-body">
-
+            @if($exame->audio_transcript)
                 <div class="row">
 
                     <div class="col-sm-12 col-md-6 col-lg-6">
@@ -84,7 +76,7 @@
                             <label class="label_title mb-3 d-block">
                                 Transcrição Áudio</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                <div class="article_description m-0 mb-1" style="line-height: 25px;">
+                                <div class="article_description m-0 mb-1" style="line-height: 25px;" style="-webkit-line-clamp: unset;">
                                     {!! $exame->audio_transcript !!}
                                 </div>
                             </div>
@@ -92,7 +84,8 @@
                     </div>
 
                 </div>
-            </div>
+            @endif
+
         </div>
     </div>
-@endif
+</div>

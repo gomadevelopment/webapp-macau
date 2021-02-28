@@ -2,6 +2,8 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="card-body">
 
+            <input type="hidden" name="" id="after_listening_questions_count" value="{{ $after_listening_questions->count() }}">
+            
             @if($after_listening_questions->count())
 
                 <div class="custom-tab customize-tab tabs_creative">
@@ -178,7 +180,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group m-2">
                             <label class="label_title d-block text-center">
-                            Esta secção não tem questões. Prossiga para a próxima secção. </label>
+                            Esta secção não tem questões. Prossiga para o questionário. </label>
                         </div>
                     </div>
                 </div>

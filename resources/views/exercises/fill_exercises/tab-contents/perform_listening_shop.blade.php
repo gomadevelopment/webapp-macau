@@ -2,6 +2,8 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="card-body">
 
+            <input type="hidden" name="" id="listening_shop_questions_count" value="{{ $listening_shop_questions->count() }}">
+
             @if($listening_shop_questions->count())
 
                 <div class="custom-tab customize-tab tabs_creative">
