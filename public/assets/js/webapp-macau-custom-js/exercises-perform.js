@@ -587,25 +587,31 @@ $(function() {
             $(".show_video").hide();
             $(".hide_video").hide();
         } else {
-            $(".under_tabs_video_card").show();
-            $(".videoWrapper").show();
-            $(".show_video").show();
+            // $(".under_tabs_video_card").show();
+            // $(".videoWrapper").show();
+            // $(".show_video").show();
             // $('.hide_video').hide();
             if (
                 $(this).attr("id") == "listening-tab" &&
                 $("#listening_questions_count").val()
             ) {
                 $(".under_tabs_video_card").show();
+                $(".videoWrapper").show();
+                $(".show_video").show();
             } else if (
                 $(this).attr("id") == "listening-shop-tab" &&
                 $("#listening_shop_questions_count").val()
             ) {
                 $(".under_tabs_video_card").show();
+                $(".videoWrapper").show();
+                $(".show_video").show();
             } else if (
                 $(this).attr("id") == "after-listening-tab" &&
                 $("#after_listening_questions_count").val()
             ) {
                 $(".under_tabs_video_card").show();
+                $(".videoWrapper").show();
+                $(".show_video").show();
             }
         }
 

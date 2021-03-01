@@ -76,7 +76,7 @@
                             <label class="label_title mb-3 d-block text-center">
                                 Transcrição Áudio</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                <div class="article_description m-0 mb-1" style="line-height: 25px;" style="-webkit-line-clamp: unset;">
+                                <div class="article_description m-0 mb-1" style="line-height: 25px; -webkit-line-clamp: unset;">
                                     {!! $exame->audio_transcript !!}
                                 </div>
                             </div>
