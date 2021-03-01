@@ -1,26 +1,35 @@
 <div class="row mb-4">
+    <?php $has_medias = false; ?>
+    @foreach ($question->question_items as $item)
+        @if($item->question_item_media)
+            <?php $has_medias = true; ?>
+            @break
+        @endif
+    @endforeach
 
     @foreach ($question->question_items as $item)
         <div class="col-sm-12 col-md-4 col-lg-4 mb-4">
             <div class="form-group" style="text-align: -webkit-center;">
 
-                <div class="drag_and_drop_image text-center">
-                    @if($item->question_item_media)
-                            @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
-                                <audio controls>
-                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
-                                </audio>
-                            @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
-                                <video controls>
-                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
-                                </video>
-                            @else
-                                <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
-                            @endif
-                    @else
-                        <img src="{{ asset('/assets/backoffice_assets/images/Placeholder.png') }}" alt="">
-                    @endif
-                </div>
+                @if($has_medias)
+                    <div class="drag_and_drop_image text-center">
+                        @if($item->question_item_media)
+                                @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                                    <audio controls>
+                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                                    </audio>
+                                @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
+                                    <video controls>
+                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                                    </video>
+                                @else
+                                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
+                                @endif
+                        @else
+                            <img src="{{ asset('/assets/backoffice_assets/images/Placeholder.png') }}" alt="">
+                        @endif
+                    </div>
+                @endif
 
                 <label class="label_title mt-3 mb-1 d-block">
                     Questão {{ $loop->index + 1 }}

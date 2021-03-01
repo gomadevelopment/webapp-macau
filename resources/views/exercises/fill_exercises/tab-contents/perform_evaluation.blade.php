@@ -71,9 +71,9 @@
             @if($exame->audio_transcript)
                 <div class="row">
 
-                    <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group">
-                            <label class="label_title mb-3 d-block">
+                            <label class="label_title mb-3 d-block text-center">
                                 Transcrição Áudio</label>
                             <div class="d-flex float-left flex-column shop_grid_caption ml-0">
                                 <div class="article_description m-0 mb-1" style="line-height: 25px;" style="-webkit-line-clamp: unset;">
