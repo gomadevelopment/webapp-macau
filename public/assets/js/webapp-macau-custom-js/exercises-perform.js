@@ -158,7 +158,7 @@ $(function() {
             // snap: ".drop",
             scroll: "true",
             scrollSensitivity: 40,
-            scrollSpeed: 5,
+            scrollSpeed: 40,
             helper: "clone",
             start: function(evt, ui) {
                 $(this).hide();
@@ -337,7 +337,7 @@ $(function() {
             placeholder: "ui-state-highlight",
             scroll: true,
             scrollSensitivity: 40,
-            scrollSpeed: 5
+            scrollSpeed: 40
         });
         $(
             '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]'
@@ -347,10 +347,10 @@ $(function() {
             placeholder: "ui-state-highlight",
             scroll: true,
             scrollSensitivity: 40,
-            scrollSpeed: 5,
+            scrollSpeed: 40,
             // helper: "clone",
             update: function(evt, ui) {
-                console.log("111");
+                // console.log("111");
                 var word_preview = "";
                 $(this)
                     .find("li span")

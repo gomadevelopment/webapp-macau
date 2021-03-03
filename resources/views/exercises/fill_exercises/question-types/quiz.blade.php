@@ -39,7 +39,7 @@
                         </div>
                         <div class="d-flex float-left flex-column en_label">
                             <p class="exercise_author" style="margin-bottom: -10px;">
-                                <strong>Circle the number</strong> which best shows your <strong>level of agreement</strong>
+                                <strong>Click the number</strong> which best shows your <strong>level of agreement</strong>
                             </p>
                             <p class="exercise_author">
                                 with the <strong>statement</strong> at the <strong>present time</strong>.
