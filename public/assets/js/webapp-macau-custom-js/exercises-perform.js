@@ -158,7 +158,7 @@ $(function() {
             // snap: ".drop",
             scroll: "true",
             scrollSensitivity: 40,
-            scrollSpeed: 40,
+            scrollSpeed: 30,
             helper: "clone",
             start: function(evt, ui) {
                 $(this).hide();
@@ -337,7 +337,7 @@ $(function() {
             placeholder: "ui-state-highlight",
             scroll: true,
             scrollSensitivity: 40,
-            scrollSpeed: 40
+            scrollSpeed: 30
         });
         $(
             '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]'
@@ -347,7 +347,7 @@ $(function() {
             placeholder: "ui-state-highlight",
             scroll: true,
             scrollSensitivity: 40,
-            scrollSpeed: 40,
+            scrollSpeed: 30,
             // helper: "clone",
             update: function(evt, ui) {
                 // console.log("111");
