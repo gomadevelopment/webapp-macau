@@ -69,7 +69,7 @@
     @foreach ($question->question_items as $item)
         
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group">
+            <div class="form-group mb-0">
                 @if($item->question_item_media)
                     <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
                         <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
@@ -129,7 +129,7 @@
         </div>
 
         @if (!$loop->last)
-            <div class="col-sm-12 col-md-12 col-lg-12 mb-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
                 <hr>
             </div>
         @endif
@@ -154,7 +154,7 @@
         @foreach ($question->question_items as $item)
         
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group">
+                <div class="form-group mb-0">
                     @if($item->question_item_media)
                         <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
                             <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
@@ -185,7 +185,7 @@
             </div>
 
             @if (!$loop->last)
-                <div class="col-sm-12 col-md-12 col-lg-12 mb-2">
+                <div class="col-sm-12 col-md-12 col-lg-12">
                     <hr>
                 </div>
             @endif

@@ -58,8 +58,8 @@
 
     @foreach ($question->question_items as $item)
 
-        <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-            <div class="form-group d-inline-flex w-100">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group d-inline-flex w-100 mb-0">
                 @if($item->question_item_media)
                     @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
                         <audio controls class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
@@ -112,6 +112,12 @@
                 </label>
             </div>
         </div>
+
+        @if(!$loop->last)
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <hr>
+            </div>
+        @endif
         
     @endforeach
 
@@ -133,8 +139,8 @@
         
         @foreach ($question->question_items as $item)
 
-            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                <div class="form-group d-inline-flex">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group d-inline-flex w-100 mb-0">
                     
                     @if($item->question_item_media)
                         @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
@@ -178,6 +184,12 @@
                     </label>
                 </div>
             </div>
+
+            @if(!$loop->last)
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <hr>
+                </div>
+            @endif
             
         @endforeach
 
