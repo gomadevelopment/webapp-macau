@@ -157,7 +157,7 @@ $(function() {
             scope: "items",
             // snap: ".drop",
             scroll: "true",
-            scrollSensitivity: 20,
+            scrollSensitivity: 40,
             scrollSpeed: 5,
             helper: "clone",
             start: function(evt, ui) {
@@ -334,12 +334,23 @@ $(function() {
         $(
             '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]'
         ).sortable({
-            placeholder: "ui-state-highlight"
+            placeholder: "ui-state-highlight",
+            scroll: true,
+            scrollSensitivity: 40,
+            scrollSpeed: 5
         });
+        $(
+            '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]'
+        ).disableSelection();
 
         $('[id^="assortment_words_table_question_item_"]').sortable({
             placeholder: "ui-state-highlight",
+            scroll: true,
+            scrollSensitivity: 40,
+            scrollSpeed: 5,
+            // helper: "clone",
             update: function(evt, ui) {
+                console.log("111");
                 var word_preview = "";
                 $(this)
                     .find("li span")
@@ -351,6 +362,7 @@ $(function() {
                     .text(word_preview);
             }
         });
+        $('[id^="assortment_words_table_question_item_"]').disableSelection();
     } else {
         $(".drag_and_drop_item").css("cursor", "default");
         $(

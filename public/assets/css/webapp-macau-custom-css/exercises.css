@@ -488,7 +488,7 @@ button.hide_video {
 .ui-draggable-dragging {
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #e6ebf1;
-    z-index: 12;
+    z-index: 999;
 }
 
 .drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item {
@@ -810,7 +810,7 @@ div[id^="cke_fill_text_word_"] {
 }
 
 .assortment_tables {
-    float: left;
+    /* float: left; */
     /* border-collapse: separate;
     border-spacing: 0 10px; */
     width: 100%;
