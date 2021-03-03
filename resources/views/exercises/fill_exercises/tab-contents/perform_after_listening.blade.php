@@ -27,8 +27,8 @@
                                 <div class="row page-title p-0" style="margin-bottom: -15px;">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group wrap m-0">
-                                            <label class="label_title d-block" style="font-size: 30px;">
-                                                {{ $question->section }} </label>
+                                            <label class="label_title d-block" style="font-size: 37px;">
+                                                Instruções </label>
                                         </div>
                                     </div>
                                 </div>

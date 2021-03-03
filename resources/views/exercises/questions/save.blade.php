@@ -541,54 +541,55 @@
             $(document).on('click', '.remove_button.remove_row', function(e){
                 e.preventDefault();
                 var row_to_remove = $(this).closest('.row_to_remove');
+                if(confirm('Tem a certeza que deseja remover esta alínea?')){
+                    // Remove simple row
+                    if(!$(this).hasClass('remove_entire_question') && !$(this).hasClass('remove_fill_option')){
+                        if(row_to_remove.prev('.empty_col').length){
+                            row_to_remove.prev('.empty_col').remove();
+                        }
+                        if(row_to_remove.prev('.hr_row').length){
+                            row_to_remove.prev('.hr_row').remove();
+                        }
+                        row_to_remove.remove();
+                    }
 
-                // Remove simple row
-                if(!$(this).hasClass('remove_entire_question') && !$(this).hasClass('remove_fill_option')){
-                    if(row_to_remove.prev('.empty_col').length){
-                        row_to_remove.prev('.empty_col').remove();
+                    // Remove row with sub-questions/sub-answers
+                    else if($(this).hasClass('remove_entire_question')){
+                        if(row_to_remove.prev('.hr_row').length){
+                            row_to_remove.prev('.hr_row').remove();
+                        }
+                        row_to_remove.next('.row').remove();
+                        row_to_remove.remove();
                     }
-                    if(row_to_remove.prev('.hr_row').length){
-                        row_to_remove.prev('.hr_row').remove();
-                    }
-                    row_to_remove.remove();
-                }
 
-                // Remove row with sub-questions/sub-answers
-                else if($(this).hasClass('remove_entire_question')){
-                    if(row_to_remove.prev('.hr_row').length){
-                        row_to_remove.prev('.hr_row').remove();
+                    if($(this).hasClass('remove_fill_option')){
+                        if($(this).parent().parent().prev().prev('.hr_row').length){
+                            $(this).parent().parent().prev().prev('.hr_row').remove();
+                        }
+                        $(this).parent().parent().prev().remove();
+                        $(this).parent().parent().remove();
                     }
-                    row_to_remove.next('.row').remove();
-                    row_to_remove.remove();
-                }
 
-                if($(this).hasClass('remove_fill_option')){
-                    if($(this).parent().parent().prev().prev('.hr_row').length){
-                        $(this).parent().parent().prev().prev('.hr_row').remove();
+                    if($(this).hasClass('remove_correction_of_statement')){
+                        if($(this).parent().prev().prev('.hr_row').length){
+                            $(this).parent().prev().prev('.hr_row').remove();
+                        }
+                        $(this).parent().prev().remove();
+                        $(this).parent().next().next().remove();
+                        $(this).parent().next().remove();
+                        $(this).parent().remove();
                     }
-                    $(this).parent().parent().prev().remove();
-                    $(this).parent().parent().remove();
-                }
 
-                if($(this).hasClass('remove_correction_of_statement')){
-                    if($(this).parent().prev().prev('.hr_row').length){
-                        $(this).parent().prev().prev('.hr_row').remove();
+                    if($(this).hasClass('remove_automatic_content')){
+                        if($(this).parent().prev().prev().prev().prev().prev('.hr_row').length){
+                            $(this).parent().prev().prev().prev().prev().prev('.hr_row').remove();
+                        }
+                        $(this).parent().prev().prev().prev().prev().remove();
+                        $(this).parent().prev().prev().prev().remove();
+                        $(this).parent().prev().prev().remove();
+                        $(this).parent().prev().remove();
+                        $(this).parent().remove();
                     }
-                    $(this).parent().prev().remove();
-                    $(this).parent().next().next().remove();
-                    $(this).parent().next().remove();
-                    $(this).parent().remove();
-                }
-
-                if($(this).hasClass('remove_automatic_content')){
-                    if($(this).parent().prev().prev().prev().prev().prev('.hr_row').length){
-                        $(this).parent().prev().prev().prev().prev().prev('.hr_row').remove();
-                    }
-                    $(this).parent().prev().prev().prev().prev().remove();
-                    $(this).parent().prev().prev().prev().remove();
-                    $(this).parent().prev().prev().remove();
-                    $(this).parent().prev().remove();
-                    $(this).parent().remove();
                 }
             });
 

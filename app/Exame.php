@@ -313,6 +313,8 @@ class Exame extends Model
             }
         }
 
+        // dd('STOP');
+
         $exercise_student_score = $questions->sum('classification');
 
         $score_perc = $exercise_sum_score_points == 0 ? 0 : round(($exercise_student_score / $exercise_sum_score_points) * 100);
@@ -328,14 +330,11 @@ class Exame extends Model
         return [$score_perc, $teacher_correction];
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function correspondenceImagesCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             if($question_item->question_item_media && isset($answer_array[$question_item->question_item_media->id])){
@@ -353,22 +352,14 @@ class Exame extends Model
             $solution_array[$question_item->question_item_media->id] = $question_item->id;
         }
 
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function correspondenceAudiosCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             if($question_item->question_item_media && isset($answer_array[$question_item->question_item_media->id])){
@@ -386,24 +377,15 @@ class Exame extends Model
             $solution_array[$question_item->question_item_media->id] = $question_item->id;
         }
 
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER DOESN'T MATTER (shuffled options)
+     */
     public function correspondenceCategoriesCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // foreach($answer_array as $answer_sub_array){
-        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-        //         // dd('WRONG - SCORE 0', $answer_array);
-        //         return 0;
-        //     }
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -428,32 +410,15 @@ class Exame extends Model
             }
         }
 
-        foreach($answer_array as $key => &$sub_array){
-            sort($sub_array);
-        }
-        foreach($solution_array as $key => &$sub_array){
-            sort($sub_array);
-        }
-
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_1_WithShuffle($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER MATTERS
+     */
     public function fillOptionsShuffleCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // foreach($answer_array as $answer_sub_array){
-        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-        //         // dd('WRONG - SCORE 0', $answer_array);
-        //         return 0;
-        //     }
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -478,24 +443,16 @@ class Exame extends Model
                 $solution_array[$question_item->id][] = $word_match;
             }
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER MATTERS
+     */
     public function fillOptionsTextWordsCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // foreach($answer_array as $answer_sub_array){
-        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-        //         // dd('WRONG - SCORE 0', $answer_array);
-        //         return 0;
-        //     }
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -520,25 +477,16 @@ class Exame extends Model
                 $solution_array[$question_item->id][] = explode('|', $question_item->$option)[0];
             }
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER MATTERS
+     */
     public function fillOptionsWritingCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // foreach($answer_array as $answer_sub_array){
-        //     if (array_search(null, $answer_array) !== false || array_search(null, $answer_sub_array) !== false){
-        //         // dd('WRONG - SCORE 0', $answer_array);
-        //         return 0;
-        //     }
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -563,25 +511,16 @@ class Exame extends Model
                 $solution_array[$question_item->id][] = $word_match;
             }
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function trueOrFalseCorrection($question, $answer_array)
     {
-        // dd($answer_array);
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
-        // dd($answer_array);
         foreach ($question->question_items as $question_item) {
             foreach($answer_array as $question_item_id => $question_answer){
                 if($question_item_id == $question_item->id){
@@ -596,23 +535,15 @@ class Exame extends Model
         foreach ($question->question_items as $question_item) {
             $solution_array[$question_item->id] = $question_item->options_correct;
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function multipleChoiceQuestionsCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
-        // dd($answer_array);
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id] == null ? '' : $answer_array[$question_item->id];
@@ -621,24 +552,22 @@ class Exame extends Model
 
         // Solution
         $solution_array = [];
+        $number_of_wrong_alineas = 0;
         foreach ($question->question_items as $question_item) {
             $options_correct = explode(',', $question_item->options_correct);
             if(!in_array($answer_array[$question_item->id], $options_correct)){
-                return 0;
+                $number_of_wrong_alineas++;
             }
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
 
-        return $question->avaliation_score;
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function multipleChoiceIntruderCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id] == null ? '' : $answer_array[$question_item->id];
@@ -647,15 +576,15 @@ class Exame extends Model
 
         // Solution
         $solution_array = [];
+        $number_of_wrong_alineas = 0;
         foreach ($question->question_items as $question_item) {
             $options_correct = explode(',', $question_item->options_correct);
             if(!in_array($answer_array[$question_item->id], $options_correct)){
-                return 0;
+                $number_of_wrong_alineas++;
             }
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
-
-        return $question->avaliation_score;
+        
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
     public function freeQuestionCorrection($question, $answer_array)
@@ -663,13 +592,11 @@ class Exame extends Model
         // STAND BY
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function differencesCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -681,22 +608,15 @@ class Exame extends Model
         foreach($question->question_items as $question_item){
             $solution_array[$question_item->id] = $question_item->text_2;
         }
-
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function statementCorrectionCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -708,23 +628,15 @@ class Exame extends Model
         foreach($question->question_items as $question_item){
             $solution_array[$question_item->id] = $question_item->text_2;
         }
-        // dd($answer_array, $solution_array, $answer_array == $solution_array, $question_item);
 
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function automaticContentCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $question_item->options_answered = $answer_array[$question_item->id];
@@ -737,22 +649,15 @@ class Exame extends Model
             $solution_array[$question_item->id] = $question_item->text_1;
         }
 
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER MATTERS
+     */
     public function assortmentSentencesCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
-
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -776,22 +681,16 @@ class Exame extends Model
                 $solution_array[$question_item->id][] = $question_item->$option;
             }
         }
-
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER MATTERS
+     */
     public function assortmentWordsCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             $numItems = count($answer_array[$question_item->id]);
@@ -816,22 +715,14 @@ class Exame extends Model
             }
         }
 
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
     public function assortmentImagesCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
-        // dd($answer_array);
         // Save Answers given
         $count = 0;
         foreach ($question->question_items as $question_item) {
@@ -845,23 +736,16 @@ class Exame extends Model
         foreach ($question->question_items as $question_item) {
             $solution_array[] = $question_item->id;
         }
-        // dd($answer_array, $solution_array, $question_item);
-
-        if($answer_array == $solution_array){
-            return $question->avaliation_score;
-        }
-        else{
-            return 0;
-        }
+        
+        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
     }
 
+    /**
+     *  question_items that have sub-options/sub-arrays
+     *  ORDER DOESN'T MATTER (shuffled options)
+     */
     public function vowelsCorrection($question, $answer_array)
     {
-        // Missing answers = WRONG = 0
-        // if (array_search(null, $answer_array) !== false){
-        //     // dd('WRONG - SCORE 0', $answer_array);
-        //     return 0;
-        // }
         // Save Answers given
         foreach ($question->question_items as $question_item) {
             for ($i = 0; $i < $question_item->options_number; $i++){
@@ -901,18 +785,86 @@ class Exame extends Model
             }
         }
 
-        foreach($answer_array as $key => &$sub_array){
-            sort($sub_array);
-        }
-        foreach($solution_array as $key => &$sub_array){
-            sort($sub_array);
-        }
+        return self::partialCorrectionDeepLevel_1_WithShuffle($question, $answer_array, $solution_array);
+    }
 
+
+    /*********************
+        Partial Correction for question_items with no sub-options/sub-arrays
+    */    
+    public function partialCorrectionDeepLevel_0($question, $answer_array, $solution_array)
+    {
+        // Partial Score Calculation
         if($answer_array == $solution_array){
             return $question->avaliation_score;
         }
-        else{
-            return 0;
-        }
+
+        $number_of_alineas = sizeof($solution_array);
+        $points_per_alinea = sizeof($solution_array) == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
+        $number_of_correct_alineas = sizeof($solution_array) - sizeof(array_diff_assoc($answer_array, $solution_array));
+        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        return $partial_score;
     }
+
+    /*********************
+        Partial Correction for question_items that have sub-options/sub-arrays
+        ORDER MATTERS
+    */    
+    public function partialCorrectionDeepLevel_1($question, $answer_array, $solution_array)
+    {
+        // Partial Score Calculation
+        $number_of_alineas = 0;
+        foreach($solution_array as $key => &$sub_array){
+            $number_of_alineas += sizeof($sub_array);
+        }
+
+        $number_of_wrong_alineas = 0;
+        foreach($solution_array as $sol_key => &$sol_sub_array){
+            $number_of_wrong_alineas += sizeof(array_diff_assoc($sol_sub_array, $answer_array[$sol_key]));
+        }
+
+        if($number_of_wrong_alineas == 0){
+            return $question->avaliation_score;
+        }
+        
+        $points_per_alinea = $number_of_alineas == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
+        $number_of_correct_alineas = $number_of_alineas - $number_of_wrong_alineas;
+        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        return $partial_score;
+    }
+
+    /*********************
+        Partial Correction for question_items that have sub-options/sub-arrays
+        ORDER DOESN'T MATTER (shuffled options)
+    */    
+    public function partialCorrectionDeepLevel_1_WithShuffle($question, $answer_array, $solution_array)
+    {
+        // Partial Score Calculation
+        $number_of_alineas = 0;
+        foreach($solution_array as $key => &$sub_array){
+            $number_of_alineas += sizeof($sub_array);
+        }
+
+        $number_of_wrong_alineas = 0;
+        foreach($answer_array as $ans_key => &$ans_sub_array){
+            foreach($ans_sub_array as $ans_sub_array_value){
+                if(!in_array($ans_sub_array_value, $solution_array[$ans_key])){
+                    $number_of_wrong_alineas++;
+                }
+            }
+        }
+
+        if($number_of_wrong_alineas == 0){
+            return $question->avaliation_score;
+        }
+        
+        $points_per_alinea = $number_of_alineas == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
+        $number_of_correct_alineas = $number_of_alineas - $number_of_wrong_alineas;
+        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        return $partial_score;
+    }
+    
 }

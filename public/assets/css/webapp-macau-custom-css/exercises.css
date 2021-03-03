@@ -162,7 +162,7 @@ a.remove_button:hover {
 }
 
 .customize-tab.tabs_creative ul:not(.select2-selection__rendered):not(.assortment_tables) {
-    box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 0.08);
+    box-shadow: 0px 0px 15px 15px #4950570d;
     border-radius: 6px;
     background-color: #ffffff;
     width: fit-content;
@@ -429,7 +429,7 @@ button.hide_video {
     align-items: center;
     justify-content: center;
     min-height: 250px;
-    max-height: 250px;
+    max-height: unset;
     position: relative;
 }
 
@@ -480,7 +480,8 @@ button.hide_video {
 /* drag_and_drop_item p-2 draggable dragaware draggable_clone */
 /* 255 40 80 */
 
-.draggable_clone {
+.draggable_clone,
+.ui-draggable-dragging {
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #e6ebf1;
     z-index: 12;
@@ -493,7 +494,8 @@ button.hide_video {
     color: #ffffff;
 }
 
-.drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item.draggable_clone {
+.drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item.draggable_clone,
+.drag_and_drop_hole:not(.origin_hole) .drag_and_drop_item.ui-draggable-dragging {
     background-color: rgba(255, 40, 80, 0.8);
     z-index: 12;
 }
@@ -954,8 +956,8 @@ div[id^="cke_fill_text_word_"] {
 .exercise_question_description,
 .exercise_question_description * {
     color: #131b31;
-    font-family: "Gilroy - Medium";
-    font-size: 18px;
+    font-family: "Gilroy - Bold";
+    font-size: 22px;
     font-weight: 500;
     font-style: normal;
     letter-spacing: -0.29px;
@@ -965,7 +967,7 @@ div[id^="cke_fill_text_word_"] {
 }
 
 .exercise_question_description {
-    margin: 10px 0 -10px 0;
+    margin: 20px 0 0 0;
 }
 
 .exercise_question_description * {
@@ -979,4 +981,34 @@ div[id^="cke_fill_text_word_"] {
 .exercise_question_description.question_info_text_type,
 .exercise_question_description.question_info_text_type * {
     font-style: revert !important;
+    font-family: "Gilroy - Medium";
+}
+
+
+.ui-state-highlight {
+    background-color: #ff2850;
+    margin: 12px 15px 12px 42px;
+    opacity: 0.3;
+    border-radius: 5px;
+}
+
+.quotation_label,
+.quotation_label strong {
+    font-size: 22px !important;
+}
+
+.total_quotation_score {
+    color: #2583ed !important;
+}
+
+.low_quotation_score {
+    color: #ff2850 !important;
+}
+
+.med_quotation_score {
+    color: #ffb801 !important;
+}
+
+.high_quotation_score {
+    color: #00b265 !important;
 }

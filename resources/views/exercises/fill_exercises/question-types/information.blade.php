@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group">
             <label class="label_title d-block" style="font-size: 30px;">

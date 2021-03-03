@@ -1,4 +1,7 @@
 $(function() {
+    if ($("#exame_review").val() == true) {
+        $("video").trigger("pause");
+    }
     $(document).on("click", "#finish_exercise_button", function(e) {
         // Deactivate finish_exercise_button
         $(this).attr("id", "");
@@ -150,22 +153,56 @@ $(function() {
 
     if ($("#exame_review").val() == false) {
         $(".drag_and_drop_item").draggable({
-            revert: true,
-            scroll: true,
-            placeholder: false,
-            droptarget: ".drop",
-            drop: function(evt, droptarget) {
-                // console.log('Vou fazer DROPPP!!');
-                if (!droptarget.children.length) {
-                    $(this).appendTo(droptarget);
-                    var test = $(this);
+            revert: "invalid",
+            scope: "items",
+            // snap: ".drop",
+            scroll: "true",
+            scrollSensitivity: 20,
+            scrollSpeed: 5,
+            helper: "clone",
+            start: function(evt, ui) {
+                $(this).hide();
+                if (
+                    !$("button.hide_video").is(":hidden") &&
+                    !$("button.hide_video").hasClass("drag_hidden")
+                ) {
+                    $("button.hide_video")
+                        .hide()
+                        .addClass("drag_hidden");
+                    $("button.show_video").show();
+                    $(".videoWrapper video").trigger("pause");
+                    $(".videoWrapper")
+                        .hide()
+                        .removeClass("stuck");
+                }
+            },
+            stop: function(evt, ui) {
+                $(this).show();
+            }
+        });
+        $(".drop").droppable({
+            accept: ".drag_and_drop_item",
+            scope: "items",
+            drop: function(evt, ui) {
+                var item_dropped = ui.draggable;
+                var droppedOn = $(this);
+
+                item_dropped.parent().append(droppedOn.children());
+
+                droppedOn.append(item_dropped);
+
+                item_dropped.css({
+                    left: 0,
+                    top: 0
+                });
+
+                setTimeout(function() {
                     // Correspondence
-                    if ($(this).hasClass("correspondence_items")) {
+                    if (item_dropped.hasClass("correspondence_items")) {
                         $("input.correspondence_d_and_d").each(function(
                             index,
                             element
                         ) {
-                            // console.log($(element));
                             // Images and Audios
                             if ($(element).next(".drag_and_drop_hole").length) {
                                 // console.log($(element).find('input').val(), $(element.attr('class')));
@@ -185,6 +222,7 @@ $(function() {
                                             .val()
                                     );
                                 }
+                                // console.log($(element).val());
                             }
                             // Categories
                             else {
@@ -212,7 +250,9 @@ $(function() {
                         });
                     }
                     // Fill Options - Shuffle
-                    else if ($(this).hasClass("fill_options_shuffle_items")) {
+                    else if (
+                        item_dropped.hasClass("fill_options_shuffle_items")
+                    ) {
                         $("input.fill_options_d_and_d").each(function(
                             index,
                             element
@@ -236,7 +276,7 @@ $(function() {
                         });
                     }
                     // True or False
-                    else if ($(this).hasClass("true_or_false_items")) {
+                    else if (item_dropped.hasClass("true_or_false_items")) {
                         $("input.true_or_false_d_and_d").each(function(
                             index,
                             element
@@ -259,8 +299,8 @@ $(function() {
                             }
                         });
                     }
-                    // Correspondence
-                    else if ($(this).hasClass("vowels_items")) {
+                    // Vowels
+                    else if (item_dropped.hasClass("vowels_items")) {
                         $("input.vowels_d_and_d").each(function(
                             index,
                             element
@@ -287,33 +327,19 @@ $(function() {
                                 });
                         });
                     }
-                } else {
-                    // droptarget.children.appendTo($(this).parent());
-                    // $(this).appendTo(droptarget);
-                    // console.log(droptarget);
-                    // console.log($.parseHTML(droptarget), $(this));
-                }
-                // console.log('Vou fazer STOOPPP');
-                $("html, body").stop();
-                // $("html, body").trigger('mousemove');
-                // return false;
+                }, 100);
             }
         });
 
         $(
             '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"]'
         ).sortable({
-            autocreate: false,
-            group: false,
-            scroll: true,
-            update: function(evt) {}
+            placeholder: "ui-state-highlight"
         });
 
         $('[id^="assortment_words_table_question_item_"]').sortable({
-            autocreate: false,
-            group: false,
-            scroll: true,
-            update: function(evt) {
+            placeholder: "ui-state-highlight",
+            update: function(evt, ui) {
                 var word_preview = "";
                 $(this)
                     .find("li span")
@@ -321,7 +347,7 @@ $(function() {
                         word_preview += $(element).text() + " ";
                     });
                 $(this)
-                    .prev(".word_preview")
+                    .prevAll(".word_preview")
                     .text(word_preview);
             }
         });
@@ -338,70 +364,6 @@ $(function() {
             .find("li")
             .css("cursor", "default");
     }
-
-    // $('html, body').click(function(){
-    //     console.log('CLICK');
-    //     if($('.draggable_clone').length){
-    //         if(!$('button.hide_video').is(":hidden") && !$('button.hide_video').hasClass('drag_hidden')){
-    //             $('button.hide_video').addClass('drag_hidden').click();
-    //         }
-    //     }
-    // });
-
-    $(document).on("mousemove", function(event) {
-        // $("html, body").stop();
-        // console.log($('.draggable_clone').length);
-        if (!$(".draggable_clone").length) {
-            // console.log('ACABOU O DRAGG!!');
-            $("html, body").stop();
-            // return false;
-        }
-
-        if ($(".draggable_clone").length) {
-            // Close video on dragging
-            if (
-                !$("button.hide_video").is(":hidden") &&
-                !$("button.hide_video").hasClass("drag_hidden")
-            ) {
-                // $('button.hide_video').click().addClass('drag_hidden');
-                $("button.hide_video")
-                    .hide()
-                    .addClass("drag_hidden");
-                $("button.show_video").show();
-                $(".videoWrapper video").trigger("pause");
-                $(".videoWrapper")
-                    .hide()
-                    .removeClass("stuck");
-                // return false;
-            }
-            // $("html, body").stop();
-            // SCROLL TOP
-            if (event.pageY - window.pageYOffset < 100) {
-                // console.log('SCROLL TOP');
-                // $("html, body").stop();
-                $("html, body").animate({ scrollTop: 0 }, 3000);
-                // return false;
-            }
-
-            // SCROLL BOTTOM
-            else if (
-                event.pageY - window.pageYOffset >
-                $(window).height() - 30
-            ) {
-                // console.log('SCROLL BOTTOM');
-                // $("html, body").stop();
-                $("html, body").animate(
-                    { scrollTop: $(document).height() - $(window).height() },
-                    3000
-                );
-                // return false;
-            } else {
-                // console.log('VOU parar no meio!!!');
-                $("html, body").stop();
-                // return false;
-            }
-        }
-    });
 
     // Start Exercise
     $(document).on(
@@ -587,27 +549,37 @@ $(function() {
             $(".show_video").hide();
             $(".hide_video").hide();
         } else {
-            // $(".under_tabs_video_card").show();
-            // $(".videoWrapper").show();
-            // $(".show_video").show();
-            // $('.hide_video').hide();
+            $(".under_tabs_video_card").hide();
+            // Hide bottom video
+            if ($("button.show_video").is(":hidden")) {
+                $("button.hide_video").click();
+                if (
+                    !$(".videoWrapper").hasClass("stuck") &&
+                    $(".videoWrapper").hasClass("was_opened")
+                ) {
+                    $(".videoWrapper").addClass("stuck");
+                }
+            }
+            $(".videoWrapper").hide();
+            $(".show_video").hide();
+            $(".hide_video").hide();
             if (
                 $(this).attr("id") == "listening-tab" &&
-                $("#listening_questions_count").val()
+                $("#listening_questions_count").val() > 0
             ) {
                 $(".under_tabs_video_card").show();
                 $(".videoWrapper").show();
                 $(".show_video").show();
             } else if (
                 $(this).attr("id") == "listening-shop-tab" &&
-                $("#listening_shop_questions_count").val()
+                $("#listening_shop_questions_count").val() > 0
             ) {
                 $(".under_tabs_video_card").show();
                 $(".videoWrapper").show();
                 $(".show_video").show();
             } else if (
                 $(this).attr("id") == "after-listening-tab" &&
-                $("#after_listening_questions_count").val()
+                $("#after_listening_questions_count").val() > 0
             ) {
                 $(".under_tabs_video_card").show();
                 $(".videoWrapper").show();
@@ -642,7 +614,7 @@ $(function() {
                 $(element).addClass("fade");
                 $(element).addClass("show");
                 $(element).addClass("active");
-                console.log($(element).attr("id"), this_id);
+
                 if ($(element).attr("id") == "pre-listening") {
                     $("#perform_pre_listening_tabs .nav-link:first").trigger(
                         "click"
@@ -718,7 +690,7 @@ $(function() {
 
     windows.on("scroll", function() {
         // console.log($(this).scrollTop());
-        if ($(this).scrollTop() >= 900) {
+        if ($(this).scrollTop() >= 500) {
             if (
                 !$(".videoWrapper").hasClass("was_opened") &&
                 !$("#pre-listening-tab").hasClass("active")
@@ -746,4 +718,22 @@ $(function() {
         iframe.addClass("stuck");
     });
     /*Floating js End*/
+
+    // QUIZ Language Switch
+    $(".en_label").attr("style", "display: none !important;");
+    $(document).on("change", ".quiz_lang_switch input", function() {
+        // console.log($(this).is(":checked"));
+        // See in English
+        if ($(this).is(":checked")) {
+            $(".en_label:not(.button_label)").attr("style", "display: block;");
+            $(".en_label.button_label").attr("style", "display: inline-block;");
+            $(".pt_label").attr("style", "display: none !important;");
+        }
+        // See in Portuguese
+        else {
+            $(".en_label").attr("style", "display: none !important;");
+            $(".pt_label:not(.button_label)").attr("style", "display: block;");
+            $(".pt_label.button_label").attr("style", "display: inline-block;");
+        }
+    });
 });

@@ -502,30 +502,32 @@
                 e.preventDefault();
                 var exercise_id = $('#exercise_id_hidden').val();
                 var question_id = $(this).attr('data-id');
-                $.ajax({
-                    type: 'GET',
-                    url: '/exercicios/editar/'+exercise_id+'/apagar/'+question_id,
-                    success: function(response){
-                        if(response && response.status == 'success'){
-                            $("#structure").html(response.html);
-                            $(".successMsg").text(response.message);
-                            $(".successMsg").fadeIn();
-                            setTimeout(() => {
-                                $(".successMsg").fadeOut();
-                            }, 5000);
-                            if(!response.has_questions){
-                                $('#publish_exam').attr('disabled', true);
+                if(confirm('Tem a certeza que deseja remover esta questão da sequência?')){
+                    $.ajax({
+                        type: 'GET',
+                        url: '/exercicios/editar/'+exercise_id+'/apagar/'+question_id,
+                        success: function(response){
+                            if(response && response.status == 'success'){
+                                $("#structure").html(response.html);
+                                $(".successMsg").text(response.message);
+                                $(".successMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".successMsg").fadeOut();
+                                }, 5000);
+                                if(!response.has_questions){
+                                    $('#publish_exam').attr('disabled', true);
+                                }
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 2000);
                             }
                         }
-                        else{
-                            $(".errorMsg").text(response.message);
-                            $(".errorMsg").fadeIn();
-                            setTimeout(() => {
-                                $(".errorMsg").fadeOut();
-                            }, 2000);
-                        }
-                    }
-                });
+                    });
+                }
             });
 
         });

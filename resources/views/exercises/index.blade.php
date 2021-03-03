@@ -426,8 +426,13 @@
 
                 // Delete Article
                 if($(this).hasClass('remove_exercise')){
-                    $('#exercise_to_delete_id').attr('value', $(this).attr('data-exercise-id'));
-                    $('#exercise_to_delete_id').attr('disabled', false);
+                    if(confirm('Tem a certeza que deseja remover este exerício e todas as suas questões permanentemente?')){
+                        $('#exercise_to_delete_id').attr('value', $(this).attr('data-exercise-id'));
+                        $('#exercise_to_delete_id').attr('disabled', false);
+                    }
+                    else{
+                        return false;
+                    }
                 }
 
                 // Pagination

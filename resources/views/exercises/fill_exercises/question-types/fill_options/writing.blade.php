@@ -1,86 +1,64 @@
-{{-- Palavras --}}
-<div class="row mt-4">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="form-group">
-            <label class="label_title d-block mb-1" style="font-size: 30px;">
-            Palavras </label>
-        </div>
-    </div>
-
-    <?php 
-
-        function getInbetweenStrings2($str){
-            $matches = array();
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            preg_match_all($regex, $str, $matches);
-            return $matches[1];
+@if($exame_review)
+    <?php
+        $quotation_class = '';
+        if($question->avaliation_score != 0){
+            if((int)$question->classification == $question->avaliation_score){
+                $quotation_class = 'high_quotation_score';
+            }
+            else if((int)$question->classification > ($question->avaliation_score / 2)){
+                $quotation_class = 'med_quotation_score';
+            }
+            else{
+                $quotation_class = 'low_quotation_score';
+            }
         }
-
-        function getStringInArray2($string){
-            $matches = array();
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            $string_array = preg_split($regex, $string);
-            return $string_array;
+        else{
+            $quotation_class = 'low_quotation_score';
         }
-    
     ?>
 
-    @foreach ($question->question_items as $item)
+    <div class="d-flex float-left flex-column mb-3 w-100">
+        <p class="exercise_author quotation_label">
+        <strong>Cotação:</strong> 
+        Obteve 
+        <strong class="{{ $quotation_class }}">{{ (int)$question->classification }}</strong> 
+        de 
+        <strong class="{{ $quotation_class == 'high_quotation_score' ? 'high_quotation_score' : 'total_quotation_score' }}">{{ $question->avaliation_score }}</strong> 
+        pontos nesta questão.
+        </p>
+    </div>
+@endif
 
-        @foreach (getInbetweenStrings2($item->text_1) as $word)
-            <?php $all_possible_shuffled_options[] = $word; ?>
-        @endforeach
-        @foreach (explode('|', $item->options_answered) as $answer)
-            <?php $all_shuffled_options_answered[] = $answer; ?>
-        @endforeach
+<?php 
+
+    function getInbetweenStrings2($str){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        return $matches[1];
+    }
+
+    function getStringInArray2($string){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        $string_array = preg_split($regex, $string);
+        return $string_array;
+    }
+
+?>
+
+@foreach ($question->question_items as $item)
+
+    @foreach (getInbetweenStrings2($item->text_1) as $word)
+        <?php $all_possible_shuffled_options[] = $word; ?>
     @endforeach
-
-    {{-- @if($exame_review)
-        @foreach (array_diff($all_possible_shuffled_options, $all_shuffled_options_answered) as $unanswered_answer)
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
-                <div class="form-group">
-                    <div class="drag_and_drop_hole origin_hole word_hole drop">
-                        <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" >
-                            {{ $unanswered_answer }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        @for ($i = 0; $i < (sizeof($all_possible_shuffled_options) - sizeof(array_diff($all_possible_shuffled_options, $all_shuffled_options_answered))); $i++)
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
-                <div class="form-group">
-                    <div class="drag_and_drop_hole origin_hole word_hole drop">
-
-                    </div>
-                </div>
-            </div>
-        @endfor
-    @else
-        @foreach ($question->question_items->shuffle() as $item)
-
-            @foreach (getInbetweenStrings2($item->text_1) as $word)
-
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
-                    <div class="form-group">
-                        <div class="drag_and_drop_hole origin_hole word_hole drop">
-                            <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" >
-                                {{ $word }}
-                                <input type="hidden" name="" value="{{ $word }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            @endforeach
-
-        @endforeach
-    @endif --}}
-
-</div>
+    @foreach (explode('|', $item->options_answered) as $answer)
+        <?php $all_shuffled_options_answered[] = $answer; ?>
+    @endforeach
+@endforeach
 
 {{-- Frases --}}
-<div class="row mt-3">
+<div class="row mb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group mb-0">
             <label class="label_title d-block mb-1" style="font-size: 30px;">
@@ -161,8 +139,7 @@
 </div>
 
 {{-- SOLUTIONS --}}
-
-@if ($exame_review)
+@if ($exame_review && ($question->classification != $question->avaliation_score))
 
     <hr class="mt-4 mb-4">
 
