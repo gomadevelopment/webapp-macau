@@ -90,7 +90,7 @@
                             @if($i < (sizeof(getStringInArray2($item->text_1)) - 1))
 
                                 @if(isset(explode('|', $item->options_answered)[$i]))
-                                    <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex" style="width: auto; vertical-align: middle;">
+                                    <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex m-1" style="width: auto; vertical-align: middle;">
                                 @endif
 
                                 @if(getInbetweenStrings2($item->text_1)[$i] == explode('|', $item->options_answered)[$i])
@@ -173,7 +173,7 @@
                                     {{-- <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" > --}}
                                         {{-- {{ getInbetweenStrings2($item->text_1)[$i] }} --}}
                                         <input type="text" name="" id="" value="{{ getInbetweenStrings2($item->text_1)[$i] }}" disabled 
-                                        class="form-control d-inline-flex" style="width: auto; vertical-align: middle;">
+                                        class="form-control d-inline-flex m-1" style="width: auto; vertical-align: middle;">
                                     {{-- </div> --}}
                                 {{-- </div> --}}
                             @endif

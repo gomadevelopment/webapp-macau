@@ -448,6 +448,10 @@ button.hide_video {
     max-height: 250px;
 }
 
+.drag_and_drop_image img {
+    max-height: 245px;
+}
+
 .drag_and_drop_image img,
 .drag_and_drop_hole,
 .drag_and_drop_item {
@@ -990,6 +994,10 @@ div[id^="cke_fill_text_word_"] {
     margin: 12px 15px 12px 42px;
     opacity: 0.3;
     border-radius: 5px;
+}
+
+.ui-sortable-handle.ui-sortable-helper img {
+    width: 1%;
 }
 
 .quotation_label,
