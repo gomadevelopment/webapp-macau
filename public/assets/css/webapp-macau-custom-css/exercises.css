@@ -437,7 +437,7 @@ button.hide_video {
     object-fit: fill;
     width: -webkit-fill-available;
     border-radius: 6px;
-    height: 250px;
+    max-height: 250px;
 }
 
 .drag_and_drop_item {
@@ -446,6 +446,7 @@ button.hide_video {
 
 .drag_and_drop_image {
     max-height: 250px;
+    border: unset;
 }
 
 .drag_and_drop_image img {
@@ -826,7 +827,7 @@ div[id^="cke_fill_text_word_"] {
 }
 
 .assortment_tables li:not(.dragging) {
-    padding: 12px 15px;
+    padding: 6px 15px;
     cursor: all-scroll;
     display: flex !important;
 }
@@ -844,11 +845,11 @@ div[id^="cke_fill_text_word_"] {
     font-weight: 700;
     font-style: normal;
     letter-spacing: -0.37px;
-    line-height: 30px;
+    line-height: 15px;
     text-align: left;
     border-radius: 5px;
     border: 2px solid #e6ebf1;
-    padding: 12px 15px;
+    padding: 8px 15px;
     width: 100%;
 }
 
