@@ -29,6 +29,22 @@
     </div>
 @endif
 
+<?php
+    $all_audio_medias = true;
+    foreach($question->question_items as $item){
+        if($item->question_item_media){
+            if(explode('/', $item->question_item_media->media_type)[0] != 'audio'){
+                $all_audio_medias = false;
+                break;
+            }
+        }
+        else{
+            $all_audio_medias = false;
+            break;
+        }
+    }
+?>
+
 <div class="row mb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group">
@@ -76,19 +92,19 @@
         <div class="col-sm-12 col-md-3 col-lg-3 mb-4">
             <div class="form-group" style="text-align: -webkit-center;">
 
-                <div class="drag_and_drop_image text-center">
+                <div class="drag_and_drop_image text-center" style="{{ $all_audio_medias ? 'min-height: 150px !important;' : '' }}">
                     @if($item->question_item_media)
-                            @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
-                                <audio controls>
-                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
-                                </audio>
-                            @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
-                                <video controls>
-                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
-                                </video>
-                            @else
-                                <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
-                            @endif
+                        @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                            <audio controls>
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                            </audio>
+                        @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
+                            <video controls>
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                            </video>
+                        @else
+                            <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
+                        @endif
                     @else
                         <img src="{{ asset('/assets/backoffice_assets/images/Placeholder.png') }}" alt="">
                     @endif
@@ -159,7 +175,7 @@
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group" style="text-align: -webkit-center;">
 
-                    <div class="drag_and_drop_image text-center">
+                    <div class="drag_and_drop_image text-center" style="{{ $all_audio_medias ? 'min-height: 150px !important;' : '' }}">
                         @if($item->question_item_media)
                                 @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
                                     <audio controls>
