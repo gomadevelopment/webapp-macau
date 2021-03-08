@@ -562,7 +562,16 @@ class Exame extends Model
             }
         }
 
-        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
+        if($number_of_wrong_alineas == 0){
+            return $question->avaliation_score;
+        }
+
+        $number_of_alineas = sizeof($answer_array);
+        $points_per_alinea = sizeof($answer_array) == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
+        $number_of_correct_alineas = sizeof($answer_array) - $number_of_wrong_alineas;
+        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        return $partial_score;
     }
 
     /**
@@ -585,8 +594,17 @@ class Exame extends Model
                 $number_of_wrong_alineas++;
             }
         }
-        
-        return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
+
+        if($number_of_wrong_alineas == 0){
+            return $question->avaliation_score;
+        }
+
+        $number_of_alineas = sizeof($answer_array);
+        $points_per_alinea = sizeof($answer_array) == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
+        $number_of_correct_alineas = sizeof($answer_array) - $number_of_wrong_alineas;
+        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        return $partial_score;
     }
 
     public function freeQuestionCorrection($question, $answer_array)
