@@ -362,9 +362,9 @@
                     $('#page_number').attr('value', $(this).attr('data-page'));
                     
                     $('.pagination li').each(function(index, element){
-                        $(element).removeClass('active');
+                        $(element).removeClass('current_page_active');
                     });
-                    $(this).parent().addClass('active');
+                    $(this).parent().addClass('current_page_active');
                     $("html, body").animate({ scrollTop: 0 }, 500);
                 }
 

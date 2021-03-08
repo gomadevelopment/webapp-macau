@@ -161,7 +161,7 @@ a.remove_button:hover {
     padding: 0 !important;
 }
 
-.customize-tab.tabs_creative ul:not(.select2-selection__rendered):not(.assortment_tables) {
+.customize-tab.tabs_creative ul:not(.select2-selection__rendered):not(.assortment_tables):not(.pagination) {
     box-shadow: 0px 0px 15px 15px #4950570d;
     border-radius: 6px;
     background-color: #ffffff;
@@ -1020,4 +1020,17 @@ div[id^="cke_fill_text_word_"] {
 
 .high_quotation_score {
     color: #00b265 !important;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

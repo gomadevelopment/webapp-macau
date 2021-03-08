@@ -170,6 +170,15 @@ span.error-block-span.pink {
     color: #fff;
 }
 
+.pagination>.current_page_active>span {
+    border-color: #ff2850;
+    background-color: #ff2850;
+    background: #ff2850;
+    z-index: 2;
+    color: #ffffff;
+    cursor: default;
+}
+
 .preloader.ajax {
     background-color: transparent;
     position: relative;

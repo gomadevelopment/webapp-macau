@@ -382,4 +382,12 @@ class User extends Authenticatable
         }
         
     }
+
+    /**
+     * Get All Student Exames for Professor Classroom
+     */
+    public function student_exames()
+    {
+        return $this->hasMany('App\Exame', 'student_id');
+    }
 }

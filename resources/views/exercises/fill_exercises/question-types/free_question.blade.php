@@ -51,3 +51,26 @@
 
     @endforeach
 </div>
+
+@if ($exame_review && $exame_correction)
+
+    <hr class="mt-4 mb-4">
+
+    <div class="row mb-4">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+                <label class="label_title d-block" style="font-size: 30px;">
+                Correção </label>
+
+                <p class="exercise_author d-block">
+                    <strong>Pontuação desta questão:</strong> 
+                    <input type="number" class="form-control d-inline-block ml-2 mr-2" style="width: 75px;" name="free_question_correction_scores[{{$question->id}}]" id="free_question_correction_scores_{{$question->id}}" min="0" max="{{ $question->avaliation_score }}"> 
+                    (escolha uma pontuação de <strong>0</strong> a <strong>{{ $question->avaliation_score }}</strong> pontos).
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+    
+@endif

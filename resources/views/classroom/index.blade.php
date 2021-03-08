@@ -275,28 +275,13 @@
                                     </li>
                                 </ul>
 
-                                <div class="tab-content" id="classroom_exercises_tabs_content">
+                                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
 
-                                    {{-- awaiting-evaluation TAB --}}
-                                    <div class="tab-pane fade show active" id="awaiting-evaluation" role="tabpanel" aria-labelledby="awaiting-evaluation-tab">
-                                        
-                                            @include('classroom.professor-exercises-evaluation.awaiting-evaluation')
+                                {{-- PROFESSOR STUDENT_CLASSES EXERCISES --}}
+                                <div class="tab-content professor_classroom_exercises" id="classroom_exercises_tabs_content">
 
-                                    </div>
+                                    @include('classroom.classroom-partials.classroom_exercises_tabs_content')
 
-                                    {{-- in-course TAB --}}
-                                    <div class="tab-pane fade" id="in-course" role="tabpanel" aria-labelledby="in-course-tab">
-
-                                            @include('classroom.professor-exercises-evaluation.in-course')
-
-                                    </div>
-
-                                    {{-- evaluated TAB --}}
-                                    <div class="tab-pane fade" id="evaluated" role="tabpanel" aria-labelledby="evaluated-tab">
-
-                                            @include('classroom.professor-exercises-evaluation.evaluated')
-
-                                    </div>
                                 </div>
 
                             </div>
@@ -324,28 +309,11 @@
                                     </li>
                                 </ul>
 
-                                <div class="tab-content" id="classroom_exercises_tabs_content">
+                                {{-- STUDENT EXERCISES --}}
+                                <div class="tab-content student_classroom_exercises" id="classroom_exercises_tabs_content">
 
-                                    {{-- in-evaluation TAB --}}
-                                    <div class="tab-pane fade show active" id="in-evaluation" role="tabpanel" aria-labelledby="in-evaluation-tab">
-                                        
-                                        @include('classroom.student-exercises-evaluation.in-evaluation')
-
-                                    </div>
-
-                                    {{-- in-course TAB --}}
-                                    <div class="tab-pane fade" id="in-course" role="tabpanel" aria-labelledby="in-course-tab">
-
-                                        @include('classroom.student-exercises-evaluation.in-course')
-
-                                    </div>
-
-                                    {{-- done TAB --}}
-                                    <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
-
-                                        @include('classroom.student-exercises-evaluation.done')
-
-                                    </div>
+                                    @include('classroom.classroom-partials.classroom_exercises_tabs_content')
+                                    
                                 </div>
 
                                 <div class="text-center">
@@ -358,7 +326,15 @@
 
                             </div>
                         @endif
-                            
+
+                        <input type="number" name="page_awaiting_evaluation" id="page_awaiting_evaluation" value="1" hidden>
+                        <input type="number" name="previous_page_awaiting_evaluation" id="previous_page_awaiting_evaluation" value="1" hidden>
+
+                        <input type="number" name="page_in_course" id="page_in_course" value="1" hidden>
+                        <input type="number" name="previous_page_in_course" id="previous_page_in_course" value="1" hidden>
+
+                        <input type="number" name="page_evaluated" id="page_evaluated" value="1" hidden>
+                        <input type="number" name="previous_page_evaluated" id="previous_page_evaluated" value="1" hidden>
 
                     </div>
 
@@ -401,6 +377,197 @@
     <script>
 
         $(function() {
+
+            // Change Student Classes EXERCISES
+            // Select All Classes or Just one
+            changeClass('#exercises_class_select');
+            function changeClass(selector){
+                // All Classes
+                if($(selector).val() == 0){
+                    $('p.class_label').show();
+                    // $('p.one_class').hide();
+                }
+                // Single Class
+                else{
+                    $('p.class_label').hide();
+                    // $('p.one_class').show();
+                }
+            }
+
+            $(document).on('change', '#exercises_class_select', function(){
+                
+                $("#classroom_exercises_tabs_content").hide();
+                $('.preloader.ajax').show();
+
+                var current_opened_tab_id = '';
+                $('#classroom_exercises_tabs_content .tab-pane').each(function(index, element){
+                    if($(element).hasClass('active') && $(element).hasClass('show')){
+                        current_opened_tab_id = $(element).attr('id');
+                    }
+                });
+
+                var student_class_id = $(this).val();
+
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/get_student_exercises_by_class/' + student_class_id,
+                        success: function(response){
+                            $("#classroom_exercises_tabs_content").show();
+                            $('.preloader.ajax').hide();
+                            if(response && response.status == 'success'){
+                                $('.professor_classroom_exercises').html(response.html);
+
+                                $('#classroom_exercises_tabs_content .tab-pane').each(function(index, element){
+                                    if(current_opened_tab_id == $(element).attr('id')){
+                                        $(element).addClass('active').addClass('show');
+                                        $(element).attr('aria-expanded', true);
+                                    }
+                                    else{
+                                        $(element).removeClass('active').removeClass('show');
+                                        $(element).attr('aria-expanded', false);
+                                    }
+                                });
+                            }
+                            else{
+                                // $('.class_name_error').text(response.message);
+                                // $('.class_name_error').removeAttr('hidden');
+                                // $('.students_colleagues_see_less').click();
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+                            changeClass($('#exercises_class_select'));
+                        }
+                    });
+                }, 50);
+            });
+
+            // Change sub_page
+            $(document).on('click', '.pagination li a', function(e){
+                e.preventDefault();
+
+                $("#classroom_exercises_tabs_content").hide();
+                $('.preloader.ajax').show();
+
+                var student_class_id = $('#exercises_class_select').val();
+
+                var this_pagination_li = $(this);
+
+                var page_to_change = '';
+                var hash = '';
+                // Change page Awaiting Evaluation
+                if($(this).parent().parent().hasClass('page_awaiting_evaluation')){
+                    page_to_change = 'page_awaiting_evaluation';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_page_awaiting_evaluation').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_page_awaiting_evaluation').attr('value', $('#page_awaiting_evaluation').attr('value'));
+                    }
+                    $('#page_awaiting_evaluation').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.page_awaiting_evaluation li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#awaiting-evaluation-tab';
+                }
+                // Change page In Course
+                else if($(this).parent().parent().hasClass('page_in_course')){
+                    page_to_change = 'page_in_course';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_page_in_course').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_page_in_course').attr('value', $('#page_in_course').attr('value'));
+                    }
+                    $('#page_in_course').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.page_in_course li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#in-course-tab';
+                }
+                // Change page Evaluated
+                else if($(this).parent().parent().hasClass('page_evaluated')){
+                    page_to_change = 'page_evaluated';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_page_evaluated').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_page_evaluated').attr('value', $('#page_evaluated').attr('value'));
+                    }
+                    $('#page_evaluated').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.page_evaluated li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#evaluated-tab';
+                }
+
+                var offset_disc = $(".header").height() + 10;
+
+                if ($(window).width() < 992) {
+                    offset_disc = 0;
+                }
+
+                $("html, body").animate(
+                    {
+                        scrollTop: $(hash).offset().top - offset_disc
+                    },
+                    800
+                );
+
+                var page_awaiting_evaluation = $('#page_awaiting_evaluation').val();
+                var page_in_course = $('#page_in_course').val();
+                var page_evaluated = $('#page_evaluated').val();
+                
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/get_student_exercises_by_class/' + student_class_id,
+                        data: {page_to_change:page_to_change, 
+                            page_awaiting_evaluation:page_awaiting_evaluation,
+                            page_in_course:page_in_course,
+                            page_evaluated:page_evaluated},
+                        success: function(response){
+                            $("#classroom_exercises_tabs_content").show();
+                            $('.preloader.ajax').hide();
+                            if(response && response.status == 'success'){
+                                if(page_to_change == 'page_awaiting_evaluation'){
+                                    $('#awaiting-evaluation').html(response.html);
+                                }
+                                else if(page_to_change == 'page_in_course'){
+                                    $('#in-course').html(response.html);
+                                }
+                                else if(page_to_change == 'page_evaluated'){
+                                    $('#evaluated').html(response.html);
+                                }
+                                // $('.professor_classroom_exercises').html(response.html);
+                            }
+                            else{
+                                // $('.class_name_error').text(response.message);
+                                // $('.class_name_error').removeAttr('hidden');
+                                // $('.students_colleagues_see_less').click();
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+
+                            changeClass($('#exercises_class_select'));
+                        }
+                    });
+                }, 50);
+            });
+
+            //////////////////
 
             // Expand/Collapse Exercises Accordions
             $(document).on('click', 'a.expand_accordion', function(){
@@ -517,25 +684,6 @@
                     $('.student_dropdown a').find('img.filled_dots').removeClass('d-block').hide();
                     $('.student_dropdown a').find('img.empty_dots').addClass('d-block');
                 }
-            });
-
-            // Select All Classes or Just one
-            changeClass('#exercises_class_select');
-            function changeClass(selector){
-                // All Classes
-                if($(selector).val() == 1){
-                    $('p.all_classes').show();
-                    $('p.one_class').hide();
-                }
-                // Single Class
-                else{
-                    $('p.all_classes').hide();
-                    $('p.one_class').show();
-                }
-            }
-
-            $(document).on('change', '#exercises_class_select', function(){
-                changeClass($(this));
             });
 
             // Choose class to display students (left side "Alunos")

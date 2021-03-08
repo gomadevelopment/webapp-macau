@@ -213,7 +213,7 @@ class Exame extends Model
         $exercise_sum_score_points = $questions->sum('avaliation_score');
         $teacher_correction = false;
         foreach ($questions as $question) {
-            if($question->teacher_correction){
+            if($question->teacher_correction && $question->avaliation_score != 0){
                 $teacher_correction = true;
                 continue;
             }
@@ -321,6 +321,8 @@ class Exame extends Model
 
         $this->classification = $exercise_student_score;
         $this->is_finished = 1;
+        $this->is_revised = $teacher_correction ? 0 : 1;
+        $this->finish_date = date('Y-m-d');
         $this->save();
 
         if(!$questions->count()){
@@ -590,6 +592,7 @@ class Exame extends Model
     public function freeQuestionCorrection($question, $answer_array)
     {
         // STAND BY
+        return 0;
     }
 
     /**
@@ -867,4 +870,19 @@ class Exame extends Model
         return $partial_score;
     }
     
+    /*********************
+        Professor Free Questions correction
+    */    
+    public function professorExameCorrection($inputs)
+    {
+        foreach($inputs['free_question_correction_scores'] as $question_id => $question_score){
+            $question = ExameQuestion::find($question_id);
+            $question->classification = $question_score;
+            $question->save();
+        }
+
+        $this->is_revised = 1;
+        $this->save();
+        
+    }
 }

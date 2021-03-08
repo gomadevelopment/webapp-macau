@@ -11,7 +11,9 @@
 
 <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
 <input type="hidden" name="exame_id" id="exame_id" value="{{ $exame->id }}">
+<input type="hidden" name="exame_student_id" id="exame_student_id" value="{{ $exame->student_id }}">
 <input type="hidden" name="exame_review" id="exame_review" value="{{ $exame_review }}">
+<input type="hidden" name="exame_correction" id="exame_correction" value="{{ $exame_correction }}">
 
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
@@ -24,9 +26,19 @@
                 </div>
 
                 <div class="exercise_time wrap float-right {{ $exame_review ? '' : 'd-none' }}">
-                    <div id="" class="time_countdown ml-2" style="padding: 10px 15px !important;">
-                        Revisão
-                    </div>
+                    @if($exame_review && !$exame_correction)
+                        <div id="" class="time_countdown ml-2" style="padding: 10px 15px !important;">
+                            Revisão
+                        </div>
+                    @elseif($exame_review && $exame_correction)
+                        <form method="POST" id="finish_exame_correction_form" action="" enctype="multipart/form-data">
+                            @csrf
+                            <a href="#" id="finish_exame_correction" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Check.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <span class="pt_label button_label">Finalizar Correção</span>
+                            </a>
+                        </form>
+                    @endif
                 </div>
 
                 <div class="exercise_time wrap float-right {{ !$exercise->has_time || $exame_review ? 'd-none' : '' }}">
@@ -277,7 +289,60 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 
     <script>
+        $(function(){
+            $(document).on('click', '#finish_exame_correction', function(e){
+                e.preventDefault();
 
+                // $(this).attr("id", "");
+
+                $("#perform_exercise_form").hide();
+                $(".preloader.ajax").show();
+
+                var exame_id = $('#exame_id').val();
+                var exame_student_id = $('#exame_student_id').val();
+
+                var formData = new FormData($("form#finish_exame_correction_form")[0]);
+
+                $('[id^="free_question_correction_scores_"]').each(function(index, element){
+                    formData.append(element.name, element.value);
+                });
+
+                $.ajax({
+                    url: "/exercicios/corrigir/"+exame_id+"/aluno/" + exame_student_id,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $("#perform_exercise_form").show();
+                        $(".preloader.ajax").hide();
+                        if (response && response.status == "success") {
+                            window.location = '/sala_de_aula';
+                        }
+                        else if (response.status == "error") {
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+
+            $('[id^="free_question_correction_scores_"]').change(function() {
+                var max = parseInt($(this).attr('max'));
+                var min = parseInt($(this).attr('min'));
+                if ($(this).val() > max)
+                {
+                    $(this).val(max);
+                }
+                else if ($(this).val() < min)
+                {
+                    $(this).val(min);
+                }       
+            });
+        });
     </script>
 
 @stop

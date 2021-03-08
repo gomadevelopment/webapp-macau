@@ -68,11 +68,16 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise'); // Adicionar {id}
         Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise'); // Adicionar {id}
 
+        Route::get('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExameGet');
+        Route::post('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExamePost');
+
         Route::get('/exercicios/realizar/update_pause_timer/{exame_id}', 'ExamesController@updatePauseTimers');
 
         // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');
         Route::get('/students_class_select/{id}', 'ClassroomController@studentsClassSelect');
+
+        Route::get('/get_student_exercises_by_class/{student_class_id}', 'ClassroomController@getStudentExercisesByClass');
         
         // Users Profile
         Route::get('/perfil/{id}', 'UsersController@index_profile');
