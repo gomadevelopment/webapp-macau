@@ -172,18 +172,18 @@ class Exercise extends Model
             self::find($this->id)->medias()->delete();
         }
 
-        Notification::create([
-            'title' => 'Novo Exercício',
-            'text' => 'Você criou um novo exercício, "'.$this->title.'".',
-            'url' => '/exercicios/editar/' . $this->id,
-            'param1_text' => 'exercise_id',
-            'param1' => $this->id,
-            'param2_text' => '',
-            'param2' => '',
-            'type_id' => 2,
-            'user_id' => auth()->user()->id,
-            'active' => 1
-        ]);
+        // Notification::create([
+        //     'title' => 'Novo Exercício',
+        //     'text' => 'Você criou um novo exercício, "'.$this->title.'".',
+        //     'url' => '/exercicios/editar/' . $this->id,
+        //     'param1_text' => 'exercise_id',
+        //     'param1' => $this->id,
+        //     'param2_text' => '',
+        //     'param2' => '',
+        //     'type_id' => 2,
+        //     'user_id' => auth()->user()->id,
+        //     'active' => 1
+        // ]);
     }
 
     public function updatePosterAndMedias($exercise_id, $media)

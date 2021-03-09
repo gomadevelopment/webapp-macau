@@ -79,7 +79,7 @@
         @endif
     @endforeach
     
-    @if(!$students_with_exames_in_course)
+    @if(!$students_exames_in_course->count())
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="shop_grid">
                 <div class="shop_grid_caption">

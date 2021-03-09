@@ -325,6 +325,21 @@ class Exame extends Model
         $this->finish_date = date('Y-m-d');
         $this->save();
 
+        if($teacher_correction){
+            Notification::create([
+                'title' => 'Novo Exame requer avaliação.',
+                'text' => 'O aluno ' . auth()->user()->username . ' requere avaliação do Exame "' . $this->title . '".',
+                'url' => '/exercicios/corrigir/'.$this->id.'/aluno/'.auth()->user()->id,
+                'param1_text' => 'exame_id',
+                'param1' => $this->id,
+                'param2_text' => 'aluno',
+                'param2' => auth()->user()->id,
+                'type_id' => 2,
+                'user_id' => $this->user_id,
+                'active' => 1
+            ]);
+        }
+
         if(!$questions->count()){
             return [0, $teacher_correction, 'no_questions'];
         }

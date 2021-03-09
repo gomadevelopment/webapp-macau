@@ -309,6 +309,8 @@
                                     </li>
                                 </ul>
 
+                                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+
                                 {{-- STUDENT EXERCISES --}}
                                 <div class="tab-content student_classroom_exercises" id="classroom_exercises_tabs_content">
 
@@ -316,17 +318,18 @@
                                     
                                 </div>
 
-                                <div class="text-center">
+                                {{-- <div class="text-center">
                                     <a href="/exercicios" class="btn search-btn comment_submit" style="font-size: 21px; float: none; white-space: nowrap;">
                                         Ir para Exercícios
                                         <img src="{{asset('/assets/backoffice_assets/icons/Arrow.svg')}}" alt="" style="margin-left: 10px; width: 10%;">
                                     </a>
-                                </div>
+                                </div> --}}
                                     
 
                             </div>
                         @endif
 
+                        {{-- PROFESSOR --}}
                         <input type="number" name="page_awaiting_evaluation" id="page_awaiting_evaluation" value="1" hidden>
                         <input type="number" name="previous_page_awaiting_evaluation" id="previous_page_awaiting_evaluation" value="1" hidden>
 
@@ -335,6 +338,16 @@
 
                         <input type="number" name="page_evaluated" id="page_evaluated" value="1" hidden>
                         <input type="number" name="previous_page_evaluated" id="previous_page_evaluated" value="1" hidden>
+
+                        {{-- STUDENT --}}
+                        <input type="number" name="p_in_evaluation" id="p_in_evaluation" value="1" hidden>
+                        <input type="number" name="previous_p_in_evaluation" id="previous_p_in_evaluation" value="1" hidden>
+
+                        <input type="number" name="p_in_course" id="p_in_course" value="1" hidden>
+                        <input type="number" name="previous_p_in_course" id="previous_p_in_course" value="1" hidden>
+
+                        <input type="number" name="p_done" id="p_done" value="1" hidden>
+                        <input type="number" name="previous_p_done" id="previous_p_done" value="1" hidden>
 
                     </div>
 
@@ -445,8 +458,8 @@
                 }, 50);
             });
 
-            // Change sub_page
-            $(document).on('click', '.pagination li a', function(e){
+            // Change sub_page - PROFESSOR
+            $(document).on('click', '.pagination.page_awaiting_evaluation li a, .pagination.page_in_course li a, .pagination.page_evaluated li a', function(e){
                 e.preventDefault();
 
                 $("#classroom_exercises_tabs_content").hide();
@@ -562,6 +575,126 @@
                             }
 
                             changeClass($('#exercises_class_select'));
+                        }
+                    });
+                }, 50);
+            });
+
+            // Change sub_page - STUDENT
+            $(document).on('click', '.pagination.in_evaluation li a, .pagination.in_course li a, .pagination.done li a', function(e){
+                e.preventDefault();
+
+                $("#classroom_exercises_tabs_content").hide();
+                $('.preloader.ajax').show();
+
+                var this_pagination_li = $(this);
+
+                var page_to_change = '';
+                var hash = '';
+                // Change page Awaiting Evaluation
+                if($(this).parent().parent().hasClass('in_evaluation')){
+                    page_to_change = 'in_evaluation';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_p_in_evaluation').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_p_in_evaluation').attr('value', $('#p_in_evaluation').attr('value'));
+                    }
+                    $('#p_in_evaluation').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.in_evaluation li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#in-evaluation-tab';
+                }
+                // Change page In Course
+                else if($(this).parent().parent().hasClass('in_course')){
+                    page_to_change = 'in_course';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_p_in_course').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_p_in_course').attr('value', $('#p_in_course').attr('value'));
+                    }
+                    $('#p_in_course').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.in_course li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#in-course-tab';
+                }
+                // Change page Evaluated
+                else if($(this).parent().parent().hasClass('done')){
+                    page_to_change = 'done';
+                    if($(this).attr('data-page') == 1){
+                        $('#previous_p_done').attr('value', 1);
+                    }
+                    else{
+                        $('#previous_p_done').attr('value', $('#p_done').attr('value'));
+                    }
+                    $('#p_done').attr('value', $(this).attr('data-page'));
+
+                    $('.pagination.done li').each(function(index, element){
+                        $(element).removeClass('current_page_active');
+                    });
+                    $(this).parent().addClass('current_page_active');
+                    hash = '#done-tab';
+                }
+
+                var offset_disc = $(".header").height() + 10;
+
+                if ($(window).width() < 992) {
+                    offset_disc = 0;
+                }
+
+                $("html, body").animate(
+                    {
+                        scrollTop: $(hash).offset().top - offset_disc
+                    },
+                    800
+                );
+
+                var page_in_evaluation = $('#p_in_evaluation').val();
+                var page_in_course = $('#p_in_course').val();
+                var page_done = $('#p_done').val();
+                
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/get_student_exercises',
+                        data: {page_to_change:page_to_change, 
+                            page_in_evaluation:page_in_evaluation,
+                            page_in_course:page_in_course,
+                            page_done:page_done},
+                        success: function(response){
+                            $("#classroom_exercises_tabs_content").show();
+                            $('.preloader.ajax').hide();
+                            if(response && response.status == 'success'){
+                                if(page_to_change == 'in_evaluation'){
+                                    $('#in-evaluation').html(response.html);
+                                }
+                                else if(page_to_change == 'in_course'){
+                                    $('#in-course').html(response.html);
+                                }
+                                else if(page_to_change == 'done'){
+                                    $('#done').html(response.html);
+                                }
+                                // $('.professor_classroom_exercises').html(response.html);
+                            }
+                            else{
+                                // $('.class_name_error').text(response.message);
+                                // $('.class_name_error').removeAttr('hidden');
+                                // $('.students_colleagues_see_less').click();
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
+
+                            // changeClass($('#exercises_class_select'));
                         }
                     });
                 }, 50);

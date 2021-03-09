@@ -65,7 +65,7 @@
                                         @endif
                                     </p>
                                     <p class="exercise_level" style="float: left; margin-right: 20px;">
-                                        <strong>Avaliação:</strong> <strong class="{{ $score_perc_class }}"> {{ $score_perc }}%</strong>
+                                        <strong>Avaliação:&nbsp;</strong> <strong class="{{ $score_perc_class }}"> {{ $score_perc }}%</strong>
                                     </p>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
         @endif
     @endforeach
     
-    @if(!$students_with_exames_evaluated)
+    @if(!$students_exames_evaluated->count())
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="shop_grid">
                 <div class="shop_grid_caption">

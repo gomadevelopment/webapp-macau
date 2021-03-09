@@ -145,18 +145,18 @@ class Article extends Model
             }
         }
 
-        Notification::create([
-            'title' => 'Novo Artigo',
-            'text' => 'Você criou um novo artigo, "'.$this->title.'".',
-            'url' => '/artigos/detalhe/' . $this->id,
-            'param1_text' => 'article_id',
-            'param1' => $this->id,
-            'param2_text' => '',
-            'param2' => '',
-            'type_id' => 1,
-            'user_id' => auth()->user()->id,
-            'active' => 1
-        ]);
+        // Notification::create([
+        //     'title' => 'Novo Artigo',
+        //     'text' => 'Você criou um novo artigo, "'.$this->title.'".',
+        //     'url' => '/artigos/detalhe/' . $this->id,
+        //     'param1_text' => 'article_id',
+        //     'param1' => $this->id,
+        //     'param2_text' => '',
+        //     'param2' => '',
+        //     'type_id' => 1,
+        //     'user_id' => auth()->user()->id,
+        //     'active' => 1
+        // ]);
     }
 
     public function updatePosterAndMedias($article_id, $poster, $medias = [])

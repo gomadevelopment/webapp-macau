@@ -47,21 +47,24 @@
     {{-- in-evaluation TAB --}}
     <div class="tab-pane fade show active" id="in-evaluation" role="tabpanel" aria-labelledby="in-evaluation-tab">
         
-        @include('classroom.student-exercises-evaluation.in-evaluation')
+        @include('classroom.student-exercises-evaluation.in-evaluation', 
+            ['student_in_evaluation_exames' => $student_in_evaluation_exames])
 
     </div>
 
     {{-- in-course TAB --}}
     <div class="tab-pane fade" id="in-course" role="tabpanel" aria-labelledby="in-course-tab">
 
-        @include('classroom.student-exercises-evaluation.in-course')
+        @include('classroom.student-exercises-evaluation.in-course', 
+            ['student_in_course_exames' => $student_in_course_exames])
 
     </div>
 
     {{-- done TAB --}}
     <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
 
-        @include('classroom.student-exercises-evaluation.done')
+        @include('classroom.student-exercises-evaluation.done', 
+            ['student_done_exames' => $student_done_exames])
 
     </div>
 

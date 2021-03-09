@@ -390,4 +390,50 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Exame', 'student_id');
     }
+
+    /**
+     * Get Student In Evaluation Exames for Student Classroom
+     */
+    public function getStudentInEvaluationExames($skip = 0, $paginate = 10)
+    {
+        return Exame::where('student_id', $this->id)->where('is_finished', 1)->where('is_revised', 0)->skip($skip)->paginate($paginate, ['*'], 'in_evaluation');
+    }
+
+    /**
+     * Get Student In Course Exames for Student Classroom
+     */
+    public function getStudentInCourseExames($skip = 0, $paginate = 10)
+    {
+        return Exame::where('student_id', $this->id)->where('is_finished', 0)->where('is_revised', 0)->skip($skip)->paginate($paginate, ['*'], 'in_course');
+    }
+
+    /**
+     * Get Student Done Exames for Student Classroom
+     */
+    public function getStudentDoneExames($skip = 0, $paginate = 10)
+    {
+        return Exame::where('student_id', $this->id)->where('is_finished', 1)->where('is_revised', 1)->skip($skip)->paginate($paginate, ['*'], 'done');
+    }
+
+    /**
+     * Checks if Student can request Exame Correction (1 day timeout)
+     */
+    public function studentCanRequestExameCorrection($exame_id)
+    {
+        $exame = Exame::find($exame_id);
+
+        $notification = Notification::where('url', '/exercicios/corrigir/'.$exame->id.'/aluno/'.auth()->user()->id)->latest('created_at')->first();
+
+        $notification_created_at = $notification->created_at;
+
+        // + 86400 = 24 hours unix
+        $diff = (strtotime($notification_created_at) + 86400) - strtotime('now');
+
+        if($diff > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }
