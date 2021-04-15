@@ -120,7 +120,7 @@
 
                                 @foreach ($professors as $professor)
                                     <tr id="{{ $professor->id }}">
-                                        <th scope="row"> <a href="/perfil/{{ $professor->id }}" class="link_on_table">{{ $professor->username }}</a> </th>
+                                        <th scope="row"> <a href="/perfil/{{ $professor->id }}" target="_blank" class="link_on_table">{{ $professor->username }}</a> </th>
                                         <th scope="row">{{ isset($professor->first_name) && isset($professor->last_name) ? $professor->first_name . ' ' . $professor->last_name : '-' }}</th>
                                         <td>{{ date('d/m/Y', strtotime($professor->created_at)) }}</td>
                                         <td>

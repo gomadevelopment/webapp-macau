@@ -239,6 +239,8 @@ class Article extends Model
             $query = self::orderBy('created_at', 'asc');
         }
 
+        $query = $query->where('published', 1);
+
         // My Favorites filter
         if(isset($filters['my_favorites'])){
             $query = $query->whereHas('article_favorite', function($q) {

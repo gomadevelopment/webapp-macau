@@ -93,7 +93,7 @@ class ArticlesController extends Controller
             ]);
         }
 
-        $articles = Article::orderBy('created_at', 'asc')->paginate(4);
+        $articles = Article::orderBy('created_at', 'asc')->where('published', 1)->paginate(4);
 
         foreach($articles as $article){
             $article['is_article_favorite'] = $article->is_article_favorite();

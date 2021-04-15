@@ -101,7 +101,7 @@
 
                                 @foreach ($students as $student)
                                     <tr id="{{ $student->id }}">
-                                        <th scope="row"> <a href="/perfil/{{ $student->id }}" class="link_on_table">{{ $student->username }}</a> </th>
+                                        <th scope="row"> <a href="/perfil/{{ $student->id }}" target="_blank" class="link_on_table">{{ $student->username }}</a> </th>
                                         <th scope="row">{{ $student->first_name ?? '-' }}</th>
                                         <th scope="row">{{ $student->last_name ?? '-' }}</th>
                                         <td>{{ date('d/m/Y', strtotime($student->created_at)) }}</td>
