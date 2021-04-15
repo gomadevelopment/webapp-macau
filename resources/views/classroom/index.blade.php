@@ -2,9 +2,9 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.1">
 
 @stop
 
@@ -39,7 +39,7 @@
                                     <div class="d-flex flex-row user_options">
                                         <p class="exercise_author align-self-center">
                                             <a href="/perfil/editar/{{ auth()->user()->id }}" class="edit_profile">Editar</a>
-                                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                                 <a href="#" class="edit_profile">Definições do Sistema</a>
                                             @endif
                                         </p>
@@ -102,12 +102,12 @@
                     @endif
 
                     {{-- Colleagues / Students --}}
-                    @if ((auth()->user()->user_role_id == 3 && auth()->user()->student_class_user) || 
-                    (auth()->user()->user_role_id != 3 && auth()->user()->classes->count()))
+                    @if ((auth()->user()->isStudent() && auth()->user()->student_class_user) || 
+                    (auth()->user()->isProfessor() && auth()->user()->classes->count()))
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                             <div class="row mb-3">
                                 <div class="col-sm-5 col-md-5 col-lg-5 align-self-center align-items-center">
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                         <h1 class="title">Alunos</h1>
                                     @else
                                         <h1 class="title">Colegas</h1>
@@ -115,8 +115,8 @@
                                     
                                 </div>
                                 <div class="col-sm-7 col-md-7 col-lg-7 align-self-center align-items-center
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) d-inline-flex @endif">
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                @if(auth()->user()->isProfessor() && auth()->user()->isActive()) d-inline-flex @endif">
+                                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                         <div class="form-group mb-0 mr-2 w-100">
                                             <div class="select2_with_search">
                                                 <select name="students_class_select" id="students_class_select" class="form-control" style="border: none;">
@@ -130,11 +130,11 @@
                                     @endif
                                     
                                     @if (
-                                    (auth()->user()->user_role_id == 3 
+                                    (auth()->user()->isStudent() 
                                     && auth()->user()->student_class_user 
                                     && auth()->user()->getStudentColleagues(auth()->user()->student_class_user->student_class->id)->count()) 
                                     || 
-                                    (auth()->user()->user_role_id != 3 
+                                    (auth()->user()->isProfessor() 
                                     && auth()->user()->getProfessorStudents())
                                     )
                                         <div class="dropdown student_options_dropdown">
@@ -143,13 +143,13 @@
                                                 Opções
                                                 <span class="dropdown-menu-arrow"></span>
                                             </a>
-                                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                                 <div class="dropdown-menu message-box">
-                                                    <a class="msg-title" href="#">
+                                                    {{-- <a class="msg-title" href="#">
                                                         <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg')}}" class="logo logout_icon mr-2 ml-1" alt="" />
                                                         Encontrar Alunos
                                                     </a>
-                                                    <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                    <hr class="mt-0 mb-2 ml-2 mr-2"> --}}
                                                     <a class="msg-title" href="#">
                                                         <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                         Desempenho da Turma
@@ -183,7 +183,7 @@
                     @endif
 
                     {{-- Professor Shortcuts --}}
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                             <div class="wrap mb-3">
                                 <h1 class="title">Atalhos</h1>
@@ -236,7 +236,7 @@
                         <div class="wrap mb-3">
                             <h1 class="title">Exercícios</h1>
                         </div>
-                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                        @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                             {{-- Class filter for professor --}}
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -352,7 +352,7 @@
                     </div>
 
                     {{-- student -  My performance --}}
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
 
                     @else
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
@@ -378,14 +378,14 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.1"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.1"></script>
 
     <script>
 

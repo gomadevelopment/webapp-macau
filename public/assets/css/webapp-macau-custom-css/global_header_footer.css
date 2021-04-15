@@ -192,6 +192,27 @@ span.error-block-span.pink {
     width: 100%;
 }
 
+.dash_action_link a.cancel {
+    color: #ff2850 !important;
+    border-radius: 3px;
+    border: 1px solid transparent;
+}
+
+.dash_action_link a.view {
+    color: #00b265 !important;
+    border-radius: 3px;
+    border: 1px solid transparent;
+}
+
+.dash_action_link a:hover {
+    border: 1px solid;
+}
+
+.dash_action_link a.view:hover {
+    border: 1px solid;
+    color: #00b265 !important;
+}
+
 /* input.select2-search__field {
     width: 100% !important;
 } */
@@ -726,6 +747,8 @@ span.error-block-span.pink {
 .logout_icon {
     border-radius: 0 !important;
 }
+
+a.view_profile {}
 
 /* Message Notification */
 

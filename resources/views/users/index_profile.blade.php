@@ -2,9 +2,9 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.1">
 
 @stop
 
@@ -55,8 +55,8 @@
                         @else
                         <br>
                         @endif
-                        @if ($user->id == auth()->user()->id)
-                            <a href="/perfil/editar/{{ auth()->user()->id }}" class="btn search-btn comment_submit mt-4" style="float: none; padding: 12px 20px; font-size: 21px;">
+                        @if ($user->id == auth()->user()->id || auth()->user()->isAdmin())
+                            <a href="/perfil/editar/{{ $user->id }}" class="btn search-btn comment_submit mt-4" style="float: none; padding: 12px 20px; font-size: 21px;">
                                 <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Editar
                             </a>
@@ -68,7 +68,7 @@
             {{-- About me / Professional path --}}
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <div class="wrap mb-3">
-                    @if($user->user_role_id == 1 || $user->user_role_id == 2)
+                    @if($user->user_role_id == 1 || $user->user_role_id == 2 || $user->user_role_id == 4)
                         <h1 class="title">Percurso Profissional</h1>
                     @else
                         <h1 class="title">Sobre mim</h1>
@@ -86,7 +86,7 @@
                     <hr>
                     @endif
 
-                    @if($user->user_role_id == 1 || $user->user_role_id == 2)
+                    @if($user->user_role_id == 1 || $user->user_role_id == 2 || $user->user_role_id == 4)
 
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
@@ -107,21 +107,29 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
-                                <h4 class="sg_rate_title">A aguardar Validação</h4>
-                                <div class="d-block text-left mt-3">
-                                    <p class="exercise_author" style="line-height: 25px; font-style: italic;">
-                                        Enquanto não for aprovado, não poderá 
-                                        utilizar as <strong style="line-height: 25px;">Ferramentas</strong> de <strong style="line-height: 25px;">Ensino</strong>.
-                                    </p>
+                            @if($user->isPreProfessor())
+                                <div class="col-sm-12 col-md-6 col-lg-6 mb-4">
+                                    <h4 class="sg_rate_title">A aguardar Validação</h4>
+                                    <div class="d-block text-left mt-3">
+                                        <p class="exercise_author" style="line-height: 25px; font-style: italic;">
+                                            Enquanto não for aprovado, não poderá 
+                                            utilizar as <strong style="line-height: 25px;">Ferramentas</strong> de <strong style="line-height: 25px;">Ensino</strong>.
+                                        </p>
+                                    </div>
+                                    <div class="d-block text-left mt-3">
+                                        @if($user->id == auth()->user()->id)
+                                            <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/contact.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                Solicitar novamente
+                                            </a>
+                                        @else
+                                            <a href="/activate_deactivate_user/{{ $user->id }}/true" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
+                                                Aprovar Utilizador
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="d-block text-left mt-3">
-                                    <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/contact.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
-                                        Solicitar novamente
-                                    </a>
-                                </div>
-                            </div>
+                            @endif
                         </div>
 
                     @else
@@ -199,13 +207,13 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.1"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.1"></script>
 
     <script>
 

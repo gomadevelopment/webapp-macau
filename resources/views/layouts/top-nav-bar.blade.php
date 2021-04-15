@@ -16,12 +16,12 @@
                 <ul class="nav-menu">
                     @if(auth()->user())
                         {{-- Professor --}}
-                        @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                        @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'exercises' ? 'active' : ''; ?>">
                                 <a href="/exercicios">Exercícios</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'questions' ? 'active' : ''; ?>">
-                                <a href="#">Questões</a>
+                                <a href="/questoes">Questões</a>
                             </li>
                             <li class="<?php echo !empty($topNavBarOption) && $topNavBarOption == 'classroom' ? 'active' : ''; ?>">
                                 <a href="/sala_de_aula">Sala de Aula</a>
@@ -62,16 +62,18 @@
                                 <div style="backgroud-size: 100%; background-image: url({{ auth()->user()->avatar_url ? '/webapp-macau-storage/avatars/'.auth()->user()->id.'/'.auth()->user()->avatar_url : 'https://via.placeholder.com/500x500'}})"
                                     class="top_nav_bar_avatar">
                                 </div>
-                                Olá, {{ auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2 ? 'Professor' : 'Aluno'}}!
+                                Olá, {{ auth()->user()->isProfessor() && auth()->user()->isActive() ? 'Professor' : 'Aluno'}}!
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box">
-                                <a class="msg-title" href="/perfil/{{auth()->user()->id}}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mb-1 " alt="" />
+                                <a class="msg-title view_profile" href="/perfil/{{auth()->user()->id}}">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon user_icon_normal mb-1 " alt="" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer_pink.svg')}}" class="logo logout_icon user_icon_pink mb-1 " alt="" style="display: none;"/>
                                     Ver Perfil
                                 </a>
-                                <a class="msg-title" href="/logout">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon mr-2" alt="" style="margin-left: 3px;" />
+                                <a class="msg-title logout" href="/logout">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon logout_icon_normal mr-2" alt="" style="margin-left: 3px;" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout_pink.svg')}}" class="logo logout_icon logout_icon_pink mr-2" alt="" style="margin-left: 3px; display: none;"/>
                                     Terminar Sessão
                                 </a>
                             </div>

@@ -122,6 +122,7 @@ class Article extends Model
         $this->title = $inputs['title'];
         $this->text = $inputs['text'];
         $this->article_category_id = $inputs['category'];
+        $this->published = auth()->user()->can_post_articles ? 1 : 0;
 
         $this->save();
 
@@ -284,5 +285,47 @@ class Article extends Model
         $skip = $filters['page'] * 4;
 
         return $query->skip($skip)->paginate(4);
+    }
+
+    public static function applyArticlesValidationFilters($filters = [])
+    {
+        $query = self::orderBy('created_at', 'desc');
+
+        if(isset($filters['settings_articles_filter_article_title'])){
+            $query = $query->where('title', 'LIKE', '%' . $filters['settings_articles_filter_article_title'] . '%');
+        }
+
+        if(isset($filters['settings_articles_filter_article_published']) && $filters['settings_articles_filter_article_published'] != 'all'){
+            if($filters['settings_articles_filter_article_published'] == 'published'){
+                $query = $query->where('published', 1);
+            }
+            else{
+                $query = $query->where('published', 0);
+            }
+        }
+
+        if(isset($filters['settings_articles_filter_user_username'])){
+            $query = $query->whereHas('user', function($q) {
+                            $q->where('username', 'LIKE', '%' . $filters['settings_articles_filter_user_username'] . '%');
+                        });
+        }
+
+        if(isset($filters['settings_articles_filter_user_can_publish']) && $filters['settings_articles_filter_user_can_publish'] != 'all'){
+            
+            if($filters['settings_articles_filter_user_can_publish'] == 'yes'){
+                $query = $query->whereHas('user', function($q) {
+                            $q->where('can_post_articles', 1);
+                        });
+            }
+            else{
+                $query = $query->whereHas('user', function($q) {
+                            $q->where('can_post_articles', 0);
+                        });
+            }
+        }
+
+        $skip = $filters['page'] * 10;
+
+        return $query->skip($skip)->paginate(10)->setPageName('articles');
     }
 }

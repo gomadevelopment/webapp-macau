@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\UploadedFile;
 
+use Illuminate\Validation\Rule;
+
 class Question extends Model
 {
     protected $fillable = [
@@ -20,7 +22,8 @@ class Question extends Model
         // 'question_name' => 'required',
         // 'question_reference' => 'required',
         'question_description' => 'required',
-        'question_type' => 'required'
+        'question_type' => 'required',
+        'question_reference' => 'unique:questions',
     );
 
     public static function rulesForEdit($id = 0, $merge = [])
@@ -29,7 +32,8 @@ class Question extends Model
             // 'question_name' => 'required',
             // 'question_reference' => 'required',
             'question_description' => 'required',
-            'question_type' => 'required'
+            'question_type' => 'required',
+            'question_reference' => [Rule::unique('questions', 'reference')->ignore($id)],
         ], $merge);
     }
 
@@ -38,6 +42,7 @@ class Question extends Model
         // 'question_reference.required' => 'A referência da questão é de preenchimento obrigatório.',
         'question_description.required' => 'A descrição da questão a apresentar ao aluno é de preenchimento obrigatório.',
         'question_type.required' => 'Escolha um tipo de questão e preencha os seus campos.',
+        'question_reference.unique' => 'Já existe uma questão com esta referência.',
     );
 
     /**
@@ -83,7 +88,50 @@ class Question extends Model
             return $q->where('exercises.user_id', auth()->user()->id);
         });
 
-        return $query->get();
+        return $query->get()->unique('reference');
+    }
+
+    /**
+     * Get Models by Question Reference
+     */
+    public static function myModelsWithFilters($filters = [])
+    {
+        $query = self::orderBy('created_at', 'asc')->where('reference', '!=', null);
+        // dd($filters);
+        $query = $query->whereHas('exercise', function($q) {
+            return $q->where('exercises.user_id', auth()->user()->id);
+        });
+
+        if(isset($filters['questions_filter_reference'])){
+            $query = $query->where('reference', 'LIKE', '%' . $filters['questions_filter_reference'] . '%');
+        }
+
+        if(isset($filters['questions_filter_exercises']) && $filters['questions_filter_exercises'] != 'all'){
+            $query = $query->whereHas('exercise', function($q) use ($filters) {
+                return $q->where('exercises.id', $filters['questions_filter_exercises']);
+            });
+        }
+
+        $skip = $filters['page'] * 10;
+
+        return $query->skip($skip)->distinct('reference')->paginate(10)->setPageName('questions');
+    }
+
+    /**
+     * Get Models by Question Reference
+     */
+    public static function exercisesWithQuestionsWithReference()
+    {
+        $questions = self::my_models();
+        $exercises = [];
+
+        foreach ($questions as $question) {
+            $exercises[] = $question->exercise;
+        }
+
+        // dd(collect($exercises)->unique()->count());
+
+        return collect($exercises)->unique();
     }
 
     public function switchQuestionType($exercise, $inputs)

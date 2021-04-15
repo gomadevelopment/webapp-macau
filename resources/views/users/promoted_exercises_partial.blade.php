@@ -2,7 +2,7 @@
     <h1 class="title">Exercícios promovidos pelo Utilizador</h1>
 </div>
 @if ($promoted_exercises->isEmpty())
-    <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 p-0">
         <div class="shop_grid">
             <div class="shop_grid_caption">
                 <h4 class="sg_rate_title" style="font-size: 20px;">
@@ -33,13 +33,13 @@
                 @endif
                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                     <strong>Nível:</strong> {{ $exercise->level->name }} &nbsp;&nbsp;&nbsp;
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                         <strong>Média de Avaliação:</strong> 62%
                     @endif
                 </p>
             </div>
 
-            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                 <div class="d-block float-right mt-3">
                     @if (auth()->user()->id == $exercise->user->id)
                         <a href="/exercicios/editar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">

@@ -72,7 +72,7 @@ class ChatController extends Controller
             }
             // Professor/Student - all student classes
             else{
-                if(auth()->user()->user_role_id == 3){
+                if(auth()->user()->isStudent()){
 
                 }
                 else{

@@ -31,48 +31,85 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/logout', 'Auth\AuthController@logout');
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
 
+        /* 
+        * MIDDLEWARE - isProfessor
+        */
+        Route::group(['middleware' => ['isProfessor']], function () {
+
+            // Articles
+            Route::get('/artigos/criar', 'ArticlesController@save');
+            Route::post('/artigos/criar', 'ArticlesController@savePost');
+            Route::get('/artigos/editar/{id}', 'ArticlesController@save');
+            Route::post('/artigos/editar/{id}', 'ArticlesController@savePost');
+            // Route::post('/artigos/apagar/{id}', 'ArticlesController@delete');
+            Route::get('/artigos/get_article_poster/{id}', 'ArticlesController@getArticlePoster');
+            Route::get('/artigos/get_article_medias/{id}', 'ArticlesController@getArticleMedias');
+
+            // Exercises
+            Route::get('/exercicios/detalhe/{id}', 'ExercisesController@details');
+            Route::get('/exercicios/criar', 'ExercisesController@save');
+            Route::post('/exercicios/criar', 'ExercisesController@savePost');
+            Route::get('/exercicios/editar/{id}', 'ExercisesController@save');
+            Route::post('/exercicios/editar/{id}', 'ExercisesController@savePost');
+            // Route::post('/exercicios/apagar/{id}', 'ExercisesController@delete');
+            Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
+            Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
+
+            Route::get('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExameGet');
+            Route::post('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExamePost');
+
+            // Exercises - Questions
+            Route::get('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@saveQuestion');
+            Route::post('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@savePostQuestion');
+            Route::get('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@saveQuestion');
+            Route::post('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@savePostQuestion');
+            Route::get('/exercicios/{exercise_id}/questao/modelo/{question_id}/criar', 'QuestionsController@loadSaveQuestionModel');
+            Route::get('/exercicios/editar/{exercise_id}/apagar/{question_id}', 'QuestionsController@deleteQuestion');
+
+            // Classes
+            Route::post('/create_class', 'ClassesController@createClass');
+            Route::get('/insert_students_in_class', 'ClassesController@insertStudentsInClass');
+            Route::get('/remove_student_from_class/{id}', 'ClassesController@removeStudentFromClass'); // id = student_id
+
+            // Questions Menu List
+            Route::get('/questoes', 'QuestionsController@getQuestionsMenuList');
+
+            /* 
+            * MIDDLEWARE - isAdmin
+            */
+            Route::group(['middleware' => ['isAdmin']], function () {
+
+                // Professor Admin
+                Route::get('/activate_deactivate_user/{user_id}/{from_other_profile}', 'ProfessorAdminController@getActivateDeactivateUser'); // id = student_id
+                Route::get('/professors_validation_filters', 'ProfessorAdminController@professorValidationApplyFilters');
+                Route::get('/students_validation_filters', 'ProfessorAdminController@studentValidationApplyFilters');
+                // Route::get('/student_validation_filters', 'ProfessorAdminController@studentValidationApplyFilters');
+
+                Route::get('/save_settings_content', 'ProfessorAdminController@saveSettingsContent');
+                Route::get('/save_new_settings_content', 'ProfessorAdminController@saveNewSettingsContent');
+                Route::get('/delete_settings_content', 'ProfessorAdminController@deleteSettingsContent');
+
+                Route::get('/approve_articles/{article_id}', 'ProfessorAdminController@approveArticleOrUser');
+                Route::get('/articles_validation_filters', 'ProfessorAdminController@articlesValidationApplyFilters');
+            });
+
+        });
+
+        /* 
+        * All Users Routes
+        */
+
         // Articles
         Route::get('/artigos', 'ArticlesController@index');
         Route::get('/artigos/detalhe/{id}', 'ArticlesController@details');
-        Route::get('/artigos/criar', 'ArticlesController@save');
-        Route::post('/artigos/criar', 'ArticlesController@savePost');
-        Route::get('/artigos/editar/{id}', 'ArticlesController@save');
-        Route::post('/artigos/editar/{id}', 'ArticlesController@savePost');
-        // Route::post('/artigos/apagar/{id}', 'ArticlesController@delete');
         Route::post('/artigos/artigo_favorito', 'ArticlesController@toggleFavorite');
-
-        Route::get('/artigos/get_article_poster/{id}', 'ArticlesController@getArticlePoster');
-        Route::get('/artigos/get_article_medias/{id}', 'ArticlesController@getArticleMedias');
 
         // Exercises
         Route::get('/exercicios', 'ExercisesController@index');
-        Route::get('/exercicios/detalhe/{id}', 'ExercisesController@details');
-        Route::get('/exercicios/criar', 'ExercisesController@save');
-        Route::post('/exercicios/criar', 'ExercisesController@savePost');
-        Route::get('/exercicios/editar/{id}', 'ExercisesController@save');
-        Route::post('/exercicios/editar/{id}', 'ExercisesController@savePost');
-        // Route::post('/exercicios/apagar/{id}', 'ExercisesController@delete');
         Route::post('/exercicios/exercicio_favorito', 'ExercisesController@toggleFavorite');
-        Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
-
-        Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
-
-        // Exercises - Questions
-        Route::get('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@saveQuestion');
-        Route::post('/exercicios/{exercise_id}/questao/criar', 'QuestionsController@savePostQuestion');
-        Route::get('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@saveQuestion');
-        Route::post('/exercicios/{exercise_id}/questao/editar/{question_id}', 'QuestionsController@savePostQuestion');
-        Route::get('/exercicios/{exercise_id}/questao/modelo/{question_id}/criar', 'QuestionsController@loadSaveQuestionModel');
-        Route::get('/exercicios/editar/{exercise_id}/apagar/{question_id}', 'QuestionsController@deleteQuestion');
-
-        Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise'); // Adicionar {id}
+        Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise');
         Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise');
-
         Route::get('/notify/exame_requires_evaluation/{exame_id}', 'NotificationsController@requireExameCorrection');
-
-        Route::get('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExameGet');
-        Route::post('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExamePost');
-
         Route::get('/exercicios/realizar/update_pause_timer/{exame_id}', 'ExamesController@updatePauseTimers');
 
         // Classroom
@@ -100,11 +137,6 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/chat/messages/{id}', 'ChatController@getChatMessages'); // id = chat_id
         Route::get('/chat_search_users', 'ChatController@searchUsers');
         Route::get('/block_user/{id}', 'UsersController@blockUser'); // id = chat_id
-
-        // Classes
-        Route::post('/create_class', 'ClassesController@createClass');
-        Route::get('/insert_students_in_class', 'ClassesController@insertStudentsInClass');
-        Route::get('/remove_student_from_class/{id}', 'ClassesController@removeStudentFromClass'); // id = student_id
 
         // Notifications
         Route::get('/notifications_mark_as_read', 'NotificationsController@markNotificationsAsRead');

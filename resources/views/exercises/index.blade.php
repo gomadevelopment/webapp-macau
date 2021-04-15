@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
 
 @stop
 
@@ -20,7 +20,7 @@
                     <div class="wrap">
                         <h1 class="title">Exercícios</h1>
                     </div>
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                         <div class="dropdown create_article">
                             <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
                             <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
@@ -296,7 +296,7 @@
                                 <input id="show_all_professors" class="checkbox-custom" name="show_all_professors" type="checkbox" checked>
                                 <label for="show_all_professors" class="checkbox-custom-label prof show_all_professors">Todos</label>
                             </li>
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                 <li>
                                     <input id="show_{{ auth()->user()->username }}" class="checkbox-custom" name="show_professors[]" type="checkbox" 
                                     value="{{ auth()->user()->id }}" {{ isset($inputs['show_professors']) && in_array(auth()->user()->id, $inputs['show_professors']) ? 'checked' : '' }}>
@@ -319,7 +319,7 @@
                             </a>
                         </ul>
 
-                        @if (auth()->user()->user_role_id != 3)
+                        @if (auth()->user()->isProfessor())
                             <h4 class="side_title">Visibilidade</h4>
                             <ul class="no-ul-list mb-3 visibility">
                                 <li>
@@ -368,9 +368,9 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.0"></script>
-    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.0"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
+    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
 
     <script>
         function openNav() {

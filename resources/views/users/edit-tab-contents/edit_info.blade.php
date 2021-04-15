@@ -13,13 +13,14 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="shop_grid_caption card-body classroom m-0 p-4">
 
-            <form method="POST" id="edit_profile_form" novalidate="true" action="/perfil/editar/{{ auth()->user()->id }}" enctype="multipart/form-data">
+            <form method="POST" id="edit_profile_form" novalidate="true" action="/perfil/editar/{{ $user->id }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                        <div class="row">
+                        <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="margin: auto !important;"><span></span><span></span></div>
+                        <div class="row replace_user_avatar_row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group d-flex flex-wrap justify-content-center m-0">
                                     {{-- <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
@@ -129,7 +130,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <div class="form-group">
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                    @if($user->isProfessor() && $user->isActive())
                                     <label for="" class="label_title">Instituição onde lecciona</label>
                                     @else
                                     <label for="" class="label_title">Instituição de Ensino</label>
@@ -150,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6">
-                                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                @if($user->isProfessor() && $user->isActive())
                                 <div class="form-group">
                                     <label for="" class="label_title">Outra</label>
                                     <input class="form-control" type="text" name="user_student_number" id="user_student_number" placeholder="">
@@ -173,7 +174,7 @@
                                 </div>
                                 @endif
                             </div>
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                            @if($user->isProfessor() && $user->isActive())
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <label for="" class="label_title">Página LinkedIn</label>
@@ -189,7 +190,7 @@
                             @endif
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                    @if($user->isProfessor() && $user->isActive())
                                         <label for="" class="label_title">Breve Resumo do Percurso Profissional</label>
                                     @else
                                         <label for="" class="label_title">Sobre mim</label>
@@ -210,7 +211,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <label for="" class="label_title">Preferências</label>
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                    @if($user->isProfessor() && $user->isActive())
                                         <input id="show_email" class="checkbox-custom" name="show_email" type="checkbox"
                                         {{ $user->show_email ? 'checked' : ''}}>
                                         <label for="show_email" class="checkbox-custom-label mb-3">Mostrar o meu Email a Utilizadores que não pertencam às minhas Turmas</label>

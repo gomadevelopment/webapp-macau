@@ -8,7 +8,12 @@ use Illuminate\Validation\Rule;
 use App\User,
     App\University,
     App\UserBlocked,
-    App\Exercise;
+    App\Exercise,
+    App\Tag,
+    App\ExerciseLevel,
+    App\ExerciseCategory,
+    App\ArticleCategory,
+    App\Article;
 
 use DB;
 
@@ -37,7 +42,8 @@ class UsersController extends Controller
             'username' => $inputs["username"],
             'email' => $inputs["email"],
             'password' => bcrypt($inputs["password"]),
-            'user_role_id' => $inputs["professor_or_student"] == 'professor' ? 2 : 3
+            'user_role_id' => $inputs["professor_or_student"] == 'professor' ? 4 : 3,
+            'active' => 1
         ]);
 
         return redirect()->to('/');
@@ -100,7 +106,36 @@ class UsersController extends Controller
         $classes = auth()->user()->classes;
         $students_without_class = User::usersWithOutClass();
 
-        return view('users.edit_profile', compact('user', 'universities', 'classes', 'students_without_class'));
+        $professors = User::whereIn('user_role_id', [1, 2, 4])
+                            ->where('id', '!=', auth()->user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'professors');
+
+        $students = User::where('user_role_id', 3)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'students');
+
+        $tags = Tag::get();
+        $exercises_levels = ExerciseLevel::get();
+        $exercises_categories = ExerciseCategory::get();
+        $articles_categories = ArticleCategory::get();
+        $articles = Article::paginate(10, ['*'], 'articles');
+
+        $inputs = [];
+
+        return view('users.edit_profile', compact(
+            'user', 
+            'universities', 
+            'tags',
+            'exercises_levels',
+            'exercises_categories',
+            'articles_categories',
+            'articles',
+            'classes', 
+            'students_without_class', 
+            'professors', 
+            'students', 
+            'inputs'));
     }
 
     public function editPost_profile($id)
@@ -118,8 +153,8 @@ class UsersController extends Controller
         
         $user = User::find($id);
 
-        $validator = \Validator::make($inputs, User::rulesForEdit(auth()->user()->id, $more_rules), User::$messages);
-
+        $validator = \Validator::make($inputs, User::rulesForEdit($id, $more_rules), User::$messages);
+        // dd($validator);
         if ($validator->fails()) {
             request()->session()->flash('edit_profile_error', 'Por favor, verifique os erros no formulário.');
             // request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
@@ -154,7 +189,36 @@ class UsersController extends Controller
         $classes = auth()->user()->classes;
         $students_without_class = User::usersWithOutClass();
 
-        return view('users.edit_profile', compact('user', 'universities', 'classes', 'students_without_class'));
+        $professors = User::whereIn('user_role_id', [1, 2, 4])
+                            ->where('id', '!=', auth()->user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'professors');
+
+        $students = User::where('user_role_id', 3)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'students');
+        
+        $tags = Tag::get();
+        $exercises_levels = ExerciseLevel::get();
+        $exercises_categories = ExerciseCategory::get();
+        $articles_categories = ArticleCategory::get();
+        $articles = Article::paginate(10, ['*'], 'articles');
+
+        $inputs = [];
+
+        return view('users.edit_profile', compact(
+            'user', 
+            'universities', 
+            'tags',
+            'exercises_levels',
+            'exercises_categories',
+            'articles_categories', 
+            'articles', 
+            'classes', 
+            'students_without_class', 
+            'professors', 
+            'students', 
+            'inputs'));
     }
 
     public function replaceUserAvatar()

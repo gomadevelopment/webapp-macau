@@ -2,7 +2,9 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Texto Introdutório <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Texto Introdutório <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Breve resumo apresentado como descrição do Exercício, tanto na lista de Exercícios como na introdução de cada Exercício individual." 
+                    alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control" name="introduction" id="introduction" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('introduction', $exercise->introduction) }}</textarea>
             </div>
         </div>
@@ -10,7 +12,9 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Enunciado <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Enunciado <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Enunciado Geral do Exercício." 
+                    alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control" name="statement" id="statement" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('statement', $exercise->statement) }}</textarea>
             </div>
         </div>
@@ -22,7 +26,9 @@
         <div class="card-body">
             <div class="form-group">
                 <form action=""></form>
-                <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Insira aqui o vídeo/audio/imagem a apresentar ao longo de todo o Exercício." 
+                    alt="" style="margin-left: 5px;"></label>
                 <div id="dropzone">
                     <div class="dropzone needsclick {{ isset($details_page) && $details_page ? 'disabled' : '' }}" id="form-dropzone-media">
                         <div class="dz-message needsclick">
@@ -41,7 +47,9 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Descrição Audivisual <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Descrição Audiovisual <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Descrição Audiovisual apresentado no ínicio da realização do Exercício, acerca da media acima inserida." 
+                    alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control" name="audiovisual_desc" id="audiovisual_desc" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audiovisual_desc', $exercise->audiovisual_desc) }}</textarea>
             </div>
         </div>
@@ -49,7 +57,9 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Transcrição Áudio <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Transcrição Áudio <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Transcrição Áudio apresentada no fim da realização de um Exercício, após o mesmo ser submetido pelo Aluno." 
+                    alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control" name="audio_transcript" id="audio_transcript" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audio_transcript', $exercise->audio_transcript) }}</textarea>
                 {{-- <div class="audio_transcription_more_options">
                     <input id="show_to_my_students" class="checkbox-custom" name="show_to_my_students" type="checkbox">
@@ -65,7 +75,7 @@
     <div class="col-sm-12 col-md-8 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Opções Adicionais <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                <label class="label_title">Opções Adicionais</label>
                 <div class="row">
                     <div class="col-sm-12 col-md-7 col-lg-7 align-self-center">
                         <input id="has_time" class="checkbox-custom" name="has_time" type="checkbox" {{ $exercise->has_time ? 'checked' : '' }} {{ isset($details_page) && $details_page ? 'disabled' : '' }}>

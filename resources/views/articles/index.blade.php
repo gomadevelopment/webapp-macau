@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
 
 @stop
 
@@ -19,11 +19,13 @@
                     <div class="wrap">
                         <h1 class="title">Biblioteca</h1>
                     </div>
-                    <div class="dropdown create_article">
-                        <a href="/artigos/criar" class="btn btn-theme btn-custom dropdown-toggle">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
-                        Criar Artigo</a>
-                    </div>
+                    @if(auth()->user()->isProfessor())
+                        <div class="dropdown create_article">
+                            <a href="/artigos/criar" class="btn btn-theme btn-custom dropdown-toggle">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
+                            Criar Artigo</a>
+                        </div>
+                    @endif
                     <div class="show_favorites">
                         <input id="my_favorites" class="checkbox-custom" name="my_favorites" type="checkbox">
                         <label for="my_favorites" class="checkbox-custom-label">Meus Favoritos</label>                    
@@ -124,12 +126,12 @@
                                         <input id="show_my_articles_mobile" class="checkbox-custom" name="show_my_articles_mobile" type="checkbox">
                                         <label for="show_my_articles_mobile" class="checkbox-custom-label">As minhas Publicações</label>
                                     </li>
-                                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                                    @if(auth()->user()->isProfessor())
                                         <li>
                                             <input id="show_my_students_articles_mobile" class="checkbox-custom" name="show_my_students_articles_mobile" type="checkbox">
                                             <label for="show_my_students_articles_mobile" class="checkbox-custom-label">Dos meus Alunos</label>
                                         </li>
-                                    @elseif(auth()->user()->user_role_id == 3)
+                                    @elseif(auth()->user()->isStudent())
                                             <li>
                                             <input id="show_my_professor_articles_mobile" class="checkbox-custom" name="show_my_professor_articles_mobile" type="checkbox">
                                             <label for="show_my_professor_articles_mobile" class="checkbox-custom-label">Do meu Professor</label>
@@ -222,12 +224,12 @@
                                 <input id="show_my_articles" class="checkbox-custom" name="show_my_articles" type="checkbox">
                                 <label for="show_my_articles" class="checkbox-custom-label show_my_articles show_">As minhas Publicações</label>
                             </li>
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                            @if(auth()->user()->isProfessor())
                                 <li>
                                     <input id="show_my_students_articles" class="checkbox-custom" name="show_my_students_articles" type="checkbox">
                                     <label for="show_my_students_articles" class="checkbox-custom-label show_my_students_articles show_">Dos meus Alunos</label>
                                 </li>
-                            @elseif(auth()->user()->user_role_id == 3)
+                            @elseif(auth()->user()->isStudent())
                                     <li>
                                     <input id="show_my_professor_articles" class="checkbox-custom" name="show_my_professor_articles" type="checkbox">
                                     <label for="show_my_professor_articles" class="checkbox-custom-label show_my_professor_articles show_">Do meu Professor</label>
@@ -294,8 +296,8 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
 
     <script>
         function openNav() {

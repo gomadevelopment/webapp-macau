@@ -111,11 +111,10 @@
     margin-left: 5px;
 }
 
-.expand_accordion.expanded,
-.red-skin a.expand_accordion.expanded:hover,
-.red-skin a.expand_accordion.expanded:focus {
+.expand_accordion.expanded:not([class*="_validation_filters_accordion"]),
+.red-skin a.expand_accordion.expanded:not([class*="_validation_filters_accordion"]):hover,
+.red-skin a.expand_accordion.expanded:not([class*="_validation_filters_accordion"]):focus {
     border: 2px solid #ff2850;
-
     color: #ff2850 !important;
     font-family: "Gilroy - Bold";
     font-weight: 700;

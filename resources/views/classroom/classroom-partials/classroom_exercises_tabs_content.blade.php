@@ -16,7 +16,7 @@
 
 </div>
 
-@if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+@if(auth()->user()->isProfessor())
 
     {{-- awaiting-evaluation TAB --}}
     <div class="tab-pane fade show active" id="awaiting-evaluation" role="tabpanel" aria-labelledby="awaiting-evaluation-tab">

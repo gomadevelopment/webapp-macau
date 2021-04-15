@@ -140,6 +140,71 @@ class User extends Authenticatable
     }
 
     /**
+     * Is Student
+     */
+    public function isStudent()
+    {
+        if($this->user_role_id == 3){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Is Professor
+     */
+    public function isProfessor()
+    {
+        if($this->user_role_id == 1 || $this->user_role_id == 2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Is Professor
+     */
+    public function isPreProfessor()
+    {
+        if($this->user_role_id == 4){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Professor is admin
+     */
+    public function isAdmin()
+    {
+        if($this->user_role_id == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Professor is admin
+     */
+    public function isActive()
+    {
+        if($this->active){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
      * Unread Notifications
      */
     public function unread_notifications()
@@ -180,6 +245,9 @@ class User extends Authenticatable
     {
         $users_with_chat_ids = [];
         foreach (auth()->user()->chat_users as $chat_user) {
+            if(!$chat_user->user->active){
+                continue;
+            }
             if(!$chat_user->chat->is_group){
                 if($chat_user->chat->user_1_id == auth()->user()->id){
                     $users_with_chat_ids[] = $chat_user->chat->user_2_id;
@@ -205,6 +273,9 @@ class User extends Authenticatable
     {
         $users_with_chat_ids = [];
         foreach (auth()->user()->chat_users as $chat_user) {
+            if(!$chat_user->user->active){
+                continue;
+            }
             if(!$chat_user->chat->is_group){
                 if($chat_user->chat->user_1_id == auth()->user()->id){
                     $users_with_chat_ids[] = $chat_user->chat->user_2_id;
@@ -280,12 +351,12 @@ class User extends Authenticatable
     public function getStudentColleagues($class_id)
     {
         $students_ids = [];
-        $students_ids = StudentClass::find($class_id)->students->pluck('id')->toArray();
+        $students_ids = StudentClass::find($class_id)->students->where('active', 1)->pluck('id')->toArray();
         if(($key = array_search(auth()->user()->id, $students_ids)) !== false) {
             unset($students_ids[$key]);
         }
 
-        return User::whereIn('id', $students_ids)->get();
+        return self::whereIn('id', $students_ids)->where('active', 1)->get();
     }
 
     /**
@@ -300,10 +371,10 @@ class User extends Authenticatable
             }
         }
         else{
-            $students_ids = StudentClass::find($class_id)->students->pluck('id')->toArray();
+            $students_ids = StudentClass::find($class_id)->students->where('active', 1)->pluck('id')->toArray();
         }
 
-        return User::whereIn('id', $students_ids)->get();
+        return self::whereIn('id', $students_ids)->where('active', 1)->get();
     }
 
     public function saveEditProfile($inputs)
@@ -435,5 +506,56 @@ class User extends Authenticatable
         else{
             return true;
         }
+    }
+
+    /**
+     * Admin Professor - Professors Validation Filters
+     */
+    public static function applyUsersValidationFilters($filters, $professors_or_students)
+    {
+        // dd($filters, $professors_or_students);
+        $user_role_ids = $professors_or_students == 'professors' ? [1, 2, 4] : [3];
+        $query = self::whereIn('user_role_id', $user_role_ids)
+                        ->where('id', '!=', auth()->user()->id)
+                        ->orderBy('created_at', 'desc');
+
+        // Username Filter
+        if(isset($filters['settings_'.$professors_or_students.'_filter_username'])){
+            $query = $query->where('username', 'LIKE', '%' . $filters['settings_'.$professors_or_students.'_filter_username'] . '%');
+        }
+
+        // settings_professors_filter_approval
+
+        // Approval Filter
+        if(isset($filters['settings_'.$professors_or_students.'_filter_approval']) && $filters['settings_'.$professors_or_students.'_filter_approval'] != 'all'){
+            if($filters['settings_'.$professors_or_students.'_filter_approval'] == 'approved'){
+                $query = $query->where('user_role_id', 2);
+            }
+            else{
+                $query = $query->where('user_role_id', 4);
+            }
+        }
+
+        // Status Filter
+        if(isset($filters['settings_'.$professors_or_students.'_filter_status']) && $filters['settings_'.$professors_or_students.'_filter_status'] != 'all'){
+            if($filters['settings_'.$professors_or_students.'_filter_status'] == 'active'){
+                $query = $query->where('active', 1);
+            }
+            else{
+                $query = $query->where('active', 0);
+            }
+        }
+
+        if (isset($filters['settings_'.$professors_or_students.'_start_date'])) {
+            $query->where('created_at', '>=', $filters['settings_'.$professors_or_students.'_start_date'] . '00:00:00');
+        }
+
+        if (isset($filters['settings_'.$professors_or_students.'_end_date'])) {
+            $query->where('created_at', '<=', $filters['settings_'.$professors_or_students.'_end_date'] . '00:00:00');
+        }
+
+        $skip = $filters['page'] * 10;
+
+        return $query->skip($skip)->paginate(10)->setPageName($professors_or_students);
     }
 }

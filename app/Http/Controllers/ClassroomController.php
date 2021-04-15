@@ -24,7 +24,7 @@ class ClassroomController extends Controller
     {
         $this->viewShareNotifications();
         // User is student
-        if(auth()->user()->user_role_id == 3){
+        if(auth()->user()->isStudent()){
             
             if(!auth()->user()->student_class_user){
                 $students_colleagues = collect([]);
@@ -44,7 +44,9 @@ class ClassroomController extends Controller
         $professor_all_classes = auth()->user()->classes;
         foreach($professor_all_classes as $class){
             foreach($class->students as $student){
-                $students->add($student);
+                if($student->active){
+                    $students->add($student);
+                }
             }
         }
 
@@ -55,9 +57,9 @@ class ClassroomController extends Controller
         $students_exames_evaluated = $all_students_exames[2];
                 
         // Student - Student Exames
-        $student_in_evaluation_exames = auth()->user()->user_role_id == 3 ? auth()->user()->getStudentInEvaluationExames(0, 1) : collect();
-        $student_in_course_exames = auth()->user()->user_role_id == 3 ? auth()->user()->getStudentInCourseExames(0, 1) : collect();
-        $student_done_exames = auth()->user()->user_role_id == 3 ? auth()->user()->getStudentDoneExames(0, 1) : collect();
+        $student_in_evaluation_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInEvaluationExames(0, 1) : collect();
+        $student_in_course_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInCourseExames(0, 1) : collect();
+        $student_done_exames = auth()->user()->isStudent() ? auth()->user()->getStudentDoneExames(0, 1) : collect();
 
         $unread_notifications = auth()->user()->getUnreadNotifications(5)->get();
         $read_notifications = auth()->user()->getReadNotifications(10)->get();

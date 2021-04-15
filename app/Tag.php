@@ -16,14 +16,35 @@ class Tag extends Model
     ];  
 
     /**
-     * Article Tags pivot
+     * Article Tags
      */
     public function article_tags() { 
         return $this->belongsToMany(
             'App\Article', 
             'articles_tags', 
-            'tag_id', 
-            'article_id'
         );
+    }
+
+    /**
+     * Exercise Tags
+     */
+    public function exercise_tags() {
+        return $this->belongsToMany(
+            'App\Tag', 
+            'exercises_tags', 
+        );
+    }
+
+    /**
+     * Tag Can be deleted
+     */
+    public function canBeDeleted()
+    {
+        if($this->article_tags->count() || $this->exercise_tags->count()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

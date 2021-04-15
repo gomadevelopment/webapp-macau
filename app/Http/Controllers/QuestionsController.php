@@ -75,10 +75,13 @@ class QuestionsController extends Controller
 
         $inputs = request()->all();
 
+        // dd($inputs);
+
         $rules = $question_id ? Question::rulesForEdit() : Question::$rulesForAdd;
 
         $validator = \Validator::make($inputs, Question::rulesForEdit(), Question::$messages);
 
+        // dd($validator);
         if ($validator->fails()) {
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
             return response()->json([
@@ -164,6 +167,42 @@ class QuestionsController extends Controller
             'message' => 'Questão removida com sucesso!',
             'html' => $html,
         ]);
+    }
+
+    public function getQuestionsMenuList()
+    {
+        view()->share('topNavBarOption', 'questions');
+        $this->viewShareNotifications();
+
+        $inputs = request()->all();
+
+        $empty_inputs = false;
+
+        if(empty($inputs)){
+            $inputs['page'] = 1;
+            $empty_inputs = true;
+        }
+
+        $questions = Question::myModelsWithFilters($inputs);
+        $exercises = Question::exercisesWithQuestionsWithReference();
+
+        if($empty_inputs){
+            return view('questions.questions_list', compact('questions', 'exercises', 'inputs'));
+        }
+
+        $view = view()->make("questions.list_partial", [
+            'questions' => $questions,
+            'exercises' => $exercises,
+            'inputs' => $inputs
+        ]);
+        $html = $view->render();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Filtros Aplicados!',
+            'html' => $html,
+        ]);
+
     }
 
     public function viewShareNotifications()

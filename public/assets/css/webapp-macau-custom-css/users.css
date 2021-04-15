@@ -1,0 +1,110 @@
+.dashboard_container_header {
+    padding: 10px 20px !important;
+}
+
+.settings_table .dashboard_fl_1 a[class*="_validation_filters_accordion"],
+.settings_table .dashboard_fl_1 h4 {
+    color: #131b31;
+    font-family: "Gilroy - Medium";
+    font-size: 22px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    text-align: left;
+}
+
+.settings_table .table {
+    margin-bottom: 0;
+}
+
+.settings_table .table .thead-dark th {
+    background-color: #35434e;
+
+    font-family: "Gilroy - Medium";
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    text-align: left;
+}
+
+.settings_table .table tbody th,
+.settings_table .table tbody td,
+.settings_table .table tbody td span,
+.settings_table .table tbody td a {
+    font-family: "Gilroy - Medium";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.25px;
+    line-height: normal;
+}
+
+.settings_table .table tbody th,
+.settings_table .table tbody td {
+    color: #131b31;
+}
+
+.filters_dates label {
+    font-size: 18px !important;
+    width: 100%;
+}
+
+.filters_dates input {
+    display: inline-block;
+    width: 48%;
+}
+
+.filters_dates button {
+    width: auto;
+    float: none !important;
+    margin-left: 10px;
+    padding: 16.5px 25px;
+}
+
+.link_on_table {
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    /* font-size: 18px; */
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.30px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.inputs_inside_table,
+.add_new_content_input {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: none;
+    padding: .5rem .75rem;
+    border: 1px solid #131b31;
+    background-clip: initial;
+}
+
+.inputs_inside_table:focus,
+.add_new_content_input:focus {
+    border: 1px solid #ff2850;
+}
+
+h4.add_new_content_h4 {
+    width: 100%;
+    display: block;
+}
+
+span.add_new_content_span {
+    margin: auto;
+}
+
+.add_new_content_input {
+    margin: 10px auto auto auto;
+    height: 46px;
+    font-size: 18px;
+    border: 1px solid #e6eaf3;
+}
+
+.add_new_content_button {
+    height: 46px;
+    margin: 10px auto auto auto;
+}

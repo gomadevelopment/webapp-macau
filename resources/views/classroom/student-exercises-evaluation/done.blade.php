@@ -70,7 +70,7 @@
                     <strong>Avaliação:</strong> <strong class="exercise_complete"> 100%</strong>
                 </p>
             </div>
-            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                 <div class="d-block float-right mt-3">
                     <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -121,7 +121,7 @@
                     <strong>Avaliação:</strong> <strong class="exercise_complete"> 100%</strong>
                 </p>
             </div>
-            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                 <div class="d-block float-right mt-3">
                     <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
@@ -172,7 +172,7 @@
                     <strong>Avaliação:</strong> <strong class="exercise_complete"> 100%</strong>
                 </p>
             </div>
-            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                 <div class="d-block float-right mt-3">
                     <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
                         <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">

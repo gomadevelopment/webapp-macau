@@ -33,7 +33,7 @@ class ExercisesController extends Controller
         $exercises_categories = ExerciseCategory::get();
         $exercises_levels = ExerciseLevel::get();
         $tags = Tag::get();
-        if(auth()->user()->user_role_id == 3){
+        if(auth()->user()->isStudent()){
             $professors = User::where('user_role_id', '!=', 3)->get();
         }
         else{

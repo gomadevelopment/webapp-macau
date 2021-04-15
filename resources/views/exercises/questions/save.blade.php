@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
 
 @stop
 
@@ -313,14 +313,14 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.0"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.0"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.1"></script> --}}
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.0"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.1"></script>
 
     <script>
 
@@ -381,6 +381,8 @@
             //         language: 'pt',
             //     });
             // }
+
+            $('#true_or_false_select_0').select2();
 
             $('#question_model').select2({
                 placeholder: "Escolher Modelo..."
@@ -780,14 +782,16 @@
                 // add_corr_category_question_0_answer_1
                 var html = $('.add_correspondence_categories_answer_clone').children();
 
+                var count_answer_clones = $(this).parent().parent().find('.row_to_remove').length;
+
+                if(count_answer_clones == 10){
+                    alert('Não pode adicionar mais de 10 frases por Categoria/Frase.');
+                    return false;
+                }
+
                 // Change answers names and ids
                 var question_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
                 var answer_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
-
-                if(answer_number >= 10){
-                    alert('Não pode adicionar mais de 10 respostas por pergunta.');
-                    return false;
-                }
 
                 html.find("[name^='corr_category_answer_']").attr('name', 'corr_category_answer_'+answer_number+'_question_'+question_number);
                 html.find("[id^='corr_category_answer_']").attr('id', 'corr_category_answer_'+answer_number+'_question_'+question_number);
@@ -927,6 +931,13 @@
 
                 var html = $('.add_multiple_choice_answers_clone').children();
 
+                var count_answer_clones = $(this).parent().parent().find('.row_to_remove').length;
+
+                if(count_answer_clones == 10){
+                    alert('Não pode adicionar mais de 10 respostas por pergunta.');
+                    return false;
+                }
+
                 // Change answers names and ids
                 var question_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
                 var answer_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
@@ -1022,12 +1033,19 @@
 
                 $(paste_before).before(html);
             });
-            // Clone new Multiple Choice ANSWER ONLY
+            // Clone new Multiple Choice INTRUDER ANSWER ONLY
             $(document).on('click', '.button_add_multiple_choice_intruder_answer', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent();
 
                 var html = $('.add_multiple_choice_intruder_answer_clone').children();
+
+                var count_answer_clones = $(this).parent().parent().find('.row_to_remove').length;
+
+                if(count_answer_clones == 10){
+                    alert('Não pode adicionar mais de 10 palavras por grupo de palavras.');
+                    return false;
+                }
 
                 // Change answers names and ids
                 var question_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
@@ -1165,6 +1183,85 @@
                 // applyCKEditor('fill_text_word_' + new_index);
                 
             });
+            // Generate multiple selects on KEYUP
+            $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var word = $(this).val();
+                var regex_match = word.match(/<%\s*%>/gm);
+                if(regex_match){
+
+                    if(regex_match.length == 11){
+                        alert('Não pode adicionar mais de 10 opções/palavras a preencher por frase. (Apague o último "<% %>" se já tiver 10 opções/palavras)');
+                        return false;
+                    }
+
+                    regex_match.forEach(function (value, index) {
+
+                        if($('#select_text_word_' + word_id + '_option_' + index).length){
+                            return;
+                        }
+
+                        var new_vowel_select = '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-1 d-flex">';
+                        new_vowel_select += '<p class="exercise_level align-self-center m-0">'+(index + 1)+'ª&nbsp;&nbsp;</p>';
+                        new_vowel_select += '<select name="select_text_word_' + word_id + '_option_' + index+'[]" id="select_text_word_' + word_id + '_option_' + index+'" class="form-control select_vowels_class" multiple></select>';
+                        new_vowel_select += '</div>';
+
+                        $('#selects_row_text_words_'+word_id).append(new_vowel_select);
+                        
+                        updateVowelSelects(index, word_id);
+
+                        $('#select_text_word_' + word_id + '_option_' + index).select2({
+                            tags: true,
+                            placeholder: "Escreva as opções...",
+                            "language": {
+                                "noResults": function(){
+                                    return "Não foram encontradas opções.";
+                                }
+                            },
+                            multiple: true
+                        });
+                        
+                    });
+                    
+                }
+                else if(!regex_match){
+                    $('#selects_row_text_words_'+word_id).empty();
+                }
+                // Delete selects "a mais"
+                $('[id^="select_text_word_'+word_id+'"]').each(function(index, element){
+                    var check_vowel_id = parseInt(element.id.match(/\d+/g)[1]);
+                    if(!regex_match){
+                        $('#select_text_word_' + word_id + '_option_0').parent().remove();
+                        $('#select_text_word_' + word_id + '_option_0').remove();
+                        return;
+                    }
+                    if(check_vowel_id >= regex_match.length){
+                        $(element).parent().remove();
+                        $(element).remove();
+                    }
+                });
+                
+            });
+            // <% %> button
+            $(document).on('click', '[id^="text_word_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#fill_text_word_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                var regex_match = textAreaTxt.match(/<%\s*%>/gm);
+                if(regex_match){
+                    if(regex_match.length == 10){
+                        alert('Não pode adicionar mais de 10 opções/palavras a preencher por frase.');
+                        return false;
+                    }
+                }
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
+            });
             // Apply select2 on load EDIT - text_words
             $('[id^="select_text_word_"]').select2({
                 tags: true,
@@ -1267,74 +1364,6 @@
                 e.preventDefault();
                 var word_id = parseInt(this.id.match(/\d+/)[0]);
                 var $txt = $("#fill_options_writing_textarea_" + word_id);
-                var caretPos = $txt[0].selectionStart;
-                var textAreaTxt = $txt.val();
-                var txtToAdd = "<% %>";
-                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
-                $txt.keyup();
-                $txt.focus();
-            });
-
-            // Generate multiple selects on KEYUP
-            $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
-                e.preventDefault();
-                var word_id = parseInt(this.id.match(/\d+/)[0]);
-                var word = $(this).val();
-                var regex_match = word.match(/<%\s*%>/gm);
-                if(regex_match){
-
-                    regex_match.forEach(function (value, index) {
-
-                        if($('#select_text_word_' + word_id + '_option_' + index).length){
-                            return;
-                        }
-
-                        var new_vowel_select = '<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-1 d-flex">';
-                        new_vowel_select += '<p class="exercise_level align-self-center m-0">'+(index + 1)+'ª&nbsp;&nbsp;</p>';
-                        new_vowel_select += '<select name="select_text_word_' + word_id + '_option_' + index+'[]" id="select_text_word_' + word_id + '_option_' + index+'" class="form-control select_vowels_class" multiple></select>';
-                        new_vowel_select += '</div>';
-
-                        $('#selects_row_text_words_'+word_id).append(new_vowel_select);
-                        
-                        updateVowelSelects(index, word_id);
-
-                        $('#select_text_word_' + word_id + '_option_' + index).select2({
-                            tags: true,
-                            placeholder: "Escreva as opções...",
-                            "language": {
-                                "noResults": function(){
-                                    return "Não foram encontradas opções.";
-                                }
-                            },
-                            multiple: true
-                        });
-                        
-                    });
-                    
-                }
-                else if(!regex_match){
-                    $('#selects_row_text_words_'+word_id).empty();
-                }
-                // Delete selects "a mais"
-                $('[id^="select_text_word_'+word_id+'"]').each(function(index, element){
-                    var check_vowel_id = parseInt(element.id.match(/\d+/g)[1]);
-                    if(!regex_match){
-                        $('#select_text_word_' + word_id + '_option_0').parent().remove();
-                        $('#select_text_word_' + word_id + '_option_0').remove();
-                        return;
-                    }
-                    if(check_vowel_id >= regex_match.length){
-                        $(element).parent().remove();
-                        $(element).remove();
-                    }
-                });
-                
-            });
-            // <% %> button
-            $(document).on('click', '[id^="text_word_perc_delimiter_"]', function(e){
-                e.preventDefault();
-                var word_id = parseInt(this.id.match(/\d+/)[0]);
-                var $txt = $("#fill_text_word_" + word_id);
                 var caretPos = $txt[0].selectionStart;
                 var textAreaTxt = $txt.val();
                 var txtToAdd = "<% %>";
@@ -1537,6 +1566,13 @@
 
                 var html = $('.add_assort_sentences_sentence_clone').children();
 
+                var count_answer_clones = $(this).parent().parent().find('.row_to_remove').length;
+
+                if(count_answer_clones == 10){
+                    alert('Não pode adicionar mais de 10 frases por grupo de frases.');
+                    return false;
+                }
+
                 // Change solutions names and ids
                 var sentence_number = parseInt($(this)[0].id.match(/\d+/g)[0]);
                 var solution_number = parseInt($(this)[0].id.match(/\d+/g)[1]);
@@ -1643,6 +1679,13 @@
                 var paste_before = $(this).parent();
 
                 var html = $('.add_assort_words_solution_clone').children();
+
+                var count_answer_clones = $(this).parent().parent().find('.row_to_remove').length;
+
+                if(count_answer_clones == 10){
+                    alert('Não pode adicionar mais de 10 palavras/excertos por frase.');
+                    return false;
+                }
 
                 // Change solutions names and ids
                 var sentence_number = parseInt($(this)[0].id.match(/\d+/g)[0]);

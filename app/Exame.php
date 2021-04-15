@@ -916,6 +916,19 @@ class Exame extends Model
 
         $this->is_revised = 1;
         $this->save();
+
+        Notification::create([
+            'title' => 'Exame corrigido',
+            'text' => 'O seu exame "'.$this->title.'" foi corrigido. Já o pode rever com nota total.',
+            'url' => '/exercicios/realizar/'.$exame->exercise->id,
+            'param1_text' => 'exercise_id',
+            'param1' => $exame->exercise->id,
+            'param2_text' => '',
+            'param2' => '',
+            'type_id' => 2,
+            'user_id' => $exame->student_id,
+            'active' => 1
+        ]);
         
     }
 }

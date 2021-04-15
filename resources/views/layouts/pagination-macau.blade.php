@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <nav>
-        <ul class="pagination p-center {{ $paginator->getOptions()['pageName'] }}">
+        <ul class="pagination p-center {{ $paginator->getOptions()['pageName'] != 'page' ? $paginator->getOptions()['pageName'] : $paginator->getPageName() }}">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="disabled page-item" aria-disabled="true" aria-label="@lang('pagination.previous')">

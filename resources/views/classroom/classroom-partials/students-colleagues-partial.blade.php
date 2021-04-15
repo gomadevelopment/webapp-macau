@@ -1,6 +1,6 @@
 @if(!$students_colleagues->count())
     <div class="form-group d-flex flex-wrap mb-4 ml-2">
-        @if(auth()->user()->user_role_id == 3)
+        @if(auth()->user()->isStudent())
             <h4 class="colleagues_name m-0">Ainda não tem colegas de turma.</h4>
         @else
             <h4 class="colleagues_name m-0">Esta turma não tem nenhum aluno.</h4>
@@ -23,7 +23,7 @@
                         <div class="dropdown-menu message-box">
                             <a class="msg-title" href="/perfil/{{ $s_c->id }}">
                                 <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                                Ver Perfil @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2) do Aluno @endif
+                                Ver Perfil @if(auth()->user()->isProfessor() && auth()->user()->isActive()) do Aluno @endif
                             </a>
                             <hr class="mt-0 mb-2 ml-2 mr-2">
                             <a class="msg-title" href="/chat/{{ $s_c->id }}">
@@ -41,7 +41,7 @@
     <div class="form-group">
         <div class="text-center">
             <a href="#" class="students_colleagues_see_all">
-                @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                     Ver todos os Alunos
                 @else
                     Mostrar todos os Colegas

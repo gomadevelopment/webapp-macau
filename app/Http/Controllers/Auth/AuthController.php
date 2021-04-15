@@ -55,6 +55,19 @@ class AuthController extends Controller
                     ->withInput();
         }
 
+        if (!auth()->user()->isActive()) {
+            $login_error = \Session::get('locale') == 'pt' || !\Session::has('locale') 
+                                ? 'Este utilizador está desativado. Por favor, contacte o suporte.' 
+                                : 'This user is deactivated. Please, contact the support.';
+            request()->session()->flash('login_error', $login_error);
+            session()->flush();
+            auth()->logout();
+            return redirect('/')
+                    ->with('login_error', $login_error)
+                    ->withErrors(['login_incorrect' => $login_error])
+                    ->withInput();
+        }
+
         return redirect()->to('/');
     }    
 

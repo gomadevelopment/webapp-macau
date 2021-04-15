@@ -71,36 +71,6 @@
                 @endif
             @endforeach
         @endif
-        {{-- <div class="form-group d-flex flex-wrap mb-4">
-            <img src="https://via.placeholder.com/500x500" alt="" class="colleagues_round_avatar mr-3">
-            <h4 class="colleagues_name m-0">Luisa Nunes</h4>
-            <div class="dropdown ml-auto align-self-center classes_student_dropdown student_dropdown">
-                <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
-                    <span class="ping"></span>
-                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                    <span class="dropdown-menu-arrow"></span>
-                </a>
-                <div class="dropdown-menu message-box">
-                    <a class="msg-title" href="/perfil">
-                        <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
-                        Ver Perfil do Aluno
-                    </a>
-                    <hr class="mt-0 mb-2 ml-2 mr-2">
-                    <a class="msg-title" href="#">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                        Iniciar Conversa
-                    </a>
-                    <hr class="mt-0 mb-2 ml-2 mr-2">
-                    <a class="msg-title" href="#">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Cross_black.svg')}}" class="logo logout_icon mr-2" alt="" />
-                        Remover Aluno da Turma
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <hr> --}}
             
     </div>
 

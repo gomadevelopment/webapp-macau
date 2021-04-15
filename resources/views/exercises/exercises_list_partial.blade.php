@@ -51,12 +51,12 @@
                         </p>
                         <p class="exercise_level" style="float: left; margin-right: 20px;">
                             <strong>Nível:</strong> {{ $exercise->level->name }} &nbsp;&nbsp;&nbsp;
-                            @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                 <strong>Média de Avaliação:</strong> 62%
                             @endif
                         </p>
                     </div>
-                    @if(auth()->user()->user_role_id == 1 || auth()->user()->user_role_id == 2)
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                         <div class="d-block float-right mt-3">
                             @if (auth()->user()->id == $exercise->user->id)
                                 <a href="/exercicios/editar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
@@ -123,7 +123,9 @@
 
                     @if($exercise->only_my_students)
                         <div class="available_tooltip_text">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-bottom: 3px; margin-right: 5px;"> 
+                            <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                                title="Apenas disponível para alunos do professor autor deste exercício." 
+                                alt="" style="margin-bottom: 3px; margin-right: 5px;"> 
                             Disponível só para os meus Alunos
                         </div>
                     @endif
