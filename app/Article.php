@@ -307,7 +307,7 @@ class Article extends Model
         }
 
         if(isset($filters['settings_articles_filter_user_username'])){
-            $query = $query->whereHas('user', function($q) {
+            $query = $query->whereHas('user', function($q) use ($filters) {
                             $q->where('username', 'LIKE', '%' . $filters['settings_articles_filter_user_username'] . '%');
                         });
         }

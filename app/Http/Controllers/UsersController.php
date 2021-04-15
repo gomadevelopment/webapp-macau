@@ -119,7 +119,7 @@ class UsersController extends Controller
         $exercises_levels = ExerciseLevel::get();
         $exercises_categories = ExerciseCategory::get();
         $articles_categories = ArticleCategory::get();
-        $articles = Article::paginate(10, ['*'], 'articles');
+        $articles = Article::orderBy('created_at', 'desc')->paginate(10, ['*'], 'articles');
 
         $inputs = [];
 
@@ -202,7 +202,7 @@ class UsersController extends Controller
         $exercises_levels = ExerciseLevel::get();
         $exercises_categories = ExerciseCategory::get();
         $articles_categories = ArticleCategory::get();
-        $articles = Article::paginate(10, ['*'], 'articles');
+        $articles = Article::orderBy('created_at', 'desc')->paginate(10, ['*'], 'articles');
 
         $inputs = [];
 
