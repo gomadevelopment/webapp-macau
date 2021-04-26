@@ -106,6 +106,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         // Exercises
         Route::get('/exercicios', 'ExercisesController@index');
+        Route::get('/exercicios/auto-exercicio', 'ExercisesController@getAutoExercise');
         Route::post('/exercicios/exercicio_favorito', 'ExercisesController@toggleFavorite');
         Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise');
         Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise');
@@ -141,6 +142,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         // Notifications
         Route::get('/notifications_mark_as_read', 'NotificationsController@markNotificationsAsRead');
         Route::get('/update_classroom_notifications', 'NotificationsController@updateNotifications');
+        Route::get('/turn_notification_types_on_off/{notification_type_id}', 'NotificationsController@turnNotificationTypesOnOff');
 
     });
 });

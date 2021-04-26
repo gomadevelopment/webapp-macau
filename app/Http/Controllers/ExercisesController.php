@@ -351,6 +351,13 @@ class ExercisesController extends Controller
         return $array;
     }
 
+    public function getAutoExercise()
+    {
+        $this->viewShareNotifications();
+
+        return view('exercises.auto-exercise');
+    }
+
     public function viewShareNotifications()
     {
         $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();

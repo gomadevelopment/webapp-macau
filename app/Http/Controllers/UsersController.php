@@ -13,7 +13,8 @@ use App\User,
     App\ExerciseLevel,
     App\ExerciseCategory,
     App\ArticleCategory,
-    App\Article;
+    App\Article,
+    App\NotificationType;
 
 use DB;
 
@@ -120,8 +121,12 @@ class UsersController extends Controller
         $exercises_categories = ExerciseCategory::get();
         $articles_categories = ArticleCategory::get();
         $articles = Article::orderBy('created_at', 'desc')->paginate(10, ['*'], 'articles');
+        $notification_types = NotificationType::get();
 
-        $inputs = [];
+        $land_on_settings_tab = !empty(request()->only('land_on_settings_tab'));
+        $inputs = [
+            'land_on_settings_tab' => $land_on_settings_tab
+        ];
 
         return view('users.edit_profile', compact(
             'user', 
@@ -131,6 +136,7 @@ class UsersController extends Controller
             'exercises_categories',
             'articles_categories',
             'articles',
+            'notification_types',
             'classes', 
             'students_without_class', 
             'professors', 
@@ -203,8 +209,12 @@ class UsersController extends Controller
         $exercises_categories = ExerciseCategory::get();
         $articles_categories = ArticleCategory::get();
         $articles = Article::orderBy('created_at', 'desc')->paginate(10, ['*'], 'articles');
+        $notification_types = NotificationType::get();
 
-        $inputs = [];
+        $land_on_settings_tab = !empty(request()->only('land_on_settings_tab'));
+        $inputs = [
+            'land_on_settings_tab' => $land_on_settings_tab
+        ];
 
         return view('users.edit_profile', compact(
             'user', 
@@ -214,6 +224,7 @@ class UsersController extends Controller
             'exercises_categories',
             'articles_categories', 
             'articles', 
+            'notification_types',
             'classes', 
             'students_without_class', 
             'professors', 

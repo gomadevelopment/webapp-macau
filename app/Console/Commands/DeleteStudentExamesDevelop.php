@@ -44,6 +44,9 @@ class DeleteStudentExamesDevelop extends Command
         $exames = Exame::get();
         Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames');
         foreach ($exames as $exame) {
+            // if($exame->id != 230){
+            //     continue;
+            // }
             foreach ($exame->questions as $question) {
                 foreach ($question->question_items as $question_item) {
                     if($question_item->question_item_media){

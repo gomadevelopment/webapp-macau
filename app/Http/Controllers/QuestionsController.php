@@ -11,6 +11,8 @@ use App\Exercise,
 use Illuminate\Support\Facades\Storage;
 use DB;
 
+use Illuminate\Validation\Rule;
+
 class QuestionsController extends Controller
 {
     public function __construct()
@@ -77,9 +79,30 @@ class QuestionsController extends Controller
 
         // dd($inputs);
 
-        $rules = $question_id ? Question::rulesForEdit() : Question::$rulesForAdd;
+        $rules = [];
 
-        $validator = \Validator::make($inputs, Question::rulesForEdit(), Question::$messages);
+        if($question_id){
+            if($inputs['question_reference']){
+                $rules = Question::rulesForEdit([
+                    'question_reference' => [Rule::unique('questions', 'reference')->ignore($id)]
+                ]);
+            }
+            else{
+                $rules = Question::rulesForEdit();
+            }
+        }
+        else{
+            if($inputs['question_reference']){
+                $rules = Question::rulesForAdd([
+                    'question_reference' => 'unique:questions'
+                ]);
+            }
+            else{
+                $rules = Question::rulesForAdd();
+            }
+        }
+
+        $validator = \Validator::make($inputs, $rules, Question::$messages);
 
         // dd($validator);
         if ($validator->fails()) {
@@ -104,7 +127,7 @@ class QuestionsController extends Controller
             DB::rollback();
             // dd($e);
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
-
+            dd($e);
             return response()->json([
                 'status' => 'error',
                 'message' => 'Ocorreu um erro ao criar/editar a questão. Por favor, verifique os erros no formulário.'

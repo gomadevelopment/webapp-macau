@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.2">
 
 @stop
 
@@ -25,6 +25,12 @@
                             <a href="/exercicios/criar" class="btn btn-theme btn-custom dropdown-toggle">
                             <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
                             Criar Exercício</a>
+                        </div>
+                    @endif
+                    @if(auth()->user()->isStudent())
+                        <div class="dropdown create_article">
+                            <a href="/exercicios/auto-exercicio" class="btn btn-theme btn-custom dropdown-toggle">
+                            Auto Exercício</a>
                         </div>
                     @endif
                     <div class="show_favorites">
@@ -368,9 +374,9 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
-    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.2"></script>
+    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.2"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.2"></script>
 
     <script>
         function openNav() {

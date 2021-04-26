@@ -1034,3 +1034,26 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.word_button,
+.word_button:hover {
+    color: #131b31;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    border-radius: unset !important;
+}
+
+.word_button.word_selected,
+.word_button.wrong {
+    color: #ff2850 !important;
+}
+
+.word_button.correct {
+    color: #00b265 !important;
+}
+
+.word_button.inactive {
+    pointer-events: none;
+    cursor: default;
+}

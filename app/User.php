@@ -209,7 +209,20 @@ class User extends Authenticatable
      */
     public function unread_notifications()
     {
-        return $this->hasMany('App\Notification', 'user_id')->where('active', 1)->orderBy('created_at', 'DESC');
+        $notification_types = [];
+        if(auth()->user()->notification_type_1){
+            $notification_types[] = 1;
+        }
+        if(auth()->user()->notification_type_2){
+            $notification_types[] = 2;
+        }
+        if(auth()->user()->notification_type_3){
+            $notification_types[] = 3;
+        }
+        return $this->hasMany('App\Notification', 'user_id')
+                        ->where('active', 1)
+                        ->whereIn('type_id', $notification_types)
+                        ->orderBy('created_at', 'DESC');
     }
 
     /**
@@ -217,7 +230,20 @@ class User extends Authenticatable
      */
     public function read_notifications()
     {
-        return $this->hasMany('App\Notification', 'user_id')->where('active', 0)->orderBy('created_at', 'DESC');
+        $notification_types = [];
+        if(auth()->user()->notification_type_1){
+            $notification_types[] = 1;
+        }
+        if(auth()->user()->notification_type_2){
+            $notification_types[] = 2;
+        }
+        if(auth()->user()->notification_type_3){
+            $notification_types[] = 3;
+        }
+        return $this->hasMany('App\Notification', 'user_id')
+                        ->where('active', 0)
+                        ->whereIn('type_id', $notification_types)
+                        ->orderBy('created_at', 'DESC');
     }
 
     public function getUnreadNotifications($limit = 10)

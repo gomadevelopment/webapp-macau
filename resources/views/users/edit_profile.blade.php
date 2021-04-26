@@ -2,10 +2,10 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=1.2">
 
 <link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
@@ -43,7 +43,9 @@
             <div class="custom-tab customize-tab tabs_creative">
                 <ul class="nav nav-tabs p-2 b-0" id="edit_profile_tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">
+                        <a class="nav-link {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? '' : 'active' }}" 
+                            id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" 
+                            aria-selected="{{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'false' : 'true' }}">
                             <img src="{{asset('/assets/backoffice_assets/icons/info.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             <img src="{{asset('/assets/backoffice_assets/icons/info_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Informação</a>
@@ -64,7 +66,9 @@
                             </li>
                             @if(auth()->user()->isAdmin())
                                 <li class="nav-item">
-                                    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings-tab" aria-selected="false">
+                                    <a class="nav-link {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'active' : '' }}"
+                                        id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings-tab" 
+                                        aria-selected="{{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'true' : 'false' }}">
                                         <img src="{{asset('/assets/backoffice_assets/icons/cog_white.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/cog.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                         Definições</a>
@@ -76,7 +80,7 @@
 
                 <div class="tab-content" id="edit_profile_tabs_content">
                     {{-- INFO TAB --}}
-                    <div class="tab-pane fade active show" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="tab-pane fade {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? '' : 'active show' }}" id="info" role="tabpanel" aria-labelledby="info-tab">
 
                         @include('users.edit-tab-contents.edit_info')
 
@@ -97,7 +101,7 @@
                             </div>
                             @if(auth()->user()->isAdmin())
                                 {{-- SETTINGS TAB --}}
-                                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                <div class="tab-pane fade {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'active show' : '' }}" id="settings" role="tabpanel" aria-labelledby="settings-tab">
 
                                     @include('users.edit-tab-contents.edit_settings')
 
@@ -133,11 +137,11 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.2"></script>
 
     <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'))}}"></script>
@@ -520,7 +524,7 @@
                 $('#settings_students_end_date').val("").datepicker("update");
             });
 
-            $(document).on('click', '.professor_validation_table:not(.article_validation_table) .dash_action_link a', function(e){
+            $(document).on('click', '.professor_validation_table:not(.article_validation_table):not(.notification_validation_table) .dash_action_link a', function(e){
                 e.preventDefault();
 
                 $(this).closest(".professor_validation_table table").hide();
@@ -549,9 +553,11 @@
                     data: {what_to_do : what_to_do},
                     success: function(response){
                         if(response && response.status == 'success'){
+                            var prof_or_student = response.prof_or_student;
+                            console.log(prof_or_student, response.activate_or_deactivate);
                             if(what_to_do == 'activate_or_deactivate'){
                                 if(response.activate_or_deactivate == 'deactivate'){
-                                    $('.professor_validation_table #'+user_id+' .payment_status.activate_or_deactivate')
+                                    $('.professor_validation_table.'+prof_or_student+' #'+user_id+' .payment_status.activate_or_deactivate')
                                         .removeClass('complete')
                                         .addClass('cancel')
                                         .text('Não Ativo');
@@ -562,7 +568,7 @@
                                         .text('Ativar');
                                 }
                                 else{
-                                    $('.professor_validation_table #'+user_id+' .payment_status.activate_or_deactivate')
+                                    $('.professor_validation_table.'+prof_or_student+' #'+user_id+' .payment_status.activate_or_deactivate')
                                         .removeClass('cancel')
                                         .addClass('complete')
                                         .text('Ativo');
@@ -575,10 +581,10 @@
                             }
                             else{
                                 if(response.validate_or_invalidate == 'invalidate'){
-                                    $('.professor_validation_table #'+user_id+' .payment_status.validate_or_invalidate')
+                                    $('.professor_validation_table.'+prof_or_student+' #'+user_id+' .payment_status.validate_or_invalidate')
                                         .removeClass('complete')
                                         .addClass('inprogress')
-                                        .text('Não Aprovado');
+                                        .text('Não');
 
                                     $(this_anchor)
                                         .removeClass('cancel')
@@ -586,10 +592,10 @@
                                         .text('Aprovar');
                                 }
                                 else{
-                                    $('.professor_validation_table #'+user_id+' .payment_status.validate_or_invalidate')
+                                    $('.professor_validation_table.'+prof_or_student+' #'+user_id+' .payment_status.validate_or_invalidate')
                                         .removeClass('inprogress')
                                         .addClass('complete')
-                                        .text('Aprovado');
+                                        .text('Sim');
 
                                     $(this_anchor)
                                         .removeClass('view')
@@ -1061,7 +1067,11 @@
                     success: function(response){
                         if(response && response.status == 'success'){
 
-                            $('#article_id_' + article_id).html(response.html);
+                            $.each(response.htmls, function(key, value){
+                                $('#article_id_' + response.articles_ids[key]).html(value);
+                            });
+
+                            // $('#article_id_' + article_id).html(response.html);
 
                             if(filters_expanded){
                                 $('.articles_validation_filters_accordion').click();
@@ -1141,6 +1151,42 @@
                             if(filters_expanded){
                                 $('.articles_validation_filters_accordion').click();
                             }
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+
+
+            // NOTIFICATIONS
+
+            $(document).on('click', '.notification_validation_table .dash_action_link a', function(e){
+                e.preventDefault();
+
+                $('.preloader.ajax.notifications').next("table").hide();
+                $('.preloader.ajax.notifications')
+                    .css('height', $('.preloader.ajax.notifications').next("table").height())
+                    .show();
+
+                var notification_type_id = $(this).attr('data-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/turn_notification_types_on_off/' + notification_type_id,
+                    success: function(response){
+                        if(response && response.status == 'success'){
+
+                            $('#notifications').html(response.html);
+
+                            $('.preloader.ajax.notifications').next("table").show();
+                            $('.preloader.ajax.notifications')
+                                .hide();
                         }
                         else{
                             $(".errorMsg").text(response.message);

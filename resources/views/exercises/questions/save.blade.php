@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.2">
 
 @stop
 
@@ -139,6 +139,9 @@
                                 <select name="question_type" id="question_type" class="form-control">
                                     <option value=""></option>
                                     @foreach ($question_types as $type)
+                                        @if($type->id == 8)
+                                            @continue
+                                        @endif
                                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
@@ -191,7 +194,7 @@
                     
                     @include('exercises.questions.types.differences')
 
-                    @include('exercises.questions.types.correction_of_statement')
+                    {{-- @include('exercises.questions.types.correction_of_statement') --}}
 
                     @include('exercises.questions.types.automatic_content')
 
@@ -313,14 +316,14 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.1"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.1"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.2"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.2"></script> --}}
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.1"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.2"></script>
 
     <script>
 
@@ -1449,8 +1452,8 @@
 
             // DIFFERENCES //  6
 
-            // Clone new Differences
-            $(document).on('click', '.button_add_differences', function(e){
+            // Clone new Differences Differences
+            $(document).on('click', '.button_add_differences_differences', function(e){
                 e.preventDefault();
                 var paste_before = $(this).parent().parent().prev();
 
@@ -1469,8 +1472,42 @@
 
                 html = html.clone();
 
-                $(paste_before).append(html);
+                $(paste_before).after(html);
                 
+            });
+
+            // Clone new Differences Find Words
+            $(document).on('click', '.button_add_differences_find_words', function(e){
+                e.preventDefault();
+                var paste_before = $(this).parent().parent().prev();
+
+                var html = $('.add_differences_find_words_clone').children();
+
+                var new_index = parseInt(html.find("[id^='differences_find_words_textarea_']")[0].id.match(/\d+/)[0]) + 1;
+
+                html.find('.question_number>span').text('Texto ' + (new_index + 1));
+
+                html.find("[id^='find_words_perc_delimiter_']").attr('id', 'find_words_perc_delimiter_'+new_index);
+
+                html.find("[name^='differences_find_words_textarea_']").attr('name', 'differences_find_words_textarea_'+new_index);
+                html.find("[id^='differences_find_words_textarea_']").attr('id', 'differences_find_words_textarea_'+new_index);
+
+                html = html.clone();
+
+                $(paste_before).after(html);
+                
+            });
+            // <% %> button
+            $(document).on('click', '[id^="find_words_perc_delimiter_"]', function(e){
+                e.preventDefault();
+                var word_id = parseInt(this.id.match(/\d+/)[0]);
+                var $txt = $("#differences_find_words_textarea_" + word_id);
+                var caretPos = $txt[0].selectionStart;
+                var textAreaTxt = $txt.val();
+                var txtToAdd = "<% %>";
+                $txt.val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));
+                $txt.keyup();
+                $txt.focus();
             });
 
 
@@ -2035,6 +2072,12 @@
                     // New Fill Options - Writing
                     case "writing":
                         question_subtype_id = "18";
+                        break;
+                    case "differences":
+                        question_subtype_id = "11";
+                        break;
+                    case "find":
+                        question_subtype_id = "19";
                         break;
                     case "same_type_and_subtype":
                         question_subtype_id = 'same_type_and_subtype';

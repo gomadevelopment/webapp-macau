@@ -3,7 +3,7 @@
         <div class="card-body p-0 mb-3 ml-1" style="background:none; box-shadow: none;">
             <label class="label_title">Validação de Professores</label>
         </div>
-        <div class="dashboard_container card-body professor_validation_table settings_table">
+        <div class="dashboard_container card-body professor_validation_table professor settings_table">
             <div class="dashboard_container_header">
                 <div class="dashboard_fl_1">
                     <h4>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
-                                    <label for="" class="label_title" style="font-size: 18px;">Aprovação</label>
+                                    <label for="" class="label_title" style="font-size: 18px;">Aprovado</label>
                                     <select name="settings_professors_filter_approval" id="settings_professors_filter_approval" class="form-control">
                                         <option value="all" 
                                             {{ isset($inputs['settings_professors_filter_approval']) && $inputs['settings_professors_filter_approval'] == 'all' ? 'selected' : '' }}>
@@ -31,11 +31,11 @@
                                         </option>
                                         <option value="approved"
                                             {{ isset($inputs['settings_professors_filter_approval']) && $inputs['settings_professors_filter_approval'] == 'approved' ? 'selected' : '' }}>
-                                            Aprovados
+                                            Sim
                                         </option>
                                         <option value="non_approved"
                                             {{ isset($inputs['settings_professors_filter_approval']) && $inputs['settings_professors_filter_approval'] == 'non_approved' ? 'selected' : '' }}>
-                                            Não Aprovados
+                                            Não
                                         </option>
                                     </select>
                                 </div>
@@ -111,7 +111,7 @@
                                     <th scope="col">Nome de Utilizador</th>
                                     <th scope="col">Nome completo</th>
                                     <th scope="col">Data de Registo</th>
-                                    <th scope="col">Aprovação</th>
+                                    <th scope="col">Aprovado</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Ações</th>
                                 </tr>
@@ -125,7 +125,7 @@
                                         <td>{{ date('d/m/Y', strtotime($professor->created_at)) }}</td>
                                         <td>
                                             <span class="payment_status validate_or_invalidate {{ $professor->isPreProfessor() ? 'inprogress' : 'complete' }}">
-                                                    {{ $professor->isPreProfessor() ? 'Não Aprovado' : 'Aprovado' }}
+                                                    {{ $professor->isPreProfessor() ? 'Não' : 'Sim' }}
                                             </span>
                                         </td>
                                         <td>

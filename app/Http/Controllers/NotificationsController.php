@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Notification,
+    App\NotificationType,
     App\Exame;
 
 class NotificationsController extends Controller
@@ -86,5 +87,38 @@ class NotificationsController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function turnNotificationTypesOnOff($notification_type_id)
+    {
+        $notification_type = NotificationType::find($notification_type_id);
+
+        if(!$notification_type){
+            return response()->json(['status' => 'error', 'message' => 'O tipo de Notificação não foi encontrado. Por favor, atualize a página e tente de novo.'], 200);
+        }
+
+        $type = 'notification_type_' . $notification_type_id;
+        if(auth()->user()->$type){
+            auth()->user()->$type = 0;
+        }
+        else{
+            auth()->user()->$type = 1;
+        }
+        
+        auth()->user()->save();
+
+        $notification_types = NotificationType::get();
+
+        $view = view()->make("users.edit-tab-contents.edit_notifications", [
+            'notification_types' => $notification_types,
+        ]);
+
+        $html = $view->render();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'html' => $html,
+        ]);
     }
 }

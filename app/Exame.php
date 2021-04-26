@@ -273,9 +273,14 @@ class Exame extends Model
                     $question->classification = $this->freeQuestionCorrection($question, $inputs[$question->id . '_free_question']);
                     $question->save();
                     break;
-                // Differences
+                // Differences - Differences
                 case 11:
-                    $question->classification = $this->differencesCorrection($question, $inputs[$question->id . '_differences']);
+                    $question->classification = $this->differencesDifferencesCorrection($question, $inputs[$question->id . '_differences']);
+                    $question->save();
+                    break;
+                // Differences - Differences
+                case 19:
+                    $question->classification = $this->differencesFindWordsCorrection($question, $inputs[$question->id . '_differences_find_words']);
                     $question->save();
                     break;
                 // Statement Correction
@@ -563,30 +568,22 @@ class Exame extends Model
     {
         // Save Answers given
         foreach ($question->question_items as $question_item) {
-            $question_item->options_answered = $answer_array[$question_item->id] == null ? '' : $answer_array[$question_item->id];
+            if(sizeof($answer_array[$question_item->id]) == 1 && !$answer_array[$question_item->id][0]){
+                $question_item->options_answered = '';
+            }
+            else{
+                $question_item->options_answered = implode(', ', $answer_array[$question_item->id]);
+            }
             $question_item->save();
         }
 
         // Solution
         $solution_array = [];
-        $number_of_wrong_alineas = 0;
         foreach ($question->question_items as $question_item) {
-            $options_correct = explode(',', $question_item->options_correct);
-            if(!in_array($answer_array[$question_item->id], $options_correct)){
-                $number_of_wrong_alineas++;
-            }
+            $solution_array[$question_item->id] = explode(', ', $question_item->options_correct);
         }
 
-        if($number_of_wrong_alineas == 0){
-            return $question->avaliation_score;
-        }
-
-        $number_of_alineas = sizeof($answer_array);
-        $points_per_alinea = sizeof($answer_array) == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
-        $number_of_correct_alineas = sizeof($answer_array) - $number_of_wrong_alineas;
-        $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
-
-        return $partial_score;
+        return self::partialCorrectionDeepLevel_1($question, $answer_array, $solution_array);
     }
 
     /**
@@ -631,7 +628,7 @@ class Exame extends Model
     /**
      *  question_items with no sub-options/sub-arrays
      */
-    public function differencesCorrection($question, $answer_array)
+    public function differencesDifferencesCorrection($question, $answer_array)
     {
         // Save Answers given
         foreach ($question->question_items as $question_item) {
@@ -646,6 +643,40 @@ class Exame extends Model
         }
         
         return self::partialCorrectionDeepLevel_0($question, $answer_array, $solution_array);
+    }
+
+    /**
+     *  question_items with no sub-options/sub-arrays
+     */
+    public function differencesFindWordsCorrection($question, $answer_array)
+    {
+        // dd($answer_array);
+        // Save Answers given
+        foreach ($question->question_items as $question_item) {
+            $numItems = count($answer_array[$question_item->id]);
+            $i = 0;
+            foreach($answer_array[$question_item->id] as $response){
+                if(!$response){
+                    continue;
+                }
+                if(++$i === $numItems) {
+                    $question_item->options_answered .= $response;
+                }
+                else{
+                    $question_item->options_answered .= $response . '|';
+                }
+            }
+            $question_item->save();
+        }
+
+        // Solution
+        $solution_array = [];
+        foreach($question->question_items as $question_item){
+            $solution_array[$question_item->id] = explode(', ', $question_item->options_correct);
+        }
+        // dd($answer_array, $solution_array);
+        // dd('STOP', $answer_array, $solution_array);
+        return self::partialCorrectionDeepLevel_1_WithShuffle($question, $answer_array, $solution_array);
     }
 
     /**
@@ -884,10 +915,24 @@ class Exame extends Model
         }
 
         $number_of_wrong_alineas = 0;
-        foreach($answer_array as $ans_key => &$ans_sub_array){
-            foreach($ans_sub_array as $ans_sub_array_value){
-                if(!in_array($ans_sub_array_value, $solution_array[$ans_key])){
-                    $number_of_wrong_alineas++;
+        if($question->question_subtype_id == 19){
+            foreach($solution_array as $sol_key => &$sol_sub_array){
+                foreach($sol_sub_array as $sol_sub_array_value){
+                    if(!in_array($sol_sub_array_value, $answer_array[$sol_key])){
+                        $number_of_wrong_alineas++;
+                    }
+                }
+            }
+        }
+        else{
+            foreach($answer_array as $ans_key => &$ans_sub_array){
+                foreach($ans_sub_array as $ans_sub_array_value){
+                    if($question->question_subtype_id == 19 && !$ans_sub_array_value){
+                        continue;
+                    }
+                    if(!in_array($ans_sub_array_value, $solution_array[$ans_key])){
+                        $number_of_wrong_alineas++;
+                    }
                 }
             }
         }
@@ -899,6 +944,8 @@ class Exame extends Model
         $points_per_alinea = $number_of_alineas == 0 ? 0 : ($question->avaliation_score / $number_of_alineas);
         $number_of_correct_alineas = $number_of_alineas - $number_of_wrong_alineas;
         $partial_score = (int)round($points_per_alinea * $number_of_correct_alineas);
+
+        $partial_score = $partial_score < 0 ? 0 : $partial_score;
 
         return $partial_score;
     }

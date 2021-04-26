@@ -3,7 +3,7 @@
         <div class="card-body p-0 mb-3 ml-1" style="background:none; box-shadow: none;">
             <label class="label_title">Gestão de Alunos</label>
         </div>
-        <div class="dashboard_container card-body professor_validation_table settings_table">
+        <div class="dashboard_container card-body professor_validation_table student settings_table">
             <div class="dashboard_container_header">
                 <div class="dashboard_fl_1">
                     <h4>
@@ -106,16 +106,16 @@
                                         <th scope="row">{{ $student->last_name ?? '-' }}</th>
                                         <td>{{ date('d/m/Y', strtotime($student->created_at)) }}</td>
                                         <td>
-                                            <span class="payment_status {{ $student->active ? 'complete' : 'cancel' }}">
+                                            <span class="payment_status activate_or_deactivate {{ $student->active ? 'complete' : 'cancel' }}">
                                                     {{ $student->active ? 'Ativo' : 'Não Ativo' }}
                                             </span>
                                         </td>
                                         <td>
                                             <div class="dash_action_link">
                                                 @if($student->active)
-                                                    <a href="#" activate_or_deactivate="deactivate" data-id="{{ $student->id }}" class="cancel">Desativar</a>
+                                                    <a href="#" activate_or_deactivate="deactivate" data-id="{{ $student->id }}" class="activate_or_deactivate cancel">Desativar</a>
                                                 @else
-                                                    <a href="#" activate_or_deactivate="activate" data-id="{{ $student->id }}" class="view">Ativar</a>
+                                                    <a href="#" activate_or_deactivate="activate" data-id="{{ $student->id }}" class="activate_or_deactivate view">Ativar</a>
                                                 @endif
                                             </div>	
                                         </td>

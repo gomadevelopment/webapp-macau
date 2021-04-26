@@ -18,13 +18,22 @@ class Question extends Model
         'reference', 'description', 'teacher_correction', 'avaliation_score'
     ];
 
-    public static $rulesForAdd = array(
-        // 'question_name' => 'required',
-        // 'question_reference' => 'required',
-        'question_description' => 'required',
-        'question_type' => 'required',
-        'question_reference' => 'unique:questions',
-    );
+    // public static $rulesForAdd = array(
+    //     // 'question_name' => 'required',
+    //     // 'question_reference' => 'required',
+    //     'question_description' => 'required',
+    //     'question_type' => 'required',
+    //     'question_reference' => 'unique:questions',
+    // );
+
+    public static function rulesForAdd($id = 0, $merge = [])
+    {
+        return array_merge([
+            'question_description' => 'required',
+            'question_type' => 'required',
+            // 'question_reference' => 'unique:questions',
+        ], $merge);
+    }
 
     public static function rulesForEdit($id = 0, $merge = [])
     {
@@ -33,7 +42,7 @@ class Question extends Model
             // 'question_reference' => 'required',
             'question_description' => 'required',
             'question_type' => 'required',
-            'question_reference' => [Rule::unique('questions', 'reference')->ignore($id)],
+            // 'question_reference' => [Rule::unique('questions', 'reference')->ignore($id)],
         ], $merge);
     }
 
@@ -148,9 +157,9 @@ class Question extends Model
                 case 6:
                     $inputs['question_subtype'] = 10;
                     break;
-                case 7:
-                    $inputs['question_subtype'] = 11;
-                    break;
+                // case 7:
+                //     $inputs['question_subtype'] = 11;
+                //     break;
                 case 8:
                     $inputs['question_subtype'] = 12;
                     break;
@@ -737,17 +746,57 @@ class Question extends Model
     {
         $input_indexes = self::inputIndexes($inputs, $this->question_subtype_id, $bool_same_type_and_subtype);
 
-        foreach($this->question_items as $question_item){
-            $question_item->delete();
+        // dd($inputs, $input_indexes, $this);
+
+        if($this->question_subtype_id == 11){
+            foreach($this->question_items as $question_item){
+                $question_item->delete();
+            }
+            
+            foreach($input_indexes as $index){
+                QuestionItem::create([
+                    'question_id' => $this->id,
+                    'text_1' => $inputs['differences_text_'.$index],
+                    'text_2' => $inputs['differences_solution_'.$index]
+                ]);
+            }
         }
-        
-        foreach($input_indexes as $index){
-            QuestionItem::create([
-                'question_id' => $this->id,
-                'text_1' => $inputs['differences_text_'.$index],
-                'text_2' => $inputs['differences_solution_'.$index]
-            ]);
+
+        if($this->question_subtype_id == 19){
+            // foreach($this->question_items as $question_item){
+            //     $question_item->delete();
+            // }
+            foreach($input_indexes as $index){
+                $options_correct_words = '';
+                $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+                preg_match_all($regex, $inputs['differences_find_words_textarea_'.$index], $matches);
+                $numItems = count($matches[1]);
+                $i = 0;
+                foreach($matches[1] as $key => $word_match){
+                    if(++$i === $numItems) {
+                        $options_correct_words .= $word_match;
+                    }
+                    else{
+                        $options_correct_words .= $word_match . ', ';
+                    }
+                }
+
+                $t1 = str_replace('<% ', '', $inputs['differences_find_words_textarea_'.$index]);
+                $t2 = str_replace('<%', '', $t1);
+                $t3 = str_replace(' %>', '', $t2);
+                $text_without_delimiters = str_replace('%>', '', $t3);
+
+                QuestionItem::create([
+                    'question_id' => $this->id,
+                    'text_1' => $inputs['differences_find_words_textarea_'.$index],
+                    'text_2' => $text_without_delimiters,
+                    'options_correct' => $options_correct_words
+                ]);
+            }
+            
         }
+
+        // dd('STOP');
     }
 
     public function statementCorrectionQuestionType($inputs, $bool_same_type_and_subtype)
@@ -1234,11 +1283,22 @@ class Question extends Model
         }
 
         // DIFFERENCES
+
+        // Differences
         else if($question_subtype == 11){
             // differences_text_0
             foreach ($inputs as $key => $value) {
                 if (strpos($key, 'differences_text_') === 0) {
                     $input_indexes[] = explode('_', $key)[2];
+                }
+            }
+        }
+        // Find Words
+        else if($question_subtype == 19){
+            // differences_text_0
+            foreach ($inputs as $key => $value) {
+                if (strpos($key, 'differences_find_words_textarea_') === 0) {
+                    $input_indexes[] = explode('_', $key)[4];
                 }
             }
         }

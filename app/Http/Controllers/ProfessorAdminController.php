@@ -20,6 +20,10 @@ class ProfessorAdminController extends Controller
 
         $data = request()->only('what_to_do');
 
+        if($from_other_profile){
+            $data['what_to_do'] = 'validate_or_invalidate';
+        }
+
         // dd($data);
 
         $activate_or_deactivate = '';
@@ -32,8 +36,10 @@ class ProfessorAdminController extends Controller
             return response()->json(['status' => 'error', 'message' => 'O utilizador seleccionado não foi encontrado. Por favor, atualize a página e tente de novo.'], 200);
         }
 
+        // dd($data['what_to_do'], $from_other_profile, $user->isProfessor());
+
         if(isset($data['what_to_do']) && $data['what_to_do'] == 'activate_or_deactivate'){
-            if($user->isProfessor()){
+            if($user->isProfessor() || $user->isPreProfessor()){
                 $prof_or_student = 'professor';
             }
             else{
@@ -49,7 +55,7 @@ class ProfessorAdminController extends Controller
                 $activate_or_deactivate = 'activate';
             }
         }
-        else if((isset($data['what_to_do']) && $data['what_to_do'] == 'validate_or_invalidate') || $from_other_profile){
+        else if((isset($data['what_to_do']) && $data['what_to_do'] == 'validate_or_invalidate')){
             $prof_or_student = 'professor';
             if($user->isPreProfessor()){
                 $user->user_role_id = 2;
@@ -276,6 +282,8 @@ class ProfessorAdminController extends Controller
             return response()->json(['status' => 'error', 'message' => 'O utilizador autor do artigo seleccionado não foi encontrado. Por favor, atualize a página e tente de novo.'], 200);
         }
 
+        $updated_articles = [];
+
         if($data['what_to_do'] == 'approve_article'){
             if($article->published){
                 $article->published = 0;
@@ -284,6 +292,7 @@ class ProfessorAdminController extends Controller
                 $article->published = 1;
             }
             $article->save();
+            $updated_articles[] = $article;
         }
         else if($data['what_to_do'] == 'approve_user'){
             if($user->can_post_articles){
@@ -301,21 +310,33 @@ class ProfessorAdminController extends Controller
                     $unapproved_article->published = 0;
                 }
                 $unapproved_article->save();
+                $updated_articles[] = $unapproved_article;
             }
         }
 
-        $article = Article::find($article_id);
+        foreach(collect($updated_articles) as $updated_article){
+            $view = view()->make("users.edit-tab-contents.admin_settings.single_article_table_row", [
+                    'article' => $updated_article,
+            ]);
 
-        $view = view()->make("users.edit-tab-contents.admin_settings.single_article_table_row", [
-                'article' => $article,
-        ]);
+            $htmls[] = $view->render();
+        }
 
-        $html = $view->render();
+        // dd($htmls);
+
+        // $article = Article::find($article_id);
+
+        // $view = view()->make("users.edit-tab-contents.admin_settings.single_article_table_row", [
+        //         'article' => $article,
+        // ]);
+
+        // $html = $view->render();
 
         return response()->json([
             'status' => 'success',
             'message' => '',
-            'html' => $html,
+            'htmls' => $htmls,
+            'articles_ids' => collect($updated_articles)->pluck('id')->toArray()
         ]);
     }
 

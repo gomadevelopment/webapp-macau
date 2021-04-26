@@ -8,16 +8,16 @@
         <title>Web App Macau</title>
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=1.1">
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=1.1">
+        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=1.2">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=1.2">
         
 		
 		<!-- Custom Color Option -->
-        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=1.1">
+        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=1.2">
 
         @yield('header')
 
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=1.1">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=1.2">
 
     </head>
 	
@@ -66,20 +66,20 @@
 		<!-- ============================================================== -->
 		<!-- All Jquery -->
 		<!-- ============================================================== -->
-        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=1.1"></script>
+        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=1.2"></script>
 
-        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=1.1"></script>
-        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=1.1"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=1.2"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=1.2"></script>
 
-        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=1.1"></script>
+        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=1.2"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
         <!-- ============================================================== -->
@@ -159,11 +159,17 @@
                     });
 
                     // Top nav bar jquery
-                    $('a.view_profile, a.logout').mouseover(function(e){
+                    $('a.view_profile, a.settings, a.logout').mouseover(function(e){
                         if($(this).hasClass('view_profile')){
                             if($('.user_icon_pink').is(':hidden')){
                                 $('.user_icon_normal').hide();
                                 $('.user_icon_pink').show();
+                            }
+                        }
+                        else if($(this).hasClass('settings')){
+                            if($('.settings_icon_pink').is(':hidden')){
+                                $('.settings_icon_normal').hide();
+                                $('.settings_icon_pink').show();
                             }
                         }
                         else{
@@ -173,10 +179,14 @@
                             }
                         }
                     });
-                    $('a.view_profile, a.logout').mouseout(function(e){
+                    $('a.view_profile, a.settings, a.logout').mouseout(function(e){
                         if($(this).hasClass('view_profile')){
                             $('.user_icon_normal').show();
                             $('.user_icon_pink').hide();
+                        }
+                        else if($(this).hasClass('settings')){
+                            $('.settings_icon_normal').show();
+                            $('.settings_icon_pink').hide();
                         }
                         else{
                             $('.logout_icon_normal').show();

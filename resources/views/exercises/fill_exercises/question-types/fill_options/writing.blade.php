@@ -90,7 +90,11 @@
                             @if($i < (sizeof(getStringInArray2($item->text_1)) - 1))
 
                                 @if(isset(explode('|', $item->options_answered)[$i]))
-                                    <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled class="form-control d-inline-flex mt-1 mb-1" style="width: auto; vertical-align: middle;">
+                                    <input type="text" name="" id="" value="{{ explode('|', $item->options_answered)[$i] }}" disabled 
+                                    class="form-control d-inline-flex mt-1 mb-1" 
+                                    style="vertical-align: middle; height: auto; padding: 5px 10px;" 
+                                    onkeypress="this.style.width = (this.value.length + 4) + 'ch';" 
+                                    data-onload="this.style.width = (this.value.length + 4) + 'ch';">
                                 @endif
 
                                 @if(getInbetweenStrings2($item->text_1)[$i] == explode('|', $item->options_answered)[$i])
@@ -118,7 +122,10 @@
 
                                 </div> --}}
                                 <input type="text" name="{{$question->id}}_fill_options_writing[{{ $item->id }}][]" id="" 
-                                class="form-control d-inline-flex mt-1 mb-1" style="width: auto; vertical-align: middle;">
+                                class="form-control d-inline-flex mt-1 mb-1" 
+                                style="vertical-align: middle; height: auto; padding: 5px 10px;" 
+                                onkeypress="this.style.width = (this.value.length + 4) + 'ch';" 
+                                data-onload="this.style.width = (this.value.length + 4) + 'ch';">
                             @endif
 
                         @endforeach
@@ -173,7 +180,10 @@
                                     {{-- <div class="drag_and_drop_item word_item p-2 fill_options_shuffle_items" > --}}
                                         {{-- {{ getInbetweenStrings2($item->text_1)[$i] }} --}}
                                         <input type="text" name="" id="" value="{{ getInbetweenStrings2($item->text_1)[$i] }}" disabled 
-                                        class="form-control d-inline-flex mt-1 mb-1" style="width: auto; vertical-align: middle;">
+                                        class="form-control d-inline-flex mt-1 mb-1" 
+                                        style="vertical-align: middle; height: auto; padding: 5px 10px;" 
+                                        onkeypress="this.style.width = (this.value.length + 4) + 'ch';" 
+                                        data-onload="this.style.width = (this.value.length + 4) + 'ch';">
                                     {{-- </div> --}}
                                 {{-- </div> --}}
                             @endif

@@ -85,7 +85,7 @@
                                     @endif
                                     <div class="row_to_remove col col-wrap d-flex mb-3">
                                         <?php $option = "options_".($i+1); ?>
-                                        <?php $correct_answers_ids = explode('|', $question_item->options_correct); ?>
+                                        <?php $correct_answers_ids = explode(', ', $question_item->options_correct); ?>
                                         <?php $checked = in_array($i+1, $correct_answers_ids) ? 'checked' : ''; ?>
                                         <input id="multiple_choice_correct_answer_{{$i}}_question_{{$loop->index}}" class="checkbox-custom" name="multiple_choice_correct_answer_{{$i}}_question_{{$loop->index}}" type="checkbox" {{$checked}}>
                                         <label for="multiple_choice_correct_answer_{{$i}}_question_{{$loop->index}}" class="checkbox-custom-label multiple_choice_correct_answer_{{$i}} d-inline-flex w-100 align-items-center m-0">

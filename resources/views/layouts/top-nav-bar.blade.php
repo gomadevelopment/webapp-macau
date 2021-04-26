@@ -67,10 +67,19 @@
                             </a>
                             <div class="dropdown-menu message-box">
                                 <a class="msg-title view_profile" href="/perfil/{{auth()->user()->id}}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon user_icon_normal mb-1 " alt="" />
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer_pink.svg')}}" class="logo logout_icon user_icon_pink mb-1 " alt="" style="display: none;"/>
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon user_icon_normal mb-1 " alt="" style="margin-left: 3px;" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer_pink.svg')}}" class="logo logout_icon user_icon_pink mb-1 " alt="" style="margin-left: 3px; display: none;"/>
                                     Ver Perfil
                                 </a>
+                                @if(auth()->user()->isAdmin())
+
+                                    <a class="msg-title settings" href="/perfil/editar/{{auth()->user()->id}}?land_on_settings_tab">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog.svg')}}" class="logo logout_icon settings_icon_normal mb-1 " alt="" style="margin-right: 8px;" />
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog_pink.svg')}}" class="logo logout_icon settings_icon_pink mb-1 " alt="" style="margin-right: 8px; display: none;"/>
+                                        Definições
+                                    </a>
+                                    
+                                @endif
                                 <a class="msg-title logout" href="/logout">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg')}}" class="logo logout_icon logout_icon_normal mr-2" alt="" style="margin-left: 3px;" />
                                     <img src="{{asset('/assets/backoffice_assets/icons/Logout_pink.svg')}}" class="logo logout_icon logout_icon_pink mr-2" alt="" style="margin-left: 3px; display: none;"/>

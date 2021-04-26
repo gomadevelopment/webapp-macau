@@ -86,7 +86,10 @@
                                         @include('exercises.fill_exercises.question-types.free_question', ['question' => $question])
                                         @break
                                     @case(11)
-                                        @include('exercises.fill_exercises.question-types.differences', ['question' => $question])
+                                        @include('exercises.fill_exercises.question-types.differences.differences', ['question' => $question])
+                                        @break
+                                    @case(19)
+                                        @include('exercises.fill_exercises.question-types.differences.find_words', ['question' => $question])
                                         @break
                                     @case(12)
                                         @include('exercises.fill_exercises.question-types.statement_correction', ['question' => $question])
