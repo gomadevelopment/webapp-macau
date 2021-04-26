@@ -15,14 +15,16 @@
                 <?php $possible_vowels_default = isset($question->id) && $question->question_subtype_id == 17 
                                                     ? explode('|', $question->question_items->first()->text_2)
                                                     : []; ?>
-                <?php $default_vowels = ['/a/', '/ɐ/', '/e/', '/ǝ/', '/i/', '/ᴉ/']; ?>
+                <?php $default_vowels = ['a', 'ɐ', 'e', 'ǝ', 'ɨ', 'o', 'ɔ', 'u']; ?>
                 <select name="possible_vowels[]" id="possible_vowels" class="form-control" aria-placeholder="Possíveis Vogais" multiple>
-                    <option value="/a/" {{ in_array('/a/', $possible_vowels_default) ? 'selected' : '' }}>/a/</option>
-                    <option value="/ɐ/" {{ in_array('/ɐ/', $possible_vowels_default) ? 'selected' : '' }}>/ɐ/</option>
-                    <option value="/e/" {{ in_array('/e/', $possible_vowels_default) ? 'selected' : '' }}>/e/</option>
-                    <option value="/ǝ/" {{ in_array('/ǝ/', $possible_vowels_default) ? 'selected' : '' }}>/ǝ/</option>
-                    <option value="/i/" {{ in_array('/i/', $possible_vowels_default) ? 'selected' : '' }}>/i/</option>
-                    <option value="/ᴉ/" {{ in_array('/ᴉ/', $possible_vowels_default) ? 'selected' : '' }}>/ᴉ/</option>
+                    <option value="a" {{ in_array('a', $possible_vowels_default) ? 'selected' : '' }}>a</option>
+                    <option value="ɐ" {{ in_array('ɐ', $possible_vowels_default) ? 'selected' : '' }}>ɐ</option>
+                    <option value="e" {{ in_array('e', $possible_vowels_default) ? 'selected' : '' }}>e</option>
+                    <option value="ɛ" {{ in_array('ɛ', $possible_vowels_default) ? 'selected' : '' }}>ɛ</option>
+                    <option value="ɨ" {{ in_array('ɨ', $possible_vowels_default) ? 'selected' : '' }}>ɨ</option>
+                    <option value="o" {{ in_array('o', $possible_vowels_default) ? 'selected' : '' }}>o</option>
+                    <option value="ɔ" {{ in_array('ɔ', $possible_vowels_default) ? 'selected' : '' }}>ɔ</option>
+                    <option value="u" {{ in_array('u', $possible_vowels_default) ? 'selected' : '' }}>u</option>
                     @foreach ($possible_vowels_default as $non_default_vowel)
                         @if(!in_array($non_default_vowel, $default_vowels))
                             <option value="{{$non_default_vowel}}" {{ in_array($non_default_vowel, $possible_vowels_default) ? 'selected' : '' }}>

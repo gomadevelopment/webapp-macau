@@ -222,9 +222,21 @@
         @foreach ($unique_vowels as $vowel)
 
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group mb-0 mt-3">
+                <div class="form-group mb-0 mt-3 d-flex align-items-center">
                     <label class="label_title mb-0 d-block" style="font-family: sans-serif !important;">
                         {{ $vowel }} </label>
+                    @if(file_exists(public_path('/assets/backoffice_assets/audios/' . $vowel . '.m4a')))
+                        <audio id="{{$vowel}}" controlslist="nodownload">
+                            <source src="{{ '/assets/backoffice_assets/audios/' . $vowel . '.m4a' }}" type="">
+                        </audio>
+                        <div> 
+                            <button type="button" class="btn search-btn comment_submit m-2" 
+                                onclick="document.getElementById('{{$vowel}}').play()" 
+                                style="padding: 4px 16px 4px 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg')}}" alt="" style="width: 150%;">
+                            </button> 
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -256,9 +268,24 @@
         @foreach ($unique_vowels as $vowel)
 
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group mb-0 mt-3">
-                    <label class="label_title mb-0 d-block" style="font-family: sans-serif !important;">
+                <div class="form-group mb-0 mt-3 d-flex align-items-center">
+                    <label class="label_title mb-0 mt-0 mr-2 d-block" style="font-family: sans-serif !important;">
                         {{ $vowel }} </label>
+                    @if(file_exists(public_path('/assets/backoffice_assets/audios/' . $vowel . '.m4a')))
+                        <audio id="{{$vowel}}" controlslist="nodownload">
+                            <source src="{{ '/assets/backoffice_assets/audios/' . $vowel . '.m4a' }}" type="">
+                        </audio>
+                        <div> 
+                            <button type="button" class="btn search-btn comment_submit m-2" 
+                                onclick="document.getElementById('{{$vowel}}').play()" 
+                                style="padding: 4px 16px 4px 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg')}}" alt="" style="width: 150%;">
+                            </button> 
+                        </div>
+                    @endif
+                    {{-- <audio id="" controls controlslist="nodownload">
+                        <source src="{{ '/assets/backoffice_assets/audios/' . $vowel . '.m4a' }}" type="">
+                    </audio> --}}
                 </div>
             </div>
 
@@ -298,9 +325,21 @@
         @foreach ($unique_vowels as $vowel)
 
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group mb-0 mt-3">
-                    <label class="label_title mb-0 d-block" style="font-family: sans-serif !important;">
+                <div class="form-group mb-0 mt-3 d-flex align-items-center">
+                    <label class="label_title mb-0 mt-0 mr-3 d-block d-flex align-items-center" style="font-family: sans-serif !important;">
                         {{ $vowel }} </label>
+                    @if(file_exists(public_path('/assets/backoffice_assets/audios/' . $vowel . '.m4a')))
+                        <audio id="{{$vowel}}" controlslist="nodownload">
+                            <source src="{{ '/assets/backoffice_assets/audios/' . $vowel . '.m4a' }}" type="">
+                        </audio>
+                        <div> 
+                            <button type="button" class="btn search-btn comment_submit m-2" 
+                                onclick="document.getElementById('{{$vowel}}').play()" 
+                                style="padding: 4px 16px 4px 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg')}}" alt="" style="width: 150%;">
+                            </button> 
+                        </div>
+                    @endif
                 </div>
             </div>
 
