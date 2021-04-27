@@ -73,18 +73,20 @@ class NotificationsController extends Controller
 
         $student_can_notify = auth()->user()->studentCanRequestExameCorrection($exame->id);
 
-        Notification::create([
-            'title' => 'Novo Exame requer avaliação.',
-            'text' => 'O aluno ' . auth()->user()->username . ' requere avaliação do Exame "' . $exame->title . '".',
-            'url' => '/exercicios/corrigir/'.$exame->id.'/aluno/'.auth()->user()->id,
-            'param1_text' => 'exame_id',
-            'param1' => $exame->id,
-            'param2_text' => 'aluno',
-            'param2' => auth()->user()->id,
-            'type_id' => 2,
-            'user_id' => $exame->user_id,
-            'active' => 1
-        ]);
+        if($exame->professor->notification_type_2){
+            Notification::create([
+                'title' => 'Novo Exame requer avaliação.',
+                'text' => 'O aluno ' . auth()->user()->username . ' requere avaliação do Exame "' . $exame->title . '".',
+                'url' => '/exercicios/corrigir/'.$exame->id.'/aluno/'.auth()->user()->id,
+                'param1_text' => 'exame_id',
+                'param1' => $exame->id,
+                'param2_text' => 'aluno',
+                'param2' => auth()->user()->id,
+                'type_id' => 2,
+                'user_id' => $exame->user_id,
+                'active' => 1
+            ]);
+        }
 
         return redirect()->back();
     }
