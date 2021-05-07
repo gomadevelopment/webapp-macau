@@ -682,7 +682,6 @@
                 }
             });
 
-            // console.log($('#show_performance').val());
             if($('#show_performance').val()){
                 applyHighChart(user_exercises);
             }

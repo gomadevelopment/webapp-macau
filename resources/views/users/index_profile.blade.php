@@ -183,8 +183,8 @@
                 <input type="number" name="previous_page" id="previous_page_number" value="1" hidden>
             </form>
 
-        @elseif(($user->isStudent() && $user->id == auth()->user()->id) 
-                || (auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->id != $user->id))
+        @elseif(($user->isStudent() && $user->id == auth()->user()->id && $user_exercises->count()) 
+                || (auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->id != $user->id && $user_exercises->count()))
 
             {{-- student - My Performance --}}
             <div class="row mb-5">
@@ -301,6 +301,11 @@
 
 </section>
 
+{{-- {{ dd((auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->id != $user->id && $user_exercises->count())) }} --}}
+
+<input type="hidden" name="show_performance" id="show_performance" 
+    value="{{ ($user->isStudent() && $user->id == auth()->user()->id && $user_exercises->count()) 
+                || (auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->id != $user->id && $user_exercises->count()) ? true : false }}">
 <input type="text" name="hidden_user_id" id="hidden_user_id" value="{{ $user->id }}" hidden>
 <input type="text" name="hidden_user_name" id="hidden_user_name" value="{{ $user->username }}" hidden>
 
@@ -516,8 +521,7 @@
                 }
             });
 
-            console.log(user_exercises.length);
-            if(user_exercises.length){
+            if($('#show_performance').val()){
                 applyHighChart(user_exercises);
             }
 
