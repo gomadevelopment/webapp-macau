@@ -84,7 +84,7 @@ class QuestionsController extends Controller
         if($question_id){
             if($inputs['question_reference']){
                 $rules = Question::rulesForEdit([
-                    'question_reference' => [Rule::unique('questions', 'reference')->ignore($id)]
+                    'question_reference' => [Rule::unique('questions', 'reference')->ignore($question_id)]
                 ]);
             }
             else{

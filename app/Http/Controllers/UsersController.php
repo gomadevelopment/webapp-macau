@@ -14,7 +14,9 @@ use App\User,
     App\ExerciseCategory,
     App\ArticleCategory,
     App\Article,
-    App\NotificationType;
+    App\NotificationType,
+    App\QuestionType,
+    App\Exame;
 
 use DB;
 
@@ -56,9 +58,8 @@ class UsersController extends Controller
         $inputs = request()->all();
 
         $user = User::find($id);
-        // dd($user, $inputs);
+
         if(!empty($inputs)){
-            // dd($inputs);
             try {
                 $skip = $inputs['page'] * 4;
 
@@ -94,9 +95,30 @@ class UsersController extends Controller
                                             ->paginate(4);
         }
 
-        $inputs['page'] = 1;
+        $inputs = [];
 
-        return view('users.index_profile', compact('user', 'promoted_exercises', 'inputs'));
+        if($user->isProfessor()){
+            $levels = collect();
+            $categories = collect();
+            $question_types_subtypes = collect();
+            $user_exercises = collect();
+        }
+        else{
+            $levels = ExerciseLevel::get();
+            $categories = ExerciseCategory::get();
+            $question_types_subtypes = QuestionType::with('subtypes')->get();
+            $filters = ['user_id' => $user->id];
+            $user_exercises = Exame::applyPerformanceFilters($filters);
+        }
+
+        return view('users.index_profile', compact(
+            'user', 
+            'promoted_exercises', 
+            'inputs', 
+            'levels', 
+            'categories', 
+            'question_types_subtypes', 
+            'user_exercises'));
     }
 
     public function edit_profile($id)
@@ -160,7 +182,6 @@ class UsersController extends Controller
         $user = User::find($id);
 
         $validator = \Validator::make($inputs, User::rulesForEdit($id, $more_rules), User::$messages);
-        // dd($validator);
         if ($validator->fails()) {
             request()->session()->flash('edit_profile_error', 'Por favor, verifique os erros no formulário.');
             // request()->session()->flash('error', 'Ocorreu um erro ao atualizar o seu perfil. Por favor, tente de novo!');
@@ -273,6 +294,19 @@ class UsersController extends Controller
         }
 
         return redirect()->to('/chat/' . $user_id);
+    }
+
+    public function applyPerformanceFilters()
+    {
+        $data = request()->all();
+
+        $user_exercises = Exame::applyPerformanceFilters($data, $data['by_student_or_class']);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'user_exercises' => $user_exercises,
+        ]);
     }
 
     public function viewShareNotifications()

@@ -2,9 +2,12 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=1.3">
+
+<link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
 @stop
 
@@ -164,7 +167,7 @@
             </div>
         </div>
 
-        @if($user->user_role_id == 1 || $user->user_role_id == 2)
+        @if($user->isProfessor() && $user->isActive())
 
             {{-- professor - promoted exercises --}}
             <form id="promoted_exercises_filters_form" class="" method="GET" autocomplete="off">
@@ -180,16 +183,114 @@
                 <input type="number" name="previous_page" id="previous_page_number" value="1" hidden>
             </form>
 
-        @else
+        @elseif(($user->isStudent() && $user->id == auth()->user()->id) 
+                || (auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->id != $user->id))
 
             {{-- student - My Performance --}}
             <div class="row mb-5">
                 <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                     <div class="wrap mb-3">
-                        <h1 class="title">O meu Desempenho</h1>
+                        @if($user->id == auth()->user()->id)
+                            <h1 class="title">O meu Desempenho</h1>
+                        @else
+                            <h1 class="title">Desempenho do aluno {{ $user->username }}</h1>
+                        @endif
                     </div>
-                    <div class="card-body" style="position: relative; overflow: hidden; height: 600px; display: grid;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/performance_icon.svg')}}" alt="" style="position: absolute; place-self: center;">
+                    <div class="dashboard_container card-body professor_validation_table settings_table" 
+                        style="position: relative; overflow: hidden; display: block;">
+
+                        <div class="dashboard_container_header" id="performance_filters">
+                            <div class="dashboard_fl_1">
+                                <h4>
+                                    <a href="#collapse_performance_filters" class="ml-auto p-0 b-0 align-self-center expand_accordion collapsed" data-toggle="collapse" data-parent="#accordion">
+                                        Filtros &nbsp;
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+                                    </a>
+                                </h4>
+                                <div id="collapse_performance_filters" class="collapse" data-parent="#accordion">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="" class="label_title" style="font-size: 18px;">Níveis de Exercícios</label>
+                                                <div class="low_z_index">
+                                                    <select name="performance_filters_levels" id="performance_filters_levels" class="form-control" multiple>
+                                                        @foreach ($levels as $level)
+                                                            <option value="{{ $level->id }}">{{ $level->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group filters_dates">
+                                                <label for="" class="label_title">Data Início</label>
+                                                <input type="text" name="performance_filters_start_date" class="form-control" id="performance_filters_start_date" value="" readonly />
+                                                <button class="btn search-btn comment_submit" id="reset-performance_filters_start_date">Limpar Data</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="" class="label_title" style="font-size: 18px;">Temas</label>
+                                                <div class="low_z_index">
+                                                    <select name="performance_filters_categories" id="performance_filters_categories" class="form-control" multiple>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group filters_dates">
+                                                <label for="" class="label_title">Data Fim</label>
+                                                <input type="text" name="performance_filters_end_date" class="form-control" id="performance_filters_end_date" value="" readonly />
+                                                <button class="btn search-btn comment_submit" id="reset-performance_filters_end_date">Limpar Data</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="" class="label_title" style="font-size: 18px;">Tipos de Questões contidas</label>
+                                                <div class="low_z_index">
+                                                    <select name="performance_filters_question_types" id="performance_filters_question_types" class="form-control" multiple>
+                                                        @foreach ($question_types_subtypes as $question_type)
+                                                            <optgroup label="{{ $question_type->name }}">
+                                                                @foreach ($question_type->subtypes as $subtype)
+                                                                    <option value="{{ $subtype->id }}">{{ $subtype->name }}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="" class="label_title" style="font-size: 18px;">Legenda</label>
+                                                <div id="choices" class="form-control d-inline-flex" style="margin-left: auto;"></div>
+                                            </div>
+                                        </div> --}}
+
+                                    </div>
+
+                                    <button class="btn search-btn comment_submit float-none professors" id="apply_filters">Aplicar</button>
+                                        
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preloader ajax performance col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+
+                        <div class="dashboard_container_body p-3">
+
+                            {{-- <div id="performance_graph_placeholder" style="background: url({{asset('/assets/backoffice_assets/icons/performance_icon.svg')}}) no-repeat;"></div> --}}
+                            
+                            <div id="performance_graph_placeholder" style="background: url({{asset('/assets/backoffice_assets/icons/performance_icon.svg')}}) no-repeat;"></div>
+
+                            {{-- <button type="button" class="btn search-btn comment_submit float-none" id="download_pdf">Exportar para PDF</button> --}}
+
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -201,145 +302,427 @@
 </section>
 
 <input type="text" name="hidden_user_id" id="hidden_user_id" value="{{ $user->id }}" hidden>
+<input type="text" name="hidden_user_name" id="hidden_user_name" value="{{ $user->username }}" hidden>
 
 
 @stop
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.3"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'))}}"></script>
+
+    {{-- HighCharts --}}
+    <script src="https://code.highcharts.com/highcharts.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/data.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js?v=1.3"></script>
+
+    <!-- Additional files for the Highslide popup effect -->
+    {{-- <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
+    <script src="https://www.highcharts.com/samples/static/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.highcharts.com/samples/static/highslide.css" /> --}}
 
     <script>
 
-        // CKEDITOR.replace( 'intro_text' , {
-        //     language: 'pt'
-        // });
+        var high_chart = null;
 
-        // CKEDITOR.replace( 'statement' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_visual_description' , {
-        //     language: 'pt'
-        // });
-
-        // CKEDITOR.replace( 'audio_transcription' , {
-        //     language: 'pt'
-        // });
-
+        var user_exercises = {!! json_encode($user_exercises) !!};
+        
+        var toggleAxisExtremes = function(event) {
+            var series = event.target,
+                yAxis = series.yAxis;
+ 
+            if (event.type === "show") {
+                    (yAxis.oldExtremes) ? yAxis.setExtremes(yAxis.oldExtremes.min, yAxis.oldExtremes.max, true, false) : false;
+            } else if (event.type === "hide"){
+                    yAxis.oldExtremes = {
+                        min: yAxis.min,
+                    max: yAxis.max
+                }
+                    yAxis.setExtremes("null")
+            }
+        }
+        
         $(function() {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('input[name="_token"]').attr("value")
-                }
-            });
 
-            // Change icon image on tab change
-            changeIconImage();
-            function changeIconImage(){
-                $('#classroom_exercises_tabs a.nav-link').each(function(index, element){
-                    if($(element).hasClass('active')){
-                        $(element).find('.white_icon').show();
-                        $(element).find('.black_icon').hide();
+            var options2 = {
+
+                chart: { 
+                    alignTicks: false
+                },
+
+                lang: {
+                    exitFullscreen: 'Sair de Ecrã Inteiro',
+                },
+
+                title: {
+                    text: 'Desempenho do Aluno: ' + $('#hidden_user_name').val()
+                },
+
+                subtitle: {
+                    style: {
+                        color: '#131b31',
                     }
-                    else{
-                        $(element).find('.white_icon').hide();
-                        $(element).find('.black_icon').show();
+                },
+
+                yAxis: [
+                    { // Desempenho yAxis
+                        title: false,
+                        min: 0,
+                        max: 100,
+                        labels: {
+                            format: '{value}%',
+                            style: {
+                                color: '#795548'
+                            }
+                        },
+                        tickInterval: 25,
+                    }, 
+                    { // Avaliação yAxis
+                        title: false,
+                        min: 0,
+                        max: 100,
+                        labels: {
+                            format: '{value}%',
+                            style: {
+                                color: '#00b265'
+                            }
+                        },
+                        tickInterval: 25,
+                    }, 
+                    { // Ansiedade yAxis
+                        title: false,
+                        min: 1,
+                        max: 5,
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: '#ff9b20'
+                            }
+                        },
+                        tickInterval: 1,
                     }
-                });
-            }
+                ],
 
-            $(document).on('click', '#classroom_exercises_tabs a.nav-link', function(){
-                changeIconImage();
-            });
+                xAxis: {
+                    tickInterval: 1,
+                },
 
-            // Change right side info_accordion icon
-            changeAccordionInfoIcon($('.info_accordion a'));
-            function changeAccordionInfoIcon(selector){
-                if($(selector).hasClass('collapsed')){
-                    $(selector).find('.show_info_button').show();
-                    $(selector).find('.hide_info_button').hide();
-                }
-                else{
-                    $(selector).find('.show_info_button').hide();
-                    $(selector).find('.hide_info_button').show();
-                }
-            }
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'top'
+                },
 
-            $(document).on('click', '.info_accordion a', function(){
-                changeAccordionInfoIcon($(this));
-            });
-
-            $('#exercise_template').select2({
-                placeholder: "Escolher exercício"
-            });
-
-            $('#categories').select2({
-                placeholder: "Escolher tema"
-            });
-
-            $('#levels').select2({
-                placeholder: "Escolher Nível"
-            });
-
-            $('#class_select').select2();
-            $('#student_select').select2();
-
-            $('#fill_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#interruption_time').select2({
-                placeholder: "Sel. Tempo"
-            });
-
-            $('#verbs_select_1').select2();
-
-            $('#verbs_select_2').select2();
-
-            $(document).on('click', '#perform_exercise_tabs .nav-link', function(){
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-                    $(element).removeClass('show');
-                    $(element).removeClass('active');
-                });
-
-                var this_id = $(this).attr('id');
-
-                $('#perform_exercise_tabs_content .tab-pane').each(function(index, element){
-
-                    if($(element).attr('aria-labelledby') == this_id){
-                        $(element).addClass('fade');
-                        $(element).addClass('show');
-                        $(element).addClass('active');
-
-                        if($(element).attr('id') == 'listening'){
-                            $('#perform_listening_tabs .nav-link:first').trigger('click');
-                        }
-
-                        if($(element).attr('id') == 'listening-shop'){
-                            $('#perform_listening_shop_tabs .nav-link:first').trigger('click');
+                plotOptions: {
+                    series: {
+                        label: {
+                            enabled: false,
+                            // connectorAllowed: false
+                        },
+                        events: {
+                            show: toggleAxisExtremes,
+                            hide: toggleAxisExtremes
                         }
                     }
+                },
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                },
+
+                exporting: {
+                    menuItemDefinitions: {
+                        viewFullscreen: {
+                            text: 'Ver em Ecrã inteiro'
+                        },
+                        printChart: {
+                            onclick: function () {
+                                this.print();
+                            },
+                            text: 'Imprimir gráfico'
+                        },
+                        separator: true,
+                        downloadPNG: {
+                            onclick: function () {
+                                this.exportChart();
+                            },
+                            text: 'Exportar para Imagem'
+                        },
+                        downloadPDF: {
+                            onclick: function() {
+                                // Highcharts.exportCharts(
+                                //     [high_chart], 
+                                //     {
+                                //         type: 'image/png',
+                                //         filename: 'Desempenho do Aluno: ' + $('#hidden_user_name').val()
+                                //     }, 
+                                //     'performance_filters'
+                                // );
+                                this.exportChart({
+                                    type: 'application/pdf'
+                                });
+                            },
+                            text: 'Exportar para PDF'
+                        },
+                    },
+                    buttons: {
+                        contextButton: {
+                            menuItems: ['viewFullscreen', 'printChart', 'separator', 'downloadPNG', 'downloadPDF']
+                        }
+                    }
+                },
+
+                navigation: {
+                    menuItemStyle: {
+                        fontWeight: 'normal',
+                        background: 'none',
+                        color: '#131b31'
+                    },
+                    menuItemHoverStyle: {
+                        fontWeight: 'bold',
+                        background: '#ff2850',
+                        color: 'white'
+                    }
+                },
+
+                credits: {
+                    enabled: false
+                },
+
+            };
+
+            Highcharts.setOptions({
+                lang: {
+                    resetZoom: 'Cancelar Zoom'
+                }
+            });
+
+            console.log(user_exercises.length);
+            if(user_exercises.length){
+                applyHighChart(user_exercises);
+            }
+
+            function applyHighChart(user_exercises){
+
+                
+                var performance_data_array = [];
+                var evaluation_data_array = [];
+                var anxiety_data_array = [];
+
+                user_exercises.forEach((exercise, index) => {
+
+                    performance_data_array.push([exercise.exercise.title, parseFloat(exercise.performance)]);
+                    evaluation_data_array.push([exercise.exercise.title, parseFloat(exercise.classification_median)]);
+                    anxiety_data_array.push([exercise.exercise.title, parseFloat(exercise.anxiety_median)]);
+                    
+                });
+
+                var performance_data = {
+                    name: 'Desempenho',
+                    data: performance_data_array,
+                    color: '#795548'
+                };
+
+                var evaluation_data = {
+                    name: 'Avaliação',
+                    data: evaluation_data_array,
+                    color: '#00b265',
+                    yAxis: 1,
+                };
+
+                var anxiety_data = {
+                    name: 'Ansiedade',
+                    data: anxiety_data_array,
+                    color: '#ff9b20',
+                    yAxis: 2,
+                };
+
+                options2.xAxis.labels = {
+                    enabled: true,
+                    formatter: function(){
+                        return '<a href="/exercicios/realizar/'+user_exercises[this.value].exercise.id+'" target="_blank" class="link_on_chart">'+performance_data_array[this.value][0]+'</a>';
+                    },
+                    rotation: -30,
+                    // align: 'right',
+                    // verticalAlign: 'top'
+                };
+
+                options2.series = [
+                    performance_data, 
+                    evaluation_data,
+                    anxiety_data
+                ];
+
+                options2.tooltip = {
+                    shared: true,
+                    headerFormat: "",
+                    pointFormatter: function() {
+                        let y = parseFloat(this.y);
+                        var perc = '';
+                        if(this.series.name == 'Desempenho' || this.series.name == 'Avaliação'){
+                            perc = '%'
+                        }
+                        return "<span style=\"color:"+this.series.color+"\">■</span> "+this.series.name+": <b>"+ y + perc +"</b></br>"
+                    }
+                }
+
+                high_chart = Highcharts.chart('performance_graph_placeholder', options2);
+            }
+                
+            /////////////
+            
+            // FILTERS
+
+            $('#performance_filters_levels, #performance_filters_categories, #performance_filters_question_types').select2();
+
+            $("#performance_filters_start_date, #performance_filters_end_date").datepicker({
+                format: "dd/mm/yyyy",
+                orientation: 'bottom'
+            });    
+
+            $('#performance_filters_start_date, #performance_filters_end_date').datepicker().on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+
+            $("#reset-performance_filters_start_date").click(function () {
+                $('#performance_filters_start_date').val("").datepicker("update");
+            });
+
+            $("#reset-performance_filters_end_date").click(function () {
+                $('#performance_filters_end_date').val("").datepicker("update");
+            });
+
+            // Apply Filters
+            $(document).on('click', '#apply_filters', function(e){
+                e.preventDefault();
+
+                $(".dashboard_container_body").hide();
+                $('.preloader.ajax.performance')
+                    .css('height', $(".dashboard_container_body").height())
+                    .show();
+                
+                var data = {
+                    by_student_or_class : 'by_student',
+                    user_id : $('#hidden_user_id').val(),
+                    performance_filters_levels: $('#performance_filters_levels').val(),
+                    performance_filters_categories: $('#performance_filters_categories').val(),
+                    performance_filters_question_types: $('#performance_filters_question_types').val(),
+                    performance_filters_start_date: $('#performance_filters_start_date').val(),
+                    performance_filters_end_date: $('#performance_filters_end_date').val(),
+                };
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/performance_filters',
+                    data: data,
+                    success: function(response){
+                        if (response && response.status == "success") {
+
+                            $(".dashboard_container_body").show();
+                            $('.preloader.ajax.performance').hide();
+
+                            user_exercises = response.user_exercises;
+                            applyHighChart(response.user_exercises);
+                            addFiltersToChart(data);
+                        }
+                        else {
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 2000);
+                        }
+                    }
                 });
             });
+
+            function addFiltersToChart(filters){
+                var filters_subtitle = '';
+
+                if(filters.performance_filters_levels){
+                    filters.performance_filters_levels.forEach((element, index) => {
+                        if(index == 0){
+                            filters_subtitle += '<b>Níveis de Exercícios: </b>' + $("#performance_filters_levels option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_levels option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_categories){
+                    filters.performance_filters_categories.forEach((element, index) => {
+                        if(index == 0){
+                            if(filters_subtitle != ''){
+                                filters_subtitle += ' | ';
+                            }
+                            filters_subtitle += '<b>Temas: </b>' + $("#performance_filters_categories option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_categories option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_question_types){
+                    filters.performance_filters_question_types.forEach((element, index) => {
+                        if(index == 0){
+                            if(filters_subtitle != ''){
+                                filters_subtitle += ' | ';
+                            }
+                            filters_subtitle += '<b>Questões: </b>' + $("#performance_filters_question_types option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_question_types option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_start_date != ''){
+                    filters_subtitle += '<br><b>Data Ínicio: </b>' + $("#performance_filters_start_date").val();
+                }
+
+                if(filters.performance_filters_end_date != ''){
+                    if(filters_subtitle != ''){
+                        filters_subtitle += ' | ';
+                    }
+                    filters_subtitle += '<b>Data Fim: </b>' + $("#performance_filters_end_date").val();
+                }
+
+                high_chart.setTitle(null, { text: filters_subtitle});
+            }
+
+            ///////////////
 
             function expandCollapseAccordion(selector){
                 if(!$(selector).hasClass('expanded')){
                     $(selector).addClass('expanded');
-                    $(selector).find('span').text('Ocultar');
+                    $(selector).css('border', 'none');
                     $(selector).find('img.expand_chevron').hide();
                     $(selector).find('img.collapse_chevron').show();
                 }
                 else{
                     $(selector).removeClass('expanded');
-                    $(selector).find('span').text('Expandir');
+                    $(selector).css('border', 'none');
                     $(selector).find('img.expand_chevron').show();
                     $(selector).find('img.collapse_chevron').hide();
                 }
@@ -349,54 +732,10 @@
                 expandCollapseAccordion($(this));
             });
 
-            function hideAllDotIcons() {
-                $('.student_dropdown a').each(function(index, element){
-                    if(!$(element).parent().hasClass('show')){
-                        $(element).find('img.filled_dots').hide();
-                        $(element).find('img.empty_dots').show();
-                    }
-                });
-            }
-
-            // changeDotsIcons('.student_dropdown a');
-            function changeDotsIcons(selector){
-                if($(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').hide();
-                    $(selector).find('img.empty_dots').show();
-                    // hideAllDotIcons();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('input[name="_token"]').attr("value")
                 }
-                else if(!$(selector).parent().hasClass('show')){
-                    $(selector).find('img.filled_dots').show();
-                    $(selector).find('img.empty_dots').hide();
-                }
-            }
-
-            $('.student_dropdown a').on('click', function(){
-                // hideAllDotIcons();
-                changeDotsIcons(this);
-            });
-
-            $('html, body').on('click', function(){
-                $('.student_dropdown a').find('img.filled_dots').hide();
-                $('.student_dropdown a').find('img.empty_dots').show();
-            });
-
-            // Select All Classes or Just one
-            changeClass('#class_select');
-            function changeClass(selector){
-                // All Classes
-                if($(selector).val() == 1){
-                    $('p.all_classes').show();
-                    $('p.one_class').hide();
-                }
-                // Single Class
-                else{
-                    $('p.all_classes').hide();
-                    $('p.one_class').show();
-                }
-            }
-            $(document).on('change', '#class_select', function(){
-                changeClass($(this));
             });
 
             // Update promoted exercises pagination

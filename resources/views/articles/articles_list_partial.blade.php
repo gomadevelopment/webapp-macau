@@ -33,11 +33,11 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
         
                 <div class="shop_grid" style="min-height: 300px;">
-                    <div class="shop_grid_thumb img">
+                    {{-- <div class="shop_grid_thumb img">
                         <img src="{{ $article->poster ? '/webapp-macau-storage/articles/'.$article->id.'/poster/'.$article->poster->media_url : 'https://via.placeholder.com/500x500'}}"
                          class="img-fluid" alt="" />
-                    </div>
-                    <div class="shop_grid_caption">
+                    </div> --}}
+                    <div class="shop_grid_caption ml-2">
                         {{-- Like buttons heart/heart_filled --}}
                         <img class="heart_icon" data-article-id="{{ $article->id }}"
                     src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="" style="display: {{ $article->is_article_favorite ? 'none;' : 'block;' }}">

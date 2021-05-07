@@ -205,6 +205,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get All Student Exames for Professor Classroom
+     */
+    public function student_exames()
+    {
+        return $this->hasMany('App\Exame', 'student_id');
+    }
+
+    /**
      * Unread Notifications
      */
     public function unread_notifications()
@@ -456,14 +464,6 @@ class User extends Authenticatable
             return 'has_exame_finished';
         }
         
-    }
-
-    /**
-     * Get All Student Exames for Professor Classroom
-     */
-    public function student_exames()
-    {
-        return $this->hasMany('App\Exame', 'student_id');
     }
 
     /**

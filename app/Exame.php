@@ -318,8 +318,6 @@ class Exame extends Model
             }
         }
 
-        // dd('STOP');
-
         $exercise_student_score = $questions->sum('classification');
 
         $score_perc = $exercise_sum_score_points == 0 ? 0 : round(($exercise_student_score / $exercise_sum_score_points) * 100);
@@ -966,21 +964,234 @@ class Exame extends Model
         $this->is_revised = 1;
         $this->save();
 
-        if($exame->student->notification_type_2){
+        if($this->student->notification_type_2){
             Notification::create([
                 'title' => 'Exame corrigido',
                 'text' => 'O seu exame "'.$this->title.'" foi corrigido. Já o pode rever com nota total.',
-                'url' => '/exercicios/realizar/'.$exame->exercise->id,
+                'url' => '/exercicios/realizar/'.$this->exercise->id,
                 'param1_text' => 'exercise_id',
-                'param1' => $exame->exercise->id,
+                'param1' => $this->exercise->id,
                 'param2_text' => '',
                 'param2' => '',
                 'type_id' => 2,
-                'user_id' => $exame->student_id,
+                'user_id' => $this->student_id,
                 'active' => 1
             ]);
         }
             
         
+    }
+
+    /*
+        Performance Filters
+    */
+    public static function applyPerformanceFilters($filters = [], $by_student_or_class = 'by_student')
+    {
+        // dd($filters, $professors_or_students);
+        $professor_students_ids = [];
+        if($by_student_or_class == 'by_student'){
+            $query = self::with(['anxiety_inquiry', 'exercise', 'questions'])
+                        ->where('student_id', $filters['user_id'])
+                        ->orderBy('created_at', 'asc');
+            
+            // Professor is viewing student profile - only sees exames made by that professor
+            if($filters['user_id'] != auth()->user()->id && auth()->user()->isProfessor() && auth()->user()->isActive()){
+                $query = $query->where('user_id', auth()->user()->id);
+            }
+        }
+        else{
+            $professor_students_ids = auth()->user()
+                                ->getProfessorStudents($filters['class_id'] ? $filters['class_id'] : null)
+                                ->pluck('id')
+                                ->toArray();
+            // dd($professor_students_ids);
+            $query = self::with(['anxiety_inquiry', 'exercise', 'questions'])
+                        // ->where('id', '<', 242)
+                        ->where('user_id', auth()->user()->id)
+                        ->whereIn('student_id', $professor_students_ids)
+                        ->orderBy('created_at', 'asc');
+        }
+        // ->unique(['user_id', 'student_id', 'exercise_id'])
+        // dd($query->get()->unique('exercise_id'));
+
+        // Levels Filter
+        if(isset($filters['performance_filters_levels']) && $filters['performance_filters_levels']){
+            $query = $query->whereIn('exercise_level_id', $filters['performance_filters_levels']);
+        }
+
+        // settings_professors_filter_approval
+
+        // Categories Filter
+        if(isset($filters['performance_filters_categories']) && $filters['performance_filters_categories']){
+            $query = $query->whereIn('exercise_category_id', $filters['performance_filters_categories']);
+        }
+
+        // Question Subtypes Filter
+        if(isset($filters['performance_filters_question_types']) && $filters['performance_filters_question_types']){
+            $query = $query->whereHas('questions', function($q) use($filters) {
+                        $q->whereHas('question_subtype', function($q2) use($filters) {
+                            return $q2->whereIn('question_subtypes.id', $filters['performance_filters_question_types']);
+                        });
+            });
+        }
+
+        // Start date - finish date
+        if (isset($filters['performance_filters_start_date']) && $filters['performance_filters_start_date']) {
+            $start_date = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$filters['performance_filters_start_date']);
+            $query->where('finish_date', '>=', $start_date);
+        }
+        
+        // End date - finish date
+        if (isset($filters['performance_filters_end_date']) && $filters['performance_filters_end_date']) {
+            $end_date = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$filters['performance_filters_end_date']);
+            $query->where('finish_date', '<=', $end_date);
+        }
+        // dd($query->get()->unique('exercise_id'));
+        // dd($query->get()->unique('exercise_id'), $query->get());
+        // dd(instanceof Collection $query->get()->unique('exercise_id'));
+        // dd($query->distinct('exercise_id')->get()->pluck('exercise_id')->toArray(), $query->get()->unique('exercise_id')->pluck('exercise_id')->toArray());
+        return self::performanceCalculation(
+            $by_student_or_class == 'by_class' ? $query->get()->unique('exercise_id') : $query->get(), 
+            $by_student_or_class == 'by_class' ? $professor_students_ids : []);
+    }
+
+    // PERFORMANCE CALCULATION
+    public static function performanceCalculation($exames, $professor_students_ids)
+    {
+        $count = 0;
+        $previous_exame = null;
+        $exclude_exames = [];
+        $length = count($exames);
+        $fixed_exames = [];
+        foreach ($exames as $exame) {
+            if($count == 0){
+                if(!empty($professor_students_ids)){
+                    $all_exames_made_by_student = 
+                                self::with('anxiety_inquiry')
+                                    ->whereIn('student_id', $professor_students_ids)
+                                    ->where('user_id', auth()->user()->id)
+                                    ->where('exercise_id', $exame->exercise_id)
+                                    ->orderBy('created_at', 'asc')
+                                    ->get();
+                    // dd($exame->id, $all_exames_made_by_student);
+                    $all_exames_number = $all_exames_made_by_student->count();
+                    // $all_exames_performance = 0;
+                    $performance_anxiety_factor_level = $exame->exercise->level->performance_anxiety_factor
+                        ? ($exame->exercise->level->performance_anxiety_factor / 5)
+                        : 2;
+                    $anxiety_indice = 0;
+                    $exame['classification_median'] = 0;
+                    $exame['anxiety_median'] = 0;
+                    $exame['accumulated_classification'] = 0;
+                    $exame['performance'] = 0;
+                    foreach ($all_exames_made_by_student as $exame2) {
+                        $anxiety_indice += $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                        $exame['classification_median'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
+                        $exame['anxiety_median'] += $exame2->anxiety_inquiry->value;
+                        $exame['accumulated_classification'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
+                        $exame['performance'] += $exame['classification_median'] - $anxiety_indice;
+
+                    }
+
+                    $anxiety_indice = $anxiety_indice / $all_exames_number;
+                    $exame['classification_median'] = (string)($exame['classification_median'] / $all_exames_number);
+                    $exame['anxiety_median'] = (string)($exame['anxiety_median'] / $all_exames_number);
+                    $exame['accumulated_classification'] = (string)($exame['accumulated_classification'] / $all_exames_number);
+                    $exame['performance'] = 
+                        $exame['classification_median'] == 0.00
+                        ? (string)$exame['classification_median']
+                        : (string)($exame['classification_median'] - $anxiety_indice);
+                    
+                    $exame['performance'] = $exame['performance'] < 0 ? 0 : $exame['performance'];
+                    
+                    // dd($exame, $all_exames_made_by_student, $anxiety_indice);
+                    // $exclude_exames[] = $exame2->id;
+                    $previous_exame = $exame;
+                }
+                else{
+                    // Indice de Ansiedade - desconta % em função do nível do Exercício
+                    $performance_anxiety_factor_level = $exame->exercise->level->performance_anxiety_factor
+                        ? ($exame->exercise->level->performance_anxiety_factor / 5)
+                        : 2;
+                    $anxiety_indice = $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                    $exame['classification_median'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);
+                    $exame['anxiety_median'] = $exame->anxiety_inquiry->value;
+                    $exame['accumulated_classification'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);;
+                    $exame['performance'] = 
+                        $exame['classification_median'] == 0.00
+                        ? (string)$exame['classification_median']
+                        : (string)($exame['classification_median'] - $anxiety_indice);
+                    $exame['performance'] = $exame['performance'] < 0 ? 0 : $exame['performance'];
+                    $previous_exame = $exame;
+                }
+                
+            }
+            else{
+                if(!empty($professor_students_ids)){
+                    $all_exames_made_by_student = 
+                                self::with('anxiety_inquiry')
+                                    ->whereNotIn('id', $exclude_exames)
+                                    ->whereIn('student_id', $professor_students_ids)
+                                    ->where('user_id', auth()->user()->id)
+                                    ->where('exercise_id', $exame->exercise_id)
+                                    ->orderBy('created_at', 'asc')
+                                    ->get();
+
+                    $all_exames_number = $all_exames_made_by_student->count();
+                    $performance_anxiety_factor_level = $exame->exercise->level->performance_anxiety_factor
+                        ? ($exame->exercise->level->performance_anxiety_factor / 5)
+                        : 2;
+                    $anxiety_indice = 0;
+                    $exame['classification_median'] = 0;
+                    $exame['anxiety_median'] = 0;
+                    $exame['accumulated_classification'] = 0;
+                    $exame['performance'] = 0;
+                    foreach ($all_exames_made_by_student as $exame2) {
+                        $anxiety_indice += $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                        $exame['anxiety_median'] += $exame2->anxiety_inquiry->value;
+                        $exame['accumulated_classification'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
+                        $exame['performance'] += $exame['classification_median'] - $anxiety_indice;
+
+                    }
+                    // dd($exame['performance']);
+                    $anxiety_indice = $anxiety_indice / $all_exames_number; //
+                    $exame['classification_median'] = (string)($exame['accumulated_classification'] / $all_exames_number); //
+                    $exame['anxiety_median'] = (string)($exame['anxiety_median'] / $all_exames_number); //
+                    $exame['accumulated_classification'] = (string)($previous_exame->accumulated_classification + $exame['classification_median']);
+                    
+                    
+                    $performance = $exame->accumulated_classification == 0.00 
+                        ? (string)$exame->accumulated_classification 
+                        : (string)round(($exame->accumulated_classification / ($count+1)), 2);
+                    
+                    $exame['performance'] = (string)($performance - $anxiety_indice);
+                    $exame['performance'] = $exame['performance'] < 0 ? 0 : $exame['performance'];
+
+                    $previous_exame = $exame;
+                }
+                else{
+                    $performance_anxiety_factor_level = $exame->exercise->level->performance_anxiety_factor
+                        ? ($exame->exercise->level->performance_anxiety_factor / 5)
+                        : 2;
+                    $exame['classification_median'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);;
+                    $exame['anxiety_median'] = $exame->anxiety_inquiry->value;
+                    $exame['accumulated_classification'] = $previous_exame->accumulated_classification + $exame['classification_median'];
+                    $performance = 
+                        $exame->accumulated_classification == 0.00 
+                        ? (string)$exame->accumulated_classification 
+                        : (string)round(($exame->accumulated_classification / ($count+1)), 2);
+                    // Indice de Ansiedade - desconta até 10%
+                    $anxiety_indice = $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level; //
+                    $exame['performance'] = (string)($performance - $anxiety_indice);
+                    $exame['performance'] = $exame['performance'] < 0 ? 0 : $exame['performance'];
+
+                    $previous_exame = $exame;
+                }
+            }
+            $count++;
+            $fixed_exames[] = $exame;
+        }
+
+        return collect($fixed_exames);
     }
 }

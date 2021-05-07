@@ -108,3 +108,44 @@ span.add_new_content_span {
     height: 46px;
     margin: 10px auto auto auto;
 }
+
+.performance-checkbox {
+    margin: auto !important;
+    display: inline-grid;
+    justify-items: center;
+}
+
+.performance-checkbox::before {
+    margin: 0 0 5px 0 !important;
+}
+
+.datepicker table tr td.active {
+    background-color: #ff2850 !important;
+    color: #fff !important;
+    background-image: none !important;
+}
+
+#tooltip,
+#tooltip strong {
+    color: #131b31;
+    font-family: "Gilroy - Regular";
+    /* font-size: 18px; */
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.30px;
+    text-align: left;
+}
+
+#tooltip strong {
+    font-family: "Gilroy - Bold";
+}
+
+#tooltip a {
+    color: #ff2850;
+    font-family: "Gilroy - Bold";
+    /* font-size: 18px; */
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.30px;
+    text-align: left;
+}

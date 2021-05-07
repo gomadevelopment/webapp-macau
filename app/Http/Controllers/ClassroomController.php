@@ -11,7 +11,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\User,
     App\StudentClass,
-    App\Exame;
+    App\Exame,
+    App\ExerciseLevel,
+    App\ExerciseCategory,
+    App\QuestionType;
 
 class ClassroomController extends Controller
 {
@@ -57,13 +60,30 @@ class ClassroomController extends Controller
         $students_exames_evaluated = $all_students_exames[2];
                 
         // Student - Student Exames
-        $student_in_evaluation_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInEvaluationExames(0, 1) : collect();
-        $student_in_course_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInCourseExames(0, 1) : collect();
-        $student_done_exames = auth()->user()->isStudent() ? auth()->user()->getStudentDoneExames(0, 1) : collect();
+        $student_in_evaluation_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInEvaluationExames(0, 4) : collect();
+        $student_in_course_exames = auth()->user()->isStudent() ? auth()->user()->getStudentInCourseExames(0, 4) : collect();
+        $student_done_exames = auth()->user()->isStudent() ? auth()->user()->getStudentDoneExames(0, 4) : collect();
 
         $unread_notifications = auth()->user()->getUnreadNotifications(5)->get();
         $read_notifications = auth()->user()->getReadNotifications(10)->get();
         // dd($unread_notifications, $read_notifications);
+
+        $inputs = [];
+
+        if(auth()->user()->isStudent() || (auth()->user()->isProfessor() && !auth()->user()->isActive())){
+            $levels = collect();
+            $categories = collect();
+            $question_types_subtypes = collect();
+            $user_exercises = collect();
+        }
+        else{
+            $levels = ExerciseLevel::get();
+            $categories = ExerciseCategory::get();
+            $question_types_subtypes = QuestionType::with('subtypes')->get();
+            $filters = ['class_id' => 0]; // Means All Classes
+            // dd(Exame::applyPerformanceFilters($filters));
+            $user_exercises = Exame::applyPerformanceFilters($filters, 'by_class');
+        }
 
         return view('classroom.index', compact(
             'students', 
@@ -75,7 +95,13 @@ class ClassroomController extends Controller
             'student_done_exames',
             'students_colleagues', 
             'unread_notifications', 
-            'read_notifications'));
+            'read_notifications',
+            'inputs', 
+            'levels', 
+            'categories', 
+            'question_types_subtypes', 
+            'user_exercises'
+        ));
     }
 
     public function custom_paginate($items, $perPage = 15, $page = null, $options = [])
@@ -164,6 +190,7 @@ class ClassroomController extends Controller
             return response()->json([
                 'status' => 'success',
                 'html' => $html,
+                'page_changed' => true
             ]);
         }
 
@@ -180,10 +207,14 @@ class ClassroomController extends Controller
             'students_exames_evaluated' => $students_exames_evaluated
         ]);
         $html = $view->render();
+
+        $user_exercises = Exame::applyPerformanceFilters($filters, $filters['by_student_or_class']);
         
         return response()->json([
             'status' => 'success',
             'html' => $html,
+            'page_changed' => false,
+            'user_exercises' => $user_exercises
         ]);
     }
 
@@ -217,17 +248,17 @@ class ClassroomController extends Controller
         $students_exames_evaluated = $students_exames_evaluated->unique();
 
         // Professor
-        $students_exames_awaiting_evaluation = $this->custom_paginate($students_exames_awaiting_evaluation, 2, !$has_pagination ? null : $filters['page_awaiting_evaluation'], 
+        $students_exames_awaiting_evaluation = $this->custom_paginate($students_exames_awaiting_evaluation, 4, !$has_pagination ? null : $filters['page_awaiting_evaluation'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'page_awaiting_evaluation'
             ]);
-        $students_exames_in_course = $this->custom_paginate($students_exames_in_course, 2, !$has_pagination ? null : $filters['page_in_course'], 
+        $students_exames_in_course = $this->custom_paginate($students_exames_in_course, 4, !$has_pagination ? null : $filters['page_in_course'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'page_in_course'
             ]);
-        $students_exames_evaluated = $this->custom_paginate($students_exames_evaluated, 2, !$has_pagination ? null : $filters['page_evaluated'], 
+        $students_exames_evaluated = $this->custom_paginate($students_exames_evaluated, 4, !$has_pagination ? null : $filters['page_evaluated'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'page_evaluated'
@@ -250,7 +281,7 @@ class ClassroomController extends Controller
                 ->where('is_finished', 1)
                 ->where('is_revised', 1)
                 ->get();
-        $student_in_evaluation_exames = $this->custom_paginate($student_in_evaluation_exames, 2, $filters['page_in_evaluation'], 
+        $student_in_evaluation_exames = $this->custom_paginate($student_in_evaluation_exames, 4, $filters['page_in_evaluation'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'in_evaluation'
@@ -261,7 +292,7 @@ class ClassroomController extends Controller
             ->where('is_finished', 0)
             ->where('is_revised', 0)
             ->get();
-        $student_in_course_exames = $this->custom_paginate($student_in_course_exames, 1, $filters['page_in_course'], 
+        $student_in_course_exames = $this->custom_paginate($student_in_course_exames, 4, $filters['page_in_course'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'in_course'
@@ -272,7 +303,7 @@ class ClassroomController extends Controller
                 ->where('is_finished', 1)
                 ->where('is_revised', 1)
                 ->get();
-        $student_done_exames = $this->custom_paginate($student_done_exames, 1, $filters['page_done'], 
+        $student_done_exames = $this->custom_paginate($student_done_exames, 4, $filters['page_done'], 
             [
                 'path' => Paginator::resolveCurrentPath(),
                 'pageName' => 'done'

@@ -144,5 +144,8 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/update_classroom_notifications', 'NotificationsController@updateNotifications');
         Route::get('/turn_notification_types_on_off/{notification_type_id}', 'NotificationsController@turnNotificationTypesOnOff');
 
+        // Performance
+        Route::get('/performance_filters', 'UsersController@applyPerformanceFilters');
+
     });
 });

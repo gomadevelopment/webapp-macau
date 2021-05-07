@@ -2,9 +2,13 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=1.3">
+
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=1.3">
+
+<link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
 @stop
 
@@ -150,11 +154,11 @@
                                                         Encontrar Alunos
                                                     </a>
                                                     <hr class="mt-0 mb-2 ml-2 mr-2"> --}}
-                                                    <a class="msg-title" href="#">
+                                                    {{-- <a class="msg-title" href="#">
                                                         <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                         Desempenho da Turma
                                                     </a>
-                                                    <hr class="mt-0 mb-2 ml-2 mr-2">
+                                                    <hr class="mt-0 mb-2 ml-2 mr-2"> --}}
                                                     <a class="msg-title professor_class_group_chat" href="#">
                                                         <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
                                                         Iniciar Conversa
@@ -275,7 +279,7 @@
                                     </li>
                                 </ul>
 
-                                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+                                <div class="preloader ajax classroom_exercises col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
 
                                 {{-- PROFESSOR STUDENT_CLASSES EXERCISES --}}
                                 <div class="tab-content professor_classroom_exercises" id="classroom_exercises_tabs_content">
@@ -309,7 +313,7 @@
                                     </li>
                                 </ul>
 
-                                <div class="preloader ajax col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+                                <div class="preloader ajax classroom_exercises col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
 
                                 {{-- STUDENT EXERCISES --}}
                                 <div class="tab-content student_classroom_exercises" id="classroom_exercises_tabs_content">
@@ -351,16 +355,107 @@
 
                     </div>
 
-                    {{-- student -  My performance --}}
-                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
-
-                    @else
+                    {{-- Performance --}}
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->classes->count())
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
-                            <div class="wrap mb-3">
-                                <h1 class="title">O meu Desempenho</h1>
-                            </div>
-                            <div class="card-body" style="position: relative; overflow: hidden; height: 480px; display: grid;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/performance_icon.svg')}}" alt="" style="position: absolute; place-self: center;">
+                            <div class="row mb-5">
+                                <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
+                                    <div class="wrap mb-3">
+                                        <h1 class="title">Desempenho dos meus Alunos/Turmas</h1>
+                                    </div>
+                                    <div class="dashboard_container card-body professor_validation_table settings_table" 
+                                        style="position: relative; overflow: hidden; display: block;">
+
+                                        <div class="dashboard_container_header">
+                                            <div class="dashboard_fl_1">
+                                                <h4>
+                                                    <a href="#collapse_performance_filters" class="ml-auto p-0 b-0 align-self-center expand_accordion filters collapsed" data-toggle="collapse" data-parent="#accordion_filters">
+                                                        Filtros &nbsp;
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron filters" alt="">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron filters" alt="" style="display: none;">
+                                                    </a>
+                                                </h4>
+                                                <div id="collapse_performance_filters" class="collapse" data-parent="#accordion_filters">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="" class="label_title" style="font-size: 18px;">Níveis de Exercícios</label>
+                                                                <div class="low_z_index">
+                                                                    <select name="performance_filters_levels" id="performance_filters_levels" class="form-control" multiple>
+                                                                        @foreach ($levels as $level)
+                                                                            <option value="{{ $level->id }}">{{ $level->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group filters_dates">
+                                                                <label for="" class="label_title">Data Início</label>
+                                                                <input type="text" name="performance_filters_start_date" class="form-control" id="performance_filters_start_date" value="" readonly />
+                                                                <button class="btn search-btn comment_submit" id="reset-performance_filters_start_date">Limpar Data</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="" class="label_title" style="font-size: 18px;">Temas</label>
+                                                                <div class="low_z_index">
+                                                                    <select name="performance_filters_categories" id="performance_filters_categories" class="form-control" multiple>
+                                                                        @foreach ($categories as $category)
+                                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group filters_dates">
+                                                                <label for="" class="label_title">Data Fim</label>
+                                                                <input type="text" name="performance_filters_end_date" class="form-control" id="performance_filters_end_date" value="" readonly />
+                                                                <button class="btn search-btn comment_submit" id="reset-performance_filters_end_date">Limpar Data</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="" class="label_title" style="font-size: 18px;">Tipos de Questões contidas</label>
+                                                                <div class="low_z_index">
+                                                                    <select name="performance_filters_question_types" id="performance_filters_question_types" class="form-control" multiple>
+                                                                        @foreach ($question_types_subtypes as $question_type)
+                                                                            <optgroup label="{{ $question_type->name }}">
+                                                                                @foreach ($question_type->subtypes as $subtype)
+                                                                                    <option value="{{ $subtype->id }}">{{ $subtype->name }}</option>
+                                                                                @endforeach
+                                                                            </optgroup>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- <div class="col-sm-12 col-md-6 col-lg-6">
+                                                            <div class="form-group">
+                                                                <label for="" class="label_title" style="font-size: 18px;">Legenda</label>
+                                                                <div id="choices" class="form-control d-inline-flex" style="margin-left: auto;"></div>
+                                                            </div>
+                                                        </div> --}}
+
+                                                    </div>
+
+                                                    <button class="btn search-btn comment_submit float-none professors" id="apply_filters">Aplicar</button>
+                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="preloader ajax performance col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2" style="height: 500px !important; margin: auto !important;"><span></span><span></span></div>
+
+                                        <div class="dashboard_container_body p-3">
+
+                                            <div id="performance_graph_placeholder" style="background: url({{asset('/assets/backoffice_assets/icons/performance_icon.svg')}}) no-repeat;"></div>
+
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -371,6 +466,8 @@
         
     </div>
 
+<input type="hidden" name="show_performance" id="show_performance" value="{{ auth()->user()->isProfessor() && auth()->user()->isActive() && auth()->user()->classes->count() ? true : false }}">
+
 </section>
 <!-- ============================ Find Courses with Sidebar End ================================== -->
 
@@ -378,18 +475,435 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=1.3"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.2"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'))}}"></script>
+    
+    {{-- HighCharts --}}
+    <script src="https://code.highcharts.com/highcharts.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/data.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js?v=1.3"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js?v=1.3"></script>
 
     <script>
 
+        var high_chart = null;
+
+        var user_exercises = {!! json_encode($user_exercises) !!};
+
+        var toggleAxisExtremes = function(event) {
+            var series = event.target,
+                yAxis = series.yAxis;
+ 
+            if (event.type === "show") {
+                    (yAxis.oldExtremes) ? yAxis.setExtremes(yAxis.oldExtremes.min, yAxis.oldExtremes.max, true, false) : false;
+            } else if (event.type === "hide"){
+                    yAxis.oldExtremes = {
+                        min: yAxis.min,
+                    max: yAxis.max
+                }
+                    yAxis.setExtremes("null")
+            }
+        }
+
         $(function() {
+
+            var options2 = {
+
+                chart: { 
+                    alignTicks: false,
+                    zoomType: 'x'
+                },
+
+                lang: {
+                    exitFullscreen: 'Sair de Ecrã Inteiro',
+                },
+
+                title: {
+                    text: 'Desempenho de Todas as Turmas',
+                    style: {
+                        color: '#131b31',
+                    }
+                },
+
+                subtitle: {
+                    style: {
+                        color: '#131b31',
+                    }
+                },
+
+                yAxis: [
+                    { // Desempenho yAxis
+                        title: false,
+                        min: 0,
+                        max: 100,
+                        labels: {
+                            format: '{value}%',
+                            style: {
+                                color: '#795548'
+                            }
+                        },
+                        tickInterval: 25,
+                    }, 
+                    { // Avaliação yAxis
+                        title: false,
+                        min: 0,
+                        max: 100,
+                        labels: {
+                            format: '{value}%',
+                            style: {
+                                color: '#00b265'
+                            }
+                        },
+                        tickInterval: 25,
+                    }, 
+                    { // Ansiedade yAxis
+                        title: false,
+                        min: 1,
+                        max: 5,
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: '#ff9b20'
+                            }
+                        },
+                        tickInterval: 1,
+                    }
+                ],
+
+                xAxis: {
+                    tickInterval: 1,
+                },
+
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'top'
+                },
+
+                plotOptions: {
+                    series: {
+                        label: {
+                            enabled: false,
+                            // connectorAllowed: false
+                        },
+                        events: {
+                            show: toggleAxisExtremes,
+                            hide: toggleAxisExtremes
+                        }
+                    }
+                },
+
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            legend: {
+                                layout: 'horizontal',
+                                align: 'center',
+                                verticalAlign: 'bottom'
+                            }
+                        }
+                    }]
+                },
+
+                exporting: {
+                    menuItemDefinitions: {
+                        viewFullscreen: {
+                            text: 'Ver em Ecrã inteiro'
+                        },
+                        printChart: {
+                            onclick: function () {
+                                this.print();
+                            },
+                            text: 'Imprimir gráfico'
+                        },
+                        separator: true,
+                        downloadPNG: {
+                            onclick: function () {
+                                this.exportChart();
+                            },
+                            text: 'Exportar para Imagem'
+                        },
+                        downloadPDF: {
+                            onclick: function() {
+                                // Highcharts.exportCharts(
+                                //     [high_chart], 
+                                //     {
+                                //         type: 'image/png',
+                                //         filename: 'Desempenho do Aluno: ' + $('#hidden_user_name').val()
+                                //     }, 
+                                //     'performance_filters'
+                                // );
+                                this.exportChart({
+                                    type: 'application/pdf'
+                                });
+                            },
+                            text: 'Exportar para PDF'
+                        },
+                    },
+                    buttons: {
+                        contextButton: {
+                            menuItems: ['viewFullscreen', 'printChart', 'separator', 'downloadPNG', 'downloadPDF']
+                        }
+                    }
+                },
+
+                navigation: {
+                    menuItemStyle: {
+                        fontWeight: 'normal',
+                        background: 'none',
+                        color: '#131b31'
+                    },
+                    menuItemHoverStyle: {
+                        fontWeight: 'bold',
+                        background: '#ff2850',
+                        color: 'white'
+                    }
+                },
+
+                credits: {
+                    enabled: false
+                },
+
+            };
+
+            Highcharts.setOptions({
+                lang: {
+                    resetZoom: 'Cancelar Zoom'
+                }
+            });
+
+            // console.log($('#show_performance').val());
+            if($('#show_performance').val()){
+                applyHighChart(user_exercises);
+            }
+
+            function applyHighChart(user_exercises){
+
+                
+                var performance_data_array = [];
+                var evaluation_data_array = [];
+                var anxiety_data_array = [];
+
+                user_exercises.forEach((exercise, index) => {
+
+                    performance_data_array.push([exercise.exercise.title, parseFloat(exercise.performance)]);
+                    evaluation_data_array.push([exercise.exercise.title, parseFloat(exercise.classification_median)]);
+                    anxiety_data_array.push([exercise.exercise.title, parseFloat(exercise.anxiety_median)]);
+                    
+                });
+
+                var performance_data = {
+                    name: 'Desempenho',
+                    data: performance_data_array,
+                    color: '#795548'
+                };
+
+                var evaluation_data = {
+                    name: 'Avaliação',
+                    data: evaluation_data_array,
+                    color: '#00b265',
+                    yAxis: 1,
+                };
+
+                var anxiety_data = {
+                    name: 'Ansiedade',
+                    data: anxiety_data_array,
+                    color: '#ff9b20',
+                    yAxis: 2,
+                };
+
+                options2.xAxis.labels = {
+                    enabled: true,
+                    formatter: function(){
+                        return '<a href="/exercicios/editar/'+user_exercises[this.value].exercise.id+'" target="_blank" class="link_on_chart">'+performance_data_array[this.value][0]+'</a>';
+                    },
+                    rotation: -30,
+                    // align: 'right',
+                    // verticalAlign: 'top'
+                };
+
+                options2.series = [
+                    performance_data, 
+                    evaluation_data,
+                    anxiety_data
+                ];
+
+                options2.tooltip = {
+                    shared: true,
+                    headerFormat: "",
+                    pointFormatter: function() {
+                        let y = parseFloat(this.y);
+                        var perc = '';
+                        if(this.series.name == 'Desempenho' || this.series.name == 'Avaliação'){
+                            perc = '%'
+                        }
+                        return "<span style=\"color:"+this.series.color+"\">■</span> "+this.series.name+": <b>"+ y + perc +"</b></br>"
+                    }
+                }
+
+                high_chart = Highcharts.chart('performance_graph_placeholder', options2);
+            }
+                
+            /////////////
+            
+            // FILTERS
+
+            $('#performance_filters_levels, #performance_filters_categories, #performance_filters_question_types').select2();
+
+            $("#performance_filters_start_date, #performance_filters_end_date").datepicker({
+                format: "dd/mm/yyyy",
+                orientation: 'bottom'
+            });    
+
+            $('#performance_filters_start_date, #performance_filters_end_date').datepicker().on('changeDate', function (ev) {
+                $(this).datepicker('hide');
+            });
+
+            $("#reset-performance_filters_start_date").click(function () {
+                $('#performance_filters_start_date').val("").datepicker("update");
+            });
+
+            $("#reset-performance_filters_end_date").click(function () {
+                $('#performance_filters_end_date').val("").datepicker("update");
+            });
+
+            // Apply Filters
+            $(document).on('click', '#apply_filters', function(e){
+                e.preventDefault();
+
+                $(".dashboard_container_body").hide();
+                $('.preloader.ajax.performance')
+                    .css('height', $(".dashboard_container_body").height())
+                    .show();
+                
+                var data = {
+                    by_student_or_class : 'by_class',
+                    class_id : $('#exercises_class_select').val(),
+                    performance_filters_levels: $('#performance_filters_levels').val(),
+                    performance_filters_categories: $('#performance_filters_categories').val(),
+                    performance_filters_question_types: $('#performance_filters_question_types').val(),
+                    performance_filters_start_date: $('#performance_filters_start_date').val(),
+                    performance_filters_end_date: $('#performance_filters_end_date').val(),
+                };
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/performance_filters',
+                    data: data,
+                    success: function(response){
+                        if (response && response.status == "success") {
+                            $(".dashboard_container_body").show();
+                            $('.preloader.ajax.performance').hide();
+
+                            user_exercises = response.user_exercises;
+                            applyHighChart(response.user_exercises);
+                            addFiltersToChart(data);
+                        }
+                        else {
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+
+            function addFiltersToChart(filters){
+                var filters_subtitle = '';
+                var class_title = '';
+
+                if(filters.performance_filters_levels){
+                    filters.performance_filters_levels.forEach((element, index) => {
+                        if(index == 0){
+                            filters_subtitle += '<b>Níveis de Exercícios: </b>' + $("#performance_filters_levels option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_levels option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_categories){
+                    filters.performance_filters_categories.forEach((element, index) => {
+                        if(index == 0){
+                            if(filters_subtitle != ''){
+                                filters_subtitle += ' | ';
+                            }
+                            filters_subtitle += '<b>Temas: </b>' + $("#performance_filters_categories option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_categories option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_question_types){
+                    filters.performance_filters_question_types.forEach((element, index) => {
+                        if(index == 0){
+                            if(filters_subtitle != ''){
+                                filters_subtitle += ' | ';
+                            }
+                            filters_subtitle += '<b>Questões: </b>' + $("#performance_filters_question_types option[value='"+element+"']").text();
+                        }
+                        else{
+                            filters_subtitle += ', ' + $("#performance_filters_question_types option[value='"+element+"']").text();
+                        }
+                    });
+                }
+
+                if(filters.performance_filters_start_date != ''){
+                    filters_subtitle += '<br><b>Data Ínicio: </b>' + $("#performance_filters_start_date").val();
+                }
+
+                if(filters.performance_filters_end_date != ''){
+                    if(filters_subtitle != ''){
+                        filters_subtitle += ' | ';
+                    }
+                    filters_subtitle += '<b>Data Fim: </b>' + $("#performance_filters_end_date").val();
+                }
+
+                if($('#exercises_class_select').val() == 0){
+                    class_title = 'Desempenho de Todas as Turmas';
+                }
+                else{
+                    class_title = 'Desempenho da ' + $("#exercises_class_select option[value='"+$('#exercises_class_select').val()+"']").text();
+                }
+
+                high_chart.setTitle({text: class_title}, {text: filters_subtitle});
+            }
+
+            ///////////////
+
+            function expandCollapseAccordion(selector){
+                if(!$(selector).hasClass('expanded')){
+                    $(selector).addClass('expanded');
+                    $(selector).css('border', 'none');
+                    $(selector).find('img.expand_chevron.filters').hide();
+                    $(selector).find('img.collapse_chevron.filters').show();
+                }
+                else{
+                    $(selector).removeClass('expanded');
+                    $(selector).css('border', 'none');
+                    $(selector).find('img.expand_chevron.filters').show();
+                    $(selector).find('img.collapse_chevron.filters').hide();
+                }
+            }
+
+            $(document).on('click', '.expand_accordion.filters', function(){
+                expandCollapseAccordion($(this));
+            });
 
             // Change Student Classes EXERCISES
             // Select All Classes or Just one
@@ -410,7 +924,13 @@
             $(document).on('change', '#exercises_class_select', function(){
                 
                 $("#classroom_exercises_tabs_content").hide();
-                $('.preloader.ajax').show();
+                $('.preloader.ajax.classroom_exercises')
+                    .css('height', $("#classroom_exercises_tabs_content").height())
+                    .show();
+                $(".dashboard_container_body").hide();
+                $('.preloader.ajax.performance')
+                    .css('height', $(".dashboard_container_body").height())
+                    .show();
 
                 var current_opened_tab_id = '';
                 $('#classroom_exercises_tabs_content .tab-pane').each(function(index, element){
@@ -421,15 +941,33 @@
 
                 var student_class_id = $(this).val();
 
+                var data = {
+                    by_student_or_class : 'by_class',
+                    class_id : $('#exercises_class_select').val(),
+                    performance_filters_levels: $('#performance_filters_levels').val(),
+                    performance_filters_categories: $('#performance_filters_categories').val(),
+                    performance_filters_question_types: $('#performance_filters_question_types').val(),
+                    performance_filters_start_date: $('#performance_filters_start_date').val(),
+                    performance_filters_end_date: $('#performance_filters_end_date').val(),
+                };
+
                 setTimeout(function () {
                     $.ajax({
                         type: 'GET',
                         url: '/get_student_exercises_by_class/' + student_class_id,
+                        data: data,
                         success: function(response){
                             $("#classroom_exercises_tabs_content").show();
-                            $('.preloader.ajax').hide();
+                            $('.preloader.ajax.classroom_exercises').hide();
+                            $(".dashboard_container_body").show();
+                            $('.preloader.ajax.performance').hide();
+                                
                             if(response && response.status == 'success'){
                                 $('.professor_classroom_exercises').html(response.html);
+
+                                user_exercises = response.user_exercises;
+                                applyHighChart(response.user_exercises);
+                                addFiltersToChart(data);
 
                                 $('#classroom_exercises_tabs_content .tab-pane').each(function(index, element){
                                     if(current_opened_tab_id == $(element).attr('id')){
@@ -463,7 +1001,9 @@
                 e.preventDefault();
 
                 $("#classroom_exercises_tabs_content").hide();
-                $('.preloader.ajax').show();
+                $('.preloader.ajax.classroom_exercises')
+                    .css('height', $("#classroom_exercises_tabs_content").height())
+                    .show();
 
                 var student_class_id = $('#exercises_class_select').val();
 
@@ -544,13 +1084,15 @@
                     $.ajax({
                         type: 'GET',
                         url: '/get_student_exercises_by_class/' + student_class_id,
-                        data: {page_to_change:page_to_change, 
+                        data: {
+                            page_to_change:page_to_change, 
                             page_awaiting_evaluation:page_awaiting_evaluation,
                             page_in_course:page_in_course,
-                            page_evaluated:page_evaluated},
+                            page_evaluated:page_evaluated
+                        },
                         success: function(response){
                             $("#classroom_exercises_tabs_content").show();
-                            $('.preloader.ajax').hide();
+                            $('.preloader.ajax.classroom_exercises').hide();
                             if(response && response.status == 'success'){
                                 if(page_to_change == 'page_awaiting_evaluation'){
                                     $('#awaiting-evaluation').html(response.html);
@@ -585,7 +1127,9 @@
                 e.preventDefault();
 
                 $("#classroom_exercises_tabs_content").hide();
-                $('.preloader.ajax').show();
+                $('.preloader.ajax.classroom_exercises')
+                    .css('height', $("#classroom_exercises_tabs_content").height())
+                    .show();
 
                 var this_pagination_li = $(this);
 
@@ -670,7 +1214,7 @@
                             page_done:page_done},
                         success: function(response){
                             $("#classroom_exercises_tabs_content").show();
-                            $('.preloader.ajax').hide();
+                            $('.preloader.ajax.classroom_exercises').hide();
                             if(response && response.status == 'success'){
                                 if(page_to_change == 'in_evaluation'){
                                     $('#in-evaluation').html(response.html);
@@ -703,7 +1247,7 @@
             //////////////////
 
             // Expand/Collapse Exercises Accordions
-            $(document).on('click', 'a.expand_accordion', function(){
+            $(document).on('click', 'a.expand_accordion:not(.filters)', function(){
                 if($(this).hasClass('expanded')){
                     $(this).removeClass('expanded');
                     $(this).find('span').text('Expandir');

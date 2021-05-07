@@ -928,3 +928,25 @@ textarea.form-control {
 .info_tooltip:hover+.info_tooltip_text {
     visibility: visible;
 }
+
+#performance_graph_placeholder {
+    height: 600px;
+    background-size: 50% !important;
+    background-position: center !important;
+    background-color: white !important;
+    padding: 0px;
+    /* background: no-repeat; */
+    position: relative;
+}
+
+.low_z_index .select2.select2-container.select2-container--default {
+    z-index: 1 !important;
+}
+
+.flot-x-axis.flot-x1-axis.xAxis.x1Axis {
+    color: transparent !important;
+}
+
+.link_on_chart {
+    color: #ff2850 !important;
+}
