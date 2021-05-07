@@ -1085,9 +1085,9 @@ class Exame extends Model
                     $exame['accumulated_classification'] = 0;
                     $exame['performance'] = 0;
                     foreach ($all_exames_made_by_student as $exame2) {
-                        $anxiety_indice += $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                        $anxiety_indice += !isset($exame2->anxiety_inquiry) || $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
                         $exame['classification_median'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
-                        $exame['anxiety_median'] += $exame2->anxiety_inquiry->value;
+                        $exame['anxiety_median'] += !isset($exame2->anxiety_inquiry) ? 1 : $exame2->anxiety_inquiry->value;
                         $exame['accumulated_classification'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
                         $exame['performance'] += $exame['classification_median'] - $anxiety_indice;
 
@@ -1113,9 +1113,9 @@ class Exame extends Model
                     $performance_anxiety_factor_level = $exame->exercise->level->performance_anxiety_factor
                         ? ($exame->exercise->level->performance_anxiety_factor / 5)
                         : 2;
-                    $anxiety_indice = $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                    $anxiety_indice = !isset($exame->anxiety_inquiry) || $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level;
                     $exame['classification_median'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);
-                    $exame['anxiety_median'] = $exame->anxiety_inquiry->value;
+                    $exame['anxiety_median'] = !isset($exame->anxiety_inquiry) ? 1 : $exame->anxiety_inquiry->value;
                     $exame['accumulated_classification'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);;
                     $exame['performance'] = 
                         $exame['classification_median'] == 0.00
@@ -1147,8 +1147,8 @@ class Exame extends Model
                     $exame['accumulated_classification'] = 0;
                     $exame['performance'] = 0;
                     foreach ($all_exames_made_by_student as $exame2) {
-                        $anxiety_indice += $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
-                        $exame['anxiety_median'] += $exame2->anxiety_inquiry->value;
+                        $anxiety_indice += !isset($exame2->anxiety_inquiry) ||  $exame2->anxiety_inquiry->value == 1 ? 0 : $exame2->anxiety_inquiry->value * $performance_anxiety_factor_level;
+                        $exame['anxiety_median'] += !isset($exame2->anxiety_inquiry) ? 1 : $exame2->anxiety_inquiry->value;
                         $exame['accumulated_classification'] += $exame2->questions->sum('avaliation_score') == 0 ? 0 : round(($exame2->questions->sum('classification') / $exame2->questions->sum('avaliation_score')) * 100);
                         $exame['performance'] += $exame['classification_median'] - $anxiety_indice;
 
@@ -1174,14 +1174,14 @@ class Exame extends Model
                         ? ($exame->exercise->level->performance_anxiety_factor / 5)
                         : 2;
                     $exame['classification_median'] = $exame->questions->sum('avaliation_score') == 0 ? 0 : round(($exame->questions->sum('classification') / $exame->questions->sum('avaliation_score')) * 100);;
-                    $exame['anxiety_median'] = $exame->anxiety_inquiry->value;
+                    $exame['anxiety_median'] = !isset($exame->anxiety_inquiry) ? 1 : $exame->anxiety_inquiry->value;
                     $exame['accumulated_classification'] = $previous_exame->accumulated_classification + $exame['classification_median'];
                     $performance = 
                         $exame->accumulated_classification == 0.00 
                         ? (string)$exame->accumulated_classification 
                         : (string)round(($exame->accumulated_classification / ($count+1)), 2);
                     // Indice de Ansiedade - desconta até 10%
-                    $anxiety_indice = $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level; //
+                    $anxiety_indice = !isset($exame->anxiety_inquiry) || $exame->anxiety_inquiry->value == 1 ? 0 : $exame->anxiety_inquiry->value * $performance_anxiety_factor_level; //
                     $exame['performance'] = (string)($performance - $anxiety_indice);
                     $exame['performance'] = $exame['performance'] < 0 ? 0 : $exame['performance'];
 
