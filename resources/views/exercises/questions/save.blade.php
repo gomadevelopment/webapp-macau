@@ -9,6 +9,12 @@
 
 @section('content')
 
+@if (session('restrict_page_error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('restrict_page_error')}}
+    </div>
+@endif
+
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
     <div class="container">
@@ -1324,13 +1330,16 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
-                        if(f.type.match('audio.*')){
-                        }
-                        else{
-                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                        if(f.type.match('video.*')){
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio ou imagem.');
                             $('#fill_options_writing_associate_media_file_input_'+id_index).remove();
                             return false;
                         }
+                        // else{
+                        //     alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                        //     $('#fill_options_writing_associate_media_file_input_'+id_index).remove();
+                        //     return false;
+                        // }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;

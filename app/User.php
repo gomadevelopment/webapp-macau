@@ -2,17 +2,20 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use Illuminate\Auth\Notifications\VerifyEmail;
 
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable;
+    use Notifiable, MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +35,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -70,6 +77,11 @@ class User extends Authenticatable
         'password.min' => 'A password tem de ter no mínimo 6 caracteres.',
         'password.confirmed' => 'As passwords inseridas não são iguais.',
     );
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
+    }
 
     /**
      * Role

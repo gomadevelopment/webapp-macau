@@ -62,12 +62,36 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $data = [])
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $inputs = request()->all();
+
+        $validator = Validator::make($inputs, User::$rulesForAdd, User::$messages);
+
+        if ($validator->fails()) {
+            $signup_error = \Session::get('locale') == 'pt' || !\Session::has('locale') 
+                                ? 'Por favor, verifique os erros no formulário.' 
+                                : 'Please, check the errors in the form.';
+            request()->session()->flash('signup_error', $signup_error);
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('signup_error', $signup_error);
+        }
+
+        $new_user = User::create([
+            'username' => $inputs["username"],
+            'email' => $inputs["email"],
+            'password' => bcrypt($inputs["password"]),
+            'user_role_id' => $inputs["professor_or_student"] == 'professor' ? 4 : 3,
+            'active' => 1
         ]);
+
+        $new_user->sendEmailVerificationNotification();
+
+        request()->session()->flash('success', 'Utilizador criado com sucesso! Para entrar, verifique o seu e-mail.');
+
+        return redirect()->to('/');
     }
 }

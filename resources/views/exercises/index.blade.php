@@ -9,6 +9,12 @@
 
 @section('content')
 
+@if (session('restrict_page_error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('restrict_page_error')}}
+    </div>
+@endif
+
 <form id="exercises_filters_form" class="" method="GET" autocomplete="off">
     @csrf
 

@@ -18,6 +18,16 @@
         {{session('error')}}
     </div>
 @endif
+
+@if (session('not_yet_verified'))
+    <div class="alert alert-danger" role="alert">
+        {{session('not_yet_verified')}}
+        <a href="/resend_email_verification/{{ session('user_id') }}" class="alert alert-danger pl-0" style="border: none; text-decoration: underline;">
+            Clique aqui para re-enviar o e-mail de confirmação.
+        </a>
+    </div>
+@endif
+
 @if(Session::get('locale') == 'pt' || !Session::has('locale'))
     <?php $pt_lang = true; ?>
 @elseif(Session::get('locale') == 'en')

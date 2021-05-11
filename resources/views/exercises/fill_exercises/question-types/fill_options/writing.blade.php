@@ -29,24 +29,6 @@
     </div>
 @endif
 
-<?php 
-
-    function getInbetweenStrings2($str){
-        $matches = array();
-        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-        preg_match_all($regex, $str, $matches);
-        return $matches[1];
-    }
-
-    function getStringInArray2($string){
-        $matches = array();
-        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-        $string_array = preg_split($regex, $string);
-        return $string_array;
-    }
-
-?>
-
 @foreach ($question->question_items as $item)
 
     @foreach (getInbetweenStrings2($item->text_1) as $word)
@@ -71,11 +53,16 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="form-group mb-0">
                 @if($item->question_item_media)
-                    <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
-                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
-                    </audio>
+                    @if(explode('/', $item->question_item_media->media_type)[0] == 'image')
+                        <img class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="width: 300px;" src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" alt="">
+                    @elseif(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                        <audio controls controlslist="nodownload" class="d-block ml-auto mr-auto mt-2 mb-3 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 250px; max-height: 100px;">
+                            <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                        </audio>
+                    @else
                     {{-- <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
                         alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;"> --}}
+                    @endif
                 @endif
 
                 @if($exame_review)

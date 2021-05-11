@@ -18,7 +18,7 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         if (!Auth::user()->isAdmin()) {
-            request()->session()->flash('Não tem privilégios para aceder a esta página. Foi redireccionado para a página anterior.');
+            request()->session()->flash('restrict_page_error', 'Página restrita a Administradores. Foi redireccionado para a página anterior.');
             return redirect()->back();
         }          
 

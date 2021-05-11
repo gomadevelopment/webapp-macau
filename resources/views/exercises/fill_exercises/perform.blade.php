@@ -9,11 +9,139 @@
 
 @section('content')
 
+@if (session('restrict_page_error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('restrict_page_error')}}
+    </div>
+@endif
+
 <input type="hidden" name="exercise_id_hidden" id="exercise_id_hidden" value="{{ $exercise->id }}">
 <input type="hidden" name="exame_id" id="exame_id" value="{{ $exame->id }}">
 <input type="hidden" name="exame_student_id" id="exame_student_id" value="{{ $exame->student_id }}">
 <input type="hidden" name="exame_review" id="exame_review" value="{{ $exame_review }}">
 <input type="hidden" name="exame_correction" id="exame_correction" value="{{ $exame_correction }}">
+
+{{-- START OF FUNCTIONS --}}
+
+<?php
+    // differences - find_words view
+    function splitSentenceIntoWords($string){
+        $regex = "/[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]+|(?!\.\d)[[:punct:]]|\s/";
+        preg_match_all($regex, $string, $matches);
+        return $matches[0];
+    }
+    if($exame_review){
+        function correctOrWrong($word, $item){
+            if(in_array($word, explode(', ', $item->options_correct)) && in_array($word, explode('|', $item->options_answered))){
+                return 'correct';
+            }
+            else if(!in_array($word, explode(', ', $item->options_correct)) && in_array($word, explode('|', $item->options_answered))){
+                return 'wrong';
+            }
+            else{
+                return '';
+            }
+        }
+    }
+
+    // fill_options - shiffle view
+    function getInbetweenStrings($str){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        return $matches[1];
+    }
+    function getStringInArray($string){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        $string_array = preg_split($regex, $string);
+        return $string_array;
+    }
+
+    // fill_options - words_text view
+    function get_delimiters($str){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        return $matches[1];
+    }
+    function getStringWithSelects($string){
+        $matches = array();
+        $regex = "/<%\s*%>/";
+        $string_array = preg_split($regex, $string);
+        return $string_array;
+    }
+
+    // fill_options - writing view
+    function getInbetweenStrings2($str){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        return $matches[1];
+    }
+    function getStringInArray2($string){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        $string_array = preg_split($regex, $string);
+        return $string_array;
+    }
+
+    // vowels view
+    function getUniqueVowels($question_items){
+        $unique_vowels = [];
+        foreach($question_items as $item){
+            for ($i = 0; $i < $item->options_number; $i++){
+                $option = "options_".($i+1);
+                $unique_vowels[] = $item->$option;
+            }
+        }
+        return array_unique($unique_vowels);
+    }
+    function getNumberOfVowels($question_items, $vowel){
+        $all_vowels = [];
+        foreach($question_items as $item){
+            for ($i = 0; $i < $item->options_number; $i++){
+                $option = "options_".($i+1);
+                $all_vowels[] = $item->$option;
+            }
+        }
+        $counts = array_count_values($all_vowels);
+        return $counts[$vowel];
+    }
+    function getVowelsUnderlined($str, $skip){
+        $matches = array();
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        $string_array = preg_split($regex, $str);
+        $underlined_string = '';
+        for($i = 0; $i < sizeof($string_array); $i++){
+            
+            if($i == (sizeof($string_array) - 1)){
+                $underlined_string .= $string_array[$i];
+            }
+            else if($i != (sizeof($string_array) - 1)){
+                if($skip == $i){
+                    $underlined_string .= $string_array[$i] . '<u>' . $matches[1][$i] . '</u>';
+                }
+                else{
+                    $underlined_string .= $string_array[$i] . $matches[1][$i];
+                }
+                continue;
+            }
+        }
+
+        return $underlined_string;
+    }
+
+    function skipFun($str){
+        $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+        preg_match_all($regex, $str, $matches);
+        return sizeof($matches[1]);
+    }
+
+?>
+
+{{-- END OF FUNCTIONS --}}
 
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">

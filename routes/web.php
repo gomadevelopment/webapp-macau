@@ -11,13 +11,14 @@
 |
 */
 
+Auth::routes(['verify' => true]);
 
 Route::group(['middlewareGroups' => 'web'], function () {
 
-    Route::get('/', 'Controller@homepage');
+    Route::get('/', 'Controller@homepage')->name('homepage');
     Route::get('/locale/{locale}', 'Controller@setLocale');
 
-    Route::post('/signup', 'UsersController@signUp');
+    Route::post('/signup', 'Auth\RegisterController@create');
 
     Route::get('/login', 'Auth\AuthController@login')->name('login');
     Route::post('/login', 'Auth\AuthController@loginPost');
@@ -26,7 +27,9 @@ Route::group(['middlewareGroups' => 'web'], function () {
     Route::get('/redefinir_password/{token}', 'Auth\ForgotPasswordController@resetPasswordGet')->name('password.reset');
     Route::post('/redefinir_password', 'Auth\ForgotPasswordController@resetPasswordPost');
 
-    Route::group(['middleware' => ['auth']], function () {
+    Route::get('/resend_email_verification/{user_id}', 'Auth\VerificationController@resend');
+
+    Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::get('/logout', 'Auth\AuthController@logout');
         Route::get('/forbidden', 'Auth\AuthController@forbidden');
@@ -96,6 +99,19 @@ Route::group(['middlewareGroups' => 'web'], function () {
         });
 
         /* 
+        * MIDDLEWARE - isStudent
+        */
+        Route::group(['middleware' => ['isStudent']], function () {
+
+            // Perform Exames
+            Route::get('/exercicios/auto-exercicio', 'ExercisesController@getAutoExercise');
+            Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise');
+            Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise');
+            Route::get('/notify/exame_requires_evaluation/{exame_id}', 'NotificationsController@requireExameCorrection');
+            Route::get('/exercicios/realizar/update_pause_timer/{exame_id}', 'ExamesController@updatePauseTimers');
+        });
+
+        /* 
         * All Users Routes
         */
 
@@ -106,12 +122,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
         // Exercises
         Route::get('/exercicios', 'ExercisesController@index');
-        Route::get('/exercicios/auto-exercicio', 'ExercisesController@getAutoExercise');
         Route::post('/exercicios/exercicio_favorito', 'ExercisesController@toggleFavorite');
-        Route::get('/exercicios/realizar/{exercise_id}', 'ExamesController@performExercise');
-        Route::post('/exercicios/realizar/{exercise_id}', 'ExamesController@performPostExercise');
-        Route::get('/notify/exame_requires_evaluation/{exame_id}', 'NotificationsController@requireExameCorrection');
-        Route::get('/exercicios/realizar/update_pause_timer/{exame_id}', 'ExamesController@updatePauseTimers');
 
         // Classroom
         Route::get('/sala_de_aula', 'ClassroomController@index');

@@ -360,7 +360,8 @@
             var options2 = {
 
                 chart: { 
-                    alignTicks: false
+                    alignTicks: false,
+                    zoomType: 'x'
                 },
 
                 lang: {

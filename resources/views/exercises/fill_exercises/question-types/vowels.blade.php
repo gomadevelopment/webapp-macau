@@ -39,31 +39,6 @@
     </div>
 
     {{-- UNIQUE VOWELS --}}
-    <?php
-        function getUniqueVowels($question_items){
-            $unique_vowels = [];
-            foreach($question_items as $item){
-                for ($i = 0; $i < $item->options_number; $i++){
-                    $option = "options_".($i+1);
-                    $unique_vowels[] = $item->$option;
-                }
-            }
-            return array_unique($unique_vowels);
-        }
-
-        function getNumberOfVowels($question_items, $vowel){
-            $all_vowels = [];
-            foreach($question_items as $item){
-                for ($i = 0; $i < $item->options_number; $i++){
-                    $option = "options_".($i+1);
-                    $all_vowels[] = $item->$option;
-                }
-            }
-            $counts = array_count_values($all_vowels);
-            return $counts[$vowel];
-        }
-    ?>
-    
     <?php $unique_vowels = getUniqueVowels($question->question_items); ?>
 
     {{-- SOLUTION VOWELS --}}
@@ -111,40 +86,7 @@
         }
         // dd($answered_vowels, $vowels_solutions);
     ?>
-
-    <?php
-        function getVowelsUnderlined($str, $skip){
-            $matches = array();
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            preg_match_all($regex, $str, $matches);
-            $string_array = preg_split($regex, $str);
-            $underlined_string = '';
-            for($i = 0; $i < sizeof($string_array); $i++){
-                
-                if($i == (sizeof($string_array) - 1)){
-                    $underlined_string .= $string_array[$i];
-                }
-                else if($i != (sizeof($string_array) - 1)){
-                    if($skip == $i){
-                        $underlined_string .= $string_array[$i] . '<u>' . $matches[1][$i] . '</u>';
-                    }
-                    else{
-                        $underlined_string .= $string_array[$i] . $matches[1][$i];
-                    }
-                    continue;
-                }
-            }
-
-            return $underlined_string;
-        }
-
-        function skipFun($str){
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            preg_match_all($regex, $str, $matches);
-            return sizeof($matches[1]);
-        }
-
-    ?>
+    
     {{-- Tr<%a%>b<%a%>lh<%a%>r --}}
     @foreach ($question->question_items as $item)
 

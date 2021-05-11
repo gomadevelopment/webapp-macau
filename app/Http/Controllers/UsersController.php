@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
+use Illuminate\Auth\Events\Registered;
+
 use App\User,
     App\University,
     App\UserBlocked,
@@ -22,36 +24,6 @@ use DB;
 
 class UsersController extends Controller
 {
-    
-    public function signUp()
-    {
-        $inputs = request()->all();
-
-        $validator = \Validator::make($inputs, User::$rulesForAdd, User::$messages);
-
-        if ($validator->fails()) {
-            $signup_error = \Session::get('locale') == 'pt' || !\Session::has('locale') 
-                                ? 'Por favor, verifique os erros no formulário.' 
-                                : 'Please, check the errors in the form.';
-            request()->session()->flash('signup_error', $signup_error);
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('signup_error', $signup_error);
-        }
-
-        $new_user = User::create([
-            'username' => $inputs["username"],
-            'email' => $inputs["email"],
-            'password' => bcrypt($inputs["password"]),
-            'user_role_id' => $inputs["professor_or_student"] == 'professor' ? 4 : 3,
-            'active' => 1
-        ]);
-
-        return redirect()->to('/');
-    }
-
     public function index_profile($id)
     {
         $this->viewShareNotifications();

@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class IsProfessor
+class IsStudent
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class IsProfessor
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->isProfessor()) {
+        if (!Auth::user()->isStudent()) {
             request()->session()->flash('restrict_page_error', 'Página restrita a Professores. Foi redireccionado para a página anterior.');
             return redirect()->back();
         }          

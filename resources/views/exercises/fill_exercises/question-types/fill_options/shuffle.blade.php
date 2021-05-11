@@ -38,24 +38,6 @@
         </div>
     </div>
 
-    <?php 
-
-        function getInbetweenStrings($str){
-            $matches = array();
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            preg_match_all($regex, $str, $matches);
-            return $matches[1];
-        }
-
-        function getStringInArray($string){
-            $matches = array();
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
-            $string_array = preg_split($regex, $string);
-            return $string_array;
-        }
-    
-    ?>
-
     @foreach ($question->question_items as $item)
 
         @foreach (getInbetweenStrings($item->text_1) as $word)

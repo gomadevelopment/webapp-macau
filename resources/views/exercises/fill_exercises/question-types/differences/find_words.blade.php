@@ -29,15 +29,6 @@
     </div>
 @endif
 
-<?php
-    function splitSentenceIntoWords($string){
-        $regex = "/[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]+|(?!\.\d)[[:punct:]]|\s/";
-        preg_match_all($regex, $string, $matches);
-        // dd($matches);
-        return $matches[0];
-    }
-?>
-
 <div class="row mb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group" style="text-align: -webkit-center;">
@@ -53,22 +44,6 @@
             <div class="form-group d-flex" style="text-align: -webkit-center;">
 
                 <div class="w-100 exercise_question_description question_info_text_type d-flex" style="border: 1px solid #ececec; border-radius: 5px; padding: 10px;">
-
-                    <?php
-                        if($exame_review){
-                            function correctOrWrong($word, $item){
-                                if(in_array($word, explode(', ', $item->options_correct)) && in_array($word, explode('|', $item->options_answered))){
-                                    return 'correct';
-                                }
-                                else if(!in_array($word, explode(', ', $item->options_correct)) && in_array($word, explode('|', $item->options_answered))){
-                                    return 'wrong';
-                                }
-                                else{
-                                    return '';
-                                }
-                            }
-                        }    
-                    ?>
 
                     @foreach (splitSentenceIntoWords($item->text_2) as $word)
                         @if($word == '' || $word == ' ')

@@ -23,7 +23,10 @@ class AuthController extends Controller
 
     public function login()
     {
-        return view('homepage');
+        request()->session()->flash('error', 'Só pode aceder à página desejada depois de entrar na plataforma.');
+        return redirect('/')
+            ->with('error', 'Só pode aceder à página desejada depois de entrar na plataforma.')
+            ->withInput();
     }
 
     public function loginPost()
@@ -52,6 +55,17 @@ class AuthController extends Controller
             return redirect('/')
                     ->with('login_error', $login_error)
                     ->withErrors(['login_incorrect' => $login_error])
+                    ->withInput();
+        }
+
+        if(!auth()->user()->hasVerifiedEmail()){
+            request()->session()->flash('not_yet_verified', 'Ainda não confirmou o seu e-mail.');
+            $user_id = auth()->user()->id;
+            session()->flush();
+            auth()->logout();
+            return redirect('/')
+                    ->with('not_yet_verified', 'Ainda não confirmou o seu e-mail.')
+                    ->with('user_id', $user_id)
                     ->withInput();
         }
 

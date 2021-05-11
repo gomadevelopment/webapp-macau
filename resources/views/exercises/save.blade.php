@@ -9,6 +9,12 @@
 
 @section('content')
 
+@if (session('restrict_page_error'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('restrict_page_error')}}
+    </div>
+@endif
+
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
     <div class="container">
