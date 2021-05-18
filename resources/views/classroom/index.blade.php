@@ -94,9 +94,6 @@
                                                 <a href="/chat/{{ auth()->user()->student_class_user->student_class->teacher->id }}" class="edit_profile" style="font-size: 16px;">
                                                     Chat
                                                 </a>
-                                                <a href="#" class="edit_profile" style="font-size: 16px;">
-                                                    Enviar E-mail
-                                                </a>
                                             </p>
                                         </div>
                                     </h4>
@@ -187,19 +184,20 @@
                     @endif
 
                     {{-- Professor Shortcuts --}}
-                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-5">
                             <div class="wrap mb-3">
                                 <h1 class="title">Atalhos</h1>
                             </div>
                             <div class="card-body">
-                                <div class="form-group m-0">
-                                    <a href="/exercicios/criar" class="shortcut_links">
-                                        Criar Novo Exercício
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
-                                    </a>
-                                </div>
-                                <hr>
+                                @if(auth()->user()->isProfessor())
+                                    <div class="form-group m-0">
+                                        <a href="/exercicios/criar" class="shortcut_links">
+                                            Criar Novo Exercício
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
+                                        </a>
+                                    </div>
+                                    <hr>
+                                @endif
                                 <div class="form-group m-0">
                                     <a href="/exercicios" class="shortcut_links">
                                         Todos os Exercícios
@@ -207,20 +205,22 @@
                                     </a>
                                 </div>
                                 <hr>
-                                <div class="form-group m-0">
-                                    <a href="#" class="shortcut_links">
-                                        Templates de Questões
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
-                                    </a>
-                                </div>
-                                <hr>
-                                <div class="form-group m-0">
+                                @if(auth()->user()->isProfessor())
+                                    <div class="form-group m-0">
+                                        <a href="/questoes" class="shortcut_links">
+                                            Templates de Questões
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
+                                        </a>
+                                    </div>
+                                    <hr>
+                                @endif
+                                {{-- <div class="form-group m-0">
                                     <a href="#" class="shortcut_links">
                                         Contactar o Suporte
                                         <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
                                     </a>
                                 </div>
-                                <hr>
+                                <hr> --}}
                                 <div class="form-group m-0">
                                     <a href="/artigos" class="shortcut_links">
                                         Biblioteca
@@ -236,7 +236,6 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
                 </div>
             </div>
 
