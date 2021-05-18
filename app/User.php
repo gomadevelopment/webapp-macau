@@ -511,6 +511,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
         $notification = Notification::where('url', '/exercicios/corrigir/'.$exame->id.'/aluno/'.auth()->user()->id)->latest('created_at')->first();
 
+        if(!$notification){
+            return true;
+        }
+
         $notification_created_at = $notification->created_at;
 
         // + 86400 = 24 hours unix
