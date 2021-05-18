@@ -37,16 +37,20 @@
 <?php $other_user = null; ?>
 <?php $users_are_blocked = false; ?>
 
-@if(!$chat->is_group)
-    @if (auth()->user()->id == $chat->user_2->id)
-        <?php $other_user = $chat->user_1; ?>
-    @else
-        <?php $other_user = $chat->user_2; ?>
+@if(isset($chat->id) && $chat)
+
+    @if(!$chat->is_group)
+        @if (auth()->user()->id == $chat->user_2->id)
+            <?php $other_user = $chat->user_1; ?>
+        @else
+            <?php $other_user = $chat->user_2; ?>
+        @endif
+
+        @if($other_user->eitherUserBlocked(auth()->user()->id) || auth()->user()->eitherUserBlocked($other_user->id))
+            <?php $users_are_blocked = true; ?>
+        @endif
     @endif
 
-    @if($other_user->eitherUserBlocked(auth()->user()->id) || auth()->user()->eitherUserBlocked($other_user->id))
-        <?php $users_are_blocked = true; ?>
-    @endif
 @endif
 
 <section class="pt-0 classroom">
@@ -72,7 +76,10 @@
                     
                 </div>
             </div>
-            <div class="col-md-8 col-xl-9 chat">
+
+            <div class="preloader ajax chat col-lg-9 col-md-12 col-sm-12 order-1 order-lg-2"><span></span><span></span></div>
+
+            <div class="col-md-8 col-xl-9 chat" id="chat_body">
                 <div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
 
                 </div>
@@ -80,112 +87,155 @@
                 <div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
 
                 </div>
-                <div class="card">
-                    <div class="card-header msg_head">
-                        <div class="d-flex bd-highlight align-items-center">
-                            <div class="img_cont">
-                                @if (!$chat->is_group)
-                                    <img src="{{ $other_user->avatar_url ? '/webapp-macau-storage/avatars/'.$other_user->id.'/'.$other_user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
-                                    class="rounded-circle user_img">
-                                @else
-                                    @foreach ($chat->users as $user)
-                                        @if($loop->index == 3)
-                                            @break
-                                        @endif
-                                        <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
-                                        class="rounded-circle user_img {{ $loop->first ? 'group_white_border_first' : 'group_white_border' }} index_{{ $loop->index }}"
-                                        >
-                                    @endforeach
-                                    @if($chat->users->count() > 3)
-                                        <div class="chat_more_users_circle rounded-circle">
-                                            <span>
-                                                +{{ $chat->users->count() - 3 }}
-                                            </span>
-                                        </div>
-                                    @endif
-                                @endif
-                                
-                                {{-- <span class="online_icon"></span> --}}
-                            </div>
-                            <div class="user_info {{ $chat->is_group ? 'users_group' : '' }} {{ $chat->is_group && $chat->users->count() > 3 ? 'more_than_3' : '' }}">
-                                @if (!$chat->is_group)
-                                    <span class="colleagues_name {{ $users_are_blocked ? 'current_chat_user' : '' }}">{{ $other_user->username }}</span>
-                                @else
-                                    <span class="colleagues_name current_chat_user">
+                @if(isset($chat->id) && $chat)
+                    <div class="card">
+                        <div class="card-header msg_head">
+                            <div class="d-flex bd-highlight align-items-center">
+                                <div class="img_cont">
+                                    @if (!$chat->is_group)
+                                        <img src="{{ $other_user->avatar_url ? '/webapp-macau-storage/avatars/'.$other_user->id.'/'.$other_user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                        class="rounded-circle user_img">
+                                    @else
                                         @foreach ($chat->users as $user)
                                             @if($loop->index == 3)
-                                                ...
                                                 @break
                                             @endif
-                                            @if($user->first_name && $user->last_name)
-                                                {{ substr($user->first_name, 0, 1) . '. ' . substr($user->last_name, 0, 1) . '.' }}{{ $loop->index < 2 || !$loop->last ? ',' : '' }}
-                                            @else
-                                                {{ $user->username }} {{ $loop->index < 2 || !$loop->last ? ',' : '' }}
-                                            @endif
-                                            
+                                            <img src="{{ $user->avatar_url ? '/webapp-macau-storage/avatars/'.$user->id.'/'.$user->avatar_url : 'https://via.placeholder.com/500x500'}}" 
+                                            class="rounded-circle user_img {{ $loop->first ? 'group_white_border_first' : 'group_white_border' }} index_{{ $loop->index }}"
+                                            >
                                         @endforeach
-                                    </span>
-                                    <p class="notification_time_ago m-0">Chat constituído por {{ $chat->users->count() }} utilizadores.</p>
-                                @endif
-                                @if ($users_are_blocked)
-                                    <p class="notification_time_ago m-0">Utilizador bloqueado</p>
-                                @endif
-                            </div>
-                        </div>
-
-                        @if (!$chat->is_group)
-                            <span class="action_menu_btn">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                                <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
-                            </span>
-                            <div class="action_menu">
-                                <ul>
-                                    <li>
-                                        <a href="/perfil/{{ $other_user->id }}">
-                                            <i class="fas fa-user-circle"></i>  Ver Perfil
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/block_user/{{ $other_user->id }}">
-                                            <i class="fas fa-ban"></i>
-                                        @if($users_are_blocked)
-                                            Desbloquear
-                                        @else
-                                            Bloquear
+                                        @if($chat->users->count() > 3)
+                                            <div class="chat_more_users_circle rounded-circle">
+                                                <span>
+                                                    +{{ $chat->users->count() - 3 }}
+                                                </span>
+                                            </div>
                                         @endif
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        @endif
-
-                    </div>
-
-                    {{-- Chat body partial --}}
-                    <div class="card-body msg_card_body pt-4">
-                        @include('users.chat-partials.chat-body', ['chat' => $chat, 'other_user' => $other_user])
-                    </div>
-
-                    <div class="card-footer">
-                        <form id="chat_message_form" class="" method="POST" autocomplete="off">
-                            @csrf
-                            <div class="input-group">
-                                {{-- <div class="input-group-append">
-                                    <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-                                </div> --}}
-                                <input type="hidden" name="chat_id" id="hidden_chat_id" value="{{ $chat->id }}">
-                                {{-- <input type="hidden" name="user_1_id" id="hidden_user_1_id" value="{{ isset($chat->user_1_id) ? $chat->user_1_id : null }}">
-                                <input type="hidden" name="user_2_id" id="hidden_user_2_id" value="{{ isset($chat->user_2_id) ? $chat->user_2_id : null }}"> --}}
-                                <input type="hidden" name="user_sender_id" id="hidden_user_sender_id" value="{{ auth()->user()->id }}">
-                                <input name="message" id="chat_input_message" class="form-control type_msg" placeholder="Escreve a tua mensagem…" 
-                                {{ $users_are_blocked ? 'disabled' : '' }}/>
-                                <div class="input-group-append">
-                                    <span class="input-group-text {{ $users_are_blocked ? '' : 'send_btn' }}"><i class="fas fa-location-arrow"></i></span>
+                                    @endif
+                                    
+                                    {{-- <span class="online_icon"></span> --}}
+                                </div>
+                                <div class="user_info {{ $chat->is_group ? 'users_group' : '' }} {{ $chat->is_group && $chat->users->count() > 3 ? 'more_than_3' : '' }}">
+                                    @if (!$chat->is_group)
+                                        <span class="colleagues_name {{ $users_are_blocked ? 'current_chat_user' : '' }}">{{ $other_user->username }}</span>
+                                    @else
+                                        <?php $tooltip_title = ''; ?>
+                                        @foreach ($chat->users as $user)
+                                            @if(!$loop->last)
+                                                @if($loop->first)
+                                                    <?php $tooltip_title .= $user->username . ' *<br>'; ?>
+                                                @else
+                                                    <?php $tooltip_title .= $user->username . '<br>'; ?>
+                                                @endif
+                                            @else
+                                                <?php $tooltip_title .= $user->username . '<br>*(Administrador)'; ?>
+                                            @endif
+                                        @endforeach
+                                        <span class="colleagues_name current_chat_user" 
+                                            data-toggle="tooltip" 
+                                            data-html="true"
+                                            title="{{ $tooltip_title }}">
+                                            @foreach ($chat->users as $user)
+                                                @if($loop->index == 3)
+                                                    ...
+                                                    @break
+                                                @endif
+                                                @if($user->first_name && $user->last_name)
+                                                    {{ substr($user->first_name, 0, 1) . '. ' . substr($user->last_name, 0, 1) . '.' }}{{ $loop->index < 2 || !$loop->last ? ',' : '' }}
+                                                @else
+                                                    {{ $user->username }} {{ $loop->index < 2 || !$loop->last ? ',' : '' }}
+                                                @endif
+                                                
+                                            @endforeach
+                                        </span>
+                                        <p class="notification_time_ago m-0">Chat constituído por {{ $chat->users->count() }} utilizadores.</p>
+                                    @endif
+                                    @if ($users_are_blocked)
+                                        <p class="notification_time_ago m-0">Utilizador bloqueado</p>
+                                    @endif
                                 </div>
                             </div>
-                        </form>
+
+                            @if (!$chat->is_group)
+                                <span class="action_menu_btn">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                                </span>
+                                <div class="action_menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/perfil/{{ $other_user->id }}">
+                                                <i class="fas fa-user-circle"></i>  Ver Perfil
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/block_user/{{ $other_user->id }}">
+                                                <i class="fas fa-ban"></i>
+                                            @if($users_are_blocked)
+                                                Desbloquear
+                                            @else
+                                                Bloquear
+                                            @endif
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @elseif($chat->is_group && $chat->chat_user_is_admin(auth()->user()->id))
+                                <span class="action_menu_btn">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                                </span>
+                                <div class="action_menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#" id="delete_group_chat" data-group-chat-id="{{ $chat->id }}">
+                                                <i class="fas fa-trash"></i>  Apagar Chat de Grupo
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endif
+
+                        </div>
+
+                        {{-- Chat body partial --}}
+                        <div class="card-body msg_card_body pt-4">
+                            @include('users.chat-partials.chat-body', ['chat' => $chat, 'other_user' => $other_user])
+                        </div>
+
+                        <div class="card-footer">
+                            <form id="chat_message_form" class="" method="POST" autocomplete="off">
+                                @csrf
+                                <div class="input-group">
+                                    {{-- <div class="input-group-append">
+                                        <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                                    </div> --}}
+                                    <input type="hidden" name="chat_id" id="hidden_chat_id" value="{{ $chat->id }}">
+                                    {{-- <input type="hidden" name="user_1_id" id="hidden_user_1_id" value="{{ isset($chat->user_1_id) ? $chat->user_1_id : null }}">
+                                    <input type="hidden" name="user_2_id" id="hidden_user_2_id" value="{{ isset($chat->user_2_id) ? $chat->user_2_id : null }}"> --}}
+                                    <input type="hidden" name="user_sender_id" id="hidden_user_sender_id" value="{{ auth()->user()->id }}">
+                                    <input name="message" id="chat_input_message" class="form-control type_msg" placeholder="Escreve a tua mensagem…" 
+                                    {{ $users_are_blocked ? 'disabled' : '' }}/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text {{ $users_are_blocked ? '' : 'send_btn' }}"><i class="fas fa-location-arrow"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="shop_grid">
+                                <div class="shop_grid_caption">
+                                    <h4 class="sg_rate_title" style="font-size: 20px;">
+                                        Não tem nenhum chat ativo. Seleccione ou crie já um novo chat!
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -231,7 +281,9 @@
             // Force chat to scroll down
             function scrollMessageBodyDown(){
                 var msgCardBody = $('.msg_card_body');
-                $(msgCardBody).scrollTop($(msgCardBody)[0].scrollHeight);
+                if(msgCardBody.length > 0){
+                    $(msgCardBody).scrollTop($(msgCardBody)[0].scrollHeight);
+                }
             }
             scrollMessageBodyDown();
 
@@ -437,7 +489,7 @@
                 $.ajax({
                     type: 'GET',
                     url: '/chat_search_users',
-                    data: {search_username: search_username, chat_id: chat_id},
+                    data: {search_username: search_username},
                     success: function(response) {
                         if(response && response.status == 'success'){
                             $(".contacts_body").html(response.html);
@@ -464,11 +516,23 @@
 
             $('#filter_chat_users').keyup(function (e) {
                 var search_username = $('#filter_chat_users').val();
+                var data;
+                if(chat_id){
+                    data = {
+                        search_username: search_username,
+                        chat_id: chat_id
+                    };
+                }
+                else{
+                    data = {
+                        search_username: search_username
+                    };
+                }
                 if(search_username.length == 0 || search_username.length > 2){
                     $.ajax({
                         type: 'GET',
                         url: '/chat_search_users',
-                        data: {search_username: search_username, chat_id: chat_id},
+                        data: data,
                         success: function(response) {
                             if(response && response.status == 'success'){
                                 $(".contacts_body").html(response.html);
@@ -486,10 +550,41 @@
                 
             });
 
+            // Delete Group Chat
+            $(document).on('click', '#delete_group_chat', function(e){
+                e.preventDefault();
+                var group_chat_id = $(this).attr('data-group-chat-id');
 
-            // Update message every 10 seconds
+                $("#chat_body").hide();
+                $('.preloader.ajax.chat')
+                    .css('height', $("#chat_body").height())
+                    .show();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/delete_group_chat',
+                    data: {group_chat_id: group_chat_id},
+                    success: function(response) {
+                        if(response && response.status == 'success'){
+                            window.location.href = '/chat';
+                        }
+                        else{
+                            $(".errorMsg").text(response.message);
+                            $(".errorMsg").fadeIn();
+                            setTimeout(() => {
+                                $(".errorMsg").fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+
+
+            // Update message every 15 seconds
             setInterval(() => {
-                getMessages();
+                if(chat_id){
+                    getMessages();
+                }
             }, 15000);
 
         });

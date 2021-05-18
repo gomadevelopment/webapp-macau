@@ -262,6 +262,7 @@ class Exercise extends Model
         else{
             $query = self::orderBy('created_at', 'desc');
         }
+
         // My Favorites filter
         if(isset($filters['my_favorites'])){
             $query = $query->whereHas('exercise_favorite', function($q) {
@@ -278,27 +279,6 @@ class Exercise extends Model
         if(!isset($filters['all_categories']) && isset($filters['categories']) && !empty($filters['categories'])){
             $query = $query->whereIn('exercise_category_id', $filters['categories']);
         }
-        
-        // Professor filters
-        if(!isset($filters['show_all_professors']) && isset($filters['show_professors']) && !empty($filters['show_professors'])){
-            $query = $query->whereIn('user_id', $filters['show_professors'])
-                                ->where('published', 1);
-
-            if(in_array(auth()->user()->id, $filters['show_professors'])){
-                $query = $query->orWhere(function ($query) {
-                                $query->where('published', 0)
-                                    ->where('user_id', auth()->user()->id);
-                        });
-            }
-        }
-        else{
-            $query = $query->where(function ($query) {
-                        $query->where('published', 1);
-                    })->orWhere(function ($query) {
-                        $query->where('published', 0)
-                            ->where('user_id', auth()->user()->id);
-                    });
-        }
 
         // Tags filters
         if(isset($filters['tags']) && !empty($filters['tags'])){
@@ -310,6 +290,11 @@ class Exercise extends Model
         // Visibility filters
         if(!isset($filters['show_vis_all']) && isset($filters['show_vis_my_students'])){
             $query = $query->where('only_my_students', 1);
+        }
+
+        // Professor filters
+        if(!isset($filters['show_all_professors']) && isset($filters['show_professors']) && !empty($filters['show_professors'])){
+            $query = $query->whereIn('user_id', $filters['show_professors']);
         }
 
         $skip = $filters['page'] * 4;

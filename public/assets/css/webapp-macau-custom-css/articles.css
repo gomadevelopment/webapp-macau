@@ -1077,3 +1077,11 @@ a[class^="show_less_"] .triangle-up {
 .dz-message img {
     margin-bottom: 20px;
 }
+
+.ck.ck-reset.ck-editor.focused {
+    border: 2px solid #ff2850 !important;
+}
+
+.ck-editor__editable {
+    min-height: 260px;
+}

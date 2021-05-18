@@ -31,6 +31,15 @@
     @else
 
         @foreach ($exercises as $exercise)
+
+            @if(auth()->user()->isProfessor())
+                @if($exercise->user_id != auth()->user()->id && $exercise->published == 0)
+                    @continue
+                @endif
+            @elseif(auth()->user()->isStudent() && $exercise->published == 0)
+                @continue
+            @endif
+
             <div class="col-lg-12 col-md-12 col-sm-12">
 
                 <div class="shop_grid_caption card-body m-0 mb-4">

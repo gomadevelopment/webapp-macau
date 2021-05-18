@@ -27,7 +27,7 @@
                         </div>
                         
                         <div class="form-group signup_button about_section">
-                            <button type="submit" class="btn btn-theme btn-lg">
+                            <button id="submit_recover_password_form" type="button" class="btn btn-theme btn-lg">
                                 {{ isset($pt_lang) && $pt_lang ? 'Recuperar' : 'Recover' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>

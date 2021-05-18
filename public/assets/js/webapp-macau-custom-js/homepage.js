@@ -167,27 +167,27 @@ $(function() {
         }
     });
 
-    $("#signup form").on("submit", function(event) {
+    $("#submit_signup_form").on("click", function(event) {
         if (signup_form_validate.errorList.length == 0) {
-            $(this).submit();
+            $("#signup form").submit();
         }
     });
 
-    $("#login form").on("submit", function(event) {
+    $("#submit_login_form").on("click", function(event) {
         if (login_form_validate.errorList.length == 0) {
-            $(this).submit();
+            $("#login form").submit();
         }
     });
 
-    $("#recover_password form").on("submit", function(event) {
+    $("#submit_recover_password_form").on("click", function(event) {
         if (recover_password_form_validate.errorList.length == 0) {
-            $(this).submit();
+            $("#recover_password form").submit();
         }
     });
 
-    $("#new_password form").on("submit", function(event) {
+    $("#submit_new_password_form").on("click", function(event) {
         if (new_password_form_validate.errorList.length == 0) {
-            $(this).submit();
+            $("#new_password form").submit();
         }
     });
 });

@@ -46,6 +46,16 @@ class Chat extends Model
         );
     }
 
+    public function chat_user_is_admin($user_id)
+    {
+        if($this->chat_user->where('user_id', $user_id)->first()->is_admin){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /**
      * Chat messages - take last X messages
      */
@@ -53,6 +63,14 @@ class Chat extends Model
     {
         $all_messages_count = $this->hasMany('App\ChatMessage', 'chat_id')->count();
         return $this->hasMany('App\ChatMessage', 'chat_id')->skip($all_messages_count-30)->take(30);
+    }
+
+    /**
+     * Chat messages - take last X messages
+     */
+    public function all_messages()
+    {
+        return $this->hasMany('App\ChatMessage', 'chat_id');
     }
 
     /**

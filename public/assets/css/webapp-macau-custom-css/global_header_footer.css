@@ -866,7 +866,8 @@ textarea.form-control {
     ToolTips
 */
 
-.tooltip-inner {
+.tooltip-inner,
+.ui-tooltip-content {
     background-color: #131b31;
     color: #ffffff;
     font-family: "Gilroy - Medium";
@@ -877,6 +878,8 @@ textarea.form-control {
     line-height: 14px;
     text-align: left;
     padding: 15px;
+    max-width: 50%;
+    margin-left: auto;
     /* bottom: 3px; */
 }
 

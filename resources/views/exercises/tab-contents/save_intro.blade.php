@@ -5,7 +5,7 @@
                 <label class="label_title">Texto Introdutório <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Breve resumo apresentado como descrição do Exercício, tanto na lista de Exercícios como na introdução de cada Exercício individual." 
                     alt="" style="margin-left: 5px;"></label>
-                <textarea class="form-control" name="introduction" id="introduction" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('introduction', $exercise->introduction) }}</textarea>
+                <textarea class="form-control apply_ckeditor" name="introduction" id="introduction" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('introduction', $exercise->introduction) }}</textarea>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
                 <label class="label_title">Enunciado <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Enunciado Geral do Exercício." 
                     alt="" style="margin-left: 5px;"></label>
-                <textarea class="form-control" name="statement" id="statement" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('statement', $exercise->statement) }}</textarea>
+                <textarea class="form-control apply_ckeditor" name="statement" id="statement" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('statement', $exercise->statement) }}</textarea>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
                 <label class="label_title">Descrição Audiovisual <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Descrição Audiovisual apresentado no ínicio da realização do Exercício, acerca da media acima inserida." 
                     alt="" style="margin-left: 5px;"></label>
-                <textarea class="form-control" name="audiovisual_desc" id="audiovisual_desc" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audiovisual_desc', $exercise->audiovisual_desc) }}</textarea>
+                <textarea class="form-control apply_ckeditor" name="audiovisual_desc" id="audiovisual_desc" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audiovisual_desc', $exercise->audiovisual_desc) }}</textarea>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
                 <label class="label_title">Transcrição Áudio <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Transcrição Áudio apresentada no fim da realização de um Exercício, após o mesmo ser submetido pelo Aluno." 
                     alt="" style="margin-left: 5px;"></label>
-                <textarea class="form-control" name="audio_transcript" id="audio_transcript" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audio_transcript', $exercise->audio_transcript) }}</textarea>
+                <textarea class="form-control apply_ckeditor" name="audio_transcript" id="audio_transcript" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audio_transcript', $exercise->audio_transcript) }}</textarea>
                 {{-- <div class="audio_transcription_more_options">
                     <input id="show_to_my_students" class="checkbox-custom" name="show_to_my_students" type="checkbox">
                     <label for="show_to_my_students" class="checkbox-custom-label">Mostrar aos meus Alunos?</label>

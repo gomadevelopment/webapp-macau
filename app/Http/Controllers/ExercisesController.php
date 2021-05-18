@@ -39,9 +39,7 @@ class ExercisesController extends Controller
         else{
             $professors = User::where('id', '!=', auth()->user()->id)->where('user_role_id', '!=', 3)->get();
         }
-        // dd($inputs);
         if(!empty($inputs)){
-            // dd($inputs);
             try {
                 // Delete Exercise
                 if(isset($inputs['exercise_to_delete_id']) && $inputs['exercise_to_delete_id']){
@@ -106,7 +104,6 @@ class ExercisesController extends Controller
                 ]);
                 $html = $view->render();
             } catch (\Exception $e) {
-                // dd($e);
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Ocorreu um erro ao aplicar os filtros! Por favor, atualize a página e tente de novo.'
@@ -188,7 +185,7 @@ class ExercisesController extends Controller
         $inputs = request()->all();
 
         $exercise = $id ? Exercise::find($id) : new Exercise;
-
+        // dd($inputs);
         if(isset($inputs['from_structure_tab'])){
             $exercise->published = isset($inputs['publish_exam']) ? 1 : 0;
             $exercise->save();
@@ -317,12 +314,17 @@ class ExercisesController extends Controller
         
     }
 
-    public function getExerciseMedias($exercise_id)
+    public function getExerciseMedias($exercise_id = null)
     {
+        if(!$exercise_id){
+            return 'no_medias';
+        }
+
         $exercise = Exercise::find($exercise_id);
         $count = 0;
         $array = [];
         // dd($exercise, $exercise->medias()->count());
+
         if(!$exercise->medias()->count()){
             return 'no_medias';
         }

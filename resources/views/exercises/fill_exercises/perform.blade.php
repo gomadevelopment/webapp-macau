@@ -340,7 +340,9 @@
                 <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg')}}" alt="" class="mb-1" style="width: 90%">
                 Ajuda
             </div>
-            <div class="info_statement mt-2">
+            <div class="info_statement mt-2" data-toggle="tooltip" 
+                data-html="true"
+            title='{!! $exame->statement !!}'>
                 <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg')}}" alt="" class="mb-1" style="width: 44%">
                 Enunciado
             </div>
@@ -422,6 +424,8 @@
                 e.preventDefault();
 
                 // $(this).attr("id", "");
+
+                $('[data-toggle="tooltip"]').tooltip();
 
                 $("#perform_exercise_form").hide();
                 $(".preloader.ajax").show();

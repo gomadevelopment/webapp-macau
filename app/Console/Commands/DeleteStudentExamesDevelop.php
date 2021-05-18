@@ -42,9 +42,9 @@ class DeleteStudentExamesDevelop extends Command
     public function handle()
     {
         $exames = Exame::get();
-        // Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames');
+        Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames/7/exame/252');
         foreach ($exames as $exame) {
-            if($exame->id != 243){
+            if($exame->id != 252){
                 continue;
             }
             foreach ($exame->questions as $question) {

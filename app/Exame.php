@@ -151,9 +151,15 @@ class Exame extends Model
                 'question_subtype_id' => $exercise_question->question_subtype_id,
                 'reference' => $exercise_question->reference,
                 'description' => $exercise_question->description,
+                'description_image_url' => $exercise_question->description_image_url,
                 'teacher_correction' => $exercise_question->teacher_correction,
                 'avaliation_score' => $exercise_question->avaliation_score,
             ]);
+            if($exercise_question->description_image_url){
+                $fromPath = public_path('webapp-macau-storage/questions/'.$exercise_question->id.'/description_image');
+                $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/questions/'.$exame_question->id.'/description_image');
+                File::copyDirectory($fromPath, $toPath);
+            }
             if($exercise_question->question_items){
                 foreach ($exercise_question->question_items as $exercise_question_item) {
                     $exame_question_item = ExameQuestionItem::create([

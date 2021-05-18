@@ -132,7 +132,7 @@ class ArticlesController extends Controller
     {
         $this->viewShareNotifications();
         $inputs = request()->all();
-        // dd($inputs);
+        dd($inputs);
         $article = $id ? Article::find($id) : new Article;
 
         $rules = $id ? Article::rulesForEdit() : Article::$rulesForAdd;

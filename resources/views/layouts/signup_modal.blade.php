@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group signup_button about_section">
-                            <button type="submit" class="btn btn-theme btn-lg" data-target="#signup">
+                            <button id="submit_signup_form" type="button" class="btn btn-theme btn-lg" data-target="#signup">
                                 {{ isset($pt_lang) && $pt_lang ? 'Tudo Pronto!' : 'All Set!' }}&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
                             </button>
                         </div>

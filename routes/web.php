@@ -56,6 +56,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
             Route::post('/exercicios/editar/{id}', 'ExercisesController@savePost');
             // Route::post('/exercicios/apagar/{id}', 'ExercisesController@delete');
             Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
+            Route::get('/exercicios/get_exercise_medias', 'ExercisesController@getExerciseMedias');
             Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
 
             Route::get('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExameGet');
@@ -142,6 +143,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         // Route::get('/update_promoted_exercises/{id}', 'UsersController@index_profile');
 
         // Chat
+        Route::get('/chat', 'ChatController@getChatRoom');
         Route::get('/chat/{id}', 'ChatController@getChat');
         Route::get('/chat_de_grupo', 'ChatController@getGroupChat');
         Route::get('/chat_de_grupo/{id}', 'ChatController@redirectToGroupChat');
@@ -149,6 +151,7 @@ Route::group(['middlewareGroups' => 'web'], function () {
         Route::get('/chat/messages/{id}', 'ChatController@getChatMessages'); // id = chat_id
         Route::get('/chat_search_users', 'ChatController@searchUsers');
         Route::get('/block_user/{id}', 'UsersController@blockUser'); // id = chat_id
+        Route::get('/delete_group_chat', 'ChatController@deleteGroupChat');
 
         // Notifications
         Route::get('/notifications_mark_as_read', 'NotificationsController@markNotificationsAsRead');

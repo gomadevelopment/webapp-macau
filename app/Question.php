@@ -15,7 +15,7 @@ class Question extends Model
 {
     protected $fillable = [
         'exercise_id', 'title', 'section', 'question_type_id', 'question_subtype_id', 
-        'reference', 'description', 'teacher_correction', 'avaliation_score'
+        'reference', 'description', 'description_image_url', 'teacher_correction', 'avaliation_score'
     ];
 
     // public static $rulesForAdd = array(
@@ -188,6 +188,37 @@ class Question extends Model
         $this->description = $inputs['question_description'];
         $this->teacher_correction = isset($inputs['correction_required']) ? 1 : 0;
         $this->avaliation_score = $inputs['question_score'];
+
+        $this->save();
+
+        if(isset($inputs['description_image_input'])){
+            if(strpos($inputs['description_image_input'], 'from_storage_') !== false){
+                if(isset($inputs['question_model_id'])){
+                    $question_model = self::find($inputs['question_model_id']);
+                    $copy_from = 'questions/' . $question_model->id . '/description_image/' . $question_model->description_image_url;
+                    $copy_to = 'questions/' . $this->id . '/description_image/' . $question_model->description_image_url;
+                    Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                    $this->description_image_url = $question_model->description_image_url;
+                }
+            }
+            else{
+                $file = $inputs['description_image_input'];
+                $paths = [];
+
+                $fileName = $file->getClientOriginalName();
+
+                Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$this->id.'/description_image');
+
+                $paths = $file->storeAs('/questions/'
+                    . $this->id . '/description_image', $fileName, 'webapp-macau-storage');
+
+                $this->description_image_url = $file->getClientOriginalName();
+            }
+        }
+        else{
+            Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$this->id.'/description_image');
+            $this->description_image_url = null;
+        }
 
         $this->save();
 

@@ -227,6 +227,13 @@
                                         <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
                                     </a>
                                 </div>
+                                <hr>
+                                <div class="form-group m-0">
+                                    <a href="/chat" class="shortcut_links">
+                                        Chat
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg')}}" alt="">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     @endif

@@ -2,7 +2,7 @@
     <ui class="contacts">
         <span class="colleagues_name ml-2">Utilizadores</span>
         @foreach ($users_with_chats as $user)
-            <li class="{{ $other_user && $other_user->id == $user->id ? 'chat_active' : '' }}">
+            <li class="{{ isset($other_user) && $other_user && $other_user->id == $user->id ? 'chat_active' : '' }}">
                 <a href="/chat/{{ $user->id }}">
                     <div class="d-flex bd-highlight align-items-center">
                         <div class="img_cont">
@@ -20,7 +20,22 @@
         
         <span class="colleagues_name ml-2">Grupos</span>
         @foreach ($group_chats as $group_chat)
-            <li class="{{ $chat->id == $group_chat->id ? 'chat_active' : '' }}">
+            <?php $tooltip_title = ''; ?>
+            @foreach ($group_chat->users as $user)
+                @if(!$loop->last)
+                    @if($loop->first)
+                        <?php $tooltip_title .= $user->username . ' *<br>'; ?>
+                    @else
+                        <?php $tooltip_title .= $user->username . '<br>'; ?>
+                    @endif
+                @else
+                    <?php $tooltip_title .= $user->username . '<br>*(Administrador)'; ?>
+                @endif
+            @endforeach
+            <li class="{{ isset($chat->id) && $chat->id == $group_chat->id ? 'chat_active' : '' }}"
+                data-toggle="tooltip" 
+                data-html="true"
+                title="{{ $tooltip_title }}">
                 <a href="/chat_de_grupo/{{ $group_chat->id }}">
                     <div class="d-flex bd-highlight align-items-center">
                         <div class="img_cont">

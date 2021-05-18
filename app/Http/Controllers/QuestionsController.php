@@ -127,7 +127,6 @@ class QuestionsController extends Controller
             DB::rollback();
             // dd($e);
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
-            dd($e);
             return response()->json([
                 'status' => 'error',
                 'message' => 'Ocorreu um erro ao criar/editar a questão. Por favor, verifique os erros no formulário.'
@@ -165,8 +164,8 @@ class QuestionsController extends Controller
                     $question_item->question_item_media->delete();
                 }
                 $question_item->delete();
-                Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$question_item->id.'/question_item');
             }
+            Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$question->id);
             $question->delete();
         }catch (\Exception $e) {
             // dd($e);
@@ -174,8 +173,6 @@ class QuestionsController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar esta questão. Por favor, tente de novo!'], 200);
         }
         DB::commit();
-
-        // $exercises->withPath('/exercicios');
 
         $view = view()->make("exercises.tab-contents.save_structure", [
             'exercise' => $exercise

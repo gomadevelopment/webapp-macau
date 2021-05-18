@@ -144,32 +144,93 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.3"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.3"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=1.3"></script>
 
     <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.3"></script>
 
     <script>
 
-        CKEDITOR.replace( 'introduction' , {
-            language: 'pt'
-        });
-
-        CKEDITOR.replace( 'statement' , {
-            language: 'pt'
-        });
-
-        CKEDITOR.replace( 'audiovisual_desc' , {
-            language: 'pt'
-        });
-
-        CKEDITOR.replace( 'audio_transcript' , {
-            language: 'pt'
-        });
-
         Dropzone.autoDiscover = false;
 
+        Dropzone.prototype.defaultOptions.dictDefaultMessage = "Largue aqui os seus ficheiros para carregamento";
+        Dropzone.prototype.defaultOptions.dictFallbackMessage = "O seu browser não suporta arrastar e largar ficheiros.";
+        Dropzone.prototype.defaultOptions.dictFileTooBig = "Ficheiro demasiado grande ({{'filesize'}}MiB). Máximo: {{'maxFilesize'}}MiB.";
+        Dropzone.prototype.defaultOptions.dictInvalidFileType = "Não pode carregar ficheiros deste tipo.";
+        Dropzone.prototype.defaultOptions.dictResponseError = "Servidor respondeu com o código: {{'statusCode'}} .";
+        Dropzone.prototype.defaultOptions.dictCancelUpload = "Cancelar Carregamento";
+        Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = "Tem a certeza que pretende cancelar este carregamento?";
+        Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover ficheiro";
+        Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Não pode carregar mais ficheiros.";
+
         $(function() {
+
+            $('.apply_ckeditor').each(function(index, element){
+
+                var newEditor = $(element).attr('id');
+
+                ClassicEditor.create(document.querySelector( '#' + newEditor ), {
+                    language: 'pt',
+                    toolbar: {
+                        items: [
+                            'heading', '|',
+                            'bold', 'italic', '|',
+                            'link', '|',
+                            'outdent', 'indent', '|',
+                            'bulletedList', 'numberedList', '|',
+                            'insertTable', '|',
+                            'blockQuote',
+                        ],
+                        shouldNotGroupWhenFull: true
+                    },
+
+                    link: {
+                        defaultProtocol: "https://",
+                        decorators: {
+                            openInNewTab: {
+                                mode: "manual",
+                                label: "Abrir numa nova janela",
+                                defaultValue: true, // This option will be selected by default.
+                                attributes: {
+                                    target: "_blank",
+                                    rel: "noopener noreferrer"
+                                }
+                            }
+                        }
+                    }
+                })
+                .then(editor => {
+                    editor.ui.focusTracker.on( 'change:isFocused', ( evt, name, value ) => {
+                        $(element).next('.ck.ck-reset.ck-editor').addClass(newEditor);
+                        if(value){
+                            $('.ck.ck-reset.ck-editor.'+newEditor).addClass('focused');
+                        }
+                        else{
+                            $('.ck.ck-reset.ck-editor.'+newEditor).removeClass('focused');
+                        }
+                    } );
+                    switch (newEditor) {
+                        case 'introduction':
+                            introduction = editor;
+                            break;
+                        case 'statement':
+                            statement = editor;
+                            break;
+                        case 'audiovisual_desc':
+                            audiovisual_desc = editor;
+                            break;
+                        case 'audio_transcript':
+                            audio_transcript = editor;
+                            break;
+                        default:
+                            break;
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            });
 
             var exercise_id = $('#exercise_id_hidden').val();
 
@@ -413,12 +474,12 @@
                 }
             });
 
-            function updateAllMessageForms()
-            {
-                for (instance in CKEDITOR.instances) {
-                    CKEDITOR.instances[instance].updateElement();
-                }
-            }
+            // function updateAllMessageForms()
+            // {
+            //     for (instance in CKEDITOR.instances) {
+            //         CKEDITOR.instances[instance].updateElement();
+            //     }
+            // }
 
             // Save POST AJAX
             $(document).on('click', '.save_exercise_form_button', function(){
@@ -427,7 +488,7 @@
                 $('.preloader.ajax').show();
                 $('html, body').animate({scrollTop: '0px'}, 300);
 
-                updateAllMessageForms();
+                // updateAllMessageForms();
                 var redirect = false;
                 if($(this).hasClass('intro_save')){
                     redirect = true;
@@ -437,6 +498,12 @@
                 var url = exercise_id ? '/exercicios/editar/' + exercise_id : '/exercicios/criar';
 
                 var formData = new FormData($("#save_exercise_form")[0]);
+                // console.log(introduction);
+                // return false;
+                formData.set('introduction', introduction.getData());
+                formData.set('statement', statement.getData());
+                formData.set('audiovisual_desc', audiovisual_desc.getData());
+                formData.set('audio_transcript', audio_transcript.getData());
 
                 if(media_files[0]){
                     formData.append('media_files', media_files[0]);

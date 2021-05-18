@@ -63,7 +63,7 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Criar Novo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Criar Novo</label>
                                                     <input type="text" name="title" class="form-control" placeholder="Título do artigo"
                                                     value="{{ old('title', $article->title) }}">
                                                     <span class="error-block-span pink title_error" hidden>
@@ -73,7 +73,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Tags <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Tags</label>
                                                     <div class="select2_with_search">
                                                         <select name="tags[]" id="tags" class="form-control" multiple  style="border: none;">
                                                             @foreach ($tags as $tag)
@@ -97,7 +97,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Tema <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Tema</label>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 p-0">
                                                         <select name="category" id="category" class="form-control">
                                                             @foreach ($article_categories as $category)
@@ -112,7 +112,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Foto de Capa <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Foto de Capa</label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-poster">
@@ -136,7 +136,7 @@
                                             
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Descrição <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Descrição</label>
                                                     <textarea class="form-control" name="text" id="text" cols="30" rows="4" placeholder="Descrição do artigo">{{ old('text', $article->text) }}</textarea>
                                                     <span class="error-block-span pink text_error" hidden>
                                                     </span>
@@ -145,7 +145,7 @@
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+                                                    <label>Media</label>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 p-0">
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-media">
@@ -233,8 +233,8 @@
 
     <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.3"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=1.3"></script>
 
     <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.3"></script>
 
@@ -247,12 +247,66 @@
             document.getElementById("filter-sidebar").style.width = "0";
         }
 
-        CKEDITOR.replace( 'text' , {
-            language: 'pt'
-        });
-
         Dropzone.autoDiscover = false;
+
+        Dropzone.prototype.defaultOptions.dictDefaultMessage = "Largue aqui os seus ficheiros para carregamento";
+        Dropzone.prototype.defaultOptions.dictFallbackMessage = "O seu browser não suporta arrastar e largar ficheiros.";
+        Dropzone.prototype.defaultOptions.dictFileTooBig = "Ficheiro demasiado grande ({{'filesize'}}MiB). Máximo: {{'maxFilesize'}}MiB.";
+        Dropzone.prototype.defaultOptions.dictInvalidFileType = "Não pode carregar ficheiros deste tipo.";
+        Dropzone.prototype.defaultOptions.dictResponseError = "Servidor respondeu com o código: {{'statusCode'}} .";
+        Dropzone.prototype.defaultOptions.dictCancelUpload = "Cancelar Carregamento";
+        Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = "Tem a certeza que pretende cancelar este carregamento?";
+        Dropzone.prototype.defaultOptions.dictRemoveFile = "Remover ficheiro";
+        Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Não pode carregar mais ficheiros.";
+
         $(function(){
+
+            ClassicEditor.create(document.querySelector( '#text' ), {
+                language: 'pt',
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', '|',
+                        'link', '|',
+                        'outdent', 'indent', '|',
+                        'bulletedList', 'numberedList', '|',
+                        'insertTable', '|',
+                        'blockQuote',
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+
+                link: {
+                    defaultProtocol: "https://",
+                    decorators: {
+                        openInNewTab: {
+                            mode: "manual",
+                            label: "Abrir numa nova janela",
+                            defaultValue: true, // This option will be selected by default.
+                            attributes: {
+                                target: "_blank",
+                                rel: "noopener noreferrer"
+                            }
+                        }
+                    }
+                }
+            })
+            .then(editor => {
+                editor.ui.focusTracker.on( 'change:isFocused', ( evt, name, value ) => {
+                    if(value){
+                        $('.ck.ck-reset.ck-editor').addClass('focused');
+                    }
+                    else{
+                        $('.ck.ck-reset.ck-editor').removeClass('focused');
+                    }
+                } );
+                text = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
             $('#category').select2({
                 placeholder: "Escolher categoria",
                 dropdownAutoWidth : false
@@ -298,6 +352,7 @@
                 thumbnailWidth: 120,
                 // maxFilesize: 3,
                 // filesizeBase: 1000,
+                acceptedFiles:'image/*',
                 init: function(e) {
                     
                     this.on("maxfilesexceeded", function(file) {
@@ -353,6 +408,7 @@
                 thumbnailWidth: 120,
                 // maxFilesize: 3,
                 // filesizeBase: 1000,
+                acceptedFiles:'image/*',
                 init: function(e) {
                     if(dropzone_medias_counter == 0){
                         var thisDropzone = this;
@@ -411,6 +467,10 @@
                 for (var i = 0; i < files.length; i++) {
 
                     var file = files[i];
+                    // if(!file.type.match('image.*')){
+                    //     alert('Não foi possível associar esse tipo de ficheiro. Associe ficheiro de imagem.');
+                    //     return false;
+                    // }
                     totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
 
                     for (var step = 0; step < totalSteps; step++) {
@@ -444,6 +504,10 @@
                 for (var i = 0; i < files.length; i++) {
 
                     var file = files[i];
+                    // if(!file.type.match('image.*')){
+                    //     alert('Não foi possível associar esse tipo de ficheiro. Associe ficheiro de imagem.');
+                    //     return false;
+                    // }
                     totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
 
                     for (var step = 0; step < totalSteps; step++) {
@@ -478,19 +542,21 @@
                 }
             });
 
-            function updateAllMessageForms()
-            {
-                for (instance in CKEDITOR.instances) {
-                        CKEDITOR.instances[instance].updateElement();
-                }
-            }
+            // function updateAllMessageForms()
+            // {
+            //     for (instance in CKEDITOR.instances) {
+            //             CKEDITOR.instances[instance].updateElement();
+            //     }
+            // }
 
             $(document).on('click', '.save_article_form_button', function(){
-                updateAllMessageForms();
+                // updateAllMessageForms();
                 var article_id = $('#article_id_hidden').val();
                 var url = article_id ? '/artigos/editar/' + article_id : '/artigos/criar';
 
                 var formData = new FormData($("#save_article_form")[0]);
+
+                formData.set('text', text.getData());
 
                 if(poster_files[0]){
                     formData.append('poster_files', poster_files[0]);

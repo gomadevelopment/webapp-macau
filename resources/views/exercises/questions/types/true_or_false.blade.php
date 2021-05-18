@@ -41,7 +41,11 @@
                             @else
                                 <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url; ?>
                             @endif
-                            <a href="#" class="btn btn-theme remove_button associate_media_preview button-wrap">
+                            <a class="btn btn-theme remove_button associate_media_preview button-wrap"
+                                                data-toggle="tooltip" 
+                                                data-html="true"
+                                                title='<img src="{{ $preview_image_src }}" 
+                                                title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2" style="width: 100%;">'>
                                 <img src="{{ $preview_image_src }}" 
                                 title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
                                 <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>

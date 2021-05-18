@@ -5,15 +5,30 @@
             <div class="row mb-4">
                 <div class="col-sm-12 col-md-6 col-lg-6">
                     <div class="form-group">
-                        <label class="label_title mb-3 d-block">
+                        <label class="label_title mb-3 d-block" style="font-size: 26px;">
                             Informação</label>
                         <div class="d-flex float-left flex-column">
                             <p class="exercise_level m-0">
                                 <strong>Título:</strong> {{ $exame->title }}
                             </p>
                             <p class="exercise_level m-0">
+                                <strong>Nível:</strong> {{ $exame->level->name }}
+                            </p>
+                            <p class="exercise_level m-0">
                                 <strong>Tema:</strong> {{ $exame->category->name }}
                             </p>
+                            @if($exame->exercise->exercise_tags->count())
+                                <p class="exercise_level m-0">
+                                    <strong>Tags:</strong>
+                                    @foreach ($exame->exercise->exercise_tags as $tag)
+                                        @if(!$loop->last)
+                                            {{ $tag->name }}, 
+                                        @else
+                                            {{ $tag->name }}
+                                        @endif
+                                    @endforeach
+                                </p>
+                            @endif
                             {{-- <p class="exercise_level m-0">
                                 <strong>Duração:</strong> 1 hora e 42 minutos
                             </p> --}}
@@ -31,62 +46,73 @@
                                     @endif
                                 </span>
                             </p>
-                            <p class="exercise_level m-0 mb-4">
+                            <p class="exercise_level m-0 mb-2">
                                 <strong>Pode interromper?</strong> {{ $exame->has_interruption ? 'Sim' : 'Não' }}
                             </p>
                         </div>
                     </div>
                 </div>
-                @if($exame->introduction || $exame->exercise->exercise_tags)
+                @if($exame->introduction)
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                            @if($exame->introduction)
-                                <label class="label_title mb-3 d-block">
-                                    Resumo</label>
-                                <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                    <div class="article_description m-0 mb-4" style="line-height: 25px;">
-                                        {!! $exame->introduction !!}
-                                    </div>
+                            <label class="label_title mb-3 d-block" style="font-size: 26px;">
+                                Resumo/Introdução</label>
+                            <div class="d-flex float-left flex-column shop_grid_caption ml-0">
+                                <div class="article_description m-0 mb-4" style="line-height: 25px;">
+                                    {!! $exame->introduction !!}
                                 </div>
-                            @endif
-                            @if($exame->exercise->exercise_tags->count())
-                                <label class="label_title mb-3 d-block">
+                            </div>
+                            {{-- @if($exame->exercise->exercise_tags->count())
+                                <label class="label_title mb-3 d-block" style="font-size: 26px;">
                                     Tags</label>
                                 @foreach ($exame->exercise->exercise_tags as $tag)
                                     <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
                                         <p>{{ $tag->name }}</p>
                                     </div>
                                 @endforeach
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 @endif
-                @if($exame->statement)
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group">
-                            <label class="label_title mb-3 d-block">
-                                Enunciado</label>
-                            <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                <div class="article_description m-0 mb-4" style="line-height: 25px;">
+                
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <hr>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label class="label_title mb-3 d-block" style="font-size: 26px;">
+                            Enunciado</label>
+                        <div class="d-flex float-left flex-column shop_grid_caption ml-0">
+                            <div class="article_description m-0 mb-2" style="line-height: 25px;">
+                                @if($exame->statement)
                                     {!! $exame->statement !!}
-                                </div>
+                                @else
+                                    (Sem Enunciado)
+                                @endif
                             </div>
                         </div>
                     </div>
-                @endif
-                @if($exame->audiovisual_desc)
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="form-group">
-                            <label class="label_title mb-3 d-block">
-                                Descrição Audiovisual</label>
-                            <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                <div class="article_description m-0 mb-4" style="line-height: 25px;">
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <hr>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label class="label_title mb-3 d-block" style="font-size: 26px;">
+                            Descrição Audiovisual</label>
+                        <div class="d-flex float-left flex-column shop_grid_caption ml-0">
+                            <div class="article_description m-0 mb-4" style="line-height: 25px;">
+                                @if($exame->audiovisual_desc)
                                     {!! $exame->audiovisual_desc !!}
-                                </div>
+                                @else
+                                    (Sem Descrição Audiovisual)
+                                @endif
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
+                
             </div>
 
             {{-- <div class="row mb-4 mt-4">

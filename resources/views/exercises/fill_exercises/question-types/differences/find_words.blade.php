@@ -33,7 +33,7 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="form-group" style="text-align: -webkit-center;">
             <label class="label_title mt-1 mb-1 d-block" style="font-size:30px;">
-                Descobra as Palavras Incorretas
+                Descubra as Palavras Incorretas
             </label>
         </div>
     </div>

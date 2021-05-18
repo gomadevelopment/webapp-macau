@@ -15,6 +15,17 @@ use DB;
 
 class ChatController extends Controller
 {
+    public function getChatRoom()
+    {
+        $this->viewShareNotifications();
+        $users_with_chats = User::usersWithChat();
+        $users_without_chats = User::where('id', '!=', auth()->user()->id)->get();
+
+        $group_chats = Chat::getUserGroupChats();
+
+        return view('users.chat', compact('users_with_chats', 'users_without_chats', 'group_chats'));
+    }
+
     public function getChat($user_id)
     {
         $this->viewShareNotifications();
@@ -193,39 +204,80 @@ class ChatController extends Controller
     {
         $data = request()->only('search_username', 'chat_id');
 
-        $chat = Chat::find($data['chat_id']);
-
         $users_with_chats = User::usersWithChat($data['search_username']);
         $group_chats = Chat::getUserGroupChats($data['search_username']);
 
-        if(!$chat){
-            request()->session()->flash('error', 'Ocorreu um erro ao filtrar os utilizadores. Por favor, tente de novo!');
-            return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao filtrar os utilizadores. Por favor, tente de novo!'], 200);
-        }
+        $other_user = null;
 
-        if($chat->is_group){
-            $other_user = null;
-        }
-        else{
-            if(auth()->user()->id == $chat->user_2->id){
-                $other_user = $chat->user_1;
+        if(isset($data['chat_id'])){
+            $chat = Chat::find($data['chat_id']);
+
+            if(!$chat){
+                request()->session()->flash('error', 'Ocorreu um erro ao filtrar os utilizadores. Por favor, tente de novo!');
+                return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao filtrar os utilizadores. Por favor, tente de novo!'], 200);
+            }
+
+            if($chat->is_group){
+                $other_user = null;
             }
             else{
-                $other_user = $chat->user_2;
+                if(auth()->user()->id == $chat->user_2->id){
+                    $other_user = $chat->user_1;
+                }
+                else{
+                    $other_user = $chat->user_2;
+                }
             }
         }
 
         $view = view()->make("users.chat-partials.chat-users", [
-            'chat' => $chat,
+            // 'chat' => $chat,
             'users_with_chats' => $users_with_chats,
             'group_chats' => $group_chats,
             'other_user' => $other_user
+            // 'other_user' => $other_user
         ]);
         $html = $view->render();
 
         return response()->json([
             'status' => 'success',
             'html' => $html
+        ]);
+    }
+
+    public function deleteGroupChat()
+    {
+        $data = request()->only('group_chat_id');
+
+        $chat = Chat::find($data['group_chat_id']);
+
+        if(!$chat){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Chat de Grupo não foi encontrado. Atualize a página e tente de novo.'
+            ]);
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($chat->chat_user as $chat_user) {
+                $chat_user->delete();
+            }
+            foreach ($chat->all_messages as $message) {
+                $message->delete();
+            }
+            $chat->delete();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ocorreu um erro ao apagar este chat de grupo. Atualize a página e tente de novo.'
+            ]);
+        }
+        DB::commit();
+
+        return response()->json([
+            'status' => 'success',
         ]);
     }
 

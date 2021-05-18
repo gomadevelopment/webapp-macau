@@ -38,10 +38,16 @@
                                         <div class="form-group">
                                             {{-- <label class="label_title mb-3 d-block">
                                                 {{ $question->title }} </label> --}}
-                                            <div class="d-flex float-left flex-column">
+                                            <div class="d-flex flex-column">
                                                 <div class="exercise_question_description">
                                                     {!! $question->description !!}
                                                 </div>
+                                            </div>
+                                            <div class="text-center">
+                                                @if($question->description_image_url)
+                                                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'. $question->id . '/description_image/' . $question->description_image_url }}" alt=""
+                                                        style="height: -webkit-fill-available;">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

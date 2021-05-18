@@ -172,11 +172,30 @@
                                 <textarea class="form-control" name="question_description" id="question_description" cols="30" rows="5" placeholder="Enunciado da questão a mostrar ao aluno (Obrigatório)">{{ isset($question) ? $question->description : '' }}</textarea>
                                 <span class="error-block-span pink question_description_error" hidden>
                                 </span>
+                                <a href="#" id="description_image_button" class="btn search-btn comment_submit mt-2" style="padding: 16px 20px; white-space: nowrap; display: {{ isset($question) && $question->description_image_url ? 'none' : 'block'}};">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    Associar Media
+                                </a>
+                                @if(isset($question) && $question->description_image_url)
+                                    <input type="text" name="description_image_input" id="description_image_input" hidden
+                                        value="from_storage_{{ $question->id }}">
+                                    <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/description_image/'.$question->description_image_url; ?>
+                                    <a class="btn btn-theme remove_button associate_media_preview mt-2" style="float: right !important;"
+                                        data-toggle="tooltip" 
+                                        data-html="true"
+                                        title='<img src="{{$preview_image_src}}" 
+                                        title="{{ $question->description_image_url }}" class="associate_media_thumbnail_img mr-2" style="width: 100%;">'>
+                                        <img src="{{$preview_image_src}}" 
+                                        title="{{ $question->description_image_url }}" class="associate_media_thumbnail_img mr-2">
+                                        <span class="associate_media_thumbnail_title">{{ $question->description_image_url }}</span>
+                                        <img class="associate_media_thumbnail_remove" id="" src="/assets/backoffice_assets/icons/Cross.svg">
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
 
-                    <hr class="mt-5 mb-4">
+                    <hr class="mt-4 mb-4">
 
                     {{-- QUESTION HERE --}}
 
@@ -326,10 +345,7 @@
     <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.3"></script>
     <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.3"></script>
     <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.3"></script> --}}
-
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.3"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=1.3"></script>
 
     <script>
 
@@ -337,59 +353,97 @@
 
             var count = 3;
 
-            // CKEDITOR
+            ClassicEditor.create(document.querySelector( '#question_description' ), {
+                language: 'pt',
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', '|',
+                        'link', '|',
+                        'outdent', 'indent', '|',
+                        'bulletedList', 'numberedList', '|',
+                        'insertTable', '|',
+                        'blockQuote',
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
 
-            // CKEDITOR.replace('info_text', {
-            //     language: 'pt'
-            // });
+                link: {
+                    defaultProtocol: "https://",
+                    decorators: {
+                        openInNewTab: {
+                            mode: "manual",
+                            label: "Abrir numa nova janela",
+                            defaultValue: true, // This option will be selected by default.
+                            attributes: {
+                                target: "_blank",
+                                rel: "noopener noreferrer"
+                            }
+                        }
+                    }
+                }
+            })
+            .then(editor => {
+                editor.ui.focusTracker.on( 'change:isFocused', ( evt, name, value ) => {
+                    if(value){
+                        $('.ck.ck-reset.ck-editor').addClass('focused');
+                    }
+                    else{
+                        $('.ck.ck-reset.ck-editor').removeClass('focused');
+                    }
+                } );
+                question_description = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
-            // CKEDITOR.replace('question_description', {
-            //     language: 'pt'
-            // });
+            // Description Image
+            $(document).on('click', "#description_image_button", function(e){
+                e.preventDefault();
 
-            // CKEDITOR.plugins.add( 'perc_delimiter', {
-            //     init: function( editor ) {
-            //         editor.addCommand( 'insertPercDelimiter', {
-            //             exec: function( editor ) {
-            //                 var now = new Date();
-            //                 editor.insertHtml('<% %>');
-            //             }
-            //         });
-            //         editor.ui.addButton( '<% %>', {
-            //             label: 'Inserir <% %>',
-            //             command: 'insertPercDelimiter',
-            //             toolbar: 'insert'
-            //         });
-            //     }
-            // });
+                var html = '<input type="file" name="description_image_input" id="description_image_input" hidden>';
 
-            // CKEDITOR.config.extraPlugins = 'perc_delimiter';
+                $(this).after(html);
 
-            ClassicEditor
-                .create( document.querySelector( '#question_description' ) )
-                .then( newEditor => {
-                    question_description = newEditor;
-                } )
-                .catch( error => {
-                    console.error( error );
-                } 
-            );
+                $('#description_image_input').click();
 
-            // applyCKEditor('fill_textarea_0');
-            // applyCKEditor('fill_text_word_0');
+                $('#description_image_input').on("change", function(e) {
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i];
+                        // console.log(f.type);
+                        if(f.type.match('image.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de imagem.');
+                            $('#description_image_input').remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview mt-2\" style=\"float: right !important;\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#description_image_input");
 
-            // function applyCKEditor(textarea) {
-            //     CKEDITOR.replace( textarea , {
-            //         height: 125,
-            //         toolbar: 'Custom',
-            //         toolbarStartupExpanded : false,
-            //         toolbarCanCollapse  : false,
-            //         toolbar_Custom: [
-            //             { name: 'test', items: ['perc_delimiter', '<% %>'] }
-            //         ],
-            //         language: 'pt',
-            //     });
-            // }
+                            $('#description_image_button').hide();
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+                console.log($('#description_image_input').val());
+            });
+
+            $('body, html').on('click', function(){
+                console.log($('#description_image_input').val(), $('#description_image_input')[0]);
+            });
 
             $('#true_or_false_select_0').select2();
 
@@ -615,6 +669,7 @@
                 // var id_index = this.id.match(/\d+/)[0];
                 $(this).parent(".associate_media_preview").prev().remove();
                 $(this).parent(".associate_media_preview").prev().show();
+                $(this).parent(".associate_media_preview").tooltip('dispose');
                 $(this).parent(".associate_media_preview").remove();
             });
 
@@ -2102,6 +2157,14 @@
                 formData.append('question_subtype', question_subtype_id);
                 formData.append($('#question_reference')[0].name, $('#question_reference')[0].value);
                 formData.append('question_description', question_description.getData());
+                if($('#description_image_input').length){
+                    if($('#description_image_input').val().match("^from_storage_")){
+                        formData.append($('#description_image_input')[0].name, $('#description_image_input').val());
+                    }
+                    else{
+                        formData.append($('#description_image_input')[0].name, $('#description_image_input')[0].files[0]);
+                    }
+                }
                 if($('#correction_required').is(':checked')){
                     formData.append($('#correction_required')[0].name, $('#correction_required')[0].value);
                 }
