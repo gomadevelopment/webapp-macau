@@ -8,16 +8,16 @@
         <title>Web App Macau</title>
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=1.3">
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=1.3">
+        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=1.4">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=1.4">
         
 		
 		<!-- Custom Color Option -->
-        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=1.3">
+        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=1.4">
 
         @yield('header')
 
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=1.3">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=1.4">
 
     </head>
 	
@@ -66,20 +66,20 @@
 		<!-- ============================================================== -->
 		<!-- All Jquery -->
 		<!-- ============================================================== -->
-        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=1.3"></script>
+        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=1.4"></script>
 
-        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=1.3"></script>
-        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=1.3"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=1.4"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=1.4"></script>
 
-        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=1.3"></script>
+        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=1.4"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
         <!-- ============================================================== -->
