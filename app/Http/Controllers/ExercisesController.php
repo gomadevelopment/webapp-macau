@@ -90,6 +90,7 @@ class ExercisesController extends Controller
 
                 foreach($exercises as $exercise){
                     $exercise['is_exercise_favorite'] = $exercise->is_exercise_favorite();
+                    $exercise['evaluation_median'] = $exercise->evaluationMedia();
                 }
 
                 $exercises->withPath('/exercicios');
@@ -129,6 +130,7 @@ class ExercisesController extends Controller
 
         foreach($exercises as $exercise){
             $exercise['is_exercise_favorite'] = $exercise->is_exercise_favorite();
+            $exercise['evaluation_median'] = $exercise->evaluationMedia();
         }
 
         $inputs['page'] = 1;

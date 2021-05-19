@@ -4,7 +4,7 @@
         @csrf
 
         <label class="label_title mb-3" style="font-size: 30px;">
-            Afirmações <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+            Afirmações </label>
         
         @if (isset($question->id) && $question->question_subtype_id == 12)
             @foreach ($question->question_items as $question_item)
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-12 mb-2">
                         <label class="label_title m-0" style="font-size: 18px;">
-                            <span>Solução</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                            <span>Solução</span> 
                         </label>
                     </div>
                     <div class="col-12">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-12 mb-2">
                     <label class="label_title m-0" style="font-size: 18px;">
-                        <span>Solução</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                        <span>Solução</span> 
                     </label>
                 </div>
                 <div class="col-12">
@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-12 mb-2">
                     <label class="label_title m-0" style="font-size: 18px;">
-                        <span>Solução</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                        <span>Solução</span> 
                     </label>
                 </div>
                 <div class="col-12">
@@ -136,7 +136,7 @@
         </div>
         <div class="col-12 mb-2">
             <label class="label_title m-0" style="font-size: 18px;">
-                <span>Solução</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                <span>Solução</span> 
             </label>
         </div>
         <div class="col-12">

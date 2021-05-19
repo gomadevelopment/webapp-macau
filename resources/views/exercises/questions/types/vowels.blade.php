@@ -4,7 +4,7 @@
         @csrf
 
         <label class="label_title mb-3" style="font-size: 30px;">
-            Palavras <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;"></label>
+            Palavras </label>
         <div class="row">
             <div class="col-12 mb-2">
                 <p class="exercise_level m-0 float-none" style="font-size: 16px;">

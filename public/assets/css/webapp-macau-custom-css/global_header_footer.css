@@ -879,8 +879,7 @@ textarea.form-control {
     text-align: left;
     padding: 15px;
     max-width: 50%;
-    margin-left: auto;
-    /* bottom: 3px; */
+    margin: auto;
 }
 
 .tooltip.bs-tooltip-auto[x-placement^=top],

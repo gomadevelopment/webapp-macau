@@ -32,17 +32,9 @@
 
         @foreach ($exercises as $exercise)
 
-            @if(auth()->user()->isProfessor())
-                @if($exercise->user_id != auth()->user()->id && $exercise->published == 0)
-                    @continue
-                @endif
-            @elseif(auth()->user()->isStudent() && $exercise->published == 0)
-                @continue
-            @endif
-
             <div class="col-lg-12 col-md-12 col-sm-12">
 
-                <div class="shop_grid_caption card-body m-0 mb-4">
+                <div class="shop_grid_caption card-body m-0 mb-4 pb-2">
                     {{-- Like buttons heart/heart_filled --}}
                     <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}"  style="top: 20px; right: 20px; display: {{ $exercise->is_exercise_favorite ? 'none;' : 'block;' }}"
                         alt="" data-exercise-id="{{ $exercise->id }}">
@@ -60,8 +52,8 @@
                         </p>
                         <p class="exercise_level" style="float: left; margin-right: 20px;">
                             <strong>Nível:</strong> {{ $exercise->level->name }} &nbsp;&nbsp;&nbsp;
-                            @if(auth()->user()->isProfessor() && auth()->user()->isActive())
-                                <strong>Média de Avaliação:</strong> 62%
+                            @if(auth()->user()->isProfessor() && auth()->user()->isActive() && $exercise->evaluation_median != 'no_exames_yet')
+                                <strong>Média de Avaliação:</strong> {{ $exercise->evaluation_median }}%
                             @endif
                         </p>
                     </div>
@@ -116,14 +108,18 @@
                         </div>
                     @endif
                     
+                    @if($exercise->introduction || $exercise->exercise_tags->count())
+                        <hr style="margin-top: 6rem;">
+                    @endif
 
-                    <hr style="margin-top: 6rem;">
+                    @if($exercise->introduction)
+                        <h4 class="sg_rate_title">Resumo</h4>
 
-                    <h4 class="sg_rate_title">Resumo</h4>
-
-                    <div class="article_description" style="margin-top: 15px;">
-                        {!! $exercise->introduction !!}
-                    </div>
+                        <div class="article_description" style="margin-top: 15px;">
+                            {!! $exercise->introduction !!}
+                        </div>
+                    @endif
+                    
                     @foreach ($exercise->exercise_tags as $tag)
                         <div class="gray_tag_div" style="background-image: url({{asset('/assets/backoffice_assets/images/tag_gray_div.svg')}});">
                             <p>{{ $tag->name }}</p>

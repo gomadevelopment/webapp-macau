@@ -130,6 +130,41 @@ class Exercise extends Model
     }
 
     /**
+     * Exercicse Evaluation Median
+     */
+    public function evaluationMedia()
+    {
+        $exames = $this->exames()->get();
+        $exercise_evaluatin_median = 0;
+
+        if(!$exames->count()){
+            return 'no_exames_yet';
+        }
+
+        foreach ($exames as $exame) {
+
+            $exame_evaluation_median = 0;
+
+            if(!$exame->questions->count()){
+                $exercise_evaluatin_median += 0;
+                continue;
+            }
+
+            $exercise_sum_score_points = $exame->questions->sum('avaliation_score');
+            $exercise_student_score = $exame->questions->sum('classification');
+
+            $score_perc = $exercise_sum_score_points == 0 ? 0 : round(($exercise_student_score / $exercise_sum_score_points) * 100);
+            
+            $exercise_evaluatin_median += $score_perc;
+        }
+
+        $exercise_evaluatin_median = $exercise_evaluatin_median == 0 ? 0 : round($exercise_evaluatin_median / $exames->count());
+
+        return $exercise_evaluatin_median;
+
+    }
+
+    /**
      * PROFESSOR
      */
     public function saveExercise($inputs)
@@ -263,6 +298,8 @@ class Exercise extends Model
             $query = self::orderBy('created_at', 'desc');
         }
 
+        $query = $query->where('published', 1);
+
         // My Favorites filter
         if(isset($filters['my_favorites'])){
             $query = $query->whereHas('exercise_favorite', function($q) {
@@ -296,6 +333,45 @@ class Exercise extends Model
         if(!isset($filters['show_all_professors']) && isset($filters['show_professors']) && !empty($filters['show_professors'])){
             $query = $query->whereIn('user_id', $filters['show_professors']);
         }
+
+        $query = $query->orWhere(function ($query) use ($filters){
+            $query->where('published', 0)
+                ->where('user_id', auth()->user()->id);
+
+            // My Favorites filter
+            if(isset($filters['my_favorites'])){
+                $query = $query->whereHas('exercise_favorite', function($q) {
+                    return $q->where('exercise_favourites.user_id', auth()->user()->id);
+                });
+            }
+
+            // Levels filters
+            if(!isset($filters['all_levels']) && isset($filters['levels']) && !empty($filters['levels'])){
+                $query = $query->whereIn('exercise_level_id', $filters['levels']);
+            }
+
+            // Categories filters
+            if(!isset($filters['all_categories']) && isset($filters['categories']) && !empty($filters['categories'])){
+                $query = $query->whereIn('exercise_category_id', $filters['categories']);
+            }
+
+            // Tags filters
+            if(isset($filters['tags']) && !empty($filters['tags'])){
+                $query = $query->whereHas('exercise_tags', function($q) use ($filters) {
+                    return $q->whereIn('exercises_tags.tag_id', $filters['tags']);
+                });
+            }
+
+            // Visibility filters
+            if(!isset($filters['show_vis_all']) && isset($filters['show_vis_my_students'])){
+                $query = $query->where('only_my_students', 1);
+            }
+
+            // Professor filters
+            if(!isset($filters['show_all_professors']) && isset($filters['show_professors']) && !empty($filters['show_professors'])){
+                $query = $query->whereIn('user_id', $filters['show_professors']);
+            }
+        });
 
         $skip = $filters['page'] * 4;
 

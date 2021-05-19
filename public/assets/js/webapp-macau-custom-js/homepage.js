@@ -167,24 +167,48 @@ $(function() {
         }
     });
 
+    ////
+    $("#signup input").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#submit_signup_form").click();
+        }
+    });
     $("#submit_signup_form").on("click", function(event) {
         if (signup_form_validate.errorList.length == 0) {
             $("#signup form").submit();
         }
     });
 
+    ////
+    $("#login input").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#submit_login_form").click();
+        }
+    });
     $("#submit_login_form").on("click", function(event) {
         if (login_form_validate.errorList.length == 0) {
             $("#login form").submit();
         }
     });
 
+    ////
+    $("#recover_password input").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#submit_recover_password_form").click();
+        }
+    });
     $("#submit_recover_password_form").on("click", function(event) {
         if (recover_password_form_validate.errorList.length == 0) {
             $("#recover_password form").submit();
         }
     });
 
+    ////
+    $("#new_password input").keypress(function(event) {
+        if (event.keyCode === 13) {
+            $("#submit_new_password_form").click();
+        }
+    });
     $("#submit_new_password_form").on("click", function(event) {
         if (new_password_form_validate.errorList.length == 0) {
             $("#new_password form").submit();

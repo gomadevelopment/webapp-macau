@@ -246,7 +246,7 @@
                             <div class="row mb-3 align-items-center pl-3 answers_row">
                                 <div class="col-12 mb-1">
                                     <label class="label_title m-0" style="font-size: 18px;">
-                                        <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                                        <span>Frases</span> 
                                     </label>
                                 </div>
                                 @for ($i = 0; $i < $question_item->options_number; $i++)
@@ -295,7 +295,7 @@
                         <div class="row mb-3 align-items-center pl-3 answers_row">
                             <div class="col-12 mb-1">
                                 <label class="label_title m-0" style="font-size: 18px;">
-                                    <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                                    <span>Frases</span> 
                                 </label>
                             </div>
                             <div class="row_to_remove col col-wrap d-flex mb-3">
@@ -422,7 +422,7 @@
     <div class="row mb-3 align-items-center pl-3 answers_row">
         <div class="col-12 mb-1">
             <label class="label_title m-0" style="font-size: 18px;">
-                <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                <span>Frases</span> 
             </label>
         </div>
         <div class="row_to_remove col col-wrap d-flex mb-3">
@@ -461,7 +461,7 @@
                 <div class="row mb-3 align-items-center pl-3 answers_row">
                     <div class="col-12 mb-1">
                         <label class="label_title m-0" style="font-size: 18px;">
-                            <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                            <span>Frases</span> 
                         </label>
                     </div>
                     <div class="row_to_remove col col-wrap d-flex mb-3">
@@ -501,7 +501,7 @@
         <div class="row mb-3 align-items-center pl-3 answers_row">
             <div class="col-12 mb-1">
                 <label class="label_title m-0" style="font-size: 18px;">
-                    <span>Frases</span> <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" title="Estas Tooltips servem para explicar ao Utilizador como usar o módulo." alt="" style="margin-left: 5px;">
+                    <span>Frases</span> 
                 </label>
             </div>
             <div class="row_to_remove col col-wrap d-flex mb-3">
