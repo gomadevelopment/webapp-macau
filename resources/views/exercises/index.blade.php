@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.6">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.6">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.7">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.7">
 
 @stop
 
@@ -380,9 +380,9 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.6"></script>
-    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.6"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.6"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.7"></script>
+    {{-- <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.7"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.7"></script>
 
     <script>
         function openNav() {
@@ -639,20 +639,17 @@
                     }, 5000);
                 }
                 else{
+                    $(".update_exercises_list").hide();
+                    $('.preloader.ajax').show();
+                    if(!confirm('Tem a certeza que deseja clonar este exercício?')){
+                        return false;
+                    }
                     $.ajax({
                         type: 'POST',
                         url: '/exercicios/clonar/' + exercise_id,
                         success: function(response){
                             if(response && response.status == 'success'){
                                 window.location = '/exercicios/editar/' + response.clone_exercise_id;
-                                // $("html, body").animate({ scrollTop: 0 }, 500);
-                                // setTimeout(function () {
-                                //     $(".successMsg").text(response.message);
-                                //     $(".successMsg").fadeIn();
-                                //     setTimeout(() => {
-                                //         $(".successMsg").fadeOut();
-                                //     }, 5000);
-                                // }, 1000);
                             }
                             else{
                                 $(".errorMsg").text(response.message);
