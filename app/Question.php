@@ -799,7 +799,7 @@ class Question extends Model
             // }
             foreach($input_indexes as $index){
                 $options_correct_words = '';
-                $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_])\s*%>/";
+                $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-])\s*%>/";
                 preg_match_all($regex, $inputs['differences_find_words_textarea_'.$index], $matches);
                 $numItems = count($matches[1]);
                 $i = 0;

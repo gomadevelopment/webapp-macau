@@ -107,10 +107,16 @@
     @foreach ($question->question_items as $item)
         
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group d-inline-flex mb-0">
+            <div class="form-group mb-0">
                 @if($item->question_item_media)
-                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
+                    @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                        <audio controls class="mt-3">
+                            <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                        </audio>
+                    @else
+                        <img class="mt-3" src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
                         alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
+                    @endif
                 @endif
 
                 @if($exame_review)
