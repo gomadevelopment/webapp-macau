@@ -374,6 +374,10 @@ a[class^="show_less_"] .triangle-up {
     word-break: break-word;
 }
 
+.shop_grid_caption .article_description * strong {
+    font-family: "Gilroy - Bold";
+}
+
 .shop_grid_caption .gray_tag_div,
 .gray_tag_div {
     width: fit-content;

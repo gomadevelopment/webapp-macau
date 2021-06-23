@@ -11,7 +11,7 @@ class Exame extends Model
 {
     protected $fillable = [
         'user_id', 'student_id', 'exercise_id', 'start_timestamp', 'pause_start_timestamp', 'pause_end_timestamp',
-        'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'statement', 
+        'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'duration', 'presentation_image', 'statement', 
         'audiovisual_desc', 'audio_transcript', 'has_time', 'time', 'has_interruption', 'interruption_time',
         'can_clone', 'only_my_students', 'only_after_correction'
     ];
@@ -117,6 +117,7 @@ class Exame extends Model
             'exercise_category_id' => $exercise->exercise_category_id,
             'exercise_level_id' => $exercise->exercise_level_id,
             'introduction' => $exercise->introduction,
+            'duration' => $exercise->duration,
             'statement' => $exercise->statement,
             'audiovisual_desc' => $exercise->audiovisual_desc,
             'audio_transcript' => $exercise->audio_transcript,
@@ -136,9 +137,9 @@ class Exame extends Model
                 'media_url' => $exercise->medias->media_url,
                 'media_type' => $exercise->medias->media_type
             ]);
-            $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
-            $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/medias');
-            File::copyDirectory($fromPath, $toPath);
+            // $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/medias');
+            // $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/medias');
+            // File::copyDirectory($fromPath, $toPath);
         }
 
         foreach ($exercise->questions as $exercise_question) {

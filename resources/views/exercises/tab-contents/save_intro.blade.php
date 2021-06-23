@@ -25,12 +25,44 @@
     <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
         <div class="card-body">
             <div class="form-group">
+                <label class="label_title">Duração do Vídeo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Duração do Vídeo que acompanha o Exercício." 
+                    alt="" style="margin-left: 5px;"></label>
+                <input class="form-control" type="text" name="duration" id="duration" value="{{ old('statement', $exercise->duration) }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
+        <div class="card-body">
+            <div class="form-group">
                 <form action=""></form>
                 <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Insira aqui o vídeo/audio/imagem a apresentar ao longo de todo o Exercício." 
                     alt="" style="margin-left: 5px;"></label>
                 <div id="dropzone">
                     <div class="dropzone needsclick {{ isset($details_page) && $details_page ? 'disabled' : '' }}" id="form-dropzone-media">
+                        <div class="dz-message needsclick">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
+                            <br>
+                            Arraste e solte os seus ficheiros aqui 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
+        <div class="card-body">
+            <div class="form-group">
+                <form action=""></form>
+                <label class="label_title">Imagem de Apresentação <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                    title="Insira aqui a imagem a suportar o texto descritivo Exercício." 
+                    alt="" style="margin-left: 5px;"></label>
+                <div id="dropzone">
+                    <div class="dropzone needsclick {{ isset($details_page) && $details_page ? 'disabled' : '' }}" id="form-dropzone-presentation">
                         <div class="dz-message needsclick">
                             <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg')}}" alt="">
                             <br>

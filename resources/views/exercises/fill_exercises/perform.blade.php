@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.7">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.7">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.9">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.9">
 
 @stop
 
@@ -264,14 +264,14 @@
                                             <div class="form-group m-2">
                                                 @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
                                                     <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
-                                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                        <source src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                                                         </audio>                                
                                                 @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
                                                     <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
-                                                        <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
+                                                        <source src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                                                     </video>
                                                 @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
-                                                    <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/medias/'. $exame->medias->media_url }}" alt=""
+                                                    <img src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" alt=""
                                                     style="height: -webkit-fill-available;">
                                                 @endif
                                                 {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
@@ -330,26 +330,55 @@
     </div>
 
     {{-- EXERCISE INFO TOGGLE --}}
-    {{-- <div class="card-body accordion custom_accordion info_accordion" id="accordion">
+    <div class="card-body accordion custom_accordion info_accordion" id="accordion">
         <a class="pause_time collapsed" data-toggle="collapse" href="#collapseOne">
             <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" class="show_info_button">
             <img src="{{asset('/assets/backoffice_assets/icons/Cross_white.svg')}}" alt="" class="hide_info_button">
         </a>
         <div id="collapseOne" class="collapse" data-parent="#accordion" style="margin-left: -5px; margin-right: -5px;">
-            <div class="info_help mt-3">
+            {{-- <div class="info_help mt-3">
                 <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg')}}" alt="" class="mb-1" style="width: 90%">
                 Ajuda
-            </div>
-            <div class="info_statement mt-2" data-toggle="tooltip" 
-                data-html="true"
-            title='{!! $exame->statement !!}'>
+            </div> --}}
+            <a href="#" data-toggle="modal" data-target="#statement_modal" class="info_statement mt-2">
                 <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg')}}" alt="" class="mb-1" style="width: 44%">
                 Enunciado
-            </div>
+            </a>
         </div>
-    </div> --}}
+    </div>
 </section>
 <!-- ============================ Find Courses with Sidebar End ================================== -->
+
+<!-- New Class Modal -->
+<div class="modal fade" id="statement_modal" tabindex="-1" role="dialog" aria-labelledby="open_statement_modal" aria-hidden="true">
+    <div class="container modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content container pr-4 pl-4" id="open_statement_modal">
+            <span class="mod-close" data-dismiss="modal" aria-hidden="true" style="background-color: #ff2850;">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg')}}" alt="" class="w-100">
+            </span>
+            <div class="modal-body page-title">
+                <h4 class="modal-header-title title mb-3">Enunciado</h4>
+                <div class="login-form row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="d-flex float-left flex-column shop_grid_caption ml-0">
+                                <div class="article_description m-0 mb-2" style="line-height: 25px; -webkit-line-clamp: unset;">
+                                    @if($exame->statement)
+                                        {!! $exame->statement !!}
+                                    @else
+                                        (Sem Enunciado)
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
 
 {{-- PAUSE MODAL --}}
 <!-- Log In Modal -->
@@ -405,16 +434,16 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.7"></script>
-    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=1.7"></script> --}}
-    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=1.7"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.7"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.9"></script>
+    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=1.9"></script> --}}
+    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=1.9"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.9"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.7"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=1.7"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.9"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=1.9"></script>
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 

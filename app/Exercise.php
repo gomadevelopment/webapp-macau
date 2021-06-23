@@ -14,7 +14,7 @@ class Exercise extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'statement', 
+        'user_id', 'title', 'exercise_category_id', 'exercise_level_id', 'introduction', 'duration', 'presentation_image', 'statement', 
         'audiovisual_desc', 'audio_transcript', 'has_time', 'time', 'has_interruption', 'interruption_time',
         'can_clone', 'only_my_students', 'only_after_correction'
     ];   
@@ -175,6 +175,7 @@ class Exercise extends Model
         $this->exercise_level_id = $inputs['level'];
 
         $this->introduction = isset($inputs['introduction']) ? $inputs['introduction'] : null;
+        $this->duration = isset($inputs['duration']) ? $inputs['duration'] : null;
         $this->statement = isset($inputs['statement']) ? $inputs['statement'] : null;
         $this->audiovisual_desc = isset($inputs['audiovisual_desc']) ? $inputs['audiovisual_desc'] : null;
         $this->audio_transcript = isset($inputs['audio_transcript']) ? $inputs['audio_transcript'] : null;
@@ -200,11 +201,19 @@ class Exercise extends Model
         }
 
         if(isset($inputs['media_files'])){
-            self::updatePosterAndMedias($this->id, $inputs['media_files']);
+            self::updatePosterAndMedias($this->id, $inputs['media_files'], 'media');
         }
         else{
             Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$this->id.'/medias');
-            self::find($this->id)->medias()->delete();
+            $this->medias()->delete();
+        }
+        if(isset($inputs['presentation_files'])){
+            self::updatePosterAndMedias($this->id, $inputs['presentation_files'], 'presentation');
+        }
+        else{
+            Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$this->id.'/presentation_image');
+            $this->presentation_image = null;
+            $this->save();
         }
 
         // Notification::create([
@@ -221,12 +230,10 @@ class Exercise extends Model
         // ]);
     }
 
-    public function updatePosterAndMedias($exercise_id, $media)
+    public function updatePosterAndMedias($exercise_id, $media, $media_or_presentation)
     {
-        // dd(is_string($poster), $medias);
-
-        if(!is_string($media)){
-            self::find($exercise_id)->medias()->delete();
+        if(!is_string($media) && $media_or_presentation == 'media'){
+            $this->medias()->delete();
             $upload_date = date('Y-m-d_H:i:s_');
             $paths = [];
 
@@ -242,6 +249,22 @@ class Exercise extends Model
                 'media_url' => $fileName,
                 'media_type' => $media->getMimeType()
             ]);
+        }
+
+        if(!is_string($media) && $media_or_presentation == 'presentation'){
+            $upload_date = date('Y-m-d_H:i:s_');
+            $paths = [];
+
+            Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/'.$exercise_id.'/presentation_image');
+
+            $fileName = $upload_date . $media->getClientOriginalName();
+
+            $paths = $media->storeAs('/exercises/'
+                . $exercise_id . '/presentation_image', $fileName, 'webapp-macau-storage');
+
+            $this->presentation_image = $fileName;
+            $this->save();
+
         }
 
         // if(!empty($medias)){

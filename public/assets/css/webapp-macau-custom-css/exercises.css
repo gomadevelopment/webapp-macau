@@ -982,7 +982,8 @@ div[id^="cke_fill_text_word_"] {
     margin: 0;
 }
 
-.exercise_question_description * a {
+.exercise_question_description * a,
+.exercise_question_description * a strong {
     color: #ff2850;
 }
 

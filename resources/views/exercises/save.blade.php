@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.7">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.7">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.9">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.9">
 
 @stop
 
@@ -101,7 +101,43 @@
     </div>
 </section>
 
-<DIV id="preview-template" style="display: none;">
+<DIV id="preview-template-media" style="display: none;">
+    <DIV class="dz-preview dz-file-preview">
+        <DIV class="dz-image"><IMG data-dz-thumbnail="" style="width: 120px; height: 120px;"></DIV>
+        <DIV class="dz-details">
+        <DIV class="dz-size"><SPAN data-dz-size=""></SPAN></DIV>
+        <DIV class="dz-filename"><SPAN data-dz-name=""></SPAN></DIV>
+        </DIV>
+
+        <DIV class="dz-progress"><SPAN class="dz-upload" data-dz-uploadprogress=""></SPAN></DIV>
+        <DIV class="dz-error-message"><SPAN data-dz-errormessage=""></SPAN></DIV>
+        
+        <div class="dz-success-mark">
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <title>Check</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+            <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+        </svg>
+        </div>
+
+        <div class="dz-error-mark">
+        <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <title>error</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+            <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+            </g>
+            </g>
+        </svg>
+        </div>
+    </DIV>
+</DIV>
+<DIV id="preview-template-presentation" style="display: none;">
     <DIV class="dz-preview dz-file-preview">
         <DIV class="dz-image"><IMG data-dz-thumbnail="" style="width: 120px; height: 120px;"></DIV>
         <DIV class="dz-details">
@@ -143,13 +179,13 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.7"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=1.7"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=1.9"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.7"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.9"></script>
 
     <script>
 
@@ -352,17 +388,25 @@
                     .css('padding-left', '10px !important');
             });
 
-            var remove_file_button_clicked = false;
+            var remove_file_button_clicked_media = false;
+            var remove_file_button_clicked_presentation = false;
 
-            $(document).on('click', '.dz-remove', function(){
-                remove_file_button_clicked = true;
+            $(document).on('click', '#form-dropzone-media .dz-remove', function(){
+                $('#form-dropzone-media .dz-preview').remove();
+                remove_file_button_clicked_media = true;
+            });
+
+            $(document).on('click', '#form-dropzone-presentation .dz-remove', function(){
+                $('#form-dropzone-presentation .dz-preview').remove();
+                remove_file_button_clicked_presentation = true;
             });
 
             var dropzone_medias_counter = 0;
+            var dropzone_presentation_counter = 0;
 
             var dropzone_media = new Dropzone('#form-dropzone-media', {
                 url: '/dropzone_media',
-                previewTemplate: document.querySelector('#preview-template').innerHTML,
+                previewTemplate: document.querySelector('#preview-template-media').innerHTML,
                 addRemoveLinks: true,
                 parallelUploads: 2,
                 uploadMultiple: false,
@@ -378,7 +422,7 @@
                     });
                     if(dropzone_medias_counter == 0){
                         var thisDropzone = this;
-                        if(exercise_id || !remove_file_button_clicked){
+                        if(exercise_id || !remove_file_button_clicked_media){
                             $.get('/exercicios/get_exercise_medias/' + exercise_id, function(data) {
                                 if(data != 'no_medias'){
                                     JSON.stringify(data);
@@ -386,8 +430,8 @@
                                         var mockFile = { name: value.name, size: value.size };
 
                                         thisDropzone.emit("addedfile", mockFile);
-
-                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path);
+                                        console.log('CALL');
+                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path, value.media_type);
 
                                         // Make sure that there is no progress bar, etc...
                                         thisDropzone.emit("complete", mockFile);
@@ -402,14 +446,21 @@
                     }
                     dropzone_medias_counter = 1;
                 },
-                thumbnail: function(file, dataUrl) {
+                thumbnail: function(file, dataUrl, media_type) {
                     if (file.previewElement) {
                     file.previewElement.classList.remove("dz-file-preview");
                     var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
                     for (var i = 0; i < images.length; i++) {
                         var thumbnailElement = images[i];
+                        console.log(media_type);
+                        console.log(file);
                         thumbnailElement.alt = file.name;
-                        thumbnailElement.src = dataUrl;
+                        if(media_type == 'video'){
+                            thumbnailElement.src = '/assets/backoffice_assets/icons/Video_Icon.svg';
+                        }
+                        else{
+                            thumbnailElement.src = dataUrl;
+                        }
                         thumbnailElement.width = "120px";
                         thumbnailElement.height = "120px";
                     }
@@ -417,12 +468,81 @@
                     }
                 },
                 removedfile: function(file){
-                    
+                    $(this.element).find('.dz-preview').remove();
+                }
+
+            });
+
+            var dropzone_presentation = new Dropzone('#form-dropzone-presentation', {
+                url: '/dropzone_presentation',
+                previewTemplate: document.querySelector('#preview-template-presentation').innerHTML,
+                addRemoveLinks: true,
+                parallelUploads: 2,
+                uploadMultiple: false,
+                maxFiles: 1,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                // maxFilesize: 3,
+                // filesizeBase: 1000,
+                init: function(e) {
+                    this.on("maxfilesexceeded", function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                    });
+                    if(dropzone_presentation_counter == 0){
+                        var thisDropzone = this;
+                        if(exercise_id || !remove_file_button_clicked_presentation){
+                            $.get('/exercicios/get_exercise_presentation_image/' + exercise_id, function(data) {
+                                if(data != 'no_medias'){
+                                    JSON.stringify(data);
+                                    $.each(data, function(key,value){
+                                        var mockFile = { name: value.name, size: value.size };
+
+                                        thisDropzone.emit("addedfile", mockFile);
+                                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.path, value.media_type);
+
+                                        // Make sure that there is no progress bar, etc...
+                                        thisDropzone.emit("complete", mockFile);
+
+                                    });
+                                }
+                                
+
+                            });
+                        }
+                            
+                    }
+                    dropzone_medias_counter = 1;
+                },
+                thumbnail: function(file, dataUrl, media_type) {
+                    if (file.previewElement) {
+                    file.previewElement.classList.remove("dz-file-preview");
+                    var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                    for (var i = 0; i < images.length; i++) {
+                        var thumbnailElement = images[i];
+                        console.log(media_type);
+                        console.log(file);
+                        thumbnailElement.alt = file.name;
+                        if(media_type == 'video'){
+                            thumbnailElement.src = '/assets/backoffice_assets/icons/Video_Icon.svg';
+                        }
+                        else{
+                            thumbnailElement.src = dataUrl;
+                        }
+                        thumbnailElement.width = "120px";
+                        thumbnailElement.height = "120px";
+                    }
+                    setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
+                },
+                removedfile: function(file){
+                    $(this.element).find('.dz-preview').remove();
                 }
 
             });
 
             var media_files = [];
+            var presentation_files = [];
 
             var minSteps = 6,
                 maxSteps = 60,
@@ -462,6 +582,41 @@
                     // media_files.push(file);
                 }
                 media_files = files;
+            }
+
+            dropzone_presentation.uploadFiles = function(files) {
+                var self = this;
+                if($('#form-dropzone-presentation .dz-preview.dz-complete.dz-image-preview')){
+                    $('#form-dropzone-presentation .dz-preview.dz-complete.dz-image-preview').remove();
+                }
+                for (var i = 0; i < files.length; i++) {
+
+                    var file = files[i];
+                    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+                    for (var step = 0; step < totalSteps; step++) {
+                        var duration = timeBetweenSteps * (step + 1);
+                        setTimeout(function(file, totalSteps, step) {
+                            return function() {
+                                file.upload = {
+                                    progress: 100 * (step + 1) / totalSteps,
+                                    total: file.size,
+                                    bytesSent: (step + 1) * file.size / totalSteps
+                                };
+
+                                self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                                if (file.upload.progress == 100) {
+                                    file.status = Dropzone.SUCCESS;
+                                    self.emit("success", file, 'success', null);
+                                    self.emit("complete", file);
+                                    self.processQueue();
+                                }
+                            };
+                        }(file, totalSteps, step), duration);
+                    }
+                    // media_files.push(file);
+                }
+                presentation_files = files;
             }
 
             // Go to Intro tab button (Gravar button on beggining tab_content)
@@ -514,6 +669,14 @@
                 else if(!media_files[0] && $('#form-dropzone-media .dz-preview.dz-complete.dz-image-preview')){
                     var existing_file = $('#form-dropzone-media .dz-preview .dz-details .dz-filename span').text();
                     formData.append('media_files', existing_file);
+                }
+
+                if(presentation_files[0]){
+                    formData.append('presentation_files', presentation_files[0]);
+                }
+                else if(!presentation_files[0] && $('#form-dropzone-presentation .dz-preview.dz-complete.dz-image-preview')){
+                    var existing_file = $('#form-dropzone-presentation .dz-preview .dz-details .dz-filename span').text();
+                    formData.append('presentation_files', existing_file);
                 }
                 
                 $.ajax({

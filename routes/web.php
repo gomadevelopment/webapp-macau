@@ -58,6 +58,8 @@ Route::group(['middlewareGroups' => 'web'], function () {
             Route::post('/exercicios/clonar/{id}', 'ExercisesController@cloneExercise');
             Route::get('/exercicios/get_exercise_medias', 'ExercisesController@getExerciseMedias');
             Route::get('/exercicios/get_exercise_medias/{id}', 'ExercisesController@getExerciseMedias');
+            Route::get('/exercicios/get_exercise_presentation_image', 'ExercisesController@getExercisePresentationImage');
+            Route::get('/exercicios/get_exercise_presentation_image/{id}', 'ExercisesController@getExercisePresentationImage');
 
             Route::get('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExameGet');
             Route::post('/exercicios/corrigir/{exame_id}/aluno/{student_id}', 'ExamesController@profCorrectionExamePost');

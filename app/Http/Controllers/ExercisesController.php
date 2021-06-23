@@ -274,6 +274,11 @@ class ExercisesController extends Controller
             //     $media_clone = $media->replicate();
             //     $exercise_clone->medias()->save($media_clone);
             // }
+            if($exercise->presentation_image){
+                $fromPath = public_path('webapp-macau-storage/exercises/'.$exercise->id.'/presentation_image');
+                $toPath = public_path('webapp-macau-storage/exercises/'.$exercise_clone->id.'/presentation_image');
+                File::copyDirectory($fromPath, $toPath);
+            }
             if($exercise->medias){
                 $media_clone = $exercise->medias->replicate();
                 $exercise_clone->medias()->save($media_clone);
@@ -284,6 +289,11 @@ class ExercisesController extends Controller
             foreach ($exercise->questions()->get() as $question) {
                 $question_clone = $question->replicate();
                 $exercise_clone->questions()->save($question_clone);
+                if($question->description_image_url){
+                    $fromPath = public_path('webapp-macau-storage/questions/'.$question->id.'/description_image');
+                    $toPath = public_path('webapp-macau-storage/questions/'.$question_clone->id.'/description_image');
+                    File::copyDirectory($fromPath, $toPath);
+                }
                 if($question->question_items){
                     foreach ($question->question_items as $question_item) {
                         $question_item_clone = $question_item->replicate();
@@ -349,7 +359,36 @@ class ExercisesController extends Controller
             'poster' => [
                 'name' => $media_file->getFilename(),
                 'size' => $media_file->getSize(),
-                'path' => '/'.$media_file->getPathname()
+                'path' => '/'.$media_file->getPathname(),
+                'media_type' => explode('/', $media_file->getMimeType())[0]
+            ]
+        ];
+        return $array;
+    }
+
+    public function getExercisePresentationImage($exercise_id = null)
+    {
+        if(!$exercise_id){
+            return 'no_medias';
+        }
+
+        $exercise = Exercise::find($exercise_id);
+        $count = 0;
+        $array = [];
+        // dd($exercise, $exercise->medias()->count());
+
+        if(!$exercise->presentation_image){
+            return 'no_medias';
+        }
+
+        $path = 'webapp-macau-storage/exercises/'.$exercise_id.'/presentation_image/'.$exercise->presentation_image;
+        $media_file = new \Illuminate\Http\File($path);
+        $array = [
+            'poster' => [
+                'name' => $media_file->getFilename(),
+                'size' => $media_file->getSize(),
+                'path' => '/'.$media_file->getPathname(),
+                'media_type' => explode('/', $media_file->getMimeType())[0]
             ]
         ];
         return $array;
