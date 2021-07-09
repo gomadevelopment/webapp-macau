@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=1.9">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=1.9">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.0">
 
 @stop
 
@@ -412,15 +412,15 @@
 </div>
 <!-- End Modal -->
 
-<button class="btn search-btn comment_submit {{ !$exame_review ? 'show_video' : 'd-none' }}" style="display: none; float: none;">
+<button class="btn search-btn comment_submit show_video" style="display: none; float: none;">
     <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
 </button>
-<button class="btn search-btn comment_submit {{ !$exame_review ? 'hide_video' : 'd-none' }}" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
+<button class="btn search-btn comment_submit hide_video" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
     <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg')}}" alt="">
 </button>
 
 @if($exercise->medias)
-    <div class="{{ !$exame_review ? 'videoWrapper stuck' : 'd-none' }}">
+    <div class="videoWrapper stuck">
         <div>
             <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
                 <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
@@ -434,16 +434,16 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=1.9"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=1.9"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=1.9"></script>
-    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=1.9"></script> --}}
-    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=1.9"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=1.9"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.0"></script>
+    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=2.0"></script> --}}
+    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=2.0"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.0"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=1.9"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=1.9"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.0"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.0"></script>
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 

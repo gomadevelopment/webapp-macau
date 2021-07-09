@@ -543,8 +543,7 @@ $(function() {
     $(document).on("click", "#perform_exercise_tabs .nav-link", function() {
         if (
             $(this).attr("id") == "intro-tab" ||
-            $(this).attr("id") == "pre-listening-tab" ||
-            $(this).attr("id") == "evaluation-tab"
+            $(this).attr("id") == "pre-listening-tab"
         ) {
             $(".under_tabs_video_card").hide();
             // Hide bottom video
@@ -592,6 +591,13 @@ $(function() {
             } else if (
                 $(this).attr("id") == "after-listening-tab" &&
                 $("#after_listening_questions_count").val() > 0
+            ) {
+                $(".under_tabs_video_card").show();
+                $(".videoWrapper").show();
+                $(".show_video").show();
+            }
+            else if (
+                $(this).attr("id") == "evaluation-tab"
             ) {
                 $(".under_tabs_video_card").show();
                 $(".videoWrapper").show();
@@ -705,7 +711,8 @@ $(function() {
         if ($(this).scrollTop() >= 500) {
             if (
                 !$(".videoWrapper").hasClass("was_opened") &&
-                !$("#pre-listening-tab").hasClass("active")
+                !$("#pre-listening-tab").hasClass("active") &&
+                !$('#intro-tab').hasClass("active")
             ) {
                 $("button.show_video").click();
 

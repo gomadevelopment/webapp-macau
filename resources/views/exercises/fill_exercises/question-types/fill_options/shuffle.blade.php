@@ -110,12 +110,16 @@
             <div class="form-group mb-0">
                 @if($item->question_item_media)
                     @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
-                        <audio controls class="mt-3">
+                        <audio controls class="mt-2" style="max-width: 300px;">
                             <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
                         </audio>
+                    @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
+                        <video controls class="mt-2" style="max-width: 300px;">
+                            <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                        </video>
                     @else
-                        <img class="mt-3" src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
-                        alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
+                        <img class="mt-2" src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
+                        alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px;max-width: 300px;">
                     @endif
                 @endif
 
@@ -196,10 +200,20 @@
         @foreach ($question->question_items as $item)
         
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group d-inline-flex mb-0">
+                <div class="form-group mb-0">
                     @if($item->question_item_media)
-                        <img src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
-                            alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px; min-width: 100px; max-width: 100px; height: fit-content; max-height: 100px;">
+                        @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                            <audio controls class="mt-2" style="max-width: 300px;">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                            </audio>
+                        @elseif(explode('/', $item->question_item_media->media_type)[0] == 'video')
+                            <video controls class="mt-2" style="max-width: 300px;">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                            </video>
+                        @else
+                            <img class="mt-2" src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" 
+                            alt="" class="mr-4 mt-2 mb-2 align-self-center" style="border-radius: 6px;max-width: 300px;">
+                        @endif
                     @endif
 
                     <label class="label_title m-0 d-block align-self-center">
