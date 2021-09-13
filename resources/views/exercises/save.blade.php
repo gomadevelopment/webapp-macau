@@ -582,6 +582,7 @@
                     // media_files.push(file);
                 }
                 media_files = files;
+                $('#external_media_files').attr('value', null);
             }
 
             dropzone_presentation.uploadFiles = function(files) {
@@ -662,6 +663,7 @@
                 formData.set('statement', statement.getData());
                 formData.set('audiovisual_desc', audiovisual_desc.getData());
                 formData.set('audio_transcript', audio_transcript.getData());
+                formData.set('external_media_files', $('#external_media_files').val());
 
                 if(media_files[0]){
                     formData.append('media_files', media_files[0]);

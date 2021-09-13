@@ -1,14 +1,27 @@
-$(function() {
-    if ($("#exame_review").val() == true) {
-        $("video").trigger("pause");
+$(function () {
+    function iFramePausePlay(divId, pauseOrPlay) {
+        // if state == 'hide', hide. Else: show video
+        var div = document.getElementById(divId);
+        var iframe = div.getElementsByTagName("iframe")[0];
+        var video_src = iframe.getAttribute('src');
+        $('#'.divId).children('iframe').attr('src', ''); // set iframe parent div value null 
+        $('#'.divId).children('iframe').attr('src', video_src); // set iframe src again it works perfect
     }
-    $(document).on("click", "#finish_exercise_button", function(e) {
+    if ($("#exame_review").val() == true) {
+        $("video, iframe").trigger("pause");
+        iFramePausePlay('under_tabs_video_card', 'pause');
+        iFramePausePlay('videoWrapper', 'pause');
+    }
+
+    $(document).on("click", "#finish_exercise_button", function (e) {
         // Deactivate finish_exercise_button
         $(this).attr("id", "");
 
         $("#perform_exercise_form").hide();
         $(".preloader.ajax").show();
-        $("html, body").animate({ scrollTop: "0px" }, 300);
+        $("html, body").animate({
+            scrollTop: "0px"
+        }, 300);
 
         var exercise_id = $("#exercise_id_hidden").val();
         var exame_id = $("#exame_id").val();
@@ -18,7 +31,7 @@ $(function() {
 
         // Inquiries
         var inquiries = new Array();
-        $(".rb").each(function(index, element) {
+        $(".rb").each(function (index, element) {
             var inquiry_id = $(element).attr("data-id");
             var data_value = $(element)
                 .find(".rb-tab-active")
@@ -36,7 +49,7 @@ $(function() {
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 $("#perform_exercise_form").show();
                 $(".preloader.ajax").hide();
                 if (response && response.status == "success") {
@@ -106,7 +119,7 @@ $(function() {
 
     // /exercicios/realizar/update_pause_timer/{exame_id}
 
-    $(document).on("click", "#pauseButton, #startButton", function() {
+    $(document).on("click", "#pauseButton, #startButton", function () {
         if ($(this).attr("data-target") == "") {
             return false;
         }
@@ -116,9 +129,9 @@ $(function() {
         var date =
             dt.getUTCFullYear() +
             "-" +
-            (dt.getUTCMonth() + 1 < 10
-                ? "0" + (dt.getUTCMonth() + 1)
-                : dt.getUTCMonth() + 1) +
+            (dt.getUTCMonth() + 1 < 10 ?
+                "0" + (dt.getUTCMonth() + 1) :
+                dt.getUTCMonth() + 1) +
             "-" +
             (dt.getUTCDate() < 10 ? "0" + dt.getUTCDate() : dt.getUTCDate()) +
             " ";
@@ -141,10 +154,8 @@ $(function() {
                 to_update: to_update,
                 to_update_timestamp: to_update_timestamp
             },
-            success: function(response) {
-                if (response && response.status == "success") {
-                } else if (response.status == "error") {
-                }
+            success: function (response) {
+                if (response && response.status == "success") {} else if (response.status == "error") {}
             }
         });
     });
@@ -160,7 +171,7 @@ $(function() {
             scrollSensitivity: 40,
             scrollSpeed: 30,
             helper: "clone",
-            start: function(evt, ui) {
+            start: function (evt, ui) {
                 $(this).hide();
                 if (
                     !$("button.hide_video").is(":hidden") &&
@@ -170,20 +181,21 @@ $(function() {
                         .hide()
                         .addClass("drag_hidden");
                     $("button.show_video").show();
-                    $(".videoWrapper video").trigger("pause");
+                    $(".videoWrapper video, .videoWrapper iframe").trigger("pause");
+                    iFramePausePlay('videoWrapper', 'pause');
                     $(".videoWrapper")
                         .hide()
                         .removeClass("stuck");
                 }
             },
-            stop: function(evt, ui) {
+            stop: function (evt, ui) {
                 $(this).show();
             }
         });
         $(".drop").droppable({
             accept: ".drag_and_drop_item",
             scope: "items",
-            drop: function(evt, ui) {
+            drop: function (evt, ui) {
                 var item_dropped = ui.draggable;
                 var droppedOn = $(this);
 
@@ -196,10 +208,10 @@ $(function() {
                     top: 0
                 });
 
-                setTimeout(function() {
+                setTimeout(function () {
                     // Correspondence
                     if (item_dropped.hasClass("correspondence_items")) {
-                        $("input.correspondence_d_and_d").each(function(
+                        $("input.correspondence_d_and_d").each(function (
                             index,
                             element
                         ) {
@@ -209,17 +221,17 @@ $(function() {
                                 if (
                                     $.trim(
                                         $(element)
-                                            .next(".drag_and_drop_hole")
-                                            .html()
+                                        .next(".drag_and_drop_hole")
+                                        .html()
                                     ) == ""
                                 ) {
                                     $(element).val(null);
                                 } else {
                                     $(element).val(
                                         $(element)
-                                            .next(".drag_and_drop_hole")
-                                            .find("input")
-                                            .val()
+                                        .next(".drag_and_drop_hole")
+                                        .find("input")
+                                        .val()
                                     );
                                 }
                                 // console.log($(element).val());
@@ -228,21 +240,21 @@ $(function() {
                             else {
                                 $(element)
                                     .next("div")
-                                    .each(function(index2, element2) {
+                                    .each(function (index2, element2) {
                                         if (
                                             $.trim(
                                                 $(element2)
-                                                    .find(".drag_and_drop_hole")
-                                                    .html()
+                                                .find(".drag_and_drop_hole")
+                                                .html()
                                             ) == ""
                                         ) {
                                             $(element).val(null);
                                         } else {
                                             $(element).val(
                                                 $(element2)
-                                                    .find(".drag_and_drop_hole")
-                                                    .find("input")
-                                                    .val()
+                                                .find(".drag_and_drop_hole")
+                                                .find("input")
+                                                .val()
                                             );
                                         }
                                     });
@@ -253,75 +265,75 @@ $(function() {
                     else if (
                         item_dropped.hasClass("fill_options_shuffle_items")
                     ) {
-                        $("input.fill_options_d_and_d").each(function(
+                        $("input.fill_options_d_and_d").each(function (
                             index,
                             element
                         ) {
                             if (
                                 $.trim(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .html()
+                                    .next(".drag_and_drop_hole")
+                                    .html()
                                 ) == ""
                             ) {
                                 $(element).val(null);
                             } else {
                                 $(element).val(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .find("input")
-                                        .val()
+                                    .next(".drag_and_drop_hole")
+                                    .find("input")
+                                    .val()
                                 );
                             }
                         });
                     }
                     // True or False
                     else if (item_dropped.hasClass("true_or_false_items")) {
-                        $("input.true_or_false_d_and_d").each(function(
+                        $("input.true_or_false_d_and_d").each(function (
                             index,
                             element
                         ) {
                             if (
                                 $.trim(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .html()
+                                    .next(".drag_and_drop_hole")
+                                    .html()
                                 ) == ""
                             ) {
                                 $(element).val(null);
                             } else {
                                 $(element).val(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .find("input")
-                                        .val()
+                                    .next(".drag_and_drop_hole")
+                                    .find("input")
+                                    .val()
                                 );
                             }
                         });
                     }
                     // Vowels
                     else if (item_dropped.hasClass("vowels_items")) {
-                        $("input.vowels_d_and_d").each(function(
+                        $("input.vowels_d_and_d").each(function (
                             index,
                             element
                         ) {
                             $(element)
                                 .next("div")
-                                .each(function(index2, element2) {
+                                .each(function (index2, element2) {
                                     if (
                                         $.trim(
                                             $(element2)
-                                                .find(".drag_and_drop_hole")
-                                                .html()
+                                            .find(".drag_and_drop_hole")
+                                            .html()
                                         ) == ""
                                     ) {
                                         $(element).val(null);
                                     } else {
                                         $(element).val(
                                             $(element2)
-                                                .find(".drag_and_drop_hole")
-                                                .find("input")
-                                                .val()
+                                            .find(".drag_and_drop_hole")
+                                            .find("input")
+                                            .val()
                                         );
                                     }
                                 });
@@ -349,12 +361,12 @@ $(function() {
             scrollSensitivity: 40,
             scrollSpeed: 30,
             // helper: "clone",
-            update: function(evt, ui) {
+            update: function (evt, ui) {
                 // console.log("111");
                 var word_preview = "";
                 $(this)
                     .find("li span")
-                    .each(function(index, element) {
+                    .each(function (index, element) {
                         word_preview += $(element).text() + " ";
                     });
                 $(this)
@@ -366,13 +378,13 @@ $(function() {
     } else {
         $(".drag_and_drop_item").css("cursor", "default");
         $(
-            '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]'
-        )
+                '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]'
+            )
             .find("li")
             .css("cursor", "default");
         $(
-            '[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]'
-        )
+                '[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]'
+            )
             .find("li")
             .css("cursor", "default");
     }
@@ -381,7 +393,7 @@ $(function() {
     $(document).on(
         "click",
         ".start_exercise, .perform_exercise_nav_button",
-        function(e) {
+        function (e) {
             if ($(this).hasClass("start_exercise")) {
                 $(this).hide();
                 // $('.nav-link.disabled').removeClass('disabled');
@@ -404,8 +416,7 @@ $(function() {
                     offset_disc = 0;
                 }
 
-                $("html, body").animate(
-                    {
+                $("html, body").animate({
                         scrollTop: $(hash).offset().top - offset_disc
                     },
                     800
@@ -419,8 +430,9 @@ $(function() {
 
     // Change icon image on tab change
     changeIconImage();
+
     function changeIconImage() {
-        $("#perform_exercise_tabs a.nav-link").each(function(index, element) {
+        $("#perform_exercise_tabs a.nav-link").each(function (index, element) {
             if ($(element).hasClass("active")) {
                 $(element)
                     .find(".white_icon")
@@ -439,12 +451,13 @@ $(function() {
         });
     }
 
-    $(document).on("click", "#perform_exercise_tabs a.nav-link", function() {
+    $(document).on("click", "#perform_exercise_tabs a.nav-link", function () {
         changeIconImage();
     });
 
     // Change right side info_accordion icon
     changeAccordionInfoIcon($(".info_accordion a"));
+
     function changeAccordionInfoIcon(selector) {
         if ($(selector).hasClass("collapsed")) {
             $(selector)
@@ -463,7 +476,7 @@ $(function() {
         }
     }
 
-    $(document).on("click", ".info_accordion a", function() {
+    $(document).on("click", ".info_accordion a", function () {
         changeAccordionInfoIcon($(this));
     });
 
@@ -523,7 +536,7 @@ $(function() {
         placeholder: "Escolher..."
     });
 
-    $(".rb-tab").click(function() {
+    $(".rb-tab").click(function () {
         if ($("#exame_review").val() == false) {
             $(this)
                 .parent()
@@ -540,7 +553,7 @@ $(function() {
     $(".show_video").hide();
     $("button.hide_video").hide();
 
-    $(document).on("click", "#perform_exercise_tabs .nav-link", function() {
+    $(document).on("click", "#perform_exercise_tabs .nav-link", function () {
         if (
             $(this).attr("id") == "intro-tab" ||
             $(this).attr("id") == "pre-listening-tab"
@@ -595,8 +608,7 @@ $(function() {
                 $(".under_tabs_video_card").show();
                 $(".videoWrapper").show();
                 $(".show_video").show();
-            }
-            else if (
+            } else if (
                 $(this).attr("id") == "evaluation-tab"
             ) {
                 $(".under_tabs_video_card").show();
@@ -614,7 +626,7 @@ $(function() {
                 .hide();
         }
 
-        $("#perform_exercise_tabs_content>.tab-pane").each(function(
+        $("#perform_exercise_tabs_content>.tab-pane").each(function (
             index,
             element
         ) {
@@ -624,7 +636,7 @@ $(function() {
 
         var this_id = $(this).attr("id");
 
-        $("#perform_exercise_tabs_content>.tab-pane").each(function(
+        $("#perform_exercise_tabs_content>.tab-pane").each(function (
             index,
             element
         ) {
@@ -655,9 +667,10 @@ $(function() {
     });
 
     // Button show/hide video
-    $(".videoWrapper video").trigger("pause");
+    $(".videoWrapper video, .videoWrapper iframe").trigger("pause");
+    iFramePausePlay('videoWrapper', 'pause');
 
-    $(document).on("click", "button.show_video, button.hide_video", function() {
+    $(document).on("click", "button.show_video, button.hide_video", function () {
         if ($(this).hasClass("show_video")) {
             $(this).hide();
             $("button.hide_video").show();
@@ -670,7 +683,8 @@ $(function() {
         } else {
             $(this).hide();
             $("button.show_video").show();
-            $(".videoWrapper video").trigger("pause");
+            $(".videoWrapper video, .videoWrapper iframe").trigger("pause");
+            iFramePausePlay('videoWrapper', 'pause');
             $(".videoWrapper")
                 .hide()
                 .removeClass("stuck");
@@ -687,14 +701,23 @@ $(function() {
     });
 
     // $('button.hide_video').click();
-
-    $(".videoWrapper video").on("play", function() {
+    $(".videoWrapper video, .videoWrapper iframe").on("play", function () {
         $(".under_tabs_video_card video").trigger("pause");
+        iFramePausePlay('under_tabs_video_card', 'pause');
     });
 
-    $(".under_tabs_video_card video").on("play", function() {
+    // $('.videoWrapper iframe').contents().find('video').on("play", function () {
+    //     iFramePausePlay('under_tabs_video_card', 'pause');
+    // });
+
+    $(".under_tabs_video_card video, .under_tabs_video_card iframe").on("play", function () {
         $(".videoWrapper video").trigger("pause");
+        iFramePausePlay('videoWrapper', 'pause');
     });
+
+    // $('.under_tabs_video_card iframe').contents().find('video').on("play", function () {
+    //     iFramePausePlay('videoWrapper', 'pause');
+    // });
 
     /*Floating js Start*/
     var windows = jQuery(window);
@@ -706,7 +729,7 @@ $(function() {
     iframeWrap.height(iframeHeight);
     iframe.addClass("stuck");
 
-    windows.on("scroll", function() {
+    windows.on("scroll", function () {
         // console.log($(this).scrollTop());
         if ($(this).scrollTop() >= 500) {
             if (
@@ -740,7 +763,7 @@ $(function() {
 
     // QUIZ Language Switch
     $(".en_label").attr("style", "display: none !important;");
-    $(document).on("change", ".quiz_lang_switch input", function() {
+    $(document).on("change", ".quiz_lang_switch input", function () {
         // console.log($(this).is(":checked"));
         // See in English
         if ($(this).is(":checked")) {

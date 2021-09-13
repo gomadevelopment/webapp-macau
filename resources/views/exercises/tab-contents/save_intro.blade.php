@@ -37,7 +37,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
         <div class="card-body">
-            <div class="form-group">
+            <div class="form-group mb-0">
                 <form action=""></form>
                 <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
                     title="Insira aqui o vídeo/audio/imagem a apresentar ao longo de todo o Exercício." 
@@ -50,6 +50,16 @@
                             Arraste e solte os seus ficheiros aqui 
                         </div>
                     </div>
+                </div>
+                <div class="form-group mb-0 text-center">
+                    <label class="label_title text-center" for="" style="font-size: 18px;">
+                        OU
+                    </label>
+                    <input type="text" name="external_media_files" id="external_media_files" class="form-control p-1" style="height: auto !important; font-size: 14px;"
+                        value="{{ old('external_media_files', $exercise->medias && $exercise->medias->media_type == 'external_video' ? $exercise->medias->media_url : '') }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
+                    <p class="mb-0" style="color: black; word-break: break-all">
+                        Exemplo: "https://www.youtube.com/embed/ujPlg-gl3fo"
+                    </p>
                 </div>
             </div>
         </div>

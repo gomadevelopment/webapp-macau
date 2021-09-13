@@ -256,20 +256,24 @@
                         @endif
 
                         @if($exame->medias)
-                            <div class="row mb-3 under_tabs_video_card">
+                            <div class="row mb-3 under_tabs_video_card" id="under_tabs_video_card">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="card-body">
 
                                         <div class="row" style="place-content: center;">
-                                            <div class="form-group m-2">
+                                            <div class="form-group m-2 w-100">
                                                 @if($exame->medias && strpos($exame->medias->media_type, 'audio') !== false)
                                                     <audio controls="true" name="media" controlsList="nodownload" width="100%" height="100%" style="background-color: transparent;">
                                                         <source src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                                                         </audio>                                
-                                                @elseif ($exame->medias && strpos($exame->medias->media_type, 'video') !== false)
+                                                @elseif ($exame->medias && strpos($exame->medias->media_type, 'video/') !== false)
                                                     <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
                                                         <source src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" type="{{ $exame->medias->media_type }}">
                                                     </video>
+                                                @elseif ($exame->medias && $exame->medias->media_type === 'external_video')
+                                                    <iframe width="100%" height="100%" src="{{ $exame->medias->media_url . '?enablejsapi=1&version=3' }}" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                                                        style="min-height: 500px;">
+                                                    </iframe>
                                                 @elseif ($exame->medias && strpos($exame->medias->media_type, 'image') !== false)
                                                     <img src="{{ '/webapp-macau-storage/exercises/'.$exame->exercise->id.'/medias/'. $exame->medias->media_url }}" alt=""
                                                     style="height: -webkit-fill-available;">
@@ -420,12 +424,17 @@
 </button>
 
 @if($exercise->medias)
-    <div class="videoWrapper stuck">
+    <div class="videoWrapper stuck" id="videoWrapper">
         <div>
-            <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
-                <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
-                    type="{{ $exercise->medias->media_type }}">
-            </video>
+            @if($exercise->medias->media_type == "external_video")
+                <iframe width="100%" height="240px" src="{{ $exercise->medias->media_url . '?enablejsapi=1&version=3' }}" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            @else
+                <video controls="true" autoplay="false" name="media" width="100%" height="240px" style="background-color: black;">
+                    <source src="{{ '/webapp-macau-storage/exercises/'.$exercise->id.'/medias/'.$exercise->medias->media_url }}" 
+                        type="{{ $exercise->medias->media_type }}">
+                </video>
+           @endif 
         </div>
     </div>
 @endif
@@ -443,7 +452,7 @@
     <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.0"></script>
 
     <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.0"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.1"></script>
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 
