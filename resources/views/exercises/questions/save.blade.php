@@ -825,6 +825,12 @@
 
                 html.find("[name^='corr_category_question_']").attr('name', 'corr_category_question_'+question_number);
                 html.find("[id^='corr_category_question_']").attr('id', 'corr_category_question_'+question_number);
+
+                html.find("[name^='corr_categoryQuestion_file_button_']").attr('name', 'corr_categoryQuestion_file_button_'+question_number);
+                html.find("[id^='corr_categoryQuestion_file_button_']").attr('id', 'corr_categoryQuestion_file_button_'+question_number);
+
+                html.find("[name^='corr_categoryQuestion_file_input_']").attr('name', 'corr_categoryQuestion_file_input_'+question_number);
+                html.find("[id^='corr_categoryQuestion_file_input_']").attr('id', 'corr_categoryQuestion_file_input_'+question_number);
                 
                 // Change answers names and ids
                 var answer_number = parseInt(html.find("[id^='corr_category_answer_']")[0].id.match(/\d+/)[0]);
@@ -838,6 +844,63 @@
 
                 $(paste_before).before(html);
             });
+            // Fill options TEXT WORDS Media upload and preview script
+            $(document).on('click', "[id^='corr_categoryQuestion_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="corr_categoryQuestion_file_input_'+id_index+'" id="corr_categoryQuestion_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#corr_categoryQuestion_file_input_' + id_index).click();
+
+                $('#corr_categoryQuestion_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#corr_categoryQuestion_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#corr_categoryQuestion_file_input_" + id_index);
+
+                            $('#corr_categoryQuestion_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            });
+
             // Clone new Correspondence Category ANSWER ONLY
             $(document).on('click', '.button_add_category_answer', function(e){
                 e.preventDefault();
@@ -1239,12 +1302,74 @@
 
                 html.find("[id^='selects_row_text_words_']").attr('id', 'selects_row_text_words_'+new_index);
 
+                html.find("[name^='fill_textWord_file_button_']").attr('name', 'fill_textWord_file_button_'+new_index);
+                html.find("[id^='fill_textWord_file_button_']").attr('id', 'fill_textWord_file_button_'+new_index);
+
+                html.find("[name^='fill_textWord_file_input_']").attr('name', 'fill_textWord_file_input_'+new_index);
+                html.find("[id^='fill_textWord_file_input_']").attr('id', 'fill_textWord_file_input_'+new_index);
+
                 html = html.clone();
 
                 $(paste_before).before(html);
 
                 // applyCKEditor('fill_text_word_' + new_index);
                 
+            });
+            // Fill options TEXT WORDS Media upload and preview script
+            $(document).on('click', "[id^='fill_textWord_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="fill_textWord_file_input_'+id_index+'" id="fill_textWord_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#fill_textWord_file_input_' + id_index).click();
+
+                $('#fill_textWord_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#fill_textWord_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#fill_textWord_file_input_" + id_index);
+
+                            $('#fill_textWord_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
             });
             // Generate multiple selects on KEYUP
             $(document).on('keyup', '[id^="fill_text_word_"]', function(e){
@@ -1533,10 +1658,72 @@
                 html.find("[name^='differences_solution_']").attr('name', 'differences_solution_'+new_index);
                 html.find("[id^='differences_solution_']").attr('id', 'differences_solution_'+new_index);
 
+                html.find("[name^='differences_file_button_']").attr('name', 'differences_file_button_'+new_index);
+                html.find("[id^='differences_file_button_']").attr('id', 'differences_file_button_'+new_index);
+
+                html.find("[name^='differences_file_input_']").attr('name', 'differences_file_input_'+new_index);
+                html.find("[id^='differences_file_input_']").attr('id', 'differences_file_input_'+new_index);
+
                 html = html.clone();
 
                 $(paste_before).after(html);
                 
+            });
+            // Differences Differences Media upload and preview script
+            $(document).on('click', "[id^='differences_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="differences_file_input_'+id_index+'" id="differences_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#differences_file_input_' + id_index).click();
+
+                $('#differences_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#differences_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap button-wrap-2 ml-auto mt-1 mb-1\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#differences_file_input_" + id_index);
+
+                            $('#differences_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
             });
 
             // Clone new Differences Find Words
@@ -1619,11 +1806,74 @@
                 html.find("[name^='split_preview_']").attr('name', 'split_preview_'+new_index);
                 html.find("[id^='split_preview_']").attr('id', 'split_preview_'+new_index);
 
+                html.find("[name^='split_file_button_']").attr('name', 'split_file_button_'+new_index);
+                html.find("[id^='split_file_button_']").attr('id', 'split_file_button_'+new_index);
+
+                html.find("[name^='split_file_input_']").attr('name', 'split_file_input_'+new_index);
+                html.find("[id^='split_file_input_']").attr('id', 'split_file_input_'+new_index);
+
                 html = html.clone();
 
                 $(paste_before).append(html);
                 
             });
+            // automatic content - split Media upload and preview script
+            $(document).on('click', "[id^='split_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="split_file_input_'+id_index+'" id="split_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#split_file_input_' + id_index).click();
+
+                $('#split_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#split_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap ml-auto\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#split_file_input_" + id_index);
+
+                            $('#split_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            });
+
             // Preview split text on key up
             $(document).on('keyup', "[id^='split_textarea_']", function(e){
                 var textarea_id = parseInt($(this)[0].id.match(/\d+/)[0]);

@@ -77,8 +77,6 @@ class QuestionsController extends Controller
 
         $inputs = request()->all();
 
-        // dd($inputs);
-
         $rules = [];
 
         if($question_id){
@@ -104,7 +102,6 @@ class QuestionsController extends Controller
 
         $validator = \Validator::make($inputs, $rules, Question::$messages);
 
-        // dd($validator);
         if ($validator->fails()) {
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
             return response()->json([
@@ -113,7 +110,6 @@ class QuestionsController extends Controller
                 'message' => 'Ocorreu um erro ao criar/editar a questão. Por favor, verifique os erros no formulário.'
             ]);
         }
-        // dd($inputs);
         DB::beginTransaction();
         try {
 
@@ -122,10 +118,8 @@ class QuestionsController extends Controller
             $question = $question_id ? Question::find($question_id) : new Question();
 
             $question->switchQuestionType($exercise, $inputs);
-
         } catch (\Exception $e) {
             DB::rollback();
-            // dd($e);
             request()->session()->flash('error', 'Ocorreu um erro ao criar/editar a questão. Por favor, tente de novo!');
             return response()->json([
                 'status' => 'error',
@@ -168,7 +162,6 @@ class QuestionsController extends Controller
             Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$question->id);
             $question->delete();
         }catch (\Exception $e) {
-            // dd($e);
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => 'Ocorreu um erro ao apagar esta questão. Por favor, tente de novo!'], 200);
         }

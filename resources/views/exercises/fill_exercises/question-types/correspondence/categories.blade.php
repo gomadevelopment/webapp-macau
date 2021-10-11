@@ -118,9 +118,16 @@
             @foreach ($question->question_items as $item)
                 
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group mb-0 mt-3">
+                    <div class="form-group mb-0 mt-3 align-items-center d-inline-flex">
                         <label class="label_title mb-0 d-block">
                             {{ $item->text_1 }} </label>
+                        @if($item->question_item_media)
+                            @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                                <audio controls class="ml-3 align-self-center" style="max-width: 300px;">
+                                    <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                                </audio>
+                            @endif
+                        @endif
                     </div>
                 </div>
 
@@ -181,7 +188,7 @@
 
 {{-- SOLUTIONS --}}
 
-@if ($exame_review && ($question->classification != $question->avaliation_score))
+@if (($exame_review && ($question->classification != $question->avaliation_score)) || ($question->classification == 0 && $question->avaliation_score == 0))
 
     <hr class="mt-4 mb-4">
 
@@ -196,9 +203,16 @@
         @foreach ($question->question_items as $item)
         
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="form-group mb-0 mt-3">
+                <div class="form-group mb-0 mt-3 align-items-center d-inline-flex">
                     <label class="label_title mb-0 d-block">
                         {{ $item->text_1 }} </label>
+                    @if($item->question_item_media)
+                        @if(explode('/', $item->question_item_media->media_type)[0] == 'audio')
+                            <audio controls class="ml-3 align-self-center" style="max-width: 300px;">
+                                <source src="{{ '/webapp-macau-storage/student_exames/'.$exame->student_id.'/exame/'.$exame->id.'/questions/'.$question->id.'/question_item/'.$item->id.'/'.$item->question_item_media->media_url }}" type="{{ $item->question_item_media->media_type }}">
+                            </audio>
+                        @endif
+                    @endif
                 </div>
             </div>
 

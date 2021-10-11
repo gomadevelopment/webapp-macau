@@ -43,10 +43,48 @@
                                     <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
                                         <textarea class="form-control" name="differences_text_{{$loop->index}}" id="differences_text_{{$loop->index}}" cols="30" rows="5" placeholder="">{{$question_item->text_1}}</textarea>
                                     </div>
-                                    <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
+
+                                    <div class="d-block float-right text-center ml-auto">
+                                        <a href="#" id="differences_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit button-wrap-2 ml-auto mt-1 mb-1" 
+                                            style="float: none; padding: 16px 20px; margin-left: 15px; display: {{$question_item->question_item_media ? 'none' : 'inline-block'}};">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Associar Media
+                                        </a>
+
+
+                                        @if($question_item->question_item_media)
+                                            <input type="text" name="differences_file_input_{{$loop->index}}" id="differences_file_input_{{$loop->index}}" hidden
+                                                value="from_storage_{{ $question_item->id }}">
+                                            @if(explode('/', $question_item->question_item_media->media_type)[0] == 'audio')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg"; ?>
+                                            @elseif(explode('/', $question_item->question_item_media->media_type)[0] == 'video')
+                                                <?php $preview_image_src = "/assets/backoffice_assets/icons/Video_Icon.svg"; ?>
+                                            @else
+                                                <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url; ?>
+                                            @endif
+                                            <a class="btn btn-theme remove_button associate_media_preview button-wrap button-wrap-2 ml-auto mt-1 mb-1"
+                                                data-toggle="tooltip" 
+                                                data-html="true"
+                                                title='<img src="{{ $preview_image_src }}" 
+                                                title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2" style="width: 100%;">'>
+                                                <img src="{{ $preview_image_src }}" 
+                                                title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
+                                                <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
+                                                <img class="associate_media_thumbnail_remove" id="corr_image_file_remove_{{$loop->index}}" src="/assets/backoffice_assets/icons/Cross.svg">
+                                            </a>
+                                        @endif
+                                        <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
+
+
+                                        <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option mt-1 mb-1" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            Remover
+                                        </a>
+                                    </div>
+                                    {{-- <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Remover
-                                    </a>
+                                    </a> --}}
                                 </div>
                                 <div class="col-12">
                                     <label class="label_title mb-0 solution_number">
@@ -77,10 +115,16 @@
                                 <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
                                     <textarea class="form-control" name="differences_text_0" id="differences_text_0" cols="30" rows="5" placeholder=""></textarea>
                                 </div>
-                                <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                                    Remover
-                                </a>
+                                <div class="d-block float-right text-center ml-auto">
+                                    <a href="#" id="differences_file_button_0" class="btn search-btn button-wrap comment_submit button-wrap-2 ml-auto mt-1 mb-1" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Associar Media
+                                    </a>
+                                    <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option mt-1 mb-1" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Remover
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <label class="label_title mb-0 solution_number">
@@ -212,10 +256,16 @@
                         <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
                             <textarea class="form-control" name="differences_text_{{$loop->index}}" id="differences_text_{{$loop->index}}" cols="30" rows="5" placeholder=""></textarea>
                         </div>
-                        <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                            Remover
-                        </a>
+                        <div class="d-block float-right text-center ml-auto">
+                            <a href="#" id="differences_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit button-wrap-2 ml-auto mt-1 mb-1" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Associar Media
+                            </a>
+                            <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option mt-1 mb-1" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                Remover
+                            </a>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label class="label_title mb-0 solution_number">
@@ -247,10 +297,16 @@
                 <div class="p-3" style="background-color: #f1f6f9; border-radius: 10px; box-shadow: 0 13px 26px 13px rgba(0, 0, 0, 0.01);width: -webkit-fill-available;">
                     <textarea class="form-control" name="differences_text_0" id="differences_text_0" cols="30" rows="5" placeholder=""></textarea>
                 </div>
-                <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                    Remover
-                </a>
+                <div class="d-block float-right text-center ml-auto">
+                    <a href="#" id="differences_file_button_0" class="btn search-btn button-wrap comment_submit button-wrap-2 ml-auto mt-1 mb-1" style="float: none; padding: 16px 20px; margin-left: 15px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        Associar Media
+                    </a>
+                    <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_fill_option mt-1 mb-1" style="float: none; padding: 16px 20px; white-space: nowrap;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        Remover
+                    </a>
+                </div>
             </div>
             <div class="col-12">
                 <label class="label_title mb-0 solution_number">

@@ -106,7 +106,6 @@ class ExamesController extends Controller
 
         $exercise = Exercise::find($exercise_id);
         $exame = Exame::find($inputs['exame_id']);
-        // dd($exercise, $exame);
         $student = auth()->user();
         $has_questions = true;
 
@@ -122,13 +121,8 @@ class ExamesController extends Controller
             if(isset($student_exercise_submition_info[3]) && $student_exercise_submition_info[3] == 'no_questions'){
                 $has_questions = false;
             }
-
-            // dd($score, $teacher_correction);
-
         } catch (\Exception $e) {
-            // dd($e);
             DB::rollback();
-
             return response()->json([
                 'status' => 'error',
                 'conclusion_time' => date('d/m/Y'),
@@ -155,17 +149,14 @@ class ExamesController extends Controller
         if($inputs['to_update'] == 'pause_start'){
             if(!$exame->pause_start_timestamp){
                 $exame->pause_start_timestamp = $inputs['to_update_timestamp'];
-                // $exame->pause_start_timestamp = date('Y-m-d H:i:s');
             }
         }
         else if($inputs['to_update'] == 'pause_end'){
             if($exame->pause_start_timestamp){
                 $exame->pause_end_timestamp = $inputs['to_update_timestamp'];
-                // $exame->pause_end_timestamp = date('Y-m-d H:i:s');
             }
         }
         $exame->save();
-        // dd($inputs, request()->all(), $exame_id);
     }
 
     public function profCorrectionExameGet($exame_id, $student_id)
@@ -226,8 +217,6 @@ class ExamesController extends Controller
 
         $inputs = request()->all();
 
-        // dd($inputs);
-
         $exame = Exame::find($exame_id);
 
         $student = User::find($student_id);
@@ -243,11 +232,9 @@ class ExamesController extends Controller
             $exame->professorExameCorrection($inputs);
         }
         catch (\Exception $e) {
-            dd($e);
             DB::rollback();
             return response()->json([
                 'status' => 'error',
-                // 'conclusion_time' => date('d/m/Y'),
                 'message' => 'Ocorreu um erro ao guardar a correção deste exame. Por favor, atualize a página e tente de novo.'
             ]);
         }

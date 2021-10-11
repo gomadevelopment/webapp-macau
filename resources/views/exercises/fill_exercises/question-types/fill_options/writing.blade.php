@@ -133,7 +133,7 @@
 </div>
 
 {{-- SOLUTIONS --}}
-@if ($exame_review && ($question->classification != $question->avaliation_score))
+@if (($exame_review && ($question->classification != $question->avaliation_score)) || ($question->classification == 0 && $question->avaliation_score == 0))
 
     <hr class="mt-4 mb-4">
 

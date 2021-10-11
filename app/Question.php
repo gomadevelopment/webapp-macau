@@ -106,7 +106,7 @@ class Question extends Model
     public static function myModelsWithFilters($filters = [])
     {
         $query = self::orderBy('created_at', 'asc')->where('reference', '!=', null);
-        // dd($filters);
+
         $query = $query->whereHas('exercise', function($q) {
             return $q->where('exercises.user_id', auth()->user()->id);
         });
@@ -138,8 +138,6 @@ class Question extends Model
             $exercises[] = $question->exercise;
         }
 
-        // dd(collect($exercises)->unique()->count());
-
         return collect($exercises)->unique();
     }
 
@@ -157,9 +155,6 @@ class Question extends Model
                 case 6:
                     $inputs['question_subtype'] = 10;
                     break;
-                // case 7:
-                //     $inputs['question_subtype'] = 11;
-                //     break;
                 case 8:
                     $inputs['question_subtype'] = 12;
                     break;
@@ -388,18 +383,21 @@ class Question extends Model
         }
 
         else if($this->question_subtype_id == 4){
-
-            foreach($this->question_items as $question_item){
-                // $question_item->question_item_media->delete();
-                $question_item->delete();
-            }
             
             foreach($input_indexes as $question_key => $answers_array){
 
-                $question_item = QuestionItem::create([
-                    'question_id' => $this->id,
-                    'text_1' => $inputs['corr_category_question_'.$question_key]
-                ]);
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$question_key])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$question_key]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['corr_category_question_'.$question_key];
+                $question_item->save();
+
                 $options_count = 1;
                 foreach($answers_array as $answer_index){
                     $option = "options_".$options_count;
@@ -407,6 +405,40 @@ class Question extends Model
                     $question_item->options_number = $options_count;
                     $question_item->save();
                     $options_count++;
+                }
+
+                if(isset($inputs['corr_categoryQuestion_file_input_'.$question_key])){
+                    if(strpos($inputs['corr_categoryQuestion_file_input_'.$question_key], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['corr_categoryQuestion_file_input_'.$question_key])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['corr_categoryQuestion_file_input_'.$question_key];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
                 }
             }
 
@@ -471,16 +503,20 @@ class Question extends Model
 
         else if($this->question_subtype_id == 6){
 
-            foreach($this->question_items as $question_item){
-                // $question_item->question_item_media->delete();
-                $question_item->delete();
-            }
-
             foreach ($input_indexes as $word_key => $selects_array) {
-                $question_item = QuestionItem::create([
-                    'question_id' => $this->id,
-                    'text_1' => $inputs['fill_text_word_'.$word_key]
-                ]);
+
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$word_key])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$word_key]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['fill_text_word_'.$word_key];
+                $question_item->save();
+
                 $options_count = 1;
                 foreach($selects_array as $select_index){
                     $option = "options_".$options_count;
@@ -498,6 +534,40 @@ class Question extends Model
                     $question_item->options_number = $options_count;
                     $question_item->save();
                     $options_count++;
+                }
+
+                if(isset($inputs['fill_textWord_file_input_'.$word_key])){
+                    if(strpos($inputs['fill_textWord_file_input_'.$word_key], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['fill_textWord_file_input_'.$word_key])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['fill_textWord_file_input_'.$word_key];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
                 }
             }
         }
@@ -780,17 +850,57 @@ class Question extends Model
         // dd($inputs, $input_indexes, $this);
 
         if($this->question_subtype_id == 11){
-            foreach($this->question_items as $question_item){
-                $question_item->delete();
+
+            foreach ($input_indexes as $index) {
+
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$index])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$index]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['differences_text_'.$index];
+                $question_item->text_2 = $inputs['differences_solution_'.$index];
+                $question_item->save();
+
+                if(isset($inputs['differences_file_input_'.$index])){
+                    if(strpos($inputs['differences_file_input_'.$index], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['differences_file_input_'.$index])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['differences_file_input_'.$index];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
+                }
             }
-            
-            foreach($input_indexes as $index){
-                QuestionItem::create([
-                    'question_id' => $this->id,
-                    'text_1' => $inputs['differences_text_'.$index],
-                    'text_2' => $inputs['differences_solution_'.$index]
-                ]);
-            }
+
         }
 
         if($this->question_subtype_id == 19){
@@ -851,16 +961,54 @@ class Question extends Model
     {
         $input_indexes = self::inputIndexes($inputs, $this->question_subtype_id, $bool_same_type_and_subtype);
 
-        foreach($this->question_items as $question_item){
-            $question_item->delete();
-        }
-        
-        foreach($input_indexes as $index){
-            QuestionItem::create([
-                'question_id' => $this->id,
-                'text_1' => $inputs['split_textarea_'.$index]
-            ]);
-        }
+        foreach ($input_indexes as $index) {
+
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$index])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$index]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['split_textarea_'.$index];
+                $question_item->save();
+
+                if(isset($inputs['split_file_input_'.$index])){
+                    if(strpos($inputs['split_file_input_'.$index], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['split_file_input_'.$index])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['split_file_input_'.$index];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
+                }
+            }
     }
 
     public function assortmentQuestionType($inputs, $bool_same_type_and_subtype)
@@ -1160,6 +1308,18 @@ class Question extends Model
                     }
                 }
             }
+
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index => $array){
+                if(isset($inputs['corr_categoryQuestion_file_input_'.$index]) && strpos($inputs['corr_categoryQuestion_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['corr_categoryQuestion_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
+                }
+            }
+
         }
 
         // FILL OPTIONS
@@ -1196,6 +1356,17 @@ class Question extends Model
                             
                         }
                     }
+                }
+            }
+
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index => $array){
+                if(isset($inputs['fill_textWord_file_input_'.$index]) && strpos($inputs['fill_textWord_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['fill_textWord_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
                 }
             }
         }
@@ -1323,6 +1494,17 @@ class Question extends Model
                     $input_indexes[] = explode('_', $key)[2];
                 }
             }
+
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index){
+                if(isset($inputs['differences_file_input_'.$index]) && strpos($inputs['differences_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['differences_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
+                }
+            }
         }
         // Find Words
         else if($question_subtype == 19){
@@ -1348,6 +1530,16 @@ class Question extends Model
             foreach ($inputs as $key => $value) {
                 if (strpos($key, 'split_textarea_') === 0) {
                     $input_indexes[] = explode('_', $key)[2];
+                }
+            }
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index){
+                if(isset($inputs['split_file_input_'.$index]) && strpos($inputs['split_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['split_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
                 }
             }
         }

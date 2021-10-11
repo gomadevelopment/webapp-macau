@@ -236,6 +236,36 @@
                                 </div>
                                 <div class="col col-wrap d-flex mb-3">
                                     <input name="corr_category_question_{{$loop->index}}" id="corr_category_question_{{$loop->index}}" value="{{$question_item->text_1}}" type="text" class="form-control" placeholder="Questão...">
+
+                                    <a href="#" id="corr_categoryQuestion_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
+                                        style="float: none; padding: 16px 20px; margin-left: 15px; display: {{$question_item->question_item_media ? 'none' : 'inline-block'}}; white-space: nowrap;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        Associar Media
+                                    </a>
+                                    @if($question_item->question_item_media)
+                                        <input type="text" name="corr_categoryQuestion_file_input_{{$loop->index}}" id="corr_categoryQuestion_file_input_{{$loop->index}}" hidden
+                                            value="from_storage_{{ $question_item->id }}">
+                                        @if(explode('/', $question_item->question_item_media->media_type)[0] == 'audio')
+                                            <?php $preview_image_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg"; ?>
+                                        @elseif(explode('/', $question_item->question_item_media->media_type)[0] == 'video')
+                                            <?php $preview_image_src = "/assets/backoffice_assets/icons/Video_Icon.svg"; ?>
+                                        @else
+                                            <?php $preview_image_src = '/webapp-macau-storage/questions/'.$question->id.'/question_item/'.$question_item->id.'/'.$question_item->question_item_media->media_url; ?>
+                                        @endif
+                                        <a class="btn btn-theme remove_button associate_media_preview button-wrap"
+                                            data-toggle="tooltip" 
+                                            data-html="true"
+                                            title='<img src="{{ $preview_image_src }}" 
+                                            title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2" style="width: 100%;">'>
+                                            <img src="{{ $preview_image_src }}" 
+                                            title="{{ $question_item->question_item_media->media_url }}" class="associate_media_thumbnail_img mr-2">
+                                            <span class="associate_media_thumbnail_title">{{ $question_item->question_item_media->media_url }}</span>
+                                            <img class="associate_media_thumbnail_remove" id="corr_image_file_remove_{{$loop->index}}" src="/assets/backoffice_assets/icons/Cross.svg">
+                                        </a>
+                                    @endif
+                                    <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
+
+
                                     <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                         <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Remover
@@ -285,6 +315,10 @@
                             </div>
                             <div class="col col-wrap d-flex mb-3">
                                 <input name="corr_category_question_0" id="corr_category_question_0" type="text" class="form-control" placeholder="Questão...">
+                                <a href="#" id="corr_categoryQuestion_file_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    Associar Media
+                                </a>
                                 <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                                     <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
@@ -405,40 +439,6 @@
 
 <div class="add_correspondence_categories_clone" hidden>
     <div class="mt-4 mb-3 hr_row"><hr></div>
-    {{-- <div class="row_to_remove row mb-0 align-items-center questions_row">
-        <div class="col-12">
-            <label class="label_title question_number">
-                <span>Categoria/Frase 1</span>
-            </label>
-        </div>
-        <div class="col col-wrap d-flex mb-3">
-            <input name="corr_category_question_0" id="corr_category_question_0" type="text" class="form-control" placeholder="Questão...">
-            <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                Remover
-            </a>
-        </div>
-    </div>
-    <div class="row mb-3 align-items-center pl-3 answers_row">
-        <div class="col-12 mb-1">
-            <label class="label_title m-0" style="font-size: 18px;">
-                <span>Frases</span> 
-            </label>
-        </div>
-        <div class="row_to_remove col col-wrap d-flex mb-3">
-            <input name="corr_category_answer_0_question_0" id="corr_category_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
-            <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_multiple_choice_answer" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
-                Remover
-            </a>
-        </div>
-        <div class="col-12">
-            <a href="#" id="add_corr_category_question_0_answer_1" class="btn search-btn comment_submit button_add_category_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
-                Adicionar
-            </a>
-        </div>
-    </div> --}}
     @if (isset($question->id) && $question->question_subtype_id == 4)
         @foreach ($question->question_items as $question_item)
             @if ($loop->last)
@@ -451,6 +451,10 @@
                     </div>
                     <div class="col col-wrap d-flex mb-3">
                         <input name="corr_category_question_{{$loop->index}}" id="corr_category_question_{{$loop->index}}" type="text" class="form-control" placeholder="Questão...">
+                        <a href="#" id="corr_categoryQuestion_file_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            Associar Media
+                        </a>
                         <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                             <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
@@ -491,6 +495,10 @@
             </div>
             <div class="col col-wrap d-flex mb-3">
                 <input name="corr_category_question_0" id="corr_category_question_0" type="text" class="form-control" placeholder="Questão...">
+                <a href="#" id="corr_categoryQuestion_file_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; margin-left: 15px; white-space: nowrap;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    Associar Media
+                </a>
                 <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
                     <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Remover
