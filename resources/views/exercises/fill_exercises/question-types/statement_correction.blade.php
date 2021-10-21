@@ -66,7 +66,7 @@
 
 {{-- SOLUTIONS --}}
 
-@if (($exame_review && ($question->classification != $question->avaliation_score)) || ($question->classification == 0 && $question->avaliation_score == 0))
+@if (($exame_review && ($question->classification != $question->avaliation_score)) || ($exame_review && $question->classification == 0 && $question->avaliation_score == 0))
 
     <hr class="mt-4 mb-4">
 
