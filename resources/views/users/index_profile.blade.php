@@ -2,10 +2,10 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.1">
 
 <link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
@@ -264,6 +264,31 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label for="" class="label_title" style="font-size: 18px;">Questões de Auto-Reflexão</label>
+                                                <div class="low_z_index">
+                                                    <select name="performance_quiz_inquiries" id="performance_quiz_inquiries" class="form-control" placeholder="Seleccione a sua questão...">
+                                                        <option value="">Seleccione a sua questão...</option>
+                                                        <optgroup label="PT">
+                                                            @foreach ($inquiries as $inquiry)
+                                                                <option value="{{ $inquiry->id }}">{{ $inquiry->question }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                        <optgroup label="EN">
+                                                            @foreach ($inquiries as $inquiry)
+                                                                <option value="{{ $inquiry->id }}">{{ $inquiry->question_en }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                        <optgroup label="CNN">
+                                                            @foreach ($inquiries as $inquiry)
+                                                                <option value="{{ $inquiry->id }}">{{ $inquiry->question_cnn }}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                         {{-- <div class="col-sm-12 col-md-6 col-lg-6">
                                             <div class="form-group">
                                                 <label for="" class="label_title" style="font-size: 18px;">Legenda</label>
@@ -314,20 +339,20 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.1"></script>
 
     <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'))}}"></script>
     <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'))}}"></script>
 
     {{-- HighCharts --}}
-    <script src="https://code.highcharts.com/highcharts.js?v=2.0"></script>
-    <script src="https://code.highcharts.com/modules/data.js?v=2.0"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js?v=2.0"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js?v=2.0"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js?v=2.0"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.0"></script>
+    <script src="https://code.highcharts.com/highcharts.js?v=2.1"></script>
+    <script src="https://code.highcharts.com/modules/data.js?v=2.1"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js?v=2.1"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js?v=2.1"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js?v=2.1"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.1"></script>
 
     <!-- Additional files for the Highslide popup effect -->
     {{-- <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>
@@ -411,6 +436,18 @@
                             format: '{value}',
                             style: {
                                 color: '#ff9b20'
+                            }
+                        },
+                        tickInterval: 1,
+                    },
+                    { // Auto Reflexão yAxis
+                        title: false,
+                        min: 1,
+                        max: 6,
+                        labels: {
+                            format: '{value}',
+                            style: {
+                                color: '#ff2850'
                             }
                         },
                         tickInterval: 1,
@@ -532,13 +569,29 @@
                 var performance_data_array = [];
                 var evaluation_data_array = [];
                 var anxiety_data_array = [];
+                var inquiries_data_array = [];
+                var inquiry_id;
 
                 user_exercises.forEach((exercise, index) => {
 
                     performance_data_array.push([exercise.exercise.title, parseFloat(exercise.performance)]);
                     evaluation_data_array.push([exercise.exercise.title, parseFloat(exercise.classification_median)]);
                     anxiety_data_array.push([exercise.exercise.title, parseFloat(exercise.anxiety_median)]);
-                    
+
+                    inquiry_id = $('#performance_quiz_inquiries').val();
+                    if(inquiry_id){
+
+                        exercise.inquiries.forEach((inquiry, index) => {
+                            if(inquiry_id == inquiry.inquirie_id){
+                                inquiries_data_array.push([exercise.exercise.title, parseFloat(inquiry.median)]);
+                            }
+                        });
+
+                        if($('button[aria-label="Show Questão de Auto-Reflexão"').attr('aria-pressed') == false){
+                            $('button[aria-label="Show Questão de Auto-Reflexão"').click();
+                        }
+
+                    }
                 });
 
                 var performance_data = {
@@ -546,19 +599,23 @@
                     data: performance_data_array,
                     color: '#795548'
                 };
-
                 var evaluation_data = {
                     name: 'Avaliação',
                     data: evaluation_data_array,
                     color: '#00b265',
                     yAxis: 1,
                 };
-
                 var anxiety_data = {
                     name: 'Ansiedade',
                     data: anxiety_data_array,
                     color: '#ff9b20',
                     yAxis: 2,
+                };
+                var inquiries_data = {
+                    name: 'Questão de Auto-Reflexão',
+                    data: inquiries_data_array,
+                    color: '#ff2850',
+                    yAxis: 3,
                 };
 
                 options2.xAxis.labels = {
@@ -574,7 +631,8 @@
                 options2.series = [
                     performance_data, 
                     evaluation_data,
-                    anxiety_data
+                    anxiety_data,
+                    inquiries_data
                 ];
 
                 options2.tooltip = {
@@ -597,7 +655,7 @@
             
             // FILTERS
 
-            $('#performance_filters_levels, #performance_filters_categories, #performance_filters_question_types').select2();
+            $('#performance_filters_levels, #performance_filters_categories, #performance_filters_question_types, #performance_quiz_inquiries').select2();
 
             $("#performance_filters_start_date, #performance_filters_end_date").datepicker({
                 format: "dd/mm/yyyy",

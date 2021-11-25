@@ -52,15 +52,26 @@
                     </div>
                 </div>
                 <div class="form-group mb-0 text-center">
+                    <label class="label_title text-center mb-0 mt-2" for="" style="font-size: 18px;">
+                        OU
+                    </label>
+                    <label class="label_title w-100">Youtube/Vimeo</label>
+                    <input type="text" name="external_media_files" id="external_media_files" class="form-control p-1" style="height: auto !important; font-size: 14px;"
+                        value="{{ old('external_media_files', $exercise->medias && $exercise->medias->media_type == 'external_video' ? $exercise->medias->media_url : '') }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
+                    <p class="mb-0 text-left" style="color: black; word-break: break-all">
+                        Exemplo: <br> "https://www.youtube.com/embed/ujPlg-gl3fo" OU <br> "https://player.vimeo.com/video/403530213"
+                    </p>
+                </div>
+                {{-- <div class="form-group mb-0 text-center">
                     <label class="label_title text-center" for="" style="font-size: 18px;">
                         OU
                     </label>
                     <input type="text" name="external_media_files" id="external_media_files" class="form-control p-1" style="height: auto !important; font-size: 14px;"
                         value="{{ old('external_media_files', $exercise->medias && $exercise->medias->media_type == 'external_video' ? $exercise->medias->media_url : '') }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
                     <p class="mb-0" style="color: black; word-break: break-all">
-                        Exemplo: "https://www.youtube.com/embed/ujPlg-gl3fo"
+                        Exemplo: "https://player.vimeo.com/video/403530213"
                     </p>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

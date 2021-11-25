@@ -43,10 +43,48 @@
                         @endif
                     {{-- No user logged in --}}
                     @else
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="#sobre">{{ isset($pt_lang) && $pt_lang ? 'Sobre' : 'About' }}</a></li>
-                        <li><a href="#como_funciona">{{ isset($pt_lang) && $pt_lang ? 'Como Funciona' : 'How it Works' }}</a></li>
-                        <li><a href="#contactos">{{ isset($pt_lang) && $pt_lang ? 'Contactos' : 'Contacts' }}</a></li>
+                        <li class="active">
+                            <a href="/">
+                                @if((isset($pt_lang) && $pt_lang) || isset($en_lang) && $en_lang)
+                                    Home
+                                @else
+                                    主頁
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#sobre">
+                                @if(isset($pt_lang) && $pt_lang)
+                                    Sobre
+                                @elseif(isset($en_lang) && $en_lang)  
+                                    About
+                                @else
+                                    關於
+                                @endif 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#como_funciona">
+                                @if(isset($pt_lang) && $pt_lang)
+                                    Como Funciona
+                                @elseif(isset($en_lang) && $en_lang)  
+                                    How it Works
+                                @else
+                                    如何操作本平台
+                                @endif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contactos">
+                                @if(isset($pt_lang) && $pt_lang)
+                                    Contactos
+                                @elseif(isset($en_lang) && $en_lang)  
+                                    Contacts
+                                @else
+                                    聯絡我們
+                                @endif
+                            </a>
+                        </li>
                     @endif
                     
                 </ul>
@@ -112,21 +150,43 @@
                         </li>
                     @else
                         <li class="login_click light">
-                            <a href="#" data-toggle="modal" data-target="#login">{{ isset($pt_lang) && $pt_lang ? 'Entrar' : 'Sign In' }}</a>
+                            <a href="#" data-toggle="modal" data-target="#login">
+                                @if(isset($pt_lang) && $pt_lang)
+                                    Entrar
+                                @elseif(isset($en_lang) && $en_lang)  
+                                    Sign In
+                                @else
+                                    登入
+                                @endif
+                            </a>
                         </li>
                         <li class="login_click theme-bg">
-                            <a href="#" data-toggle="modal" data-target="#signup">{{ isset($pt_lang) && $pt_lang ? 'Inscrever' : 'Sign Up' }}</a>
+                            <a href="#" data-toggle="modal" data-target="#signup">
+                                @if(isset($pt_lang) && $pt_lang)
+                                    Inscrever
+                                @elseif(isset($en_lang) && $en_lang)  
+                                    Sign Up
+                                @else
+                                    註冊
+                                @endif
+                            </a>
                         </li>
                     @endif
                     @if(Request::path() === '/' || stristr(Request::path(), 'redefinir_password') !== false)
-                        <li class="language_button ml-3 {{ isset($pt_lang) && $pt_lang ? 'active' : '' }}">
+                        <li class="language_button ml-4 {{ isset($pt_lang) && $pt_lang ? 'active' : '' }}">
                             <a href="/locale/pt">PT</a>
                         </li>
-                        <li class="language_slash">
-                            <a href="#">|</a>
+                        <li class="language_slash ml-1">
+                            <a href="#" style="padding: 30px 5px;">|</a>
                         </li>
-                        <li class="language_button {{ isset($en_lang) && $en_lang ? 'active' : '' }}">
+                        {{-- <li class="language_button ml-1 {{ isset($en_lang) && $en_lang ? 'active' : '' }}">
                             <a href="/locale/en">EN</a>
+                        </li>
+                        <li class="language_slash ml-1">
+                            <a href="#" style="padding: 30px 5px;">|</a>
+                        </li> --}}
+                        <li class="language_button ml-1 {{ isset($cnn_lang) && $cnn_lang ? 'active' : '' }}">
+                            <a href="/locale/cnn">CHN</a>
                         </li>
                     @endif
                 </ul>

@@ -66,9 +66,9 @@
                                     <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="">Remover
                                 </a>
                             @endif
-                            <a href="#" class="btn btn-theme share_button">
+                            {{-- <a href="#" class="btn btn-theme share_button">
                                 <img src="{{asset('/assets/backoffice_assets/icons/share.svg')}}" alt="">Partilhar
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="read_more">
                             <a href="/artigos/detalhe/{{ $article->id }}" class="">Ler mais <img src="{{asset('/assets/backoffice_assets/icons/Add.svg')}}" alt="" style="margin: -1px 10px 3px 5px;"></a>

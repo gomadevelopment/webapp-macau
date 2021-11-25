@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.1">
 
 @stop
 
@@ -179,13 +179,13 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.1"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.1"></script>
 
     <script>
 
@@ -413,7 +413,7 @@
                 maxFiles: 1,
                 thumbnailHeight: 120,
                 thumbnailWidth: 120,
-                // maxFilesize: 3,
+                maxFilesize: 200000000,
                 // filesizeBase: 1000,
                 init: function(e) {
                     this.on("maxfilesexceeded", function(file) {

@@ -26,7 +26,7 @@ class Controller extends BaseController
 
     public function setLocale($locale = 'pt')
     {
-        if (!in_array($locale, ['pt', 'en'])){
+        if (!in_array($locale, ['pt', 'en', 'cnn'])){
             $locale = 'pt';
         }
         \Session::put('locale', $locale);

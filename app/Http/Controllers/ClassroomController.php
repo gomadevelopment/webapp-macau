@@ -14,7 +14,8 @@ use App\User,
     App\Exame,
     App\ExerciseLevel,
     App\ExerciseCategory,
-    App\QuestionType;
+    App\QuestionType,
+    App\Inquiry;
 
 class ClassroomController extends Controller
 {
@@ -75,14 +76,16 @@ class ClassroomController extends Controller
             $categories = collect();
             $question_types_subtypes = collect();
             $user_exercises = collect();
+            $inquiries = collect();
         }
         else{
             $levels = ExerciseLevel::get();
             $categories = ExerciseCategory::get();
             $question_types_subtypes = QuestionType::with('subtypes')->get();
             $filters = ['class_id' => 0]; // Means All Classes
-            // dd(Exame::applyPerformanceFilters($filters));
             $user_exercises = Exame::applyPerformanceFilters($filters, 'by_class');
+            $inquiries = Inquiry::get();
+
         }
 
         return view('classroom.index', compact(
@@ -100,7 +103,8 @@ class ClassroomController extends Controller
             'levels', 
             'categories', 
             'question_types_subtypes', 
-            'user_exercises'
+            'user_exercises',
+            'inquiries'
         ));
     }
 

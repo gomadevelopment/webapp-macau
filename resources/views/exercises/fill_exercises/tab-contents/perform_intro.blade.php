@@ -76,12 +76,13 @@
                         
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label class="label_title mb-3 d-block" style="font-size: 26px;">
-                                    Enunciado</label>
+                                    
                                 <div class="d-flex float-left flex-column shop_grid_caption ml-0">
-                                    <div class="article_description m-0 mb-2" style="line-height: 25px; -webkit-line-clamp: unset;">
+                                    <div class="article_description m-0 mb-2" style="line-height: 25px; -webkit-line-clamp: unset;margin-right: auto !important;">
                                         @if($exame->statement)
-                                            {!! $exame->statement !!}
+                                            <a href="#" data-toggle="modal" data-target="#statement_modal" class="info_statement mt-2 btn search-btn comment_submit">
+                                                Enunciado
+                                            </a>
                                         @else
                                             (Sem Enunciado)
                                         @endif

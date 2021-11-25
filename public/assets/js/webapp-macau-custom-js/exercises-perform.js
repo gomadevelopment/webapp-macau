@@ -21,15 +21,30 @@ $(function () {
         iFramePausePlay('videoWrapper', 'pause');
     }
 
+    function checkForAllInquiries() {
+        var bool = true;
+        $(".rb:not(.anxiety_levels)").each(function (index, element) {
+            if (!$(element).find(".rb-tab-active").length) {
+                $(element).parent().parent().parent().css('border', '2px solid #ff2850');
+                bool = false;
+            }
+            else {
+                $(element).parent().parent().parent().css('border', '2px solid #e6ebf1');
+            }
+        });
+
+        return bool;
+    }
+
     $(document).on("click", "#finish_exercise_button", function (e) {
         // Deactivate finish_exercise_button
         $(this).attr("id", "");
 
-        $("#perform_exercise_form").hide();
-        $(".preloader.ajax").show();
-        $("html, body").animate({
-            scrollTop: "0px"
-        }, 300);
+        // $("#perform_exercise_form").hide();
+        // $(".preloader.ajax").show();
+        // $("html, body").animate({
+        //     scrollTop: "0px"
+        // }, 300);
 
         var exercise_id = $("#exercise_id_hidden").val();
         var exame_id = $("#exame_id").val();
@@ -37,6 +52,17 @@ $(function () {
         var formData = new FormData($("form#perform_exercise_form")[0]);
         formData.append("exame_id", exame_id);
 
+        if (!checkForAllInquiries()) {
+
+            $('body, html').animate({
+                scrollTop: $("#inquiries_card_body").offset().top - 90
+            }, 600);
+
+            return false;
+        }
+
+        console.log(checkForAllInquiries());
+        return false;
         // Inquiries
         var inquiries = new Array();
         $(".rb").each(function (index, element) {
@@ -771,19 +797,38 @@ $(function () {
 
     // QUIZ Language Switch
     $(".en_label").attr("style", "display: none !important;");
-    $(document).on("change", ".quiz_lang_switch input", function () {
-        // console.log($(this).is(":checked"));
-        // See in English
-        if ($(this).is(":checked")) {
-            $(".en_label:not(.button_label)").attr("style", "display: block;");
-            $(".en_label.button_label").attr("style", "display: inline-block;");
-            $(".pt_label").attr("style", "display: none !important;");
-        }
-        // See in Portuguese
-        else {
+    $(".cnn_label").attr("style", "display: none !important;");
+
+    $(document).on('click', '.inquiries_ul a', function (e) {
+        e.preventDefault();
+        $('.inquiries_ul .language_button').removeClass('active');
+        var language = $(this).attr('data-language');
+
+        $(this).parent().addClass('active');
+
+        if (language == 'pt') {
             $(".en_label").attr("style", "display: none !important;");
+            $(".cnn_label").attr("style", "display: none !important;");
             $(".pt_label:not(.button_label)").attr("style", "display: block;");
             $(".pt_label.button_label").attr("style", "display: inline-block;");
         }
+        else if (language == 'en') {
+            $(".pt_label").attr("style", "display: none !important;");
+            $(".cnn_label").attr("style", "display: none !important;");
+            $(".en_label:not(.button_label)").attr("style", "display: block;");
+            $(".en_label.button_label").attr("style", "display: inline-block;");
+        }
+        else if (language == 'cnn') {
+            $(".en_label").attr("style", "display: none !important;");
+            $(".pt_label").attr("style", "display: none !important;");
+            $(".cnn_label:not(.button_label)").attr("style", "display: block;");
+            $(".cnn_label.button_label").attr("style", "display: inline-block;");
+        }
+
     });
+
+    // QUIZ
+
+
+
 });

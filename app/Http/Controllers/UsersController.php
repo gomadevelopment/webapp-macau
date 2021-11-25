@@ -18,7 +18,8 @@ use App\User,
     App\Article,
     App\NotificationType,
     App\QuestionType,
-    App\Exame;
+    App\Exame,
+    App\Inquiry;
 
 use DB;
 
@@ -74,6 +75,7 @@ class UsersController extends Controller
             $categories = collect();
             $question_types_subtypes = collect();
             $user_exercises = collect();
+            $inquiries = collect();
         }
         else{
             $levels = ExerciseLevel::get();
@@ -81,6 +83,7 @@ class UsersController extends Controller
             $question_types_subtypes = QuestionType::with('subtypes')->get();
             $filters = ['user_id' => $user->id];
             $user_exercises = Exame::applyPerformanceFilters($filters);
+            $inquiries = Inquiry::get();
         }
 
         return view('users.index_profile', compact(
@@ -90,7 +93,8 @@ class UsersController extends Controller
             'levels', 
             'categories', 
             'question_types_subtypes', 
-            'user_exercises'));
+            'user_exercises',
+            'inquiries'));
     }
 
     public function edit_profile($id)

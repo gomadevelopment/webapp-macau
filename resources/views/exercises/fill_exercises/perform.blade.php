@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.0">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.0">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.1">
 
 @stop
 
@@ -445,16 +445,16 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.0"></script>
-    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=2.0"></script> --}}
-    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=2.0"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.0"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.1"></script>
+    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=2.1"></script> --}}
+    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=2.1"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.1"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.0"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.0"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.1"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.1"></script>
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 

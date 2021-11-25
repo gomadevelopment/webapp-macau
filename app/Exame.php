@@ -1006,8 +1006,9 @@ class Exame extends Model
         // dd($filters, $professors_or_students);
         $professor_students_ids = [];
         if($by_student_or_class == 'by_student'){
-            $query = self::with(['anxiety_inquiry', 'exercise', 'questions'])
+            $query = self::with(['anxiety_inquiry', 'exercise', 'questions', 'inquiries'])
                         ->where('student_id', $filters['user_id'])
+                        ->where('is_finished', 1)
                         ->orderBy('created_at', 'asc');
             
             // Professor is viewing student profile - only sees exames made by that professor
@@ -1021,14 +1022,13 @@ class Exame extends Model
                                 ->pluck('id')
                                 ->toArray();
             // dd($professor_students_ids);
-            $query = self::with(['anxiety_inquiry', 'exercise', 'questions'])
+            $query = self::with(['anxiety_inquiry', 'exercise', 'questions', 'inquiries'])
                         // ->where('id', '<', 242)
                         ->where('user_id', auth()->user()->id)
                         ->whereIn('student_id', $professor_students_ids)
+                        ->where('is_finished', 1)
                         ->orderBy('created_at', 'asc');
         }
-        // ->unique(['user_id', 'student_id', 'exercise_id'])
-        // dd($query->get()->unique('exercise_id'));
 
         // Levels Filter
         if(isset($filters['performance_filters_levels']) && $filters['performance_filters_levels']){
@@ -1062,10 +1062,7 @@ class Exame extends Model
             $end_date = preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$filters['performance_filters_end_date']);
             $query->where('finish_date', '<=', $end_date);
         }
-        // dd($query->get()->unique('exercise_id'));
-        // dd($query->get()->unique('exercise_id'), $query->get());
-        // dd(instanceof Collection $query->get()->unique('exercise_id'));
-        // dd($query->distinct('exercise_id')->get()->pluck('exercise_id')->toArray(), $query->get()->unique('exercise_id')->pluck('exercise_id')->toArray());
+
         return self::performanceCalculation(
             $by_student_or_class == 'by_class' ? $query->get()->unique('exercise_id') : $query->get(), 
             $by_student_or_class == 'by_class' ? $professor_students_ids : []);
@@ -1080,6 +1077,30 @@ class Exame extends Model
         $length = count($exames);
         $fixed_exames = [];
         foreach ($exames as $exame) {
+
+            // Calculate Exame Inquiries Median
+            foreach ($exame->inquiries as $inquiry) {
+                if($inquiry->inquirie_id == 15){
+                    break;
+                }
+                if($previous_exame){
+                    foreach ($previous_exame->inquiries as $previous_inquiry) {
+                        if($inquiry->inquirie_id == $previous_inquiry->inquirie_id){
+                            
+                            $inquiry->accumulated_value = ($inquiry->value + $previous_inquiry->accumulated_value);
+                            $inquiry->median = round(($inquiry->value + $previous_inquiry->accumulated_value) / ($count + 1), 2);
+                            if($count == 2 && $inquiry->inquirie_id == 3){
+                                // dd($inquiry, $previous_inquiry);
+                            }
+                        }
+                    }
+                }
+                else{
+                    $inquiry->median = $inquiry->value;
+                    $inquiry->accumulated_value = $inquiry->value;
+                }
+            }
+
             if($count == 0){
                 if(!empty($professor_students_ids)){
                     $all_exames_made_by_student = 
