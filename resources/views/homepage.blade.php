@@ -120,10 +120,16 @@
         <p class="description">
             @if(isset($pt_lang) && $pt_lang)
                 ‘Português à Vista’ é uma plataforma de e-learning que tem por objetivo apoiar o ensino e a aprendizagem do Português Língua Não Materna em Macau (PLNM). A partir de um conjunto  vasto de recursos audiovisuais, devidamente selecionados e organizados por níveis de proficiência linguística (do A1 a C1) e temas, foram criados exercícios interativos especificamente desenhados para o desenvolvimento da comprensão do oraldo PLNM. “Português à Vista” promove a autonomia da aprendizagem, tal como a interação social e a colaboração, tirando   partido das ferramentas digitais criadas para esse fim. É ainda disponibilizada, a pensar nos  professores, asistematização da exploração didática da maioria dos recursos audiovisuais que se encontram na plataforma.
+                <br>
+                <br>
+                Este Projecto é financiado pelo Fundo do Ensino Superior do Governo de Macau RAE
             @elseif(isset($en_lang) && $en_lang)
                 ‘Português à Vista’ is an e-learning platform that aims to support the teaching and learning of Portuguese as a Non-Native Language in Macau (PNNL). From a vast set of audiovisual resources, duly selected and organized by levels of linguistic proficiency (from A1 to C1) and themes, interactive exercises were created specifically designed to develop PNLL oral comprehension. “Português à Vista” promotes learning autonomy, as well as social interaction and collaboration, taking advantage of the digital tools created for this purpose. It is also available, thinking about teachers, the systematization of the didactic exploration of most audiovisual resources that are on the platform.
             @elseif(isset($cnn_lang) && $cnn_lang)
                 葡萄牙語視角” 旨在為本澳以非葡文作為母語的人士（非葡語人士）提供一個教育及學習的電子平台。透過大量的視聽教材，恰當地按其語言熟練水平 (由Ａ１至Ｃ１等級) 及主題進行挑選和分類，從而為非葡語人士度身訂造出能專門提升其口語理解能力的互動練習 透過創建 “葡萄牙語視角” 此類的電子工具，冀能鼓勵自主學習以及促進社交互動和彼此協作
+                <br>
+                <br>
+                本平台獲得 “澳門特別行政區政府高等教育基金會” 支持
             @endif
         </p>
         <div class="signup_button">
