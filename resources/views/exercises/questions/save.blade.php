@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.1">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.1">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.2">
 
 @stop
 
@@ -14,6 +14,10 @@
         {{session('restrict_page_error')}}
     </div>
 @endif
+
+<div class="alert alert-danger errorMsg global-alert" style="display:none;" role="alert">
+
+</div>
 
 <!-- ============================ Page Title Start================================== -->
 <section class="page-title articles">
@@ -340,11 +344,11 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.1"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.1"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.1"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.1"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.2"></script>
 
     <script>
 
@@ -421,6 +425,10 @@
                             $('#description_image_input').remove();
                             return false;
                         }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -437,11 +445,11 @@
                         fileReader.readAsDataURL(f);
                     }
                 });
-                console.log($('#description_image_input').val());
+                // console.log($('#description_image_input').val());
             });
 
             $('body, html').on('click', function(){
-                console.log($('#description_image_input').val(), $('#description_image_input')[0]);
+                // console.log($('#description_image_input').val(), $('#description_image_input')[0]);
             });
 
             $('#true_or_false_select_0').select2();
@@ -717,6 +725,10 @@
                             alert('Não foi possível associar esse tipo de ficheiro. Associe ficheiro de imagem.');
                             return false;
                         }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -786,6 +798,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio ou video.');
                             $('#corr_audio_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -867,6 +883,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
                             $('#corr_categoryQuestion_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -979,6 +999,10 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1099,6 +1123,10 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1240,6 +1268,10 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i]
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1338,6 +1370,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
                             $('#fill_textWord_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -1519,6 +1555,10 @@
                         //     $('#fill_options_writing_associate_media_file_input_'+id_index).remove();
                         //     return false;
                         // }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1605,6 +1645,10 @@
                         filesLength = files.length;
                     for (var i = 0; i < filesLength; i++) {
                         var f = files[i];
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1694,6 +1738,10 @@
                             $('#differences_file_input_'+id_index).remove();
                             return false;
                         }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -1742,11 +1790,78 @@
                 html.find("[name^='differences_find_words_textarea_']").attr('name', 'differences_find_words_textarea_'+new_index);
                 html.find("[id^='differences_find_words_textarea_']").attr('id', 'differences_find_words_textarea_'+new_index);
 
+                html.find("[name^='differences_find_words_file_button_']").attr('name', 'differences_find_words_file_button_'+new_index);
+                html.find("[id^='differences_find_words_file_button_']").attr('id', 'differences_find_words_file_button_'+new_index);
+
+                html.find("[name^='differences_find_words_file_input_']").attr('name', 'differences_find_words_file_input_'+new_index);
+                html.find("[id^='differences_find_words_file_input_']").attr('id', 'differences_find_words_file_input_'+new_index);
+
                 html = html.clone();
 
                 $(paste_before).after(html);
                 
             });
+            // Differences Find Words Media upload and preview script
+            $(document).on('click', "[id^='differences_find_words_file_button_']", function(e){
+                e.preventDefault();
+                var id_index = this.id.match(/\d+/)[0];
+
+                var html = '<input type="file" name="differences_find_words_file_input_'+id_index+'" id="differences_find_words_file_input_'+id_index+'" hidden>';
+                
+                $(this).after(html);
+
+                $('#differences_find_words_file_input_' + id_index).click();
+
+                $('#differences_find_words_file_input_' + id_index).on("change", function(e) {
+                    var id_index = this.id.match(/\d+/)[0];
+                    
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        if(f.type.match('audio.*')){
+                        }
+                        else{
+                            alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
+                            $('#differences_find_words_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function(e) {
+                            var file = e.target;
+                            var preview_img_src = e.target.result;
+                            if(f.type.match('audio.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Soundclip_Icon.svg";
+                            }
+                            else if(f.type.match('video.*')){
+                                preview_img_src = "/assets/backoffice_assets/icons/Video_Icon.svg";
+                            }
+                            $("<a href=\"#\" class=\"btn btn-theme remove_button associate_media_preview button-wrap button-wrap-2 ml-auto mt-1 mb-1\">" +
+                                "<img src=\""+preview_img_src+"\" title=\""+file.name+"\" class=\"associate_media_thumbnail_img mr-2\">" +
+                                "<span class=\"associate_media_thumbnail_title\">"+f.name+"</span>" +
+                                "<img class=\"associate_media_thumbnail_remove\" src=\"/assets/backoffice_assets/icons/Cross.svg\">" +
+                                "</a>"
+                            ).insertAfter("#differences_find_words_file_input_" + id_index);
+
+                            $('#differences_find_words_file_button_' + id_index).hide();
+
+                            // $(".associate_media_thumbnail_remove").click(function(e){
+                            //     e.stopImmediatePropagation();
+                            //     e.preventDefault();
+                            //     $('#fill_associate_media_file_button_' + id_index).show();
+                            //     $('#fill_associate_media_file_input_' + id_index).remove();
+                            //     $(this).parent(".associate_media_preview").remove();
+                            // });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            });
+
             // <% %> button
             $(document).on('click', '[id^="find_words_perc_delimiter_"]', function(e){
                 e.preventDefault();
@@ -1840,6 +1955,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
                             $('#split_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -1992,6 +2111,10 @@
                             $('#assort_words_media_file_input_'+id_index).remove();
                             return false;
                         }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
+                            return false;
+                        }
                         var fileReader = new FileReader();
                         fileReader.onload = (function(e) {
                             var file = e.target;
@@ -2094,6 +2217,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de imagem.');
                             $('#assort_image_media_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -2233,6 +2360,10 @@
                         else{
                             alert('Não foi possível associar esse tipo de ficheiro. Associe um ficheiro de audio.');
                             $('#vowels_media_file_input_'+id_index).remove();
+                            return false;
+                        }
+                        if(/^[a-zA-Z0-9- _.]*$/.test(f.name) == false) {
+                            alert('Não é possível associar ficheiros cujo o nome tenha caracteres especials. Por favor, edite o nome do ficheiro antes de submeter.');
                             return false;
                         }
                         var fileReader = new FileReader();
@@ -2445,24 +2576,33 @@
                             // question_type_error
                             // question_reference_error
                             // question_description_error
-                            Object.keys(response.errors).forEach(function (key) {
-                                if(key == 'question_name'){
-                                    $('.question_title_error').text(response.errors[key]);
-                                    $('.question_title_error').removeAttr('hidden');
-                                }
-                                if(key == 'question_reference'){
-                                    $('.question_reference_error').text(response.errors[key]);
-                                    $('.question_reference_error').removeAttr('hidden');
-                                }
-                                if(key == 'question_description'){
-                                    $('.question_description_error').text(response.errors[key]);
-                                    $('.question_description_error').removeAttr('hidden');
-                                }
-                                if(key == 'question_type'){
-                                    $('.question_type_error').text(response.errors[key]);
-                                    $('.question_type_error').removeAttr('hidden');
-                                }
-                            });
+                            if(response.errors){
+                                Object.keys(response.errors).forEach(function (key) {
+                                    if(key == 'question_name'){
+                                        $('.question_title_error').text(response.errors[key]);
+                                        $('.question_title_error').removeAttr('hidden');
+                                    }
+                                    if(key == 'question_reference'){
+                                        $('.question_reference_error').text(response.errors[key]);
+                                        $('.question_reference_error').removeAttr('hidden');
+                                    }
+                                    if(key == 'question_description'){
+                                        $('.question_description_error').text(response.errors[key]);
+                                        $('.question_description_error').removeAttr('hidden');
+                                    }
+                                    if(key == 'question_type'){
+                                        $('.question_type_error').text(response.errors[key]);
+                                        $('.question_type_error').removeAttr('hidden');
+                                    }
+                                });
+                            }
+                            else{
+                                $(".errorMsg").text(response.message);
+                                $(".errorMsg").fadeIn();
+                                setTimeout(() => {
+                                    $(".errorMsg").fadeOut();
+                                }, 5000);
+                            }
                         }
                     }
                 });

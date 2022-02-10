@@ -93,7 +93,13 @@
                     @endif
                 </div>
 
-                <input type="hidden" name="{{$question->id}}_correspondence_images[{{ $item->question_item_media->id }}]" class="correspondence_d_and_d" data-item-id="">
+                @if($item->question_item_media)
+                    <input type="hidden" name="{{$question->id}}_correspondence_images[{{ $item->question_item_media->id }}]" class="correspondence_d_and_d" data-item-id="">
+                @else
+                    <?php auth()->user()->deleteSpecificStudentExame($exercise->id); ?>
+                    <?php request()->session()->flash('error', 'Ocorreu um erro ao corresponder um media com algo estático. Por exemplo, está em falta uma imagem no tipo de questão "Correspondência de Imagens". Por favor, peça ao seu professor ou professor autor que reveja o exercício.'); ?>
+                    <script>window.location='{{url()->previous()}}';</script>
+                @endif
                 
                 @if($exame_review)
                     

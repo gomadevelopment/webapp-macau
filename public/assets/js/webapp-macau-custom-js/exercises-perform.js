@@ -1,14 +1,16 @@
 $(function () {
     function iFramePausePlay(divId, pauseOrPlay) {
         var div = document.getElementById(divId);
+        if (!div) {
+            return false;
+        }
         if (div.getElementsByTagName("iframe").length == 0) {
             var iframe = div.getElementsByTagName("source")[0];
             var video_src = iframe.getAttribute('src');
             console.log(video_src);
             $('#'.divId).children('source').attr('src', ''); // set iframe parent div value null 
             $('#'.divId).children('source').attr('src', video_src); // set iframe src again it works perfect
-        }
-        else {
+        } else {
             var iframe = div.getElementsByTagName("iframe")[0];
             var video_src = iframe.getAttribute('src');
             $('#'.divId).children('iframe').attr('src', ''); // set iframe parent div value null 
@@ -27,8 +29,7 @@ $(function () {
             if (!$(element).find(".rb-tab-active").length) {
                 $(element).parent().parent().parent().css('border', '2px solid #ff2850');
                 bool = false;
-            }
-            else {
+            } else {
                 $(element).parent().parent().parent().css('border', '2px solid #e6ebf1');
             }
         });
@@ -38,7 +39,7 @@ $(function () {
 
     $(document).on("click", "#finish_exercise_button", function (e) {
         // Deactivate finish_exercise_button
-        $(this).attr("id", "");
+
 
         // $("#perform_exercise_form").hide();
         // $(".preloader.ajax").show();
@@ -61,8 +62,8 @@ $(function () {
             return false;
         }
 
-        console.log(checkForAllInquiries());
-        return false;
+        $(this).attr("id", "");
+
         // Inquiries
         var inquiries = new Array();
         $(".rb").each(function (index, element) {
@@ -189,7 +190,7 @@ $(function () {
                 to_update_timestamp: to_update_timestamp
             },
             success: function (response) {
-                if (response && response.status == "success") { } else if (response.status == "error") { }
+                if (response && response.status == "success") {} else if (response.status == "error") {}
             }
         });
     });
@@ -255,17 +256,17 @@ $(function () {
                                 if (
                                     $.trim(
                                         $(element)
-                                            .next(".drag_and_drop_hole")
-                                            .html()
+                                        .next(".drag_and_drop_hole")
+                                        .html()
                                     ) == ""
                                 ) {
                                     $(element).val(null);
                                 } else {
                                     $(element).val(
                                         $(element)
-                                            .next(".drag_and_drop_hole")
-                                            .find("input")
-                                            .val()
+                                        .next(".drag_and_drop_hole")
+                                        .find("input")
+                                        .val()
                                     );
                                 }
                                 // console.log($(element).val());
@@ -278,17 +279,17 @@ $(function () {
                                         if (
                                             $.trim(
                                                 $(element2)
-                                                    .find(".drag_and_drop_hole")
-                                                    .html()
+                                                .find(".drag_and_drop_hole")
+                                                .html()
                                             ) == ""
                                         ) {
                                             $(element).val(null);
                                         } else {
                                             $(element).val(
                                                 $(element2)
-                                                    .find(".drag_and_drop_hole")
-                                                    .find("input")
-                                                    .val()
+                                                .find(".drag_and_drop_hole")
+                                                .find("input")
+                                                .val()
                                             );
                                         }
                                     });
@@ -306,17 +307,17 @@ $(function () {
                             if (
                                 $.trim(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .html()
+                                    .next(".drag_and_drop_hole")
+                                    .html()
                                 ) == ""
                             ) {
                                 $(element).val(null);
                             } else {
                                 $(element).val(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .find("input")
-                                        .val()
+                                    .next(".drag_and_drop_hole")
+                                    .find("input")
+                                    .val()
                                 );
                             }
                         });
@@ -330,17 +331,17 @@ $(function () {
                             if (
                                 $.trim(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .html()
+                                    .next(".drag_and_drop_hole")
+                                    .html()
                                 ) == ""
                             ) {
                                 $(element).val(null);
                             } else {
                                 $(element).val(
                                     $(element)
-                                        .next(".drag_and_drop_hole")
-                                        .find("input")
-                                        .val()
+                                    .next(".drag_and_drop_hole")
+                                    .find("input")
+                                    .val()
                                 );
                             }
                         });
@@ -357,17 +358,17 @@ $(function () {
                                     if (
                                         $.trim(
                                             $(element2)
-                                                .find(".drag_and_drop_hole")
-                                                .html()
+                                            .find(".drag_and_drop_hole")
+                                            .html()
                                         ) == ""
                                     ) {
                                         $(element).val(null);
                                     } else {
                                         $(element).val(
                                             $(element2)
-                                                .find(".drag_and_drop_hole")
-                                                .find("input")
-                                                .val()
+                                            .find(".drag_and_drop_hole")
+                                            .find("input")
+                                            .val()
                                         );
                                     }
                                 });
@@ -412,13 +413,13 @@ $(function () {
     } else {
         $(".drag_and_drop_item").css("cursor", "default");
         $(
-            '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]'
-        )
+                '[id^="assortment_sentences_table_question_item_"], [id^="assortment_images_table_question_"], [id^="assortment_words_table_question_item_"]'
+            )
             .find("li")
             .css("cursor", "default");
         $(
-            '[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]'
-        )
+                '[id^="exame_review_assortment_sentences_table_question_item_"], [id^="exame_review_assortment_images_table_question_"], [id^="exame_review_assortment_words_table_question_item_"]'
+            )
             .find("li")
             .css("cursor", "default");
     }
@@ -451,8 +452,8 @@ $(function () {
                 }
 
                 $("html, body").animate({
-                    scrollTop: $(hash).offset().top - offset_disc
-                },
+                        scrollTop: $(hash).offset().top - offset_disc
+                    },
                     800
                 );
             }
@@ -811,14 +812,12 @@ $(function () {
             $(".cnn_label").attr("style", "display: none !important;");
             $(".pt_label:not(.button_label)").attr("style", "display: block;");
             $(".pt_label.button_label").attr("style", "display: inline-block;");
-        }
-        else if (language == 'en') {
+        } else if (language == 'en') {
             $(".pt_label").attr("style", "display: none !important;");
             $(".cnn_label").attr("style", "display: none !important;");
             $(".en_label:not(.button_label)").attr("style", "display: block;");
             $(".en_label.button_label").attr("style", "display: inline-block;");
-        }
-        else if (language == 'cnn') {
+        } else if (language == 'cnn') {
             $(".en_label").attr("style", "display: none !important;");
             $(".pt_label").attr("style", "display: none !important;");
             $(".cnn_label:not(.button_label)").attr("style", "display: block;");

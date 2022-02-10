@@ -9,6 +9,12 @@
     </div>
 @endif
 
+@if (session('ErrorException'))
+    <div class="global-alert alert alert-danger" role="alert">
+        {{session('ErrorException')}}
+    </div>
+@endif
+
 <div class="alert alert-success successMsg global-alert" style="display:none;" role="alert">
 
 </div>

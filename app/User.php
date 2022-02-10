@@ -216,6 +216,28 @@ class User extends Authenticatable implements MustVerifyEmailContract
         }
     }
 
+    public function deleteSpecificStudentExame($exercise_id)
+    {
+        if($this->isStudent()){
+            $exercise = Exercise::find($exercise_id);
+            $exame = Exame::where('student_id', $this->id)->where('exercise_id', $exercise->id)->first();
+            
+            Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames/'.$this->id.'/exame/' . $exame->id);
+            foreach ($exame->questions as $question) {
+                foreach ($question->question_items as $question_item) {
+                    if($question_item->question_item_media){
+                        $question_item->question_item_media->delete();
+                    }
+                    $question_item->delete();
+                }
+                $question->delete();
+            }
+            $exame->medias()->delete();
+            $exame->inquiries()->delete();
+            $exame->delete();
+        }
+    }
+
     /**
      * Get All Student Exames for Professor Classroom
      */

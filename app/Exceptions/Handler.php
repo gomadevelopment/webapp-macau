@@ -50,6 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if(strpos(url()->previous(), '/exercicios/') !== false){
+            request()->session()->flash('ErrorException', $exception->getMessage());
+            return redirect()->back();
+        }
         return parent::render($request, $exception);
     }
 }

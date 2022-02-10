@@ -475,7 +475,7 @@ class Exame extends Model
                 $question_item->save();
                 continue;
             }
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-])\s*%>/";
+            $regex = '/<%\s*([("\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)]*[("A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)])\s*%>/';
             preg_match_all($regex, $question_item->text_1, $matches);
             foreach($matches[1] as $word_match){
                 $solution_array[$question_item->id][] = $word_match;
@@ -543,7 +543,7 @@ class Exame extends Model
         // Solution
         $solution_array = [];
         foreach ($question->question_items as $question_item) {
-            $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-])\s*%>/";
+            $regex = '/<%\s*([("\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)]*[("A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)])\s*%>/';
             preg_match_all($regex, $question_item->text_1, $matches);
             foreach($matches[1] as $word_match){
                 $solution_array[$question_item->id][] = $word_match;

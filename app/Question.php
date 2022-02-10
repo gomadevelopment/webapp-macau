@@ -909,7 +909,7 @@ class Question extends Model
             // }
             foreach($input_indexes as $index){
                 $options_correct_words = '';
-                $regex = "/<%\s*([\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-]*[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-])\s*%>/";
+                $regex = '/<%\s*([("\s*A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)]*[("A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ0-9_%-)])\s*%>/';
                 preg_match_all($regex, $inputs['differences_find_words_textarea_'.$index], $matches);
                 $numItems = count($matches[1]);
                 $i = 0;
@@ -927,12 +927,54 @@ class Question extends Model
                 $t3 = str_replace(' %>', '', $t2);
                 $text_without_delimiters = str_replace('%>', '', $t3);
 
-                QuestionItem::create([
-                    'question_id' => $this->id,
-                    'text_1' => $inputs['differences_find_words_textarea_'.$index],
-                    'text_2' => $text_without_delimiters,
-                    'options_correct' => $options_correct_words
-                ]);
+                if(!$bool_same_type_and_subtype || !isset($inputs['existent_question_item_id_'.$index])){
+                    $question_item = new QuestionItem();
+                }
+
+                else{
+                    $question_item = QuestionItem::find($inputs['existent_question_item_id_'.$index]);
+                }
+
+                $question_item->question_id = $this->id;
+                $question_item->text_1 = $inputs['differences_find_words_textarea_'.$index];
+                $question_item->text_2 = $text_without_delimiters;
+                $question_item->options_correct = $options_correct_words;
+                $question_item->save();
+
+                if(isset($inputs['differences_find_words_file_input_'.$index])){
+                    if(strpos($inputs['differences_find_words_file_input_'.$index], 'from_storage_') !== false){
+                        
+                        if(isset($inputs['question_model_id'])){
+                            $question_model = self::find($inputs['question_model_id']);
+                            $question_model_item = QuestionItem::find(explode('_', $inputs['differences_find_words_file_input_'.$index])[2]);
+                            $copy_from = 'questions/' . $question_model->id . '/question_item/' . $question_model_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            $copy_to = 'questions/' . $this->id . '/question_item/' . $question_item->id . '/' . $question_model_item->question_item_media->media_url;
+                            Storage::disk('webapp-macau-storage')->copy($copy_from, $copy_to);
+                            $question_item_media = QuestionItemMedia::create([
+                                'question_item_id' => $question_item->id,
+                                'media_url' => $question_model_item->question_item_media->media_url,
+                                'media_type' => $question_model_item->question_item_media->media_type
+                            ]);
+                        }
+                        
+                        continue;
+                    }
+                    $file = $inputs['differences_find_words_file_input_'.$index];
+                    $upload_date = date('Y-m-d_H:i:s_');
+                    $paths = [];
+
+                    $fileName = $file->getClientOriginalName();
+
+                    $paths = $file->storeAs('/questions/'
+                        . $this->id . '/question_item/' . $question_item->id, $fileName, 'webapp-macau-storage');
+
+                    $question_item_media = QuestionItemMedia::create([
+                        'question_item_id' => $question_item->id,
+                        'media_url' => $file->getClientOriginalName(),
+                        'media_type' => $file->getMimeType()
+                    ]);
+                }
+
             }
             
         }
@@ -1512,6 +1554,17 @@ class Question extends Model
             foreach ($inputs as $key => $value) {
                 if (strpos($key, 'differences_find_words_textarea_') === 0) {
                     $input_indexes[] = explode('_', $key)[4];
+                }
+            }
+
+            $existent_file_question_item_ids = [];
+            $existent_question_item_ids = [];
+            foreach($input_indexes as $index){
+                if(isset($inputs['differences_find_words_file_input_'.$index]) && strpos($inputs['differences_find_words_file_input_'.$index], 'from_storage_') !== false){
+                    $existent_file_question_item_ids[] = explode('_', $inputs['differences_find_words_file_input_'.$index])[2];
+                }
+                if(isset($inputs['existent_question_item_id_'.$index])){
+                    $existent_question_item_ids[] = $inputs['existent_question_item_id_'.$index];
                 }
             }
         }

@@ -112,8 +112,6 @@
                         @if($exame->introduction)
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="form-group">
-                                    <label class="label_title mb-3 d-block text-center" style="font-size: 26px;font-family: 'Gilroy - Regular';">
-                                        (Frase de apresentação):</label>
                                     <div class="d-flex float-left flex-column shop_grid_caption ml-0 align-items-center">
                                         <div class="article_description m-0 text-center" style="line-height: 25px;  -webkit-line-clamp: unset;">
                                             {!! $exame->introduction !!}
