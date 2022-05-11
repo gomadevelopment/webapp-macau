@@ -11,7 +11,7 @@
                             <p class="supported_label">Supported by Higher Education Fund of Macao SAR Government</p>
                             <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg')}}" alt="">
                             <p>Estrada Marginal da Ilha Verde, 14-17, Macau, China.</p>
-                            <p>+1 246-345-0695</p>
+                            <p>+853 8592 5600</p>
                             <p>info@portuguesavista.com</p>
                         </div>
                         

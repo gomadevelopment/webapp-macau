@@ -119,7 +119,7 @@
         </h1>
         <p class="description">
             @if(isset($pt_lang) && $pt_lang)
-                ‘Português à Vista’ é uma plataforma de e-learning que tem por objetivo apoiar o ensino e a aprendizagem do Português Língua Não Materna em Macau (PLNM). A partir de um conjunto  vasto de recursos audiovisuais, devidamente selecionados e organizados por níveis de proficiência linguística (do A1 a C1) e temas, foram criados exercícios interativos especificamente desenhados para o desenvolvimento da comprensão do oraldo PLNM. “Português à Vista” promove a autonomia da aprendizagem, tal como a interação social e a colaboração, tirando   partido das ferramentas digitais criadas para esse fim. É ainda disponibilizada, a pensar nos  professores, asistematização da exploração didática da maioria dos recursos audiovisuais que se encontram na plataforma.
+                ‘Português à Vista’ é uma plataforma de e-learning que tem por objetivo apoiar o ensino e a aprendizagem do Português Língua Não Materna em Macau (PLNM). A partir de um conjunto  vasto de recursos audiovisuais, devidamente selecionados e organizados por níveis de proficiência linguística (do A1 a C1) e temas, foram criados exercícios interativos especificamente desenhados para o desenvolvimento da compreensão do oraldo PLNM. ‘Português à Vista’ promove a autonomia da aprendizagem, tal como a interação social e a colaboração, tirando   partido das ferramentas digitais criadas para esse fim. É ainda disponibilizada, a pensar nos  professores, a sistematização da exploração didática da maioria dos recursos audiovisuais que se encontram na plataforma.
                 <br>
                 <br>
                 Este Projecto é financiado pelo Fundo do Ensino Superior do Governo de Macau RAE
@@ -251,7 +251,7 @@
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
-                                Questionários de auto-reflexão para desenvolver as estratégias 
+                                Questionários de autorreflexão para desenvolver as estratégias 
                                 de aprendizagem da compreensão do oral, de acordo com as abordagens didáticas atuais.
                             @elseif(isset($en_lang) && $en_lang)
                                 Self-reflection questionnaires to develop strategies of learning 
@@ -295,11 +295,11 @@
             @endif
         </h1>
         <p class="small_text">Estrada Marginal da Ilha Verde, 14-17, Macau, China.</p>
-        <p class="small_text">+1 246-345-0695</p>
+        <p class="small_text">+853 8592 5600</p>
         <p class="small_text">info@portuguesavista.com</p>
         <h1 class="sub_title">
             @if(isset($pt_lang) && $pt_lang)
-                Junta-te a milhares de Utilizadores felizes!
+                Junta-te a esta comunidade de utilizadores!
             @elseif(isset($en_lang) && $en_lang)
                 Join thousands of happy Users!
             @elseif(isset($cnn_lang) && $cnn_lang)
@@ -308,7 +308,7 @@
         </h1>
         <p class="small_text">
             @if(isset($pt_lang) && $pt_lang)
-                Inscreve-te agora e começa a aprender uma das Linguas mais faladas por todo o Mundo!
+                Inscreve-te e aprende uma das línguas mais faladas em todo o mundo!
             @elseif(isset($en_lang) && $en_lang)
                 Sign up now and start learning one of the most spoken languages ​​around the world!
             @elseif(isset($cnn_lang) && $cnn_lang)
