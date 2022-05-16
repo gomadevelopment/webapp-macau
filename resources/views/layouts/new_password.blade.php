@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/homepage.css', config()->get('app.https')) }}?v=2.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/homepage.css', config()->get('app.https')) }}?v=2.3">
 
 @stop
 
@@ -37,8 +37,8 @@
                     <div class="form-group">
                         <input id="password" name="password" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Nova Palavra-Passe' : 'New Password' }}" autocomplete="off"
                         style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
-                        <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
-                        <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
+                        <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                        <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg', config()->get('app.https'))}}?v=2.3" alt="">
                         @if ($errors->has('password'))
                             <span class="error-block-span">
                                 {{ $errors->first('password') }}
@@ -49,8 +49,8 @@
                     <div class="form-group">
                         <input name="password_confirmation" type="password" class="form-control" placeholder="{{ isset($pt_lang) && $pt_lang ? 'Confirmar Nova Palavra-Passe' : 'Confirm New Password' }}" autocomplete="off"
                         style="background: url({{asset('/assets/landing_page/icons/Lock.svg')}}) no-repeat scroll 7px 14px;">
-                        <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg')}}" alt="">
-                        <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg')}}" alt="">
+                        <img class="eye-hide" src="{{asset('/assets/landing_page/icons/eye-off.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                        <img class="eye-show" src="{{asset('/assets/landing_page/icons/eye.svg', config()->get('app.https'))}}?v=2.3" alt="">
                         @if ($errors->has('password'))
                             <span class="error-block-span">
                                 {{ $errors->first('password') }}
@@ -60,7 +60,7 @@
 
                     <div class="form-group signup_button about_section">
                         <button id="submit_new_password_form" type="button" class="btn btn-theme btn-lg">
-                            {{ isset($pt_lang) && $pt_lang ? 'Confirmar' : 'Confirm' }}&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                            {{ isset($pt_lang) && $pt_lang ? 'Confirmar' : 'Confirm' }}&nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
                         </button>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
 
     @if (session('login_error'))
         <script type="text/javascript">

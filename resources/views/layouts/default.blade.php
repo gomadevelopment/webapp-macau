@@ -2,27 +2,29 @@
 <html lang="{{ app()->getLocale() }}">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="author" content="www.frebsite.nl" />
+		<meta name="author" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		
-        <title>Web App Macau</title>
+        <title>PortuguêsàVista</title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets/img/favicon-32x32.png', config()->get('app.https')) }}?v=2.3">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=2.2">
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=2.2">
+        <link rel="stylesheet" href="{{asset('/assets/css/styles.css', config()->get('app.https')) }}?v=2.3">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/global_header_footer.css', config()->get('app.https')) }}?v=2.3">
         
 		
 		<!-- Custom Color Option -->
-        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=2.2">
+        <link rel="stylesheet" href="{{asset('/assets/css/colors.css', config()->get('app.https')) }}?v=2.3">
 
         @yield('header')
 
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=2.2">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=2.3">
 
     </head>
 	
     <body class="red-skin">
-	
+
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
@@ -69,20 +71,20 @@
 		<!-- ============================================================== -->
 		<!-- All Jquery -->
 		<!-- ============================================================== -->
-        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=2.2"></script>
+        <script src="{{asset('/assets/js/jquery.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/popper.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/bootstrap.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/select2.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/slick.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/jquery.counterup.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/counterup.min.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/jquery.validate.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/custom.js', config()->get('app.https')) }}?v=2.3"></script>
 
-        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=2.2"></script>
-        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=2.2"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=2.3"></script>
+        <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=2.3"></script>
 
-        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=2.2"></script>
+        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=2.3"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
         <!-- ============================================================== -->

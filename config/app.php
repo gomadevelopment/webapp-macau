@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'https' => env('HTTPS', false),
+
 ];

@@ -13,7 +13,7 @@
                 </div>
                 <div class="d-block float-right">
                     <a href="/exercicios/realizar/{{ $exame->exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Retomar
                     </a>
                 </div>

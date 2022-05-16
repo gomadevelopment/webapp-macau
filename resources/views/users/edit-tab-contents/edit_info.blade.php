@@ -31,7 +31,7 @@
                                     Imagem de Perfil
                                 </h4>
                                 <a href="#" id="replace_user_avatar" class="btn search-btn comment_submit mt-4 mb-4" style="float: none; padding: 12px 20px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                     Substituir Fotografia
                                 </a>
                                 <input type="file" name="avatar_url" id="avatar_url" hidden>
@@ -230,12 +230,12 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <div class="d-block text-right mt-2">
                                     <a href="/perfil/{{ $user->id }}" class="btn btn-theme remove_button m-2" style="float: none; padding: 12px 20px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Ver o meu Perfil
                                     </a>
                                     <button class="btn search-btn comment_submit m-2" style="float: none; padding: 12px 20px;">
                                         Gravar
-                                        <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px; margin-bottom: 2px;">
                                     </button>
                                 </div>
                             </div>
@@ -250,11 +250,11 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-2">
                         <div class="d-block text-center mb-3">
                             <a href="/exercicios" class="btn btn-theme remove_button m-3" style="float: none; padding: 12px 20px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Ver Exercícios
                             </a>
                             <a href="/sala_de_aula" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Book.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Book.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Sala de Aula
                             </a>
                         </div>

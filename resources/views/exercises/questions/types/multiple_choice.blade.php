@@ -42,7 +42,7 @@
                                     type="text" class="form-control" placeholder="Questão...">
                                     <a href="#" id="m_c_associate_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
                                         style="float: none; padding: 16px 20px; white-space: nowrap; display: {{$question_item->question_item_media ? 'none' : 'block'}};">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Associar Media
                                     </a>
                                     @if($question_item->question_item_media)
@@ -68,7 +68,7 @@
                                     @endif
                                     <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
                                     <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Remover
                                     </a>
                                 </div>
@@ -98,14 +98,14 @@
                                             type="text" class="form-control" placeholder="Resposta...">
                                         </label>
                                         <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                             Remover
                                         </a>
                                     </div>
                                     @if(($i + 1) == $question_item->options_number)
                                         <div class="col-12">
                                             <a href="#" id="add_questions_question_{{$loop->index}}_answer_{{ ($i+1) }}" class="btn search-btn comment_submit button_add_multiple_choice_answer question_{{$loop->index}} answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                                 Adicionar
                                             </a>
                                         </div>
@@ -125,11 +125,11 @@
                             <div class="col col-wrap d-flex mb-3">
                                 <input name="multiple_choice_question_0" id="multiple_choice_question_0" type="text" class="form-control" placeholder="Questão...">
                                 <a href="#" id="m_c_associate_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Associar Media
                                 </a>
                                 <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
                                 </a>
                             </div>
@@ -150,13 +150,13 @@
                                     <input name="multiple_choice_answer_0_question_0" id="multiple_choice_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
                                 </label>
                                 <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
                                 </a>
                             </div>
                             <div class="col-12">
                                 <a href="#" id="add_questions_question_0_answer_1" class="btn search-btn comment_submit button_add_multiple_choice_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                     Adicionar
                                 </a>
                             </div>
@@ -166,7 +166,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                             <a href="#" class="btn search-btn comment_submit m-3 button_add_multiple_choice" style="font-size: 21px; float: none;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                 Adicionar Alínea
                             </a>
                         </div>
@@ -196,7 +196,7 @@
                                         <span>Grupo de Palavras {{ $loop->index + 1 }}</span>
                                     </label>
                                     <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                         Remover
                                     </a>
                                 </div>
@@ -224,14 +224,14 @@
                                             type="text" class="form-control" placeholder="Palavra...">
                                         </label>
                                         <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                             Remover
                                         </a>
                                     </div>
                                     @if(($i + 1) == $question_item->options_number)
                                         <div class="col-12">
                                             <a href="#" id="add_intruders_question_{{$loop->index}}_answer_{{ ($i+1) }}" class="btn search-btn comment_submit button_add_multiple_choice_intruder_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                                 Adicionar
                                             </a>
                                         </div>
@@ -248,7 +248,7 @@
                                     <span>Grupo de Palavras 1</span>
                                 </label>
                                 <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
                                 </a>
                             </div>
@@ -267,13 +267,13 @@
                                     <input name="multiple_choice_intruder_input_answer_0_question_0" id="multiple_choice_intruder_input_answer_0_question_0" type="text" class="form-control" placeholder="Palavra...">
                                 </label>
                                 <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Remover
                                 </a>
                             </div>
                             <div class="col-12">
                                 <a href="#" id="add_intruders_question_0_answer_1" class="btn search-btn comment_submit button_add_multiple_choice_intruder_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                     Adicionar
                                 </a>
                             </div>
@@ -284,7 +284,7 @@
                     <div class="row mb-3">
                         <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                             <a href="#" class="btn search-btn comment_submit m-3 button_add_multiple_choice_intruder" style="font-size: 21px; float: none;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                                 Adicionar Alínea
                             </a>
                         </div>
@@ -318,11 +318,11 @@
                         type="text" class="form-control" placeholder="Questão...">
                         <a href="#" id="m_c_associate_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
                             style="float: none; padding: 16px 20px; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Associar Media
                         </a>
                         <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
                     </div>
@@ -343,13 +343,13 @@
                             <input name="multiple_choice_answer_0_question_{{$loop->index}}" id="multiple_choice_answer_0_question_{{$loop->index}}" type="text" class="form-control" placeholder="Resposta...">
                         </label>
                         <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
                     </div>
                     <div class="col-12">
                         <a href="#" id="add_questions_question_{{$loop->index}}_answer_1" class="btn search-btn comment_submit button_add_multiple_choice_answer question_{{$loop->index}} answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                             Adicionar
                         </a>
                     </div>
@@ -367,11 +367,11 @@
             <div class="col col-wrap d-flex mb-3">
                 <input name="multiple_choice_question_0" id="multiple_choice_question_0" type="text" class="form-control" placeholder="Questão...">
                 <a href="#" id="m_c_associate_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Associar Media
                 </a>
                 <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row remove_entire_question" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Remover
                 </a>
             </div>
@@ -392,13 +392,13 @@
                     <input name="multiple_choice_answer_0_question_0" id="multiple_choice_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
                 </label>
                 <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     Remover
                 </a>
             </div>
             <div class="col-12">
                 <a href="#" id="add_questions_question_0_answer_1" class="btn search-btn comment_submit button_add_multiple_choice_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                     Adicionar
                 </a>
             </div>
@@ -421,7 +421,7 @@
                                 <input name="multiple_choice_answer_{{$i}}_question_{{$loop->index}}" id="multiple_choice_answer_{{$i}}_question_{{$loop->index}}" type="text" class="form-control" placeholder="Resposta...">
                             </label>
                             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                 Remover
                             </a>
                         </div>
@@ -436,7 +436,7 @@
                 <input name="multiple_choice_answer_0_question_0" id="multiple_choice_answer_0_question_0" type="text" class="form-control" placeholder="Resposta...">
             </label>
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>
@@ -453,7 +453,7 @@
                 <span>Grupo de Palavras 1</span>
             </label>
             <a href="#" class="btn btn-theme remove_button remove_row remove_entire_question ml-auto" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>
@@ -471,13 +471,13 @@
                 <input name="multiple_choice_intruder_input_answer_0_question_0" id="multiple_choice_intruder_input_answer_0_question_0" type="text" class="form-control" placeholder="Palavra...">
             </label>
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>
         <div class="col-12">
             <a href="#" id="add_intruders_question_0_answer_1" class="btn search-btn comment_submit button_add_multiple_choice_intruder_answer question_0 answer_0" style="padding: 12px 14px; float: right; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                 Adicionar
             </a>
         </div>
@@ -497,7 +497,7 @@
                                 <input name="multiple_choice_intruder_input_answer_{{$i}}_question_{{$loop->index}}" id="multiple_choice_intruder_input_answer_{{$i}}_question_{{$loop->index}}" type="text" class="form-control" placeholder="Palavra...">
                             </label>
                             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                 Remover
                             </a>
                         </div>
@@ -512,7 +512,7 @@
                 <input name="multiple_choice_intruder_input_answer_0_question_0" id="multiple_choice_intruder_input_answer_0_question_0" type="text" class="form-control" placeholder="Palavra...">
             </label>
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>

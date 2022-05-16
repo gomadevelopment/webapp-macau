@@ -16,18 +16,18 @@
                     <div class="dropdown ml-auto align-self-center student_dropdown">
                         <a href="#" class="messages" data-toggle="dropdown" aria-expanded="false">
                             <span class="ping"></span>
-                            <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg')}}" class="empty_dots d-block" alt="">
-                            <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg')}}" class="filled_dots" alt="" style="display: none;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg', config()->get('app.https'))}}?v=2.3" class="empty_dots d-block" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg', config()->get('app.https'))}}?v=2.3" class="filled_dots" alt="" style="display: none;">
                             <span class="dropdown-menu-arrow"></span>
                         </a>
                         <div class="dropdown-menu message-box">
                             <a class="msg-title" href="/perfil/{{ $s_c->id }}">
-                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/USer.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2" alt="" />
                                 Ver Perfil @if(auth()->user()->isProfessor() && auth()->user()->isActive()) do Aluno @endif
                             </a>
                             <hr class="mt-0 mb-2 ml-2 mr-2">
                             <a class="msg-title" href="/chat/{{ $s_c->id }}">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg')}}" class="logo logout_icon mr-2" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2" alt="" />
                                 Iniciar Conversa
                             </a>
                         </div>

@@ -52,7 +52,7 @@
                         @foreach ($shuffled_array as $shuffled_option)
 
                             <li>
-                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="" class="mr-3">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg', config()->get('app.https'))}}?v=2.3" alt="" class="mr-3">
                                 <span>
                                     {{ $shuffled_option }}
                                 </span>
@@ -66,7 +66,7 @@
                         @foreach (explode('|', $item->options_answered) as $answer)
                             <?php $option = 'options_'.($loop->index+1); ?>
                             <li>
-                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="" class="mr-3">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg', config()->get('app.https'))}}?v=2.3" alt="" class="mr-3">
                                 <span>
                                     {{ $answer }}
                                 </span>
@@ -115,7 +115,7 @@
                         @for ($i = 0; $i < $item->options_number; $i++)
                             <?php $option = 'options_'.($i+1); ?>
                             <li style="cursor: default;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg')}}" alt="" class="mr-3">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Drag_black.svg', config()->get('app.https'))}}?v=2.3" alt="" class="mr-3">
                                 <span>
                                     {{ $item->$option }}
                                 </span>

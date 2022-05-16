@@ -26,7 +26,7 @@
                 @if(auth()->user()->studentCanRequestExameCorrection($exame->id))
                     <div class="d-block float-right mt-3">
                         <a href="/notify/exame_requires_evaluation/{{ $exame->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                             Notificar Professor
                         </a>
                     </div>
@@ -65,15 +65,15 @@
             </div>
             <div class="d-block float-right mt-3">
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Iniciar Exercício
                 </a>
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Retomar
                 </a>
                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Notificar Professor
                 </a>
             </div>
@@ -97,15 +97,15 @@
             </div>
             <div class="d-block float-right mt-3">
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Iniciar Exercício
                 </a>
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Retomar
                 </a>
                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Notificar Professor
                 </a>
             </div>
@@ -129,15 +129,15 @@
             </div>
             <div class="d-block float-right mt-3">
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Iniciar Exercício
                 </a>
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Retomar
                 </a>
                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Notificar Professor
                 </a>
             </div>
@@ -161,15 +161,15 @@
             </div>
             <div class="d-block float-right mt-3">
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Iniciar Exercício
                 </a>
                 <a href="/exercicios/realizar" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Retomar
                 </a>
                 <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Notificar Professor
                 </a>
             </div>

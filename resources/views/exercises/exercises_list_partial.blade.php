@@ -42,9 +42,9 @@
 
                 <div class="shop_grid_caption card-body m-0 mb-4 pb-2">
                     {{-- Like buttons heart/heart_filled --}}
-                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}"  style="top: 20px; right: 20px; display: {{ $exercise->is_exercise_favorite ? 'none;' : 'block;' }}"
+                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg', config()->get('app.https'))}}?v=2.3"  style="top: 20px; right: 20px; display: {{ $exercise->is_exercise_favorite ? 'none;' : 'block;' }}"
                         alt="" data-exercise-id="{{ $exercise->id }}">
-                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}"  style="top: 20px; right: 20px; display: {{ $exercise->is_exercise_favorite ? 'block;' : 'none;' }}"
+                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg', config()->get('app.https'))}}?v=2.3"  style="top: 20px; right: 20px; display: {{ $exercise->is_exercise_favorite ? 'block;' : 'none;' }}"
                         alt="" style="display: none;" data-exercise-id="{{ $exercise->id }}">
                     <p class="exercise_level not_published_exercise">{{ $exercise->published ? '' : 'Exercício não publicado.' }}</p>
                     <h4 class="sg_rate_title">{{ $exercise->title }}</h4>
@@ -53,7 +53,7 @@
                             <strong>Professor:</strong> 
                             <a href="/perfil/{{ $exercise->user->id }}" class="professor_link">
                                 {{ $exercise->user->username }} 
-                                <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg')}}" alt="" style="margin: 0 0 2px 3px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin: 0 0 2px 3px;">
                             </a> 
                         </p>
                         <p class="exercise_level" style="float: left; margin-right: 20px;">
@@ -67,25 +67,25 @@
                         <div class="d-block float-right mt-3">
                             @if (auth()->user()->id == $exercise->user->id)
                                 <a href="/exercicios/editar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                     Editar
                                 </a>
                             @else
                                 <a href="/exercicios/detalhe/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                     Visualizar
                                 </a>
                             @endif
                             @if(auth()->user()->id == $exercise->user->id)
                                 <a href="#" class="btn btn-theme remove_button remove_exercise" 
                                 style="float: none; padding: 14px 20px; margin-left: 15px;" data-exercise-id="{{ $exercise->id }}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg')}}" alt="" style="margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
                                     Remover
                                 </a>
                             @endif
                             @if($exercise->can_clone)
                                 <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;" data-exercise-id="{{ $exercise->id }}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/clone.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/clone.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                     Clonar
                                 </a>
                             @endif
@@ -94,21 +94,21 @@
                         <div class="d-block float-right mt-3">
                             <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;"
                                 {{ auth()->user()->hasExerciseInProgress($exercise->id) == 'no_exame_started' ? '' : 'hidden' }}>
-                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Iniciar Exercício
                             </a>
                             <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;"
                                 {{ auth()->user()->hasExerciseInProgress($exercise->id) != 'no_exame_started' && auth()->user()->hasExerciseInProgress($exercise->id) != 'has_exame_finished' ? '' : 'hidden' }}>
-                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Retomar Exercício
                             </a>
                             <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;"
                                 {{ auth()->user()->hasExerciseInProgress($exercise->id) == 'has_exame_finished' ? '' : 'hidden' }}>
-                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Rever Exercício
                             </a>
                             <a href="#" hidden class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Notificar Professor
                             </a>
                         </div>
@@ -134,7 +134,7 @@
 
                     @if($exercise->only_my_students)
                         <div class="available_tooltip_text">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                            <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
                                 title="Apenas disponível para alunos do professor autor deste exercício." 
                                 alt="" style="margin-bottom: 3px; margin-right: 5px;"> 
                             Disponível só para os meus Alunos

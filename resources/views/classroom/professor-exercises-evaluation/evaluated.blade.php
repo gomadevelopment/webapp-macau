@@ -29,8 +29,8 @@
                         <br>
                         <a href="#collapse_student_{{ $student->id }}_exames_evaluated" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                             <span>Expandir</span>
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="">
                         </a>
                     </div>
 

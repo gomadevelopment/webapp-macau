@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-6 col-lg-4 mb-5" {{ isset($details_page) && $details_page ? 'hidden' : '' }}>
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Criar a partir de outro Exercício <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg')}}" data-toggle="tooltip" 
+                <label class="label_title">Criar a partir de outro Exercício <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
                     title="Clonar um exercício a partir de outro já existente a que tenha acesso e que seja possível clonar." 
                     alt="" style="margin-left: 5px;"></label>
                 <select name="exercise_template" id="exercise_template" class="form-control" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
@@ -71,10 +71,10 @@
                 
         </div>
         <button type="" class="btn search-btn comment_submit go_to_intro_tab beginning_save save_exercise_form_button" {{ isset($details_page) && $details_page ? 'hidden' : '' }}>
-            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg')}}" alt="" style="margin-left: 10px;">
+            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;">
         </button>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-3 text-center">
-        <img src="{{asset('/assets/backoffice_assets/images/lamp.svg')}}" alt="" style="contain: style;">
+        <img src="{{asset('/assets/backoffice_assets/images/lamp.svg', config()->get('app.https'))}}?v=2.3" alt="" style="contain: style;">
     </div>
 </div>

@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
 
 @stop
 
@@ -74,7 +74,7 @@
                                         @endforeach
                                     <div class="article_buttons">
                                             <a href="#" class="btn btn-theme share_button">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/share.svg')}}" alt="">Partilhar
+                                                <img src="{{asset('/assets/backoffice_assets/icons/share.svg', config()->get('app.https'))}}?v=2.3" alt="">Partilhar
                                             </a>
                                         </div>
                                     {{-- <hr>
@@ -102,8 +102,8 @@
                                                                 <div class="comment-info">
                                                                     <p class="time-ago">12 min.</p>
                                                                     <a href="#" class="reply" style="margin-left: 5px;">Responder</a>
-                                                                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
-                                                                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
+                                                                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                                                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg', config()->get('app.https'))}}?v=2.3" alt="" style="display: none;">
                                                                 </div>
                                                             </div>
                                                         </article>
@@ -127,8 +127,8 @@
                                                                 <div class="comment-info">
                                                                     <p class="time-ago">12 min.</p>
                                                                     <a href="#" class="reply" style="margin-left: 5px;">Responder</a>
-                                                                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg')}}" alt="">
-                                                                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg')}}" alt="" style="display: none;">
+                                                                    <img class="heart_icon" src="{{asset('/assets/backoffice_assets/icons/Heart.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                                                    <img class="heart_filled_icon" src="{{asset('/assets/backoffice_assets/icons/Heart_filled.svg', config()->get('app.https'))}}?v=2.3" alt="" style="display: none;">
                                                                 </div>
                                                             </div>
                                                         </article>
@@ -176,8 +176,8 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
 
     <script>
         function openNav() {

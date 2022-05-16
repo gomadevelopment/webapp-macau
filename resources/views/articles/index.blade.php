@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
 
 @stop
 
@@ -22,7 +22,7 @@
                     @if(auth()->user()->isProfessor())
                         <div class="dropdown create_article">
                             <a href="/artigos/criar" class="btn btn-theme btn-custom dropdown-toggle">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt=""> 
+                            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt=""> 
                             Criar Artigo</a>
                         </div>
                     @endif
@@ -32,7 +32,7 @@
                     </div>
                     <div class="dropdown order_by">
                         <a class="btn btn-custom dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg')}}" alt="" style="margin-left: 10px;">
+                        Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;">
                         </a>
                         <span class="dropdown-menu-arrow"></span>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="dropdown order_by d-block float-none mr-auto ml-auto mb-3" style="width: fit-content;">
                                         <a class="btn btn-custom dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg')}}" alt="" style="margin-left: 10px;">
+                                        Ordenar por <img src="{{asset('/assets/backoffice_assets/icons/Sort.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;">
                                         </a>
                                         <span class="dropdown-menu-arrow"></span>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -296,8 +296,8 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
 
     <script>
         function openNav() {

@@ -29,8 +29,8 @@
                         <br>
                         <a href="#collapse_student_{{ $student->id }}_exames_in_course" class="ml-auto align-self-center expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                             <span>Expandir</span>
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="">
                         </a>
                     </div>
 
@@ -59,7 +59,7 @@
                                 </div>
                                 {{-- <div class="d-block float-right mt-3">
                                     <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Avaliar
                                     </a>
                                 </div> --}}

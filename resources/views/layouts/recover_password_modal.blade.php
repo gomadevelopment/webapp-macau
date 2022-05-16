@@ -3,7 +3,7 @@
     <div class="container modal-dialog modal-dialog-centered login-pop-form" role="document">
         <div class="modal-content" id="password-recover">
             <span class="mod-close" data-dismiss="modal" aria-hidden="true">
-                <img src="{{asset('/assets/landing_page/icons/Close.svg')}}" alt="" class="w-100">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg', config()->get('app.https'))}}?v=2.3" alt="" class="w-100">
             </span>
             <div class="modal-body">
                 <h4 class="modal-header-title">PortuguêsàVista</h4>
@@ -28,7 +28,7 @@
                         
                         <div class="form-group signup_button about_section">
                             <button id="submit_recover_password_form" type="button" class="btn btn-theme btn-lg">
-                                {{ isset($pt_lang) && $pt_lang ? 'Recuperar' : 'Recover' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg')}}" alt="">
+                                {{ isset($pt_lang) && $pt_lang ? 'Recuperar' : 'Recover' }} &nbsp; <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
                             </button>
                         </div>
                         
@@ -37,7 +37,7 @@
                 </div>
                 
             </div>
-            <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/SignIn&SignUp.svg')}}" alt="">
+            <img class="scene3_svg" src="{{asset('/assets/landing_page/illustrations/SignIn&SignUp.svg', config()->get('app.https'))}}?v=2.3" alt="">
         </div>
     </div>
 </div>

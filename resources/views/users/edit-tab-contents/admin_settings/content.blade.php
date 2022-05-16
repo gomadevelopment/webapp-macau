@@ -6,8 +6,8 @@
             <h4 class="sg_rate_title align-self-center text-center mr-2" style="font-size: 21px;">
                 Universidades
             </h4>
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
         </a>
     </div>
 
@@ -29,8 +29,8 @@
             <h4 class="sg_rate_title align-self-center text-center mr-2" style="font-size: 21px;">
                 Tags
             </h4>
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
         </a>
     </div>
 
@@ -51,8 +51,8 @@
             <h4 class="sg_rate_title align-self-center text-center mr-2" style="font-size: 21px;">
                 Níveis de Exercícios
             </h4>
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
         </a>
     </div>
 
@@ -74,8 +74,8 @@
             <h4 class="sg_rate_title align-self-center text-center mr-2" style="font-size: 21px;">
                 Categorias de Exercícios
             </h4>
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
         </a>
     </div>
 
@@ -97,8 +97,8 @@
             <h4 class="sg_rate_title align-self-center text-center mr-2" style="font-size: 21px;">
                 Categorias de Artigos
             </h4>
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg')}}" class="expand_chevron" alt="">
-            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg')}}" class="collapse_chevron" alt="" style="display: none;">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
         </a>
     </div>
 

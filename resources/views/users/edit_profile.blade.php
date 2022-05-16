@@ -2,10 +2,10 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.2">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.2">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.3">
 
 <link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
@@ -25,7 +25,7 @@
 
                 <div class="exercise_time wrap float-right create_class_button" style="display: none;">
                     <a href="#" data-toggle="modal" data-target="#new_create_class_modal"  class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg')}}" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Criar Turma
                     </a>
                 </div>
@@ -46,22 +46,22 @@
                         <a class="nav-link {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? '' : 'active' }}" 
                             id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" 
                             aria-selected="{{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'false' : 'true' }}">
-                            <img src="{{asset('/assets/backoffice_assets/icons/info.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/info_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/info.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/info_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Informação</a>
                     </li>
                     @if($user->id == auth()->user()->id)
                         <li class="nav-item">
                             <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications-tab" aria-selected="false">
-                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_white.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                 Notificações</a>
                         </li>
                         @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                             <li class="nav-item">
                                 <a class="nav-link" id="classes-tab" data-toggle="tab" href="#classes" role="tab" aria-controls="classes-tab" aria-selected="false">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Classes_white.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Classes.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Classes_white.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Classes.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                     Turmas</a>
                             </li>
                             @if(auth()->user()->isAdmin())
@@ -69,8 +69,8 @@
                                     <a class="nav-link {{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'active' : '' }}"
                                         id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings-tab" 
                                         aria-selected="{{ isset($inputs['land_on_settings_tab']) && $inputs['land_on_settings_tab'] ? 'true' : 'false' }}">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/cog_white.svg')}}" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/cog.svg')}}" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog_white.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                         Definições</a>
                                 </li>
                             @endif
@@ -137,14 +137,14 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.2"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.2"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.3"></script>
 
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'))}}"></script>
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'))}}"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
 
     <script>
 
