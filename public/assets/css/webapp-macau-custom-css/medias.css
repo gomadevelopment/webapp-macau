@@ -97,6 +97,10 @@
 
 @media (max-width: 991px) {
 
+    .hero-caption.small_wd {
+        margin-left: -25px;
+    }
+
     /* Exercises Col + Button wraps */
 
     .header.homepage .nav-brand {
@@ -175,7 +179,7 @@
     }
 
     .scene1_svg {
-        width: 65%;
+        width: 52%;
         max-width: 210%;
         margin-left: -80px;
     }
@@ -198,6 +202,10 @@
 }
 
 @media (max-width: 767px) {
+
+    .hero-caption.small_wd {
+        margin-left: 0;
+    }
 
     .nav-menu.nav-menu-social>li.login_click {
         top: 20px;
@@ -280,6 +288,8 @@
     .hero_banner .container {
         padding-top: 0;
     }
+
+    .scene1_svg {}
 
     .scene1_svg,
     .scene2_svg {

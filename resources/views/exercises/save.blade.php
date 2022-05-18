@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -50,20 +50,20 @@
                 <ul class="nav nav-tabs p-2 b-0" id="create_exercise_tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link {{ $land_on_structure_tab ? '' : 'active' }}" id="begin-tab" data-toggle="tab" href="#begin" role="tab" aria-controls="begin" aria-selected="{{ $land_on_structure_tab ? 'false' : 'true' }}">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Home.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Home_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/File.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/File_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Introdução</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ $land_on_structure_tab ? 'active' : '' }} {{ isset($exercise->id) ? '' : 'disabled' }}" id="structure-tab" data-toggle="tab" href="#structure" role="tab" aria-controls="structure" aria-selected="{{ $land_on_structure_tab ? 'true' : 'false' }}">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Layers.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Layers_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Layers.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Layers_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Estrutura</a>
                     </li>
                 </ul>
@@ -179,13 +179,13 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.4"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.4"></script>
 
     <script>
 

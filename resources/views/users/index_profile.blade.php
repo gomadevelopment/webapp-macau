@@ -2,10 +2,10 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.4">
 
 <link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
@@ -52,7 +52,7 @@
                         {{ $user->username }}
                         @if ($user->university)
                             <p class="exercise_author align-self-center text-center">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Location.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 5px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Location.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 5px;">
                                 {{ $user->university->name }}
                             </p>
                         @else
@@ -60,7 +60,7 @@
                         @endif
                         @if ($user->id == auth()->user()->id || auth()->user()->isAdmin())
                             <a href="/perfil/editar/{{ $user->id }}" class="btn search-btn comment_submit mt-4" style="float: none; padding: 12px 20px; font-size: 21px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Editar
                             </a>
                         @endif
@@ -96,7 +96,7 @@
                                 <h4 class="sg_rate_title">Mais informação</h4>
                                 <div class="d-block text-left mt-3">
                                     <a href="/chat/{{ $user->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Contactar
                                     </a>
                                 </div>
@@ -105,7 +105,7 @@
                                         {{-- LinkedIn logo --}}
                                         <a href="{{ $user->linkedin_url }}" target="_blank" 
                                         class="btn search-btn comment_submit" style="float: none; padding: 12px 44px; font-size: 21px; background-color: #0766c1; border-color: #0766c1;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg', config()->get('app.https'))}}?v=2.3" alt="" style="width: 110%;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/LinkedIn_Logo.svg', config()->get('app.https'))}}?v=2.4" alt="" style="width: 110%;">
                                         </a>
                                     </div>
                                 @endif
@@ -122,7 +122,7 @@
                                     <div class="d-block text-left mt-3">
                                         @if($user->id == auth()->user()->id)
                                             <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; font-size: 21px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Solicitar novamente
                                             </a>
                                         @else
@@ -148,7 +148,7 @@
                             <p class="exercise_author"><strong>Professor:</strong> 
                                 <a href="/perfil/{{ $user->student_class_user->student_class->teacher->id }}" class="professor_link">
                                     {{ $user->student_class_user->student_class->teacher->username }}
-                                    <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin: 0 3px 2px 3px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin: 0 3px 2px 3px;">
                                 </a>
                             </p>
                             <p class="exercise_author"><strong>Turma:</strong> {{ $user->student_class_user->student_class->name }}
@@ -156,7 +156,7 @@
                         @endif
                         <div class="d-block float-right mt-3 mb-4">
                             <a href="#" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px; font-size: 21px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/contact.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 Contactar
                             </a>
                         </div>
@@ -204,8 +204,8 @@
                                 <h4>
                                     <a href="#collapse_performance_filters" class="ml-auto p-0 b-0 align-self-center expand_accordion collapsed" data-toggle="collapse" data-parent="#accordion">
                                         Filtros &nbsp;
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.4" class="expand_chevron" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.4" class="collapse_chevron" alt="" style="display: none;">
                                     </a>
                                 </h4>
                                 <div id="collapse_performance_filters" class="collapse" data-parent="#accordion">
@@ -339,20 +339,20 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
 
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.4"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.4"></script>
 
     {{-- HighCharts --}}
-    <script src="https://code.highcharts.com/highcharts.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/data.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.3"></script>
+    <script src="https://code.highcharts.com/highcharts.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/data.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.4"></script>
 
     <!-- Additional files for the Highslide popup effect -->
     {{-- <script src="https://www.highcharts.com/samples/static/highslide-full.min.js"></script>

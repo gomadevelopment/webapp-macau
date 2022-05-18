@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -26,7 +26,7 @@
             <div class="col-lg-12 col-md-12 d-flex align-items-center">
                 <form method="GET" action="/exercicios/editar/{{ $exercise->id }}" class="">
                     <button type="submit" class="btn search-btn comment_submit mr-5" style="float: none; padding: 10px 15px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="">
                     </button>
                     <input type="hidden" name="land_on_structure_tab" id="land_on_structure_tab" value="true">
                 </form>
@@ -80,17 +80,17 @@
                                     <div class="d-block float-right mt-3">
                                         <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $created_question->id }}" class="" style="display: contents;">
                                             <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Editar
                                             </button>
                                             <input type="hidden" name="exercise_question_section" id="exercise_question_section" value="{{ isset($exercise_question_section) ? $exercise_question_section : '' }}">
                                         </form>
                                         <a href="#" class="btn btn-theme remove_button" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px;">
                                             Remover
                                         </a>
                                         <a href="#" class="btn btn-theme clone_button" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/clone.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                             Clonar
                                         </a>
                                     </div>
@@ -176,7 +176,7 @@
                                 <span class="error-block-span pink question_description_error" hidden>
                                 </span>
                                 <a href="#" id="description_image_button" class="btn search-btn comment_submit mt-2" style="padding: 16px 20px; white-space: nowrap; display: {{ isset($question) && $question->description_image_url ? 'none' : 'block'}};">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                     Associar Media
                                 </a>
                                 @if(isset($question) && $question->description_image_url)
@@ -291,7 +291,7 @@
 
                     <div class="text-center mt-4">
                         <button type="button" id="submit_enabled_form" class="btn search-btn comment_submit m-3" style="float: none;">
-                            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;"></button>
+                            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 10px;"></button>
                         {{-- <input id="save_as_template" class="checkbox-custom" name="save_as_template" type="checkbox">
                         <label for="save_as_template" class="checkbox-custom-label d-inline-block">Gravar como Template</label> --}}
                     </div>
@@ -304,7 +304,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                 <form method="GET" action="{{ isset($exercise->id) ? '/exercicios/' . $exercise->id . '/questao/criar' : '#' }}" class="add_question_form">
                     <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                         Criar Questão
                     </button>
                     <input type="hidden" name="exercise_question_section" id="exercise_question_section" value="{{ isset($exercise_question_section) ? $exercise_question_section : '' }}">
@@ -313,10 +313,10 @@
         </div>
 
         <button class="btn search-btn comment_submit show_video" style="display: none; float: none;">
-            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="">
         </button>
         <button class="btn search-btn comment_submit hide_video" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
-            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="">
+            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="">
         </button>
 
         @if($exercise->medias)
@@ -344,11 +344,11 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.4"></script>
 
     <script>
 

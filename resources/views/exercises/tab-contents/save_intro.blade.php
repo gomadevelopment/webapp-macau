@@ -2,7 +2,7 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Texto Introdutório <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Texto Introdutório <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Breve resumo apresentado como descrição do Exercício, tanto na lista de Exercícios como na introdução de cada Exercício individual." 
                     alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control apply_ckeditor" name="introduction" id="introduction" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('introduction', $exercise->introduction) }}</textarea>
@@ -12,7 +12,7 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Enunciado <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Enunciado <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Enunciado Geral do Exercício." 
                     alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control apply_ckeditor" name="statement" id="statement" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('statement', $exercise->statement) }}</textarea>
@@ -25,7 +25,7 @@
     <div class="col-sm-12 col-md-4 col-lg-4 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Duração do Vídeo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Duração do Vídeo <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Duração do Vídeo que acompanha o Exercício." 
                     alt="" style="margin-left: 5px;"></label>
                 <input class="form-control" type="text" name="duration" id="duration" value="{{ old('statement', $exercise->duration) }}" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>
@@ -39,13 +39,13 @@
         <div class="card-body">
             <div class="form-group mb-0">
                 <form action=""></form>
-                <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Media <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Insira aqui o vídeo/audio/imagem a apresentar ao longo de todo o Exercício." 
                     alt="" style="margin-left: 5px;"></label>
                 <div id="dropzone">
                     <div class="dropzone needsclick {{ isset($details_page) && $details_page ? 'disabled' : '' }}" id="form-dropzone-media">
                         <div class="dz-message needsclick">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.4" alt="">
                             <br>
                             Arraste e solte os seus ficheiros aqui 
                         </div>
@@ -79,13 +79,13 @@
         <div class="card-body">
             <div class="form-group">
                 <form action=""></form>
-                <label class="label_title">Imagem de Apresentação <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Imagem de Apresentação <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Insira aqui a imagem a suportar o texto descritivo Exercício." 
                     alt="" style="margin-left: 5px;"></label>
                 <div id="dropzone">
                     <div class="dropzone needsclick {{ isset($details_page) && $details_page ? 'disabled' : '' }}" id="form-dropzone-presentation">
                         <div class="dz-message needsclick">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.4" alt="">
                             <br>
                             Arraste e solte os seus ficheiros aqui 
                         </div>
@@ -100,7 +100,7 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Descrição Audiovisual <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Descrição Audiovisual <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Descrição Audiovisual apresentado no ínicio da realização do Exercício, acerca da media acima inserida." 
                     alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control apply_ckeditor" name="audiovisual_desc" id="audiovisual_desc" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audiovisual_desc', $exercise->audiovisual_desc) }}</textarea>
@@ -110,7 +110,7 @@
     <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
         <div class="card-body">
             <div class="form-group">
-                <label class="label_title">Transcrição Áudio <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.3" data-toggle="tooltip" 
+                <label class="label_title">Transcrição Áudio <img src="{{asset('/assets/backoffice_assets/icons/Tooltip.svg', config()->get('app.https'))}}?v=2.4" data-toggle="tooltip" 
                     title="Transcrição Áudio apresentada no fim da realização de um Exercício, após o mesmo ser submetido pelo Aluno." 
                     alt="" style="margin-left: 5px;"></label>
                 <textarea class="form-control apply_ckeditor" name="audio_transcript" id="audio_transcript" cols="30" rows="4" placeholder="" {{ isset($details_page) && $details_page ? 'disabled' : '' }}>{{ old('audio_transcript', $exercise->audio_transcript) }}</textarea>
@@ -180,7 +180,7 @@
     </div>
     <div class="col-sm-12 col-md-4 col-lg-6 mb-5 align-self-end">
         <button type="button" class="btn search-btn comment_submit intro_save save_exercise_form_button" {{ isset($details_page) && $details_page ? 'hidden' : '' }}>
-            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;">
+            Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 10px;">
         </button>
     </div>
 </div>

@@ -6,10 +6,10 @@
                 
                 <div class="col-lg-6 col-md-6">
                     <div class="footer-widget">
-                        <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Negativo.svg', config()->get('app.https'))}}?v=2.3" class="logo" alt="" style="width: 26%;" />
+                        <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Negativo.svg', config()->get('app.https'))}}?v=2.4" class="logo" alt="" style="width: 26%;" />
                         <div class="footer-add">
                             <p class="supported_label">Supported by Higher Education Fund of Macao SAR Government</p>
-                            <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg', config()->get('app.https'))}}?v=2.4" alt="">
                             <p>Estrada Marginal da Ilha Verde, 14-17, Macau, China.</p>
                             <p>+853 8592 5600</p>
                             <p>info@portuguesavista.com</p>
@@ -62,10 +62,10 @@
                 
                 <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 text-right">
                     <ul class="footer-bottom-social">
-                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/facebook.svg', config()->get('app.https'))}}?v=2.3" alt=""></a></li>
-                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/instagram.svg', config()->get('app.https'))}}?v=2.3" alt=""></a></li>
-                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/twitter.svg', config()->get('app.https'))}}?v=2.3" alt=""></a></li>
-                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/linkedin.svg', config()->get('app.https'))}}?v=2.3" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/facebook.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/instagram.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/twitter.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/linkedin.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
                     </ul>
                 </div>
                 

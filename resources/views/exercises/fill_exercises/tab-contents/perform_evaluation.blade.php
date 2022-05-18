@@ -53,16 +53,16 @@
 
             <div class="d-block text-center mt-4 mb-4">
                 <a href="/exercicios" class="btn btn-theme remove_button m-2" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/icon_View_Exercises.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Ver Exercícios
                 </a>
                 <a href="/sala_de_aula" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Book.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Book.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                     Sala de Aula
                 </a>
                 @if(!$exame_review)
                     <a href="/exercicios/realizar/{{ $exercise->id }}" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Rever Exercício
                     </a>
                 @endif

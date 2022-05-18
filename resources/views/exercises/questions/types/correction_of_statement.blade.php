@@ -24,7 +24,7 @@
                             class="form-control" placeholder="Afirmação...">{{$question_item->text_1}}</textarea>
                         </div>
                         <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px; height: fit-content;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px; height: fit-content;">
                             Remover
                         </a>
                     </div>
@@ -54,7 +54,7 @@
                         <textarea cols="30" rows="5" name="correction_of_statement_question_0" id="correction_of_statement_question_0" class="form-control" placeholder="Afirmação..."></textarea>
                     </div>
                     <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap; height: fit-content;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
                     </a>
                 </div>
@@ -74,7 +74,7 @@
         <div class="row mb-3">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                 <a href="#" class="btn search-btn comment_submit m-3 button_add_correction_of_statement" style="font-size: 21px; float: none;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                     Adicionar Alínea
                 </a>
             </div>
@@ -102,7 +102,7 @@
                         <textarea cols="30" rows="5" name="correction_of_statement_question_{{$loop->index}}" id="correction_of_statement_question_{{$loop->index}}" class="form-control" placeholder="Afirmação..."></textarea>
                     </div>
                     <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
                     </a>
                 </div>
@@ -130,7 +130,7 @@
                 <textarea cols="30" rows="5" name="correction_of_statement_question_0" id="correction_of_statement_question_0" class="form-control" placeholder="Afirmação..."></textarea>
             </div>
             <a href="#" class="btn btn-theme button-wrap remove_button remove_row remove_correction_of_statement ml-3" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>

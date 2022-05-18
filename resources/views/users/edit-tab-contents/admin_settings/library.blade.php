@@ -9,8 +9,8 @@
                     <h4>
                         <a href="#collapse_articles_validation_filters" class="ml-auto p-0 b-0 align-self-center articles_validation_filters_accordion expand_accordion collapsed"  data-toggle="collapse" data-parent="#accordion">
                             Filtros &nbsp;
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron" alt="">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron" alt="" style="display: none;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.4" class="expand_chevron" alt="">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.4" class="collapse_chevron" alt="" style="display: none;">
                         </a>
                     </h4>
                     <div id="collapse_articles_validation_filters" class="collapse" data-parent="#accordion">

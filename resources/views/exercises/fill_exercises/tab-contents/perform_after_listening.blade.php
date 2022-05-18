@@ -138,37 +138,37 @@
                                 <div class="d-block text-center mt-4 mb-4">
                                     @if($loop->first)
                                         <a href="#listening-shop" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                             Voltar
                                         </a>
                                         @if($loop->last)
                                             <a href="#quiz-div" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Continuar
                                             </a>
                                         @else
                                             <a href="#ex{{$after_listening_questions[$loop->index+1]->id}}" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Seguinte
                                             </a>
                                         @endif
                                     @else
                                         @if($loop->last)
                                             <a href="#ex{{$after_listening_questions[$loop->index-1]->id}}" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                                 Voltar
                                             </a>
                                             <a href="#quiz-div" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Continuar
                                             </a>
                                         @else
                                             <a href="#ex{{$after_listening_questions[$loop->index-1]->id}}" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                                                 Voltar
                                             </a>
                                             <a href="#ex{{$after_listening_questions[$loop->index+1]->id}}" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                                <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                                 Seguinte
                                             </a>
                                         @endif
@@ -195,7 +195,7 @@
                 </div>
                 <div class="d-block text-center mt-4 mb-4">
                     <a href="#quiz-div" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Prosseguir
                     </a>
                 </div>

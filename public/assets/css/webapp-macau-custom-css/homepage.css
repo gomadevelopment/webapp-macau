@@ -15,17 +15,17 @@
 
 .scene1_svg {
     width: auto;
-    max-width: 160%;
-    margin-left: -90px;
+    max-width: 50%;
+    margin-left: 50px;
     margin-right: -120px;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
 }
 
 .hero-caption.small_wd {
     /* position: absolute; */
-    max-width: 520px;
+    max-width: 500px;
     /* margin-top: 50px; */
-    max-width: unset;
+    /* max-width: unset; */
 }
 
 .hero-caption.small_wd .big-header-capt {

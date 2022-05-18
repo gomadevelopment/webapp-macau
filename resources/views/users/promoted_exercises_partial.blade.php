@@ -27,7 +27,7 @@
                         <strong>Professor:</strong> 
                         <a href="/perfil/{{ $exercise->user->id }}" class="professor_link">
                             {{ $exercise->user->username }} 
-                            <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin: 0 0 2px 3px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/eye_outline.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin: 0 0 2px 3px;">
                         </a> 
                     </p>
                 @endif
@@ -43,12 +43,12 @@
                 <div class="d-block float-right mt-3">
                     @if (auth()->user()->id == $exercise->user->id)
                         <a href="/exercicios/editar/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                             Editar
                         </a>
                     @else
                         <a href="/exercicios/detalhe/{{ $exercise->id }}" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Eye.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                             Visualizar
                         </a>
                     @endif

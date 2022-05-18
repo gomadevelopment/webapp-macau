@@ -156,7 +156,7 @@
 
             <div class="d-block text-center mt-4 mb-4">
                 <a href="" class="btn search-btn comment_submit {{ $exame_review ? '' : 'start_exercise' }} m-2 d-none" style="float: none; padding: 12px 20px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin: 0 5px 2px 0;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin: 0 5px 2px 0;">
                     Iniciar Exercício
                 </a>
                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -167,7 +167,7 @@
                         </div>
                     @endif
                     <a href="#pre-listening" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/play.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Prosseguir
                     </a>
                 </div>

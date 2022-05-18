@@ -411,21 +411,21 @@
 
             <div class="d-block text-center mt-4 mb-4">
                 <a href="#after-listening" class="btn btn-theme remove_button m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/small_arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                     <span class="pt_label button_label">Voltar</span>
                     <span class="en_label button_label">Back</span>
                     <span class="cnn_label button_label">后退</span>
                 </a>
                 @if(!$exame_review)
                     <a href="#evaluation" id="{{ $exame_review ? '' : 'finish_exercise_button' }}" class="btn search-btn comment_submit m-2" style="float: none; padding: 15px 25px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         <span class="pt_label button_label">Concluir</span>
                         <span class="en_label button_label">Finish</span>
                         <span class="cnn_label button_label">结束</span>
                     </a>
                 @else
                     <a href="#evaluation" id="" class="btn search-btn comment_submit m-2 perform_exercise_nav_button" style="float: none; padding: 15px 25px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         <span class="pt_label button_label">Ver Classificação</span>
                         <span class="en_label button_label">View Classification</span>
                         <span class="cnn_label button_label">查看分类</span>

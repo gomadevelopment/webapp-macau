@@ -175,7 +175,7 @@
                             <button type="button" class="btn search-btn comment_submit m-2" 
                                 onclick="document.getElementById('{{$vowel}}').play()" 
                                 style="padding: 4px 16px 4px 5px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.3" alt="" style="width: 150%;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.4" alt="" style="width: 150%;">
                             </button> 
                         </div>
                     @endif
@@ -221,7 +221,7 @@
                             <button type="button" class="btn search-btn comment_submit m-2" 
                                 onclick="document.getElementById('{{$vowel}}').play()" 
                                 style="padding: 4px 16px 4px 5px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.3" alt="" style="width: 150%;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.4" alt="" style="width: 150%;">
                             </button> 
                         </div>
                     @endif
@@ -278,7 +278,7 @@
                             <button type="button" class="btn search-btn comment_submit m-2" 
                                 onclick="document.getElementById('{{$vowel}}').play()" 
                                 style="padding: 4px 16px 4px 5px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.3" alt="" style="width: 150%;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.4" alt="" style="width: 150%;">
                             </button> 
                         </div>
                     @endif

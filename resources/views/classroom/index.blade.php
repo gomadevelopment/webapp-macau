@@ -2,11 +2,11 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.4">
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/users.css', config()->get('app.https')) }}?v=2.4">
 
 <link rel="stylesheet" href="{{asset('/assets/js/bootstrap-datepicker/dist/css/bootstrap-datepicker.css', config()->get('app.https')) }}" id="bscss">
 
@@ -147,17 +147,17 @@
                                             @if(auth()->user()->isProfessor() && auth()->user()->isActive())
                                                 <div class="dropdown-menu message-box">
                                                     {{-- <a class="msg-title" href="#">
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2 ml-1" alt="" />
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Lens_black.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon mr-2 ml-1" alt="" />
                                                         Encontrar Alunos
                                                     </a>
                                                     <hr class="mt-0 mb-2 ml-2 mr-2"> --}}
                                                     {{-- <a class="msg-title" href="#">
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2" alt="" />
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Graph_Pie_black.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon mr-2" alt="" />
                                                         Desempenho da Turma
                                                     </a>
                                                     <hr class="mt-0 mb-2 ml-2 mr-2"> --}}
                                                     <a class="msg-title professor_class_group_chat" href="#">
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2" alt="" />
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon mr-2" alt="" />
                                                         Iniciar Conversa
                                                     </a>
                                                 </div>
@@ -165,7 +165,7 @@
                                             @if (auth()->user()->student_class_user)
                                                 <div class="dropdown-menu message-box">
                                                     <a class="msg-title student_class_group_chat" href="#" data-student-class-id="{{ auth()->user()->student_class_user->student_class_id }}">
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon mr-2" alt="" />
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chat_black.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon mr-2" alt="" />
                                                         Iniciar Conversa de Turma
                                                     </a>
                                                 </div>
@@ -193,7 +193,7 @@
                                     <div class="form-group m-0">
                                         <a href="/exercicios/criar" class="shortcut_links">
                                             Criar Novo Exercício
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                         </a>
                                     </div>
                                     <hr>
@@ -201,7 +201,7 @@
                                 <div class="form-group m-0">
                                     <a href="/exercicios" class="shortcut_links">
                                         Todos os Exercícios
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                     </a>
                                 </div>
                                 <hr>
@@ -209,7 +209,7 @@
                                     <div class="form-group m-0">
                                         <a href="/questoes" class="shortcut_links">
                                             Templates de Questões
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                         </a>
                                     </div>
                                     <hr>
@@ -217,21 +217,21 @@
                                 {{-- <div class="form-group m-0">
                                     <a href="#" class="shortcut_links">
                                         Contactar o Suporte
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                     </a>
                                 </div>
                                 <hr> --}}
                                 <div class="form-group m-0">
                                     <a href="/artigos" class="shortcut_links">
                                         Biblioteca
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                     </a>
                                 </div>
                                 <hr>
                                 <div class="form-group m-0">
                                     <a href="/chat" class="shortcut_links">
                                         Chat
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow_pink.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -267,20 +267,20 @@
                                 <ul class="nav nav-tabs p-2 b-0" id="classroom_exercises_tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="awaiting-evaluation-tab" data-toggle="tab" href="#awaiting-evaluation" role="tab" aria-controls="awaiting-evaluation" aria-selected="true">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             A aguardar Avaliação</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="in-course-tab" data-toggle="tab" href="#in-course" role="tab" aria-controls="in-course" aria-selected="false">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             Em curso</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="evaluated-tab" data-toggle="tab" href="#evaluated" role="tab" aria-controls="evaluated" aria-selected="false">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Check_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Check_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             Avaliados</a>
                                     </li>
                                 </ul>
@@ -301,20 +301,20 @@
                                 <ul class="nav nav-tabs p-2 b-0" id="classroom_exercises_tabs" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="in-evaluation-tab" data-toggle="tab" href="#in-evaluation" role="tab" aria-controls="in-evaluation" aria-selected="true">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Watch_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             Em Avaliação</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="in-course-tab" data-toggle="tab" href="#in-course" role="tab" aria-controls="in-course" aria-selected="false">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             Em curso</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="done-tab" data-toggle="tab" href="#done" role="tab" aria-controls="done" aria-selected="false">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                                            <img src="{{asset('/assets/backoffice_assets/icons/Check_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                                            <img src="{{asset('/assets/backoffice_assets/icons/Check_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                                             Concluídos</a>
                                     </li>
                                 </ul>
@@ -331,7 +331,7 @@
                                 {{-- <div class="text-center">
                                     <a href="/exercicios" class="btn search-btn comment_submit" style="font-size: 21px; float: none; white-space: nowrap;">
                                         Ir para Exercícios
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px; width: 10%;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Arrow.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 10px; width: 10%;">
                                     </a>
                                 </div> --}}
                                     
@@ -377,8 +377,8 @@
                                                 <h4>
                                                     <a href="#collapse_performance_filters" class="ml-auto p-0 b-0 align-self-center expand_accordion filters collapsed" data-toggle="collapse" data-parent="#accordion_filters">
                                                         Filtros &nbsp;
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.3" class="expand_chevron filters" alt="">
-                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.3" class="collapse_chevron filters" alt="" style="display: none;">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_black.svg', config()->get('app.https'))}}?v=2.4" class="expand_chevron filters" alt="">
+                                                        <img src="{{asset('/assets/backoffice_assets/icons/Chevron_up_pink.svg', config()->get('app.https'))}}?v=2.4" class="collapse_chevron filters" alt="" style="display: none;">
                                                     </a>
                                                 </h4>
                                                 <div id="collapse_performance_filters" class="collapse" data-parent="#accordion_filters">
@@ -506,21 +506,21 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/classroom.js', config()->get('app.https')) }}?v=2.4"></script>
 
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
-    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.3"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.4"></script>
+    <script src="{{asset('/assets/js/bootstrap-datepicker/dist/js/bootstrap-datepicker.pt.min.js', config()->get('app.https'), config()->get('app.https'))}}?v=2.4"></script>
     
     {{-- HighCharts --}}
-    <script src="https://code.highcharts.com/highcharts.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/data.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js?v=2.3"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.3"></script>
+    <script src="https://code.highcharts.com/highcharts.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/data.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js?v=2.4"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js?v=2.4"></script>
 
     <script>
 

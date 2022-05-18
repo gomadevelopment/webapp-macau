@@ -34,13 +34,13 @@
                             @if (!isset($details_page))
                                 <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $question->id }}" class="" style="display: contents;">
                                     <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Editar
                                     </button>
                                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Pré-Escuta" hidden>
                                 </form>
                                 <a href="#" class="btn btn-theme remove_button delete_question_button" data-id="{{$question->id}}" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px;">
                                     Remover
                                 </a>
                             @endif
@@ -59,7 +59,7 @@
                 <form action=""></form>
                 <form method="GET" action="{{ '/exercicios/' . $exercise->id . '/questao/criar' }}" class="add_question_form">
                     <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px;">
                         Adicionar</button>
                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Pré-Escuta" hidden>
                 </form>
@@ -98,13 +98,13 @@
                             @if (!isset($details_page))
                                 <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $question->id }}" class="" style="display: contents;">
                                     <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Editar
                                     </button>
                                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="À Escuta" hidden>
                                 </form>
                                 <a href="#" class="btn btn-theme remove_button delete_question_button" data-id="{{$question->id}}" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px;">
                                     Remover
                                 </a>
                             @endif
@@ -122,7 +122,7 @@
             <div class="card-body text-center">
                 <form method="GET" action="{{ '/exercicios/' . $exercise->id . '/questao/criar' }}" class="add_question_form">
                     <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px;">
                         Adicionar</button>
                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="À Escuta" hidden>
                 </form>
@@ -161,13 +161,13 @@
                             @if (!isset($details_page))
                                 <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $question->id }}" class="" style="display: contents;">
                                     <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Editar
                                     </button>
                                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Oficina da Escuta" hidden>
                                 </form>
                                 <a href="#" class="btn btn-theme remove_button delete_question_button" data-id="{{$question->id}}" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px;">
                                     Remover
                                 </a>
                             @endif
@@ -185,7 +185,7 @@
             <div class="card-body text-center">
                 <form method="GET" action="{{ '/exercicios/' . $exercise->id . '/questao/criar' }}" class="add_question_form">
                     <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px;">
                         Adicionar</button>
                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Oficina da Escuta" hidden>
                 </form>
@@ -225,13 +225,13 @@
                             @if (!isset($details_page))
                                 <form method="GET" action="/exercicios/{{ $exercise->id }}/questao/editar/{{ $question->id }}" class="" style="display: contents;">
                                     <button class="btn search-btn comment_submit" style="float: none; padding: 12px 20px; margin-left: 15px;">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                        <img src="{{asset('/assets/backoffice_assets/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                         Editar
                                     </button>
                                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Pós-Escuta" hidden>
                                 </form>
                                 <a href="#" class="btn btn-theme remove_button delete_question_button" data-id="{{$question->id}}" style="float: none; padding: 14px 20px; margin-left: 15px;">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px;">
                                     Remover
                                 </a>
                             @endif
@@ -249,7 +249,7 @@
             <div class="card-body text-center">
                 <form method="GET" action="{{ '/exercicios/' . $exercise->id . '/questao/criar' }}" class="add_question_form">
                     <button type="submit" class="btn search-btn comment_submit m-3" style="font-size: 21px; float: none;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px;">
                         Adicionar</button>
                     <input type="text" name="exercise_question_section" id="exercise_question_section" value="Pós-Escuta" hidden>
                 </form>
@@ -278,7 +278,7 @@
             <input id="publish_exam" class="checkbox-custom" name="publish_exam" type="checkbox" {{ $exercise->published == 1 ? 'checked' : '' }} {{ $exercise->questions()->count() ? '' : 'disabled' }}>
             <label for="publish_exam" class="checkbox-custom-label publish_exam-label d-inline-block mb-3">Publicar Sequência? (Ativo/Desativo)</label>
             <button type="submit" class="btn search-btn comment_submit ml-3 mb-3" style="float: none;">
-                Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;"></button>
+                Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 10px;"></button>
         </form>
     </div>
 @endif

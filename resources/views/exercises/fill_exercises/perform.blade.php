@@ -2,8 +2,8 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -162,7 +162,7 @@
                         <form method="POST" id="finish_exame_correction_form" action="" enctype="multipart/form-data">
                             @csrf
                             <a href="#" id="finish_exame_correction" class="btn search-btn comment_submit" style="float: none; padding: 15px 25px;">
-                                <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                                <img src="{{asset('/assets/backoffice_assets/icons/Check.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                                 <span class="pt_label button_label">Finalizar Correção</span>
                             </a>
                         </form>
@@ -179,10 +179,10 @@
 
                     <a href="#" data-toggle="modal" data-target="#pause_modal" data-backdrop='static' data-keyboard='false'
                         id="pauseButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Pause_circle.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Pause_circle.svg', config()->get('app.https'))}}?v=2.4" alt="">
                     </a>
                     <a href="#" id="startButton" class="pause_time ml-2 {{ !$exercise->has_interruption ? 'no_interruption_time' : '' }}" style="padding: 10px 15px !important;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Play_circle.svg', config()->get('app.https'))}}?v=2.4" alt="">
                     </a>
                 </div>
                 
@@ -201,38 +201,38 @@
                 <ul class="nav nav-tabs p-2 b-0" id="perform_exercise_tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="intro-tab" data-toggle="tab" href="#intro" role="tab" aria-controls="intro" aria-selected="true">
-                            <img src="{{asset('/assets/backoffice_assets/icons/File.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/File_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/File_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Introdução</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pre-listening-tab" data-toggle="tab" href="#pre-listening" role="tab" aria-controls="pre-listening-tab" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Pre_Listen_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pré-Escuta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="listening-tab" data-toggle="tab" href="#listening" role="tab" aria-controls="listening-tab" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Listen.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Listen_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Listen.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Listen_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             À Escuta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="listening-shop-tab" data-toggle="tab" href="#listening-shop" role="tab" aria-controls="listening-shop-tab" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Home2.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Home2_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home2.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Home2_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Oficina da Escuta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="after-listening-tab" data-toggle="tab" href="#after-listening" role="tab" aria-controls="after-listening-tab" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/After_listen.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/After_listen_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/After_listen.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/After_listen_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Pós-Escuta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="false">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar.svg', config()->get('app.https'))}}?v=2.3" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar_black.svg', config()->get('app.https'))}}?v=2.3" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar.svg', config()->get('app.https'))}}?v=2.4" class="white_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Graph_Bar_black.svg', config()->get('app.https'))}}?v=2.4" class="black_icon" alt="" style="margin-bottom: 3px; margin-right: 5px;">
                             Classificação</a>
                     </li>
                 </ul>
@@ -281,7 +281,7 @@
                                                     
                                                 @endif
                                                 {{-- <video controls="true" name="media" width="100%" height="100%" style="background-color: black;">
-                                                    <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4', config()->get('app.https'))}}?v=2.3" type="video/mp4">
+                                                    <source src="{{asset('/assets/backoffice_assets/videos/dummy_video.mp4', config()->get('app.https'))}}?v=2.4" type="video/mp4">
                                                 </video> --}}
                                             </div>
                                         </div>
@@ -338,16 +338,16 @@
     {{-- EXERCISE INFO TOGGLE --}}
     <div class="card-body accordion custom_accordion info_accordion" id="accordion">
         <a class="pause_time collapsed" data-toggle="collapse" href="#collapseOne">
-            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" class="show_info_button">
-            <img src="{{asset('/assets/backoffice_assets/icons/Cross_white.svg', config()->get('app.https'))}}?v=2.3" alt="" class="hide_info_button">
+            <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" class="show_info_button">
+            <img src="{{asset('/assets/backoffice_assets/icons/Cross_white.svg', config()->get('app.https'))}}?v=2.4" alt="" class="hide_info_button">
         </a>
         <div id="collapseOne" class="collapse" data-parent="#accordion" style="margin-left: -5px; margin-right: -5px;">
             {{-- <div class="info_help mt-3">
-                <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg', config()->get('app.https'))}}?v=2.3" alt="" class="mb-1" style="width: 90%">
+                <img src="{{asset('/assets/backoffice_assets/icons/help-circle.svg', config()->get('app.https'))}}?v=2.4" alt="" class="mb-1" style="width: 90%">
                 Ajuda
             </div> --}}
             <a href="#" data-toggle="modal" data-target="#statement_modal" class="info_statement mt-2">
-                <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg', config()->get('app.https'))}}?v=2.3" alt="" class="mb-1" style="width: 44%">
+                <img src="{{asset('/assets/backoffice_assets/icons/file-text.svg', config()->get('app.https'))}}?v=2.4" alt="" class="mb-1" style="width: 44%">
                 Enunciado
             </a>
         </div>
@@ -360,7 +360,7 @@
     <div class="container modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content container pr-4 pl-4" id="open_statement_modal">
             <span class="mod-close" data-dismiss="modal" aria-hidden="true" style="background-color: #ff2850;">
-                <img src="{{asset('/assets/landing_page/icons/Close.svg', config()->get('app.https'))}}?v=2.3" alt="" class="w-100">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg', config()->get('app.https'))}}?v=2.4" alt="" class="w-100">
             </span>
             <div class="modal-body page-title">
                 <h4 class="modal-header-title title mb-3">Enunciado</h4>
@@ -409,7 +409,7 @@
                 <div class="d-block text-center" style="margin: 2rem 0 !important;">
                     <a href="#" class="btn search-btn comment_submit m-2 unpause_exercise_modal_button" style="float: none; padding: 15px 25px;">
                         Retomar
-                        <img src="{{asset('/assets/backoffice_assets/icons/Turn_back.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Turn_back.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 5px; margin-bottom: 2px;">
                     </a>
                 </div>
             </div>
@@ -419,10 +419,10 @@
 <!-- End Modal -->
 
 <button class="btn search-btn comment_submit show_video" style="display: none; float: none;">
-    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="">
+    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="">
 </button>
 <button class="btn search-btn comment_submit hide_video" style="float: none; -webkit-transform: scaleX(-1); transform: scaleX(-1);">
-    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.3" alt="">
+    <img src="{{asset('/assets/backoffice_assets/icons/Arrow_back.svg', config()->get('app.https'))}}?v=2.4" alt="">
 </button>
 
 @if($exercise->medias)
@@ -445,16 +445,16 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
-    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=2.3"></script> --}}
-    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=2.3"></script>
-    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
+    {{-- <script src="{{asset('/assets/js/drag-and-drop-plugin/src/draganddrop.js', config()->get('app.https')) }}?v=2.4"></script> --}}
+    <script src="{{asset('/assets/js/jquery-ui/jquery-ui.js', config()->get('app.https')) }}?v=2.4"></script>
+    {{-- <script src="{{asset('/assets/js/ckeditor/ckeditor.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor/config.js', config()->get('app.https')) }}?v=2.4"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.3"></script> --}}
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.4"></script> --}}
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises-perform.js', config()->get('app.https')) }}?v=2.4"></script>
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/0.9.1/jquery.tablednd.js" integrity="sha256-d3rtug+Hg1GZPB7Y/yTcRixO/wlI78+2m08tosoRn7A=" crossorigin="anonymous"></script> --}}
 

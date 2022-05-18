@@ -3,7 +3,7 @@
     <div class="container modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content container pr-4 pl-4" id="insert_student_modal">
             <span class="mod-close" data-dismiss="modal" aria-hidden="true">
-                <img src="{{asset('/assets/landing_page/icons/Close.svg', config()->get('app.https'))}}?v=2.3" alt="" class="w-100">
+                <img src="{{asset('/assets/landing_page/icons/Close.svg', config()->get('app.https'))}}?v=2.4" alt="" class="w-100">
             </span>
             <div class="modal-body page-title">
                 <h4 class="modal-header-title title mb-3">Adicionar à turma</h4>

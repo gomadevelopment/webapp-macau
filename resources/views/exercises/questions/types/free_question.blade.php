@@ -20,7 +20,7 @@
                         type="text" class="form-control" placeholder="Questão...">
                         <a href="#" id="f_q_associate_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" 
                             style="float: none; padding: 16px 20px; white-space: nowrap; display: {{$question_item->question_item_media ? 'none' : 'block'}};">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Associar Media
                         </a>
                         @if($question_item->question_item_media)
@@ -46,7 +46,7 @@
                         @endif
                         <input type="hidden" name="existent_question_item_id_{{ $loop->index }}" value="{{ $question_item->id }}">
                         <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                            <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                             Remover
                         </a>
                     </div>
@@ -58,11 +58,11 @@
                 <div class="row_to_remove col col-wrap d-flex mb-3">
                     <input name="free_question_0" id="free_question_0" type="text" class="form-control" placeholder="Questão...">
                     <a href="#" id="f_q_associate_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Associar Media
                     </a>
                     <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
                     </a>
                 </div>
@@ -72,7 +72,7 @@
         <div class="row mb-3">
             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
                 <a href="#" class="btn search-btn comment_submit m-3 button_add_free_question" style="font-size: 21px; float: none;">
-                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 4px;">
+                    <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 4px;">
                     Adicionar Alínea
                 </a>
             </div>
@@ -93,11 +93,11 @@
                 <div class="row_to_remove col col-wrap d-flex mb-3">
                     <input name="free_question_{{$loop->index}}" id="free_question_{{$loop->index}}" type="text" class="form-control" placeholder="Questão...">
                     <a href="#" id="f_q_associate_media_button_{{$loop->index}}" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Associar Media
                     </a>
                     <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                         Remover
                     </a>
                 </div>
@@ -108,11 +108,11 @@
         <div class="row_to_remove col col-wrap d-flex mb-3">
             <input name="free_question_0" id="free_question_0" type="text" class="form-control" placeholder="Questão...">
             <a href="#" id="f_q_associate_media_button_0" class="btn search-btn button-wrap comment_submit" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Upload_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Associar Media
             </a>
             <a href="#" class="btn btn-theme button-wrap-2 remove_button remove_row" style="float: none; padding: 16px 20px; white-space: nowrap;">
-                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 10px; margin-bottom: 2px;">
+                <img src="{{asset('/assets/backoffice_assets/icons/Cross.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 10px; margin-bottom: 2px;">
                 Remover
             </a>
         </div>

@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/homepage.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/homepage.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -40,7 +40,7 @@
     <div class="container">
 
                 <div class="hero-caption small_wd mb-5">
-                    <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Positivo.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                    <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Positivo.svg', config()->get('app.https'))}}?v=2.4" alt="">
                     <h1 class="big-header-capt cl_2 mb-0">
                         @if(isset($pt_lang) && $pt_lang)
                             Aprenda&nbsp;
@@ -89,10 +89,10 @@
                             註冊
                         @endif
                          &nbsp; 
-                        <img src="{{asset('/assets/landing_page/icons/Arrow.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-bottom: 2px;">
+                        <img src="{{asset('/assets/landing_page/icons/Arrow.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-bottom: 2px;">
                     </button>
                 </div>
-                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/Hero_Image.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/coverimageptavista.png', config()->get('app.https'))}}?v=2.4" alt="">
     </div>
 </div>
 
@@ -142,7 +142,7 @@
                     註冊
                 @endif
                  &nbsp; 
-                <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-bottom: 2px;">
+                <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-bottom: 2px;">
             </button>
         </div>
             
@@ -163,7 +163,7 @@
         </h1>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-7">
-                <img class="scene2_svg" src="{{asset('/assets/landing_page/illustrations/HowitWorks.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                <img class="scene2_svg" src="{{asset('/assets/landing_page/illustrations/HowitWorks.svg', config()->get('app.https'))}}?v=2.4" alt="">
             </div>
             <div class="col-xs-12 col-sm-12 col-md-5">
                 <div class="hero-caption small_wd mb-5">
@@ -187,7 +187,7 @@
                     </h1>
                     <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
                         <div style="width: 30px; text-align: center;" class="desktop_icon_div">
-                            <img src="{{asset('/assets/landing_page/icons/Desktop.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/landing_page/icons/Desktop.svg', config()->get('app.https'))}}?v=2.4" alt="">
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
@@ -205,7 +205,7 @@
                     </div>
                     <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
                         <div style="width: 35px; text-align: center;">
-                            <img src="{{asset('/assets/landing_page/icons/Contents.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/landing_page/icons/Contents.svg', config()->get('app.https'))}}?v=2.4" alt="">
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
@@ -219,7 +219,7 @@
                     </div>
                     <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
                         <div style="width: 36px; text-align: center;">
-                            <img src="{{asset('/assets/landing_page/icons/Badge.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/landing_page/icons/Badge.svg', config()->get('app.https'))}}?v=2.4" alt="">
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
@@ -233,7 +233,7 @@
                     </div>
                     <div style="display: inline-flex; align-items: center; margin-bottom: -20px;">
                         <div style="width: 36px; text-align: center;">
-                            <img src="{{asset('/assets/landing_page/icons/Pencil.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/landing_page/icons/Pencil.svg', config()->get('app.https'))}}?v=2.4" alt="">
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
@@ -247,7 +247,7 @@
                     </div>
                     <div style="display: inline-flex; align-items: center; margin-bottom: 30px;">
                         <div style="width: 36px; text-align: center;">
-                            <img src="{{asset('/assets/landing_page/icons/Comment.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                            <img src="{{asset('/assets/landing_page/icons/Comment.svg', config()->get('app.https'))}}?v=2.4" alt="">
                         </div>
                         <p>
                             @if(isset($pt_lang) && $pt_lang)
@@ -272,7 +272,7 @@
                             註冊
                         @endif
                          &nbsp; 
-                        <img src="{{asset('/assets/landing_page/icons/Arrow.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-bottom: 2px;">
+                        <img src="{{asset('/assets/landing_page/icons/Arrow.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-bottom: 2px;">
                     </button>
                 </div>
             </div>
@@ -325,7 +325,7 @@
                     註冊
                 @endif
                  &nbsp; 
-                <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-bottom: 2px;">
+                <img src="{{asset('/assets/landing_page/icons/Arrow-pink.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-bottom: 2px;">
             </button>
         </div>
             
@@ -336,7 +336,7 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
 
     @if (session('login_error'))
         <script type="text/javascript">

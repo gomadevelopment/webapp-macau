@@ -7,7 +7,7 @@
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
                 <a class="nav-brand" href="/">
-                    <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Positivo.svg', config()->get('app.https'))}}?v=2.3" class="logo" alt="" />
+                    <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Positivo.svg', config()->get('app.https'))}}?v=2.4" class="logo" alt="" />
                 </a>
                 <div class="nav-toggle"></div>
             </div>
@@ -104,22 +104,22 @@
                             </a>
                             <div class="dropdown-menu message-box">
                                 <a class="msg-title view_profile" href="/perfil/{{auth()->user()->id}}">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon user_icon_normal mb-1 " alt="" style="margin-left: 3px;" />
-                                    <img src="{{asset('/assets/backoffice_assets/icons/USer_pink.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon user_icon_pink mb-1 " alt="" style="margin-left: 3px; display: none;"/>
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon user_icon_normal mb-1 " alt="" style="margin-left: 3px;" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/USer_pink.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon user_icon_pink mb-1 " alt="" style="margin-left: 3px; display: none;"/>
                                     Ver Perfil
                                 </a>
                                 @if(auth()->user()->isAdmin())
 
                                     <a class="msg-title settings" href="/perfil/editar/{{auth()->user()->id}}?land_on_settings_tab">
-                                        <img src="{{asset('/assets/backoffice_assets/icons/cog.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon settings_icon_normal mb-1 " alt="" style="margin-right: 8px;" />
-                                        <img src="{{asset('/assets/backoffice_assets/icons/cog_pink.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon settings_icon_pink mb-1 " alt="" style="margin-right: 8px; display: none;"/>
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon settings_icon_normal mb-1 " alt="" style="margin-right: 8px;" />
+                                        <img src="{{asset('/assets/backoffice_assets/icons/cog_pink.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon settings_icon_pink mb-1 " alt="" style="margin-right: 8px; display: none;"/>
                                         Definições
                                     </a>
                                     
                                 @endif
                                 <a class="msg-title logout" href="/logout">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon logout_icon_normal mr-2" alt="" style="margin-left: 3px;" />
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout_pink.svg', config()->get('app.https'))}}?v=2.3" class="logo logout_icon logout_icon_pink mr-2" alt="" style="margin-left: 3px; display: none;"/>
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon logout_icon_normal mr-2" alt="" style="margin-left: 3px;" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Logout_pink.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon logout_icon_pink mr-2" alt="" style="margin-left: 3px; display: none;"/>
                                     Terminar Sessão
                                 </a>
                             </div>
@@ -128,12 +128,12 @@
                         <li class="user_notifications dropdown">
                             <a href="#" class="nav-link messages" data-toggle="dropdown">
                                 <span class="ping"></span>
-                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_pink.svg', config()->get('app.https'))}}?v=2.3" class="logo" alt="" />
+                                <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_pink.svg', config()->get('app.https'))}}?v=2.4" class="logo" alt="" />
                                 <span class="dropdown-menu-arrow"></span>
                             </a>
                             <div class="dropdown-menu message-box notifications">
                                 <div class="msg-title mt-2 pb-3">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg', config()->get('app.https'))}}?v=2.3" class="logo" alt="" style="margin-right: 10px;margin-bottom: 3px;" />
+                                    <img src="{{asset('/assets/backoffice_assets/icons/bell_icon_black.svg', config()->get('app.https'))}}?v=2.4" class="logo" alt="" style="margin-right: 10px;margin-bottom: 3px;" />
                                     <div class="d-inline-block">
                                         Notificações ({{ $unread_user_notifications->count() }})
                                     </div>

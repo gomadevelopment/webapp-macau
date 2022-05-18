@@ -2,9 +2,9 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.3">
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/exercises.css', config()->get('app.https')) }}?v=2.4">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/classroom.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -22,7 +22,7 @@
                 
                 <div class="exercise_time wrap float-right create_class_button">
                     <a href="#" data-toggle="modal" data-target="#chat_new_message_modal" class="btn search-btn comment_submit" style="float: none; padding: 12px 20px;">
-                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-right: 5px; margin-bottom: 2px;">
+                        <img src="{{asset('/assets/backoffice_assets/icons/Add_white.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-right: 5px; margin-bottom: 2px;">
                         Nova Mensagem
                     </a>
                 </div>
@@ -158,8 +158,8 @@
 
                             @if (!$chat->is_group)
                                 <span class="action_menu_btn">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg', config()->get('app.https'))}}?v=2.3" class="empty_dots d-block" alt="">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg', config()->get('app.https'))}}?v=2.3" class="filled_dots" alt="" style="display: none;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg', config()->get('app.https'))}}?v=2.4" class="empty_dots d-block" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg', config()->get('app.https'))}}?v=2.4" class="filled_dots" alt="" style="display: none;">
                                 </span>
                                 <div class="action_menu">
                                     <ul>
@@ -182,8 +182,8 @@
                                 </div>
                             @elseif($chat->is_group && $chat->chat_user_is_admin(auth()->user()->id))
                                 <span class="action_menu_btn">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg', config()->get('app.https'))}}?v=2.3" class="empty_dots d-block" alt="">
-                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg', config()->get('app.https'))}}?v=2.3" class="filled_dots" alt="" style="display: none;">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/Dots.svg', config()->get('app.https'))}}?v=2.4" class="empty_dots d-block" alt="">
+                                    <img src="{{asset('/assets/backoffice_assets/icons/dots_filled.svg', config()->get('app.https'))}}?v=2.4" class="filled_dots" alt="" style="display: none;">
                                 </span>
                                 <div class="action_menu">
                                     <ul>
@@ -266,9 +266,9 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/exercises.js', config()->get('app.https')) }}?v=2.4"></script>
 
     <script>
 

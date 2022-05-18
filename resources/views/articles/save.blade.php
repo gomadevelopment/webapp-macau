@@ -2,7 +2,7 @@
 
 @section('header')
 
-<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.3">
+<link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/articles.css', config()->get('app.https')) }}?v=2.4">
 
 @stop
 
@@ -117,7 +117,7 @@
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-poster">
                                                                 <div class="dz-message needsclick">
-                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                                                     <br>
                                                                     Arraste e solte a foto de capa do artigo aqui
                                                                 </div>
@@ -150,7 +150,7 @@
                                                         <div id="dropzone">
                                                             <div class="dropzone needsclick" id="form-dropzone-media">
                                                                 <div class="dz-message needsclick">
-                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.3" alt="">
+                                                                    <img src="{{asset('/assets/backoffice_assets/icons/Upload.svg', config()->get('app.https'))}}?v=2.4" alt="">
                                                                     <br>
                                                                     Arraste e solte os seus ficheiros aqui 
                                                                 </div>
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             
-                            <button type="button" class="btn search-btn comment_submit save_article_form_button">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.3" alt="" style="margin-left: 10px;"></button>
+                            <button type="button" class="btn search-btn comment_submit save_article_form_button">Gravar <img src="{{asset('/assets/backoffice_assets/icons/save.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-left: 10px;"></button>
                         </form>
                     </div>
                     
@@ -231,12 +231,12 @@
 
 @section('scripts')
 
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.3"></script>
-    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/homepage.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/webapp-macau-custom-js/articles.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/ckeditor.js', config()->get('app.https')) }}?v=2.4"></script>
+    <script src="{{asset('/assets/js/ckeditor5/translations/pt.js', config()->get('app.https')) }}?v=2.4"></script>
 
-    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.3"></script>
+    <script src="{{asset('/assets/js/dropzone/dist/dropzone.js', config()->get('app.https')) }}?v=2.4"></script>
 
     <script>
         function openNav() {
