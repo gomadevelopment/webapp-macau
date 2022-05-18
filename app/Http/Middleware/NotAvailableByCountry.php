@@ -16,7 +16,7 @@ class NotAvailableByCountry
     public function handle($request, Closure $next)
     {
         if ($request->header('X-Country') != 'MO') {
-            abort(403, 'Not available for your country.');
+            // abort(403, 'Not available for your country.');
         }
 
         return $next($request);
