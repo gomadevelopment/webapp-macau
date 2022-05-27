@@ -18,25 +18,15 @@
                     </div>
                 </div>
 
-                <div class="col-lg-1 col-md-1"></div>
+                <div class="col-lg-4 col-md-4"></div>
 
                 <div class="col-lg-2 col-md-2">
                     <div class="footer-widget">
                         <h4 class="widget-title">{{ isset($pt_lang) && $pt_lang ? 'Informação' : 'Information' }}</h4>
                         <ul class="footer-menu">
-                            <li><a href="#">{{ isset($pt_lang) && $pt_lang ? 'Sobre nós' : 'About us' }}</a></li>
-                            <li><a href="#">FAQ’s</a></li>
-                            <li><a href="#">{{ isset($pt_lang) && $pt_lang ? 'Privacidade' : 'Privacy Policy' }}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-3">
-                    <div class="footer-widget">
-                        <h4 class="widget-title">{{ isset($pt_lang) && $pt_lang ? 'Ajuda e Suporte' : 'Help and Support' }}</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">{{ isset($pt_lang) && $pt_lang ? 'Documentação' : 'Documentation' }}</a></li>
-                            <li><a href="#">{{ isset($pt_lang) && $pt_lang ? 'Envia-nos um E-mail' : 'Send us an E-mail' }}</a></li>
+                            <li><a href="/ficha-tecnica">{{ isset($pt_lang) && $pt_lang ? 'Ficha Técnica' : 'Technical File' }}</a></li>
+                            <li><a href="/faqs">FAQ’s</a></li>
+                            <li><a href="/privacidade">{{ isset($pt_lang) && $pt_lang ? 'Privacidade' : 'Privacy Policy' }}</a></li>
                         </ul>
                     </div>
                 </div>

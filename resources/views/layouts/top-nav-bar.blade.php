@@ -115,6 +115,11 @@
                                         <img src="{{asset('/assets/backoffice_assets/icons/cog_pink.svg', config()->get('app.https'))}}?v=2.4" class="logo logout_icon settings_icon_pink mb-1 " alt="" style="margin-right: 8px; display: none;"/>
                                         Definições
                                     </a>
+
+                                    <a class="msg-title irr-actions" href="/acoes-irreversiveis?land_on_tab=professor">
+                                        <i class="fa fa-exclamation-triangle" style="width: 22px; margin-right: 7px; text-align: center;"></i>
+                                        Ações Irreversíveis
+                                    </a>
                                     
                                 @endif
                                 <a class="msg-title logout" href="/logout">

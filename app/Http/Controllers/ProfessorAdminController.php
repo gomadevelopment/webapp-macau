@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\User,
     App\University,
     App\Tag,
+    App\Exercise,
     App\ExerciseLevel,
     App\ExerciseCategory,
     App\ArticleCategory,
@@ -365,5 +364,140 @@ class ProfessorAdminController extends Controller
             'message' => '',
             'html' => $html,
         ]);
+    }
+
+    public function viewShareNotifications()
+    {
+        $unread_user_notifications = auth()->user()->getUnreadNotifications(5)->get();
+        $read_user_notifications = auth()->user()->getReadNotifications(10)->get();
+        view()->share(compact('unread_user_notifications', 'read_user_notifications'));
+    }
+
+    public function getIrreversibleActions()
+    {
+        $this->viewShareNotifications();
+        $inputs = request()->all();
+
+        $professors = User::whereIn('user_role_id', [1, 2, 4])
+                            ->where('id', '!=', auth()->user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'professors');
+
+        $students = User::where('user_role_id', 3)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'students');
+
+        $exercises = Exercise::orderBy('created_at', 'desc')
+                            ->paginate(10, ['*'], 'exercises');
+
+        $categories = ExerciseCategory::get();
+        $levels = ExerciseLevel::get();
+
+        return view('users.irr-actions', compact('inputs', 'professors', 'students', 'exercises', 'categories', 'levels'));
+    }
+
+    public function irrActionsProfessorValidationApplyFilters()
+    {
+        $inputs = request()->only(
+            'page',
+            'settings_professors_filter_username',
+            'settings_professors_filter_approval',
+            'settings_professors_filter_status',
+            'settings_professors_start_date',
+            'settings_professors_end_date'
+        );
+
+        $professors = User::applyUsersValidationFilters($inputs, 'professors');
+
+        $view = view()->make("global-partials.irr-actions.professors", [
+                'professors' => $professors,
+                'inputs' => $inputs
+        ]);
+
+
+        $html = $view->render();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'html' => $html,
+        ]);
+    }
+
+    public function irrActionsStudentValidationApplyFilters()
+    {
+        $inputs = request()->only(
+            'page',
+            'settings_students_filter_username',
+            'settings_students_filter_status',
+            'settings_students_start_date',
+            'settings_students_end_date'
+        );
+
+        $students = User::applyUsersValidationFilters($inputs, 'students');
+
+        $view = view()->make("global-partials.irr-actions.students", [
+                'students' => $students,
+                'inputs' => $inputs
+        ]);
+
+        $html = $view->render();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'html' => $html,
+        ]);
+    }
+
+    public function irrActionsExerciseValidationApplyFilters()
+    {
+        $inputs = request()->only(
+            'page',
+            'settings_exercises_filter_name',
+            'settings_exercises_filter_category',
+            'settings_exercises_filter_level',
+            'settings_exercises_filter_published',
+        );
+
+        $exercises = Exercise::applyExerciseValidationFilters($inputs);
+
+        $exercise_categories = ExerciseCategory::get();
+        $exercise_levels = ExerciseLevel::get();
+
+        $view = view()->make("global-partials.irr-actions.exercises", [
+                'exercises' => $exercises,
+                'categories' => $exercise_categories,
+                'levels' => $exercise_levels,
+                'inputs' => $inputs
+        ]);
+
+        $html = $view->render();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => '',
+            'html' => $html,
+        ]);
+    }
+
+    public function deleteIrreversibleAction($deleteWhat, $id)
+    {
+        if($deleteWhat == 'professor')
+        {
+            User::deleteProfessor($id);
+        }
+        else if($deleteWhat == 'aluno')
+        {
+            User::deleteStudent($id);
+        }
+        else if($deleteWhat == 'exercicio')
+        {
+            Exercise::deleteExercise($id);
+        }
+
+        request()->session()->flash('success', ucfirst($deleteWhat) . ' apagado com sucesso!');
+
+        return redirect()->to('/acoes-irreversiveis?land_on_tab=' . $deleteWhat);
     }
 }

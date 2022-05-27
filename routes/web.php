@@ -29,6 +29,10 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
     Route::get('/resend_email_verification/{user_id}', 'Auth\VerificationController@resend');
 
+    Route::get('/ficha-tecnica', 'Controller@technicalFile');
+    Route::get('/faqs', 'Controller@faqs');
+    Route::get('/privacidade', 'Controller@privacy');
+
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::get('/logout', 'Auth\AuthController@logout');
@@ -97,6 +101,14 @@ Route::group(['middlewareGroups' => 'web'], function () {
 
                 Route::get('/approve_articles/{article_id}', 'ProfessorAdminController@approveArticleOrUser');
                 Route::get('/articles_validation_filters', 'ProfessorAdminController@articlesValidationApplyFilters');
+
+                Route::get('/acoes-irreversiveis', 'ProfessorAdminController@getIrreversibleActions');
+                Route::get('/acoes-irreversiveis/professors_validation_filters', 'ProfessorAdminController@irrActionsProfessorValidationApplyFilters');
+                Route::get('/acoes-irreversiveis/students_validation_filters', 'ProfessorAdminController@irrActionsStudentValidationApplyFilters');
+                Route::get('/acoes-irreversiveis/exercises_validation_filters', 'ProfessorAdminController@irrActionsExerciseValidationApplyFilters');
+
+                Route::get('/acoes-irreversiveis/apagar/{deleteWhat}/{id}', 'ProfessorAdminController@deleteIrreversibleAction');
+
             });
 
         });

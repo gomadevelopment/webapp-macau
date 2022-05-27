@@ -600,4 +600,158 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
         return $query->skip($skip)->paginate(10)->setPageName($professors_or_students);
     }
+
+    public static function deleteProfessor($id)
+    {
+        $professor = self::find($id);
+
+        // delete articles
+        foreach($professor->articles as $article) { $article->delete(); }
+        $professor->article_favorite()->delete();
+
+        // delete student classes
+        StudentClass::where('teacher_id', $professor->id)->get();
+        foreach(StudentClass::where('teacher_id', $professor->id)->get() as $studentClass)
+        {
+            $studentClass->students()->delete();
+            $studentClass->delete();
+        }
+
+        // delete chats
+        $professor->chat_users()->delete();
+        foreach($professor->chat_user_1 as $chatUser) 
+        { 
+            $chatUser->chat_user()->delete();
+            $chatUser->all_messages()->delete();
+            $chatUser->delete(); 
+        }
+        foreach($professor->chat_user_2 as $chatUser) 
+        { 
+            $chatUser->chat_user()->delete();
+            $chatUser->all_messages()->delete();
+            $chatUser->delete(); 
+        }
+
+        // delete exercises
+        foreach(ExerciseFavorite::where('user_id', $professor->id)->get() as $exerciseFavorite)
+        {
+            $exerciseFavorite->delete();
+        }
+
+        foreach (Exercise::where('user_id', $professor->id)->get() as $exercise) 
+        {
+            foreach ($exercise->questions as $question) {
+                foreach ($question->question_items as $question_item) {
+                    if($question_item->question_item_media){
+                        $question_item->question_item_media->delete();
+                    }
+                    $question_item->delete();
+                }
+                $question->delete();
+                Storage::disk('webapp-macau-storage')->deleteDirectory('questions/'.$question->id);
+            }
+
+            foreach ($exercise->exames as $exame) 
+            {
+                Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames/'.$exame->student->id.'/exame/' . $exame->id);
+                foreach ($exame->questions as $question) {
+                    foreach ($question->question_items as $question_item) {
+                        if($question_item->question_item_media){
+                            $question_item->question_item_media->delete();
+                        }
+                        $question_item->delete();
+                    }
+                    $question->delete();
+                }
+                $exame->medias()->delete();
+                $exame->inquiries()->delete();
+                $exame->delete();
+            }
+
+            foreach ($exercise->exercise_tags as $exerciseTag)
+            {
+                $exerciseTag->delete();
+            }
+
+            $exercise->medias()->delete();
+            $exerciseId = $exercise->id;
+            $exercise->delete();
+            Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/' . $exerciseId);
+        }
+
+        // delete notifications
+        foreach(Notification::where('user_id', $professor->id)->get() as $notification)
+        {
+            $notification->delete();
+        }
+
+        // delete avatar
+        $professorId = $professor->id;
+        $professor->delete();
+        Storage::disk('webapp-macau-storage')->deleteDirectory('avatars/' . $professorId);
+    }
+    
+    public static function deleteStudent($id)
+    {
+        $student = self::find($id);
+
+        // delete articles
+        foreach($student->articles as $article) { $article->delete(); }
+        $student->article_favorite()->delete();
+
+        // delete student classes
+        StudentClass::where('teacher_id', $student->id)->get();
+        foreach(StudentClassUser::where('user_id', $student->id)->get() as $studentClassUser)
+        {
+            $studentClassUser->delete();
+        }
+
+        // delete chats
+        $student->chat_users()->delete();
+        foreach($student->chat_user_1 as $chatUser) 
+        { 
+            $chatUser->chat_user()->delete();
+            $chatUser->all_messages()->delete();
+            $chatUser->delete(); 
+        }
+        foreach($student->chat_user_2 as $chatUser) 
+        { 
+            $chatUser->chat_user()->delete();
+            $chatUser->all_messages()->delete();
+            $chatUser->delete(); 
+        }
+
+        // delete exercises
+        foreach(ExerciseFavorite::where('user_id', $student->id)->get() as $exerciseFavorite)
+        {
+            $exerciseFavorite->delete();
+        }
+
+        foreach ($student->student_exames as $exame) 
+        {
+            foreach ($exame->questions as $question) {
+                foreach ($question->question_items as $question_item) {
+                    if($question_item->question_item_media){
+                        $question_item->question_item_media->delete();
+                    }
+                    $question_item->delete();
+                }
+                $question->delete();
+            }
+            $exame->medias()->delete();
+            $exame->inquiries()->delete();
+            $exame->delete();
+        }
+
+        // delete notifications
+        foreach(Notification::where('user_id', $student->id)->get() as $notification)
+        {
+            $notification->delete();
+        }
+
+        $studentId = $student->id;
+        $student->delete();
+        Storage::disk('webapp-macau-storage')->deleteDirectory('avatars/' . $studentId);
+        Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames/'.$studentId);
+    }
 }

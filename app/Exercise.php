@@ -220,18 +220,6 @@ class Exercise extends Model
             $this->save();
         }
 
-        // Notification::create([
-        //     'title' => 'Novo Exercício',
-        //     'text' => 'Você criou um novo exercício, "'.$this->title.'".',
-        //     'url' => '/exercicios/editar/' . $this->id,
-        //     'param1_text' => 'exercise_id',
-        //     'param1' => $this->id,
-        //     'param2_text' => '',
-        //     'param2' => '',
-        //     'type_id' => 2,
-        //     'user_id' => auth()->user()->id,
-        //     'active' => 1
-        // ]);
     }
 
     public function updatePosterAndMedias($exercise_id, $media, $media_or_presentation, $isExternal = false)
@@ -376,5 +364,82 @@ class Exercise extends Model
         $skip = $filters['page'] * 4;
 
         return $query->skip($skip)->paginate(4);
+    }
+
+    public static function applyExerciseValidationFilters($filters)
+    {
+        // dd($filters);
+        $query = self::orderBy('created_at', 'desc');
+
+        // Name Filter
+        if(isset($filters['settings_exercises_filter_name']) && $filters['settings_exercises_filter_name']){
+            $query = $query->where('title', 'LIKE', '%' . $filters['settings_exercises_filter_name'] . '%');
+        }
+
+        if(isset($filters['settings_exercises_filter_category']) && $filters['settings_exercises_filter_category'] != 'all'){
+            $query = $query->where('exercise_category_id', $filters['settings_exercises_filter_category']);
+        }
+
+        if(isset($filters['settings_exercises_filter_level']) && $filters['settings_exercises_filter_level'] != 'all'){
+            $query = $query->where('exercise_level_id', $filters['settings_exercises_filter_level']);
+        }
+
+        if(isset($filters['settings_exercises_filter_published']) && $filters['settings_exercises_filter_published'] != 'all'){
+            $query = $query->where('published', $filters['settings_exercises_filter_published']);
+        }
+
+        $skip = $filters['page'] * 10;
+
+        return $query->skip($skip)->paginate(10)->setPageName('exercises');
+    }
+
+    public static function deleteExercise($id)
+    {
+        $exercise = self::find($id);
+
+        // delete exercises
+        foreach(ExerciseFavorite::where('exercise_id', $exercise->id)->get() as $exerciseFavorite)
+        {
+            $exerciseFavorite->delete();
+        }
+
+        foreach ($exercise->questions as $question) {
+            foreach ($question->question_items as $question_item) {
+                if($question_item->question_item_media){
+                    $question_item->question_item_media->delete();
+                }
+                $question_item->delete();
+            }
+            $question->delete();
+        }
+
+        foreach ($exercise->exames as $exame) 
+        {
+            foreach ($exame->questions as $question) {
+                foreach ($question->question_items as $question_item) {
+                    if($question_item->question_item_media){
+                        $question_item->question_item_media->delete();
+                    }
+                    $question_item->delete();
+                }
+                $question->delete();
+            }
+            $exame->medias()->delete();
+            $exame->inquiries()->delete();
+            $exameStudentId = $exame->student->id;
+            $exameId = $exame->id;
+            $exame->delete();
+            Storage::disk('webapp-macau-storage')->deleteDirectory('student_exames/'.$exameStudentId.'/exame/' . $exameId);
+        }
+
+        foreach ($exercise->exercise_tags as $exerciseTag)
+        {
+            $exerciseTag->delete();
+        }
+
+        $exercise->medias()->delete();
+        $exerciseId = $exercise->id;
+        $exercise->delete();
+        Storage::disk('webapp-macau-storage')->deleteDirectory('exercises/' . $exerciseId);
     }
 }

@@ -68,9 +68,8 @@
                     </h1>
                     <p style="margin-left: 0;">
                         @if(isset($pt_lang) && $pt_lang)
-                            Plataforma de aprendizagem para alunos e professores com propostas 
-                            de actividades para desenvolver a compreensão do oral em Português Língua 
-                            Não Materna.
+                            Plataforma de aprendizagem com propostas de atividades para desenvolver a 
+                            compreensão oral do Português dirigida a professores e alunos.
                         @elseif(isset($en_lang) && $en_lang)
                             Learning platform for students and teachers with activity proposals to 
                             develop the understanding of oral Portuguese Language
@@ -129,7 +128,7 @@
                 葡萄牙語視角” 旨在為本澳以非葡文作為母語的人士（非葡語人士）提供一個教育及學習的電子平台。透過大量的視聽教材，恰當地按其語言熟練水平 (由Ａ１至Ｃ１等級) 及主題進行挑選和分類，從而為非葡語人士度身訂造出能專門提升其口語理解能力的互動練習 透過創建 “葡萄牙語視角” 此類的電子工具，冀能鼓勵自主學習以及促進社交互動和彼此協作
                 <br>
                 <br>
-                本平台獲得 “澳門特別行政區政府高等教育基金會” 支持
+                本平台獲得"澳門特別行政區政府高等教育基金”支持
             @endif
         </p>
         <div class="signup_button">
