@@ -75,10 +75,6 @@
                                 </tr>
                             </tbody>
                             </table>
-
-                            <br>
-
-                            <p class="exercise_author mr-auto"><strong>Exemplo:&nbsp;<a href="http://www.portaldalinguaportuguesa.org/admin.html" target="_blank">Portal da Língua Portuguesa</a></strong></p>
                     </div>
                 </div>
             </div>
