@@ -91,7 +91,7 @@
                         <img src="{{asset('/assets/landing_page/icons/Arrow.svg', config()->get('app.https'))}}?v=2.4" alt="" style="margin-bottom: 2px;">
                     </button>
                 </div>
-                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/coverimageptavista.png', config()->get('app.https'))}}?v=2.4" alt="">
+                <img class="scene1_svg" src="{{asset('/assets/landing_page/illustrations/coverimageptavista.png', config()->get('app.https'))}}?v=2.5" alt="">
     </div>
 </div>
 
@@ -118,7 +118,7 @@
         </h1>
         <p class="description">
             @if(isset($pt_lang) && $pt_lang)
-                ‘Português à Vista’ é uma plataforma de e-learning que tem por objetivo apoiar o ensino e a aprendizagem do Português Língua Não Materna em Macau (PLNM). A partir de um conjunto  vasto de recursos audiovisuais, devidamente selecionados e organizados por níveis de proficiência linguística (do A1 a C1) e temas, foram criados exercícios interativos especificamente desenhados para o desenvolvimento da compreensão do oraldo PLNM. ‘Português à Vista’ promove a autonomia da aprendizagem, tal como a interação social e a colaboração, tirando   partido das ferramentas digitais criadas para esse fim. É ainda disponibilizada, a pensar nos  professores, a sistematização da exploração didática da maioria dos recursos audiovisuais que se encontram na plataforma.
+                ‘Português à Vista’ é uma plataforma de e-learning que tem por objetivo apoiar o ensino e a aprendizagem do Português Língua Não Materna (PLNM) em Macau. A partir de um conjunto  vasto de recursos audiovisuais, devidamente selecionados e organizados por níveis de proficiência linguística (do A1 a C1) e temas, foram criados exercícios interativos especificamente desenhados para o desenvolvimento da compreensão do oral do PLNM. ‘Português à Vista’ promove a autonomia da aprendizagem, tal como a interação social e a colaboração, tirando   partido das ferramentas digitais criadas para esse fim. É ainda disponibilizada, a pensar nos  professores, a sistematização da exploração didática da maioria dos recursos audiovisuais que se encontram na plataforma.
                 <br>
                 <br>
                 Este Projecto é financiado pelo Fundo do Ensino Superior do Governo de Macau RAE

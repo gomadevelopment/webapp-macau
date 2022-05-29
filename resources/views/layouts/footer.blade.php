@@ -39,7 +39,7 @@
         <div class="container">
             <div class="row align-items-center">
                 
-                <div class="col-xs-6 col-sm-7 col-md-8 col-lg-8">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="mb-0">
                         @if(isset($pt_lang) && $pt_lang)
                             © 2020 PortuguêsàVista. Desenhado e desenvolvido por 
@@ -50,14 +50,14 @@
                     </p>
                 </div>
                 
-                <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 text-right">
+                {{-- <div class="col-xs-6 col-sm-5 col-md-4 col-lg-4 text-right">
                     <ul class="footer-bottom-social">
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/facebook.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/instagram.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/twitter.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
                         <li><a href="#"><img src="{{asset('/assets/landing_page/social_icons/linkedin.svg', config()->get('app.https'))}}?v=2.4" alt=""></a></li>
                     </ul>
-                </div>
+                </div> --}}
                 
             </div>
         </div>
