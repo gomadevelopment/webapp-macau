@@ -9,7 +9,7 @@ $(function () {
     /* HEADER */
 
     // Scroll to section on nav-bar menu click
-    $(".nav-menu a").on("click", function (event) {
+    $(".nav-menu a.homepage-links").on("click", function (event) {
 
         var requestPath = $(this).attr('data-request-path');
 

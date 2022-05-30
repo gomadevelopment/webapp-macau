@@ -84,7 +84,7 @@
         <script src="{{asset('/assets/js/jquery.timeago.js', config()->get('app.https')) }}?v=2.4"></script>
         <script src="{{asset('/assets/js/jquery.timeago.pt.js', config()->get('app.https')) }}?v=2.4"></script>
 
-        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=2.5"></script>
+        <script src="{{asset('/assets/js/webapp-macau-custom-js/global_header_footer.js', config()->get('app.https')) }}?v=2.6"></script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
         <!-- ============================================================== -->
