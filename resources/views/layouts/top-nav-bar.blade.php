@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#sobre">
+                            <a data-request-path="{{ Request::path('') }}" href="#sobre">
                                 @if(isset($pt_lang) && $pt_lang)
                                     Sobre
                                 @elseif(isset($en_lang) && $en_lang)  
@@ -64,7 +64,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#como_funciona">
+                            <a data-request-path="{{ Request::path('') }}" href="#como_funciona">
                                 @if(isset($pt_lang) && $pt_lang)
                                     Como Funciona
                                 @elseif(isset($en_lang) && $en_lang)  
@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#contactos">
+                            <a data-request-path="{{ Request::path('') }}" href="#contactos">
                                 @if(isset($pt_lang) && $pt_lang)
                                     Contactos
                                 @elseif(isset($en_lang) && $en_lang)  

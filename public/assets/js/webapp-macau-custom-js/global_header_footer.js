@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // Success + alert flash info fade
     setTimeout(fade_out, 10000);
 
@@ -9,7 +9,15 @@ $(function() {
     /* HEADER */
 
     // Scroll to section on nav-bar menu click
-    $(".nav-menu a").on("click", function(event) {
+    $(".nav-menu a").on("click", function (event) {
+
+        var requestPath = $(this).attr('data-request-path');
+
+        if (requestPath !== '/') {
+            event.preventDefault();
+            location.href = '/' + this.hash;
+        }
+
         if (!$(this).hasClass("nav-link")) {
             $(".navigation-portrait .nav-menus-wrapper-close-button").trigger(
                 "click"
@@ -28,8 +36,7 @@ $(function() {
                 offset_disc = 0;
             }
 
-            $("html, body").animate(
-                {
+            $("html, body").animate({
                     scrollTop: $(hash).offset().top - offset_disc
                 },
                 800
@@ -38,7 +45,7 @@ $(function() {
     });
 
     // Global Heart like
-    $(document).on("click", ".heart_icon, .heart_filled_icon", function() {
+    $(document).on("click", ".heart_icon, .heart_filled_icon", function () {
         var article_id = $(this).attr("data-article-id");
         if (article_id) {
             return false;
