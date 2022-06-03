@@ -19,7 +19,7 @@
 
         @yield('header')
 
-        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=2.4">
+        <link rel="stylesheet" href="{{asset('/assets/css/webapp-macau-custom-css/medias.css', config()->get('app.https')) }}?v=2.5">
 
     </head>
 	

@@ -250,6 +250,8 @@
     .scene3_svg {
         margin-top: 760px;
         margin-left: 50px;
+        width: 0;
+        height: 50px;
     }
 
     .scene1_svg {
