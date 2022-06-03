@@ -9,7 +9,9 @@
                         <img src="{{asset('/assets/landing_page/logo/PortuguêsàVista_Negativo.svg', config()->get('app.https'))}}?v=2.4" class="logo" alt="" style="width: 26%;" />
                         <div class="footer-add">
                             <p class="supported_label">Supported by Higher Education Fund of Macao SAR Government</p>
-                            <img class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg', config()->get('app.https'))}}?v=2.4" alt="">
+                            <a href="https://www.usj.edu.mo/en/" target="_blank">
+                                <img width="200px" class="university_logo d-block mb-3" src="{{asset('/assets/landing_page/illustrations/logomacau_Negativo.svg', config()->get('app.https'))}}?v=2.5" alt="">
+                            </a>
                             <p>Estrada Marginal da Ilha Verde, 14-17, Macau, China.</p>
                             <p>+853 8592 5600</p>
                             <p>info@portuguesavista.com</p>
