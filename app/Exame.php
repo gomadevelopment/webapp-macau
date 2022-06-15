@@ -103,7 +103,7 @@ class Exame extends Model
         return $hours . ':' . $minutes . ':' . $seconds;
     }
 
-    public static function cloneStudentExame($exercise)
+    public static function cloneStudentExame($exercise, $belongsToTeacherClass = false)
     {
         $student_exame = self::create([
             'user_id' => $exercise->user_id,
@@ -142,7 +142,22 @@ class Exame extends Model
             // File::copyDirectory($fromPath, $toPath);
         }
 
-        foreach ($exercise->questions as $exercise_question) {
+        foreach ($exercise->questions as $exercise_question) 
+        {
+            // Skip this question
+            // IF Question Type is: Questões Livres
+            // AND IF Question SubType is: Questões Livres
+            // AND IF student IS NOT in any of the teachers classes
+            if($exercise_question->question_type_id == 6 && $exercise_question->question_subtype_id == 10 && !$belongsToTeacherClass)
+            {
+                continue;
+            }
+
+            if($exercise_question->teacher_correction && !$belongsToTeacherClass)
+            {
+                continue;
+            }
+
             $exame_question = ExameQuestion::create([
                 'exame_id' => $student_exame->id,
                 'classification' => 0.00,
@@ -156,11 +171,13 @@ class Exame extends Model
                 'teacher_correction' => $exercise_question->teacher_correction,
                 'avaliation_score' => $exercise_question->avaliation_score,
             ]);
+            
             if($exercise_question->description_image_url){
                 $fromPath = public_path('webapp-macau-storage/questions/'.$exercise_question->id.'/description_image');
                 $toPath = public_path('webapp-macau-storage/student_exames/'.auth()->user()->id.'/exame/'.$student_exame->id.'/questions/'.$exame_question->id.'/description_image');
                 File::copyDirectory($fromPath, $toPath);
             }
+
             if($exercise_question->question_items){
                 foreach ($exercise_question->question_items as $exercise_question_item) {
                     $exame_question_item = ExameQuestionItem::create([

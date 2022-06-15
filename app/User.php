@@ -216,6 +216,22 @@ class User extends Authenticatable implements MustVerifyEmailContract
         }
     }
 
+    public function belongsToTeacherClass($teacherId)
+    {
+        $belongsToTeacherClass = false;
+        $teacher = self::find($teacherId);
+
+        foreach ($teacher->classes as $class) {
+            if(in_array($this->id, $class->students->pluck('id')->toArray()))
+            {
+                $belongsToTeacherClass = true;
+                break;
+            }
+        }
+
+        return $belongsToTeacherClass;
+    }
+
     public function deleteSpecificStudentExame($exercise_id)
     {
         if($this->isStudent()){

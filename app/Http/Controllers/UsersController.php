@@ -38,6 +38,10 @@ class UsersController extends Controller
 
                 $promoted_exercises = Exercise::where('user_id', $user->id)->skip($skip)->paginate(4);
 
+                foreach($promoted_exercises as $exercise){
+                    $exercise['evaluation_median'] = $exercise->evaluationMedia();
+                }
+
                 $view = view()->make("users.promoted_exercises_partial", [
                     'promoted_exercises' => $promoted_exercises,
                     'inputs' => $inputs
@@ -66,6 +70,10 @@ class UsersController extends Controller
                                             ->where('user_id', $user->id)
                                             ->where('published', 1)
                                             ->paginate(4);
+        }
+
+        foreach($promoted_exercises as $exercise){
+            $exercise['evaluation_median'] = $exercise->evaluationMedia();
         }
 
         $inputs = [];

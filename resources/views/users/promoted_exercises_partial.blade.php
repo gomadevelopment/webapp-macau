@@ -33,8 +33,8 @@
                 @endif
                 <p class="exercise_level" style="float: left; margin-right: 20px;">
                     <strong>Nível:</strong> {{ $exercise->level->name }} &nbsp;&nbsp;&nbsp;
-                    @if(auth()->user()->isProfessor() && auth()->user()->isActive())
-                        <strong>Média de Avaliação:</strong> 62%
+                    @if(auth()->user()->isProfessor() && auth()->user()->isActive() && $exercise->evaluation_median != 'no_exames_yet')
+                        <strong>Média de Avaliação:</strong> {{ $exercise->evaluation_median }}%
                     @endif
                 </p>
             </div>

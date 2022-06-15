@@ -39,7 +39,7 @@ class ExamesController extends Controller
         DB::beginTransaction();
         try {
             if(auth()->user()->hasExerciseInProgress($exercise->id) == 'no_exame_started'){
-                $exame = Exame::cloneStudentExame($exercise);
+                $exame = Exame::cloneStudentExame($exercise, auth()->user()->belongsToTeacherClass($exercise->user_id));
                 if($exame->has_time){
                     $time_left = gmdate("H:i:s", $exame->time * 60);
                 }

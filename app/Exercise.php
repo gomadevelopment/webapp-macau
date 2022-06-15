@@ -135,18 +135,16 @@ class Exercise extends Model
     public function evaluationMedia()
     {
         $exames = $this->exames()->get();
-        $exercise_evaluatin_median = 0;
+        $exercise_evaluation_median = 0;
 
         if(!$exames->count()){
             return 'no_exames_yet';
         }
 
-        foreach ($exames as $exame) {
-
-            $exame_evaluation_median = 0;
-
+        foreach ($exames as $exame) 
+        {
             if(!$exame->questions->count()){
-                $exercise_evaluatin_median += 0;
+                $exercise_evaluation_median += 0;
                 continue;
             }
 
@@ -155,12 +153,12 @@ class Exercise extends Model
 
             $score_perc = $exercise_sum_score_points == 0 ? 0 : round(($exercise_student_score / $exercise_sum_score_points) * 100);
             
-            $exercise_evaluatin_median += $score_perc;
+            $exercise_evaluation_median += $score_perc;
         }
 
-        $exercise_evaluatin_median = $exercise_evaluatin_median == 0 ? 0 : round($exercise_evaluatin_median / $exames->count());
+        $exercise_evaluation_median = $exercise_evaluation_median == 0 ? 0 : round($exercise_evaluation_median / $exames->count());
 
-        return $exercise_evaluatin_median;
+        return $exercise_evaluation_median;
 
     }
 
